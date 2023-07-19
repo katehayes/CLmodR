@@ -1532,35 +1532,8 @@ pru_ptg <- pru_data_10 %>%
   select(c(level, school, school_type, starts_with("part.time.girls.aged"))) %>%
   pivot_longer(starts_with("part.time.girls"),
                names_to = "age", values_to = "pt_girls") %>%
-  mutate(age = as.numeric(str_replace(age, "part.time.girls.aged.", "")))
-
-
-pru_ptb <- pru_data_10 %>%
-  select(c(level, school, school_type, starts_with("part.time.boys.aged"))) %>%
-  pivot_longer(starts_with("part.time.boys"),
-               names_to = "age", values_to = "pt_boys") %>%
-  mutate(age = as.numeric(str_replace(age, "part.time.boys.aged.", "")))
-
-
-pru_ftg <- pru_data_10 %>%
-  select(c(level, school, school_type, starts_with("full.time.girls.aged"))) %>%
-  pivot_longer(starts_with("full.time.girls"),
-               names_to = "age", values_to = "ft_girls") %>%
-  mutate(age = as.numeric(str_replace(age, "full.time.girls.aged.", "")))
-
-
-pru_ftb <- pru_data_10 %>%
-  select(c(level, school, school_type, starts_with("full.time.boys.aged"))) %>%
-  pivot_longer(starts_with("full.time.boys"),
-               names_to = "age", values_to = "ft_boys") %>%
-  mutate(age = as.numeric(str_replace(age, "full.time.boys.aged.", "")))
-
-
-pru_data_10 <- pru_ptg %>%
-  full_join(pru_ptb) %>%
-  full_join(pru_ftg) %>%
-  full_join(pru_ftb) %>%
-  pivot_longer(c(ft_boys, ft_girls, pt_boys, pt_girls),
+  mutate(age = as.numeric(str_replace(age, "part.time.girls.aged.", ""))) %>%
+  pivot_longer(pt_girls,
                names_to = "gender", values_to = "count") %>%
   mutate(pt_ft = gender) %>%
   mutate(gender = ifelse(gender %in% c("pt_girls", "ft_girls"), "Girl", "Boy"),
@@ -1568,6 +1541,67 @@ pru_data_10 <- pru_ptg %>%
   mutate(end_period_year = 2010,
          end_period_month = "January",
          period_length = "Year")
+
+
+pru_ptb <- pru_data_10 %>%
+  select(c(level, school, school_type, starts_with("part.time.boys.aged"))) %>%
+  pivot_longer(starts_with("part.time.boys"),
+               names_to = "age", values_to = "pt_boys") %>%
+  mutate(age = as.numeric(str_replace(age, "part.time.boys.aged.", ""))) %>%
+  pivot_longer(pt_boys,
+               names_to = "gender", values_to = "count") %>%
+  mutate(pt_ft = gender) %>%
+  mutate(gender = ifelse(gender %in% c("pt_girls", "ft_girls"), "Girl", "Boy"),
+         pt_ft = ifelse(pt_ft %in% c("pt_girls", "pt_boys"), "Part time", "Full time")) %>%
+  mutate(end_period_year = 2010,
+         end_period_month = "January",
+         period_length = "Year")
+
+
+pru_ftg <- pru_data_10 %>%
+  select(c(level, school, school_type, starts_with("full.time.girls.aged"))) %>%
+  pivot_longer(starts_with("full.time.girls"),
+               names_to = "age", values_to = "ft_girls") %>%
+  mutate(age = as.numeric(str_replace(age, "full.time.girls.aged.", ""))) %>%
+  pivot_longer(ft_girls,
+               names_to = "gender", values_to = "count") %>%
+  mutate(pt_ft = gender) %>%
+  mutate(gender = ifelse(gender %in% c("pt_girls", "ft_girls"), "Girl", "Boy"),
+         pt_ft = ifelse(pt_ft %in% c("pt_girls", "pt_boys"), "Part time", "Full time")) %>%
+  mutate(end_period_year = 2010,
+         end_period_month = "January",
+         period_length = "Year")
+
+
+pru_ftb <- pru_data_10 %>%
+  select(c(level, school, school_type, starts_with("full.time.boys.aged"))) %>%
+  pivot_longer(starts_with("full.time.boys"),
+               names_to = "age", values_to = "ft_boys") %>%
+  mutate(age = as.numeric(str_replace(age, "full.time.boys.aged.", ""))) %>%
+  pivot_longer(ft_boys,
+               names_to = "gender", values_to = "count") %>%
+  mutate(pt_ft = gender) %>%
+  mutate(gender = ifelse(gender %in% c("pt_girls", "ft_girls"), "Girl", "Boy"),
+         pt_ft = ifelse(pt_ft %in% c("pt_girls", "pt_boys"), "Part time", "Full time")) %>%
+  mutate(end_period_year = 2010,
+         end_period_month = "January",
+         period_length = "Year")
+
+
+pru_data_10 <- pru_ptg %>%
+  full_join(pru_ptb) %>%
+  full_join(pru_ftg) %>%
+  full_join(pru_ftb) 
+
+# %>%
+#   pivot_longer(c(ft_boys, ft_girls, pt_boys, pt_girls),
+#                names_to = "gender", values_to = "count") %>%
+#   mutate(pt_ft = gender) %>%
+#   mutate(gender = ifelse(gender %in% c("pt_girls", "ft_girls"), "Girl", "Boy"),
+#          pt_ft = ifelse(pt_ft %in% c("pt_girls", "pt_boys"), "Part time", "Full time")) %>%
+#   mutate(end_period_year = 2010,
+#          end_period_month = "January",
+#          period_length = "Year")
 
 
 
@@ -1594,9 +1628,10 @@ pru_10to22_age_gender <- pru_data_22 %>%
   filter(count != 0) %>%
   mutate(gender = reconcile_gender(gender))
 
-save(pru_10to22_age_gender, file = "Output/Data/Cleaned/pru_10to22_age_gender.Rdata")
+# save(pru_10to22_age_gender, file = "Output/Data/Cleaned/pru_10to22_age_gender.Rdata")
+save(pru_10to22_age_gender, file = "output/data/cleaned/schools_10to22_age_gender.Rdata")
 
-pru_10to22_ethnicity <- pru_eth_22 %>%
+schools_10to22_ethnicity <- pru_eth_22 %>%
   bind_rows(pru_eth_21) %>%
   bind_rows(pru_eth_20) %>%
   bind_rows(pru_eth_19) %>%
@@ -1614,10 +1649,11 @@ pru_10to22_ethnicity <- pru_eth_22 %>%
                   `Other ethnic group`, `Refused or information not yet available`),
                names_to = "ethnicity", values_to = "count")
 
-save(pru_10to22_ethnicity, file = "Output/Data/Cleaned/pru_10to22_ethnicity.Rdata")
+# save(pru_10to22_ethnicity, file = "Output/Data/Cleaned/pru_10to22_ethnicity.Rdata")
+save(schools_10to22_ethnicity, file = "output/data/cleaned/schools_10to22_ethnicity.Rdata")
 
 
-pru_10to22_fsm <- pru_fsm_22 %>%
+schools_10to22_fsm <- pru_fsm_22 %>%
   bind_rows(pru_fsm_21) %>%
   bind_rows(pru_fsm_20) %>%
   bind_rows(pru_fsm_19) %>%
@@ -1631,7 +1667,7 @@ pru_10to22_fsm <- pru_fsm_22 %>%
   bind_rows(pru_fsm_11) %>%
   bind_rows(pru_fsm_10)
 
-save(pru_10to22_fsm, file = "Output/Data/Cleaned/pru_10to22_fsm.Rdata")
+save(schools_10to22_fsm, file = "output/data/cleaned/schools_10to22_fsm.Rdata")
 
 
 
