@@ -8,6 +8,11 @@
 # HAD TO RENAME AGAIN, ADDED _22
 # spc_school_level_underlying_data_22.csv
 
+
+
+s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-hayeska@tcd.ie/My Drive/temp_data/spc_school_level_underlying_data_22.csv")
+
+
 s_data <- read.csv("/Users/katehayes/temp_data/spc_school_level_underlying_data_22.csv")
 
 pru_data_22 <- s_data %>%
