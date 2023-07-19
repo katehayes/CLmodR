@@ -1,3 +1,6 @@
+# I AM GOING TO CHANGE FROM JUST GETTING THE PRU KIDS TO GETTING ALL KIDS
+
+
 # going to have children by age and sex, by school
 # then for each school, how many children of each ethnicity, and how many children FSM eligible.
 
