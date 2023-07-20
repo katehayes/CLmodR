@@ -1140,7 +1140,8 @@ pru_data_13 <- s_data %>%
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
   mutate(across(c(starts_with("part.time."),
-                  (starts_with("full.time."))), ~as.numeric(str_replace(.x, "x", "1.5")))) %>%
+                  `headcount.of.pupils`,
+                  starts_with("full.time.")), ~as.numeric(str_replace(.x, "x", "1.5")))) %>%
  mutate(across(c(starts_with("number.of.pupils.classified.as."),
                 `number.of.pupils.unclassified`,
                 `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~str_replace(.x, "x", "1.5"))) %>%
@@ -1407,7 +1408,8 @@ pru_data_11 <- s_data %>%
   rename(school = School.name,
          school_type = Type.of.establishment,
          school_headcount = `headcount.of.pupils`,
-         school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals)
+         school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals) %>% 
+  filter(!(school %in% c("", 0)))
 
 pru_fsm_11 <- pru_data_11 %>%
   select(c(level, school, school_type, school_headcount, school_fsm)) %>%
@@ -1533,7 +1535,7 @@ pru_data_10 <- s_data %>%
   mutate(across(c(starts_with("number.of.pupils.classified.as."),
                   `number.of.pupils.unclassified`), ~as.numeric(ifelse(.x == ">", `Number.of.pupils..used.for.FSM.calculation.`, .x)))) %>%
   mutate(`number.of.pupils.known.to.be.eligible.for.free.school.meals` = 
-           ifelse(`number.of.pupils.known.to.be.eligible.for.free.school.meals` == ">", `Number.of.pupils..used.for.FSM.calculation.`, `number.of.pupils.known.to.be.eligible.for.free.school.meals`)) %>%
+           as.numeric(ifelse(`number.of.pupils.known.to.be.eligible.for.free.school.meals` == ">", `Number.of.pupils..used.for.FSM.calculation.`, `number.of.pupils.known.to.be.eligible.for.free.school.meals`))) %>%
   mutate(White = select(., c(`number.of.pupils.classified.as.white.British.ethnic.origin`:`number.of.pupils.classified.as.any.other.white.background.ethnic.origin`))
          %>% rowSums(na.rm = TRUE)) %>%
   mutate(`Mixed or Multiple ethnic groups` = select(., c(`number.of.pupils.classified.as.white.and.black.Caribbean.ethnic.origin`:`number.of.pupils.classified.as.any.other.mixed.background.ethnic.origin`))
@@ -1651,6 +1653,8 @@ pru_data_10 <- pru_ptg %>%
 # one set w broken down again, split into the different charcteristics # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+
+
 schools_10to22_age_gender <- pru_data_22 %>%
   bind_rows(pru_data_21) %>%
   bind_rows(pru_data_20) %>%
@@ -1666,6 +1670,7 @@ schools_10to22_age_gender <- pru_data_22 %>%
   bind_rows(pru_data_10) %>%
   filter(count != 0) %>%
   mutate(gender = reconcile_gender(gender))
+
 
 # save(pru_10to22_age_gender, file = "Output/Data/Cleaned/pru_10to22_age_gender.Rdata")
 save(schools_10to22_age_gender, file = "output/data/cleaned/schools_10to22_age_gender.Rdata")
@@ -1702,7 +1707,7 @@ schools_10to22_fsm <- pru_fsm_22 %>%
   bind_rows(pru_fsm_16) %>%
   bind_rows(pru_fsm_15) %>%
   bind_rows(pru_fsm_14 %>% 
-              mutate(school_headcount = as.numeric(str_replace(school_headcount, "x", "1.5")))) %>%
+              mutate(school_headcount = as.numeric(str_replace(school_headcount, "x", "1.5"))))  %>%
   bind_rows(pru_fsm_13 %>% 
               mutate(school_headcount = as.numeric(str_replace(school_headcount, "x", "1.5")))) %>%
   bind_rows(pru_fsm_12 %>% 
@@ -1714,6 +1719,10 @@ schools_10to22_fsm <- pru_fsm_22 %>%
 
 save(schools_10to22_fsm, file = "output/data/cleaned/schools_10to22_fsm.Rdata")
 
+schools_10to22_fsm <- schools_10to22_fsm %>% 
+  filter(end_period_year != 2011) %>% 
+  bind_rows(pru_fsm_11 %>% 
+              mutate(school_headcount = as.numeric(str_replace(school_headcount, "x", "1.5"))))
 
 
 

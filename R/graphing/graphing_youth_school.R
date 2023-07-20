@@ -21,10 +21,11 @@ schools %>%
                             end_period_year - age == 2010 ~"Cohort 18",
                             end_period_year - age == 2011 ~"Cohort 19",
                             end_period_year - age == 2012 ~"Cohort 20")) %>% 
+  filter(fsm == "FSM") %>% 
   group_by(cohort, end_period_year, gender) %>% 
   mutate(tot = sum(count)) %>% 
   mutate(pc = count / tot) %>% 
-  filter(pru == "PRU") %>% 
+  filter(my_categories == "Pupil referral unit") %>% 
   mutate(cohort = factor(cohort, levels = c("Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4",
                                             "Cohort 5", "Cohort 6", "Cohort 7", "Cohort 8", "Cohort 9",
                                             "Cohort 10", "Cohort 11", "Cohort 12", "Cohort 13", "Cohort 14",
@@ -36,18 +37,59 @@ schools %>%
 
   
   
-check <- schools %>% 
-  distinct(school_type)
 
-check <- schools_fsm %>% 
-  group_by(end_period_year, school_type) %>% 
-  summarise(tot_count = sum(school_fsm))
-  
-  
-  # %>% 
-  summarise(fsm_pc = sum(school_fsm)/sum(school_headcount))
+schools %>% 
+  mutate(cohort = case_when(end_period_year - age == 1993 ~"Cohort 1", 
+                            end_period_year - age == 1994 ~"Cohort 2",
+                            end_period_year - age == 1995 ~"Cohort 3",
+                            end_period_year - age == 1996 ~"Cohort 4",
+                            end_period_year - age == 1997 ~"Cohort 5",
+                            end_period_year - age == 1998 ~"Cohort 6",
+                            end_period_year - age == 1999 ~"Cohort 7",
+                            end_period_year - age == 2000 ~"Cohort 8",
+                            end_period_year - age == 2001 ~"Cohort 9",
+                            end_period_year - age == 2002 ~"Cohort 10",
+                            end_period_year - age == 2003 ~"Cohort 11",
+                            end_period_year - age == 2004 ~"Cohort 12",
+                            end_period_year - age == 2005 ~"Cohort 13",
+                            end_period_year - age == 2006 ~"Cohort 14",
+                            end_period_year - age == 2007 ~"Cohort 15",
+                            end_period_year - age == 2008 ~"Cohort 16",
+                            end_period_year - age == 2009 ~"Cohort 17",
+                            end_period_year - age == 2010 ~"Cohort 18",
+                            end_period_year - age == 2011 ~"Cohort 19",
+                            end_period_year - age == 2012 ~"Cohort 20")) %>%
+  mutate(cohort = factor(cohort, levels = c("Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4",
+                                            "Cohort 5", "Cohort 6", "Cohort 7", "Cohort 8", "Cohort 9",
+                                            "Cohort 10", "Cohort 11", "Cohort 12", "Cohort 13", "Cohort 14",
+                                            "Cohort 15", "Cohort 16", "Cohort 17", "Cohort 18", "Cohort 19", "Cohort 20"))) %>% 
+  filter(!(my_categories %in% c("Nursery", "Unknown"))) %>% 
+  # mutate(my_categories = factor(my_categories, 
+  #                               levels = c("State-funded primary", "State-funded secondary",
+  #                                          "State-funded special school", "Pupil referral unit", "Private school"))) %>% 
+  # filter(my_categories == "Pupil referral unit") %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count, fill = my_categories),
+           stat = "identity", position = "fill") +
+  facet_grid(rows = vars(cohort))
+# THIS GRAPH IS NOT GOOD :)
 
 
+fsm_pc_birm_byschooltype <- schools_fsm %>% 
+  group_by(end_period_year, my_categories) %>% 
+  summarise(fsm_pc = sum(school_fsm)/sum(school_headcount)) %>% 
+  filter(!(my_categories %in% c("Nursery", "Private school", "Unknown"))) %>% 
+  mutate(my_categories = factor(my_categories, 
+                                levels = c("State - unknown", "State-funded primary", "State-funded secondary",
+                                           "State-funded special school", "Pupil referral unit"))) %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = fsm_pc),
+           stat = "identity", position = "stack") +
+  facet_grid(~my_categories)
+
+fsm_pc_birm_byschooltype
+
+ggsave(filename = "output/graphs/fsm_pc_birm_byschooltype.png", fsm_pc_birm_byschooltype)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # NEWER STUFF ABOVE# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
