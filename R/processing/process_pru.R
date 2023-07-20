@@ -10,6 +10,8 @@ s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sh
 
 # there is something wrong with school categories in 2010 and 2011
 
+# initial conditions for the PRU population???
+
 schools_fsm <- schools_10to22_fsm %>%
   filter(level == "Birmingham") %>% 
   left_join(s_data) 
@@ -68,8 +70,7 @@ fsm_pru <- check %>%
   group_by(cohort, gender) %>% 
   mutate(diff_pru = PRU - lag(PRU),
          diff_non_pru = `Not PRU` - lag(`Not PRU`),
-         rate_excluded = diff_pru / lag(`Not PRU`)) %>% 
-  filter(cohort ==  "Cohort 11")
+         rate_segregated = diff_pru / lag(`Not PRU`))
 
 
 nonfsm_pru <- check %>% 
@@ -87,8 +88,7 @@ nonfsm_pru <- check %>%
   group_by(cohort, gender) %>% 
   mutate(diff_pru = PRU - lag(PRU),
          diff_non_pru = `Not PRU` - lag(`Not PRU`),
-         rate_excluded = diff_pru / lag(`Not PRU`)) %>% 
-  filter(cohort ==  "Cohort 11")
+         rate_segregated = diff_pru / lag(`Not PRU`))
 
 
 
