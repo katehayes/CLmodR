@@ -1041,7 +1041,7 @@ pru_data_14 <- s_data %>%
                   `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~str_replace(.x, "x", "1.5"))) %>%
   mutate(across(c(starts_with("number.of.pupils.classified.as."),
                   `number.of.pupils.unclassified`,
-                  `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~as.numeric(str_replace(.x, ">", "99.5")))) %>%
+                  `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~as.numeric(ifelse(.x == ">", `headcount.of.pupils..unrounded.`, .x)))) %>%
   mutate(White = select(., c(`number.of.pupils.classified.as.white.British.ethnic.origin`:`number.of.pupils.classified.as.any.other.white.background.ethnic.origin`))
          %>% rowSums(na.rm = TRUE)) %>%
   mutate(`Mixed or Multiple ethnic groups` = select(., c(`number.of.pupils.classified.as.white.and.black.Caribbean.ethnic.origin`:`number.of.pupils.classified.as.any.other.mixed.background.ethnic.origin`))
@@ -1146,7 +1146,7 @@ pru_data_13 <- s_data %>%
                 `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~str_replace(.x, "x", "1.5"))) %>%
   mutate(across(c(starts_with("number.of.pupils.classified.as."),
                   `number.of.pupils.unclassified`,
-                  `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~as.numeric(str_replace(.x, ">", "99.5")))) %>%
+                  `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~as.numeric(ifelse(.x == ">", `headcount.of.pupils`, .x)))) %>%
   mutate(White = select(., c(`number.of.pupils.classified.as.white.British.ethnic.origin`:`number.of.pupils.classified.as.any.other.white.background.ethnic.origin`))
          %>% rowSums(na.rm = TRUE)) %>%
   mutate(`Mixed or Multiple ethnic groups` = select(., c(`number.of.pupils.classified.as.white.and.black.Caribbean.ethnic.origin`:`number.of.pupils.classified.as.any.other.mixed.background.ethnic.origin`))
@@ -1242,14 +1242,16 @@ pru_data_12 <- s_data %>%
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
+  mutate(across(everything(),
+                ~ifelse(.x == "..", NA, .x))) %>%
   mutate(across(c(starts_with("part.time."),
                   (starts_with("full.time."))), ~as.numeric(str_replace(.x, "x", "1.5")))) %>%
-mutate(across(c(starts_with("number.of.pupils.classified.as."),
+  mutate(across(c(starts_with("number.of.pupils.classified.as."),
                 `number.of.pupils.unclassified`,
                 `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~str_replace(.x, "x", "1.5"))) %>%
   mutate(across(c(starts_with("number.of.pupils.classified.as."),
                   `number.of.pupils.unclassified`,
-                  `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~as.numeric(str_replace(.x, ">", "99.5")))) %>%
+                  `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~as.numeric(ifelse(.x == ">", `headcount.of.pupils`, .x)))) %>%
   mutate(White = select(., c(`number.of.pupils.classified.as.white.British.ethnic.origin`:`number.of.pupils.classified.as.any.other.white.background.ethnic.origin`))
          %>% rowSums(na.rm = TRUE)) %>%
   mutate(`Mixed or Multiple ethnic groups` = select(., c(`number.of.pupils.classified.as.white.and.black.Caribbean.ethnic.origin`:`number.of.pupils.classified.as.any.other.mixed.background.ethnic.origin`))
@@ -1384,7 +1386,7 @@ pru_data_11 <- s_data %>%
                 ~ifelse(.x == "..", NA, .x))) %>%
   mutate(across(c(starts_with("part.time."),
                   (starts_with("full.time."))), ~as.numeric(str_replace(.x, "x", "1.5")))) %>%
-mutate(across(c(starts_with("number.of.pupils.classified.as."),
+  mutate(across(c(starts_with("number.of.pupils.classified.as."),
                 `number.of.pupils.unclassified`,
                 `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~str_replace(.x, "x", "1.5"))) %>%
   mutate(across(c(starts_with("number.of.pupils.classified.as."),
