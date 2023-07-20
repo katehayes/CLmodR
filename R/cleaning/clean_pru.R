@@ -1,9 +1,14 @@
 # I AM GOING TO CHANGE FROM JUST GETTING THE PRU KIDS TO GETTING ALL KIDS
 
+# also regarding the FSM - need not just percentage - need for each school 
+# a) total headcount b) most expansive definition of FSM eligibility
+
+
+
+
 
 # going to have children by age and sex, by school
 # then for each school, how many children of each ethnicity, and how many children FSM eligible.
-
 
 # JAN 22 SCHOOL CENSUS
 # https://explore-education-statistics.service.gov.uk/find-statistics/school-pupils-and-their-characteristics#explore-data-and-files
@@ -26,6 +31,7 @@ pru_data_22 <- s_data %>%
   select(c(level, School.Name, Phase.type.grouping, `TypeOfEstablishment..name.`, Ward.name, Urban.rural,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
+           headcount.of.pupils,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
   mutate(across(c(starts_with("part.time."),
@@ -50,10 +56,11 @@ pru_data_22 <- s_data %>%
          school_subtype = `TypeOfEstablishment..name.`,
          ward = Ward.name,
          urban_rural = Urban.rural,
+         school_headcount = headcount.of.pupils,
          school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals)
 
 pru_fsm_22 <- pru_data_22 %>%
-  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_fsm)) %>%
+  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2022,
          end_period_month = "January",
          period_length = "Year")
@@ -132,6 +139,7 @@ pru_data_21 <- s_data %>%
   select(c(level, School.Name, Phase.type.grouping, `TypeOfEstablishment..name.`, Ward.name, Urban.rural,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
+           headcount.of.pupils,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
   mutate(across(c(starts_with("part.time."),
@@ -156,10 +164,11 @@ pru_data_21 <- s_data %>%
          school_subtype = `TypeOfEstablishment..name.`,
          ward = Ward.name,
          urban_rural = Urban.rural,
+         school_headcount = headcount.of.pupils,
          school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals)
 
 pru_fsm_21 <- pru_data_21 %>%
-  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_fsm)) %>%
+  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2021,
          end_period_month = "January",
          period_length = "Year")
@@ -234,6 +243,7 @@ pru_data_20 <- s_data %>%
   select(c(level, School.Name, Phase.type.grouping, `TypeOfEstablishment..name.`, Ward.name, Urban.rural,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
+           headcount.of.pupils,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
   mutate(across(c(starts_with("part.time."),
@@ -282,11 +292,12 @@ pru_data_20 <- s_data %>%
          school_subtype = `TypeOfEstablishment..name.`,
          ward = Ward.name,
          urban_rural = Urban.rural,
+         school_headcount = headcount.of.pupils,
          school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals)
 
 
 pru_fsm_20 <- pru_data_20 %>%
-  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_fsm)) %>%
+  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2020,
          end_period_month = "January",
          period_length = "Year")
@@ -360,6 +371,7 @@ pru_data_19 <- s_data %>%
          level = ifelse(la_name == "Birmingham", "Birmingham", level)) %>% #doing level in a different way for a sec...
   select(c(level, school_name, phase.type_grouping, type_of_establishment, ward_name, urban_rural,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
+           headcount.of.pupils,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals..Performance.Tables.`,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
@@ -408,11 +420,12 @@ pru_data_19 <- s_data %>%
          school_type = phase.type_grouping,
          school_subtype = type_of_establishment,
          ward = ward_name,
+         school_headcount = headcount.of.pupils,
          school_fsm = `number.of.pupils.known.to.be.eligible.for.free.school.meals..Performance.Tables.`)
 
 
 pru_fsm_19 <- pru_data_19 %>%
-  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_fsm)) %>%
+  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2019,
          end_period_month = "January",
          period_length = "Year")
@@ -486,6 +499,7 @@ pru_data_18 <- s_data %>%
          level = ifelse(LA.name == "Birmingham", "Birmingham", level)) %>% #doing level in a different way for a sec...
   select(c(level, School.Name, Phase.type.grouping, `TypeOfEstablishment`, Ward.name, Urban.rural,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
+           headcount.of.pupils,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
@@ -533,10 +547,11 @@ pru_data_18 <- s_data %>%
          school_subtype = `TypeOfEstablishment`,
          ward = Ward.name,
          urban_rural = Urban.rural,
+         school_headcount = headcount.of.pupils,
          school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals)
 
 pru_fsm_18 <- pru_data_18 %>%
-  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_fsm)) %>%
+  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2018,
          end_period_month = "January",
          period_length = "Year")
@@ -610,6 +625,7 @@ pru_data_17 <- s_data %>%
          level = ifelse(LA.name == "Birmingham", "Birmingham", level)) %>% #doing level in a different way for a sec...
   select(c(level, School.Name, Phase.type.grouping, `TypeOfEstablishment`, Ward.name, Urban.rural,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
+           `headcount.of.pupils..unrounded.`,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
@@ -657,10 +673,11 @@ pru_data_17 <- s_data %>%
          school_subtype = `TypeOfEstablishment`,
          ward = Ward.name,
          urban_rural = Urban.rural,
+         school_headcount = `headcount.of.pupils..unrounded.`,
          school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals)
 
 pru_fsm_17 <- pru_data_17 %>%
-  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_fsm)) %>%
+  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2017,
          end_period_month = "January",
          period_length = "Year")
@@ -731,6 +748,7 @@ pru_data_16 <- s_data %>%
          level = ifelse(LA.name == "Birmingham", "Birmingham", level)) %>% #doing level in a different way for a sec...
   select(c(level, School.Name, Phase.type.grouping, `TypeOfEstablishment..name.`, Ward.name, Urban.rural,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
+           `headcount.of.pupils..unrounded.`,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
@@ -780,10 +798,11 @@ pru_data_16 <- s_data %>%
          school_subtype = `TypeOfEstablishment..name.`,
          ward = Ward.name,
          urban_rural = Urban.rural,
+         school_headcount = `headcount.of.pupils..unrounded.`,
          school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals)
 
 pru_fsm_16 <- pru_data_16 %>%
-  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_fsm)) %>%
+  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2016,
          end_period_month = "January",
          period_length = "Year")
@@ -858,6 +877,7 @@ pru_data_15 <- s_data %>%
          level = ifelse(LA.name == "Birmingham", "Birmingham", level)) %>% #doing level in a different way for a sec...
   select(c(level, School.Name, Phase.type.grouping, `TypeOfEstablishment..name.`, Ward.name, Urban.rural,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
+           `headcount.of.pupils..unrounded.`,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
@@ -905,10 +925,11 @@ pru_data_15 <- s_data %>%
          school_subtype = `TypeOfEstablishment..name.`,
          ward = Ward.name,
          urban_rural = Urban.rural,
+         school_headcount = `headcount.of.pupils..unrounded.`,
          school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals)
 
 pru_fsm_15 <- pru_data_15 %>%
-  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_fsm)) %>%
+  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2015,
          end_period_month = "January",
          period_length = "Year")
@@ -985,6 +1006,7 @@ pru_data_14 <- s_data %>%
          level = ifelse(LA.name == "Birmingham", "Birmingham", level)) %>% #doing level in a different way for a sec...
   select(c(level, School.Name, Phase.type.grouping, `TypeOfEstablishment..name.`, Ward.name, Urban.rural,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
+           `headcount.of.pupils..unrounded.`,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
@@ -1037,10 +1059,11 @@ pru_data_14 <- s_data %>%
          school_subtype = `TypeOfEstablishment..name.`,
          ward = Ward.name,
          urban_rural = Urban.rural,
+         school_headcount = `headcount.of.pupils..unrounded.`,
          school_fsm = `number.of.pupils.known.to.be.eligible.for.free.school.meals`)
 
 pru_fsm_14 <- pru_data_14 %>%
-  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_fsm)) %>%
+  select(c(level, school, school_type, school_subtype, ward, urban_rural, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2014,
          end_period_month = "January",
          period_length = "Year")
@@ -1112,6 +1135,7 @@ pru_data_13 <- s_data %>%
          level = ifelse(LA.name == "Birmingham", "Birmingham", level)) %>% #doing level in a different way for a sec...
   select(c(level, School.Name, Type.of.establishment, School.Type, CAS.Ward.name,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
+           `headcount.of.pupils`,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
@@ -1139,10 +1163,11 @@ pru_data_13 <- s_data %>%
          school_type = Type.of.establishment,
          school_subtype = School.Type,
          ward = CAS.Ward.name,
+         school_headcount = `headcount.of.pupils`,
          school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals)
 
 pru_fsm_13 <- pru_data_13 %>%
-  select(c(level, school, school_type, school_subtype, ward, school_fsm)) %>%
+  select(c(level, school, school_type, school_subtype, ward, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2013,
          end_period_month = "January",
          period_length = "Year")
@@ -1213,6 +1238,7 @@ pru_data_12 <- s_data %>%
          level = ifelse(LA.name == "Birmingham", "Birmingham", level)) %>% #doing level in a different way for a sec...
   select(c(level, School.Name, Type.of.establishment, School.Type,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
+           `headcount.of.pupils`,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
@@ -1239,10 +1265,11 @@ mutate(across(c(starts_with("number.of.pupils.classified.as."),
   rename(school = School.Name,
          school_type = Type.of.establishment,
          school_subtype = School.Type,
+         school_headcount = `headcount.of.pupils`,
          school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals)
 
 pru_fsm_12 <- pru_data_12 %>%
-  select(c(level, school, school_type, school_subtype, school_fsm)) %>%
+  select(c(level, school, school_type, school_subtype, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2012,
          end_period_month = "January",
          period_length = "Year")
@@ -1349,9 +1376,12 @@ pru_data_11 <- s_data %>%
          level = ifelse(LA.name == "Birmingham", "Birmingham", level)) %>% #doing level in a different way for a sec...
   select(c(level, School.name, Type.of.establishment,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
+           `headcount.of.pupils`,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
+  mutate(across(everything(),
+                ~ifelse(.x == "..", NA, .x))) %>%
   mutate(across(c(starts_with("part.time."),
                   (starts_with("full.time."))), ~as.numeric(str_replace(.x, "x", "1.5")))) %>%
 mutate(across(c(starts_with("number.of.pupils.classified.as."),
@@ -1359,7 +1389,7 @@ mutate(across(c(starts_with("number.of.pupils.classified.as."),
                 `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~str_replace(.x, "x", "1.5"))) %>%
   mutate(across(c(starts_with("number.of.pupils.classified.as."),
                   `number.of.pupils.unclassified`,
-                  `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~as.numeric(str_replace(.x, ">", "99.5")))) %>%
+                  `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~as.numeric(ifelse(.x == ">", `headcount.of.pupils`, .x)))) %>%
   mutate(White = select(., c(`number.of.pupils.classified.as.white.British.ethnic.origin`:`number.of.pupils.classified.as.any.other.white.background.ethnic.origin`))
          %>% rowSums(na.rm = TRUE)) %>%
   mutate(`Mixed or Multiple ethnic groups` = select(., c(`number.of.pupils.classified.as.white.and.black.Caribbean.ethnic.origin`:`number.of.pupils.classified.as.any.other.mixed.background.ethnic.origin`))
@@ -1374,10 +1404,11 @@ mutate(across(c(starts_with("number.of.pupils.classified.as."),
   select(-c(`number.of.pupils.classified.as.white.British.ethnic.origin`:`number.of.pupils.classified.as.any.other.ethnic.group.ethnic.origin`)) %>%
   rename(school = School.name,
          school_type = Type.of.establishment,
+         school_headcount = `headcount.of.pupils`,
          school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals)
 
 pru_fsm_11 <- pru_data_11 %>%
-  select(c(level, school, school_type, school_fsm)) %>%
+  select(c(level, school, school_type, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2011,
          end_period_month = "January",
          period_length = "Year")
@@ -1483,19 +1514,24 @@ pru_data_10 <- s_data %>%
                                        "Wolverhampton", "Worcestershire"),
                         "(rest of) West Midlands (region)", level),
          level = ifelse(LA.name == "Birmingham", "Birmingham", level)) %>% #doing level in a different way for a sec...
-  select(c(level, School.name, Type.of.establishment,
+  select(c(level, CAS.Ward.name, School.name, Type.of.establishment,
            `part.time.girls.aged.0`:`full.time.boys.aged.19`,
+           `Number.of.pupils..used.for.FSM.calculation.`,
            `number.of.pupils.known.to.be.eligible.for.free.school.meals`,
            starts_with("number.of.pupils.classified.as."),
            `number.of.pupils.unclassified`)) %>%
-  mutate(across(c(starts_with("part.time."),
-                  (starts_with("full.time."))), ~as.numeric(str_replace(.x, "x", "1.5")))) %>%
+  mutate(across(everything(),
+                   ~ifelse(.x == "..", NA, .x))) %>%
+  mutate(across(c(starts_with("part.time."), 
+                  starts_with("full.time."),
+                  `Number.of.pupils..used.for.FSM.calculation.`), ~as.numeric(str_replace(.x, "x", "1.5")))) %>%
   mutate(across(c(starts_with("number.of.pupils.classified.as."),
                   `number.of.pupils.unclassified`,
                   `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~str_replace(.x, "x", "1.5"))) %>%
   mutate(across(c(starts_with("number.of.pupils.classified.as."),
-                  `number.of.pupils.unclassified`,
-                  `number.of.pupils.known.to.be.eligible.for.free.school.meals`), ~as.numeric(str_replace(.x, ">", "99.5")))) %>%
+                  `number.of.pupils.unclassified`), ~as.numeric(ifelse(.x == ">", `Number.of.pupils..used.for.FSM.calculation.`, .x)))) %>%
+  mutate(`number.of.pupils.known.to.be.eligible.for.free.school.meals` = 
+           ifelse(`number.of.pupils.known.to.be.eligible.for.free.school.meals` == ">", `Number.of.pupils..used.for.FSM.calculation.`, `number.of.pupils.known.to.be.eligible.for.free.school.meals`)) %>%
   mutate(White = select(., c(`number.of.pupils.classified.as.white.British.ethnic.origin`:`number.of.pupils.classified.as.any.other.white.background.ethnic.origin`))
          %>% rowSums(na.rm = TRUE)) %>%
   mutate(`Mixed or Multiple ethnic groups` = select(., c(`number.of.pupils.classified.as.white.and.black.Caribbean.ethnic.origin`:`number.of.pupils.classified.as.any.other.mixed.background.ethnic.origin`))
@@ -1509,18 +1545,19 @@ pru_data_10 <- s_data %>%
   rename(`Refused or information not yet available` = `number.of.pupils.unclassified`) %>%
   select(-c(`number.of.pupils.classified.as.white.British.ethnic.origin`:`number.of.pupils.classified.as.any.other.ethnic.group.ethnic.origin`)) %>%
   rename(school = School.name,
+         ward = CAS.Ward.name,
          school_type = Type.of.establishment,
+         school_headcount = `Number.of.pupils..used.for.FSM.calculation.`,
          school_fsm = number.of.pupils.known.to.be.eligible.for.free.school.meals)
 
-
 pru_fsm_10 <- pru_data_10 %>%
-  select(c(level, school, school_type, school_fsm)) %>%
+  select(c(level, ward, school, school_type, school_headcount, school_fsm)) %>%
   mutate(end_period_year = 2010,
          end_period_month = "January",
          period_length = "Year")
 
 pru_eth_10 <- pru_data_10 %>%
-  select(c(level, school, school_type, White, `Mixed or Multiple ethnic groups`,
+  select(c(level, ward, school, school_type, White, `Mixed or Multiple ethnic groups`,
            `Asian or Asian British`, `Black, African, Caribbean or Black British`,
            `Other ethnic group`, `Refused or information not yet available`)) %>%
   mutate(end_period_year = 2010,
@@ -1529,7 +1566,7 @@ pru_eth_10 <- pru_data_10 %>%
 
 
 pru_ptg <- pru_data_10 %>%
-  select(c(level, school, school_type, starts_with("part.time.girls.aged"))) %>%
+  select(c(level, ward, school, school_type, starts_with("part.time.girls.aged"))) %>%
   pivot_longer(starts_with("part.time.girls"),
                names_to = "age", values_to = "pt_girls") %>%
   mutate(age = as.numeric(str_replace(age, "part.time.girls.aged.", ""))) %>%
@@ -1544,7 +1581,7 @@ pru_ptg <- pru_data_10 %>%
 
 
 pru_ptb <- pru_data_10 %>%
-  select(c(level, school, school_type, starts_with("part.time.boys.aged"))) %>%
+  select(c(level, ward, school, school_type, starts_with("part.time.boys.aged"))) %>%
   pivot_longer(starts_with("part.time.boys"),
                names_to = "age", values_to = "pt_boys") %>%
   mutate(age = as.numeric(str_replace(age, "part.time.boys.aged.", ""))) %>%
@@ -1559,7 +1596,7 @@ pru_ptb <- pru_data_10 %>%
 
 
 pru_ftg <- pru_data_10 %>%
-  select(c(level, school, school_type, starts_with("full.time.girls.aged"))) %>%
+  select(c(level, ward, school, school_type, starts_with("full.time.girls.aged"))) %>%
   pivot_longer(starts_with("full.time.girls"),
                names_to = "age", values_to = "ft_girls") %>%
   mutate(age = as.numeric(str_replace(age, "full.time.girls.aged.", ""))) %>%
@@ -1574,7 +1611,7 @@ pru_ftg <- pru_data_10 %>%
 
 
 pru_ftb <- pru_data_10 %>%
-  select(c(level, school, school_type, starts_with("full.time.boys.aged"))) %>%
+  select(c(level, ward, school, school_type, starts_with("full.time.boys.aged"))) %>%
   pivot_longer(starts_with("full.time.boys"),
                names_to = "age", values_to = "ft_boys") %>%
   mutate(age = as.numeric(str_replace(age, "full.time.boys.aged.", ""))) %>%
@@ -1612,7 +1649,7 @@ pru_data_10 <- pru_ptg %>%
 # one set w broken down again, split into the different charcteristics # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-pru_10to22_age_gender <- pru_data_22 %>%
+schools_10to22_age_gender <- pru_data_22 %>%
   bind_rows(pru_data_21) %>%
   bind_rows(pru_data_20) %>%
   bind_rows(pru_data_19) %>%
@@ -1629,7 +1666,7 @@ pru_10to22_age_gender <- pru_data_22 %>%
   mutate(gender = reconcile_gender(gender))
 
 # save(pru_10to22_age_gender, file = "Output/Data/Cleaned/pru_10to22_age_gender.Rdata")
-save(pru_10to22_age_gender, file = "output/data/cleaned/schools_10to22_age_gender.Rdata")
+save(schools_10to22_age_gender, file = "output/data/cleaned/schools_10to22_age_gender.Rdata")
 
 schools_10to22_ethnicity <- pru_eth_22 %>%
   bind_rows(pru_eth_21) %>%
@@ -1656,20 +1693,24 @@ save(schools_10to22_ethnicity, file = "output/data/cleaned/schools_10to22_ethnic
 schools_10to22_fsm <- pru_fsm_22 %>%
   bind_rows(pru_fsm_21) %>%
   bind_rows(pru_fsm_20) %>%
-  bind_rows(pru_fsm_19) %>%
+  bind_rows(pru_fsm_19 %>% 
+              mutate(school_headcount = as.numeric(school_headcount))) %>%
   bind_rows(pru_fsm_18) %>%
   bind_rows(pru_fsm_17) %>%
   bind_rows(pru_fsm_16) %>%
   bind_rows(pru_fsm_15) %>%
-  bind_rows(pru_fsm_14) %>%
-  bind_rows(pru_fsm_13) %>%
-  bind_rows(pru_fsm_12) %>%
-  bind_rows(pru_fsm_11) %>%
-  bind_rows(pru_fsm_10)
+  bind_rows(pru_fsm_14 %>% 
+              mutate(school_headcount = as.numeric(str_replace(school_headcount, "x", "1.5")))) %>%
+  bind_rows(pru_fsm_13 %>% 
+              mutate(school_headcount = as.numeric(str_replace(school_headcount, "x", "1.5")))) %>%
+  bind_rows(pru_fsm_12 %>% 
+              mutate(school_headcount = as.numeric(str_replace(school_headcount, "x", "1.5")))) %>%
+  bind_rows(pru_fsm_11 %>% 
+              mutate(school_headcount = as.numeric(str_replace(school_headcount, "x", "1.5")))) %>% 
+  bind_rows(pru_fsm_10 %>% 
+              mutate(school_headcount = as.numeric(str_replace(school_headcount, "x", "1.5")))) 
 
 save(schools_10to22_fsm, file = "output/data/cleaned/schools_10to22_fsm.Rdata")
-
-
 
 
 

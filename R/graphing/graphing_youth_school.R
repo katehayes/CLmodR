@@ -1,4 +1,58 @@
 
+
+schools %>% 
+  mutate(cohort = case_when(end_period_year - age == 1993 ~"Cohort 1", 
+                            end_period_year - age == 1994 ~"Cohort 2",
+                            end_period_year - age == 1995 ~"Cohort 3",
+                            end_period_year - age == 1996 ~"Cohort 4",
+                            end_period_year - age == 1997 ~"Cohort 5",
+                            end_period_year - age == 1998 ~"Cohort 6",
+                            end_period_year - age == 1999 ~"Cohort 7",
+                            end_period_year - age == 2000 ~"Cohort 8",
+                            end_period_year - age == 2001 ~"Cohort 9",
+                            end_period_year - age == 2002 ~"Cohort 10",
+                            end_period_year - age == 2003 ~"Cohort 11",
+                            end_period_year - age == 2004 ~"Cohort 12",
+                            end_period_year - age == 2005 ~"Cohort 13",
+                            end_period_year - age == 2006 ~"Cohort 14",
+                            end_period_year - age == 2007 ~"Cohort 15",
+                            end_period_year - age == 2008 ~"Cohort 16",
+                            end_period_year - age == 2009 ~"Cohort 17",
+                            end_period_year - age == 2010 ~"Cohort 18",
+                            end_period_year - age == 2011 ~"Cohort 19",
+                            end_period_year - age == 2012 ~"Cohort 20")) %>% 
+  group_by(cohort, end_period_year, gender) %>% 
+  mutate(tot = sum(count)) %>% 
+  mutate(pc = count / tot) %>% 
+  filter(pru == "PRU") %>% 
+  mutate(cohort = factor(cohort, levels = c("Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4",
+                                            "Cohort 5", "Cohort 6", "Cohort 7", "Cohort 8", "Cohort 9",
+                                            "Cohort 10", "Cohort 11", "Cohort 12", "Cohort 13", "Cohort 14",
+                                            "Cohort 15", "Cohort 16", "Cohort 17", "Cohort 18", "Cohort 19", "Cohort 20"))) %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = pc),
+           stat = "identity", position = "stack") +
+  facet_grid(rows = vars(gender), cols = vars(cohort))
+
+  
+  
+check <- schools %>% 
+  distinct(school_type)
+
+check <- schools_fsm %>% 
+  group_by(end_period_year, school_type) %>% 
+  summarise(tot_count = sum(school_fsm))
+  
+  
+  # %>% 
+  summarise(fsm_pc = sum(school_fsm)/sum(school_headcount))
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# NEWER STUFF ABOVE# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
 birm_pru <- pru_data %>%
   filter(level == "Birmingham") %>%
   group_by(year, age, gender, ethnicity) %>%
