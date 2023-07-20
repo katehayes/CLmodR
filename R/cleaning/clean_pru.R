@@ -1719,10 +1719,10 @@ schools_10to22_fsm <- pru_fsm_22 %>%
 
 save(schools_10to22_fsm, file = "output/data/cleaned/schools_10to22_fsm.Rdata")
 
-schools_10to22_fsm <- schools_10to22_fsm %>% 
-  filter(end_period_year != 2011) %>% 
-  bind_rows(pru_fsm_11 %>% 
-              mutate(school_headcount = as.numeric(str_replace(school_headcount, "x", "1.5"))))
+# schools_10to22_fsm <- schools_10to22_fsm %>% 
+#   filter(end_period_year != 2011) %>% 
+#   bind_rows(pru_fsm_11 %>% 
+#               mutate(school_headcount = as.numeric(str_replace(school_headcount, "x", "1.5"))))
 
 
 
