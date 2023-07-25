@@ -1,5 +1,208 @@
 
 
+
+susp_excl_fsm %>% 
+ggplot() +
+  geom_bar(aes(x = end_period_year, y = perm_excl_rate),
+           stat = "identity", position = "stack") +
+  facet_grid(rows = vars(fsm))
+
+
+susp_excl_fsm %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = suspension_rate),
+           stat = "identity", position = "stack") +
+  facet_grid(rows = vars(fsm))
+
+susp_excl_fsm %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = one_plus_susp_rate),
+           stat = "identity", position = "stack") +
+  facet_grid(rows = vars(fsm))
+
+susp_excl_fsm %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = susp_rate_per_child_susp),
+           stat = "identity", position = "stack") +
+  facet_grid(rows = vars(fsm))
+
+
+susp_excl_age %>% 
+  mutate(age = as.character(age)) %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = susp_rate_per_child_susp, fill = end_period_year),
+           stat = "identity", position = "dodge2") 
+
+susp_excl_age %>% 
+  add_cohort() %>% 
+  mutate(age = as.character(age)) %>% 
+  ggplot() +
+  geom_bar(aes(x = cohort, y = susp_rate_per_child_susp, fill = age),
+           stat = "identity", position = "dodge2") 
+
+
+# the number of suspensions per suspended child is not too high
+# maybe 1.5 for 10, touching 1.75 for 11/12, gradually falling from
+# there, maybe one by 16/17
+
+
+
+susp_excl_age %>% 
+  mutate(age = as.character(age)) %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = susp_rate_per_child_susp, fill = age),
+           stat = "identity", position = "dodge2") 
+
+
+susp_excl_age %>% 
+  add_cohort() %>% 
+  mutate(age = as.character(age)) %>% 
+  ggplot() +
+  geom_bar(aes(x = cohort, y = perm_excl_rate, fill = age),
+           stat = "identity", position = "dodge2") 
+# thirteen seems to be the age you get permanently excluded...well 13-15
+
+susp_excl_age %>% 
+  mutate(age = as.character(age)) %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = perm_excl_rate, fill = end_period_year),
+           stat = "identity", position = "dodge2") 
+# thirteen seems to be the age you get permanently excluded...well 13-15
+
+
+
+susp_excl_age %>% 
+ mutate(age = as.character(age)) %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = perm_excl_rate, fill = age),
+           stat = "identity", position = "dodge2")
+
+susp_excl_age %>% 
+  mutate(age = as.character(age)) %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = one_plus_susp_rate, fill = age),
+           stat = "identity", position = "dodge2")
+
+
+susp_excl_age %>% 
+  # mutate(age = as.character(age)) %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = one_plus_susp_rate, fill = end_period_year),
+           stat = "identity", position = "dodge2")
+# 14 and 12/13 (stepping gradually to peak, half step down to 15, fall off from then) are the years where the biggest percentage of kids get suspended
+
+
+susp_excl_age %>% 
+  mutate(age = as.numeric(age),
+         end_period_year = as.numeric(end_period_year)) %>% 
+  mutate(cohort = case_when(end_period_year - age == 1993 ~"Cohort 1", 
+                          end_period_year - age == 1994 ~"Cohort 2",
+                          end_period_year - age == 1995 ~"Cohort 3",
+                          end_period_year - age == 1996 ~"Cohort 4",
+                          end_period_year - age == 1997 ~"Cohort 5",
+                          end_period_year - age == 1998 ~"Cohort 6",
+                          end_period_year - age == 1999 ~"Cohort 7",
+                          end_period_year - age == 2000 ~"Cohort 8",
+                          end_period_year - age == 2001 ~"Cohort 9",
+                          end_period_year - age == 2002 ~"Cohort 10",
+                          end_period_year - age == 2003 ~"Cohort 11",
+                          end_period_year - age == 2004 ~"Cohort 12",
+                          end_period_year - age == 2005 ~"Cohort 13",
+                          end_period_year - age == 2006 ~"Cohort 14",
+                          end_period_year - age == 2007 ~"Cohort 15",
+                          end_period_year - age == 2008 ~"Cohort 16",
+                          end_period_year - age == 2009 ~"Cohort 17",
+                          end_period_year - age == 2010 ~"Cohort 18",
+                          end_period_year - age == 2011 ~"Cohort 19",
+                          end_period_year - age == 2012 ~"Cohort 20")) %>% 
+  mutate(cohort = factor(cohort, levels = c("Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4",
+                                            "Cohort 5", "Cohort 6", "Cohort 7", "Cohort 8", "Cohort 9",
+                                            "Cohort 10", "Cohort 11", "Cohort 12", "Cohort 13", "Cohort 14",
+                                            "Cohort 15", "Cohort 16", "Cohort 17", "Cohort 18", "Cohort 19", "Cohort 20"))) %>% 
+  # select(end_period_year, age, cohort, one_plus_susp_rate) %>% 
+  # pivot_wider(names_from = age, values_from = one_plus_susp_rate,
+  #             values_fill = 0) %>% 
+  # pivot_longer(starts_with("1"),
+  #              names_to = "age", values_to = "one_plus_susp_rate") %>% 
+  mutate(age = as.character(age)) %>% 
+  ggplot() +
+  geom_bar(aes(x = cohort, y = one_plus_susp_rate, fill = age),
+           stat = "identity", position = "dodge2")
+
+susp_excl_age %>% 
+  mutate(age = as.numeric(age),
+         end_period_year = as.numeric(end_period_year)) %>% 
+  mutate(cohort = case_when(end_period_year - age == 1993 ~"Cohort 1", 
+                            end_period_year - age == 1994 ~"Cohort 2",
+                            end_period_year - age == 1995 ~"Cohort 3",
+                            end_period_year - age == 1996 ~"Cohort 4",
+                            end_period_year - age == 1997 ~"Cohort 5",
+                            end_period_year - age == 1998 ~"Cohort 6",
+                            end_period_year - age == 1999 ~"Cohort 7",
+                            end_period_year - age == 2000 ~"Cohort 8",
+                            end_period_year - age == 2001 ~"Cohort 9",
+                            end_period_year - age == 2002 ~"Cohort 10",
+                            end_period_year - age == 2003 ~"Cohort 11",
+                            end_period_year - age == 2004 ~"Cohort 12",
+                            end_period_year - age == 2005 ~"Cohort 13",
+                            end_period_year - age == 2006 ~"Cohort 14",
+                            end_period_year - age == 2007 ~"Cohort 15",
+                            end_period_year - age == 2008 ~"Cohort 16",
+                            end_period_year - age == 2009 ~"Cohort 17",
+                            end_period_year - age == 2010 ~"Cohort 18",
+                            end_period_year - age == 2011 ~"Cohort 19",
+                            end_period_year - age == 2012 ~"Cohort 20")) %>% 
+  mutate(cohort = factor(cohort, levels = c("Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4",
+                                            "Cohort 5", "Cohort 6", "Cohort 7", "Cohort 8", "Cohort 9",
+                                            "Cohort 10", "Cohort 11", "Cohort 12", "Cohort 13", "Cohort 14",
+                                            "Cohort 15", "Cohort 16", "Cohort 17", "Cohort 18", "Cohort 19", "Cohort 20"))) %>% 
+  # select(end_period_year, age, cohort, one_plus_susp_rate) %>% 
+  # pivot_wider(names_from = age, values_from = one_plus_susp_rate,
+  #             values_fill = 0) %>% 
+  # pivot_longer(starts_with("1"),
+  #              names_to = "age", values_to = "one_plus_susp_rate") %>% 
+  ggplot() +
+  geom_bar(aes(x = cohort, y = perm_excl_rate, fill = age),
+           stat = "identity", position = "dodge2")
+
+
+
+
+fsm_pru %>% 
+  ggplot() +
+  geom_bar(aes(x = cohort, y = rate_segregated, fill = as.character(age)),
+           stat = "identity", position = "dodge2") +
+  facet_grid(rows = vars(gender))
+
+
+fsm_pru %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = rate_segregated, fill = cohort),
+           stat = "identity", position = "dodge2")
+# the kids that turned 15 during the PRU craze (2016,17,18) were the ones
+# that got it in the neck
+
+# typically 15 was the age to get sent to a PRU
+# in every year the older kids are sent to PRUs at higher rates than younger kids
+# but it changed so radically at the pandemic that for certain cohorts their segration
+# rates started dropping over time
+
+nonfsm_pru %>% 
+  ggplot() +
+  geom_bar(aes(x = cohort, y = rate_segregated, fill = as.character(age)),
+           stat = "identity", position = "dodge2") +
+  facet_grid(rows = vars(gender))
+
+nonfsm_pru %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = rate_segregated, fill = cohort),
+           stat = "identity", position = "dodge2")
+
+# patterns much the same for non-fsm kids, just much less
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# PRU below# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
 schools %>% 
   mutate(cohort = case_when(end_period_year - age == 1993 ~"Cohort 1", 
                             end_period_year - age == 1994 ~"Cohort 2",
@@ -90,6 +293,15 @@ fsm_pc_birm_byschooltype <- schools_fsm %>%
 fsm_pc_birm_byschooltype
 
 ggsave(filename = "output/graphs/fsm_pc_birm_byschooltype.png", fsm_pc_birm_byschooltype)
+
+
+
+
+
+
+
+
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # NEWER STUFF ABOVE# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 

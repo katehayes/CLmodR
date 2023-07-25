@@ -1,3 +1,40 @@
+# s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/school_categories.csv")
+
+# we've got school level, but no characteristics
+# then we've got characteristics at birm level, but not the school
+# we've also got deprivation decile at the national level, not birm
+# and POST LOOKED AFTER ARRANGEMENTS???? <- actually its national level and not very he;lpful at all, ignore
+
+# es_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/permanent-and-fixed-period-exclusions-in-england_2021-22-summer-term/data/exc_pru.csv")
+# 
+# es_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/permanent-and-fixed-period-exclusions-in-england_2021-22-summer-term/data/exc_school.csv")
+# 
+es_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/permanent-and-fixed-period-exclusions-in-england_2021-22-summer-term/data/exc_characteristics.csv")
+# 
+# es_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/permanent-and-fixed-period-exclusions-in-england_2021-22-summer-term/data/exc_idaci_sen_need_fsm6.csv")
+# es_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/permanent-and-fixed-period-exclusions-in-england_2021-22-summer-term/data/exc_plaa.csv")
+# 
+
+
+
+es_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/permanent-and-fixed-period-exclusions-in-england_2021-22-summer-term/data/exc_pru.csv")
+
+excl_susp_14to22_pru <- es_data %>% 
+  rename(end_period_year = time_period) %>%
+  mutate(end_period_year = paste(str_sub(end_period_year, end = -5), str_sub(end_period_year, start = -2), sep = "")) %>% 
+  filter(geographic_level == "School",
+         la_name == "Birmingham") %>% 
+  rename(level = la_name,
+         school = school_name,
+         school_headcount = headcount) %>% 
+  select(level, end_period_year, school, school_headcount,
+         perm_excl, suspension, one_plus_susp) %>% 
+  mutate(period_length = "Academic Year",
+         end_period_month = "June?") 
+
+save(excl_susp_14to22_pru, file = "output/data/cleaned/excl_susp_14to22_pru.Rdata")
+
+
 # EXCLUSIONS AND SUSPENSIONS
 es_data <- read.csv("/Users/katehayes/temp_data/permanent-and-fixed-period-exclusions-in-england_2020-21/data/exc_characteristics.csv")
 
