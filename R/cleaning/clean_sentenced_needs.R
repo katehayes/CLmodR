@@ -200,6 +200,11 @@ careconv_data <- c_data %>%
   filter(la_name == "Birmingham")
 
 
+c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR50_2017_UnderlyingData (1)/SFR50_OC22017.csv")
+
+
+
+
 #####################################################################################################
 #########OLD WORK TO ADJUST _ MISSING FROM CARE#####################################################################################################
 #####################################################################################################

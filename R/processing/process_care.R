@@ -1,9 +1,9 @@
 
 # loading in data made in the cleaning scripts
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/care_10to22.Rdata")
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/care_11to22_age.Rdata")
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/care_11to22_gender.Rdata")
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/care_11to22_placement.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/care_10to22.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/care_11to22_age.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/care_11to22_gender.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/care_11to22_placement.Rdata")
 
 # first we'll take all the supplementary data, make percentages, then add these back into the main dataset and multiply
 placement_pc <- care_11to22_placement %>%
@@ -19,8 +19,9 @@ group_by(level, end_period_year, end_period_month, period_length, placement) %>%
                                         "Residential schools",
                                         "Other residential settings"),
                             "Residential",
-                            "Not residential")) %>%
-  filter(residential == "Residential") # if you stop here you can see the percentages of each residential category
+                            "Not residential")) 
+# %>%
+  # filter(residential == "Residential") # if you stop here you can see the percentages of each residential category
 
 # quick graph of the pc's to see about the assumption ill be making
 check_placement_pc <- placement_pc %>%

@@ -805,3 +805,188 @@ care_11to22_provider <- care_data_18to22 %>%
 
 
 save(care_11to22_provider, file = "Output/Data/Cleaned/care_11to22_provider.Rdata")
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# looking at starting residential placements # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# data below is from https://www.gov.uk/government/publications/why-do-children-go-into-childrens-homes/why-do-children-go-into-childrens-homes#appendix-2-supplementary-tables-and-data
+# i just put it in my own excel sheet
+# its a one-off study in 2019, but gives a little useful detail - would be better to have it at brim level for every child but... hey
+
+c_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/entering_res_care.xls", sheet = 1)
+
+pc_res_first <- c_data %>% 
+  filter(`Number of places before admission` == 0) %>% 
+  select(`% of children in homes 31/03/2019`) %>% 
+  unlist()
+
+c_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/entering_res_care.xls", sheet = 3)
+
+age_placements <- c_data %>% 
+  select(-All) %>% 
+  rename(num_placements = `Number of placements`) %>% 
+  filter(num_placements != "Total") %>% 
+  pivot_longer(-num_placements,
+               names_to = "age", values_to = "count") %>% 
+  mutate(age = str_remove(age, "Age "),
+         age = str_remove(age, " at entry")) %>% 
+  group_by(age) %>% 
+  mutate(pc = count / sum(count))
+
+age_placements %>% 
+  ggplot() +
+  geom_bar(aes(x = num_placements, y = count), stat = "identity") +
+  facet_wrap(~age, ncol = 1)
+
+
+c_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/entering_res_care.xls", sheet = 2)
+
+age_at_entry <- c_data %>% 
+  select(-`% of sample`) %>% 
+  rename(age = `Age of children`,
+         pc = `% of children in homes 31/03/2020`)
+
+
+age_at_rescare_entry <- age_at_entry %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = pc), stat = "identity")
+ggsave(filename = "output/graphs/age_at_rescare_entry.png", age_at_rescare_entry)
+
+
+
+c_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/entering_res_care.xls", sheet = 4)
+
+pc_missing <- c_data %>% 
+  mutate(Frequency = Frequency/107) %>% # this is the total children in the sample
+  filter(`Event that led to the child living at the home` == "Going missing") %>% 
+  pivot_wider(names_from = `Event that led to the child living at the home`,
+              values_from = Frequency) %>% 
+  unlist()
+
+pc_cce <- c_data %>% 
+  mutate(Frequency = Frequency/107) %>% # this is the total children in the sample
+  filter(`Event that led to the child living at the home` == "Child criminal exploitation") %>% 
+  pivot_wider(names_from = `Event that led to the child living at the home`,
+              values_from = Frequency) %>% 
+  unlist()
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# DURATION # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+
+c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/children-looked-after-in-england-including-adoptions_2022 (1)/data (1)/national_duration_of_placements_ceasing.csv")
+
+c_duration <- c_data %>% 
+  filter(placement_duration %in% c("Median duration (days)", "Average duration (days)", "All placements")) %>% 
+  select(time_period, placement_duration, placement_group, number) %>% 
+  pivot_wider(names_from = placement_duration, values_from = number) %>% 
+  rename(headcount = `All placements`) %>% 
+  rename(mean = `Average duration (days)`,
+         median = `Median duration (days)`) %>% 
+  # pivot_longer(c(`Median duration (days)`, `Average duration (days)`),
+  #              names_to = "measure", values_to = "duration") %>% 
+  mutate(residential =
+           ifelse(placement_group %in% c("Secure units, children’s homes and semi-independent living accommodation",
+                                         "Residential schools",
+                                         "Other residential settings"),
+                  "Residential",
+                  "Not residential")) %>% 
+  mutate(headcount = as.numeric(headcount),
+         mean = as.numeric(mean)) %>% 
+  mutate(count_times_av = headcount * mean) %>% 
+  group_by(time_period, residential) %>% 
+  summarise(mean_dur = sum(count_times_av)/sum(headcount))
+
+c_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR50_2017_National_tables (1).xlsx", 
+                    sheet = 8, skip = 9, n_max = 15)
+
+c_duration_17 <- c_data %>% 
+  rename(headcount = `...2`,
+         )
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# CARE AND OFFENDING DATA# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# this set of data, the 'convictions and health outcomes' data, i believe only goes to 2018 << I WAS WRONG
+# i think now it goes back to 2015, which is good
+# if you want more about convictions among CLA and even remand, i think you can look at reasons children started and then ceased
+
+# Local authority level data for children looked after on 31 March for at least 12 months,
+# by OC2 indicators. These are whether the child:
+# was convicted or subject to youth cautions, or youth conditional cautions during the year
+
+
+c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/children-looked-after-in-england-including-adoptions_2022 (1)/data (1)/la_conviction_health_outcome_cla.csv")
+
+careconv_18to22 <- c_data %>%
+  filter(la_name == "Birmingham",
+         cla_group == "Convictions: Children looked after Ages 10 to 17 years") %>% 
+  select(time_period, characteristic, number) %>% 
+  mutate(characteristic = ifelse(characteristic == "Total ages 10 to 17 years",
+                                 "count_total", "count_convicted")) %>% 
+  rename(end_period_year = time_period) %>% 
+  pivot_wider(names_from = characteristic, values_from = number) %>% 
+  mutate(age = "10-17",
+         count_total = as.numeric(count_total))
+
+
+# OC2_10to17: Children looked after at 31 March 2017 for at least 12 months aged 10 to 17 years
+# OC2_convicted: Children looked after at 31 March 2017 convicted or subject to a final warning or reprimand during the year aged 10 to 17 years
+c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR50_2017_UnderlyingData (1)/SFR50_OC22017.csv")
+
+careconv_17 <- c_data %>% 
+  filter(geog_n == "Birmingham") %>% 
+  select(c(OC2_10to17, OC2_convicted)) %>% 
+  rename(count_total = OC2_10to17,
+         count_convicted = OC2_convicted) %>% 
+  mutate(age = "10-17",
+         end_period_year = 2017) %>% 
+  mutate(count_total = as.numeric(count_total))
+
+
+# CLA_10over: Children looked after at 31 March 2016 for at least 12 months aged 10 years and over
+# CLA_convicted: Children looked after at 31 March 2016 convicted or subject to a final warning or reprimand during the year
+c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR41_2016_UD (1)/SFR41_OC22016.csv")
+
+careconv_16 <- c_data %>% 
+  filter(geog_n == "Birmingham") %>% 
+  select(c(CLA_10over, CLA_convicted)) %>% 
+  rename(count_total = CLA_10over,
+         count_convicted = CLA_convicted) %>% 
+  mutate(age = "10-17",
+         end_period_year = 2016) %>% 
+  mutate(count_total = as.numeric(count_total))
+
+
+# CLA_10over: Children looked after at 31 March 2015 for at least 12 months aged 10 years and over
+# CLA_convicted: Children looked after at 31 March 2015 convicted or subject to a final warning or reprimand during the year
+c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR34_2015_UnderlyingData (1)/SFR34_OC22015.csv")
+
+careconv_15 <- c_data %>% 
+  filter(geog_n == "Birmingham") %>% 
+  select(c(CLA_10over, CLA_convicted)) %>% 
+  rename(count_total = CLA_10over,
+         count_convicted = CLA_convicted) %>% 
+  mutate(age = "10-17",
+         end_period_year = 2015) %>% 
+  mutate(count_total = as.numeric(count_total))
+
+
+# difference between final warning/reprimand and a caution? if any?
+careconv_15to22 <- bind_rows(careconv_18to22, careconv_17, careconv_16, careconv_15) %>% 
+  mutate(count_convicted = as.numeric(count_convicted)) %>% 
+  mutate(pc_convicted = count_convicted / count_total)
+
+pc_care_convicted <- careconv_15to22 %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = pc_convicted), stat = "identity")
+ggsave(filename = "output/graphs/pc_care_convicted.png", pc_care_convicted)
+
+
+
+
