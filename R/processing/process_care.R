@@ -4,6 +4,34 @@ load("/Users/katehayes/CLmodR/output/data/cleaned/care_10to22.Rdata")
 load("/Users/katehayes/CLmodR/output/data/cleaned/care_11to22_age.Rdata")
 load("/Users/katehayes/CLmodR/output/data/cleaned/care_11to22_gender.Rdata")
 load("/Users/katehayes/CLmodR/output/data/cleaned/care_11to22_placement.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/care_duration_14to22.Rdata")
+
+
+mod1 <- lm(mean_dur ~ end_period_year, data = care_duration_14to22 %>%
+             filter(residential == "Residential"))
+summary(mod1)
+
+mod2 <- lm(mean_dur ~ end_period_year, data = care_duration_14to22 %>%
+             filter(residential == "Not residential"))
+summary(mod2)
+
+care_duration <- care_duration_14to22 %>% 
+  ungroup() %>% 
+  add_row(end_period_year = 2013, residential = "Residential", mean_dur = (6.328*2013)-12540.394) %>% 
+  add_row(end_period_year = 2012, residential = "Residential", mean_dur = (6.328*2012)-12540.394) %>% 
+  add_row(end_period_year = 2011, residential = "Residential", mean_dur = (6.328*2011)-12540.394) %>%
+  add_row(end_period_year = 2010, residential = "Residential", mean_dur = (6.328*2010)-12540.394) %>% 
+  add_row(end_period_year = 2013, residential = "Not residential", mean_dur = (7.929*2013)-15637.629) %>%
+  add_row(end_period_year = 2012, residential = "Not residential", mean_dur = (7.929*2012)-15637.629) %>%
+  add_row(end_period_year = 2011, residential = "Not residential", mean_dur = (7.929*2011)-15637.629) %>%
+  add_row(end_period_year = 2010, residential = "Not residential", mean_dur = (7.929*2010)-15637.629) 
+
+save(care_duration, file = "output/data/processed/care_duration.Rdata")
+
+
+
+
+
 
 # first we'll take all the supplementary data, make percentages, then add these back into the main dataset and multiply
 placement_pc <- care_11to22_placement %>%
