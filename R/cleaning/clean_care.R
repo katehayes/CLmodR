@@ -879,15 +879,17 @@ pc_cce <- c_data %>%
 
 c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/children-looked-after-in-england-including-adoptions_2022 (1)/data (1)/national_duration_of_placements_ceasing.csv")
 
-c_duration <- c_data %>% 
+c_duration_18to22 <- c_data %>% 
   filter(placement_duration %in% c("Median duration (days)", "Average duration (days)", "All placements")) %>% 
   select(time_period, placement_duration, placement_group, number) %>% 
   pivot_wider(names_from = placement_duration, values_from = number) %>% 
-  rename(headcount = `All placements`) %>% 
+  rename(headcount = `All placements`,
+         end_period_year = time_period) %>% 
   rename(mean = `Average duration (days)`,
          median = `Median duration (days)`) %>% 
   # pivot_longer(c(`Median duration (days)`, `Average duration (days)`),
   #              names_to = "measure", values_to = "duration") %>% 
+  filter(placement_group != "All placements") %>% 
   mutate(residential =
            ifelse(placement_group %in% c("Secure units, children’s homes and semi-independent living accommodation",
                                          "Residential schools",
@@ -897,7 +899,7 @@ c_duration <- c_data %>%
   mutate(headcount = as.numeric(headcount),
          mean = as.numeric(mean)) %>% 
   mutate(count_times_av = headcount * mean) %>% 
-  group_by(time_period, residential) %>% 
+  group_by(end_period_year, residential) %>% 
   summarise(mean_dur = sum(count_times_av)/sum(headcount))
 
 c_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR50_2017_National_tables (1).xlsx", 
@@ -905,7 +907,138 @@ c_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@s
 
 c_duration_17 <- c_data %>% 
   rename(headcount = `...2`,
-         )
+         placement_group = `...1`,
+         mean = `...13`) %>% 
+  select(placement_group, headcount, mean) %>% 
+  filter(!is.na(headcount),
+         placement_group != "All placements") %>% 
+  mutate(residential = ifelse(placement_group %in% c("Secure units, children's homes and",
+                                                     "Residential schools",
+                                                     "Other residential settings"),
+                              "Residential",
+                              "Not residential")) %>%
+  mutate(headcount = as.numeric(headcount),
+         mean = as.numeric(mean)) %>% 
+  mutate(count_times_av = headcount * mean) %>% 
+  group_by(residential) %>% 
+  summarise(mean_dur = sum(count_times_av)/sum(headcount)) %>% 
+  mutate(end_period_year = 2017)
+
+c_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR41_2016_National_Tables.xlsx",
+                    sheet = 9, skip = 9, n_max = 15)
+
+
+c_duration_16 <- c_data %>% 
+  rename(headcount = `...2`,
+         placement_group = `...1`,
+         mean = `...13`) %>% 
+  select(placement_group, headcount, mean) %>% 
+  filter(!is.na(headcount),
+         placement_group != "All placements") %>% 
+  mutate(residential = ifelse(placement_group %in% c("Secure units, children's homes and",
+                                                     "Residential schools",
+                                                     "Other residential settings"),
+                              "Residential",
+                              "Not residential")) %>%
+  mutate(headcount = as.numeric(headcount),
+         mean = as.numeric(mean)) %>% 
+  mutate(count_times_av = headcount * mean) %>% 
+  group_by(residential) %>% 
+  summarise(mean_dur = sum(count_times_av)/sum(headcount)) %>% 
+  mutate(end_period_year = 2016)
+
+
+c_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR34_2015_National_Tables.xlsx",
+                    sheet = 9, skip = 9, n_max = 15)
+
+c_duration_15 <- c_data %>% 
+  rename(headcount = `...2`,
+         placement_group = `...1`,
+         mean = `...13`) %>% 
+  select(placement_group, headcount, mean) %>% 
+  filter(!is.na(headcount),
+         placement_group != "All placements") %>% 
+  mutate(residential = ifelse(placement_group %in% c("Secure units, children's homes",
+                                                     "Residential schools",
+                                                     "Other residential settings"),
+                              "Residential",
+                              "Not residential")) %>%
+  mutate(headcount = as.numeric(headcount),
+         mean = as.numeric(mean)) %>% 
+  mutate(count_times_av = headcount * mean) %>% 
+  group_by(residential) %>% 
+  summarise(mean_dur = sum(count_times_av)/sum(headcount)) %>% 
+  mutate(end_period_year = 2015)
+
+
+c_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR36_2014_National_tables_revised.xlsx",
+                    sheet = 13, skip = 9, n_max = 15)
+
+c_duration_14 <- c_data %>% 
+  rename(headcount = `...2`,
+         placement_group = `...1`,
+         mean = `...13`) %>% 
+  select(placement_group, headcount, mean) %>% 
+  filter(!is.na(headcount),
+         placement_group != "All placements",
+         placement_group != "Missing - Absent for more than") %>% 
+  mutate(residential = ifelse(placement_group %in% c("Secure units, children's homes",
+                                                     "Residential schools",
+                                                     "Other residential settings"),
+                              "Residential",
+                              "Not residential")) %>%
+  mutate(headcount = as.numeric(headcount),
+         mean = as.numeric(mean)) %>% 
+  mutate(count_times_av = headcount * mean) %>% 
+  group_by(residential) %>% 
+  summarise(mean_dur = sum(count_times_av)/sum(headcount)) %>% 
+  mutate(end_period_year = 2014)
+
+
+# c_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR36_2013_NationalTables.xlsx",
+                    # sheet = ..) oh got its in a really annoying format...
+
+care_duration_14to22 <- bind_rows(c_duration_18to22, c_duration_17,
+                                  c_duration_16, c_duration_15,
+                                  c_duration_14)
+
+save(care_duration_14to22, file = "output/data/cleaned/care_duration_14to22.Rdata")
+
+care_dur <- care_duration_14to22 %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = mean_dur), stat = "identity") +
+  facet_grid(~residential)
+ggsave(filename = "output/graphs/care_dur.png", care_dur)
+
+care_dur
+
+mod1 <- lm(mean_dur ~ end_period_year, data = care_duration_14to22 %>%
+              filter(residential == "Residential"))
+summary(mod1)
+
+mod2 <- lm(mean_dur ~ end_period_year, data = care_duration_14to22 %>%
+             filter(residential == "Not residential"))
+summary(mod2)
+
+care_duration <- care_duration_14to22 %>% 
+  ungroup() %>% 
+  add_row(end_period_year = 2013, residential = "Residential", mean_dur = (6.328*2013)-12540.394) %>% 
+  add_row(end_period_year = 2012, residential = "Residential", mean_dur = (6.328*2012)-12540.394) %>% 
+  add_row(end_period_year = 2011, residential = "Residential", mean_dur = (6.328*2011)-12540.394) %>%
+  add_row(end_period_year = 2010, residential = "Residential", mean_dur = (6.328*2010)-12540.394) %>% 
+  add_row(end_period_year = 2013, residential = "Not residential", mean_dur = (7.929*2013)-15637.629) %>%
+  add_row(end_period_year = 2012, residential = "Not residential", mean_dur = (7.929*2012)-15637.629) %>%
+  add_row(end_period_year = 2011, residential = "Not residential", mean_dur = (7.929*2011)-15637.629) %>%
+  add_row(end_period_year = 2010, residential = "Not residential", mean_dur = (7.929*2010)-15637.629) 
+
+
+care_duration %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = mean_dur), stat = "identity") +
+  facet_grid(~residential)
+
+
+
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -978,9 +1111,11 @@ careconv_15 <- c_data %>%
 
 
 # difference between final warning/reprimand and a caution? if any?
-careconv_15to22 <- bind_rows(careconv_18to22, careconv_17, careconv_16, careconv_15) %>% 
+care_convicted_15to22 <- bind_rows(careconv_18to22, careconv_17, careconv_16, careconv_15) %>% 
   mutate(count_convicted = as.numeric(count_convicted)) %>% 
   mutate(pc_convicted = count_convicted / count_total)
+
+save(care_convicted_15to22, file = "output/data/cleaned/care_convicted_15to22.Rdata")
 
 pc_care_convicted <- careconv_15to22 %>% 
   ggplot() +
