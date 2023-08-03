@@ -823,6 +823,8 @@ pc_res_first <- c_data %>%
 
 c_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/entering_res_care.xls", sheet = 3)
 
+
+
 age_placements <- c_data %>% 
   select(-All) %>% 
   rename(num_placements = `Number of placements`) %>% 
@@ -839,6 +841,8 @@ age_placements %>%
   geom_bar(aes(x = num_placements, y = count), stat = "identity") +
   facet_wrap(~age, ncol = 1)
 
+# 10% of 10-13 year olds and 20% of 14-16 year olds enter res care with no prior care placement
+
 
 c_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/entering_res_care.xls", sheet = 2)
 
@@ -853,9 +857,19 @@ age_at_rescare_entry <- age_at_entry %>%
   geom_bar(aes(x = age, y = pc), stat = "identity")
 ggsave(filename = "output/graphs/age_at_rescare_entry.png", age_at_rescare_entry)
 
-
+age_at_rescare_entry 
 
 c_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/entering_res_care.xls", sheet = 4)
+
+pc_origin <-  c_data %>% 
+  mutate(Frequency = Frequency/107) %>%
+  filter(`Event that led to the child living at the home` %in% c("Foster placement breakdown",
+                                                                 "Family breakdown",
+                                                                 "Children’s home placement breakdown",
+                                                                 "Adoption breakdown",
+                                                                 "Secure order had expired")) %>% 
+  rename(origin = `Event that led to the child living at the home`)
+
 
 pc_missing <- c_data %>% 
   mutate(Frequency = Frequency/107) %>% # this is the total children in the sample
@@ -870,6 +884,30 @@ pc_cce <- c_data %>%
   pivot_wider(names_from = `Event that led to the child living at the home`,
               values_from = Frequency) %>% 
   unlist()
+
+
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# entering care, all types (not just residential) # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+
+c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/children-looked-after-in-england-including-adoptions_2022 (1)/data (1)/national_cla_ceased_during_year_placements_care_periods.csv")
+
+first_placement_18to22 <- c_data %>% 
+  filter(cla_group == "Number of placements",
+         periods_or_placements %in% c("1", "Total")) %>% 
+  select(time_period, periods_or_placements, age_on_ceasing, number) %>% 
+  pivot_wider(names_from = periods_or_placements, values_from = number) %>% 
+  filter(age_on_ceasing %in% c("10 to 15 years", "16 to 17 years", "18 years and over")) %>% 
+  mutate(pc = as.numeric(`1`)/ as.numeric(Total))
+
+first_placement_18to22 %>% 
+  ggplot() +
+  geom_bar(aes(x = time_period, y = pc), stat = "identity") +
+  facet_grid(~age_on_ceasing)
+
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

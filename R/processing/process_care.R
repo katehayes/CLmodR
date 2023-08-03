@@ -5,7 +5,85 @@ load("/Users/katehayes/CLmodR/output/data/cleaned/care_11to22_age.Rdata")
 load("/Users/katehayes/CLmodR/output/data/cleaned/care_11to22_gender.Rdata")
 load("/Users/katehayes/CLmodR/output/data/cleaned/care_11to22_placement.Rdata")
 load("/Users/katehayes/CLmodR/output/data/cleaned/care_duration_14to22.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/care_convicted_15to22.Rdata")
+load("/Users/katehayes/CLmodR/output/data/processed/population.Rdata")
 
+
+lac <- care_11to22_age %>%
+  filter(level == "Birmingham",
+         age %in% c("10-15", "16+"),
+         end_period_year <= 2020) %>% 
+  group_by(end_period_year) %>% 
+  summarise(care = sum(count)) %>% 
+  full_join(population %>% 
+              filter(end_period_year >= 2010) %>% 
+              group_by(end_period_year) %>% 
+              summarise(population = sum(count))) %>% 
+  mutate(lac_rate = care/population)
+
+lac %>% 
+  ggplot() +
+    geom_bar(aes(x = end_period_year, y = lac_rate),
+             stat = "identity", position = "stack")
+
+care_11to22_age %>% 
+  filter(level == "Birmingham") %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count, fill = age),
+           stat = "identity", position = "stack")
+
+
+care_10to22 %>% 
+  filter(level == "Birmingham") %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count, fill = period_length),
+           stat = "identity", position = "dodge")
+
+
+# https://lginform.local.gov.uk/reports/lgastandard?mod-metric=891&mod-area=E08000025&mod-group=AllMetropolitanBoroughLaInCountry_England&mod-type=namedComparisonGroup&mod-period=15&mod-groupType=namedComparisonGroup
+# https://www.basw.co.uk/system/files/resources/basw_82151-10_0.pdf <- comes from here
+# number of children who were LAC on 31st March 2015 per 10,000 children aged 0-17, by deprivation decile, England sample
+LAC_rate <- c(15/10000, 17/10000, 25/10000, 34/10000, 34/10000, 47/10000, 64/10000, 75/10000, 100/10000, 159/10000, 62/10000)
+
+names(LAC_rate) <- c("IMD decile 10", "IMD decile 9", "IMD decile 8", 
+                    "IMD decile 7", "IMD decile 6", "IMD decile 5", 
+                    "IMD decile 4", "IMD decile 3", "IMD decile 2", 
+                    "IMD decile 1", "English average")
+
+LAC_rate <-stack(LAC_rate)
+
+LAC_rate %>% 
+ggplot() +
+  geom_bar(aes(y = values, x = ind),
+           stat = "identity")
+
+# what combinations of LAC rates in poverty:not in birmingham across time adds up
+# to the correct overall average LAC rate?
+
+# over in process_poverty we said (lol) that in 2015 
+# child poverty in england was 0.1447838 pc
+# cp in birm was 0.2536112 pc
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# for care duration & in care conviction rates # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# making estimates of earlier years to fill back to 2010 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # #  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# p = i x d
+# duration = prevalence(day count)/ incidence(per day - so years total div by 365)
+
+check <- care_10to22 %>% 
+  pivot_wider(names_from = period_length,
+              values_from = count) %>% 
+  mutate(duration = Day / (Year / 365))
+
+check %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = duration, fill = level),
+           stat = "identity", position = "dodge")
+# looked at diff between duration in birm/wm/eng by doing the p=id calculation
+# looks fine, birm higher by like 10 days usually, not too bad
 
 mod1 <- lm(mean_dur ~ end_period_year, data = care_duration_14to22 %>%
              filter(residential == "Residential"))
@@ -28,10 +106,46 @@ care_duration <- care_duration_14to22 %>%
 
 save(care_duration, file = "output/data/processed/care_duration.Rdata")
 
+care_duration %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = mean_dur, fill = residential),
+           stat = "identity", position = "dodge")
 
 
+care_convicted <- care_convicted_15to22 %>% 
+  ungroup() %>% 
+  select(end_period_year, pc_convicted) %>% 
+  add_row(end_period_year = 2014, pc_convicted = care_convicted_15to22 %>% 
+            filter(end_period_year < 2020) %>% 
+            summarise(pc_convicted = mean(pc_convicted)) %>% 
+            select(pc_convicted) %>% 
+            unlist()) %>% 
+  add_row(end_period_year = 2013, pc_convicted = care_convicted_15to22 %>% 
+            filter(end_period_year < 2020) %>% 
+            summarise(pc_convicted = mean(pc_convicted)) %>% 
+            select(pc_convicted) %>% 
+            unlist()) %>% 
+  add_row(end_period_year = 2012, pc_convicted = care_convicted_15to22 %>% 
+            filter(end_period_year < 2020) %>% 
+            summarise(pc_convicted = mean(pc_convicted)) %>% 
+            select(pc_convicted) %>% 
+            unlist()) %>% 
+  add_row(end_period_year = 2011, pc_convicted = care_convicted_15to22 %>% 
+            filter(end_period_year < 2020) %>% 
+            summarise(pc_convicted = mean(pc_convicted)) %>% 
+            select(pc_convicted) %>% 
+            unlist()) %>% 
+  add_row(end_period_year = 2010, pc_convicted = care_convicted_15to22 %>% 
+            filter(end_period_year < 2020) %>% 
+            summarise(pc_convicted = mean(pc_convicted)) %>% 
+            select(pc_convicted) %>% 
+            unlist()) 
 
+save(care_convicted, file = "output/data/processed/care_convicted.Rdata")
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# below here is older # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # #  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # first we'll take all the supplementary data, make percentages, then add these back into the main dataset and multiply
 placement_pc <- care_11to22_placement %>%
@@ -105,8 +219,21 @@ care_pc <- care_pc %>%
 
 care <- care_10to22 %>%
   filter(period_length == "Day") %>%
-  full_join(care_pc) %>%
-  mutate(count = count * Residential) %>%
+  full_join(care_pc %>% 
+              select(-c(Boys, Girls, `10-15`, `16+`))) %>%
+  mutate(Residential = count * Residential,
+         `Not residential` = count * `Not residential`) %>% 
+  filter(level == "Birmingham") %>% 
+ select(-c(count, level)) %>% 
+ full_join(population %>% 
+             filter(end_period_year >= 2010) %>% 
+             group_by(end_period_year) %>% 
+             summarise(population = sum(count)))
+ 
+
+
+
+# %>%
   select(-Residential) %>%
   mutate(Girls = count * Girls,
          Boys = count * Boys) %>%

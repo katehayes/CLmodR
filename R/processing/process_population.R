@@ -1,4 +1,4 @@
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/pop_estimate_01to20_age_gender.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/pop_estimate_01to20_age_gender.Rdata")
 
 # kind of doing it like divide by 52 to get number turning 10 each week?
 # everyone who was 9 when you saw them in june will turn 10 by the time you see them same day next year
@@ -26,7 +26,8 @@ age_out <- pop_estimate_01to20_age_gender %>%
   select(-age)
 
 population <- pop_estimate_01to20_age_gender %>%
-  filter(age %in% 10:17, level == "Birmingham")
+  filter(age %in% 10:17, level == "Birmingham") %>% 
+  mutate(end_period_year = as.numeric(end_period_year))
 
 pop_IC <- population %>%
   filter(end_period_year == 2010) %>%
@@ -42,7 +43,7 @@ save(age_in, file = "Output/Data/Processed/age_in.Rdata")
 
 save(age_out, file = "Output/Data/Processed/age_out.Rdata")
 
-save(population, file = "Output/Data/Processed/population.Rdata")
+save(population, file = "output/data/processed/population.Rdata")
 
 save(v_turn10, file = "Output/Data/Input/v_turn10.Rdata")
 

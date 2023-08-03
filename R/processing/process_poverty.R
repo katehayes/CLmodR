@@ -1,5 +1,5 @@
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/poverty_06to12_15to21.Rdata")
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/poverty_15to21_workstatus_age")
+load("/Users/katehayes/CLmodR/output/data/cleaned/poverty_06to12_15to21.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/poverty_15to21_workstatus_age.Rdata")
 
 # poverty_06to12_15to21 - combines a point in time measure and a summary year measure
 # the counts are all people between 0-20
@@ -26,7 +26,7 @@ missing_pov <- poverty %>%
 poverty <- poverty %>%
   bind_rows(missing_pov)
 
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/pop_estimate_01to20_age_gender.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/pop_estimate_01to20_age_gender.Rdata")
 
 poverty_rate <- pop_estimate_01to20_age_gender %>%
   filter(level %in% c("Birmingham", "West Midlands (region)", "England")) %>%
@@ -38,7 +38,7 @@ poverty_rate <- pop_estimate_01to20_age_gender %>%
   ungroup() %>%
   mutate(pov_rate = pov / pop)
 
-check_pov_rate <- poverty_rate  %>%
+check_pov_rate <- poverty_rate %>%
   ggplot() +
   geom_line(aes(x = end_period_year, y = pov_rate, colour = level)) +
   scale_x_continuous(name = "") +
@@ -48,7 +48,7 @@ check_pov_rate <- poverty_rate  %>%
 check_pov_rate
 # looks like the change of measure could easily be ruining everything but
 
-ggsave(filename = "Output/Graphs/assumption_checks/check_pov_rate.png", check_pov_rate)
+# ggsave(filename = "output/graphs/assumption checks/check_pov_rate.png", check_pov_rate)
 
 params_impov <- poverty_rate %>%
   filter(level == "Birmingham") %>%
@@ -61,7 +61,7 @@ params_impov <- poverty_rate %>%
          meaning = "(if pos) pc of included group that will transition to excluded (become impoverished) or (if neg) pc growth of included group as result of transitions from excluded group") %>%
   rename(value = pc_impov)
 
-save(params_impov, file = "Output/Data/Cleaned/params_impov.Rdata")
+# save(params_impov, file = "output/data/cleaned/params_impov.Rdata")
 
 
 check_impov_rate <- params_impov  %>%
@@ -73,5 +73,5 @@ check_impov_rate <- params_impov  %>%
   theme(strip.background = element_blank())
 check_impov_rate
 # doesnt look great.. but i guess it is vaguely like showing when the tories started, and when covid payments kicked int
-ggsave(filename = "Output/Graphs/assumption_checks/check_impov_rate.png", check_impov_rate)
+# ggsave(filename = "output/graphs/assumption checks/check_impov_rate.png", check_impov_rate)
 
