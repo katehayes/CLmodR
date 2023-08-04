@@ -220,14 +220,52 @@ care_pc <- care_pc %>%
 care <- care_10to22 %>%
   filter(period_length == "Day") %>%
   full_join(care_pc %>% 
-              select(-c(Boys, Girls, `10-15`, `16+`))) %>%
+              select(-c(Boys, Girls, `10-15`, `16+`))) %>% 
   mutate(Residential = count * Residential,
-         `Not residential` = count * `Not residential`) %>% 
+         `Not residential` = count * `Not residential`) %>%
   filter(level == "Birmingham") %>% 
- select(-c(count, level)) %>% 
- full_join(population %>% 
+  select(-level) %>% 
+  full_join(care_pc %>% 
+            ungroup() %>% 
+            select(-c(Boys, Girls, Residential, `Not residential`)) %>% 
+            filter(level == "Birmingham") %>% 
+            select(-level)) %>% 
+  mutate(`>10 CiC pc` = `10-15` + `16+`,
+         `>10 res count` = 0.9*Residential,
+         `>10 nonres count` = count*`>10 CiC pc` - `>10 res count`) %>% 
+  select(-c(count, Residential, `Not residential`, `>10 CiC pc`)) %>% 
+  mutate(`10-15` = `10-15`/(`10-15` + `16+`),
+         `16+` = `16+`/(`10-15` + `16+`),
+         count = `>10 res count` + `>10 nonres count`) %>% 
+full_join(care_pc %>% 
+            ungroup() %>% 
+            select(-c(Residential, `Not residential`, `10-15`, `16+`)) %>% 
+            filter(level == "Birmingham") %>% 
+            select(-level)) %>% 
+  mutate(res_boys = `>10 res count`*0.62,
+         res_girls = `>10 res count`*0.38,
+         nonres_boys = count*Boys - res_boys,
+         nonres_girls = count*Girls - res_girls) %>% 
+  select(c(end_period_year, end_period_month, period_length,
+           res_boys, res_girls, nonres_boys, nonres_girls)) %>% 
+  pivot_longer(c(res_boys, res_girls, nonres_boys, nonres_girls),
+               names_to = "name", values_to = "count") %>% 
+  mutate(residential = ifelse(grepl("non", name), "Not residential", "Residential"),
+         gender = ifelse(grepl("girl", name), "Girls", "Boys")) %>% 
+  select(-name) 
+
+
+
+care %>% 
+ggplot() +
+  geom_bar(aes(x = end_period_year, y = count, fill = gender),
+           stat = "identity", position = "stack") +
+  facet_grid(~residential)
+
+# %>% 
+  full_join(population %>% 
              filter(end_period_year >= 2010) %>% 
-             group_by(end_period_year) %>% 
+             group_by(end_period_year, gender) %>% 
              summarise(population = sum(count)))
  
 

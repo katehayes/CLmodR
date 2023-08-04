@@ -846,10 +846,12 @@ age_placements %>%
 
 c_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/entering_res_care.xls", sheet = 2)
 
-age_at_entry <- c_data %>% 
+rescare_age_at_entry_20 <- c_data %>% 
   select(-`% of sample`) %>% 
   rename(age = `Age of children`,
          pc = `% of children in homes 31/03/2020`)
+
+save(rescare_age_at_entry_20, file = "output/data/cleaned/rescare_age_at_entry_20.Rdata")
 
 
 age_at_rescare_entry <- age_at_entry %>% 
