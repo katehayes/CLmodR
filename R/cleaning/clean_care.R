@@ -849,7 +849,9 @@ c_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sh
 rescare_age_at_entry_20 <- c_data %>% 
   select(-`% of sample`) %>% 
   rename(age = `Age of children`,
-         pc = `% of children in homes 31/03/2020`)
+         pc = `% of children in homes 31/03/2020`) %>% 
+  filter(age >= 10) %>% 
+  mutate(`>10pc` = pc/sum(pc))
 
 save(rescare_age_at_entry_20, file = "output/data/cleaned/rescare_age_at_entry_20.Rdata")
 

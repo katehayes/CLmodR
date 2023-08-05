@@ -1,3 +1,6 @@
+# COULD WE USE INCOME IMD FOR BIRMINGHAM???
+
+
 
 # local_child_poverty_basket_of_indicators.xlsx <- THIS FILE HAS HIDDEN BIRM DATA 2006-2012
 # don't have age of child

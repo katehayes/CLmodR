@@ -255,6 +255,142 @@ full_join(care_pc %>%
   select(-name) 
 
 
+care_calc <- care %>% 
+  pivot_wider(names_from = residential,
+              values_from = count) %>% 
+  mutate(res10 = Residential*rescare_age_at_entry_20 %>% 
+           filter(age == 10) %>% 
+           select(`>10pc`) %>% 
+           unlist()) %>% 
+  mutate(res11 = Residential*rescare_age_at_entry_20 %>% 
+           filter(age == 11) %>% 
+           select(`>10pc`) %>% 
+           unlist()) %>% 
+  mutate(res12 = Residential*rescare_age_at_entry_20 %>% 
+           filter(age == 12) %>% 
+           select(`>10pc`) %>% 
+           unlist()) %>% 
+  mutate(res13 = Residential*rescare_age_at_entry_20 %>% 
+           filter(age == 13) %>% 
+           select(`>10pc`) %>% 
+           unlist()) %>% 
+  mutate(res14 = Residential*rescare_age_at_entry_20 %>% 
+           filter(age == 14) %>% 
+           select(`>10pc`) %>% 
+           unlist()) %>% 
+  mutate(res15 = Residential*rescare_age_at_entry_20 %>% 
+           filter(age == 15) %>% 
+           select(`>10pc`) %>% 
+           unlist()) %>% 
+  mutate(res16 = Residential*rescare_age_at_entry_20 %>% 
+           filter(age == 16) %>% 
+           select(`>10pc`) %>% 
+           unlist()) %>% 
+  mutate(res17 = Residential*rescare_age_at_entry_20 %>% 
+           filter(age == 17) %>% 
+           select(`>10pc`) %>% 
+           unlist()) %>% 
+  mutate(res10to15 = res10 + res11 + res12 + res13 + res14 + res15,
+         res16plus = res16 + res17) %>% 
+  ungroup() %>% 
+  select(-c(res10, res11, res12, res13, res14, res15, res16, res17,
+            end_period_month, period_length)) %>% 
+  full_join(care_pc %>% 
+              ungroup() %>% 
+              select(-c(Boys, Girls, Residential, `Not residential`)) %>% 
+              filter(level == "Birmingham") %>% 
+              select(-c(level, end_period_month, period_length))) %>% 
+  mutate(tot = `10-15` + `16+`,
+         `10-15` = `10-15`/ tot,
+         `16+` = `16+`/tot) %>% 
+  mutate(nonres10to15 = (Residential + `Not residential`)*`10-15` -  res10to15,
+         nonres16plus = (Residential + `Not residential`)*`16+` -  res16plus) %>% 
+  select(-c(Residential, `Not residential`, `10-15`, `16+`, tot)) %>% 
+  pivot_longer(c(nonres10to15, nonres16plus, res10to15, res16plus),
+               values_to = "count", names_to = "name") %>% 
+  mutate(residential = ifelse(grepl("non", name), "Not residential", "Residential"),
+         age = ifelse(grepl("15", name), "10-15", "16+")) %>% 
+  select(-name) %>% 
+  pivot_wider(names_from = residential,
+              values_from = count) %>% 
+  full_join(population %>% 
+            filter(end_period_year >= 2010) %>% 
+            pivot_wider(names_from = age, values_from = count) %>% 
+            mutate(`10-15` = `10` + `11` + `12` + `13` +`14` + `15`,
+                   `16+` = `16` + `17`) %>% 
+            select(end_period_year, gender, `10-15`, `16+`) %>% 
+            pivot_longer(c(`10-15`, `16+`),
+                         names_to = "age",
+                         values_to = "population")) %>% 
+  mutate(pc_res = Residential / population,
+         pc_notres = `Not residential` / population) %>% 
+  mutate(pc_lac = pc_res + pc_notres)
+
+care_dist_agein <-care_calc %>% 
+  filter(age == "10-15") %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = pc_notres, fill = gender),
+           stat = "identity", position = "dodge")
+
+care_dist_agein
+
+res <- care_calc %>% 
+  filter(age == "10-15") %>% 
+  select(end_period_year, gender, pc_res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = pc_res) %>% 
+  filter(end_period_year <= 2020) %>% 
+  mutate(week = (end_period_year - 2010)*52) %>% 
+  arrange(week)
+
+t_lac <- res$week
+
+res <- res %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+nres <- care_calc %>% 
+  filter(age == "10-15") %>% 
+  select(end_period_year, gender, pc_notres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = pc_notres) %>% 
+  filter(end_period_year <= 2020) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+
+# trying to do initial conditions..
+care_ic <- population %>% 
+  filter(end_period_year >= 2010) %>% 
+  select(end_period_year, gender, age, count) %>% 
+  mutate(res = ifelse((age <= 15 & gender == "Girls"), count*0.0019257341, count),
+         res = ifelse((age > 15 & gender == "Girls"), count*0.0005670682, res),
+         res = ifelse((age <= 15 & gender == "Boys"), count*0.0030011218, res),
+         res = ifelse((age > 15 & gender == "Boys"), count*0.0008835090, res)) %>% 
+  mutate(nres = ifelse((age <= 15 & gender == "Girls"), count*0.006825878, count),
+         nres = ifelse((age > 15 & gender == "Girls"), count*0.011319689, nres),
+         nres = ifelse((age <= 15 & gender == "Boys"), count*0.005865848, nres),
+         nres = ifelse((age > 15 & gender == "Boys"), count*0.011156836, nres)) %>% 
+  mutate(pc_current = (res+nres)/count) %>% 
+  mutate(pc_ever = case_when(age == 10 ~ 1.55,
+                             age == 11 ~ 1.55+0.2428,
+                             age == 12 ~ 1.55+2*0.2428,
+                             age == 13 ~ 1.55+3*0.2428,
+                             age == 14 ~ 1.55+4*0.2428,
+                             age == 15 ~ 1.55+5*0.2428,
+                             age == 16 ~ 1.55+6*0.2428,
+                             age == 17 ~ 3.25)) %>% 
+  mutate(pc_ever = pc_ever/100) %>% 
+  mutate(pc_prior = pc_ever - pc_current) %>% 
+  mutate(prior = count*pc_prior) %>% 
+  mutate(never = count - res - nres - prior)
+
+exact_ic <- care_ic %>% 
+  filter(end_period_year == 2010) %>% 
+  select(gender, age, never, nres, res, prior)
+
+3.25-1.55
 
 care %>% 
 ggplot() +
