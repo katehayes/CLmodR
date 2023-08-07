@@ -1,5 +1,12 @@
-load("/Users/katehayes/CLmodelR/Output/Data/Input/v_turn10.Rdata")
-load("/Users/katehayes/CLmodelR/Output/Data/Input/t_turn10.Rdata")
+load("/Users/katehayes/CLmodR/output/data/input/v_turn10.Rdata")
+load("/Users/katehayes/CLmodR/output/data/input/t_turn10.Rdata")
+
+load("/Users/katehayes/CLmodR/output/data/input/t_lac.Rdata")
+load("/Users/katehayes/CLmodR/output/data/input/nres.Rdata")
+load("/Users/katehayes/CLmodR/output/data/input/res.Rdata")
+
+load("/Users/katehayes/CLmodR/output/data/input/end_nr.Rdata")
+load("/Users/katehayes/CLmodR/output/data/input/end_res.Rdata")
 
 lac_model = odin::odin({
   
@@ -23,10 +30,7 @@ lac_model = odin::odin({
   prior2nres[] <- user(0)
   prior2res[] <- user(0)
   
-  # duration of LAC compartments
-  end_nr <- user(1/6.288462) #mean rate of exit from nonres care - 1 over mean duration of non-residential care (in 2015)
-  end_res <- user(1/4.19324) #mean rate of exit from res care - 1 over mean duration of residential care (in 2015)
-  
+
   #destination of LAC compartments
   nr2nr <- user(0.6) #jsut made these nres ones up lol!!
   nr2res <- user(0.1)
@@ -222,44 +226,44 @@ lac_model = odin::odin({
   
   # differential equations
   deriv(LACnev10[]) <- (1-(pc_nres[i]-pc_res[i]-pc_prior[i]))*turn10[i] - age_up*LACnev10[i] - np2lac[i]*LACnev10[i]
-  deriv(LACnres10[]) <- pc_nres[i]*turn10[i] - age_up*LACnres10[i] + np2nres[i]*np2lac[i]*LACnev10[i] + prior2nres[i]*prior2lac[i]*LACprior10[i] - (1-nr2nr)*end_nr*LACnres10[i] + res2nr*end_res*LACres10[i]
-  deriv(LACres10[]) <- pc_res[i]*turn10[i] - age_up*LACres10[i] + np2res[i]*np2lac[i]*LACnev10[i] + prior2res[i]*prior2lac[i]*LACprior10[i] - (1-res2res)*end_res*LACres10[i] + nr2res*end_nr*LACnres10[i]
-  deriv(LACprior10[]) <- pc_prior[i]*turn10[i] - age_up*LACprior10[i] - prior2lac[i]*LACprior10[i] + nr2exit*end_nr*LACnres10[i] + res2exit*end_res*LACres10[i]
+  deriv(LACnres10[]) <- pc_nres[i]*turn10[i] - age_up*LACnres10[i] + np2nres[i]*np2lac[i]*LACnev10[i] + prior2nres[i]*prior2lac[i]*LACprior10[i] - (1-nr2nr)*end_nr[i]*LACnres10[i] + res2nr*end_res[i]*LACres10[i]
+  deriv(LACres10[]) <- pc_res[i]*turn10[i] - age_up*LACres10[i] + np2res[i]*np2lac[i]*LACnev10[i] + prior2res[i]*prior2lac[i]*LACprior10[i] - (1-res2res)*end_res[i]*LACres10[i] + nr2res*end_nr[i]*LACnres10[i]
+  deriv(LACprior10[]) <- pc_prior[i]*turn10[i] - age_up*LACprior10[i] - prior2lac[i]*LACprior10[i] + nr2exit*end_nr[i]*LACnres10[i] + res2exit*end_res[i]*LACres10[i]
   
   deriv(LACnev11[]) <- age_up*LACnev10[i] - np2lac[i]*LACnev11[i] - age_up*LACnev11[i]
-  deriv(LACnres11[]) <- age_up*LACnres10[i] + np2nres[i]*np2lac[i]*LACnev11[i] + prior2nres[i]*prior2lac[i]*LACprior11[i] - (1-nr2nr)*end_nr*LACnres11[i] - age_up*LACnres11[i] + res2nr*end_res*LACres11[i]
-  deriv(LACres11[]) <- age_up*LACres10[i] + np2res[i]*np2lac[i]*LACnev11[i] + prior2res[i]*prior2lac[i]*LACprior11[i] - (1-res2res)*end_res*LACres11[i] - age_up*LACres11[i] + nr2res*end_nr*LACnres11[i]
-  deriv(LACprior11[]) <- age_up*LACprior10[i] - prior2lac[i]*LACprior11[i] + nr2exit*end_nr*LACnres11[i] + res2exit*end_res*LACres11[i] - age_up*LACprior11[i]
+  deriv(LACnres11[]) <- age_up*LACnres10[i] + np2nres[i]*np2lac[i]*LACnev11[i] + prior2nres[i]*prior2lac[i]*LACprior11[i] - (1-nr2nr)*end_nr[i]*LACnres11[i] - age_up*LACnres11[i] + res2nr*end_res[i]*LACres11[i]
+  deriv(LACres11[]) <- age_up*LACres10[i] + np2res[i]*np2lac[i]*LACnev11[i] + prior2res[i]*prior2lac[i]*LACprior11[i] - (1-res2res)*end_res[i]*LACres11[i] - age_up*LACres11[i] + nr2res*end_nr[i]*LACnres11[i]
+  deriv(LACprior11[]) <- age_up*LACprior10[i] - prior2lac[i]*LACprior11[i] + nr2exit*end_nr[i]*LACnres11[i] + res2exit*end_res[i]*LACres11[i] - age_up*LACprior11[i]
   
   deriv(LACnev12[]) <- age_up*LACnev11[i] - np2lac[i]*LACnev12[i] - age_up*LACnev12[i]
-  deriv(LACnres12[]) <- age_up*LACnres11[i] + np2nres[i]*np2lac[i]*LACnev12[i] + prior2nres[i]*prior2lac[i]*LACprior12[i] - (1-nr2nr)*end_nr*LACnres12[i] - age_up*LACnres12[i] + res2nr*end_res*LACres12[i]
-  deriv(LACres12[]) <- age_up*LACres11[i] + np2res[i]*np2lac[i]*LACnev12[i] + prior2res[i]*prior2lac[i]*LACprior12[i] - (1-res2res)*end_res*LACres12[i] - age_up*LACres12[i] + nr2res*end_nr*LACnres12[i]
-  deriv(LACprior12[]) <- age_up*LACprior11[i] - prior2lac[i]*LACprior12[i] + nr2exit*end_nr*LACnres12[i] + res2exit*end_res*LACres12[i] - age_up*LACprior12[i]
+  deriv(LACnres12[]) <- age_up*LACnres11[i] + np2nres[i]*np2lac[i]*LACnev12[i] + prior2nres[i]*prior2lac[i]*LACprior12[i] - (1-nr2nr)*end_nr[i]*LACnres12[i] - age_up*LACnres12[i] + res2nr*end_res[i]*LACres12[i]
+  deriv(LACres12[]) <- age_up*LACres11[i] + np2res[i]*np2lac[i]*LACnev12[i] + prior2res[i]*prior2lac[i]*LACprior12[i] - (1-res2res)*end_res[i]*LACres12[i] - age_up*LACres12[i] + nr2res*end_nr[i]*LACnres12[i]
+  deriv(LACprior12[]) <- age_up*LACprior11[i] - prior2lac[i]*LACprior12[i] + nr2exit*end_nr[i]*LACnres12[i] + res2exit*end_res[i]*LACres12[i] - age_up*LACprior12[i]
   
   deriv(LACnev13[]) <- age_up*LACnev12[i] - np2lac[i]*LACnev13[i] - age_up*LACnev13[i]
-  deriv(LACnres13[]) <- age_up*LACnres12[i] + np2nres[i]*np2lac[i]*LACnev13[i] + prior2nres[i]*prior2lac[i]*LACprior13[i] - (1-nr2nr)*end_nr*LACnres13[i] - age_up*LACnres13[i] + res2nr*end_res*LACres13[i]
-  deriv(LACres13[]) <- age_up*LACres12[i] + np2res[i]*np2lac[i]*LACnev13[i] + prior2res[i]*prior2lac[i]*LACprior13[i] - (1-res2res)*end_res*LACres13[i] - age_up*LACres13[i] + nr2res*end_nr*LACnres13[i]
-  deriv(LACprior13[]) <- age_up*LACprior12[i] - prior2lac[i]*LACprior13[i] + nr2exit*end_nr*LACnres13[i] + res2exit*end_res*LACres13[i] - age_up*LACprior13[i]
+  deriv(LACnres13[]) <- age_up*LACnres12[i] + np2nres[i]*np2lac[i]*LACnev13[i] + prior2nres[i]*prior2lac[i]*LACprior13[i] - (1-nr2nr)*end_nr[i]*LACnres13[i] - age_up*LACnres13[i] + res2nr*end_res[i]*LACres13[i]
+  deriv(LACres13[]) <- age_up*LACres12[i] + np2res[i]*np2lac[i]*LACnev13[i] + prior2res[i]*prior2lac[i]*LACprior13[i] - (1-res2res)*end_res[i]*LACres13[i] - age_up*LACres13[i] + nr2res*end_nr[i]*LACnres13[i]
+  deriv(LACprior13[]) <- age_up*LACprior12[i] - prior2lac[i]*LACprior13[i] + nr2exit*end_nr[i]*LACnres13[i] + res2exit*end_res[i]*LACres13[i] - age_up*LACprior13[i]
   
   deriv(LACnev14[]) <- age_up*LACnev13[i] - np2lac[i]*LACnev14[i] - age_up*LACnev14[i]
-  deriv(LACnres14[]) <- age_up*LACnres13[i] + np2nres[i]*np2lac[i]*LACnev14[i] + prior2nres[i]*prior2lac[i]*LACprior14[i] - (1-nr2nr)*end_nr*LACnres14[i] - age_up*LACnres14[i] + res2nr*end_res*LACres14[i]
-  deriv(LACres14[]) <- age_up*LACres13[i] + np2res[i]*np2lac[i]*LACnev14[i] + prior2res[i]*prior2lac[i]*LACprior14[i] - (1-res2res)*end_res*LACres14[i] - age_up*LACres14[i] + nr2res*end_nr*LACnres14[i]
-  deriv(LACprior14[]) <- age_up*LACprior13[i] - prior2lac[i]*LACprior14[i] + nr2exit*end_nr*LACnres14[i] + res2exit*end_res*LACres14[i] - age_up*LACprior14[i]
+  deriv(LACnres14[]) <- age_up*LACnres13[i] + np2nres[i]*np2lac[i]*LACnev14[i] + prior2nres[i]*prior2lac[i]*LACprior14[i] - (1-nr2nr)*end_nr[i]*LACnres14[i] - age_up*LACnres14[i] + res2nr*end_res[i]*LACres14[i]
+  deriv(LACres14[]) <- age_up*LACres13[i] + np2res[i]*np2lac[i]*LACnev14[i] + prior2res[i]*prior2lac[i]*LACprior14[i] - (1-res2res)*end_res[i]*LACres14[i] - age_up*LACres14[i] + nr2res*end_nr[i]*LACnres14[i]
+  deriv(LACprior14[]) <- age_up*LACprior13[i] - prior2lac[i]*LACprior14[i] + nr2exit*end_nr[i]*LACnres14[i] + res2exit*end_res[i]*LACres14[i] - age_up*LACprior14[i]
   
   deriv(LACnev15[]) <- age_up*LACnev14[i] - np2lac[i]*LACnev15[i] - age_up*LACnev15[i]
-  deriv(LACnres15[]) <- age_up*LACnres14[i] + np2nres[i]*np2lac[i]*LACnev15[i] + prior2nres[i]*prior2lac[i]*LACprior15[i] - (1-nr2nr)*end_nr*LACnres15[i] - age_up*LACnres15[i] + res2nr*end_res*LACres15[i]
-  deriv(LACres15[]) <- age_up*LACres14[i] + np2res[i]*np2lac[i]*LACnev15[i] + prior2res[i]*prior2lac[i]*LACprior15[i] - (1-res2res)*end_res*LACres15[i] - age_up*LACres15[i] + nr2res*end_nr*LACnres15[i]
-  deriv(LACprior15[]) <- age_up*LACprior14[i] - prior2lac[i]*LACprior15[i] + nr2exit*end_nr*LACnres15[i] + res2exit*end_res*LACres15[i] - age_up*LACprior15[i]
+  deriv(LACnres15[]) <- age_up*LACnres14[i] + np2nres[i]*np2lac[i]*LACnev15[i] + prior2nres[i]*prior2lac[i]*LACprior15[i] - (1-nr2nr)*end_nr[i]*LACnres15[i] - age_up*LACnres15[i] + res2nr*end_res[i]*LACres15[i]
+  deriv(LACres15[]) <- age_up*LACres14[i] + np2res[i]*np2lac[i]*LACnev15[i] + prior2res[i]*prior2lac[i]*LACprior15[i] - (1-res2res)*end_res[i]*LACres15[i] - age_up*LACres15[i] + nr2res*end_nr[i]*LACnres15[i]
+  deriv(LACprior15[]) <- age_up*LACprior14[i] - prior2lac[i]*LACprior15[i] + nr2exit*end_nr[i]*LACnres15[i] + res2exit*end_res[i]*LACres15[i] - age_up*LACprior15[i]
   
   deriv(LACnev16[]) <- age_up*LACnev15[i] - np2lac[i]*LACnev16[i] - age_up*LACnev16[i]
-  deriv(LACnres16[]) <- age_up*LACnres15[i] + np2nres[i]*np2lac[i]*LACnev16[i] + prior2nres[i]*prior2lac[i]*LACprior16[i] - (1-nr2nr)*end_nr*LACnres16[i] - age_up*LACnres16[i] + res2nr*end_res*LACres16[i]
-  deriv(LACres16[]) <- age_up*LACres15[i] + np2res[i]*np2lac[i]*LACnev16[i] + prior2res[i]*prior2lac[i]*LACprior16[i] - (1-res2res)*end_res*LACres16[i] - age_up*LACres16[i] + nr2res*end_nr*LACnres16[i]
-  deriv(LACprior16[]) <- age_up*LACprior15[i] - prior2lac[i]*LACprior16[i] + nr2exit*end_nr*LACnres16[i] + res2exit*end_res*LACres16[i] - age_up*LACprior16[i]
+  deriv(LACnres16[]) <- age_up*LACnres15[i] + np2nres[i]*np2lac[i]*LACnev16[i] + prior2nres[i]*prior2lac[i]*LACprior16[i] - (1-nr2nr)*end_nr[i]*LACnres16[i] - age_up*LACnres16[i] + res2nr*end_res[i]*LACres16[i]
+  deriv(LACres16[]) <- age_up*LACres15[i] + np2res[i]*np2lac[i]*LACnev16[i] + prior2res[i]*prior2lac[i]*LACprior16[i] - (1-res2res)*end_res[i]*LACres16[i] - age_up*LACres16[i] + nr2res*end_nr[i]*LACnres16[i]
+  deriv(LACprior16[]) <- age_up*LACprior15[i] - prior2lac[i]*LACprior16[i] + nr2exit*end_nr[i]*LACnres16[i] + res2exit*end_res[i]*LACres16[i] - age_up*LACprior16[i]
   
   deriv(LACnev17[]) <- age_up*LACnev16[i] - np2lac[i]*LACnev17[i] - age_up*LACnev17[i]
-  deriv(LACnres17[]) <- age_up*LACnres16[i] + np2nres[i]*np2lac[i]*LACnev17[i] + prior2nres[i]*prior2lac[i]*LACprior17[i] - (1-nr2nr)*end_nr*LACnres17[i] - age_up*LACnres17[i] + res2nr*end_res*LACres17[i]
-  deriv(LACres17[]) <- age_up*LACres16[i] + np2res[i]*np2lac[i]*LACnev17[i] + prior2res[i]*prior2lac[i]*LACprior17[i] - (1-res2res)*end_res*LACres17[i] - age_up*LACres17[i] + nr2res*end_nr*LACnres17[i]
-  deriv(LACprior17[]) <- age_up*LACprior16[i] - prior2lac[i]*LACprior17[i] + nr2exit*end_nr*LACnres17[i] + res2exit*end_res*LACres17[i] - age_up*LACprior17[i]
+  deriv(LACnres17[]) <- age_up*LACnres16[i] + np2nres[i]*np2lac[i]*LACnev17[i] + prior2nres[i]*prior2lac[i]*LACprior17[i] - (1-nr2nr)*end_nr[i]*LACnres17[i] - age_up*LACnres17[i] + res2nr*end_res[i]*LACres17[i]
+  deriv(LACres17[]) <- age_up*LACres16[i] + np2res[i]*np2lac[i]*LACnev17[i] + prior2res[i]*prior2lac[i]*LACprior17[i] - (1-res2res)*end_res[i]*LACres17[i] - age_up*LACres17[i] + nr2res*end_nr[i]*LACnres17[i]
+  deriv(LACprior17[]) <- age_up*LACprior16[i] - prior2lac[i]*LACprior17[i] + nr2exit*end_nr[i]*LACnres17[i] + res2exit*end_res[i]*LACres17[i] - age_up*LACprior17[i]
   
   # interpolation section
   turn10[] <- interpolate(tt, y, "linear")
@@ -268,6 +272,8 @@ lac_model = odin::odin({
   y[, ] <- user()
   dim(tt) <- user()
   dim(y) <- c(length(tt), length(turn10))
+  
+  
   
   pc_nres[] <- interpolate(tlac, nrlac, "linear")
   dim(pc_nres) <- N_gender
@@ -282,9 +288,49 @@ lac_model = odin::odin({
   dim(rlac) <- c(length(tlac), length(pc_res))
   
   
-  # output(missing_rc1014) <- missing_rc1014
-  # output(missing_rc1517) <- missing_rc1517
-
+  
+  end_nr[] <- interpolate(tlac, enr, "linear")
+  dim(end_nr) <- N_gender
+  enr[, ] <- user()
+  dim(enr) <- c(length(tlac), length(end_nr))
+  
+  end_res[] <- interpolate(tlac, eres, "linear")
+  dim(end_res) <- N_gender
+  eres[, ] <- user()
+  dim(eres) <- c(length(tlac), length(end_res))
+  
+  
+  
+  # ageing in at 10, what state do you occupy
+  output(pc_nres) <- pc_nres
+  output(pc_res) <- pc_res
+  output(pc_prior) <- pc_prior
+  
+  # rate of entering care
+  output(np2lac) <- np2lac
+  output(prior2lac) <- prior2lac
+  
+  #destination on entering care
+  output(np2nres) <- np2nres
+  output(np2res) <- np2res
+  
+  output(prior2nres) <- prior2nres
+  output(prior2res) <- prior2res
+  
+  
+  # duration of care states
+  output(end_nr) <- end_nr
+  output(end_res) <- end_res
+  
+  # end of nonres care episode, where do you go next
+  output(nr2nr) <- nr2nr
+  output(nr2res) <- nr2res
+  output(nr2exit) <- nr2exit
+  
+  # end of res care episode, where do you go next
+  output(res2nr) <- res2nr
+  output(res2res) <- res2res
+  output(res2exit) <- res2exit
   
 },
 target = 'c')  
@@ -297,8 +343,11 @@ lac_pars <- list(tt = t_turn10,
                  tlac = t_lac,
                  nrlac = nres,
                  rlac = res,
+                 
+                 enr = endnr,
+                 eres = endres,
                 
-            
+      
                  # INITIAL CONDITIONS
                  LACnev10_ini = c(7313.850,6829.476),
                  LACnres10_ini = c(43.57738,47.35112),
@@ -591,6 +640,7 @@ LAC_data <- as.data.frame(mod$run(t))
 
 
 mod_states <- LAC_data %>%
+  select(c(starts_with("LAC"), t)) %>% 
   pivot_longer(-t, names_to = "state", values_to = "count") %>%
   mutate(age = as.numeric(str_extract_all(state, "(\\d{2})")),
          gender = if_else(grepl("\\[1\\]", state), "Boys", "Girls")) %>% 
@@ -599,53 +649,62 @@ mod_states <- LAC_data %>%
          lac = ifelse(grepl("Cres", state), "Residential", lac),
          lac = ifelse(grepl("prior", state), "Prior", lac)) %>% 
   select(-state) %>% 
-  group_by(t, gender, age) %>% 
-  mutate(pc = count/ sum(count))
+  group_by(t, gender, age)
 
-
-mod_states %>% 
-  filter(gender == "Boys",
-         lac != "Never") %>% 
-  ggplot() +
-  geom_line(aes(x = t, y = pc, group = age, color = age)) +
-  facet_grid(~lac)
-
-
-mod_states %>% 
-  filter(gender == "Girls",
-         lac != "Never") %>% 
-  ggplot() +
-  geom_line(aes(x = t, y = pc, group = age, color = age)) +
-  facet_grid(~lac)
-
-mod_states %>% 
-  filter(lac == "Residential") %>% 
-  ggplot() +
-  geom_line(aes(x = t, y = pc, group = as.character(age), color = as.character(age))) +
-  facet_grid(~gender)
-
-
-compare <- care %>% 
-  mutate(t = (end_period_year - 2010)*52) %>% 
-  select(t, gender, residential, count) %>% 
-  rename(measure = count) %>% 
-  full_join(mod_states %>% 
-              ungroup() %>% 
-              filter(lac %in% c("Residential", "Not residential")) %>% 
-              group_by(t, gender, lac) %>% 
-              summarise(model = sum(count)) %>% 
-              rename(residential = lac)) %>% 
-  filter(!is.na(measure),
-         !is.na(model)) %>% 
+mod_params <- LAC_data %>%
+  select(-c(starts_with("LAC"))) %>% 
+  pivot_longer(-t,
+               names_to = "param",
+               values_to = "value") %>% 
+  filter(grepl("\\[", param)) %>% 
+  mutate(gender = if_else(grepl("\\[1\\]", param), "Boys", "Girls")) %>% 
+  bind_rows(LAC_data %>%
+              select(-c(starts_with("LAC"))) %>% 
+              pivot_longer(-t,
+                           names_to = "param",
+                           values_to = "value") %>% 
+              filter(!grepl("\\[", param)) %>%
+              mutate(gender = "Boys")) %>% 
+  bind_rows(LAC_data %>%
+              select(-c(starts_with("LAC"))) %>% 
+              pivot_longer(-t,
+                           names_to = "param",
+                           values_to = "value") %>% 
+              filter(!grepl("\\[", param)) %>%
+              mutate(gender = "Girls")) %>% 
+  mutate(param = str_remove_all(param, "\\[1\\]")) %>% 
+  mutate(param = str_remove_all(param, "\\[2\\]")) %>% 
   arrange(t) %>% 
-  pivot_longer(c(measure, model),
-               names_to = "compare",
-               values_to = "count")
+  pivot_wider(names_from = param,
+              values_from = value)
 
-compare %>% 
-  ggplot() +
-  geom_line(aes(x = t, y = count, group = compare, color = compare)) +
-  facet_grid(~interaction(gender, residential))
+
+
+# making flows
+
+mod_flows <- mod_states %>% 
+  pivot_wider(names_from = lac,
+              values_from = count) %>% 
+  full_join(mod_params) %>% 
+  mutate(NP2NRES = np2nres*np2lac*Never,
+         NP2RES = np2res*np2lac*Never,
+         
+         NRES2NRES = nr2nr*end_nr*`Not residential`,
+         NRES2RES = nr2res*end_nr*`Not residential`,
+         NRES2PRIOR = nr2exit*end_nr*`Not residential`,
+         
+         RES2NRES = res2nr*end_res*Residential,
+         RES2RES = res2res*end_res*Residential,
+         RES2PRIOR = res2exit*end_res*Residential,
+         
+         PRIOR2NRES = prior2nres*prior2lac*Prior,
+         PRIOR2RES = prior2res*prior2lac*Prior,
+         
+         NRESinflow = NP2NRES + NRES2NRES + RES2NRES + PRIOR2NRES,
+         RESinflow = NP2RES + NRES2RES + RES2RES + PRIOR2RES,
+         LACoutflow = NRES2PRIOR + RES2PRIOR) %>% 
+  mutate(check_resnp = NP2RES/RESinflow)
+  
 
 
 # counting the size of flows to/from LAC for calibration - you can prob do this after output but, writing here for now

@@ -112,16 +112,28 @@ care_duration %>%
            stat = "identity", position = "dodge")
 
 
-end_nr <- care_duration %>% 
+endnr <- care_duration %>% 
   filter(residential == "Not residential",
          end_period_year <= 2020) %>% 
   arrange(end_period_year) %>% 
-  select(residential)
+  select(mean_dur) %>% 
+  mutate(mean_dur = 1/(mean_dur/7)) %>% 
+  rename(Boys = mean_dur) %>% 
+  mutate(Girls = Boys) %>% 
+  as.matrix()
 
+endres <- care_duration %>% 
+  filter(residential == "Residential",
+         end_period_year <= 2020) %>% 
+  arrange(end_period_year) %>% 
+  select(mean_dur) %>% 
+  mutate(mean_dur = 1/(mean_dur/7)) %>% 
+  rename(Boys = mean_dur) %>% 
+  mutate(Girls = Boys) %>% 
+  as.matrix()
 
-
-
-
+save(endnr, file = "output/data/input/endnr.Rdata")
+save(endres, file = "output/data/input/endres.Rdata")
 
 care_convicted <- care_convicted_15to22 %>% 
   ungroup() %>% 
@@ -369,6 +381,11 @@ nres <- care_calc %>%
   arrange(end_period_year) %>% 
   select(c(Boys, Girls)) %>% 
   as.matrix()
+
+save(t_lac, file = "output/data/input/t_lac.Rdata")
+save(nres, file = "output/data/input/nres.Rdata")
+save(res, file = "output/data/input/res.Rdata")
+
 
 
 # trying to do initial conditions..
