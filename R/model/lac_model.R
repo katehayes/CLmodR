@@ -570,7 +570,7 @@ lac_pars <- list(tt = t_turn10,
                                       unlist()),
                  
                  # PARAMETERS
-                 pc_prior = c(0.01,0.01),
+                 pc_prior = c(0.0066,0.0066),
                  
                  # rate of entering care
                  np2lac = c(0.0000769,0.0000769),
@@ -593,22 +593,59 @@ LAC_data <- as.data.frame(mod$run(t))
 mod_states <- LAC_data %>%
   pivot_longer(-t, names_to = "state", values_to = "count") %>%
   mutate(age = as.numeric(str_extract_all(state, "(\\d{2})")),
-         gender = if_else(grepl("\\[1\\]", state), "Boy", "Girl")) %>% 
+         gender = if_else(grepl("\\[1\\]", state), "Boys", "Girls")) %>% 
   mutate(lac = ifelse(grepl("nev", state), "Never", NA),
          lac = ifelse(grepl("nres", state), "Not residential", lac),
          lac = ifelse(grepl("Cres", state), "Residential", lac),
          lac = ifelse(grepl("prior", state), "Prior", lac)) %>% 
-  select(-state)
+  select(-state) %>% 
+  group_by(t, gender, age) %>% 
+  mutate(pc = count/ sum(count))
 
 
+mod_states %>% 
+  filter(gender == "Boys",
+         lac != "Never") %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = pc, group = age, color = age)) +
+  facet_grid(~lac)
 
 
+mod_states %>% 
+  filter(gender == "Girls",
+         lac != "Never") %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = pc, group = age, color = age)) +
+  facet_grid(~lac)
+
+mod_states %>% 
+  filter(lac == "Residential") %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = pc, group = as.character(age), color = as.character(age))) +
+  facet_grid(~gender)
 
 
+compare <- care %>% 
+  mutate(t = (end_period_year - 2010)*52) %>% 
+  select(t, gender, residential, count) %>% 
+  rename(measure = count) %>% 
+  full_join(mod_states %>% 
+              ungroup() %>% 
+              filter(lac %in% c("Residential", "Not residential")) %>% 
+              group_by(t, gender, lac) %>% 
+              summarise(model = sum(count)) %>% 
+              rename(residential = lac)) %>% 
+  filter(!is.na(measure),
+         !is.na(model)) %>% 
+  arrange(t) %>% 
+  pivot_longer(c(measure, model),
+               names_to = "compare",
+               values_to = "count")
 
-
-
-
+compare %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = count, group = compare, color = compare)) +
+  facet_grid(~interaction(gender, residential))
 
 
 # counting the size of flows to/from LAC for calibration - you can prob do this after output but, writing here for now

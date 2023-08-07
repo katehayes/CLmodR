@@ -112,6 +112,17 @@ care_duration %>%
            stat = "identity", position = "dodge")
 
 
+end_nr <- care_duration %>% 
+  filter(residential == "Not residential",
+         end_period_year <= 2020) %>% 
+  arrange(end_period_year) %>% 
+  select(residential)
+
+
+
+
+
+
 care_convicted <- care_convicted_15to22 %>% 
   ungroup() %>% 
   select(end_period_year, pc_convicted) %>% 
