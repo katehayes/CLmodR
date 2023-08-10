@@ -17,7 +17,7 @@ lac_model = odin::odin({
   # what is their distribution across LAC states when kids turn 10 - what compartments do they age into
   # pc_nres[] <- user(0)
   # pc_res[] <- user(0)
-  pc_prior[] <- user(0)
+  # pc_prior[] <- user(0)
   
   # rate of entering care
   # np2lac[] <- user(0)
@@ -128,7 +128,7 @@ lac_model = odin::odin({
   
   # setting dimensions
   # parameters first
-  dim(pc_prior) <- N_gender
+  # dim(pc_prior) <- N_gender
   
   # dim(np2lac) <- N_gender
   # dim(prior2lac) <- N_gender
@@ -286,6 +286,11 @@ lac_model = odin::odin({
   dim(pc_res) <- N_gender
   rlac[, ] <- user()
   dim(rlac) <- c(length(tlac), length(pc_res))
+  
+  pc_prior[] <- interpolate(tlac, plac, "linear")
+  dim(pc_prior) <- N_gender
+  plac[, ] <- user()
+  dim(plac) <- c(length(tlac), length(pc_prior))
   
   
   
@@ -545,6 +550,7 @@ lac_pars <- list(tt = t_turn10,
                  tlac = t_lac,
                  nrlac = nres,
                  rlac = res,
+                 plac = pri,
                  
                  enr = endnr,
                  eres = endres,
@@ -854,10 +860,10 @@ lac_pars <- list(tt = t_turn10,
                                       filter(age == 17,
                                              gender == "Girls") %>% 
                                       select(prior) %>% 
-                                      unlist()),
+                                      unlist())
                  
                  # PARAMETERS
-                 pc_prior = c(0.0066,0.0066)
+                 # pc_prior = c(0.0066,0.0066)
                  
                  # rate of entering care
                  # np2lac = c(0.0000769,0.0000769),

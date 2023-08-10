@@ -1164,6 +1164,117 @@ pc_care_convicted <- careconv_15to22 %>%
   geom_bar(aes(x = end_period_year, y = pc_convicted), stat = "identity")
 ggsave(filename = "output/graphs/pc_care_convicted.png", pc_care_convicted)
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# LITTLE PIECE OF DATA FROM A STUDY# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# Aaboute the cumulative proportion of children entering carae
+c_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/entering_res_care.xlsx", sheet = 5)
+
+cum_pc <- c_data %>% 
+  mutate(across(c(starts_with("1"), `4`, `6`, `9`), ~as.numeric(.x))) %>% 
+  mutate(across(c(starts_with("1"), `4`, `6`, `9`), round, 2)) %>% 
+  pivot_longer(c(starts_with("1"), `4`, `6`, `9`),
+               names_to = "age",
+               values_to = "cum_pc")  %>% 
+  mutate(year_of_birth_late = as.numeric(paste(substr(year_of_birth, 1,2), substr(year_of_birth, 6,7), sep = ""))) %>% 
+  mutate(year_of_birth_late = ifelse(year_of_birth_late == 1900, 2000, year_of_birth_late)) %>% 
+  mutate(year_of_birth = as.numeric(substr(year_of_birth, 1,4))) %>% 
+  mutate(year_of_birth_mid = ifelse((year_of_birth_late - year_of_birth) == 2, as.numeric(year_of_birth)+1, NA)) %>% 
+  pivot_longer(starts_with("year_of_birth"),
+               names_to = "delete",
+               values_to = "year_of_birth") %>% 
+  select(-delete) %>% 
+  filter(!is.na(year_of_birth)) %>% 
+  mutate(age = as.numeric(age),
+         year_of_birth = as.numeric(year_of_birth)) %>% 
+  arrange(year_of_birth) %>% 
+  mutate(approx_year = year_of_birth + age) %>% 
+  filter(approx_year <= 2012)
+
+whats_needed <- cum_pc %>% 
+  filter(age >= 9,
+         approx_year >= 2010)
 
 
 
+cum_pc %>% 
+  filter(year_of_birth %in% c(1994, 1997, 2000, 2003, 2006, 2008, 2011)) %>% 
+  ggplot() +
+  geom_line(aes(x = approx_year, y = cum_pc, group = as.character(year_of_birth), color = as.character(year_of_birth))) +
+  facet_grid(~gender)
+
+check <- cum_pc %>% 
+  filter(year_of_birth %in% c(1994, 1997, 2000, 2003, 2006, 2008, 2011)) %>% 
+  mutate(age = factor(age, level = c("1", "4", "6", "9", "12", "15", "18"))) %>% 
+  ggplot() +
+  geom_line(aes(x = approx_year, y = cum_pc, group = age, color = age)) +
+  facet_grid(~gender)
+
+
+ cum_pc %>% 
+  filter(year_of_birth %in% c(1994, 1997, 2000, 2003, 2006, 2008, 2011)) %>% 
+  # mutate(age = factor(age, level = c("1", "4", "6", "9", "12", "15", "18"))) %>% 
+  ggplot() +
+  geom_line(aes(x = age, y = cum_pc, group = as.character(year_of_birth), color = as.character(year_of_birth))) +
+  facet_grid(~gender)
+
+
+# another little piece of data from another study
+# https://whatworks-csc.org.uk/wp-content/uploads/WWCSC_residential_care_report_FINAL_accessible.pdf
+# Figure 4: Gender distribution within each typology among children living in residential care in 2019/20
+# (n=10,046) compared to all CiC in 2019/20 (n=108,552) 
+
+c_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/entering_res_care.xlsx", sheet = 6)
+
+gen_by_type <- c_data %>% 
+  mutate(count = group_pc*total_count) %>% 
+  select(-c(group_pc, total_count)) %>% 
+  mutate(female_pc = female_pc/100) %>% 
+  mutate(Girls = female_pc*count,
+         Boys = (1-female_pc)*count) %>% 
+  select(-c(female_pc, count)) %>% 
+  pivot_longer(c(Girls, Boys),
+               names_to = "gender",
+               values_to = "count") %>% 
+  filter(group != "Overall") %>% 
+  pivot_wider(names_from = residential,
+              values_from = count) %>% 
+  mutate(`Not residential` = `All CiC` - Residential) %>% 
+  select(-`All CiC`) %>% 
+  pivot_longer(c(Residential, `Not residential`),
+               names_to = "residential",
+               values_to = "count")
+
+# NONE OF THIS REALLY ADD, P DOWN TO ROUNDING ERROR - WILL NOT BE USED PRECISELY ANYWAY
+# check <- gen_by_type %>% 
+#   filter(group != "Overall") %>% 
+#   group_by(gender, residential) %>% 
+#   summarise(tot = sum(count))
+
+
+girl_entry <- gen_by_type %>% 
+  group_by(gender, group) %>% 
+  mutate(check = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(gender) %>% 
+  mutate(check1 = check/sum(check)) %>% 
+  distinct(gender, group, check1)
+
+
+teen_entry <- gen_by_type %>% 
+  filter(group == "Adolescent entrant (11-15)") %>%
+  group_by(gender) %>% 
+  mutate(count_gender = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(gen_pc = count_gender/ sum(count)) %>% 
+  mutate(gen_destination_pc = count/ count_gender)
+
+
+late_entry <- gen_by_type %>% 
+  filter(group == "Late to care (16+)") %>%
+  group_by(gender) %>% 
+  mutate(count_gender = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(gen_pc = count_gender/ sum(count)) %>% 
+  mutate(gen_destination_pc = count/ count_gender)
