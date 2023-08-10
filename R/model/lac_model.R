@@ -883,55 +883,7 @@ t <- seq(0, 520, length.out = 1041)  #from 0 to 10 years, two steps a week or so
 LAC_data <- as.data.frame(mod$run(t))
 
 
-mod_states <- LAC_data %>%
-  select(c(starts_with("LAC"), t)) %>% 
-  pivot_longer(-t, names_to = "state", values_to = "count") %>%
-  mutate(age = as.numeric(str_extract_all(state, "(\\d{2})")),
-         gender = if_else(grepl("\\[1\\]", state), "Boys", "Girls")) %>% 
-  mutate(lac = ifelse(grepl("nev", state), "Never", NA),
-         lac = ifelse(grepl("nres", state), "Not residential", lac),
-         lac = ifelse(grepl("Cres", state), "Residential", lac),
-         lac = ifelse(grepl("prior", state), "Prior", lac)) %>% 
-  select(-state) %>% 
-  group_by(t, gender, age)
 
-mod_params <- LAC_data %>%
-  select(-c(starts_with("LAC"))) %>% 
-  pivot_longer(-t,
-               names_to = "param",
-               values_to = "value") %>% 
-  filter(grepl("\\[", param)) %>% 
-  mutate(gender = if_else(grepl("\\[1\\]", param), "Boys", "Girls")) %>% 
-  bind_rows(LAC_data %>%
-              select(-c(starts_with("LAC"))) %>% 
-              pivot_longer(-t,
-                           names_to = "param",
-                           values_to = "value") %>% 
-              filter(!grepl("\\[", param)) %>%
-              mutate(gender = "Boys")) %>% 
-  bind_rows(LAC_data %>%
-              select(-c(starts_with("LAC"))) %>% 
-              pivot_longer(-t,
-                           names_to = "param",
-                           values_to = "value") %>% 
-              filter(!grepl("\\[", param)) %>%
-              mutate(gender = "Girls")) %>% 
-  mutate(param = str_remove_all(param, "\\[1\\]")) %>% 
-  mutate(param = str_remove_all(param, "\\[2\\]")) %>% 
-  arrange(t) %>% 
-  mutate(age = as.numeric(str_extract_all(param, "(\\d{2})")),
-         age = ifelse(is.na(age), "constant", age),
-         param = str_remove_all(param, "(\\d{2})")) %>% 
-  pivot_wider(names_from = age,
-              values_from = value) %>% 
-  mutate(across(starts_with("1"), ~ifelse(is.na(.x), constant, .x))) %>% 
-  select(-constant) %>% 
-  pivot_longer(starts_with("1"),
-               names_to = "age",
-               values_to = "value") %>% 
-  pivot_wider(names_from = param,
-              values_from = value) %>% 
-  mutate(age = as.numeric(age))
 
 
 

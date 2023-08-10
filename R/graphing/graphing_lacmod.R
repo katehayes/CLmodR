@@ -1,53 +1,54 @@
-load("/Users/katehayes/CLmodR/output/data/processed/population.Rdata")
-compare_pop <- population %>%
-  filter(end_period_year >= 2010) %>%
-  mutate(t = (as.numeric(end_period_year) - 2010)*52) %>%
-  select(t, age, gender, count) %>%
-  mutate(compare = "Data") %>%
-  bind_rows(mod_states %>%
-              group_by(t, age, gender) %>% 
-              summarise(count = sum(count)) %>% 
-              mutate(compare = "Model output"))
+
+mod_states <- LAC_data %>%
+  select(c(starts_with("LAC"), t)) %>% 
+  pivot_longer(-t, names_to = "state", values_to = "count") %>%
+  mutate(age = as.numeric(str_extract_all(state, "(\\d{2})")),
+         gender = if_else(grepl("\\[1\\]", state), "Boys", "Girls")) %>% 
+  mutate(lac = ifelse(grepl("nev", state), "Never", NA),
+         lac = ifelse(grepl("nres", state), "Not residential", lac),
+         lac = ifelse(grepl("Cres", state), "Residential", lac),
+         lac = ifelse(grepl("prior", state), "Prior", lac)) %>% 
+  select(-state) %>% 
+  group_by(t, gender, age)
 
 
-
-compare_pop %>%
-  ggplot() +
-  geom_line(aes(x = t, y = count, group = interaction(gender, compare), color = interaction(gender, compare))) +
-  facet_wrap(~age) +
-  scale_x_continuous(breaks = seq(0, 520, 52),
-                     labels = c("2010", "2011", "2012", "2013", "2014", "2015",
-                                "2016", "2017", "2018", "2019", "2020")) +
-  scale_color_manual(values=c("skyblue","pink","navy", "red"))
-
-# ACTUALLY YOU NEED TO GET THE POPULATION LOOKING WAY WAY BETTER
-
-
-
-compare <- care %>% 
-  mutate(t = (end_period_year - 2010)*52) %>% 
-  select(t, gender, residential, count) %>% 
-  rename(measure = count) %>% 
-  full_join(mod_states %>% 
-              ungroup() %>% 
-              filter(lac %in% c("Residential", "Not residential")) %>% 
-              group_by(t, gender, lac) %>% 
-              summarise(model = sum(count)) %>% 
-              rename(residential = lac)) %>% 
-  filter(!is.na(measure),
-         !is.na(model)) %>% 
+mod_params <- LAC_data %>%
+  select(-c(starts_with("LAC"))) %>% 
+  pivot_longer(-t,
+               names_to = "param",
+               values_to = "value") %>% 
+  filter(grepl("\\[", param)) %>% 
+  mutate(gender = if_else(grepl("\\[1\\]", param), "Boys", "Girls")) %>% 
+  bind_rows(LAC_data %>%
+              select(-c(starts_with("LAC"))) %>% 
+              pivot_longer(-t,
+                           names_to = "param",
+                           values_to = "value") %>% 
+              filter(!grepl("\\[", param)) %>%
+              mutate(gender = "Boys")) %>% 
+  bind_rows(LAC_data %>%
+              select(-c(starts_with("LAC"))) %>% 
+              pivot_longer(-t,
+                           names_to = "param",
+                           values_to = "value") %>% 
+              filter(!grepl("\\[", param)) %>%
+              mutate(gender = "Girls")) %>% 
+  mutate(param = str_remove_all(param, "\\[1\\]")) %>% 
+  mutate(param = str_remove_all(param, "\\[2\\]")) %>% 
   arrange(t) %>% 
-  pivot_longer(c(measure, model),
-               names_to = "compare",
-               values_to = "count")
-
-compare %>% 
-  ggplot() +
-  geom_line(aes(x = t, y = count, group = compare, color = compare)) +
-  facet_grid(~interaction(gender, residential))
-# WAY TOO MANY GOING INTO NOT RESIDENTIAL
-
-
+  mutate(age = as.numeric(str_extract_all(param, "(\\d{2})")),
+         age = ifelse(is.na(age), "constant", age),
+         param = str_remove_all(param, "(\\d{2})")) %>% 
+  pivot_wider(names_from = age,
+              values_from = value) %>% 
+  mutate(across(starts_with("1"), ~ifelse(is.na(.x), constant, .x))) %>% 
+  select(-constant) %>% 
+  pivot_longer(starts_with("1"),
+               names_to = "age",
+               values_to = "value") %>% 
+  pivot_wider(names_from = param,
+              values_from = value) %>% 
+  mutate(age = as.numeric(age))
 
 
 # AT SOME POINT COUNT THE PEOPLE AGING OUT OF CARE AGE 17
@@ -80,6 +81,40 @@ mod_flows <- mod_states %>%
 
 
 
+
+
+
+
+
+
+compare <- care %>% 
+  mutate(t = (end_period_year - 2010)*52) %>% 
+  select(t, gender, residential, count) %>% 
+  rename(measure = count) %>% 
+  full_join(mod_states %>% 
+              ungroup() %>% 
+              filter(lac %in% c("Residential", "Not residential")) %>% 
+              group_by(t, gender, lac) %>% 
+              summarise(model = sum(count)) %>% 
+              rename(residential = lac)) %>% 
+  filter(!is.na(measure),
+         !is.na(model)) %>% 
+  arrange(t) %>% 
+  pivot_longer(c(measure, model),
+               names_to = "compare",
+               values_to = "count")
+
+compare %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = count, group = compare, color = compare)) +
+  facet_grid(~interaction(gender, residential))
+# WAY TOO MANY GOING INTO NOT RESIDENTIAL
+# currently over nonresidential under residential
+
+
+
+
+
 # 10% of 10-13 year olds and 20% of 14-16 year olds enter res care with no prior care placement
 mod_flows %>% 
   ggplot() +
@@ -94,6 +129,7 @@ mod_flows %>%
   ggplot() +
   geom_line(aes(x = t, y = check_res2res, group = as.character(age), color = as.character(age))) +
   facet_grid(~gender)
+# WHAT IS THE FUCKING DEAL WITH THE BURN IN PERIOD/INITIAL CONDITION EFFECT!!
 
 
 # 3% going to res come from an adoption breakdown, lets say 6 for 10 year olds though plus 6% from family breakdown
@@ -101,19 +137,19 @@ mod_flows %>%
   ggplot() +
   geom_line(aes(x = t, y = check_prior2res, group = as.character(age), color = as.character(age))) +
   facet_grid(~gender)
-
+# FAR TOO MANY COMING FROM PRIOR
 
 # From the whole residential care sample, 12% returned home to live with someone with parental responsibility after their first residential care placement
 mod_flows %>% 
   ggplot() +
   geom_line(aes(x = t, y = check_res2exit, group = as.character(age), color = as.character(age))) +
   facet_grid(~gender)
-
-
+# this is probably too high
+# MORE INSANE BURN IN 
 
 # 50% of placements finishing for 10-17 year olds are their first ever placement
 # (so basically there should always be approx equal numbers comeing into the wo lac states from either non-lac side?)
-
+# So the number should be around 1
 mod_flows %>% 
   ggplot() +
   geom_line(aes(x = t, y = check_pcpriors, group = as.character(age), color = as.character(age))) +
@@ -158,3 +194,28 @@ mod_states %>%
   ggplot() +
   geom_line(aes(x = t, y = pc, group = as.character(age), color = as.character(age))) +
   facet_grid(~gender)
+
+
+load("/Users/katehayes/CLmodR/output/data/processed/population.Rdata")
+compare_pop <- population %>%
+  filter(end_period_year >= 2010) %>%
+  mutate(t = (as.numeric(end_period_year) - 2010)*52) %>%
+  select(t, age, gender, count) %>%
+  mutate(compare = "Data") %>%
+  bind_rows(mod_states %>%
+              group_by(t, age, gender) %>% 
+              summarise(count = sum(count)) %>% 
+              mutate(compare = "Model output"))
+
+
+
+compare_pop %>%
+  ggplot() +
+  geom_line(aes(x = t, y = count, group = interaction(gender, compare), color = interaction(gender, compare))) +
+  facet_wrap(~age) +
+  scale_x_continuous(breaks = seq(0, 520, 52),
+                     labels = c("2010", "2011", "2012", "2013", "2014", "2015",
+                                "2016", "2017", "2018", "2019", "2020")) +
+  scale_color_manual(values=c("skyblue","pink","navy", "red"))
+
+# ACTUALLY YOU NEED TO GET THE POPULATION LOOKING WAY WAY BETTER

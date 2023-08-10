@@ -1177,47 +1177,82 @@ cum_pc <- c_data %>%
   pivot_longer(c(starts_with("1"), `4`, `6`, `9`),
                names_to = "age",
                values_to = "cum_pc")  %>% 
-  mutate(year_of_birth_late = as.numeric(paste(substr(year_of_birth, 1,2), substr(year_of_birth, 6,7), sep = ""))) %>% 
-  mutate(year_of_birth_late = ifelse(year_of_birth_late == 1900, 2000, year_of_birth_late)) %>% 
   mutate(year_of_birth = as.numeric(substr(year_of_birth, 1,4))) %>% 
-  mutate(year_of_birth_mid = ifelse((year_of_birth_late - year_of_birth) == 2, as.numeric(year_of_birth)+1, NA)) %>% 
-  pivot_longer(starts_with("year_of_birth"),
-               names_to = "delete",
-               values_to = "year_of_birth") %>% 
-  select(-delete) %>% 
-  filter(!is.na(year_of_birth)) %>% 
   mutate(age = as.numeric(age),
-         year_of_birth = as.numeric(year_of_birth)) %>% 
-  arrange(year_of_birth) %>% 
-  mutate(approx_year = year_of_birth + age) %>% 
-  filter(approx_year <= 2012)
-
-whats_needed <- cum_pc %>% 
-  filter(age >= 9,
-         approx_year >= 2010)
+         year_of_birth = as.numeric(year_of_birth)) %>%
+  mutate(end_period_year = year_of_birth + age) %>%
+  select(gender, age, end_period_year, cum_pc) %>%
+  # select(gender, age, year_of_birth, cum_pc) %>% 
+  mutate(age = factor(age, level = c("1", "4", "6", "9", "12", "15", "18")))
+  # mutate(age2 = age^2)
 
 
 
-cum_pc %>% 
-  filter(year_of_birth %in% c(1994, 1997, 2000, 2003, 2006, 2008, 2011)) %>% 
+# making predictions... putting two regressions on it, jesus
+mod <- lm(cum_pc ~ end_period_year + gender + age, data = cum_pc %>% 
+            filter(!is.na(cum_pc)))
+
+
+needed <- data.frame(end_period_year = rep(c(2010:2020), each = 8),
+                     age = rep(c("9", "12", "15", "18"), times = 22),
+                     gender = rep(c("Boys", "Boys", "Boys", "Boys", "Girls", "Girls", "Girls", "Girls"), times = 11)) 
+
+needed$cum_pc <- predict(mod, newdata = needed) 
+
+needed <- needed %>% 
+  bind_rows(data.frame(end_period_year = rep(c(2010:2020), each = 12),
+                       age = rep(c("10", "11", "13", "14", "16", "17"), times = 22),
+                       gender = rep(c("Boys", "Boys", "Boys", "Boys", "Boys", "Boys", "Girls", "Girls", "Girls", "Girls", "Girls", "Girls"), times = 11),
+                       cum_pc = NA)) %>% 
+  arrange(end_period_year, age) %>% 
+  mutate(age = as.numeric(age))
+
+
+mod2 <- lm(cum_pc~ end_period_year + gender + age, data = needed %>% 
+            filter(!is.na(cum_pc)))
+
+new <- needed %>% 
+  filter(is.na(cum_pc))
+
+new$cum_pc <- predict(mod2, newdata = new %>% 
+                        select(-cum_pc))
+
+care_cum_pc <- needed %>% 
+  filter(!is.na(cum_pc)) %>% 
+  bind_rows(new) %>% 
+  filter(age %in% c(10:17))
+
+
+care_cum_pc %>% 
+  mutate(year_of_birth = end_period_year - age) %>% 
+  ggplot() +
+  geom_line(aes(x = age, y = cum_pc, group = as.character(year_of_birth), color = as.character(year_of_birth))) +
+  facet_grid(~gender)
+
+
+save(care_cum_pc, file = "output/data/processed/care_cum_pc.Rdata")
+
+
+
+care_cum_pc %>% 
+  ggplot() +
+  geom_line(aes(x = age, y = cum_pc, group = as.character(year_of_birth), color = as.character(year_of_birth))) +
+  facet_grid(~gender)
+
+care_cum_pc %>% 
+  mutate(approx_year = year_of_birth + as.numeric(age)) %>% 
   ggplot() +
   geom_line(aes(x = approx_year, y = cum_pc, group = as.character(year_of_birth), color = as.character(year_of_birth))) +
   facet_grid(~gender)
 
-check <- cum_pc %>% 
-  filter(year_of_birth %in% c(1994, 1997, 2000, 2003, 2006, 2008, 2011)) %>% 
-  mutate(age = factor(age, level = c("1", "4", "6", "9", "12", "15", "18"))) %>% 
+care_cum_pc %>% 
+  mutate(approx_year = year_of_birth + as.numeric(age)) %>% 
   ggplot() +
   geom_line(aes(x = approx_year, y = cum_pc, group = age, color = age)) +
   facet_grid(~gender)
 
 
- cum_pc %>% 
-  filter(year_of_birth %in% c(1994, 1997, 2000, 2003, 2006, 2008, 2011)) %>% 
-  # mutate(age = factor(age, level = c("1", "4", "6", "9", "12", "15", "18"))) %>% 
-  ggplot() +
-  geom_line(aes(x = age, y = cum_pc, group = as.character(year_of_birth), color = as.character(year_of_birth))) +
-  facet_grid(~gender)
+
 
 
 # another little piece of data from another study
