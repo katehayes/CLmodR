@@ -58,6 +58,7 @@ mod_flows <- mod_states %>%
   full_join(mod_params) %>% 
   mutate(NP2NRES = nev2nres*Never,
          NP2RES = nev2res*Never,
+         NP2LAC = NP2NRES + NP2RES,
          
          NRES2NRES = nr2nr*end_nr*`Not residential`,
          NRES2RES = nr2res*end_nr*`Not residential`,
@@ -113,6 +114,10 @@ compare %>%
 
 
 
+check <- mod_states %>% 
+  pivot_wider(names_from = lac,
+              values_from = count)
+
 
 
 # 10% of 10-13 year olds and 20% of 14-16 year olds enter res care with no prior care placement
@@ -122,6 +127,8 @@ mod_flows %>%
   facet_grid(~gender)
 # so this is almost exactly wrong - 10 year olds are at 20% and 16/17 year olds at 10%
 # need to make age-varying parameters to solve this
+# update - no longer is the above true ...
+
 
 
 # 15% going to res come direct from other care homes - 3% come at the expiry of a secure order
@@ -130,14 +137,20 @@ mod_flows %>%
   geom_line(aes(x = t, y = check_res2res, group = as.character(age), color = as.character(age))) +
   facet_grid(~gender)
 # WHAT IS THE FUCKING DEAL WITH THE BURN IN PERIOD/INITIAL CONDITION EFFECT!!
+# big initial condition problem with age 10, why? - THIS ONE FIXED NOW THE ISSUE IS WITH OTHERS 
 
+# PROPORTIONS OF 16 AND 17 STARTING OFF ARE WAY OFF
 
 # 3% going to res come from an adoption breakdown, lets say 6 for 10 year olds though plus 6% from family breakdown
 mod_flows %>% 
   ggplot() +
   geom_line(aes(x = t, y = check_prior2res, group = as.character(age), color = as.character(age))) +
   facet_grid(~gender)
-# FAR TOO MANY COMING FROM PRIOR
+# FAR TOO MANY COMING FROM PRIOR!!!!!!!!!!!!
+# the above still true - gets worse as the model goes on!!!!!!!!!!!!!!!!!!
+# may need to undo that incidence reduction you did 
+# & then try somehow to just stop so many people coming out of prior?
+# just scale down prior??
 
 # From the whole residential care sample, 12% returned home to live with someone with parental responsibility after their first residential care placement
 mod_flows %>% 
@@ -145,19 +158,81 @@ mod_flows %>%
   geom_line(aes(x = t, y = check_res2exit, group = as.character(age), color = as.character(age))) +
   facet_grid(~gender)
 # this is probably too high
-# MORE INSANE BURN IN 
+# MORE INSANE BURN IN - esp for number 10
 
 # 50% of placements finishing for 10-17 year olds are their first ever placement
 # (so basically there should always be approx equal numbers comeing into the wo lac states from either non-lac side?)
 # So the number should be around 1
+# more 10 year old burn in
 mod_flows %>% 
   ggplot() +
   geom_line(aes(x = t, y = check_pcpriors, group = as.character(age), color = as.character(age))) +
   facet_grid(~gender)
 
 
+# full_join(care_ic)
+# AGE OF ENTERING CARE - distribution
+mod_flows %>% 
+  ggplot() +
+  geom_bar(aes(x = t, y = NP2LAC, fill = as.character(age)),
+           stat = "identity", position = "fill") +
+  facet_grid(~gender)
 
 
+
+
+
+
+# states
+compare <- mod_states %>%
+  mutate(compare = "Model") %>% 
+  bind_rows(care_ic %>% 
+              mutate(t = (end_period_year - 2010)*52) %>% 
+              select(t, gender, age, never, nres, res, prior) %>% 
+              pivot_longer(c(never, nres, res, prior),
+                           names_to = "lac",
+                           values_to = "count") %>% 
+              mutate(lac = case_when(lac == "never" ~ "Never",
+                                     lac == "nres" ~ "Not residential",
+                                     lac == "res" ~ "Residential",
+                                     lac == "prior" ~ "Prior")) %>% 
+              mutate(compare = "Est data"))
+  
+  
+compare %>% 
+  filter(lac == "Prior") %>% 
+  ggplot() +
+    geom_line(aes(x = t, y = count, group = compare, color = compare)) +
+    facet_grid(~interaction(gender, age))
+
+compare %>% 
+  filter(lac == "Never") %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = count, group = compare, color = compare)) +
+  facet_grid(~interaction(gender, age))
+# boys and girls age 10 and 11 have way too much never....
+
+
+compare %>% 
+  filter(lac == "Not residential") %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = count, group = compare, color = compare)) +
+  facet_grid(~interaction(gender, age))
+# THE PROBLEM WITH RESIDENTIAL IS ONLY WITH SIXTEEN AND SEVENTEEN YEAR OLDS!!
+# TOO MANY OF THEM!! THE OTHERS ARE FINE!!!!!
+# (when i scaled down incidence by 30% to 70% then the sixteen and seventeen were looking much better lol)
+
+
+compare %>% 
+  filter(lac == "Residential") %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = count, group = compare, color = compare)) +
+  facet_grid(~interaction(gender, age))
+# WAY OVERCOUNTING 17, UNDERCOUNTING EVERYTHING ELSE
+# WHAT THE FUCK IS THE TEN INITAL CONDITION SO HIGH - FIXED
+
+
+# below here 
 
 mod_states %>% 
   group_by(t, gender, age) %>% 
@@ -181,15 +256,12 @@ mod_states %>%
   facet_grid(~lac)
 
 
-# mod_states %>% 
-  filter(gender == "Boys",
-         lac != "Never") %>% 
-  ggplot() +
-  geom_line(aes(x = t, y = pc, group = age, color = age)) +
-  facet_grid(~lac)
-
-
+# more obvious burn ins
+# MAINLY FROM 15/16
 mod_states %>% 
+  group_by(t, gender, age) %>% 
+  mutate(tot = sum(count)) %>% 
+  mutate(pc = count/tot) %>% 
   filter(lac == "Residential") %>% 
   ggplot() +
   geom_line(aes(x = t, y = pc, group = as.character(age), color = as.character(age))) +

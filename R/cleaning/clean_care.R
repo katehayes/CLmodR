@@ -824,7 +824,6 @@ pc_res_first <- c_data %>%
 c_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/entering_res_care.xls", sheet = 3)
 
 
-
 age_placements <- c_data %>% 
   select(-All) %>% 
   rename(num_placements = `Number of placements`) %>% 
@@ -850,13 +849,14 @@ rescare_age_at_entry_20 <- c_data %>%
   select(-`% of sample`) %>% 
   rename(age = `Age of children`,
          pc = `% of children in homes 31/03/2020`) %>% 
-  filter(age >= 10) %>% 
-  mutate(`>10pc` = pc/sum(pc))
+  filter(age >= 10) %>%
+  mutate(`>10pc` = pc/sum(pc)) %>% 
+  select(-pc)
 
 save(rescare_age_at_entry_20, file = "output/data/cleaned/rescare_age_at_entry_20.Rdata")
 
 
-age_at_rescare_entry <- age_at_entry %>% 
+age_at_rescare_entry <- rescare_age_at_entry_20 %>% 
   ggplot() +
   geom_bar(aes(x = age, y = pc), stat = "identity")
 ggsave(filename = "output/graphs/age_at_rescare_entry.png", age_at_rescare_entry)
@@ -1051,34 +1051,6 @@ care_dur <- care_duration_14to22 %>%
   geom_bar(aes(x = end_period_year, y = mean_dur), stat = "identity") +
   facet_grid(~residential)
 ggsave(filename = "output/graphs/care_dur.png", care_dur)
-
-care_dur
-
-mod1 <- lm(mean_dur ~ end_period_year, data = care_duration_14to22 %>%
-              filter(residential == "Residential"))
-summary(mod1)
-
-mod2 <- lm(mean_dur ~ end_period_year, data = care_duration_14to22 %>%
-             filter(residential == "Not residential"))
-summary(mod2)
-
-care_duration <- care_duration_14to22 %>% 
-  ungroup() %>% 
-  add_row(end_period_year = 2013, residential = "Residential", mean_dur = (6.328*2013)-12540.394) %>% 
-  add_row(end_period_year = 2012, residential = "Residential", mean_dur = (6.328*2012)-12540.394) %>% 
-  add_row(end_period_year = 2011, residential = "Residential", mean_dur = (6.328*2011)-12540.394) %>%
-  add_row(end_period_year = 2010, residential = "Residential", mean_dur = (6.328*2010)-12540.394) %>% 
-  add_row(end_period_year = 2013, residential = "Not residential", mean_dur = (7.929*2013)-15637.629) %>%
-  add_row(end_period_year = 2012, residential = "Not residential", mean_dur = (7.929*2012)-15637.629) %>%
-  add_row(end_period_year = 2011, residential = "Not residential", mean_dur = (7.929*2011)-15637.629) %>%
-  add_row(end_period_year = 2010, residential = "Not residential", mean_dur = (7.929*2010)-15637.629) 
-
-
-care_duration %>% 
-  ggplot() +
-  geom_bar(aes(x = end_period_year, y = mean_dur), stat = "identity") +
-  facet_grid(~residential)
-
 
 
 

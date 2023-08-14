@@ -38,9 +38,37 @@ poverty_rate <- pop_estimate_01to20_age_gender %>%
   ungroup() %>%
   mutate(pov_rate = pov / pop)
 
-check_pov_rate <- poverty_rate %>%
+
+
+
+smooth_poverty <- poverty_rate %>% 
+  filter(level == "Birmingham",
+         !is.na(pov_rate)) %>%
+  arrange(end_period_year) %>% 
+  mutate(spov_rate = smooth.spline(end_period_year, pov_rate)$y)
+
+save(t_lac_adj, file = "output/data/input/t_lac_adj.Rdata")
+
+
+
+check <- poverty_rate %>% 
+  filter(level == "Birmingham",
+         !is.na(pov_rate)) %>%
+  arrange(end_period_year) %>% 
+  mutate(pov_rate_2 = smooth.spline(end_period_year, pov_rate)$y) %>%
+  # mutate(pov_rate_2 = rollmean(rollmean(pov_rate, 3,  na.pad=TRUE, align="center"), 3,  na.pad=TRUE, align="center")) %>% 
+  mutate(compare = "smooth") %>% 
+  select(-pov_rate) %>% 
+  bind_rows(poverty_rate %>% 
+              filter(level == "Birmingham",
+                     !is.na(pov_rate)) %>%
+              arrange(end_period_year) %>% 
+              rename(pov_rate_2 = pov_rate) %>% 
+              mutate(compare = "data"))
+
+check_pov_rate <- check %>%
   ggplot() +
-  geom_line(aes(x = end_period_year, y = pov_rate, colour = level)) +
+  geom_line(aes(x = end_period_year, y = pov_rate_2, colour = compare)) +
   scale_x_continuous(name = "") +
   scale_y_continuous(name = "") +
   theme_classic() +
@@ -49,6 +77,7 @@ check_pov_rate
 # looks like the change of measure could easily be ruining everything but
 
 # ggsave(filename = "output/graphs/assumption checks/check_pov_rate.png", check_pov_rate)
+
 
 params_impov <- poverty_rate %>%
   filter(level == "Birmingham") %>%

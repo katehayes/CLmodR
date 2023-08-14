@@ -275,28 +275,30 @@ lac_model = odin::odin({
   
   
   
-  pc_nres[] <- interpolate(tlac, nrlac, "linear")
+  pc_nres[] <- interpolate(tlacadj, nrlac, "linear")
   dim(pc_nres) <- N_gender
-  tlac[] <- user()
+  tlacadj[] <- user()
   nrlac[, ] <- user()
-  dim(tlac) <- user()
-  dim(nrlac) <- c(length(tlac), length(pc_nres))
+  dim(tlacadj) <- user()
+  dim(nrlac) <- c(length(tlacadj), length(pc_nres))
   
-  pc_res[] <- interpolate(tlac, rlac, "linear")
+  pc_res[] <- interpolate(tlacadj, rlac, "linear")
   dim(pc_res) <- N_gender
   rlac[, ] <- user()
-  dim(rlac) <- c(length(tlac), length(pc_res))
+  dim(rlac) <- c(length(tlacadj), length(pc_res))
   
-  pc_prior[] <- interpolate(tlac, plac, "linear")
+  pc_prior[] <- interpolate(tlacadj, plac, "linear")
   dim(pc_prior) <- N_gender
   plac[, ] <- user()
-  dim(plac) <- c(length(tlac), length(pc_prior))
+  dim(plac) <- c(length(tlacadj), length(pc_prior))
   
   
   
   end_nr[] <- interpolate(tlac, enr, "linear")
   dim(end_nr) <- N_gender
+  tlac[] <- user()
   enr[, ] <- user()
+  dim(tlac) <- user()
   dim(enr) <- c(length(tlac), length(end_nr))
   
   end_res[] <- interpolate(tlac, eres, "linear")
@@ -548,6 +550,7 @@ lac_pars <- list(tt = t_turn10,
                  y = v_turn10,
                  
                  tlac = t_lac,
+                 tlacadj = t_lac_adj,
                  nrlac = nres,
                  rlac = res,
                  plac = pri,
@@ -593,10 +596,42 @@ lac_pars <- list(tt = t_turn10,
                  
       
                  # INITIAL CONDITIONS
-                 LACnev10_ini = c(7313.850,6829.476),
-                 LACnres10_ini = c(43.57738,47.35112),
-                 LACres10_ini = c(22.295334,13.358817),
-                 LACprior10_ini = c(49.27678,46.81357),
+                 LACnev10_ini = c(exact_ic %>% 
+                                    filter(age == 10,
+                                           gender == "Boys") %>% 
+                                    select(never) %>% 
+                                    unlist(), exact_ic %>% 
+                                    filter(age == 10,
+                                           gender == "Girls") %>% 
+                                    select(never) %>% 
+                                    unlist()),
+                 LACnres10_ini = c(exact_ic %>% 
+                                     filter(age == 10,
+                                            gender == "Boys") %>% 
+                                     select(nres) %>% 
+                                     unlist(), exact_ic %>% 
+                                     filter(age == 10,
+                                            gender == "Girls") %>% 
+                                     select(nres) %>% 
+                                     unlist()),
+                 LACres10_ini = c(exact_ic %>% 
+                                    filter(age == 10,
+                                           gender == "Boys") %>% 
+                                    select(res) %>% 
+                                    unlist(), exact_ic %>% 
+                                    filter(age == 10,
+                                           gender == "Girls") %>% 
+                                    select(res) %>% 
+                                    unlist()),
+                 LACprior10_ini = c(exact_ic %>% 
+                                      filter(age == 10,
+                                             gender == "Boys") %>% 
+                                      select(prior) %>% 
+                                      unlist(), exact_ic %>% 
+                                      filter(age == 10,
+                                             gender == "Girls") %>% 
+                                      select(prior) %>% 
+                                      unlist()),
                  
                  LACnev11_ini = c(exact_ic %>% 
                                     filter(age == 11,
