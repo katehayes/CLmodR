@@ -249,11 +249,14 @@ care <- care_10to22 %>%
 save(care, file = "Output/Data/Processed/care.Rdata")
 
 
-care %>% 
+care %>%
   ggplot() +
     geom_bar(aes(x = end_period_year, y = count), 
              stat = "identity", position = "stack") +
     facet_grid(~interaction(gender, residential))
+
+  
+
 
 # so its
 # 10-13 - (56-34) - 22
@@ -1395,6 +1398,36 @@ save(care_convicted, file = "output/data/processed/care_convicted.Rdata")
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # COME BACK TO THIS - FIGURING OUT ATTRIBUTING PARTS TO POVERTY # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # # # # # # # #  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+check <- care %>%
+  group_by(end_period_year) %>% 
+  summarise(care_count = sum(count)) %>% 
+  full_join(pop_estimate_01to20_age_gender %>%
+              filter(level == "Birmingham",
+                     age %in% c(10:17)) %>%
+              group_by(end_period_year) %>%
+              summarise(pop = sum(count))) %>% 
+  filter(end_period_year %in% c(2010:2020)) %>% 
+  mutate(care_pc = care_count/pop) %>% 
+  left_join(smooth_poverty %>% 
+              select(end_period_year, spov_rate)) %>% 
+  mutate(pop_excl = pop*spov_rate,
+         pop_incl = pop*(1-spov_rate)) %>% 
+  mutate(mult = 3) %>% 
+  mutate(rate_incl = care_count/(mult*pop_excl + pop_incl),
+         rate_excl = rate_incl*mult) %>% 
+  mutate(care_excl = pop_excl*rate_excl,
+         care_incl = pop_incl*rate_incl) %>% 
+  mutate(ratio = care_excl/care_incl)
+
+
+pop_excl*5*rate + pop_incl*rate = care_count
+care_count/(5pop_excl + pop_incl) = rate
+
+
+  # mutate(excl_care = ,
+  #        incl_care = )
+
 
 
 # https://lginform.local.gov.uk/reports/lgastandard?mod-metric=891&mod-area=E08000025&mod-group=AllMetropolitanBoroughLaInCountry_England&mod-type=namedComparisonGroup&mod-period=15&mod-groupType=namedComparisonGroup

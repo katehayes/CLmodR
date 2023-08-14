@@ -40,14 +40,24 @@ poverty_rate <- pop_estimate_01to20_age_gender %>%
 
 
 
-
 smooth_poverty <- poverty_rate %>% 
   filter(level == "Birmingham",
          !is.na(pov_rate)) %>%
   arrange(end_period_year) %>% 
-  mutate(spov_rate = smooth.spline(end_period_year, pov_rate)$y)
+  mutate(spov_rate = smooth.spline(end_period_year, pov_rate)$y) %>% 
+  select(-c(pov, pov_rate, level)) %>% 
+  mutate(spov = pop*spov_rate)
 
-save(t_lac_adj, file = "output/data/input/t_lac_adj.Rdata")
+save(smooth_poverty, file = "output/data/processed/smooth_poverty.Rdata")
+
+smooth_poverty %>%
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = spov)) +
+  scale_x_continuous(name = "") +
+  scale_y_continuous(name = "") +
+  theme_classic() +
+  theme(strip.background = element_blank())
+
 
 
 
