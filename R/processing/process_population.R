@@ -13,12 +13,54 @@ age_in <- pop_estimate_01to20_age_gender %>%
   mutate(week = (end_period_year - 2009)*52) %>%
   select(-c(end_period_year, end_period_month, level, period_length))
 
+age_in2 <- pop_estimate_01to20_age_gender %>%
+  filter(age == 10, level == "Birmingham")  %>% 
+  # select(c(end_period_year, gender, count))  %>% 
+  # pivot_wider(names_from = gender, values_from = count) %>% 
+  # mutate(diff_boy = lead(Boys) - Boys,
+  #        diff_girl = lead(Girls) - Girls) %>%
+  mutate(turn10_wkly = count / 52) %>%
+  select(-c(count, age)) %>%
+  filter(end_period_year >= 2011) %>%
+  pivot_wider(names_from = gender, values_from = turn10_wkly) %>%
+  mutate(week = (end_period_year - 2011)*52) %>%
+  select(-c(end_period_year, end_period_month, level, period_length)) %>% 
+  add_row(Boys = 157, Girls = 143, week = 520) %>% 
+  add_row(Boys = 157, Girls = 143, week = 572)
+
+v2_turn10 <- age_in2 %>%
+  select(-week) %>%
+  as.matrix()
+
 v_turn10 <- age_in %>%
   select(-week) %>%
   as.matrix()
 
 t_turn10 <- age_in$week
 
+
+age_in_pov <- pop_estimate_01to20_age_gender %>%
+  filter(age == 9, level == "Birmingham") %>%
+  mutate(turn10_wkly = count / 52) %>%
+  select(-c(age, count)) %>%
+  filter(end_period_year >= 2009) %>%
+  pivot_wider(names_from = gender, values_from = turn10_wkly) %>%
+  left_join(smooth_poverty %>% 
+              select(c(end_period_year, spov_rate))) %>% 
+  mutate(boys_incl = Boys*(1-spov_rate),
+         girls_incl = Girls*(1-spov_rate),
+         boys_excl = Boys*spov_rate,
+         girls_excl = Girls*spov_rate) %>% 
+  mutate(week = (end_period_year - 2009)*52) %>%
+  select(c(week, boys_incl, girls_incl, boys_excl, girls_excl)) %>% 
+  arrange(week)
+
+v_turn10_i <- age_in_pov %>%
+  select(c(boys_incl, girls_incl)) %>%
+  as.matrix()
+v_turn10_e <- age_in_pov %>%
+  select(c(boys_excl, girls_excl)) %>%
+  as.matrix()
 
 
 age_out <- pop_estimate_01to20_age_gender %>%
@@ -34,6 +76,18 @@ pop_IC <- population %>%
   select(-c(level, end_period_month, period_length)) %>%
   # pivot_wider(names_from = gender, values_from = count)
   mutate(pov = 0.3)
+
+
+
+pop_estimate_01to20_age_gender %>%
+  filter(age %in% 9:10, level == "Birmingham") %>% 
+  mutate(end_period_year = as.numeric(end_period_year)) %>% 
+  filter(end_period_year >= 2010) %>%
+  mutate(t = (as.numeric(end_period_year) - 2010)*52) %>%
+  select(t, age, gender, count) %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = count, group = as.character(age), color = as.character(age))) +
+  facet_wrap(~gender)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # output # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

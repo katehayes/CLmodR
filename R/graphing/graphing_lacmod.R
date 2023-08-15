@@ -1,6 +1,6 @@
 
 mod_states <- LAC_data %>%
-  select(c(starts_with("LAC"), t)) %>% 
+  select(c(starts_with("ILAC"), starts_with("ELAC"), t)) %>% 
   pivot_longer(-t, names_to = "state", values_to = "count") %>%
   mutate(age = as.numeric(str_extract_all(state, "(\\d{2})")),
          gender = if_else(grepl("\\[1\\]", state), "Boys", "Girls")) %>% 
@@ -8,7 +8,7 @@ mod_states <- LAC_data %>%
          lac = ifelse(grepl("nres", state), "Not residential", lac),
          lac = ifelse(grepl("Cres", state), "Residential", lac),
          lac = ifelse(grepl("prior", state), "Prior", lac)) %>% 
-  select(-state) %>% 
+  mutate(state = ifelse(grepl("ILAC", state), "Included", "Excluded")) %>% 
   group_by(t, gender, age)
 
 
@@ -185,6 +185,8 @@ mod_flows %>%
 
 # states
 compare <- mod_states %>%
+  group_by(t, gender, age, lac) %>% 
+  summarise(count = sum(count)) %>% 
   mutate(compare = "Model") %>% 
   bind_rows(care_ic %>% 
               mutate(t = (end_period_year - 2010)*52) %>% 
@@ -269,6 +271,16 @@ mod_states %>%
 
 
 load("/Users/katehayes/CLmodR/output/data/processed/population.Rdata")
+# compare_pop2 <- population %>%
+#   filter(end_period_year >= 2010) %>%
+#   mutate(t = (as.numeric(end_period_year) - 2010)*52) %>%
+#   select(t, age, gender, count) %>%
+#   mutate(compare = "Data") %>%
+#   bind_rows(mod_states %>%
+#               group_by(t, age, gender) %>% 
+#               summarise(count = sum(count)) %>% 
+#               mutate(compare = "Model output"))
+
 compare_pop <- population %>%
   filter(end_period_year >= 2010) %>%
   mutate(t = (as.numeric(end_period_year) - 2010)*52) %>%
@@ -281,6 +293,7 @@ compare_pop <- population %>%
 
 
 
+
 compare_pop %>%
   ggplot() +
   geom_line(aes(x = t, y = count, group = interaction(gender, compare), color = interaction(gender, compare))) +
@@ -290,4 +303,57 @@ compare_pop %>%
                                 "2016", "2017", "2018", "2019", "2020")) +
   scale_color_manual(values=c("skyblue","pink","navy", "red"))
 
-# ACTUALLY YOU NEED TO GET THE POPULATION LOOKING WAY WAY BETTER
+
+mod_states %>% 
+  group_by(t, gender, age, state) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = count, group = state, color = state)) +
+  facet_wrap(~interaction(gender, age))
+
+# looks like the move from pov to not is working more or less!!!
+mod_states %>% 
+  group_by(t, state) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(t) %>% 
+  mutate(pc = count / sum(count)) %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = pc, group = state, color = state))
+
+
+mod_states %>% 
+  group_by(t, state, gender, age) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  filter(lac == "Never") %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = pc, group = age, color = age)) +
+  facet_wrap(~interaction(gender, state))
+
+
+mod_states %>% 
+  group_by(t, state, gender, age) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  filter(lac == "Residential") %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = pc, group = age, color = age)) +
+  facet_wrap(~interaction(gender, state))
+
+mod_states %>% 
+  group_by(t, state, gender, age) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  filter(lac == "Not residential") %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = pc, group = age, color = age)) +
+  facet_wrap(~interaction(gender, state))
+
+mod_states %>% 
+  group_by(t, state, gender, age) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  filter(lac == "Prior") %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = pc, group = age, color = age)) +
+  facet_wrap(~interaction(gender, state))
+
+
+\# ACTUALLY YOU NEED TO GET THE POPULATION LOOKING WAY WAY BETTER

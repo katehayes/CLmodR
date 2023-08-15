@@ -732,9 +732,10 @@ care_lin_int %>%
 
 # Should i try the p=id method?
 
-entry_rate <- care_lin_int %>% 
+# entry_rate <- care_lin_int %>% 
+entry_rate <- care_agedetail4 %>% 
   mutate(count = ifelse(residential == "Not residential" & age %in% c(16, 17), 0.8*count, count)) %>% 
-  mutate(end_period_year = 2010 + floor(week/52)) %>% 
+  # mutate(end_period_year = 2010 + floor(week/52)) %>% 
   full_join(care_duration %>% 
               ungroup() %>% 
               mutate(end_period_year = end_period_year - 1) %>% 
@@ -812,14 +813,21 @@ entry_rate <- care_lin_int %>%
 #   facet_wrap(~interaction(age, gender))
 
 # %>% 
-  select(week, gender, age, residential, 
-         inc_from_never, inc_from_prior) %>% 
+# select(week, gender, age, residential,
+#        inc_from_never, inc_from_prior) %>%
+  select(end_period_year, gender, age, residential,
+         inc_from_never, inc_from_prior) %>%
   pivot_wider(names_from = residential,
               values_from = c(inc_from_prior, inc_from_never)) %>% 
-  full_join(care_lin_int %>% 
-              pivot_wider(names_from = residential,
-                          values_from = count))  %>% 
-  mutate(end_period_year = 2010 + floor(week/52)) %>% 
+  full_join(care_agedetail4 %>% 
+                       pivot_wider(names_from = residential,
+                                   values_from = count)) %>%
+
+# %>% 
+  # full_join(care_lin_int %>% 
+  #             pivot_wider(names_from = residential,
+  #                         values_from = count))  %>% 
+  # mutate(end_period_year = 2010 + floor(week/52)) %>% 
   full_join(population %>% 
               filter(end_period_year >= 2010) %>% 
               group_by(end_period_year, gender, age) %>% 
@@ -834,9 +842,14 @@ entry_rate <- care_lin_int %>%
          rate_prior2res = `inc_from_prior_Residential`/count_prior,
          rate_never2nres = `inc_from_never_Not residential`/population*(1-pc_ever),
          rate_never2res = `inc_from_never_Residential`/population*(1-pc_ever)) %>% 
-  select(c(week, gender, age, starts_with("rate_"))) %>% 
+  select(c(end_period_year, gender, age, starts_with("rate_"))) %>% 
   ungroup() %>% 
-  rename(end_period_year = week)
+  filter(end_period_year <= 2020) %>% 
+  arrange(end_period_year) 
+
+
+# %>% 
+  mutate(rate_prior2nres = smooth.spline(end_period_year, rate_prior2nres)$y)
 
 
 entry_rate %>% 
@@ -1330,18 +1343,794 @@ care_ic <- population %>%
   mutate(prior = count*pc_prior) %>% 
   mutate(never = count - res - nres - prior)
 
+# exact_ic <- care_ic %>% 
+#   filter(end_period_year == 2010) %>% 
+#   select(gender, age, never, nres, res, prior)
+# 
+# 
+# exact_ic <- care_ic %>% 
+#   filter(end_period_year == 2010) %>% 
+#   left_join(smooth_poverty) %>% 
+#   select(gender, age, never, nres, res, prior, spov_rate) %>% 
+#   mutate(not_pov = 1 - spov_rate) %>% 
+#   pivot_longer(c(spov_rate, not_pov),
+#                names_to = "poverty",
+#                values_to = "pc") 
+
+
 exact_ic <- care_ic %>% 
   filter(end_period_year == 2010) %>% 
-  select(gender, age, never, nres, res, prior)
+  left_join(smooth_poverty) %>% 
+  #   select(gender, age, never, nres, res, prior, spov_rate) %>%
+  select(gender, age, count, never, nres, res, prior, spov_rate) %>% 
+  mutate(count_incl = count*(1-spov_rate),
+         count_excl = count*spov_rate) %>%
+  mutate(mult_excl = count_excl*4) %>% 
+  mutate(lac_pc_incl = count_incl/(count_incl + mult_excl),
+         lac_pc_excl = mult_excl/(count_incl + mult_excl)) %>% 
+  mutate(nres_incl = nres*lac_pc_incl,
+         nres_excl = nres*lac_pc_excl,
+         res_incl = res*lac_pc_incl,
+         res_excl = res*lac_pc_excl,
+         pri_incl = prior*lac_pc_incl,
+         pri_excl = prior*lac_pc_excl) %>% 
+  mutate(nev_incl = count_incl - nres_incl - res_incl - pri_incl,
+         nev_excl = count_excl - nres_excl - res_excl - pri_excl) %>% 
+  select(c(gender, age, nev_incl, nres_incl, res_incl, pri_incl,
+            nev_excl, nres_excl, res_excl, pri_excl))
 
 
 
+
+# from check below, in 2010 when multiplier is 4 
+  # lac rate for incl is 0.005108891 lac rate for excl is 0.02043557
+  
+# check <- exact_ic %>% 
+#   mutate(excl_rate = (nres_excl + res_excl)/(nev_excl + nres_excl + res_excl + pri_excl),
+#          incl_rate = (nres_incl + res_incl)/(nev_incl + nres_incl + res_incl + pri_incl))
 
 # NUMBER FOR THE YEAR 2010 ARE ESTIMATES BASED ON THE VALUE OF THE TOTAL
 # NUMBERS IN 2010 AND THE PROPORTION OF TOTAL THAT WAS RESIDENTIAL IN THE YEAR 2011
 # assuming that the gender and age breakdowns can simply be put together and applied.
 
+ten_pc <- care_ic %>% 
+  left_join(smooth_poverty) %>% 
+  #   select(gender, age, never, nres, res, prior, spov_rate) %>%
+  select(end_period_year, gender, age, count, never, nres, res, prior, spov_rate) %>% 
+  mutate(count_incl = count*(1-spov_rate),
+         count_excl = count*spov_rate) %>%
+  mutate(mult_excl = count_excl*4) %>% 
+  mutate(lac_pc_incl = count_incl/(count_incl + mult_excl),
+         lac_pc_excl = mult_excl/(count_incl + mult_excl)) %>% 
+  mutate(nres_incl = nres*lac_pc_incl,
+         nres_excl = nres*lac_pc_excl,
+         res_incl = res*lac_pc_incl,
+         res_excl = res*lac_pc_excl,
+         pri_incl = prior*lac_pc_incl,
+         pri_excl = prior*lac_pc_excl) %>% 
+  mutate(nev_incl = count_incl - nres_incl - res_incl - pri_incl,
+         nev_excl = count_excl - nres_excl - res_excl - pri_excl) %>% 
+  select(c(end_period_year, gender, age, nev_incl, nres_incl, res_incl, pri_incl,
+           nev_excl, nres_excl, res_excl, pri_excl)) %>% 
+  filter(age == 10) %>% 
+  mutate(across(c(nres_incl, res_incl, pri_incl), ~.x/(nev_incl + nres_incl + res_incl + pri_incl))) %>% 
+  mutate(across(c(nres_excl, res_excl, pri_excl), ~.x/(nev_excl + nres_excl + res_excl + pri_excl))) %>% 
+  select(end_period_year, gender, nres_incl, res_incl, pri_incl, nres_excl, res_excl, pri_excl) %>% 
+  pivot_wider(names_from = gender,
+              values_from = c(nres_incl, res_incl, pri_incl, nres_excl, res_excl, pri_excl)) %>% 
+  mutate(week = (end_period_year - 2010)*52) %>% 
+  mutate(week = ifelse(week == 0, 1, week)) %>% 
+  add_row(week = 0) %>% 
+  mutate(across(everything(), ~ifelse(is.na(.x), 0, .x))) %>% 
+  arrange(week) %>% 
+  select(-end_period_year)
 
+nresincl <- ten_pc %>% 
+  select(c(nres_incl_Boys, nres_incl_Girls)) %>% 
+  as.matrix()
+
+resincl <- ten_pc %>% 
+  select(c(res_incl_Boys, res_incl_Girls)) %>% 
+  as.matrix()
+
+priincl <- ten_pc %>% 
+  select(c(pri_incl_Boys, pri_incl_Girls)) %>% 
+  as.matrix()
+
+nresexcl <- ten_pc %>% 
+  select(c(nres_excl_Boys, nres_excl_Girls)) %>% 
+  as.matrix()
+
+resexcl <- ten_pc %>% 
+  select(c(res_excl_Boys, res_excl_Girls)) %>% 
+  as.matrix()
+
+priexcl <- ten_pc %>% 
+  select(c(pri_excl_Boys, pri_excl_Girls)) %>% 
+  as.matrix()
+
+# save(t_lac_adj, file = "output/data/input/t_lac_adj.Rdata")
+# save(t_lac, file = "output/data/input/t_lac.Rdata")
+# save(nres, file = "output/data/input/nres.Rdata")
+# save(res, file = "output/data/input/res.Rdata")
+# save(pri, file = "output/data/input/pri.Rdata")
+
+
+entry_rate_pov <- care_ic %>% 
+  left_join(smooth_poverty) %>% 
+  #   select(gender, age, never, nres, res, prior, spov_rate) %>%
+  select(end_period_year, gender, age, count, never, nres, res, prior, spov_rate) %>% 
+  mutate(count_incl = count*(1-spov_rate),
+         count_excl = count*spov_rate) %>%
+  mutate(mult_excl = count_excl*4) %>% 
+  mutate(lac_pc_incl = count_incl/(count_incl + mult_excl),
+         lac_pc_excl = mult_excl/(count_incl + mult_excl)) %>% 
+  mutate(nres_incl = nres*lac_pc_incl,
+         nres_excl = nres*lac_pc_excl,
+         res_incl = res*lac_pc_incl,
+         res_excl = res*lac_pc_excl,
+         pri_incl = prior*lac_pc_incl,
+         pri_excl = prior*lac_pc_excl) %>% 
+  mutate(nev_incl = count_incl - nres_incl - res_incl - pri_incl,
+         nev_excl = count_excl - nres_excl - res_excl - pri_excl) %>% 
+  select(c(end_period_year, gender, age, nev_incl, nres_incl, res_incl, pri_incl,
+           nev_excl, nres_excl, res_excl, pri_excl)) %>% 
+  pivot_longer(-c(end_period_year, gender, age), 
+               names_to = "state",
+               values_to = "count") %>% 
+  mutate(residential = ifelse(grepl("nev", state), "Never", NA),
+         residential = ifelse(grepl("res", state), "Residential", residential),
+         residential = ifelse(grepl("nres", state), "Not residential", residential),
+         residential = ifelse(grepl("pri", state), "Prior", residential)) %>% 
+  mutate(state = ifelse(grepl("incl", state), "Included", "Excluded")) %>% 
+  pivot_wider(names_from = residential,
+              values_from = count) %>% 
+  left_join(care_duration %>% 
+              ungroup() %>% 
+              mutate(end_period_year = end_period_year - 1) %>% 
+              filter(end_period_year >= 2010) %>% 
+              pivot_wider(names_from = residential,
+                          values_from = mean_dur) %>% 
+              rename(res_dur = Residential,
+                     nres_dur = `Not residential`)) %>%
+  group_by(state, gender, age) %>% 
+  arrange(end_period_year) %>% 
+  mutate(res_incidence = lead(Residential)/(res_dur/7),
+         nres_incidence = 0.8*lead(`Not residential`)/(nres_dur/7)) %>% 
+  mutate(res_incidence = ifelse(is.na(res_incidence), Residential/(res_dur/7), res_incidence),
+         nres_incidence = ifelse(is.na(nres_incidence), 0.8*`Not residential`/(nres_dur/7), nres_incidence)) %>% 
+  ungroup() %>% 
+# changed it to 'lead' here 
+  #sometimes do 20% haircut jhust because!!
+  filter(end_period_year <= 2020) %>% 
+  mutate(res_pc_from_never = ifelse(age %in% c(10, 11, 12, 13),
+                                0.1, NA),
+         res_pc_from_never = ifelse(age %in% c(14, 15, 16, 17),
+                                0.18, res_pc_from_never)) %>% 
+  mutate(res_pc_from_res = ifelse(age %in% c(10, 11, 12, 13),
+                              0.16, NA),
+         res_pc_from_res = ifelse(age %in% c(14, 15, 16, 17),
+                              0.3, res_pc_from_res)) %>% 
+  mutate(res_pc_from_nres = ifelse(age %in% c(10, 11, 12, 13),
+                               0.5, NA),
+         res_pc_from_nres = ifelse(age %in% c(14, 15, 16, 17),
+                               0.3, res_pc_from_nres)) %>% 
+  mutate(nres_pc_from_never = ifelse(age %in% c(10, 11, 12, 13, 14, 15),
+                                0.6, NA),
+         nres_pc_from_never = ifelse(age %in% c(16, 17),
+                                0.4, nres_pc_from_never)) %>% 
+  mutate(nres_pc_from_nres = ifelse(age %in% c(10, 11, 12, 13, 14, 15),
+                               0.25, NA),
+         nres_pc_from_nres = ifelse(age %in% c(16, 17),
+                               0.4, nres_pc_from_nres)) %>% 
+  mutate(nres_pc_from_res = ifelse(age %in% c(10, 11, 12, 13, 14, 15),
+                              0.05, NA),
+         nres_pc_from_res = ifelse(age %in% c(16, 17),
+                              0.05, nres_pc_from_res)) %>% 
+  mutate(res_pc_from_prior = 1 - (res_pc_from_never + res_pc_from_nres + res_pc_from_res),
+         nres_pc_from_prior = 1 - (nres_pc_from_never + nres_pc_from_nres + nres_pc_from_res)) %>% 
+  mutate(res_inc_from_never = res_incidence*res_pc_from_never,
+         res_inc_from_prior = res_incidence*res_pc_from_prior,
+         res_inc_from_nres = res_incidence*res_pc_from_nres,
+         res_inc_from_res = res_incidence*res_pc_from_res,
+         nres_inc_from_never = nres_incidence*nres_pc_from_never,
+         nres_inc_from_prior = nres_incidence*nres_pc_from_prior,
+         nres_inc_from_nres = nres_incidence*nres_pc_from_nres,
+         nres_inc_from_res = nres_incidence*nres_pc_from_res) %>% 
+  mutate(rate_prior2nres = nres_inc_from_prior/Prior,
+         rate_prior2res = res_inc_from_prior/Prior,
+         rate_never2nres = nres_inc_from_never/Never,
+         rate_never2res = res_inc_from_never/Never) %>% 
+  select(c(end_period_year, state, gender, age, starts_with("rate_"))) %>% 
+  arrange(end_period_year) 
+
+
+prior2nres10i <-entry_rate_pov %>%
+  filter(age == 10, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres11i <-entry_rate_pov %>%
+  filter(age == 11, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres12i <-entry_rate_pov %>%
+  filter(age == 12, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres13i <-entry_rate_pov %>%
+  filter(age == 13, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres14i <-entry_rate_pov %>%
+  filter(age == 14, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres15i <-entry_rate_pov %>%
+  filter(age == 15, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres16i <-entry_rate_pov %>%
+  filter(age == 16, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres17i <-entry_rate_pov %>%
+  filter(age == 17, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+
+
+prior2res10i <-entry_rate_pov %>%
+  filter(age == 10, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res11i <-entry_rate_pov %>%
+  filter(age == 11, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res12i <-entry_rate_pov %>%
+  filter(age == 12, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res13i <-entry_rate_pov %>%
+  filter(age == 13, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res14i <-entry_rate_pov %>%
+  filter(age == 14, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res15i <-entry_rate_pov %>%
+  filter(age == 15, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res16i <-entry_rate_pov %>%
+  filter(age == 16, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res17i <-entry_rate_pov %>%
+  filter(age == 17, state == "Included") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+
+never2nres10i <-entry_rate_pov %>%
+  filter(age == 10, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres11i <-entry_rate_pov %>%
+  filter(age == 11, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres12i <-entry_rate_pov %>%
+  filter(age == 12, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres13i <-entry_rate_pov %>%
+  filter(age == 13, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres14i <-entry_rate_pov %>%
+  filter(age == 14, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres15i <-entry_rate_pov %>%
+  filter(age == 15, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres16i <-entry_rate_pov %>%
+  filter(age == 16, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres17i <-entry_rate_pov %>%
+  filter(age == 17, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+
+
+never2res10i <-entry_rate_pov %>%
+  filter(age == 10, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res11i <-entry_rate_pov %>%
+  filter(age == 11, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res12i <-entry_rate_pov %>%
+  filter(age == 12, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res13i <-entry_rate_pov %>%
+  filter(age == 13, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res14i <-entry_rate_pov %>%
+  filter(age == 14, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res15i <-entry_rate_pov %>%
+  filter(age == 15, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res16i <-entry_rate_pov %>%
+  filter(age == 16, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res17i <-entry_rate_pov %>%
+  filter(age == 17, state == "Included") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+
+prior2nres10e <- entry_rate_pov %>%
+  filter(age == 10, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres11e <- entry_rate_pov %>%
+  filter(age == 11, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres12e <- entry_rate_pov %>%
+  filter(age == 12, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres13e <- entry_rate_pov %>%
+  filter(age == 13, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres14e <- entry_rate_pov %>%
+  filter(age == 14, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres15e <- entry_rate_pov %>%
+  filter(age == 15, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres16e <- entry_rate_pov %>%
+  filter(age == 16, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2nres17e <- entry_rate_pov %>%
+  filter(age == 17, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+
+
+prior2res10e <- entry_rate_pov %>%
+  filter(age == 10, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res11e <- entry_rate_pov %>%
+  filter(age == 11, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res12e <- entry_rate_pov %>%
+  filter(age == 12, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res13e <- entry_rate_pov %>%
+  filter(age == 13, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res14e <- entry_rate_pov %>%
+  filter(age == 14, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res15e <- entry_rate_pov %>%
+  filter(age == 15, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res16e <- entry_rate_pov %>%
+  filter(age == 16, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+prior2res17e <- entry_rate_pov %>%
+  filter(age == 17, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_prior2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_prior2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+
+never2nres10e <- entry_rate_pov %>%
+  filter(age == 10, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres11e <- entry_rate_pov %>%
+  filter(age == 11, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres12e <- entry_rate_pov %>%
+  filter(age == 12, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres13e <- entry_rate_pov %>%
+  filter(age == 13, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres14e <- entry_rate_pov %>%
+  filter(age == 14, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres15e <- entry_rate_pov %>%
+  filter(age == 15, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres16e <- entry_rate_pov %>%
+  filter(age == 16, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2nres17e <- entry_rate_pov %>%
+  filter(age == 17, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2nres) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2nres) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+
+
+never2res10e <- entry_rate_pov %>%
+  filter(age == 10, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res11e <- entry_rate_pov %>%
+  filter(age == 11, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res12e <- entry_rate_pov %>%
+  filter(age == 12, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res13e <- entry_rate_pov %>%
+  filter(age == 13, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res14e <- entry_rate_pov %>%
+  filter(age == 14, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res15e <- entry_rate_pov %>%
+  filter(age == 15, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res16e <- entry_rate_pov %>%
+  filter(age == 16, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
+
+never2res17e <- entry_rate_pov %>%
+  filter(age == 17, state == "Excluded") %>% 
+  select(end_period_year, gender, rate_never2res) %>% 
+  pivot_wider(names_from = gender,
+              values_from = rate_never2res) %>% 
+  arrange(end_period_year) %>% 
+  select(c(Boys, Girls)) %>% 
+  as.matrix()
 
 
 
@@ -1408,26 +2197,58 @@ check <- care %>%
               group_by(end_period_year) %>%
               summarise(pop = sum(count))) %>% 
   filter(end_period_year %in% c(2010:2020)) %>% 
-  mutate(care_pc = care_count/pop) %>% 
+  mutate(scare_count = smooth.spline(end_period_year, care_count)$y) %>% 
+  mutate(scare_pc = scare_count/pop) %>% 
   left_join(smooth_poverty %>% 
               select(end_period_year, spov_rate)) %>% 
   mutate(pop_excl = pop*spov_rate,
          pop_incl = pop*(1-spov_rate)) %>% 
-  mutate(mult = 3) %>% 
-  mutate(rate_incl = care_count/(mult*pop_excl + pop_incl),
-         rate_excl = rate_incl*mult) %>% 
+  mutate(mult = 4) %>% 
+  mutate(rate_incl = scare_count/(mult*pop_excl + pop_incl),
+         rate_excl = rate_incl*mult)  %>% 
   mutate(care_excl = pop_excl*rate_excl,
-         care_incl = pop_incl*rate_incl) %>% 
-  mutate(ratio = care_excl/care_incl)
+         care_incl = pop_incl*rate_incl)
+
+check %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = rate_excl),
+           stat = "identity", position = "dodge")
+
+check %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = rate_incl),
+           stat = "identity", position = "dodge")
 
 
-pop_excl*5*rate + pop_incl*rate = care_count
-care_count/(5pop_excl + pop_incl) = rate
+check %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = pop_excl),
+           stat = "identity", position = "dodge")
+
+check %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = pop_incl),
+           stat = "identity", position = "dodge")
 
 
-  # mutate(excl_care = ,
-  #        incl_care = )
 
+
+
+care %>%
+  group_by(end_period_year) %>% 
+  summarise(care_count = sum(count)) %>% 
+  full_join(pop_estimate_01to20_age_gender %>%
+              filter(level == "Birmingham",
+                     age %in% c(10:17)) %>%
+              group_by(end_period_year) %>%
+              summarise(pop = sum(count))) %>% 
+  filter(end_period_year %in% c(2010:2020)) %>% 
+  mutate(scare_count = smooth.spline(end_period_year, care_count)$y) %>% 
+  mutate(scare_pc = scare_count/pop) %>% 
+  # mutate(scare_pc = smooth.spline(end_period_year, care_pc)$y) %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = scare_pc),
+           stat = "identity", position = "dodge")
 
 
 # https://lginform.local.gov.uk/reports/lgastandard?mod-metric=891&mod-area=E08000025&mod-group=AllMetropolitanBoroughLaInCountry_England&mod-type=namedComparisonGroup&mod-period=15&mod-groupType=namedComparisonGroup

@@ -46,13 +46,59 @@ smooth_poverty <- poverty_rate %>%
   arrange(end_period_year) %>% 
   mutate(spov_rate = smooth.spline(end_period_year, pov_rate)$y) %>% 
   select(-c(pov, pov_rate, level)) %>% 
-  mutate(spov = pop*spov_rate)
+  mutate(spov = pop*spov_rate) 
 
 save(smooth_poverty, file = "output/data/processed/smooth_poverty.Rdata")
 
-smooth_poverty %>%
+
+smooth_poverty_rate <- smooth_poverty %>% 
+  arrange(end_period_year) %>% 
+  mutate(excl_pc = spov_rate,
+         incl_pc = 1-spov_rate) %>% 
+  select(-c(spov_rate, spov)) %>% 
+  mutate(excl_pop = excl_pc*pop,
+         incl_pop = incl_pc*pop) %>% 
+  # what if it was the new size with the old ratio
+  mutate(if_excl = pop*lag(excl_pc),
+         if_incl = pop*lag(incl_pc)) %>% 
+  mutate(diff_excl = excl_pop - if_excl,
+         diff_incl = incl_pop - if_incl) %>% 
+  mutate(pc_of_excl = diff_excl/((excl_pop + lag(excl_pop))/2)) %>% 
+  mutate(pc_of_incl = diff_incl/((incl_pop + lag(incl_pop))/2)) %>% 
+  filter(end_period_year >= 2010) %>% 
+  mutate(week = (end_period_year - 2010)*52) %>% 
+  arrange(week) %>% 
+  rename(rise = pc_of_excl, 
+         fall = pc_of_incl) %>% 
+  mutate(rise = ifelse(rise <0, -rise, 0)/52,
+         fall = ifelse(fall <0, -fall, 0)/52)
+
+
+rise <- smooth_poverty_rate %>%
+  select(rise) %>% 
+  mutate(rise2 = rise) %>% 
+  as.matrix()
+
+fall <- smooth_poverty_rate %>%
+  select(fall) %>% 
+  mutate(fall2 = fall) %>% 
+  as.matrix()
+
+rf_t <- smooth_poverty_rate$week
+
+# 
+#   mutate(diff_excl = excl_pop - lag(excl_pop),
+#          diff_incl = incl_pop - lag(incl_pop),
+#          diff_pop = pop - lag(pop),
+#          pcdiff_excl = (lead(excl_pop) - excl_pop)/excl_pop,
+#          pcdiff_incl = (lead(incl_pop) - incl_pop)/incl_pop,
+#          pcdiff_pop = (lead(pop) - pop)/pop) 
+
+
+
+smooth_poverty_rate %>%
   ggplot() +
-  geom_line(aes(x = end_period_year, y = spov)) +
+  geom_line(aes(x = end_period_year, y = fall)) +
   scale_x_continuous(name = "") +
   scale_y_continuous(name = "") +
   theme_classic() +
