@@ -503,87 +503,87 @@ lac_model = odin::odin({
   dim(fa) <- c(length(rft), length(f))
   
   
-  pc_nres_i[] <- interpolate(tlacadj, nrlaci, "linear")
+  pc_nres_i[] <- interpolate(tlacadj, nrlaci, "spline")
   dim(pc_nres_i) <- N_gender
   tlacadj[] <- user()
   nrlaci[, ] <- user()
   dim(tlacadj) <- user()
   dim(nrlaci) <- c(length(tlacadj), length(pc_nres_i))
   
-  pc_res_i[] <- interpolate(tlacadj, rlaci, "linear")
+  pc_res_i[] <- interpolate(tlacadj, rlaci, "spline")
   dim(pc_res_i) <- N_gender
   rlaci[, ] <- user()
   dim(rlaci) <- c(length(tlacadj), length(pc_res_i))
   
-  pc_prior_i[] <- interpolate(tlacadj, placi, "linear")
+  pc_prior_i[] <- interpolate(tlacadj, placi, "spline")
   dim(pc_prior_i) <- N_gender
   placi[, ] <- user()
   dim(placi) <- c(length(tlacadj), length(pc_prior_i))
   
-  pc_nres_e[] <- interpolate(tlacadj, nrlace, "linear")
+  pc_nres_e[] <- interpolate(tlacadj, nrlace, "spline")
   dim(pc_nres_e) <- N_gender
   nrlace[, ] <- user()
   dim(nrlace) <- c(length(tlacadj), length(pc_nres_e))
   
-  pc_res_e[] <- interpolate(tlacadj, rlace, "linear")
+  pc_res_e[] <- interpolate(tlacadj, rlace, "spline")
   dim(pc_res_e) <- N_gender
   rlace[, ] <- user()
   dim(rlace) <- c(length(tlacadj), length(pc_res_e))
   
-  pc_prior_e[] <- interpolate(tlacadj, place, "linear")
+  pc_prior_e[] <- interpolate(tlacadj, place, "spline")
   dim(pc_prior_e) <- N_gender
   place[, ] <- user()
   dim(place) <- c(length(tlacadj), length(pc_prior_e))
   
-  end_nr[] <- interpolate(tlac, enr, "linear")
+  end_nr[] <- interpolate(tlac, enr, "spline")
   dim(end_nr) <- N_gender
   tlac[] <- user()
   enr[, ] <- user()
   dim(tlac) <- user()
   dim(enr) <- c(length(tlac), length(end_nr))
   
-  end_res[] <- interpolate(tlac, eres, "linear")
+  end_res[] <- interpolate(tlac, eres, "spline")
   dim(end_res) <- N_gender
   eres[, ] <- user()
   dim(eres) <- c(length(tlac), length(end_res))
   
   
-  nev2nres10i[] <- interpolate(tlac, n2nres10i, "linear")
+  nev2nres10i[] <- interpolate(tlac, n2nres10i, "spline")
   dim(nev2nres10i) <- N_gender
   n2nres10i[, ] <- user()
   dim(n2nres10i) <- c(length(tlac), length(nev2nres10i))
   
-  nev2nres11i[] <- interpolate(tlac, n2nres11i, "linear")
+  nev2nres11i[] <- interpolate(tlac, n2nres11i, "spline")
   dim(nev2nres11i) <- N_gender
   n2nres11i[, ] <- user()
   dim(n2nres11i) <- c(length(tlac), length(nev2nres11i))
   
-  nev2nres12i[] <- interpolate(tlac, n2nres12i, "linear")
+  nev2nres12i[] <- interpolate(tlac, n2nres12i, "spline")
   dim(nev2nres12i) <- N_gender
   n2nres12i[, ] <- user()
   dim(n2nres12i) <- c(length(tlac), length(nev2nres12i))
   
-  nev2nres13i[] <- interpolate(tlac, n2nres13i, "linear")
+  nev2nres13i[] <- interpolate(tlac, n2nres13i, "spline")
   dim(nev2nres13i) <- N_gender
   n2nres13i[, ] <- user()
   dim(n2nres13i) <- c(length(tlac), length(nev2nres13i))
   
-  nev2nres14i[] <- interpolate(tlac, n2nres14i, "linear")
+  nev2nres14i[] <- interpolate(tlac, n2nres14i, "spline")
   dim(nev2nres14i) <- N_gender
   n2nres14i[, ] <- user()
   dim(n2nres14i) <- c(length(tlac), length(nev2nres14i))
   
-  nev2nres15i[] <- interpolate(tlac, n2nres15i, "linear")
+  nev2nres15i[] <- interpolate(tlac, n2nres15i, "spline")
   dim(nev2nres15i) <- N_gender
   n2nres15i[, ] <- user()
   dim(n2nres15i) <- c(length(tlac), length(nev2nres15i))
   
-  nev2nres16i[] <- interpolate(tlac, n2nres16i, "linear")
+  nev2nres16i[] <- interpolate(tlac, n2nres16i, "spline")
   dim(nev2nres16i) <- N_gender
   n2nres16i[, ] <- user()
   dim(n2nres16i) <- c(length(tlac), length(nev2nres16i))
   
-  nev2nres17i[] <- interpolate(tlac, n2nres17i, "linear")
+  nev2nres17i[] <- interpolate(tlac, n2nres17i, "spline")
   dim(nev2nres17i) <- N_gender
   n2nres17i[, ] <- user()
   dim(n2nres17i) <- c(length(tlac), length(nev2nres17i))
@@ -591,83 +591,83 @@ lac_model = odin::odin({
   
   
   
-  nev2res10i[] <- interpolate(tlac, n2res10i, "linear")
+  nev2res10i[] <- interpolate(tlac, n2res10i, "spline")
   dim(nev2res10i) <- N_gender
   n2res10i[, ] <- user()
   dim(n2res10i) <- c(length(tlac), length(nev2res10i))
   
-  nev2res11i[] <- interpolate(tlac, n2res11i, "linear")
+  nev2res11i[] <- interpolate(tlac, n2res11i, "spline")
   dim(nev2res11i) <- N_gender
   n2res11i[, ] <- user()
   dim(n2res11i) <- c(length(tlac), length(nev2res11i))
   
-  nev2res12i[] <- interpolate(tlac, n2res12i, "linear")
+  nev2res12i[] <- interpolate(tlac, n2res12i, "spline")
   dim(nev2res12i) <- N_gender
   n2res12i[, ] <- user()
   dim(n2res12i) <- c(length(tlac), length(nev2res12i))
   
-  nev2res13i[] <- interpolate(tlac, n2res13i, "linear")
+  nev2res13i[] <- interpolate(tlac, n2res13i, "spline")
   dim(nev2res13i) <- N_gender
   n2res13i[, ] <- user()
   dim(n2res13i) <- c(length(tlac), length(nev2res13i))
   
-  nev2res14i[] <- interpolate(tlac, n2res14i, "linear")
+  nev2res14i[] <- interpolate(tlac, n2res14i, "spline")
   dim(nev2res14i) <- N_gender
   n2res14i[, ] <- user()
   dim(n2res14i) <- c(length(tlac), length(nev2res14i))
   
-  nev2res15i[] <- interpolate(tlac, n2res15i, "linear")
+  nev2res15i[] <- interpolate(tlac, n2res15i, "spline")
   dim(nev2res15i) <- N_gender
   n2res15i[, ] <- user()
   dim(n2res15i) <- c(length(tlac), length(nev2res15i))
   
-  nev2res16i[] <- interpolate(tlac, n2res16i, "linear")
+  nev2res16i[] <- interpolate(tlac, n2res16i, "spline")
   dim(nev2res16i) <- N_gender
   n2res16i[, ] <- user()
   dim(n2res16i) <- c(length(tlac), length(nev2res16i))
   
-  nev2res17i[] <- interpolate(tlac, n2res17i, "linear")
+  nev2res17i[] <- interpolate(tlac, n2res17i, "spline")
   dim(nev2res17i) <- N_gender
   n2res17i[, ] <- user()
   dim(n2res17i) <- c(length(tlac), length(nev2res17i))
   
   
-  pri2nres10i[] <- interpolate(tlac, p2nres10i, "linear")
+  pri2nres10i[] <- interpolate(tlac, p2nres10i, "spline")
   dim(pri2nres10i) <- N_gender
   p2nres10i[, ] <- user()
   dim(p2nres10i) <- c(length(tlac), length(pri2nres10i))
   
-  pri2nres11i[] <- interpolate(tlac, p2nres11i, "linear")
+  pri2nres11i[] <- interpolate(tlac, p2nres11i, "spline")
   dim(pri2nres11i) <- N_gender
   p2nres11i[, ] <- user()
   dim(p2nres11i) <- c(length(tlac), length(pri2nres11i))
   
-  pri2nres12i[] <- interpolate(tlac, p2nres12i, "linear")
+  pri2nres12i[] <- interpolate(tlac, p2nres12i, "spline")
   dim(pri2nres12i) <- N_gender
   p2nres12i[, ] <- user()
   dim(p2nres12i) <- c(length(tlac), length(pri2nres12i))
   
-  pri2nres13i[] <- interpolate(tlac, p2nres13i, "linear")
+  pri2nres13i[] <- interpolate(tlac, p2nres13i, "spline")
   dim(pri2nres13i) <- N_gender
   p2nres13i[, ] <- user()
   dim(p2nres13i) <- c(length(tlac), length(pri2nres13i))
   
-  pri2nres14i[] <- interpolate(tlac, p2nres14i, "linear")
+  pri2nres14i[] <- interpolate(tlac, p2nres14i, "spline")
   dim(pri2nres14i) <- N_gender
   p2nres14i[, ] <- user()
   dim(p2nres14i) <- c(length(tlac), length(pri2nres14i))
   
-  pri2nres15i[] <- interpolate(tlac, p2nres15i, "linear")
+  pri2nres15i[] <- interpolate(tlac, p2nres15i, "spline")
   dim(pri2nres15i) <- N_gender
   p2nres15i[, ] <- user()
   dim(p2nres15i) <- c(length(tlac), length(pri2nres15i))
   
-  pri2nres16i[] <- interpolate(tlac, p2nres16i, "linear")
+  pri2nres16i[] <- interpolate(tlac, p2nres16i, "spline")
   dim(pri2nres16i) <- N_gender
   p2nres16i[, ] <- user()
   dim(p2nres16i) <- c(length(tlac), length(pri2nres16i))
   
-  pri2nres17i[] <- interpolate(tlac, p2nres17i, "linear")
+  pri2nres17i[] <- interpolate(tlac, p2nres17i, "spline")
   dim(pri2nres17i) <- N_gender
   p2nres17i[, ] <- user()
   dim(p2nres17i) <- c(length(tlac), length(pri2nres17i))
@@ -675,83 +675,83 @@ lac_model = odin::odin({
   
   
   
-  pri2res10i[] <- interpolate(tlac, p2res10i, "linear")
+  pri2res10i[] <- interpolate(tlac, p2res10i, "spline")
   dim(pri2res10i) <- N_gender
   p2res10i[, ] <- user()
   dim(p2res10i) <- c(length(tlac), length(pri2res10i))
   
-  pri2res11i[] <- interpolate(tlac, p2res11i, "linear")
+  pri2res11i[] <- interpolate(tlac, p2res11i, "spline")
   dim(pri2res11i) <- N_gender
   p2res11i[, ] <- user()
   dim(p2res11i) <- c(length(tlac), length(pri2res11i))
   
-  pri2res12i[] <- interpolate(tlac, p2res12i, "linear")
+  pri2res12i[] <- interpolate(tlac, p2res12i, "spline")
   dim(pri2res12i) <- N_gender
   p2res12i[, ] <- user()
   dim(p2res12i) <- c(length(tlac), length(pri2res12i))
   
-  pri2res13i[] <- interpolate(tlac, p2res13i, "linear")
+  pri2res13i[] <- interpolate(tlac, p2res13i, "spline")
   dim(pri2res13i) <- N_gender
   p2res13i[, ] <- user()
   dim(p2res13i) <- c(length(tlac), length(pri2res13i))
   
-  pri2res14i[] <- interpolate(tlac, p2res14i, "linear")
+  pri2res14i[] <- interpolate(tlac, p2res14i, "spline")
   dim(pri2res14i) <- N_gender
   p2res14i[, ] <- user()
   dim(p2res14i) <- c(length(tlac), length(pri2res14i))
   
-  pri2res15i[] <- interpolate(tlac, p2res15i, "linear")
+  pri2res15i[] <- interpolate(tlac, p2res15i, "spline")
   dim(pri2res15i) <- N_gender
   p2res15i[, ] <- user()
   dim(p2res15i) <- c(length(tlac), length(pri2res15i))
   
-  pri2res16i[] <- interpolate(tlac, p2res16i, "linear")
+  pri2res16i[] <- interpolate(tlac, p2res16i, "spline")
   dim(pri2res16i) <- N_gender
   p2res16i[, ] <- user()
   dim(p2res16i) <- c(length(tlac), length(pri2res16i))
   
-  pri2res17i[] <- interpolate(tlac, p2res17i, "linear")
+  pri2res17i[] <- interpolate(tlac, p2res17i, "spline")
   dim(pri2res17i) <- N_gender
   p2res17i[, ] <- user()
   dim(p2res17i) <- c(length(tlac), length(pri2res17i))
   
   
-  nev2nres10e[] <- interpolate(tlac, n2nres10e, "linear")
+  nev2nres10e[] <- interpolate(tlac, n2nres10e, "spline")
   dim(nev2nres10e) <- N_gender
   n2nres10e[, ] <- user()
   dim(n2nres10e) <- c(length(tlac), length(nev2nres10e))
   
-  nev2nres11e[] <- interpolate(tlac, n2nres11e, "linear")
+  nev2nres11e[] <- interpolate(tlac, n2nres11e, "spline")
   dim(nev2nres11e) <- N_gender
   n2nres11e[, ] <- user()
   dim(n2nres11e) <- c(length(tlac), length(nev2nres11e))
   
-  nev2nres12e[] <- interpolate(tlac, n2nres12e, "linear")
+  nev2nres12e[] <- interpolate(tlac, n2nres12e, "spline")
   dim(nev2nres12e) <- N_gender
   n2nres12e[, ] <- user()
   dim(n2nres12e) <- c(length(tlac), length(nev2nres12e))
   
-  nev2nres13e[] <- interpolate(tlac, n2nres13e, "linear")
+  nev2nres13e[] <- interpolate(tlac, n2nres13e, "spline")
   dim(nev2nres13e) <- N_gender
   n2nres13e[, ] <- user()
   dim(n2nres13e) <- c(length(tlac), length(nev2nres13e))
   
-  nev2nres14e[] <- interpolate(tlac, n2nres14e, "linear")
+  nev2nres14e[] <- interpolate(tlac, n2nres14e, "spline")
   dim(nev2nres14e) <- N_gender
   n2nres14e[, ] <- user()
   dim(n2nres14e) <- c(length(tlac), length(nev2nres14e))
   
-  nev2nres15e[] <- interpolate(tlac, n2nres15e, "linear")
+  nev2nres15e[] <- interpolate(tlac, n2nres15e, "spline")
   dim(nev2nres15e) <- N_gender
   n2nres15e[, ] <- user()
   dim(n2nres15e) <- c(length(tlac), length(nev2nres15e))
   
-  nev2nres16e[] <- interpolate(tlac, n2nres16e, "linear")
+  nev2nres16e[] <- interpolate(tlac, n2nres16e, "spline")
   dim(nev2nres16e) <- N_gender
   n2nres16e[, ] <- user()
   dim(n2nres16e) <- c(length(tlac), length(nev2nres16e))
   
-  nev2nres17e[] <- interpolate(tlac, n2nres17e, "linear")
+  nev2nres17e[] <- interpolate(tlac, n2nres17e, "spline")
   dim(nev2nres17e) <- N_gender
   n2nres17e[, ] <- user()
   dim(n2nres17e) <- c(length(tlac), length(nev2nres17e))
@@ -759,83 +759,83 @@ lac_model = odin::odin({
   
   
   
-  nev2res10e[] <- interpolate(tlac, n2res10e, "linear")
+  nev2res10e[] <- interpolate(tlac, n2res10e, "spline")
   dim(nev2res10e) <- N_gender
   n2res10e[, ] <- user()
   dim(n2res10e) <- c(length(tlac), length(nev2res10e))
   
-  nev2res11e[] <- interpolate(tlac, n2res11e, "linear")
+  nev2res11e[] <- interpolate(tlac, n2res11e, "spline")
   dim(nev2res11e) <- N_gender
   n2res11e[, ] <- user()
   dim(n2res11e) <- c(length(tlac), length(nev2res11e))
   
-  nev2res12e[] <- interpolate(tlac, n2res12e, "linear")
+  nev2res12e[] <- interpolate(tlac, n2res12e, "spline")
   dim(nev2res12e) <- N_gender
   n2res12e[, ] <- user()
   dim(n2res12e) <- c(length(tlac), length(nev2res12e))
   
-  nev2res13e[] <- interpolate(tlac, n2res13e, "linear")
+  nev2res13e[] <- interpolate(tlac, n2res13e, "spline")
   dim(nev2res13e) <- N_gender
   n2res13e[, ] <- user()
   dim(n2res13e) <- c(length(tlac), length(nev2res13e))
   
-  nev2res14e[] <- interpolate(tlac, n2res14e, "linear")
+  nev2res14e[] <- interpolate(tlac, n2res14e, "spline")
   dim(nev2res14e) <- N_gender
   n2res14e[, ] <- user()
   dim(n2res14e) <- c(length(tlac), length(nev2res14e))
   
-  nev2res15e[] <- interpolate(tlac, n2res15e, "linear")
+  nev2res15e[] <- interpolate(tlac, n2res15e, "spline")
   dim(nev2res15e) <- N_gender
   n2res15e[, ] <- user()
   dim(n2res15e) <- c(length(tlac), length(nev2res15e))
   
-  nev2res16e[] <- interpolate(tlac, n2res16e, "linear")
+  nev2res16e[] <- interpolate(tlac, n2res16e, "spline")
   dim(nev2res16e) <- N_gender
   n2res16e[, ] <- user()
   dim(n2res16e) <- c(length(tlac), length(nev2res16e))
   
-  nev2res17e[] <- interpolate(tlac, n2res17e, "linear")
+  nev2res17e[] <- interpolate(tlac, n2res17e, "spline")
   dim(nev2res17e) <- N_gender
   n2res17e[, ] <- user()
   dim(n2res17e) <- c(length(tlac), length(nev2res17e))
   
   
-  pri2nres10e[] <- interpolate(tlac, p2nres10e, "linear")
+  pri2nres10e[] <- interpolate(tlac, p2nres10e, "spline")
   dim(pri2nres10e) <- N_gender
   p2nres10e[, ] <- user()
   dim(p2nres10e) <- c(length(tlac), length(pri2nres10e))
   
-  pri2nres11e[] <- interpolate(tlac, p2nres11e, "linear")
+  pri2nres11e[] <- interpolate(tlac, p2nres11e, "spline")
   dim(pri2nres11e) <- N_gender
   p2nres11e[, ] <- user()
   dim(p2nres11e) <- c(length(tlac), length(pri2nres11e))
   
-  pri2nres12e[] <- interpolate(tlac, p2nres12e, "linear")
+  pri2nres12e[] <- interpolate(tlac, p2nres12e, "spline")
   dim(pri2nres12e) <- N_gender
   p2nres12e[, ] <- user()
   dim(p2nres12e) <- c(length(tlac), length(pri2nres12e))
   
-  pri2nres13e[] <- interpolate(tlac, p2nres13e, "linear")
+  pri2nres13e[] <- interpolate(tlac, p2nres13e, "spline")
   dim(pri2nres13e) <- N_gender
   p2nres13e[, ] <- user()
   dim(p2nres13e) <- c(length(tlac), length(pri2nres13e))
   
-  pri2nres14e[] <- interpolate(tlac, p2nres14e, "linear")
+  pri2nres14e[] <- interpolate(tlac, p2nres14e, "spline")
   dim(pri2nres14e) <- N_gender
   p2nres14e[, ] <- user()
   dim(p2nres14e) <- c(length(tlac), length(pri2nres14e))
   
-  pri2nres15e[] <- interpolate(tlac, p2nres15e, "linear")
+  pri2nres15e[] <- interpolate(tlac, p2nres15e, "spline")
   dim(pri2nres15e) <- N_gender
   p2nres15e[, ] <- user()
   dim(p2nres15e) <- c(length(tlac), length(pri2nres15e))
   
-  pri2nres16e[] <- interpolate(tlac, p2nres16e, "linear")
+  pri2nres16e[] <- interpolate(tlac, p2nres16e, "spline")
   dim(pri2nres16e) <- N_gender
   p2nres16e[, ] <- user()
   dim(p2nres16e) <- c(length(tlac), length(pri2nres16e))
   
-  pri2nres17e[] <- interpolate(tlac, p2nres17e, "linear")
+  pri2nres17e[] <- interpolate(tlac, p2nres17e, "spline")
   dim(pri2nres17e) <- N_gender
   p2nres17e[, ] <- user()
   dim(p2nres17e) <- c(length(tlac), length(pri2nres17e))
@@ -843,42 +843,42 @@ lac_model = odin::odin({
   
   
   
-  pri2res10e[] <- interpolate(tlac, p2res10e, "linear")
+  pri2res10e[] <- interpolate(tlac, p2res10e, "spline")
   dim(pri2res10e) <- N_gender
   p2res10e[, ] <- user()
   dim(p2res10e) <- c(length(tlac), length(pri2res10e))
   
-  pri2res11e[] <- interpolate(tlac, p2res11e, "linear")
+  pri2res11e[] <- interpolate(tlac, p2res11e, "spline")
   dim(pri2res11e) <- N_gender
   p2res11e[, ] <- user()
   dim(p2res11e) <- c(length(tlac), length(pri2res11e))
   
-  pri2res12e[] <- interpolate(tlac, p2res12e, "linear")
+  pri2res12e[] <- interpolate(tlac, p2res12e, "spline")
   dim(pri2res12e) <- N_gender
   p2res12e[, ] <- user()
   dim(p2res12e) <- c(length(tlac), length(pri2res12e))
   
-  pri2res13e[] <- interpolate(tlac, p2res13e, "linear")
+  pri2res13e[] <- interpolate(tlac, p2res13e, "spline")
   dim(pri2res13e) <- N_gender
   p2res13e[, ] <- user()
   dim(p2res13e) <- c(length(tlac), length(pri2res13e))
   
-  pri2res14e[] <- interpolate(tlac, p2res14e, "linear")
+  pri2res14e[] <- interpolate(tlac, p2res14e, "spline")
   dim(pri2res14e) <- N_gender
   p2res14e[, ] <- user()
   dim(p2res14e) <- c(length(tlac), length(pri2res14e))
   
-  pri2res15e[] <- interpolate(tlac, p2res15e, "linear")
+  pri2res15e[] <- interpolate(tlac, p2res15e, "spline")
   dim(pri2res15e) <- N_gender
   p2res15e[, ] <- user()
   dim(p2res15e) <- c(length(tlac), length(pri2res15e))
   
-  pri2res16e[] <- interpolate(tlac, p2res16e, "linear")
+  pri2res16e[] <- interpolate(tlac, p2res16e, "spline")
   dim(pri2res16e) <- N_gender
   p2res16e[, ] <- user()
   dim(p2res16e) <- c(length(tlac), length(pri2res16e))
   
-  pri2res17e[] <- interpolate(tlac, p2res17e, "linear")
+  pri2res17e[] <- interpolate(tlac, p2res17e, "spline")
   dim(pri2res17e) <- N_gender
   p2res17e[, ] <- user()
   dim(p2res17e) <- c(length(tlac), length(pri2res17e))
@@ -994,12 +994,12 @@ target = 'c')
 
 
 lac_pars <- list(tt = t_turn10,
-                 yi = v_turn10_i,
-                 ye = v_turn10_e,
+                 yi = v_turn10_i_scenario,
+                 ye = v_turn10_e_scenario,
                  
-                 rft = rf_t,
-                 ri = rise,
-                 fa = fall,
+                 rft = rf_t_scenario,
+                 ri = rise_scenario,
+                 fa = fall_scenario,
                  
                  tlac = t_lac,
                  tlacadj = t_lac_adj,
@@ -1713,9 +1713,9 @@ lac_pars <- list(tt = t_turn10,
 
 mod <- lac_model$new(user = lac_pars)
 t <- seq(0, 520, length.out = 1041)  #from 0 to 10 years, two steps a week or something
-LAC_data <- as.data.frame(mod$run(t))
+# LAC_data <- as.data.frame(mod$run(t))
 
-
+LAC_data_scenario <- as.data.frame(mod$run(t))
 
 
 

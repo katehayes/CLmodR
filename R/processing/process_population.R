@@ -89,6 +89,10 @@ pop_estimate_01to20_age_gender %>%
   geom_line(aes(x = t, y = count, group = as.character(age), color = as.character(age))) +
   facet_wrap(~gender)
 
+
+
+
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # output # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -103,20 +107,33 @@ save(v_turn10, file = "Output/Data/Input/v_turn10.Rdata")
 
 save(t_turn10, file = "Output/Data/Input/t_turn10.Rdata")
 
-# birm_relative_pop_data <- pop_data %>%
-#   pivot_wider(names_from = level, values_from = count) %>%
-#   mutate(birm_over_wmp = Birmingham/`West Midlands (police)`,
-#          birm_over_wmr = Birmingham/`West Midlands (region)`,
-#          birm_over_eng = Birmingham/England,
-#          birm_over_ew = Birmingham/`Eng/Wales`)
-#
-# save(birm_relative_pop_data, file = "Output/Data/birm_relative_pop_data.Rda")
-#
-# sum_for_diagram <- birm_relative_pop_data %>%
-#   ungroup() %>%
-#   filter(age %in% 10:17) %>%
-#   summarise(across(`Eng/Wales`:Birmingham, ~ sum(.x))) %>%
-#   mutate(birm_over_wmp = Birmingham/`West Midlands (police)`,
-#          birm_over_wmr = Birmingham/`West Midlands (region)`,
-#          birm_over_eng = Birmingham/England,
-#          birm_over_ew = Birmingham/`Eng/Wales`)
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # POVERTY STEADY FALL SCENARIO # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+age_in_pov_scenario <- pop_estimate_01to20_age_gender %>%
+  filter(age == 9, level == "Birmingham") %>%
+  mutate(turn10_wkly = count / 52) %>%
+  select(-c(age, count)) %>%
+  filter(end_period_year >= 2009) %>%
+  pivot_wider(names_from = gender, values_from = turn10_wkly) %>%
+  left_join(poverty_scenario %>% 
+              select(c(end_period_year, new_pov_rate))) %>% 
+  mutate(boys_incl = Boys*(1-new_pov_rate),
+         girls_incl = Girls*(1-new_pov_rate),
+         boys_excl = Boys*new_pov_rate,
+         girls_excl = Girls*new_pov_rate) %>% 
+  mutate(week = (end_period_year - 2009)*52) %>%
+  select(c(week, boys_incl, girls_incl, boys_excl, girls_excl)) %>% 
+  arrange(week)
+
+v_turn10_i_scenario <- age_in_pov %>%
+  select(c(boys_incl, girls_incl)) %>%
+  as.matrix()
+v_turn10_e_scenario <- age_in_pov %>%
+  select(c(boys_excl, girls_excl)) %>%
+  as.matrix()
+
+save(v_turn10_i_scenario, file = "output/data/input/v_turn10_i_scenario.Rdata")
+save(v_turn10_e_scenario, file = "output/data/input/v_turn10_e_scenario.Rdata")

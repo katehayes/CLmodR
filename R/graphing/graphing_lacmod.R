@@ -199,7 +199,14 @@ compare <- mod_states %>%
                                      lac == "res" ~ "Residential",
                                      lac == "prior" ~ "Prior")) %>% 
               mutate(compare = "Est data"))
-  
+
+
+compare %>% 
+  filter(lac %in% c("Residential", "Not residential")) %>% 
+  group_by(t, compare) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = count, group = compare, color = compare))
   
 compare %>% 
   filter(lac == "Prior") %>% 

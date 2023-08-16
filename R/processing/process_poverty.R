@@ -86,13 +86,9 @@ fall <- smooth_poverty_rate %>%
 
 rf_t <- smooth_poverty_rate$week
 
-# 
-#   mutate(diff_excl = excl_pop - lag(excl_pop),
-#          diff_incl = incl_pop - lag(incl_pop),
-#          diff_pop = pop - lag(pop),
-#          pcdiff_excl = (lead(excl_pop) - excl_pop)/excl_pop,
-#          pcdiff_incl = (lead(incl_pop) - incl_pop)/incl_pop,
-#          pcdiff_pop = (lead(pop) - pop)/pop) 
+save(rise, file = "output/data/input/rise.Rdata")
+save(fall, file = "output/data/input/fall.Rdata")
+save(rf_t, file = "output/data/input/rf_t.Rdata")
 
 
 
@@ -135,28 +131,73 @@ check_pov_rate
 # ggsave(filename = "output/graphs/assumption checks/check_pov_rate.png", check_pov_rate)
 
 
-params_impov <- poverty_rate %>%
-  filter(level == "Birmingham") %>%
-  arrange(end_period_year) %>%
-  mutate(pov_change = lead(pov) - pov,
-         pc_impov = pov_change / (pop - pov)) %>%  # this is in the form of - x pc of children in included will transition to excluded this year ie wil fall below poverty line
-  select(end_period_year, level, pc_impov) %>%
-  filter(!is.na(pc_impov)) %>%
-  mutate(name = "impov",
-         meaning = "(if pos) pc of included group that will transition to excluded (become impoverished) or (if neg) pc growth of included group as result of transitions from excluded group") %>%
-  rename(value = pc_impov)
 
-# save(params_impov, file = "output/data/cleaned/params_impov.Rdata")
+# SCENARIO SETTING
+poverty_scenario <- pop_estimate_01to20_age_gender %>%
+  group_by(end_period_year, level) %>%
+  summarise(pop = sum(count)) %>%
+  full_join(poverty %>%
+              select(end_period_year, level, count) %>%
+              rename(pov = count)) %>%
+  ungroup() %>%
+  mutate(pov_rate = pov / pop) %>% 
+  filter(level == "Birmingham",
+         end_period_year %in% c(2006:2020)) %>% 
+  select(-level)
 
+mod_pov <- lm(pov_rate ~ end_period_year, data = poverty_scenario %>%
+            filter(end_period_year <= 2012))
 
-check_impov_rate <- params_impov  %>%
+poverty_scenario$pov_predict <- predict(mod_pov, newdata = poverty_scenario)
+
+poverty_scenario <- poverty_scenario %>% 
+  mutate(new_pov_rate = ifelse(end_period_year <= 2012, pov_rate, pov_predict)) %>% 
+  mutate(new_pov_rate = smooth.spline(end_period_year, new_pov_rate)$y) 
+
+poverty_scenario %>% 
   ggplot() +
-  geom_line(aes(x = end_period_year, y = value)) +
-  scale_x_continuous(name = "") +
-  scale_y_continuous(name = "") +
-  theme_classic() +
-  theme(strip.background = element_blank())
-check_impov_rate
-# doesnt look great.. but i guess it is vaguely like showing when the tories started, and when covid payments kicked int
-# ggsave(filename = "output/graphs/assumption checks/check_impov_rate.png", check_impov_rate)
+  geom_line(aes(x = end_period_year, y = new_pov_rate))
 
+poverty_scenario <- poverty_scenario %>% 
+  arrange(end_period_year) %>% 
+  mutate(excl_pc = new_pov_rate,
+         incl_pc = 1-new_pov_rate) %>% 
+  select(-c(pov, pov_predict, pov_rate)) %>% 
+  mutate(excl_pop = excl_pc*pop,
+         incl_pop = incl_pc*pop) %>% 
+  # what if it was the new size with the old ratio
+  mutate(if_excl = pop*lag(excl_pc),
+         if_incl = pop*lag(incl_pc)) %>% 
+  mutate(diff_excl = excl_pop - if_excl,
+         diff_incl = incl_pop - if_incl) %>% 
+  mutate(pc_of_excl = diff_excl/((excl_pop + lag(excl_pop))/2)) %>% # getting the midpoint of the interval
+  mutate(pc_of_incl = diff_incl/((incl_pop + lag(incl_pop))/2)) %>% # try this with other stuff too bc it seems nice here
+  filter(end_period_year >= 2009) %>% 
+  mutate(week = (end_period_year - 2010)*52) %>% 
+  arrange(week) %>% 
+  rename(rise = pc_of_excl, 
+         fall = pc_of_incl) %>% 
+  mutate(rise = ifelse(rise <0, -rise, 0)/52,
+         fall = ifelse(fall <0, -fall, 0)/52)
+  
+
+
+rise_scenario <- poverty_scenario %>%
+  filter(end_period_year >= 2010) %>% 
+  select(rise) %>% 
+  mutate(rise2 = rise) %>% 
+  as.matrix()
+
+fall_scenario <- poverty_scenario %>%
+  filter(end_period_year >= 2010) %>% 
+  select(fall) %>% 
+  mutate(fall2 = fall) %>% 
+  as.matrix()
+
+rf_t_scenario <- poverty_scenario %>% 
+  filter(end_period_year >= 2010)
+rf_t_scenario <- rf_t_scenario$week
+
+save(rise_scenario, file = "output/data/input/rise_scenario.Rdata")
+save(fall_scenario, file = "output/data/input/fall_scenario.Rdata")
+save(rf_t_scenario, file = "output/data/input/rf_t_scenario.Rdata")
