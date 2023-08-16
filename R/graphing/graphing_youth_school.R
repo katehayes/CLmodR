@@ -1,4 +1,22 @@
 
+schools %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = perm_excl_rate),
+           stat = "identity", position = "stack") +
+  facet_grid(rows = vars(fsm))
+
+
+
+
+
+
+
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# DID THE BELOW WHAT, A WEEK OR TWO AGO PROB# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# CURRENTLY IN NICE BEFORE FLIGHT, THAT WORK IS ABOVE # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 
 susp_excl_fsm %>% 
@@ -284,7 +302,7 @@ fsm_pc_birm_byschooltype <- schools_fsm %>%
   filter(!(my_categories %in% c("Nursery", "Private school", "Unknown"))) %>% 
   mutate(my_categories = factor(my_categories, 
                                 levels = c("State - unknown", "State-funded primary", "State-funded secondary",
-                                           "State-funded special school", "Pupil referral unit"))) %>% 
+                                           "State-funded special", "Pupil referral unit"))) %>% 
   ggplot() +
   geom_bar(aes(x = end_period_year, y = fsm_pc),
            stat = "identity", position = "stack") +

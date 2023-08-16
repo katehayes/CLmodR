@@ -17,7 +17,7 @@ schools_fsm <- schools_10to22_fsm %>%
   left_join(s_data) 
 
 
-schools <- schools_10to22_age_gender %>%
+schools_school_level <- schools_10to22_age_gender %>%
   filter(level == "Birmingham") %>%
   filter(age %in% 10:17) %>% 
   # left_join(s_data) 
@@ -26,6 +26,25 @@ schools <- schools_10to22_age_gender %>%
               mutate(fsm_pc = ifelse(is.na(fsm_pc), 0, fsm_pc))) %>% 
   mutate(count_fsm = count * fsm_pc,
          count_non_fsm = count * (1-fsm_pc)) 
+
+save(schools_school_level, file = "output/data/processed/schools_school_level.Rdata")
+
+
+schools <- schools_school_level %>% 
+  select(-c(count, school_headcount, school_fsm,
+            fsm_pc)) %>% 
+  pivot_longer(c(count_fsm, count_non_fsm),
+               names_to = "fsm",
+               values_to = "count") %>% 
+  mutate(fsm = ifelse(grepl("non", fsm), "Not FSM eligible", "FSM eligible")) %>% 
+  group_by(end_period_year, end_period_month, period_length,
+           my_categories, age, gender, fsm) %>% 
+  summarise(count = sum(count))
+
+save(schools, file = "output/data/processed/schools.Rdata")
+
+
+
 
 
 check <- schools %>% 
