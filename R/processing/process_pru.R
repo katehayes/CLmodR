@@ -8,6 +8,10 @@ load("/Users/katehayes/CLmodR/output/data/cleaned/schools_10to22_ethnicity.Rdata
 
 s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/school_categories.csv")
 
+
+secondary <- s_data %>% 
+  filter(my_categories == "State-funded secondary") %>% 
+  distinct(school_type, school_subtype)
 # there is something wrong with school categories in 2010 and 2011
 
 # initial conditions for the PRU population???
@@ -39,7 +43,9 @@ schools <- schools_school_level %>%
   mutate(fsm = ifelse(grepl("non", fsm), "Not FSM eligible", "FSM eligible")) %>% 
   group_by(end_period_year, end_period_month, period_length,
            my_categories, age, gender, fsm) %>% 
-  summarise(count = sum(count))
+  summarise(count = sum(count)) %>% 
+  rename(school_type = my_categories) %>% 
+  ungroup()
 
 save(schools, file = "output/data/processed/schools.Rdata")
 

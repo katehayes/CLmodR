@@ -1,16 +1,36 @@
 
 schools %>% 
+  filter(school_type == "Pupil referral unit") %>% 
   ggplot() +
-  geom_bar(aes(x = end_period_year, y = perm_excl_rate),
+  geom_bar(aes(x = end_period_year, y = count, fill = as.character(age)),
+           stat = "identity", position = "dodge") +
+  facet_grid(rows = vars(gender))
+
+# no more than 15 year olds in PRUs
+
+
+schools %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count, fill = school_type),
            stat = "identity", position = "stack") +
-  facet_grid(rows = vars(fsm))
+  facet_grid(rows = vars(gender))
 
 
+schools %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = count, fill = school_type),
+           stat = "identity", position = "stack") +
+  facet_grid(cols = vars(end_period_year))
+
+# when across time does PRU use peak?
 
 
-
-
-
+schools %>% 
+  filter(end_period_year == 2017) %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = count, fill = school_type),
+           stat = "identity", position = "stack") +
+  facet_grid(cols = vars(end_period_year))
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
