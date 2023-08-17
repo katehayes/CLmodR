@@ -179,7 +179,8 @@ reconcile_gender <- function(x) {
                  "Females", "females", "Female", "female")
 
   unknown_list <- c("Unknown", "unknown",
-                    "Not Known", "Not known", "not known")
+                    "Not Known", "Not known", "not known",
+                    "Unclassified/withheld")
 
   total_list <- c(boys_list, girls_list, unknown_list)
 

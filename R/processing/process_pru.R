@@ -50,11 +50,41 @@ schools <- schools_school_level %>%
 save(schools, file = "output/data/processed/schools.Rdata")
 
 
+pru <- schools %>% 
+  filter(school_type == "Pupil referral unit",
+         age <= 15) %>% 
+  select(-school_type) %>% 
+  group_by(gender, age, fsm) %>% 
+  arrange(end_period_year) %>% 
+  # although no point really in smoothing until youve got the pcs of total?? not sure
+  mutate(smooth_count = smooth.spline(end_period_year, count)$y)
 
+
+school_pru <- schools %>% 
+  mutate(pru = ifelse(school_type == "Pupil referral unit", "PRU", "Not PRU")) %>%
+  group_by(end_period_year, age, gender, pru, fsm) %>%
+  summarise(count = sum(count))
+
+
+
+pru %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count, fill = fsm),
+           stat = "identity", position = "stack") +
+  facet_wrap(~interaction(gender, age))
+
+pru %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = smooth_count, fill = fsm),
+           stat = "identity", position = "stack")
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # not sure what i was up to# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
 check <- schools %>% 
-  mutate(pru = ifelse(my_categories == "Pupil referral unit", "PRU", "Not PRU")) %>% 
+  mutate(pru = ifelse(school_type == "Pupil referral unit", "PRU", "Not PRU")) %>% 
   group_by(end_period_year, age, gender, pru) %>% 
   mutate(count_fsm = sum(count_fsm),
          count_non_fsm = sum(count_non_fsm)) %>% 
