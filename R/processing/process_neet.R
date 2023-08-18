@@ -3,6 +3,41 @@ load("/Users/katehayes/CLmodR/output/data/cleaned/neet_12to23_age.Rdata")
 load("/Users/katehayes/CLmodR/output/data/cleaned/part_18to23_age_gender.Rdata")
 load("/Users/katehayes/CLmodR/output/data/cleaned/part_type_18to23.Rdata")
 
+gender_pc <- neet_16to23_age_gender %>% 
+  filter(gender != "Unknown",
+         neet == "NEET") %>% 
+  ungroup() %>% 
+  group_by(end_period_year, age) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  ungroup() %>% 
+  group_by(gender, age) %>% 
+  summarise(pc = mean(pc))
+
+ok!! essentially 60:40
+
+
+neet <- neet_12to23_age %>% 
+  filter(neet == "NEET") %>% 
+  mutate(Boys = 0.6*count,
+         Girls = 0.4*count) %>% 
+  select(-count) %>% 
+  pivot_longer(c(Boys, Girls),
+               names_to = "gender",
+               values_to = "count")
+
+neet %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count, fill = gender),
+           stat = "identity", position = "stack") +
+  facet_wrap(~age)
+
+
+
+
+
+# NO NO NO IN ALL OF THE BELOW I AM ASSUMINUG FROM 2016
+# BIT I HAVE INFO ON EARLIER - AND THE TREND CHANGES
+
 smooth_neet <- neet_16to23_age_gender %>% 
   filter(gender != "Unknown") %>% 
   ungroup() %>% 
@@ -12,18 +47,6 @@ smooth_neet <- neet_16to23_age_gender %>%
   group_by(gender, age, neet) %>% 
   arrange(end_period_year) 
 
-
-
-neet_12to23_age
-
-
-
-
-
-
-
-# NO NO NO IN ALL OF THE BELOW I AM ASSUMINUG FROM 2016
-# BIT I HAVE INFO ON EARLIER - AND THE TREND CHANGES
 mod_neet_b16 <- lm(pc ~ end_period_year, data = smooth_neet %>% 
                      filter(neet == "NEET",
                             gender == "Boys",
