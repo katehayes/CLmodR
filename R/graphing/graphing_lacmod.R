@@ -11,6 +11,18 @@ mod_states <- LAC_data %>%
   mutate(state = ifelse(grepl("ILAC", state), "Included", "Excluded")) %>% 
   group_by(t, gender, age)
 
+mod_states_scenario <- LAC_data_scenario %>%
+  select(c(starts_with("ILAC"), starts_with("ELAC"), t)) %>% 
+  pivot_longer(-t, names_to = "state", values_to = "count") %>%
+  mutate(age = as.numeric(str_extract_all(state, "(\\d{2})")),
+         gender = if_else(grepl("\\[1\\]", state), "Boys", "Girls")) %>% 
+  mutate(lac = ifelse(grepl("nev", state), "Never", NA),
+         lac = ifelse(grepl("nres", state), "Not residential", lac),
+         lac = ifelse(grepl("Cres", state), "Residential", lac),
+         lac = ifelse(grepl("prior", state), "Prior", lac)) %>% 
+  mutate(state = ifelse(grepl("ILAC", state), "Included", "Excluded")) %>% 
+  group_by(t, gender, age)
+
 
 mod_params <- LAC_data %>%
   select(-c(starts_with("LAC"))) %>% 
@@ -328,6 +340,15 @@ mod_states %>%
   ggplot() +
   geom_line(aes(x = t, y = pc, group = state, color = state))
 
+mod_states_scenario %>% 
+  group_by(t, state) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(t) %>% 
+  mutate(pc = count / sum(count)) %>% 
+  ggplot() +
+  geom_line(aes(x = t, y = pc, group = state, color = state))
+
 
 mod_states %>% 
   group_by(t, state, gender, age) %>% 
@@ -343,24 +364,31 @@ mod_states %>%
   mutate(pc = count/sum(count)) %>% 
   filter(lac == "Residential") %>% 
   ggplot() +
-  geom_line(aes(x = t, y = pc, group = age, color = age)) +
-  facet_wrap(~interaction(gender, state))
+  geom_line(aes(x = t, y = pc, group = as.character(age), color = as.character(age))) +
+  facet_wrap(~interaction(gender, state))  +
+  scale_colour_viridis(discrete=T,
+                       direction = -1)
 
 mod_states %>% 
   group_by(t, state, gender, age) %>% 
   mutate(pc = count/sum(count)) %>% 
   filter(lac == "Not residential") %>% 
   ggplot() +
-  geom_line(aes(x = t, y = pc, group = age, color = age)) +
-  facet_wrap(~interaction(gender, state))
+  geom_line(aes(x = t, y = pc, group = as.character(age), color = as.character(age))) +
+  facet_wrap(~interaction(gender, state)) +
+  scale_colour_viridis(discrete=T,
+                       direction = -1)
 
 mod_states %>% 
   group_by(t, state, gender, age) %>% 
   mutate(pc = count/sum(count)) %>% 
   filter(lac == "Prior") %>% 
   ggplot() +
-  geom_line(aes(x = t, y = pc, group = age, color = age)) +
-  facet_wrap(~interaction(gender, state))
+  geom_line(aes(x = t, y = pc, group = as.character(age), color = as.character(age))) +
+  facet_wrap(~interaction(gender, state)) +
+  scale_colour_viridis(discrete=T,
+                       direction = -1)
 
+  library(viridis)
 
 \# ACTUALLY YOU NEED TO GET THE POPULATION LOOKING WAY WAY BETTER

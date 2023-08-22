@@ -48,6 +48,8 @@ smooth_poverty <- poverty_rate %>%
   select(-c(pov, pov_rate, level)) %>% 
   mutate(spov = pop*spov_rate) 
 
+
+
 save(smooth_poverty, file = "output/data/processed/smooth_poverty.Rdata")
 
 
@@ -94,7 +96,7 @@ save(rf_t, file = "output/data/input/rf_t.Rdata")
 
 smooth_poverty_rate %>%
   ggplot() +
-  geom_line(aes(x = end_period_year, y = fall)) +
+  geom_line(aes(x = end_period_year, y = excl_pc)) +
   scale_x_continuous(name = "") +
   scale_y_continuous(name = "") +
   theme_classic() +
@@ -155,8 +157,20 @@ poverty_scenario <- poverty_scenario %>%
   mutate(new_pov_rate = smooth.spline(end_period_year, new_pov_rate)$y) 
 
 poverty_scenario %>% 
+  select(end_period_year, new_pov_rate) %>% 
+  rename(pov_rate = new_pov_rate) %>% 
+  mutate(scenario = "scenario") %>% 
+  bind_rows(smooth_poverty_rate %>% 
+              select(end_period_year, excl_pc) %>% 
+              rename(pov_rate = excl_pc) %>% 
+              mutate(scenario = "data")) %>% 
   ggplot() +
-  geom_line(aes(x = end_period_year, y = new_pov_rate))
+  geom_line(aes(x = end_period_year, y = pov_rate, group = scenario, colour = scenario)) +
+  scale_x_continuous(name = "") +
+  scale_y_continuous(name = "") +
+  theme_classic() +
+  theme(strip.background = element_blank())
+
 
 poverty_scenario <- poverty_scenario %>% 
   arrange(end_period_year) %>% 

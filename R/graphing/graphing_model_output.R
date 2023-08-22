@@ -1,5 +1,5 @@
-# load("/Users/katehayes/CLmodelR/Output/Data/Output/CL_data.Rdata")
-# load("/Users/katehayes/CLmodelR/Output/Data/Output/mod_states.Rdata")
+load("/Users/katehayes/CLmodR/output/data/output/CL_data.Rdata")
+load("/Users/katehayes/CLmodR/output/data/output/mod_states.Rdata")
 
 
 

@@ -63,7 +63,10 @@ pru <- schools %>%
 school_pru <- schools %>% 
   mutate(pru = ifelse(school_type == "Pupil referral unit", "PRU", "Not PRU")) %>%
   group_by(end_period_year, age, gender, pru, fsm) %>%
-  summarise(count = sum(count))
+  summarise(count = sum(count)) %>% 
+  pivot_wider(names_from = pru,
+              values_from = count,
+              values_fill = 0)
 
 
 

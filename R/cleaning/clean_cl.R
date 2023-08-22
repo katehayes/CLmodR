@@ -1,4 +1,4 @@
-load("/Users/katehayes/CLmodelR/Output/Data/Scraped/cl_data.Rdata")
+load("/sers/katehayes/CLmodR/output/data/scraped/cl_data.Rdata")
 library(zoo)
 
 
