@@ -121,15 +121,15 @@ group_by(level, end_period_year, end_period_month, period_length, placement) %>%
                             "Not residential")) 
 
 # quick graph of the pc's to see about the assumption ill be making
-# check_placement_pc <- placement_pc %>%
-#   filter(level == "Birmingham") %>%
-#   ggplot() +
-#   geom_line(aes(x = end_period_year, y = pc, colour = placement)) +
-#   scale_x_continuous(name = "") +
-#   scale_y_continuous(name = "") +
-#   theme_classic() +
-#   theme(strip.background = element_blank())
-# check_placement_pc
+check_placement_pc <- placement_pc %>%
+  filter(level == "Birmingham") %>%
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc, colour = placement)) +
+  scale_x_continuous(name = "") +
+  scale_y_continuous(name = "") +
+  theme_classic() +
+  theme(strip.background = element_blank())
+check_placement_pc
 # secure units & 'other residential settings' growing as a pc of total care placements, residential schools shrikning
 # think its probably ok to just apply the same pcs to 2010 as you have in 2011
 
@@ -137,6 +137,17 @@ placement_pc <- placement_pc  %>%
   group_by(level, end_period_year, end_period_month, period_length, residential) %>%
   summarise(pc = sum(pc)) %>%
   pivot_wider(names_from = residential, values_from = pc)
+
+placement_pc  %>%
+  filter(level == "Birmingham") %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_res_pc = smooth.spline())
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = Residential, colour = "res")) +
+  geom_line(aes(x = end_period_year, y = `Not residential`, colour = "not res"))
+
+
+
 
 # ok..... do I need to leave non-residential in there too? probably not. probably you just need the categories
 # you're using plus their percentages.

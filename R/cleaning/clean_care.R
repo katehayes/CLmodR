@@ -1285,3 +1285,127 @@ late_entry <- gen_by_type %>%
   ungroup() %>% 
   mutate(gen_pc = count_gender/ sum(count)) %>% 
   mutate(gen_destination_pc = count/ count_gender)
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# CARE LEAVER ACTIVITY # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# . Numbers have been rounded to the nearest 10. Percentages rounded to the nearest whole number. 
+# Figures exclude young people who were looked after under an agreed series of short term 
+# placements, those who have died since leaving care, those who have returned home to parents 
+# or someone with parental responsibility for a continuous period of at least 6 months and
+# those whose care was transferred to another local authority. Figures for the number of care 
+# leavers who have died each year can be found in the methodology document. 
+# Historical data may differ from older publications which is mainly due to amendments 
+# made by local authorities after the previous publication.
+
+# - ‘z’ for not applicable
+# For percentages:
+#   
+#   - where the numerator or denominator is small then the figure is replaced by ‘c’
+# - they may not sum to 100% due to rounding
+# - they are rounded to whole numbers
+
+c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/children-looked-after-in-england-including-adoptions_2022 (1)/data (1)/la_care_leavers_activity.csv")
+
+care_out_18to22 <- c_data %>% 
+  filter(la_name == "Birmingham",
+         grepl("Total", activity),
+         activity != "Total") %>% 
+  select(time_period, age, activity, percentage) %>% 
+  rename(end_period_year = time_period,
+         pc = percentage,
+         neet = activity) %>% 
+  mutate(neet = case_when(neet == "Total in education, employment or training" ~ "Not NEET",
+                          neet == "Total not in education, employment or training" ~ "NEET",
+                          neet == "Total information not known" ~ "NK"),
+         pc = as.numeric(pc)/100,
+         age = reconcile_age(age))
+
+
+# TWENTY SEVENTEEN
+# For confidentiality purposes, numbers from one to five inclusive have been 
+# suppressed and replaced by a cross (x).
+c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR50_2017_UnderlyingData (1)/SFR50_CareLeavers17182017.csv")
+
+care_out_17 <- c_data %>% 
+  filter(geog_n == "Birmingham") %>% 
+  select(c(starts_with("CL_Act"))) %>% 
+  mutate(end_period_year = 2017) %>% 
+  pivot_longer(-end_period_year,
+               names_to = "neet",
+               values_to = "count") %>% 
+  filter(grepl("17.18", neet)) %>% 
+  mutate(age = "17-18") %>% 
+  mutate(count = as.numeric(ifelse(count == "x", 3, count))) %>% 
+  mutate(neet = case_when(neet == "CL_Act_NoInf17.18" ~ "NK",
+                          neet %in% c("CL_Act_HE17.18", "CL_Act_OE17.18", "CL_Act_TE17.18") ~ "Not NEET",
+                          neet %in% c("CL_Act_NEET_ill17.18", "CL_Act_NEET_oth17.18", "CL_Act_NEET_preg17.18") ~ "NEET")) %>% 
+  group_by(end_period_year, age, neet) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count)) %>% 
+  select(-count)
+
+
+# 2016
+c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR41_2016_UD (1)/SFR41_CareLeavers2016.csv")
+
+care_out_16 <- c_data %>% 
+  filter(geog_n == "Birmingham") %>% 
+  select(c(starts_with("Act"), `LA_NoActinf17.18`)) %>% 
+  mutate(end_period_year = 2016) %>% 
+  pivot_longer(-end_period_year,
+               names_to = "neet",
+               values_to = "count") %>% 
+  filter(grepl("17.18", neet)) %>% 
+  mutate(age = "17-18") %>% 
+  mutate(neet = case_when(neet == "LA_NoActinf17.18" ~ "NK",
+                          neet %in% c("Act_HE17.18", "Act_OE17.18", "Act_TE17.18") ~ "Not NEET",
+                          neet %in% c("Act_NEET_ill17.18", "Act_NEET_oth17.18", "Act_NEET_preg17.18") ~ "NEET")) %>% 
+  group_by(end_period_year, age, neet) %>% 
+  summarise(count = sum(as.numeric(count))) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count)) %>% 
+  select(-count)
+
+
+# all together
+care_out_16to22 <- care_out_18to22 %>% 
+  bind_rows(care_out_17, care_out_16)
+
+neet_pc <- care_out_16to22 %>% 
+  group_by(neet) %>% 
+  summarise(pc = mean(pc))
+
+
+# neet steadily rising for 17/18 year olds, pretty steady for 19-20
+care_out_16to22 %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc, group = neet, colour = neet)) +
+  facet_grid(~age)
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Coutcomes of children in need lol # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# https://explore-education-statistics.service.gov.uk/find-statistics/outcomes-for-children-in-need-including-children-looked-after-by-local-authorities-in-england/data-guidance
+
+
+c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/outcomes-for-children-in-need-including-children-looked-after-by-local-authorities-in-england_2022/data/school_type_la.csv")
+
+care_school_16to22 <- c_data %>% 
+  filter(la_name == "Birmingham",
+         social_care_group == "CLA 12 months at 31 March") %>% 
+  mutate(check = as.numeric(t_pru)/(as.numeric(t_secondary)+as.numeric(t_pru)))
+
+check <- care_school_16to22 %>% 
+  select(time_period, t_pru) %>% 
+  mutate(time_period = as.numeric(paste(substr(time_period,1,2), substr(time_period,5,6), sep = ""))) %>% 
+  rename(end_period_year = time_period) %>% 
+  full_join(pru %>% 
+              group_by(end_period_year) %>% 
+              summarise(count = sum(count))) %>% 
+  mutate(check = as.numeric(t_pru)/count)
+
+# between 1 and say 5% of looked after kids shuold be in PRUs

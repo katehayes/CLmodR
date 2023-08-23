@@ -6,6 +6,10 @@ load("/Users/katehayes/CLmodR/output/data/cleaned/schools_10to22_age_gender.Rdat
 load("/Users/katehayes/CLmodR/output/data/cleaned/schools_10to22_fsm.Rdata")
 load("/Users/katehayes/CLmodR/output/data/cleaned/schools_10to22_ethnicity.Rdata")
 
+
+
+
+
 s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/school_categories.csv")
 
 
