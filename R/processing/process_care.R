@@ -138,16 +138,21 @@ placement_pc <- placement_pc  %>%
   summarise(pc = sum(pc)) %>%
   pivot_wider(names_from = residential, values_from = pc)
 
-placement_pc  %>%
+rescare_pc <- placement_pc %>%
   filter(level == "Birmingham") %>% 
+  ungroup() %>% 
   arrange(end_period_year) %>% 
-  mutate(smooth_res_pc = smooth.spline())
+  mutate(smooth_res_pc = smooth.spline(end_period_year, Residential, lambda = 0.005)$y,
+         smooth_nres_pc = 1-smooth_res_pc) %>% 
   ggplot() +
   geom_line(aes(x = end_period_year, y = Residential, colour = "res")) +
-  geom_line(aes(x = end_period_year, y = `Not residential`, colour = "not res"))
+  geom_line(aes(x = end_period_year, y = `Not residential`, colour = "not res")) + 
+  geom_line(aes(x = end_period_year, y = smooth_res_pc, colour = "smooth res")) + 
+  geom_line(aes(x = end_period_year, y = smooth_nres_pc, colour = "smooth nres"))
 
-
-
+rescare_pc
+ggsave(filename = "output/graphs/rescare_pc.png", rescare_pc)
+# rescare pc gradually climbing
 
 # ok..... do I need to leave non-residential in there too? probably not. probably you just need the categories
 # you're using plus their percentages.
@@ -161,17 +166,64 @@ age_pc <- care_11to22_age %>%
   select(-c(count, tot)) %>%
   pivot_wider(names_from = age, values_from = pc)
 
-# age_pc %>% 
-#   ggplot() +
-#   geom_line(aes(x = end_period_year, y = `10-15`, group = level, color = level))
+age_pc %>%
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = `10-15`, group = level, color = level))
 # 
-# age_pc %>% 
-#   ggplot() +
-#   geom_line(aes(x = end_period_year, y = `16+`, group = level, color = level))
+age_pc %>%
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = `16+`, group = level, color = level))
 # birmingham much jumpier because less data - generally looks to be around english level
-
 # at eng level:      97% of kids in res care are 10 or over - 2015
 
+
+
+
+
+care_rate_by_age <- care_11to22_age %>% 
+  filter(level == "Birmingham", 
+         age %in% c("10-15", "16+"),
+         end_period_year <= 2020) %>%
+  full_join(pop_estimate_01to20_age_gender %>% 
+              filter(level == "Birmingham",
+                     age %in% c(10:17),
+                     end_period_year %in% c(2011:2022)) %>% 
+              mutate(age = ifelse(age >=16, "16+", "10-15")) %>% 
+              group_by(end_period_year, age) %>% 
+              summarise(pop = sum(count))) %>%
+  mutate(pc = count/pop)  %>% 
+  ungroup() %>% 
+  group_by(age) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_pc = smooth.spline(end_period_year, pc, lambda = 0.003)$y) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc, group = age, colour = age)) +
+  geom_line(aes(x = end_period_year, y = smooth_pc, group = age, colour = age))
+care_rate_by_age
+
+ggsave(filename = "output/graphs/care_rate_by_age.png", care_rate_by_age)
+# so .... care of 16 plus has definitely been climbing much faster than younger kids
+
+care_age_pc <- care_11to22_age %>% 
+  filter(level == "Birmingham", 
+         age %in% c("10-15", "16+"),
+         end_period_year <= 2020) %>%
+  full_join(pop_estimate_01to20_age_gender %>% 
+              filter(level == "Birmingham",
+                     age %in% c(10:17),
+                     end_period_year %in% c(2011:2022)) %>% 
+              mutate(age = ifelse(age >=16, "16+", "10-15")) %>% 
+              group_by(end_period_year, age) %>% 
+              summarise(pop = sum(count))) %>%
+  mutate(pc = count/pop)  %>% 
+  ungroup() %>% 
+  group_by(age) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_pc = smooth.spline(end_period_year, pc, lambda = 0.003)$y) %>% 
+  select(end_period_year, age, smooth_pc) %>% 
+  pivot_wider(names_from = age, values_from = smooth_pc)
+
+# ASSUMPTION - 97 PC OF RES CARE ARE OVER TEN!!!!!!
  rate10plus <- c(97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97)
  names(rate10plus) <- c("2020", "2019", "2018", "2017", "2016", "2015", "2014", 
                         "2013", "2012", "2011", "2010")
@@ -194,16 +246,79 @@ gender_pc <- care_11to22_gender %>%
   pivot_wider(names_from = gender, values_from = pc)
 
 
-gender_pc %>% 
+girl_care_birm_v_eng <- gender_pc %>% 
   ggplot() +
   geom_line(aes(x = end_period_year, y = Girls, group = level, color = level))
+girl_care_birm_v_eng
+ggsave(filename = "output/graphs/girl_care_birm_v_eng.png", girl_care_birm_v_eng)
 # OK - BIRMINGHAM HAS WAY MORE GIRLS IN CARE THEN THE REST OF ENGLAND
 
 # at england level, rescare girl 38 in 2015 - 44.6 overall - 0.85
 #                   rescare girl 37 in 2020 - 43.8 overall - 0.8447
 
 
+# WHAT IF WE ASSUME THAT THE GENDER RELATION IS THE SAME NO MATTER THE AGE???
+care_rate_by_gender <- care_11to22_gender %>%
+  filter(level == "Birmingham", 
+         end_period_year <= 2020) %>% 
+  full_join(pop_estimate_01to20_age_gender %>% 
+              filter(level == "Birmingham",
+                     age <= 17,
+                     end_period_year %in% c(2011:2022)) %>% 
+              group_by(end_period_year, gender) %>% 
+              summarise(pop = sum(count))) %>%
+  mutate(pc = count/pop) %>% 
+  ungroup() %>% 
+  group_by(gender) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_pc = smooth.spline(end_period_year, pc, lambda = 0.0025)$y) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc, group = gender, colour = gender)) +
+  geom_line(aes(x = end_period_year, y = smooth_pc, group = gender, colour = gender))
+care_rate_by_gender
 
+ggsave(filename = "output/graphs/care_rate_by_gender.png", care_rate_by_gender)
+
+
+gen_ratio_care <- care_11to22_gender %>%
+  filter(level == "Birmingham", 
+         end_period_year <= 2020) %>% 
+  full_join(pop_estimate_01to20_age_gender %>% 
+              filter(level == "Birmingham",
+                     age <= 17,
+                     end_period_year %in% c(2011:2022)) %>% 
+              group_by(end_period_year, gender) %>% 
+              summarise(pop = sum(count))) %>%
+  mutate(pc = count/pop) %>% 
+  ungroup() %>% 
+  group_by(gender) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_pc = smooth.spline(end_period_year, pc, lambda = 0.0025)$y) %>% 
+  select(end_period_year, gender, smooth_pc) %>% 
+  pivot_wider(names_from = gender, values_from = smooth_pc) %>% 
+  mutate(boy2girl = Boys/Girls) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = boy2girl))
+gen_ratio_care
+ggsave(filename = "output/graphs/gen_ratio_care.png", gen_ratio_care)
+
+
+care_gender_pc <- care_11to22_gender %>%
+  filter(level == "Birmingham", 
+         end_period_year <= 2020) %>% 
+  full_join(pop_estimate_01to20_age_gender %>% 
+              filter(level == "Birmingham",
+                     age <= 17,
+                     end_period_year %in% c(2011:2022)) %>% 
+              group_by(end_period_year, gender) %>% 
+              summarise(pop = sum(count))) %>%
+  mutate(pc = count/pop) %>% 
+  ungroup() %>% 
+  group_by(gender) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_pc = smooth.spline(end_period_year, pc, lambda = 0.0025)$y) %>%
+  select(end_period_year, gender, smooth_pc) %>% 
+  pivot_wider(names_from = gender, values_from = smooth_pc)
 
 
 # OK MAYBE IT SHOULDNT ACTUALLY ALL COME IN TOGETHER - YOU CAN REVISIT THIS....
@@ -218,7 +333,130 @@ care_pc_2010 <- care_pc %>%
 care_pc <- care_pc %>%
   bind_rows(care_pc_2010)
 
+
+
+care <- care_10to22 %>% 
+  filter(level == "Birmingham")
+
+
+smoothing_age_rate <- pop_estimate_01to20_age_gender %>% 
+  filter(level == "Birmingham",
+         age %in% c(10:17),
+         end_period_year >= 2011) %>% 
+  group_by(end_period_year, age) %>% 
+  summarise(count = sum(count)) %>% 
+  full_join(care_age_pc) %>% 
+  mutate(pc = ifelse(age >=16, `16+`, `10-15`)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year) %>% 
+  arrange(age) %>% 
+  mutate(smooth_pc = smooth.spline(age, pc, lambda = 0.015)$y) %>% 
+  mutate(pc_adj = ifelse(age == 10, pc - 0.002, pc),
+         pc_adj = ifelse(age == 17, pc + 0.002, pc_adj)) %>% 
+  mutate(smooth_pc_adj = smooth.spline(age, pc_adj, lambda = 0.015)$y) %>% 
+  ggplot() +
+  geom_line(aes(x = age, y = pc, group = end_period_year, colour = end_period_year)) +
+  geom_line(aes(x = age, y = smooth_pc_adj, group = end_period_year, colour = end_period_year)) 
+smoothing_age_rate
+ggsave(filename = "output/graphs/smoothing_age_rate.png", smoothing_age_rate)
+# I think this looks ok....
+# even though its a lot of just me eyeballing
+# this is children in care not children entering care.
+
+
+
+care_age <- pop_estimate_01to20_age_gender %>% 
+  filter(level == "Birmingham",
+         age %in% c(10:17),
+         end_period_year >= 2011) %>% 
+  group_by(end_period_year, age) %>% 
+  summarise(count = sum(count)) %>% 
+  full_join(care_age_pc) %>% 
+  mutate(pc = ifelse(age >=16, `16+`, `10-15`)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year) %>% 
+  arrange(age) %>% 
+  mutate(pc_adj = ifelse(age == 10, pc - 0.002, pc),
+         pc_adj = ifelse(age == 17, pc + 0.002, pc_adj)) %>% 
+  mutate(smooth_pc_adj = smooth.spline(age, pc_adj, lambda = 0.015)$y) %>% 
+  mutate(care = count*smooth_pc_adj) %>% 
+  select(end_period_year, age, count, care)
+
+smoothing_age_rate_check <- care_age %>% 
+  mutate(age = ifelse(age >=16, "16+", "10-15")) %>% 
+  group_by(end_period_year, age) %>% 
+  summarise(count = sum(count),
+            care = sum(care)) %>% 
+  full_join(care_11to22_age %>% 
+              filter(level == "Birmingham", 
+                     age %in% c("10-15", "16+"),
+                     end_period_year <= 2020) %>%
+              group_by(end_period_year, age) %>% 
+              summarise(count_caredata = sum(count))) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = care, group = age, colour = age)) +
+  geom_line(aes(x = end_period_year, y = count_caredata, group = age, colour = age))
+smoothing_age_rate_check
+ggsave(filename = "output/graphs/smoothing_age_rate_check.png", smoothing_age_rate_check)
+
+#
+
+care_age_gen <- care_age %>% 
+  full_join(pop_estimate_01to20_age_gender %>% 
+              filter(level == "Birmingham",
+                     age %in% c(10:17),
+                     end_period_year >= 2011) %>% 
+              group_by(end_period_year, gender, age) %>% 
+              summarise(count = sum(count)) %>%
+              pivot_wider(names_from = gender,
+                          values_from = count)) %>% 
+  full_join(care_gender_pc %>% 
+              rename(boy_pc = Boys,
+                     girl_pc = Girls)) %>% 
+  mutate(boy2girl_care = boy_pc/girl_pc,
+         boy2girl_care = ifelse(boy2girl_care < 1, 1, boy2girl_care), # i had smoothed them and the lines cross at 2011..
+         boy_pc_pop = Boys/(Boys+Girls),
+         maybe_bpc_care = Boys*boy2girl_care/(Boys*boy2girl_care+Girls)) %>% 
+  mutate(boy_care = maybe_bpc_care*care,
+         girl_care = (1-maybe_bpc_care)*care) %>% 
+  # mutate(boy_care_rate = boy_care/Boys,
+  #        girl_care_rate = girl_care/Girls) %>% 
+  # mutate(check = boy_care_rate/girl_care_rate)
+  select(end_period_year, age, boy_care, girl_care) %>% 
+  pivot_longer(c(boy_care, girl_care),
+               names_to = "gender",
+               values_to = "count") %>% 
+  mutate(gender = ifelse(grepl("boy", gender), "Boys", "Girls"))
+
+
+
+check_care_construct <- care_age_gen %>% 
+  full_join(pop_estimate_01to20_age_gender %>% 
+                        filter(level == "Birmingham",
+                               age %in% c(10:17),
+                               end_period_year >= 2011) %>% 
+                        group_by(end_period_year, gender, age) %>% 
+                        summarise(pop = sum(count))) %>%
+  mutate(pc = count/pop) %>% 
+  ggplot() +
+    geom_line(aes(x = end_period_year, y = pc, group = as.character(age), colour = as.character(age))) +
+  facet_grid(~gender)
+check_care
+ggsave(filename = "output/graphs/check_care_construct.png", check_care_construct)
+
+
+# OLDER BELOW
 # ADD BACK TO MAIN TIME SERIES
+
+
+
+
+
+
+
+
+
+
 
 care <- care_10to22 %>%
   filter(period_length == "Day") %>%

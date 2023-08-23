@@ -153,29 +153,7 @@ care_pov <- care_ic %>%
            nev_excl, nres_excl, res_excl, pri_excl))
 
 
-care_rate_by_age <- care_11to22_age %>% 
-  filter(level == "Birmingham", 
-         age %in% c("10-15", "16+"),
-         end_period_year <= 2020) %>%
-  full_join(pop_estimate_01to20_age_gender %>% 
-              filter(level == "Birmingham",
-                     age %in% c(10:17),
-                     end_period_year %in% c(2011:2022)) %>% 
-              mutate(age = ifelse(age >=16, "16+", "10-15")) %>% 
-              group_by(end_period_year, age) %>% 
-              summarise(pop = sum(count))) %>%
-  mutate(pc = count/pop)  %>% 
-  ungroup() %>% 
-  group_by(age) %>% 
-  arrange(end_period_year) %>% 
-  mutate(smooth_pc = smooth.spline(end_period_year, pc, lambda = 0.003)$y) %>% 
-  ggplot() +
-  geom_line(aes(x = end_period_year, y = pc, group = age, colour = age)) +
-  geom_line(aes(x = end_period_year, y = smooth_pc, group = age, colour = age))
-care_rate_by_age
 
-ggsave(filename = "output/graphs/care_rate_by_age.png", care_rate_by_age)
-# so .... care of 16 plus has definitely been climbing much faster than younger kids
 
 
 
