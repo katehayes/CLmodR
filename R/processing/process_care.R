@@ -105,76 +105,7 @@ save(endres, file = "output/data/input/endres.Rdata")
 
 # this is placement, age, and gender
 
-placement_pc <- care_11to22_placement %>%
-group_by(level, end_period_year, end_period_month, period_length, placement) %>%
-  summarise(count = sum(count)) %>%
-  ungroup() %>%
-  group_by(end_period_year, level) %>%
-  mutate(tot = sum(count)) %>%
-  mutate(pc = count / tot) %>%
-  ungroup() %>%
-  mutate(residential =
-           ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
-                                        "Residential schools",
-                                        "Other residential settings"),
-                            "Residential",
-                            "Not residential")) 
 
-# quick graph of the pc's to see about the assumption ill be making
-check_placement_pc <- placement_pc %>%
-  filter(level == "Birmingham") %>%
-  ggplot() +
-  geom_line(aes(x = end_period_year, y = pc, colour = placement)) +
-  scale_x_continuous(name = "") +
-  scale_y_continuous(name = "") +
-  theme_classic() +
-  theme(strip.background = element_blank())
-check_placement_pc
-# secure units & 'other residential settings' growing as a pc of total care placements, residential schools shrikning
-# think its probably ok to just apply the same pcs to 2010 as you have in 2011
-
-placement_pc <- placement_pc  %>%
-  group_by(level, end_period_year, end_period_month, period_length, residential) %>%
-  summarise(pc = sum(pc)) %>%
-  pivot_wider(names_from = residential, values_from = pc)
-
-rescare_pc <- placement_pc %>%
-  filter(level == "Birmingham") %>% 
-  ungroup() %>% 
-  arrange(end_period_year) %>% 
-  mutate(smooth_res_pc = smooth.spline(end_period_year, Residential, lambda = 0.005)$y,
-         smooth_nres_pc = 1-smooth_res_pc) %>% 
-  ggplot() +
-  geom_line(aes(x = end_period_year, y = Residential, colour = "res")) +
-  geom_line(aes(x = end_period_year, y = `Not residential`, colour = "not res")) + 
-  geom_line(aes(x = end_period_year, y = smooth_res_pc, colour = "smooth res")) + 
-  geom_line(aes(x = end_period_year, y = smooth_nres_pc, colour = "smooth nres"))
-
-rescare_pc
-ggsave(filename = "output/graphs/rescare_pc.png", rescare_pc)
-# rescare pc gradually climbing
-
-# ok..... do I need to leave non-residential in there too? probably not. probably you just need the categories
-# you're using plus their percentages.
-
-age_pc <- care_11to22_age %>%
-  group_by(end_period_year, level) %>%
-  mutate(tot = sum(count)) %>%
-  mutate(pc = count / tot) %>%
-  ungroup() %>%
-  filter(age %in% c("10-15", "16+")) %>%
-  select(-c(count, tot)) %>%
-  pivot_wider(names_from = age, values_from = pc)
-
-age_pc %>%
-  ggplot() +
-  geom_line(aes(x = end_period_year, y = `10-15`, group = level, color = level))
-# 
-age_pc %>%
-  ggplot() +
-  geom_line(aes(x = end_period_year, y = `16+`, group = level, color = level))
-# birmingham much jumpier because less data - generally looks to be around english level
-# at eng level:      97% of kids in res care are 10 or over - 2015
 
 
 
@@ -223,38 +154,10 @@ care_age_pc <- care_11to22_age %>%
   select(end_period_year, age, smooth_pc) %>% 
   pivot_wider(names_from = age, values_from = smooth_pc)
 
-# ASSUMPTION - 97 PC OF RES CARE ARE OVER TEN!!!!!!
- rate10plus <- c(97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97)
- names(rate10plus) <- c("2020", "2019", "2018", "2017", "2016", "2015", "2014", 
-                        "2013", "2012", "2011", "2010")
- 
- rate10plus <-stack(rate10plus) %>% 
-   rename(end_period_year = ind,
-          rate10plus = values) %>% 
-   mutate(rate10plus = rate10plus/100) %>% 
-   mutate(end_period_year = as.character(end_period_year)) %>% 
-   mutate(end_period_year = as.numeric(end_period_year))
+
      
                
 
-gender_pc <- care_11to22_gender %>%
-  group_by(end_period_year, level) %>%
-  mutate(tot = sum(count)) %>%
-  mutate(pc = count / tot) %>%
-  ungroup() %>%
-  select(-c(count, tot)) %>%
-  pivot_wider(names_from = gender, values_from = pc)
-
-
-girl_care_birm_v_eng <- gender_pc %>% 
-  ggplot() +
-  geom_line(aes(x = end_period_year, y = Girls, group = level, color = level))
-girl_care_birm_v_eng
-ggsave(filename = "output/graphs/girl_care_birm_v_eng.png", girl_care_birm_v_eng)
-# OK - BIRMINGHAM HAS WAY MORE GIRLS IN CARE THEN THE REST OF ENGLAND
-
-# at england level, rescare girl 38 in 2015 - 44.6 overall - 0.85
-#                   rescare girl 37 in 2020 - 43.8 overall - 0.8447
 
 
 # WHAT IF WE ASSUME THAT THE GENDER RELATION IS THE SAME NO MATTER THE AGE???
@@ -321,25 +224,420 @@ care_gender_pc <- care_11to22_gender %>%
   pivot_wider(names_from = gender, values_from = smooth_pc)
 
 
-# OK MAYBE IT SHOULDNT ACTUALLY ALL COME IN TOGETHER - YOU CAN REVISIT THIS....
-care_pc <- placement_pc %>%
-  full_join(age_pc) %>%
-  full_join(gender_pc)
 
-care_pc_2010 <- care_pc %>%
-  filter(end_period_year == 2011) %>%
-  mutate(end_period_year = end_period_year - 1)
+care_rate_byres <- care_11to22_placement %>%
+  filter(level == "Birmingham", 
+         end_period_year <= 2020) %>% 
+  mutate(residential =
+           ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                   "Residential schools",
+                                   "Other residential settings"),
+                  "Residential",
+                  "Not residential")) %>%
+  group_by(level, end_period_year, end_period_month, period_length, residential) %>%
+  summarise(count = sum(count)) %>%
+  ungroup() %>%
+  pivot_wider(names_from = residential,
+              values_from = count) %>% 
+  mutate(tot = Residential +`Not residential`) %>% 
+  full_join(care_11to22_age %>%
+              filter(level == "Birmingham",
+                     end_period_year <= 2020) %>% 
+              group_by(end_period_year) %>%
+              mutate(tot = sum(count)) %>%
+              mutate(pc = count / tot) %>%
+              ungroup() %>%
+              filter(age %in% c("10-15", "16+")) %>%
+              group_by(end_period_year) %>% 
+              summarise(pc = sum(pc))) %>% 
+  mutate(tenplus_tot = tot*pc,
+         tenplus_res = 0.95*Residential,
+         tenplus_nres = tenplus_tot-tenplus_res) %>% 
+  select(end_period_year, tenplus_res, tenplus_nres) %>% 
+  pivot_longer(-end_period_year,
+               names_to = "residential",
+               values_to = "count") %>% 
+  mutate(residential = ifelse(grepl("nres", residential),
+                              "Not residential", "Residential")) %>% 
+  full_join(pop_estimate_01to20_age_gender %>% 
+              filter(level == "Birmingham",
+                     age %in% c(10:17),
+                     end_period_year %in% c(2011:2022)) %>% 
+              group_by(end_period_year) %>% 
+              summarise(pop = sum(count))) %>%
+  mutate(pc = count/pop) %>% 
+  ungroup() %>% 
+  group_by(residential) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_pc = smooth.spline(end_period_year, pc, lambda = 0.0025)$y) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc, group = residential, colour = residential)) +
+  geom_line(aes(x = end_period_year, y = smooth_pc, group = residential, colour = residential))
+care_rate_byres
+ggsave(filename = "output/graphs/care_rate_byres.png", care_rate_byres)
 
-care_pc <- care_pc %>%
-  bind_rows(care_pc_2010)
 
 
 
-care <- care_10to22 %>% 
-  filter(level == "Birmingham")
+care_res_pc <- care_11to22_placement %>%
+  filter(level == "Birmingham", 
+         end_period_year <= 2020) %>% 
+  mutate(residential =
+           ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                   "Residential schools",
+                                   "Other residential settings"),
+                  "Residential",
+                  "Not residential")) %>%
+  group_by(level, end_period_year, end_period_month, period_length, residential) %>%
+  summarise(count = sum(count)) %>%
+  ungroup() %>%
+  pivot_wider(names_from = residential,
+              values_from = count) %>% 
+  mutate(tot = Residential +`Not residential`) %>% 
+  full_join(care_11to22_age %>%
+              filter(level == "Birmingham",
+                     end_period_year <= 2020) %>% 
+              group_by(end_period_year) %>%
+              mutate(tot = sum(count)) %>%
+              mutate(pc = count / tot) %>%
+              ungroup() %>%
+              filter(age %in% c("10-15", "16+")) %>%
+              group_by(end_period_year) %>% 
+              summarise(pc = sum(pc))) %>% 
+  mutate(tenplus_tot = tot*pc,
+         tenplus_res = 0.95*Residential, # ASSUMPTION - I read somewhere that like 95% of res care was over 10...find where 
+         tenplus_nres = tenplus_tot-tenplus_res) %>% 
+  select(end_period_year, tenplus_tot, tenplus_res, tenplus_nres) %>% 
+  # mutate(boy_res = tenplus_res*0.63, #you've got the source for this ASSUMPTION in the doc
+  #        girl_res =  tenplus_res*0.27) %>% 
+  # pivot_longer(-end_period_year,
+  #              names_to = "residential",
+  #              values_to = "count") %>% 
+  # mutate(residential = ifelse(grepl("nres", residential),
+  #                             "Not residential", "Residential")) 
+  full_join(pop_estimate_01to20_age_gender %>% 
+              filter(level == "Birmingham",
+                     age %in% c(10:17),
+                     end_period_year %in% c(2011:2020)) %>% 
+              group_by(end_period_year, gender) %>% 
+              summarise(count = sum(count)) %>% 
+              pivot_wider(names_from = gender,
+                          values_from = count)) %>% 
+  full_join(care_11to22_gender %>%
+               filter(level == "Birmingham", 
+                      end_period_year <= 2020) %>% 
+               full_join(pop_estimate_01to20_age_gender %>% 
+                           filter(level == "Birmingham",
+                                  age <= 17,
+                                  end_period_year %in% c(2011:2022)) %>% 
+                           group_by(end_period_year, gender) %>% 
+                           summarise(pop = sum(count))) %>%
+               mutate(pc = count/pop) %>% 
+               select(end_period_year, gender, pc) %>% 
+               pivot_wider(names_from = gender, values_from = pc) %>% 
+              mutate(boy2girl = Boys/Girls) %>% 
+              select(end_period_year, boy2girl)) %>% 
+  # having some difficulty because if i bump boys up in rescare 
+  # but keep the same gender ratio then...
+  # it will artificially depress boys in non-res....
+  # maybe the best thing is to keep the correct ratio in non-res and then
+  # just change the ratio in res
+  mutate(maybe_res_boy2girl = boy2girl*1.4,#trying to say that the gender ratio can follow the general trend
+    # boy2girl = ifelse(boy2girl < 1, 1, boy2girl),
+         maybe_bpc_tot = Boys*boy2girl/(Boys*boy2girl+Girls),
+         maybe_bpc_res = Boys*maybe_res_boy2girl/(Boys*maybe_res_boy2girl+Girls)) %>% 
+  mutate(boy_res = maybe_bpc_res*tenplus_res,
+         girl_res = (1-maybe_bpc_res)*tenplus_res,
+         boy_nres = maybe_bpc_tot*tenplus_nres,
+         girl_nres = (1-maybe_bpc_tot)*tenplus_nres) %>% 
+  # ONE TOTAL IS COMING FROM RESIDENTIAL THE OTHER FROM AGE - PROBABLY THERE'S A SMALL DIFF IN THE UNDERLYING DATA
+  # select(end_period_year, boy_nres, boy_res, girl_nres, girl_res, tenplus_res, tenplus_nres) %>% 
+  # full_join(care_11to22_age %>% 
+  #             filter(level == "Birmingham", 
+  #                    age %in% c("10-15", "16+"),
+  #                    end_period_year <= 2020) %>%
+  #             select(end_period_year, age, count) %>% 
+  #             pivot_wider(names_from = age,
+  #                         values_from = count)) %>% 
+  # mutate(check1 = boy_nres + boy_res + girl_nres + girl_res,
+  #        check2 = `10-15` + `16+`,
+  #        check3 = tenplus_res + tenplus_nres)
+  select(end_period_year, boy_nres, boy_res, girl_nres, girl_res) %>% 
+  # so we're putting the age on last
+  # lets say no relation between age & gender
+  # but yeah age does vary across res types
+  full_join(pop_estimate_01to20_age_gender %>% 
+              filter(level == "Birmingham",
+                     age %in% c(10:17),
+                     end_period_year >= 2011) %>% 
+              group_by(end_period_year, gender, age) %>% 
+              summarise(count = sum(count)) %>%
+              pivot_wider(names_from = c(gender, age),
+                          values_from = count)) %>% 
+  full_join(pop_estimate_01to20_age_gender %>% 
+              filter(level == "Birmingham",
+                     age %in% c(10:17),
+                     end_period_year >= 2011) %>% 
+              group_by(end_period_year, age) %>% 
+              summarise(count = sum(count)) %>% 
+              full_join(care_age_pc) %>% 
+              mutate(pc = ifelse(age >=16, `16+`, `10-15`)) %>% 
+              ungroup() %>%
+              group_by(end_period_year) %>%
+              arrange(age) %>%
+              mutate(smooth_pc = smooth.spline(age, pc, lambda = 0.03)$y) %>%
+              # mutate(pc_adj = ifelse(age == 10, pc - 0.002, pc),
+              #        pc_adj = ifelse(age == 17, pc + 0.002, pc_adj)) %>%
+              # mutate(smooth_pc_adj = smooth.spline(age, pc_adj, lambda = 0.015)$y) %>%
+              select(end_period_year, age, smooth_pc) %>%
+              pivot_wider(names_from = age,
+                          values_from = smooth_pc)) %>%
+              # select(end_period_year, age, pc) %>% 
+              # pivot_wider(names_from = age,
+              #              values_from = pc) %>% 
+  mutate(`17to10` = `17`/`10`,
+         `16to10` = `16`/`10`,
+         `15to10` = `15`/`10`,
+         `14to10` = `14`/`10`,
+         `13to10` = `13`/`10`,
+         `12to10` = `12`/`10`,
+         `11to10` = `11`/`10`) %>% 
+  mutate(`res17to10` = 1.35*`17`/`10`,
+         `res16to10` = 1.30*`16`/`10`,
+         `res15to10` = 1.25*`15`/`10`,
+         `res14to10` = 1.20*`14`/`10`,
+         `res13to10` = 1.15*`13`/`10`,
+         `res12to10` = 1.01*`12`/`10`,
+         `res11to10` = 1.05*`11`/`10`) %>% 
+  mutate(`17pc_res` = `17`*`res17to10`/(`17`*`res17to10` + `16`*`res16to10` + `15`*`res15to10` +
+              `14`*`res14to10` + `13`*`res13to10` + `12`*`res12to10` + `11`*`res11to10` + `10`),
+         `16pc_res` = `16`*`res16to10`/ (`17`*`res17to10` + `16`*`res16to10` + `15`*`res15to10` +
+              `14`*`res14to10` + `13`*`res13to10` + `12`*`res12to10` + `11`*`res11to10` + `10`),
+         `15pc_res` = `15`*`res15to10`/ (`17`*`res17to10` + `16`*`res16to10` + `15`*`res15to10` +
+              `14`*`res14to10` + `13`*`res13to10` + `12`*`res12to10` + `11`*`res11to10` + `10`),
+         `14pc_res` = `14`*`res14to10`/(`17`*`res17to10` + `16`*`res16to10` + `15`*`res15to10` +
+              `14`*`res14to10` + `13`*`res13to10` + `12`*`res12to10` + `11`*`res11to10` + `10`),
+         `13pc_res` = `13`*`res13to10`/(`17`*`res17to10` + `16`*`res16to10` + `15`*`res15to10` +
+              `14`*`res14to10` + `13`*`res13to10` + `12`*`res12to10` + `11`*`res11to10` + `10`),
+         `12pc_res` = `12`*`res12to10`/ (`17`*`res17to10` + `16`*`res16to10` + `15`*`res15to10` +
+              `14`*`res14to10` + `13`*`res13to10` + `12`*`res12to10` + `11`*`res11to10` + `10`),
+         `11pc_res` = `11`*`res11to10`/(`17`*`res17to10` + `16`*`res16to10` + `15`*`res15to10` +
+              `14`*`res14to10` + `13`*`res13to10` + `12`*`res12to10` + `11`*`res11to10` + `10`),
+         `10pc_res` = `10`/(`17`*`res17to10` + `16`*`res16to10` + `15`*`res15to10` +
+              `14`*`res14to10` + `13`*`res13to10` + `12`*`res12to10` + `11`*`res11to10` + `10`)) %>% 
+  mutate(girl_17res = girl_res*`17pc_res`,
+         girl_16res = girl_res*`16pc_res`,
+         girl_15res = girl_res*`15pc_res`,
+         girl_14res = girl_res*`14pc_res`,
+         girl_13res = girl_res*`13pc_res`,
+         girl_12res = girl_res*`12pc_res`,
+         girl_11res = girl_res*`11pc_res`,
+         girl_10res = girl_res*`10pc_res`,
+         boy_17res = boy_res*`17pc_res`,
+         boy_16res = boy_res*`16pc_res`,
+         boy_15res = boy_res*`15pc_res`,
+         boy_14res = boy_res*`14pc_res`,
+         boy_13res = boy_res*`13pc_res`,
+         boy_12res = boy_res*`12pc_res`,
+         boy_11res = boy_res*`11pc_res`,
+         boy_10res = boy_res*`10pc_res`) %>% 
+  mutate(`17pc` = `17`*`17to10`/(`17`*`17to10` + `16`*`16to10` + `15`*`15to10` +
+                                   `14`*`14to10` + `13`*`13to10` + `12`*`12to10` + `11`*`11to10` + `10`),
+         `16pc` = `16`*`16to10`/ (`17`*`17to10` + `16`*`16to10` + `15`*`15to10` +
+                                    `14`*`14to10` + `13`*`13to10` + `12`*`12to10` + `11`*`11to10` + `10`),
+         `15pc` = `15`*`15to10`/ (`17`*`17to10` + `16`*`16to10` + `15`*`15to10` +
+                                    `14`*`14to10` + `13`*`13to10` + `12`*`12to10` + `11`*`11to10` + `10`),
+         `14pc` = `14`*`14to10`/(`17`*`17to10` + `16`*`16to10` + `15`*`15to10` +
+                                   `14`*`14to10` + `13`*`13to10` + `12`*`12to10` + `11`*`11to10` + `10`),
+         `13pc` = `13`*`13to10`/(`17`*`17to10` + `16`*`16to10` + `15`*`15to10` +
+                                   `14`*`14to10` + `13`*`13to10` + `12`*`12to10` + `11`*`11to10` + `10`),
+         `12pc` = `12`*`12to10`/ (`17`*`17to10` + `16`*`16to10` + `15`*`15to10` +
+                                    `14`*`14to10` + `13`*`13to10` + `12`*`12to10` + `11`*`11to10` + `10`),
+         `11pc` = `11`*`11to10`/(`17`*`17to10` + `16`*`16to10` + `15`*`15to10` +
+                                   `14`*`14to10` + `13`*`13to10` + `12`*`12to10` + `11`*`11to10` + `10`),
+         `10pc` = `10`/(`17`*`17to10` + `16`*`16to10` + `15`*`15to10` +
+                          `14`*`14to10` + `13`*`13to10` + `12`*`12to10` + `11`*`11to10` + `10`)) %>% 
+mutate(girl_17 = (girl_res+girl_nres)*`17pc`,
+         girl_16 = (girl_res+girl_nres)*`16pc`,
+         girl_15 = (girl_res+girl_nres)*`15pc`,
+         girl_14 = (girl_res+girl_nres)*`14pc`,
+         girl_13 = (girl_res+girl_nres)*`13pc`,
+         girl_12 = (girl_res+girl_nres)*`12pc`,
+         girl_11 = (girl_res+girl_nres)*`11pc`,
+         girl_10 = (girl_res+girl_nres)*`10pc`,
+         boy_17 = (boy_res+boy_nres)*`17pc`,
+         boy_16 = (boy_res+boy_nres)*`16pc`,
+         boy_15 = (boy_res+boy_nres)*`15pc`,
+         boy_14 = (boy_res+boy_nres)*`14pc`,
+         boy_13 = (boy_res+boy_nres)*`13pc`,
+         boy_12 = (boy_res+boy_nres)*`12pc`,
+         boy_11 = (boy_res+boy_nres)*`11pc`,
+         boy_10 = (boy_res+boy_nres)*`10pc`) %>% 
+  mutate(girl_17nres = girl_17 - girl_17res,
+         girl_16nres = girl_16 - girl_16res,
+         girl_15nres = girl_15 - girl_15res,
+         girl_14nres = girl_14 - girl_14res,
+         girl_13nres = girl_13 - girl_13res,
+         girl_12nres = girl_12 - girl_12res,
+         girl_11nres = girl_11 - girl_11res,
+         girl_10nres = girl_10 - girl_10res,
+         boy_17nres = boy_17 - boy_17res,
+         boy_16nres = boy_16 - boy_16res,
+         boy_15nres = boy_15 - boy_15res,
+         boy_14nres = boy_14 - boy_14res,
+         boy_13nres = boy_13 - boy_13res,
+         boy_12nres = boy_12 - boy_12res,
+         boy_11nres = boy_11 - boy_11res,
+         boy_10nres = boy_10 - boy_10res) %>% 
+  select(c(end_period_year, starts_with("boy_"), starts_with("girl_"))) %>% 
+  select(-c(boy_17:boy_10, girl_17:girl_10)) %>% 
+  mutate(check = boy_17nres + boy_16nres + boy_15nres + boy_14nres +
+           boy_13nres + boy_12nres + boy_11nres + boy_10nres) %>% 
+  mutate(check2 = boy_17res + boy_16res + boy_15res + boy_14res +
+           boy_13res + boy_12res + boy_11res + boy_10res) %>% 
+  select(c(end_period_year, starts_with("boy_1"), starts_with("girl_1"))) %>% 
+  pivot_longer(-end_period_year,
+               names_to = "residential",
+               values_to = "count") %>% 
+  mutate(age = as.numeric(str_extract_all(residential, "(\\d{2})")),
+         gender = ifelse(grepl("boy", residential), "Boys", "Girls"),
+         residential = ifelse(grepl("nres", residential), "Not residential", "Residential")) %>% 
+  full_join(pop_estimate_01to20_age_gender %>% 
+              filter(level == "Birmingham",
+                     age %in% c(10:17),
+                     end_period_year %in% c(2011:2022)) %>%
+              group_by(end_period_year, gender, age) %>% 
+              summarise(pop = sum(count))) %>% 
+  mutate(pc = count/pop)  %>% 
+  group_by(residential, gender, age) %>%
+  arrange(end_period_year) %>%
+  mutate(smooth_pc = smooth.spline(end_period_year, pc, lambda = 0.0025)$y) %>%
+  # ggplot() +
+  # geom_line(aes(x = end_period_year, y = pc, group = age, colour = age)) +
+  # geom_line(aes(x = end_period_year, y = smooth_pc, group = age, colour = age)) +
+  # facet_grid(rows = vars(residential), cols = vars(gender))
+  # group_by(end_period_year, residential, gender) %>%
+  # arrange(age) %>%
+  # mutate(smooth_pc = smooth.spline(age, pc, lambda = 0.015)$y) %>%
+  # mutate(smooth_count = smooth_pc*pop) %>% 
+  # ungroup() %>%
+  # group_by(end_period_year, residential, gender) %>%
+  # mutate(age_pc = count/sum(count)) %>%
+  # mutate(smooth_count = smooth_pc*pop) %>% 
+  # ungroup() %>% 
+  # group_by(end_period_year, residential) %>% 
+  # summarise(count = sum(count),
+  #           smooth_count = sum(smooth_count),
+  #           pop = sum(pop)) %>% 
+  # mutate(pc = count/pop,
+  #        smooth_pc = smooth_count/pop) %>% 
+  # ungroup() %>% 
+  # ggplot() +
+  # # geom_line(aes(x = end_period_year, y = pc, group = residential, colour = residential)) +
+  # #   
+  # # geom_line(aes(x = end_period_year, y = count, group = residential, colour = residential)) +
+  # # geom_line(aes(x = end_period_year, y = smooth_count, group = residential, colour = residential))
+  # geom_line(aes(x = end_period_year, y = pc, group = residential, colour = residential)) +
+  # geom_line(aes(x = end_period_year, y = smooth_pc, group = residential, colour = residential))
+  mutate(smooth_count = smooth_pc*pop) 
 
 
-smoothing_age_rate <- pop_estimate_01to20_age_gender %>% 
+
+
+
+# %>% 
+  ungroup() %>% 
+  group_by(end_period_year, age) %>% 
+  summarise(count = sum(count),
+            smooth_count = sum(smooth_count),
+            pop = sum(pop)) %>% 
+  mutate(pc = count/pop,
+         smooth_pc = smooth_count/pop) %>% 
+  ungroup() %>% 
+  ggplot() +
+  # geom_line(aes(x = end_period_year, y = pc, group = residential, colour = residential)) +
+  #   
+  # geom_line(aes(x = end_period_year, y = count, group = residential, colour = residential)) +
+  # geom_line(aes(x = end_period_year, y = smooth_count, group = residential, colour = residential))
+  geom_line(aes(x = end_period_year, y = pc, group = age, colour = age)) +
+  geom_line(aes(x = end_period_year, y = smooth_pc, group = age, colour = age))
+
+
+
+  care_res_pc
+  
+  
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc, group = as.character(age), colour = as.character(age))) +
+  geom_line(aes(x = end_period_year, y = smooth_pc, group = as.character(age), colour = as.character(age))) +
+  # geom_line(aes(x = age, y = pc, group = as.character(end_period_year), colour = as.character(end_period_year)),
+  #           linetype = "dashed") +
+  # geom_line(aes(x = age, y = smooth_pc, group = as.character(end_period_year), colour = as.character(end_period_year))) +
+  # # geom_line(aes(x = end_period_year, y = count, group = as.character(age), colour = as.character(age))
+  #           ,
+  #           linetype = "dashed"
+  #           ) +
+  # geom_line(aes(x = end_period_year, y = smooth_count, group = as.character(age), colour = as.character(age))) +
+  # geom_line(aes(x = end_period_year, y = age_pc, group = as.character(age), colour = as.character(age))) +
+  # geom_bar(aes(x = end_period_year, y = age_pc, fill = as.character(age)), 
+  #          stat = "identity", position = "stack") +
+  facet_grid(rows = vars(gender),
+             cols = vars(residential)) +
+  scale_color_viridis(discrete = T)
+
+care_res_pc
+
+
+
+
+
+
+
+
+
+
+
+# %>% 
+  full_join(care_11to22_age %>% 
+              filter(level == "Birmingham", 
+                     age %in% c("10-15", "16+"),
+                     end_period_year <= 2020) %>%
+              select(end_period_year, age, count) %>% 
+              full_join(pop_estimate_01to20_age_gender %>% 
+                          filter(level == "Birmingham",
+                                 age %in% c(10:17),
+                                 end_period_year %in% c(2011:2022)) %>% 
+                          mutate(age = ifelse(age >=16, "16+", "10-15")) %>% 
+                          group_by(end_period_year, age) %>% 
+                          summarise(pop = sum(count))) %>%
+              mutate(pc = count/pop) %>% 
+              select(-c(pop, count)) %>% 
+              pivot_wider(names_from = age,
+                          values_from = pc))
+
+
+
+
+# %>% 
+  pivot_longer(-end_period_year,
+               names_to = "gender",
+               values_to = "count") %>% 
+  mutate(residential = ifelse(grepl("nres", gender), "Not residential", "Residential"),
+         gender = ifelse(grepl("boy", gender), "Boys", "Girls"))
+
+
+  # %>%
+  mutate(pc = count/pop) %>% 
+  ungroup() %>% 
+  group_by(residential) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_pc = smooth.spline(end_period_year, pc, lambda = 0.0025)$y) %>% 
+  select(end_period_year, residential, smooth_pc) %>% 
+  pivot_wider(names_from = residential, values_from = smooth_pc)
+
+
+
+check <- pop_estimate_01to20_age_gender %>% 
   filter(level == "Birmingham",
          age %in% c(10:17),
          end_period_year >= 2011) %>% 
@@ -354,6 +652,24 @@ smoothing_age_rate <- pop_estimate_01to20_age_gender %>%
   mutate(pc_adj = ifelse(age == 10, pc - 0.002, pc),
          pc_adj = ifelse(age == 17, pc + 0.002, pc_adj)) %>% 
   mutate(smooth_pc_adj = smooth.spline(age, pc_adj, lambda = 0.015)$y) %>% 
+  select(end_period_year, age, smooth_pc_adj)
+
+
+smoothing_age_rate <- pop_estimate_01to20_age_gender %>% 
+  filter(level == "Birmingham",
+         age %in% c(10:17),
+         end_period_year >= 2011) %>% 
+  group_by(end_period_year, age) %>% 
+  summarise(count = sum(count)) %>% 
+  full_join(care_age_pc) %>% 
+  mutate(pc = ifelse(age >=16, `16+`, `10-15`)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year) %>% 
+  arrange(age) %>% 
+  mutate(smooth_pc = smooth.spline(age, pc, lambda = 0.0015)$y) %>% 
+  mutate(pc_adj = ifelse(age == 10, pc - 0.002, pc),
+         pc_adj = ifelse(age == 17, pc + 0.002, pc_adj)) %>% 
+  mutate(smooth_pc_adj = smooth.spline(age, pc_adj, lambda = 0.0015)$y) %>% 
   ggplot() +
   geom_line(aes(x = age, y = pc, group = end_period_year, colour = end_period_year)) +
   geom_line(aes(x = age, y = smooth_pc_adj, group = end_period_year, colour = end_period_year)) 
@@ -441,14 +757,175 @@ check_care_construct <- care_age_gen %>%
   ggplot() +
     geom_line(aes(x = end_period_year, y = pc, group = as.character(age), colour = as.character(age))) +
   facet_grid(~gender)
-check_care
+check_care_construct
 ggsave(filename = "output/graphs/check_care_construct.png", check_care_construct)
 
 
-# OLDER BELOW
+
+
+care_age_gen_res <- care_age_gen
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  care_11to22_placement %>%
+  filter(level == "Birmingham") %>% 
+  mutate(residential =
+           ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                   "Residential schools",
+                                   "Other residential settings"),
+                  "Residential",
+                  "Not residential")) %>%
+  group_by(level, end_period_year, end_period_month, period_length, residential) %>%
+  summarise(count = sum(count)) %>%
+  ungroup() %>%
+  group_by(end_period_year, level) %>%
+  mutate(tot = sum(count)) %>%
+  mutate(pc = count / tot) %>%
+  ungroup() %>% 
+  select(end_period_year, residential, pc) %>% 
+  pivot_wider(names_from = residential, values_from = pc)
+
+rescare_pc <- care_res_pc %>%
+  arrange(end_period_year) %>% 
+  mutate(smooth_res_pc = smooth.spline(end_period_year, Residential, lambda = 0.005)$y,
+         smooth_nres_pc = 1-smooth_res_pc) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = Residential, colour = "res")) +
+  geom_line(aes(x = end_period_year, y = `Not residential`, colour = "not res")) + 
+  geom_line(aes(x = end_period_year, y = smooth_res_pc, colour = "smooth res")) + 
+  geom_line(aes(x = end_period_year, y = smooth_nres_pc, colour = "smooth nres"))
+
+rescare_pc
+ggsave(filename = "output/graphs/rescare_pc.png", rescare_pc)
+# rescare pc gradually climbing
+
+# ok..... do I need to leave non-residential in there too? probably not. probably you just need the categories
+# you're using plus their percentages.
+
+
+
+
+
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # OLDER BELOW # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+placement_pc <- care_11to22_placement %>%
+  group_by(level, end_period_year, end_period_month, period_length, placement) %>%
+  summarise(count = sum(count)) %>%
+  ungroup() %>%
+  group_by(end_period_year, level) %>%
+  mutate(tot = sum(count)) %>%
+  mutate(pc = count / tot) %>%
+  ungroup() %>%
+  mutate(residential =
+           ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                   "Residential schools",
+                                   "Other residential settings"),
+                  "Residential",
+                  "Not residential")) 
+
+# quick graph of the pc's to see about the assumption ill be making
+check_placement_pc <- placement_pc %>%
+  filter(level == "Birmingham") %>%
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc, colour = placement)) +
+  scale_x_continuous(name = "") +
+  scale_y_continuous(name = "") +
+  theme_classic() +
+  theme(strip.background = element_blank())
+check_placement_pc
+# secure units & 'other residential settings' growing as a pc of total care placements, residential schools shrikning
+# think its probably ok to just apply the same pcs to 2010 as you have in 2011
+
+placement_pc <- placement_pc  %>%
+  group_by(level, end_period_year, end_period_month, period_length, residential) %>%
+  summarise(pc = sum(pc)) %>%
+  pivot_wider(names_from = residential, values_from = pc)
+
+
+# rescare pc gradually climbing
+
+# ok..... do I need to leave non-residential in there too? probably not. probably you just need the categories
+# you're using plus their percentages.
+
+age_pc <- care_11to22_age %>%
+  group_by(end_period_year, level) %>%
+  mutate(tot = sum(count)) %>%
+  mutate(pc = count / tot) %>%
+  ungroup() %>%
+  filter(age %in% c("10-15", "16+")) %>%
+  select(-c(count, tot)) %>%
+  pivot_wider(names_from = age, values_from = pc)
+
+age_pc %>%
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = `10-15`, group = level, color = level))
+# 
+age_pc %>%
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = `16+`, group = level, color = level))
+# birmingham much jumpier because less data - generally looks to be around english level
+# at eng level:      97% of kids in res care are 10 or over - 2015
+
+
+
+
+# ASSUMPTION - 97 PC OF RES CARE ARE OVER TEN!!!!!!
+rate10plus <- c(97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97)
+names(rate10plus) <- c("2020", "2019", "2018", "2017", "2016", "2015", "2014", 
+                       "2013", "2012", "2011", "2010")
+
+rate10plus <-stack(rate10plus) %>% 
+  rename(end_period_year = ind,
+         rate10plus = values) %>% 
+  mutate(rate10plus = rate10plus/100) %>% 
+  mutate(end_period_year = as.character(end_period_year)) %>% 
+  mutate(end_period_year = as.numeric(end_period_year))
+
+
+gender_pc <- care_11to22_gender %>%
+  group_by(end_period_year, level) %>%
+  mutate(tot = sum(count)) %>%
+  mutate(pc = count / tot) %>%
+  ungroup() %>%
+  select(-c(count, tot)) %>%
+  pivot_wider(names_from = gender, values_from = pc)
+
+
+girl_care_birm_v_eng <- gender_pc %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = Girls, group = level, color = level))
+girl_care_birm_v_eng
+ggsave(filename = "output/graphs/girl_care_birm_v_eng.png", girl_care_birm_v_eng)
+# OK - BIRMINGHAM HAS WAY MORE GIRLS IN CARE THEN THE REST OF ENGLAND
+
+# at england level, rescare girl 38 in 2015 - 44.6 overall - 0.85
+#                   rescare girl 37 in 2020 - 43.8 overall - 0.8447
+
+
 # ADD BACK TO MAIN TIME SERIES
 
 
+# OK MAYBE IT SHOULDNT ACTUALLY ALL COME IN TOGETHER - YOU CAN REVISIT THIS....
+care_pc <- placement_pc %>%
+  full_join(age_pc) %>%
+  full_join(gender_pc)
+
+care_pc_2010 <- care_pc %>%
+  filter(end_period_year == 2011) %>%
+  mutate(end_period_year = end_period_year - 1)
+
+care_pc <- care_pc %>%
+  bind_rows(care_pc_2010)
 
 
 
