@@ -106,9 +106,6 @@ ggsave(filename = "output/graphs/care_v_all_pru_rate.png", care_v_all_pru_rate)
 
 
 check <- care_school_16to22 %>% 
-  select(time_period, t_pru, t_secondary) %>% 
-  mutate(time_period = as.numeric(paste(substr(time_period,1,2), substr(time_period,5,6), sep = ""))) %>% 
-  rename(end_period_year = time_period) %>%
   mutate(pc_care = as.numeric(t_pru)/(as.numeric(t_secondary)+as.numeric(t_pru))) %>% 
   select(end_period_year, pc_care) %>% 
   full_join(school_pru %>% 
@@ -118,8 +115,18 @@ check <- care_school_16to22 %>%
               mutate(pc_all = PRU/(PRU +`Not PRU`))) %>%
     mutate(check = pc_care/pc_all)
 # so i havent taken away care from the all thing, but it looks here like 
-# care is about 10 times more likely not 30
+# care is about 8 times more likely not 30
 
+pc_of_pru_in_care <- care_school_16to22 %>% 
+  full_join(pru %>% 
+              group_by(end_period_year) %>% 
+              summarise(count = sum(count))) %>% 
+  mutate(pc = as.numeric(t_pru)/count) %>% 
+  filter(end_period_year >= 2016) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc))
+pc_of_pru_in_care
+ggsave(filename = "output/graphs/pc_of_pru_in_care.png", pc_of_pru_in_care)
 
 
 school_pru %>% 
@@ -129,6 +136,8 @@ school_pru %>%
   mutate(pc = PRU/(PRU +`Not PRU`)) %>% 
   ggplot() +
   geom_line(aes(x = end_period_year, y = pc))
+
+
 
 
 care_pov <- care_ic %>% 

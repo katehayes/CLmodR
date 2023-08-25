@@ -1397,15 +1397,13 @@ c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sh
 care_school_16to22 <- c_data %>% 
   filter(la_name == "Birmingham",
          social_care_group == "CLA 12 months at 31 March") %>% 
-  mutate(check = as.numeric(t_pru)/(as.numeric(t_secondary)+as.numeric(t_pru)))
-
-check <- care_school_16to22 %>% 
-  select(time_period, t_pru) %>% 
   mutate(time_period = as.numeric(paste(substr(time_period,1,2), substr(time_period,5,6), sep = ""))) %>% 
   rename(end_period_year = time_period) %>% 
-  full_join(pru %>% 
-              group_by(end_period_year) %>% 
-              summarise(count = sum(count))) %>% 
-  mutate(check = as.numeric(t_pru)/count)
+  select(end_period_year, starts_with("t_"))
 
-# between 1 and say 5% of looked after kids shuold be in PRUs
+
+
+
+
+
+
