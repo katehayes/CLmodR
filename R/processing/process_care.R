@@ -686,6 +686,7 @@ care_pov <- care %>%
   select(-c(count, pc, smooth_pc)) %>% 
   pivot_wider(names_from = residential,
               values_from = smooth_count) %>% 
+  # CUM PC COMES IN FROM THAT PAPER
   full_join(care_cum_pc) %>% 
   mutate(cum_pc = cum_pc/100) %>% 
   mutate(pc_prior = cum_pc - ((Residential + `Not residential`)/pop)) %>% 
@@ -717,20 +718,177 @@ care_pov <- care %>%
                values_to = "count")
 
 
+# NOW I NEED TO PUT ON THE SCHOOLS DATA
+
+# HOW TO DEAL WITH THE INCONGRUETY BETWEEN FSM AND CHILD POV
+# WHAT IF WE SAID THAT THE SAME RATIO BETWEEN FSM AND NOT FSM I WOULD USE FOR POV/NOT POV
+# I WONDER WOULD THAT WORK OUT AS THE SAME OVERALL FIGURES..
+# PC OG FIRLS AGE TEN ON FSM IN PRUS
+
+school_in_care <- school_pru %>% 
+  mutate(pc_in_pru = PRU/(PRU + `Not PRU`)) %>% 
+  filter(age <= 15) 
+
+  
+school_in_care %>% 
+  ungroup() %>% 
+  group_by(gender, age, fsm) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_pc = smooth.spline(end_period_year, pc_in_pru, lambda = 0.0005)$y) %>% 
+  filter(gender == "Boys") %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = smooth_pc, group = fsm, colour = fsm)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age))
+
+
+
+pru_rate_byfsm_boy <- school_pru %>% 
+  mutate(pc_in_pru = PRU/(PRU + `Not PRU`)) %>% 
+  filter(age <= 15,
+         gender == "Boys") %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = pc_in_pru, group = fsm, colour = fsm)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age))
+pru_rate_byfsm_boy
+ggsave(filename = "output/graphs/pru_rate_byfsm_boy.png", pru_rate_byfsm_boy)
+
+
+pru_rate_byfsm_girl <- school_pru %>% 
+  mutate(pc_in_pru = PRU/(PRU + `Not PRU`)) %>% 
+  filter(age <= 15,
+         gender == "Girls") %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = pc_in_pru, group = fsm, colour = fsm)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age))
+pru_rate_byfsm_girl
+ggsave(filename = "output/graphs/pru_rate_byfsm_girl.png", pru_rate_byfsm_girl)
+
+# WOW weird, pretty much all of the increase in PRU rates just came from the
+# children who were FSM eligible - only exception being 15 year olds
+
+school_pru %>% 
+  mutate(pc_in_pru = PRU/(PRU + `Not PRU`)) %>% 
+  select(-c(PRU, `Not PRU`)) %>% 
+  pivot_wider(names_from = fsm,
+              values_from = pc_in_pru) %>% 
+  mutate(fsm_mult = `FSM eligible`/`Not FSM eligible`) %>% 
+  filter(age <= 15) %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = fsm_mult, group = as.character(age), colour = as.character(age))) +
+  facet_grid(~gender)
+
+# this is a graph showing how much more likely kids eligible for FSM were to
+# be in PRUs compared to those who weren't.
+# what happened in 2018 lol
+
+pc_fsm <- school_pru %>%
+  filter(age <= 15,
+         end_period_year <= 2020) %>% 
+  mutate(count = PRU + `Not PRU`) %>% 
+  select(-c(PRU, `Not PRU`)) %>% 
+  group_by(end_period_year, gender, age) %>%
+  mutate(pc_fsm = count/sum(count)) %>% 
+  filter(fsm == "FSM eligible") %>% 
+  select(-c(count, fsm))
+
+
+pc_pru <- school_pru %>%
+  filter(age <= 15,
+         end_period_year <= 2020) %>% 
+  group_by(end_period_year, gender, age) %>%
+  summarise(PRU = sum(PRU),
+            `Not PRU` = sum(`Not PRU`)) %>% 
+  mutate(pc_pru = PRU/ (PRU + `Not PRU`)) %>% 
+  select(-c(PRU, `Not PRU`))
+  
+
+
+fsm_pru_mult <- school_pru %>% 
+  filter(age <= 15,
+         end_period_year <= 2020) %>% 
+  pivot_longer(c(PRU, `Not PRU`),
+               names_to = "pru",
+               values_to = "count") %>%
+  group_by(end_period_year, gender, age, fsm) %>%
+  mutate(pc_in_pru = count/sum(count)) %>%
+  filter(pru == "PRU") %>% 
+  pivot_wider(names_from = fsm,
+              values_from = c(count, pc_in_pru)) %>% 
+  mutate(
+    # tot_pru = `count_FSM eligible` + `count_Not FSM eligible`,
+         fsm_mult = `pc_in_pru_FSM eligible`/`pc_in_pru_Not FSM eligible`) %>% 
+  mutate(fsm_mult = ifelse(is.na(fsm_mult), 0, fsm_mult)) %>% 
+  select(-c(starts_with("count"), pru))
+
+
+school_in_care <- pop_estimate_01to20_age_gender %>% 
+  filter(level == "Birmingham",
+         age %in% c(10:15),
+         end_period_year %in% c(2010:2022)) %>%
+  group_by(end_period_year, gender, age) %>% 
+  summarise(pop = sum(count)) %>% 
+  full_join(pc_fsm) %>% 
+  full_join(pc_pru) %>% 
+  left_join(smooth_poverty %>% 
+              select(end_period_year, spov_rate) %>% 
+              filter(end_period_year %in% c(2010:2020))) %>% 
+  full_join(fsm_pru_mult) %>% 
+  mutate(count_pru = pc_pru*pop,
+         incl_count = pop*(1-spov_rate),
+         excl_count = pop*spov_rate,
+         incl_pru = count_pru*(1-spov_rate)/((1-spov_rate) + fsm_mult*spov_rate),
+         excl_pru = count_pru*fsm_mult*spov_rate/((1-spov_rate) + fsm_mult*spov_rate)) %>% 
+  select(c(end_period_year, gender, age, incl_count, excl_count, incl_pru, excl_pru)) %>% 
+  pivot_longer(c(starts_with("incl"), starts_with("excl")), 
+             names_to = c("state", ".value"),
+             names_sep="_",
+             values_to = "count") %>% 
+  mutate(state = ifelse(state == "incl", "Not in poverty", "In poverty")) %>% 
+  mutate(pru_rate = pru/count)
 
 
 
 
+pru_rate_bypov_girl <- school_in_care %>% 
+  filter(gender == "Girls") %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = pru_rate, group = state, colour = state)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age))
+pru_rate_bypov_girl
+pru_rate_byfsm_girl
+
+ggsave(filename = "output/graphs/pru_rate_bypov_girl.png", pru_rate_bypov_girl)
+  
+  
+  
+
+pru_rate_bypov_boy <- school_in_care %>% 
+  filter(gender == "Boys") %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = pru_rate, group = state, colour = state)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age))
+pru_rate_bypov_boy
+pru_rate_byfsm_boy
+
+ggsave(filename = "output/graphs/pru_rate_bypov_girl.png", pru_rate_bypov_girl)
 
 
 
+# SO I'VE WORKED OUT A PRU RATE FOR POVERTY... NOW I NEED TO FIGURE OUT
+# ABOUT THE CARE MULTIPLIER.....
+# SHIT...SOME MULTIPLIER COMES FROM POVERTY.. SOME COMES FROM CARE...
+# WHAT PERCENTAGE IS DOWN TO WHAT....
 
-
-
-
-
-
-
+care_pov_pru <- care_pov %>% 
+  pivot_wider(names_from = care,
+              values_from = count) %>% 
+  full_join(school_in_care %>% 
+              select(-c(count, pru)))
 
 
 
