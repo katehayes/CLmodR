@@ -784,6 +784,71 @@ school_pru %>%
 # be in PRUs compared to those who weren't.
 # what happened in 2018 lol
 
+
+care_v_fsm_pru_mult <- school_pru %>% 
+  filter(age <= 15) %>% 
+  group_by(end_period_year, fsm) %>% 
+  summarise(PRU = sum(PRU),
+            `Not PRU` = sum(`Not PRU`)) %>% 
+  mutate(pc_in_pru = PRU/(PRU + `Not PRU`)) %>% 
+  select(-c(PRU, `Not PRU`)) %>% 
+  pivot_wider(names_from = fsm,
+              values_from = pc_in_pru) %>% 
+  mutate(fsm_mult = `FSM eligible`/`Not FSM eligible`) %>% 
+  full_join(care_school_16to22 %>% 
+              mutate(pc_care = as.numeric(t_pru)/(as.numeric(t_secondary)+as.numeric(t_pru))) %>% 
+              select(end_period_year, pc_care) %>% 
+              full_join(school_pru %>% 
+                          group_by(end_period_year) %>% 
+                          summarise(`Not PRU` = sum(`Not PRU`),
+                                    PRU = sum(PRU)) %>% 
+                          mutate(pc_all = PRU/(PRU +`Not PRU`))) %>%
+              mutate(care_mult = pc_care/pc_all) %>% 
+              select(end_period_year, pc_care, care_mult)) %>%
+  mutate(care_v_fsm = pc_care/`FSM eligible`) %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = fsm_mult, colour = "fsm mult")) +
+  geom_line(aes(x=end_period_year, y = care_mult, colour = "care mult")) +
+geom_line(aes(x=end_period_year, y = care_v_fsm, colour = "care to fsm")) 
+
+care_v_fsm_pru_mult
+ggsave(filename = "output/graphs/care_v_fsm_pru_mult.png", care_v_fsm_pru_mult)
+# i mean, ridiculous graph really, but they dont NOT track, and in general
+# the care effect is higher - rate in care is about 2.5/3 times the overall fsm rate..
+
+
+
+care_v_fsm_pru <- school_pru %>% 
+  filter(age <= 15) %>% 
+  group_by(end_period_year, fsm) %>% 
+  summarise(PRU = sum(PRU),
+            `Not PRU` = sum(`Not PRU`)) %>% 
+  mutate(pc_in_pru = PRU/(PRU + `Not PRU`)) %>% 
+  select(-c(PRU, `Not PRU`)) %>% 
+  pivot_wider(names_from = fsm,
+              values_from = pc_in_pru) %>% 
+  mutate(fsm_mult = `FSM eligible`/`Not FSM eligible`) %>% 
+  full_join(care_school_16to22 %>% 
+              mutate(pc_care = as.numeric(t_pru)/(as.numeric(t_secondary)+as.numeric(t_pru))) %>% 
+              select(end_period_year, pc_care) %>% 
+              full_join(school_pru %>% 
+                          group_by(end_period_year) %>% 
+                          summarise(`Not PRU` = sum(`Not PRU`),
+                                    PRU = sum(PRU)) %>% 
+                          mutate(pc_all = PRU/(PRU +`Not PRU`))) %>%
+              mutate(care_mult = pc_care/pc_all) %>% 
+              select(end_period_year, pc_care, care_mult)) %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = `FSM eligible`, colour = "fsm rate")) +
+  geom_line(aes(x=end_period_year, y = pc_care, colour = "care rate")) 
+
+care_v_fsm_pru
+ggsave(filename = "output/graphs/care_v_fsm_pru.png", care_v_fsm_pru)
+
+
+
+
+
 pc_fsm <- school_pru %>%
   filter(age <= 15,
          end_period_year <= 2020) %>% 
@@ -884,26 +949,139 @@ ggsave(filename = "output/graphs/pru_rate_bypov_girl.png", pru_rate_bypov_girl)
 # SHIT...SOME MULTIPLIER COMES FROM POVERTY.. SOME COMES FROM CARE...
 # WHAT PERCENTAGE IS DOWN TO WHAT....
 
+# so the rate of EVERYONE in care needs to be about 2.5/3 time higher than the rate of 
+# EVERYONE in poverty...
+# pru rate in care is about 4.5 percent in 2017 but is sdropping, like everything, downn to 3 in 2020
+
+# also the pc of total pru pupils that are in care is hovering around 3 for the years we have it!
+# that's 3pc who should be in RESIDENTIAL or NOT RESIDENTIAL
+
+# should we give prior the same likelyhood of PRU as current LAC (conditional on age & gen)?
+
 care_pov_pru <- care_pov %>% 
+  filter(age <= 15) %>% 
   pivot_wider(names_from = care,
               values_from = count) %>% 
   full_join(school_in_care %>% 
-              select(-c(count, pru)))
+              select(-c(count, pru))) %>% 
+  mutate(tot = Never + Prior + Residential + `Not residential`) %>% 
+  mutate(prucount_Prior = (pru_rate*tot)*2*Prior/(2*(Prior + Residential + `Not residential`) + Never),
+         prucount_Residential = (pru_rate*tot)*2*Residential/(2*(Prior + Residential + `Not residential`) + Never),
+         `prucount_Not residential` = (pru_rate*tot)*2*`Not residential`/(2*(Prior + Residential + `Not residential`) + Never),
+         prucount_Never = pru_rate*tot - `prucount_Not residential` - prucount_Residential - prucount_Prior) %>% 
+  select(-pru_rate, -tot) %>% 
+  rename(tot_Never = Never,
+         tot_Prior = Prior,
+         tot_Residential = Residential,
+         `tot_Not residential` = `Not residential`) %>% 
+  pivot_longer(c(starts_with("tot"), starts_with("prucount")), 
+               names_to = c("name", ".value"),
+               names_sep="_") %>% 
+  pivot_longer(c(Prior,Residential, `Not residential`, Never),
+               names_to = "care",
+               values_to = "count") %>% 
+  pivot_wider(names_from = name,
+              values_from = count) 
+
+# %>% 
+  mutate(`Not PRU` = tot - prucount) %>% 
+  rename(PRU = prucount) %>% 
+  select(-tot)
+
+
+care_pov_pru %>% 
+  group_by(end_period_year, state, care) %>% 
+  summarise(pru = sum(prucount),
+            tot = sum(tot)) %>% 
+  mutate(pru_rate = pru/tot) %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = pru_rate, group = state, colour = state)) +
+  facet_grid(~care)
+# kind of intresting how its like, almost as youd expect higher for the prior, then nres, then res
+# probably something to do with the age/gender (/poverty?) makeup
+# oh yeah it is....when i graphed all the care ones lie over eaach other
+
+care_pov_pru %>% 
+  group_by(end_period_year, state, care) %>% 
+  summarise(pru = sum(prucount),
+            tot = sum(tot)) %>% 
+  mutate(pru_rate = pru/tot) %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = pru_rate, group = care, colour = care)) +
+  facet_grid(~state)
+
+
+# pru rate in care is about 4.5 percent in 2017 but is sdropping, like everything, downn to 3 in 2020
+# checking this:
+care_pov_pru %>% 
+  filter(care %in% c("Residential", "Not residential")) %>% 
+  group_by(end_period_year) %>% 
+  summarise(pru = sum(prucount),
+            tot = sum(tot)) %>% 
+  mutate(pru_rate = pru/tot) %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = pru_rate))
+# ok not terrible
+# maybe a bit high
+# this wants the multiplier to be 2.75!
+
+# so the rate of EVERYONE in care needs to be about 2.5/3 time higher than the rate of 
+# EVERYONE in poverty...
+care_pov_pru %>% 
+  group_by(end_period_year, state) %>% 
+  summarise(pru = sum(prucount),
+            tot = sum(tot)) %>% 
+  mutate(pru_rate = pru/tot) %>% 
+  filter(state == "In poverty") %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = pru_rate))
+# right so this is a bit low! so the care multiplier is a little high?
+# ok changed it to 2.5... could be 2.75....
+# 2.75 pretty good
+
+# also the pc of total pru pupils that are in care is hovering around 3 for the years we have it!
+care_pov_pru %>% 
+  mutate(care2 = ifelse(care %in% c("Residential", "Not residential"), "LAC", "Not LAC")) %>% 
+  group_by(end_period_year, care2) %>% 
+  summarise(pru = sum(prucount)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year) %>% 
+  mutate(pc = pru/sum(pru)) %>% 
+  filter(care2 == "LAC") %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = pc))
+# ok this is too high!!!!
+# vring muoltiplier back down
+# this measure wants things to be about 2! going to go with this one for now
 
 
 
+care_pov_pru %>% 
+  group_by(end_period_year, gender, age, care) %>% 
+  summarise(pru = sum(prucount),
+            tot = sum(tot)) %>% 
+  mutate(pru_rate = pru/tot) %>% 
+  filter(gender == "Girls") %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = pru_rate, group = care, colour = care)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age)) 
 
 
+care_pov_pru %>% 
+  group_by(end_period_year, gender, age, care) %>% 
+  summarise(pru = sum(prucount),
+            tot = sum(tot)) %>% 
+  mutate(pru_rate = pru/tot) %>% 
+  filter(gender == "Boys") %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = pru_rate, group = care, colour = care)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age)) 
 
-
-
-
-
-
-
-
-
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # from recently but still the previous version # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
 
