@@ -981,7 +981,27 @@ care_pov_pru <- care_pov %>%
                names_to = "care",
                values_to = "count") %>% 
   pivot_wider(names_from = name,
-              values_from = count) 
+              values_from = count) %>% 
+  mutate(pru_rate = as.numeric(prucount)/as.numeric(tot)) %>% 
+  ungroup() %>% 
+  group_by(gender, age, state, care) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_rate = smooth.spline(end_period_year, pru_rate, lambda = 0.0001)$y) %>% # 0.0001 is decent
+  mutate(smooth_count = tot*smooth_rate)
+
+
+care_pov_pru %>% 
+  filter(gender == "Boys") %>% 
+  ggplot() +
+  # geom_line(aes(x=end_period_year, y = pru_rate, group = care, colour = care)) +
+  # geom_line(aes(x=end_period_year, y = smooth_rate, group = care, colour = care)) +
+  geom_line(aes(x=end_period_year, y = prucount, group = care, colour = care)) +
+  geom_line(aes(x=end_period_year, y = smooth_count, group = care, colour = care)) +
+  facet_grid(rows = vars(state),
+             cols = vars(age)) 
+
+
+
 
 # %>% 
   mutate(`Not PRU` = tot - prucount) %>% 
@@ -1078,6 +1098,12 @@ care_pov_pru %>%
   geom_line(aes(x=end_period_year, y = pru_rate, group = care, colour = care)) +
   facet_grid(rows = vars(gender),
              cols = vars(age)) 
+
+
+# # # # ## NOW IVE GOT TO DO THE SAME THING BUT FOR NEET!!!!# # # # ## # # # #
+# HAVE TO DIVIDE NEET UP INTO AGE GENDER NOT IN POVERTY & IN POVERTY;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # from recently but still the previous version # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

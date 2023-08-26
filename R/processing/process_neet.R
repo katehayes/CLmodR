@@ -49,12 +49,12 @@ neet <- neet_12to23_age %>%
   ungroup() %>% 
   group_by(gender, age) %>% 
   arrange(end_period_year) %>% 
-  mutate(smooth_pc = smooth.spline(end_period_year, pc_neet)$y)
+  mutate(smooth_pc = smooth.spline(end_period_year, pc_neet, lambda = 0.0001)$y)
 
 neet %>% 
   ggplot() +
-  geom_bar(aes(x = end_period_year, y = smooth_pc, fill = gender),
-           stat = "identity", position = "dodge") +
+  geom_line(aes(x = end_period_year, y = pc_neet, group = gender, colour = gender)) +
+  geom_line(aes(x = end_period_year, y = smooth_pc, group = gender, colour = gender)) +
   facet_wrap(~age)
 # seems fine
 

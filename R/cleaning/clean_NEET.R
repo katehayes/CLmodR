@@ -457,13 +457,58 @@ neet_vul_22 <- n_data %>%
          vul_pc_neet = VG_NEET_NK_percentage) %>% 
   select(-VG_cohort_percentage)
 
+# 35.9 and 32.5
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # extra piece# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+# https://ffteducationdatalab.org.uk/wp-content/uploads/2021/09/working_paper4.pdf
+# Post-16 activities at ages 16 and 17, 1999/2000 cohort of pupils who
+# experienced AP schools pre-16 
+# Table 2: Post-16 activities at ages 16 and 17, 1999/2000 cohort of pupils who
+# completed Key Stage 4 in state-funded mainstream schools 
 
-https://ffteducationdatalab.org.uk/wp-content/uploads/2021/09/working_paper4.pdf
+# NOTE TO SELF ALSO LOOK AT THE CUSTODY!!!!
+
+n_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/schools_extra.xlsx",
+                    sheet = 2)
+
+pru_neet <- n_data %>% 
+  mutate(destination = ifelse(destination == "Not in education, employment and training (NEET)",
+                              "NEET", "Not NEET")) %>% 
+  group_by(origin, age, term, destination) %>% 
+  summarise(pc = sum(pc)) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = destination,
+              values_from = pc) %>% 
+  group_by(origin) %>% 
+  arrange(age, term) %>% 
+  mutate(diff_NEET = lead(NEET) - NEET,
+         pc_entering_NEET = diff_NEET/`Not NEET`)
+
+entering_neet <- pru_neet %>% 
+  ggplot() +
+    geom_line(aes(x=interaction(term,age), y = pc_entering_NEET, group = origin, colour = origin))
+
+entering_neet
+ggsave(filename = "output/graphs/entering_neet.png", entering_neet)
+
+
+
+
+pru_to_neet <- n_data %>% 
+  filter(destination == "Not in education, employment and training (NEET)") %>% 
+  ggplot() +
+  geom_line(aes(x=term, y = pc, group = origin, colour = origin)) +
+  facet_grid(~age)
+pru_to_neet
+ggsave(filename = "output/graphs/pru_to_neet.png", pru_to_neet)
+
+
+# hhm so, every term some pc of the remainging students become neet
+
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # putting it together,# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
