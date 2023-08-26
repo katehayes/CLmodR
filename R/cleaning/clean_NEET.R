@@ -147,12 +147,13 @@ neet_18 <- n_data %>%
          neet = ifelse(grepl("neet", neet), "NEET", "Total")) %>% 
   pivot_wider(names_from = neet, 
               values_from = count) %>% 
+  mutate(NEET = (2.2/9.2)*NEET) %>% 
   mutate(`Not NEET` = Total - NEET) %>% 
   select(-Total) %>% 
   pivot_longer(c(NEET, `Not NEET`),
                names_to = "neet",
                values_to = "count")
-
+# 9.2%	2.2%	7.0%
 
 n_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/2018_NEET_and_participation_tables.xlsx",
                     sheet = 2, skip = 4)
@@ -203,12 +204,15 @@ neet_16 <- n_data %>%
          neet = ifelse(grepl("neet", neet), "NEET", "Total")) %>% 
   pivot_wider(names_from = neet, 
               values_from = count) %>% 
+  mutate(NEET = NEET*(2.8/10.2)) %>% 
   mutate(`Not NEET` = Total - NEET) %>% 
   select(-Total) %>% 
   pivot_longer(c(NEET, `Not NEET`),
                names_to = "neet",
                values_to = "count") 
 
+  # 10.2%	2.8%	7.4% 
+  
 # 2015 - HERE WE NO LONGER HAVE GENDER
 n_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/2015_local_authority_NEET_figures.xls",
                    sheet = 2, skip = 4)
@@ -225,7 +229,7 @@ neet_15 <- n_data %>%
   mutate(count_nk_16 = (pc_nk_16*100)*count_neet_16/(pc_neet_16*100),
          count_nk_17 = (pc_nk_17*100)*count_neet_17/(pc_neet_17*100)) %>% 
   mutate(count_16 = count_neet_16/pc_neet_16,
-         count_17 = count_neet_17/pc_neet_17) %>% 
+         count_17 = count_neet_17/pc_neet_17) # %>% 
   # mutate(count_notneet_16 = ((1-pc_neet_16)*100)*(count_neet_16/(pc_neet_16*100)),
   #        count_notneet_17 = ((1-pc_neet_17)*100)*(count_neet_17/(pc_neet_17*100))) %>% 
   select(-c(starts_with("pc"))) %>% 
@@ -516,7 +520,8 @@ ggsave(filename = "output/graphs/pru_to_neet.png", pru_to_neet)
 
 neet_16to23_age_gender <- neet_19to23 %>% 
   mutate(across(c(starts_with("count"), age), ~as.numeric(.x))) %>% 
-  mutate(NEET = count_neet + count_nk,
+  mutate(NEET = count_neet,
+        # NEET = count_neet + count_nk,
          `Not NEET` = count_avg_tot - NEET) %>% 
   select(c(end_period_year, gender, age, NEET, `Not NEET`)) %>% 
   pivot_longer(c(NEET, `Not NEET`),

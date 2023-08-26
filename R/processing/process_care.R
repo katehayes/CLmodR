@@ -900,7 +900,7 @@ school_in_care <- pop_estimate_01to20_age_gender %>%
   left_join(smooth_poverty %>% 
               select(end_period_year, spov_rate) %>% 
               filter(end_period_year %in% c(2010:2020))) %>% 
-  full_join(fsm_pru_mult) %>% 
+  full_join(fsm_pru_mult)  %>% 
   mutate(count_pru = pc_pru*pop,
          incl_count = pop*(1-spov_rate),
          excl_count = pop*spov_rate,

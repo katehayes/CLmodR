@@ -81,7 +81,7 @@ check <- gender_pc %>%
   filter(neet == "NEET") %>% 
   group_by(age) %>% 
   summarise(gen_mult = mean(gen_mult))
-# 1.4 and 1.5
+# 1.4 and 1.3
 
 
 
@@ -116,20 +116,21 @@ neet <- neet_12to23_age %>%
                        (neet_rate*(Boys_pop + Girls_pop)*1.4*Boys_pop/(1.4*Boys_pop + Girls_pop))/Boys_pop,
                        Boys),
          Boys = ifelse((end_period_year < 2016 & age == 17),
-                       (neet_rate*(Boys_pop + Girls_pop)*1.5*Boys_pop/(1.5*Boys_pop + Girls_pop))/Boys_pop,
+                       (neet_rate*(Boys_pop + Girls_pop)*1.3*Boys_pop/(1.3*Boys_pop + Girls_pop))/Boys_pop,
                        Boys),
          Girls = ifelse((end_period_year < 2016 & age == 16),
                         (neet_rate*(Boys_pop + Girls_pop)*Girls_pop/(1.4*Boys_pop + Girls_pop))/Girls_pop,
                        Girls),
          Girls = ifelse((end_period_year < 2016 & age == 17),
-                       (neet_rate*(Boys_pop + Girls_pop)*Girls_pop/(1.5*Boys_pop + Girls_pop))/Girls_pop,
+                       (neet_rate*(Boys_pop + Girls_pop)*Girls_pop/(1.3*Boys_pop + Girls_pop))/Girls_pop,
                        Girls)) %>% 
-  # neet %>% 
-  #   ggplot() +
-  #   geom_line(aes(x = end_period_year, y = neet_rate)) +
-  #   geom_line(aes(x = end_period_year, y = Boys, colour = "Boys")) +
-  #   geom_line(aes(x = end_period_year, y = Girls, colour = "Girls")) +
-  #   facet_grid(~age)
+#   neet %>%
+#     ggplot() +
+#     geom_line(aes(x = end_period_year, y = neet_rate)) +
+#     geom_line(aes(x = end_period_year, y = Boys, colour = "Boys")) +
+#     geom_line(aes(x = end_period_year, y = Girls, colour = "Girls")) +
+#     facet_grid(~age)
+# # WEIRD SPIKE IN 16 YEAR OLDS IN 2015....
   group_by(age) %>% 
   arrange(end_period_year) %>% 
   mutate(Girls = ifelse(end_period_year == 2010, lead(Girls), Girls),
@@ -156,15 +157,147 @@ neet <- neet_12to23_age %>%
 # then check whether with the transition from pru percentages you got, see whether that all works
 
 
+  # WORK OUT POVERTY PCS
+
+pov_neet <- pop_estimate_01to20_age_gender %>%
+  filter(level == "Birmingham",
+         age %in% c(16:17),
+         end_period_year >= 2010) %>% 
+  group_by(end_period_year, gender, age) %>% 
+  summarise(pop = sum(count)) %>% 
+  left_join(smooth_poverty %>% 
+              select(end_period_year, spov_rate) %>% 
+              filter(end_period_year %in% c(2010:2020))) %>% 
+  full_join(neet %>% 
+              ungroup() %>% 
+              group_by(end_period_year, gender, age) %>% 
+              mutate(neet_rate = count/sum(count)) %>% 
+              filter(neet == "NEET") %>% 
+              select(-c(neet, count))) %>% 
+  mutate(count_neet = neet_rate*pop,
+         incl_count = pop*(1-spov_rate),
+         excl_count = pop*spov_rate,
+         incl_neet = count_neet*(1-spov_rate)/((1-spov_rate) + 2.5*spov_rate),
+         excl_neet = count_neet*2.5*spov_rate/((1-spov_rate) + 2.5*spov_rate)) %>% 
+  select(c(end_period_year, gender, age, incl_count, excl_count, incl_neet, excl_neet)) %>% 
+  pivot_longer(c(starts_with("incl"), starts_with("excl")), 
+               names_to = c("state", ".value"),
+               names_sep="_",
+               values_to = "count") %>% 
+  mutate(state = ifelse(state == "incl", "Not in poverty", "In poverty")) %>% 
+  mutate(neet_rate = neet/count)
+
+
+care_pov_neet <- care_pov %>% 
+  filter(age >= 16) %>% 
+  pivot_wider(names_from = care,
+              values_from = count) %>% 
+  full_join(pov_neet %>% 
+              select(-c(count, neet))) %>% 
+  mutate(tot = Never + Prior + Residential + `Not residential`) %>%
+  mutate(neetcount_Prior = (neet_rate*tot)*3*Prior/(3*Prior + 5*(Residential + `Not residential`) + Never),
+         neetcount_Residential = (neet_rate*tot)*5*Residential/(3*Prior + 5*(Residential + `Not residential`) + Never),
+         `neetcount_Not residential` = (neet_rate*tot)*5*`Not residential`/(3*Prior + 5*(Residential + `Not residential`) + Never),
+         neetcount_Never = neet_rate*tot - `neetcount_Not residential` - neetcount_Residential - neetcount_Prior) %>% 
+  select(-neet_rate, -tot) %>% 
+  rename(tot_Never = Never,
+         tot_Prior = Prior,
+         tot_Residential = Residential,
+         `tot_Not residential` = `Not residential`) %>% 
+  pivot_longer(c(starts_with("tot"), starts_with("neetcount")), 
+               names_to = c("name", ".value"),
+               names_sep="_") %>% 
+  pivot_longer(c(Prior,Residential, `Not residential`, Never),
+               names_to = "care",
+               values_to = "count") %>% 
+  pivot_wider(names_from = name,
+              values_from = count) %>% 
+  mutate(neet_rate = as.numeric(neetcount)/as.numeric(tot)) %>% 
+  ungroup() %>% 
+  group_by(gender, age, state, care) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_rate = smooth.spline(end_period_year, neet_rate, lambda = 0.001)$y) %>% # 0.0001 is decent
+  # maybe its better to smooth out the insane spike,... i just dont know...
+  mutate(smooth_count = tot*smooth_rate)
+  
+ 
+care_pov_neet %>% 
+  filter(gender == "Boys") %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = neet_rate, group = care, colour = care)) +
+  geom_line(aes(x=end_period_year, y = smooth_rate, group = care, colour = care)) +
+  # geom_line(aes(x=end_period_year, y = neetcount, group = care, colour = care)) +
+  # geom_line(aes(x=end_period_year, y = smooth_count, group = care, colour = care)) +
+  facet_grid(rows = vars(state),
+             cols = vars(age)) 
+
+care_pov_neet %>% 
+  group_by(end_period_year, state, care) %>% 
+  summarise(neet = sum(smooth_count),
+            tot = sum(tot)) %>% 
+  mutate(neet_rate = neet/tot) %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = neet_rate, group = state, colour = state)) +
+  facet_grid(~care)
+
+
+care_pov_neet %>% 
+  group_by(end_period_year, state, care) %>% 
+  summarise(neet = sum(smooth_count),
+            tot = sum(tot)) %>% 
+  mutate(neet_rate = neet/tot) %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = neet_rate, group = care, colour = care)) +
+  facet_grid(~state)
+
+# 27\% 13\%  fsm neet to mainstream neet
+# disadvantaged about 50\% more likely to be neet
+# so between 50pc and 100pc more then, are the two estimates
+
+
+# and then CARE -
+#   av from 2016 is 30pc of 17to18 yo care leavers neet, lets say 35pc of 19to20 yos
+care_pov_neet %>% 
+  filter(care %in% c("Residential", "Not residential")) %>% 
+  group_by(end_period_year, age) %>% 
+  summarise(neet = sum(smooth_count),
+            tot = sum(tot)) %>% 
+  mutate(neet_rate = neet/tot) %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = neet_rate, group = age, colour = age))
+# this is currently too low
+
+
+care_pov_neet %>% 
+  group_by(end_period_year, state) %>% 
+  summarise(neet = sum(neetcount),
+            tot = sum(tot)) %>% 
+  mutate(neet_rate = neet/tot) %>% 
+  # filter(state == "In poverty") %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = neet_rate, group = state, colour = state))
 
 
 
 
+# REALLY NOT SURE ABOUT THIS BUT LETS LEAVE IT HERE UNTILL WE CHECK WHETHER THE TRANSITIONS
+# FROM PRU TO NEET ETC WOULD WORK WITH THIS NEET DIST
+care_pov_neet %>% 
+  group_by(end_period_year, gender, age, care, state) %>% 
+  summarise(neet = sum(smooth_count),
+            tot = sum(tot)) %>% 
+  mutate(neet_rate = neet/tot) %>% 
+  filter(gender == "Boys") %>% 
+  ggplot() +
+  geom_line(aes(x=end_period_year, y = neet_rate, group = care, colour = care)) +
+  facet_grid(rows = vars(age),
+             cols = vars(state)) 
 
 
 
-
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # from recently but still the previous version # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
 neet <- neet_12to23_age %>% 
