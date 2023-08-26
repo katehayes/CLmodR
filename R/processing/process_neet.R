@@ -10,12 +10,162 @@ gender_pc <- neet_16to23_age_gender %>%
   group_by(end_period_year, age) %>% 
   mutate(pc = count/sum(count)) %>% 
   ungroup() %>% 
-  group_by(gender, age)
-
-# %>% 
+  group_by(gender, age) 
+ %>% 
   summarise(pc = mean(pc))
 
 ok!! essentially 60:40
+
+
+
+gender_pc <- neet_16to23_age_gender %>% 
+  filter(gender != "Unknown") %>% 
+  group_by(end_period_year, age, gender) %>% 
+  mutate(neet_rate = count/sum(count)) %>% 
+  ungroup() %>% 
+  bind_rows(data_frame(end_period_year = c(2017, 2017, 2017, 2017),
+                       gender = c("Girls", "Girls", "Boys", "Boys"),
+                       age = c(16,17,16,17),
+                       neet = c("NEET", "NEET", "NEET", "NEET"))) %>% 
+  bind_rows(data_frame(end_period_year = c(2017, 2017, 2017, 2017),
+                       gender = c("Girls", "Girls", "Boys", "Boys"),
+                       age = c(16,17,16,17),
+                       neet = c("Not NEET", "Not NEET", "Not NEET", "Not NEET"))) %>% 
+  group_by(age, gender, neet) %>% 
+  arrange(end_period_year) %>% 
+  mutate(neet_rate = na.approx(neet_rate))
+  
+  
+gen_mult_neet <- gender_pc %>% 
+  select(-count) %>% 
+  pivot_wider(names_from = gender,
+              values_from = neet_rate) %>% 
+  mutate(gen_mult = Boys/Girls) %>% 
+  filter(neet == "NEET") %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = gen_mult)) +
+  facet_grid(~age)
+gen_mult_neet
+ggsave(filename = "output/graphs/gen_mult_neet.png", gen_mult_neet)
+
+  
+neet_rate <- neet_12to23_age %>% 
+  group_by(end_period_year, age) %>% 
+  mutate(neet_rate = count/sum(count)) %>% 
+  ungroup() %>% 
+  bind_rows(data_frame(end_period_year = c(2017, 2017, 2017, 2017),
+                       age = c(16,17,16,17),
+                       neet = c("NEET", "NEET", "Not NEET", "Not NEET"))) %>% 
+  group_by(age, neet) %>% 
+  arrange(end_period_year) %>% 
+  mutate(neet_rate = na.approx(neet_rate)) %>% 
+  filter(neet == "NEET")
+
+
+neet_rate_bygen <- gender_pc %>% 
+  filter(neet == "NEET") %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = neet_rate, group = gender, colour = gender)) +
+  geom_line(data = neet_rate, aes(x = end_period_year, y = neet_rate)) +
+  facet_grid(~age)
+neet_rate_bygen
+ggsave(filename = "output/graphs/neet_rate_bygen.png", neet_rate_bygen)
+
+
+
+check <- gender_pc %>% 
+  select(-count) %>% 
+  pivot_wider(names_from = gender,
+              values_from = neet_rate) %>% 
+  mutate(gen_mult = Boys/Girls) %>% 
+  filter(neet == "NEET") %>% 
+  group_by(age) %>% 
+  summarise(gen_mult = mean(gen_mult))
+# 1.4 and 1.5
+
+
+
+neet <- neet_12to23_age %>% 
+  group_by(end_period_year, age) %>% 
+  mutate(neet_rate = count/sum(count)) %>% 
+  ungroup() %>% 
+  bind_rows(data_frame(end_period_year = c(2017, 2017, 2017, 2017),
+                       age = c(16,17,16,17),
+                       neet = c("NEET", "NEET", "Not NEET", "Not NEET"))) %>% 
+  group_by(age, neet) %>% 
+  arrange(end_period_year) %>% 
+  mutate(neet_rate = na.approx(neet_rate)) %>% 
+  filter(neet == "NEET") %>% 
+  select(-c(count, neet)) %>% 
+  full_join(gender_pc %>% 
+              filter(neet == "NEET") %>% 
+              select(-c(count, neet)) %>% 
+              pivot_wider(names_from = gender,
+                          values_from = neet_rate)) %>% 
+  full_join(pop_estimate_01to20_age_gender %>%
+              filter(level == "Birmingham",
+                     age %in% c(16:17),
+                     end_period_year >= 2010) %>% 
+              group_by(end_period_year, gender, age) %>% 
+              summarise(pop = sum(count)) %>% 
+              pivot_wider(names_from = gender,
+                          values_from = pop) %>% 
+              rename(Boys_pop = Boys,
+                     Girls_pop = Girls)) %>% 
+  mutate(Boys = ifelse((end_period_year < 2016 & age == 16),
+                       (neet_rate*(Boys_pop + Girls_pop)*1.4*Boys_pop/(1.4*Boys_pop + Girls_pop))/Boys_pop,
+                       Boys),
+         Boys = ifelse((end_period_year < 2016 & age == 17),
+                       (neet_rate*(Boys_pop + Girls_pop)*1.5*Boys_pop/(1.5*Boys_pop + Girls_pop))/Boys_pop,
+                       Boys),
+         Girls = ifelse((end_period_year < 2016 & age == 16),
+                        (neet_rate*(Boys_pop + Girls_pop)*Girls_pop/(1.4*Boys_pop + Girls_pop))/Girls_pop,
+                       Girls),
+         Girls = ifelse((end_period_year < 2016 & age == 17),
+                       (neet_rate*(Boys_pop + Girls_pop)*Girls_pop/(1.5*Boys_pop + Girls_pop))/Girls_pop,
+                       Girls)) %>% 
+  # neet %>% 
+  #   ggplot() +
+  #   geom_line(aes(x = end_period_year, y = neet_rate)) +
+  #   geom_line(aes(x = end_period_year, y = Boys, colour = "Boys")) +
+  #   geom_line(aes(x = end_period_year, y = Girls, colour = "Girls")) +
+  #   facet_grid(~age)
+  group_by(age) %>% 
+  arrange(end_period_year) %>% 
+  mutate(Girls = ifelse(end_period_year == 2010, lead(Girls), Girls),
+         Boys = ifelse(end_period_year == 2010, lead(Boys), Boys)) %>% 
+  mutate(Boys_NEET = Boys_pop*Boys,
+         `Boys_Not NEET` = Boys_pop - Boys_NEET,
+         Girls_NEET = Girls_pop*Girls,
+         `Girls_Not NEET` = Girls_pop - Girls_NEET) %>% 
+  filter(end_period_year <= 2020) %>% 
+  select(c(end_period_year, age, 
+           starts_with("Girls_N"), starts_with("Boys_N"))) %>% 
+  pivot_longer(c(starts_with("Girls"), starts_with("Boys")), 
+               names_to = c("gender", ".value"),
+               names_sep="_") %>% 
+  pivot_longer(c(starts_with("N")),
+               names_to = "neet",
+               values_to = "count")
+                        
+                        
+                        
+                        
+# SO NOW WE NEED TO ADD IN POVERTY AND CARE
+# could do that,
+# then check whether with the transition from pru percentages you got, see whether that all works
+
+
+
+
+
+
+
+
+
+
+
+
 
 neet <- neet_12to23_age %>% 
   pivot_wider(names_from = neet,
