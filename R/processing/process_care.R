@@ -987,6 +987,7 @@ care_pov_pru <- care_pov %>%
   group_by(gender, age, state, care) %>% 
   arrange(end_period_year) %>% 
   mutate(smooth_rate = smooth.spline(end_period_year, pru_rate, lambda = 0.0001)$y) %>% # 0.0001 is decent
+  mutate(smooth_rate = ifelse(smooth_rate < 0, 0, smooth_rate)) %>% 
   mutate(smooth_count = tot*smooth_rate)
 
 

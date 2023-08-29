@@ -13,7 +13,9 @@ age_in <- pop_estimate_01to20_age_gender %>%
   mutate(week = (end_period_year - 2009)*52) %>%
   select(-c(end_period_year, end_period_month, level, period_length))
 
-age_in2 <- pop_estimate_01to20_age_gender %>%
+
+
+age_in <- pop_estimate_01to20_age_gender %>%
   filter(age == 10, level == "Birmingham")  %>% 
   # select(c(end_period_year, gender, count))  %>% 
   # pivot_wider(names_from = gender, values_from = count) %>% 

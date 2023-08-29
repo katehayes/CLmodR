@@ -164,7 +164,78 @@ care_pov <- care_ic %>%
 
 
 
+pov_care_school <- care_pov_pru %>% 
+  mutate(Mainstream = tot - smooth_count) %>% 
+  select(-c(tot, pru_rate, prucount, smooth_rate)) %>% 
+  rename(PRU = smooth_count) %>% 
+  pivot_longer(c(PRU, Mainstream),
+               names_to = "school",
+               values_to = "count") %>% 
+  bind_rows(care_pov_neet %>% 
+              mutate(Mainstream = tot - smooth_count) %>% 
+              select(-c(tot, neet_rate, neetcount, smooth_rate)) %>% 
+              rename(NEET = smooth_count) %>% 
+              pivot_longer(c(NEET, Mainstream),
+                           names_to = "school",
+                           values_to = "count")) %>% 
+  arrange(end_period_year, age)
 
+
+
+
+pru_v_neet <- pov_care_school %>% 
+  add_cohort()  %>% 
+  group_by(cohort, age, gender, school) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(cohort, age, gender) %>% 
+  mutate(rate = count/sum(count)) %>% 
+  filter(school != "Mainstream") %>% 
+  ggplot() + 
+  geom_bar(aes(x = age, y = rate, fill = school), 
+           stat = "identity", position = "stack") +
+  facet_grid(rows = vars(gender),
+             cols = vars(cohort))
+
+ggsave(filename = "output/graphs/pru_v_neet.png", pru_v_neet)
+
+
+rates <- pov_care_school %>%
+  filter(age < 16) %>% 
+  group_by(end_period_year, gender, state, school) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year, gender, state) %>% 
+  mutate(pru_rate = count/sum(count)) %>% 
+  filter(school != "Mainstream") %>% 
+  select(-c(school, count)) %>% 
+  full_join(pov_care_school %>%
+              filter(age >= 16) %>% 
+              group_by(end_period_year, gender, state, school) %>% 
+              summarise(count = sum(count)) %>% 
+              ungroup() %>% 
+              group_by(end_period_year, gender, state) %>% 
+              mutate(neet_rate = count/sum(count)) %>% 
+              filter(school != "Mainstream") %>% 
+              select(-c(school, count))) %>% 
+  full_join(pov_care_school %>%
+              # mutate(care = ifelse(care == "Never", "No care experience", "Care experienced")) %>% 
+              mutate(care = ifelse(care %in% c("Never", "Prior"), "Not in care", "Care")) %>% 
+              group_by(end_period_year, gender, state, care) %>% 
+              summarise(count = sum(count)) %>% 
+              ungroup() %>% 
+              group_by(end_period_year, gender, state) %>% 
+              mutate(care_rate = count/sum(count)) %>% 
+              filter(care != "Not in care") %>% 
+              select(-c(care, count))) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pru_rate, colour = "PRU")) + 
+  geom_line(aes(x = end_period_year, y = neet_rate, colour = "NEET")) + 
+  geom_line(aes(x = end_period_year, y = care_rate, colour = "care")) + 
+  facet_grid(rows = vars(gender),
+             cols = vars(state))
+
+rates
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # unsuccessful experiment # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

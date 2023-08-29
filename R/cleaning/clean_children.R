@@ -1,4 +1,5 @@
-child_data <- read_ods("/Users/katehayes/temp_data/Local_level_open_data (2) 2/Children_Table.ods", sheet = 3)
+child_data <- read_ods("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/Local_level_open_data (2) 2/Children_Table.ods", sheet = 3)
+
 
 # Want to have birm, wm, ew
 # have by age AND sex AND ethnicity... pretty crazy!!
@@ -92,7 +93,7 @@ check <- child1011[[2]]
 
 # earlier year, 2009/10 - this year NO BIRMINGHAM LEVEL
 
-child_data <- read_xls("/Users/katehayes/temp_data/New Tables for Website/Regional tables.xls",
+child_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/New Tables for Website (1)/Regional tables.xls",
                        sheet = 5, skip = 4)
 
 child0910 <- child_data[c(3,12),] %>%

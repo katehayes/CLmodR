@@ -1,3 +1,32 @@
+# MAY
+# https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/articles/theeducationandsocialcarebackgroundofyoungpeoplewhointeractwiththecriminaljusticesystem/may2022#future-developments
+
+# offending among PRU attenders
+n_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/datadownload (1).xlsx",
+                    sheet = 11, skip = 2, n_max = 3)
+
+
+# offending among LAC
+n_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/datadownload (1).xlsx",
+                    sheet = 10, skip = 2, n_max = 3)
+
+
+# offending among FSM groups
+n_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/datadownload (1).xlsx",
+                    sheet = 17, skip = 2, n_max = 3)
+
+
+
+# DECEMBER
+# https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/datasets/theeducationbackgroundoflookedafterchildrenwhointeractwiththecriminaljusticesystem
+n_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/20221205datatables.xlsx",
+                    )
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# below is still relevant just older!!  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
 
 # FOR CARE HISTORY
 # Table 1.2b: Assessed care status(1) as a proportion of children assessed by
@@ -201,6 +230,10 @@ careconv_data <- c_data %>%
 
 
 c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/SFR50_2017_UnderlyingData (1)/SFR50_OC22017.csv")
+
+
+
+
 
 
 

@@ -1,7 +1,54 @@
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/children_14to21_age_gen_eth.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/children_14to21_age_gen_eth.Rdata")
 load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/children_10to21_age.Rdata")
 load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/children_10to21_gender.Rdata")
 load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/children_10to21_ethnicity.Rdata")
+
+
+children <- children_14to21_age_gen_eth %>% 
+  filter(level == "Birmingham",
+         end_period_year <= 2020,
+         age != "Unknown",
+         gender != "Unknown") %>% 
+  group_by(end_period_year, gender, age) %>% 
+  summarise(count = sum(count)) %>% 
+  full_join(pop_estimate_01to20_age_gender %>%
+              filter(level == "Birmingham",
+                     age %in% c(10:17),
+                     end_period_year >= 2014) %>% 
+              mutate(age = ifelse(age >= 15, "15-17", "10-14")) %>% 
+              group_by(end_period_year, gender, age) %>% 
+              summarise(pop = sum(count))) %>% 
+  mutate(rate = count / pop)
+
+
+disposal_rate_age_gen <- children %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = rate, group = gender, colour = gender)) +
+  facet_grid(~age)
+disposal_rate_age_gen
+ggsave(filename = "Output/Graphs/disposal_rate_age_gen.png", disposal_rate_age_gen)
+
+
+
+child_age_10to13 <- children_10to21_age %>% 
+  filter(level == "Birmingham") 
+# god the age categories are really annoying earlier thatn 2014
+
+
+  
+child_gen_10to13 <- children_10to21_gender %>% 
+    filter(level == "Birmingham",
+           gender != "Unknown") %>% 
+    group_by(end_period_year, gender) %>% 
+    summarise(count = sum(count)) %>% 
+    full_join(pop_estimate_01to20_age_gender %>%
+              filter(level == "Birmingham",
+                     age %in% c(16:17),
+                     end_period_year >= 2010) %>% 
+              select(c(end_period_year, gender, age, count)))
+
+
+
 
 
 # we'll check the distribution of age groups across genders in the 14-21 set
