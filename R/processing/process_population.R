@@ -27,7 +27,7 @@ age_in <- pop_estimate_01to20_age_gender %>%
   pivot_wider(names_from = gender, values_from = turn10_wkly) %>%
   mutate(week = (end_period_year - 2011)*52) %>%
   select(-c(end_period_year, end_period_month, level, period_length)) %>% 
-  add_row(Boys = 157, Girls = 143, week = 520) %>% 
+  add_row(Boys = 157, Girls = 143, week = 520) %>%
   add_row(Boys = 157, Girls = 143, week = 572)
 
 v2_turn10 <- age_in2 %>%

@@ -7,7 +7,9 @@ casc_model = odin::odin({
   # parameters # # # # # # # # # # # # # # # # # # # # # # # # # # # 
   N_gender <- user(2)
   age_up <- user(1/52) # rate of ageing out of your age compartment - 1/52
+ 
   tau <- user(0)
+  tau2 <- user(40)
 
   
   # delays # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -463,99 +465,108 @@ casc_model = odin::odin({
   excl_rate[] <- E[i] / (I[i] + E[i])
   
   # differential equations # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  deriv(IC1_10[]) <- 0.25*incl_rate[i]*turn10[i] - age_up*IC1_10_lag[i]
-  deriv(IC2_10[]) <- 0.25*incl_rate[i]*turn10[i] - age_up*IC2_10_lag[i]
-  deriv(IC3_10[]) <- 0.25*incl_rate[i]*turn10[i] - age_up*IC3_10_lag[i]
-  deriv(IC4_10[]) <- 0.25*incl_rate[i]*turn10[i] - age_up*IC4_10_lag[i]
+  deriv(IC1_10[]) <- 0.9842*incl_rate[i]*turn10[i] - age_up*IC1_10_lag[i] - f[i]*IC1_10[i] + r[i]*EC1_10[i]
+  deriv(IC2_10[]) <- 0.003*incl_rate[i]*turn10[i] - age_up*IC2_10_lag[i] - f[i]*IC2_10[i] + r[i]*EC2_10[i]
+  deriv(IC3_10[]) <- 0.0007*incl_rate[i]*turn10[i] - age_up*IC3_10_lag[i] - f[i]*IC3_10[i] + r[i]*EC3_10[i]
+  deriv(IC4_10[]) <- 0.0058*incl_rate[i]*turn10[i] - age_up*IC4_10_lag[i] - f[i]*IC4_10[i] + r[i]*EC4_10[i]
   
-  deriv(IC1_11[]) <- age_up*IC1_10_lag[i] - age_up*IC1_11_lag[i]
-  deriv(IC2_11[]) <- age_up*IC2_10_lag[i] - age_up*IC2_11_lag[i]
-  deriv(IC3_11[]) <- age_up*IC3_10_lag[i] - age_up*IC3_11_lag[i]
-  deriv(IC4_11[]) <- age_up*IC4_10_lag[i] - age_up*IC4_11_lag[i]
+  deriv(IC1_11[]) <- age_up*IC1_10_lag[i] - age_up*IC1_11_lag[i] - f[i]*IC1_11[i] + r[i]*EC1_11[i]
+  deriv(IC2_11[]) <- age_up*IC2_10_lag[i] - age_up*IC2_11_lag[i] - f[i]*IC2_11[i] + r[i]*EC2_11[i]
+  deriv(IC3_11[]) <- age_up*IC3_10_lag[i] - age_up*IC3_11_lag[i] - f[i]*IC3_11[i] + r[i]*EC3_11[i]
+  deriv(IC4_11[]) <- age_up*IC4_10_lag[i] - age_up*IC4_11_lag[i] - f[i]*IC4_11[i] + r[i]*EC4_11[i]
   
-  deriv(IC1_12[]) <- age_up*IC1_11_lag[i] - age_up*IC1_12_lag[i]
-  deriv(IC2_12[]) <- age_up*IC2_11_lag[i] - age_up*IC2_12_lag[i]
-  deriv(IC3_12[]) <- age_up*IC3_11_lag[i] - age_up*IC3_12_lag[i]
-  deriv(IC4_12[]) <- age_up*IC4_11_lag[i] - age_up*IC4_12_lag[i]
+  deriv(IC1_12[]) <- age_up*IC1_11_lag[i] - age_up*IC1_12_lag[i] - f[i]*IC1_12[i] + r[i]*EC1_12[i]
+  deriv(IC2_12[]) <- age_up*IC2_11_lag[i] - age_up*IC2_12_lag[i] - f[i]*IC2_12[i] + r[i]*EC2_12[i]
+  deriv(IC3_12[]) <- age_up*IC3_11_lag[i] - age_up*IC3_12_lag[i] - f[i]*IC3_12[i] + r[i]*EC3_12[i]
+  deriv(IC4_12[]) <- age_up*IC4_11_lag[i] - age_up*IC4_12_lag[i] - f[i]*IC4_12[i] + r[i]*EC4_12[i]
   
-  deriv(IC1_13[]) <- age_up*IC1_12_lag[i] - age_up*IC1_13_lag[i]
-  deriv(IC2_13[]) <- age_up*IC2_12_lag[i] - age_up*IC2_13_lag[i]
-  deriv(IC3_13[]) <- age_up*IC3_12_lag[i] - age_up*IC3_13_lag[i]
-  deriv(IC4_13[]) <- age_up*IC4_12_lag[i] - age_up*IC4_13_lag[i]
+  deriv(IC1_13[]) <- age_up*IC1_12_lag[i] - age_up*IC1_13_lag[i] - f[i]*IC1_13[i] + r[i]*EC1_13[i]
+  deriv(IC2_13[]) <- age_up*IC2_12_lag[i] - age_up*IC2_13_lag[i] - f[i]*IC2_13[i] + r[i]*EC2_13[i]
+  deriv(IC3_13[]) <- age_up*IC3_12_lag[i] - age_up*IC3_13_lag[i] - f[i]*IC3_13[i] + r[i]*EC3_13[i]
+  deriv(IC4_13[]) <- age_up*IC4_12_lag[i] - age_up*IC4_13_lag[i] - f[i]*IC4_13[i] + r[i]*EC4_13[i]
   
-  deriv(IC1_14[]) <- age_up*IC1_13_lag[i] - age_up*IC1_14_lag[i]
-  deriv(IC2_14[]) <- age_up*IC2_13_lag[i] - age_up*IC2_14_lag[i]
-  deriv(IC3_14[]) <- age_up*IC3_13_lag[i] - age_up*IC3_14_lag[i]
-  deriv(IC4_14[]) <- age_up*IC4_13_lag[i] - age_up*IC4_14_lag[i]
+  deriv(IC1_14[]) <- age_up*IC1_13_lag[i] - age_up*IC1_14_lag[i] - f[i]*IC1_14[i] + r[i]*EC1_14[i]
+  deriv(IC2_14[]) <- age_up*IC2_13_lag[i] - age_up*IC2_14_lag[i] - f[i]*IC2_14[i] + r[i]*EC2_14[i]
+  deriv(IC3_14[]) <- age_up*IC3_13_lag[i] - age_up*IC3_14_lag[i] - f[i]*IC3_14[i] + r[i]*EC3_14[i]
+  deriv(IC4_14[]) <- age_up*IC4_13_lag[i] - age_up*IC4_14_lag[i] - f[i]*IC4_14[i] + r[i]*EC4_14[i]
   
-  deriv(IC1_15[]) <- age_up*IC1_14_lag[i] - age_up*IC1_15_lag[i]
-  deriv(IC2_15[]) <- age_up*IC2_14_lag[i] - age_up*IC2_15_lag[i]
-  deriv(IC3_15[]) <- age_up*IC3_14_lag[i] - age_up*IC3_15_lag[i]
-  deriv(IC4_15[]) <- age_up*IC4_14_lag[i] - age_up*IC4_15_lag[i]
+  deriv(IC1_15[]) <- age_up*IC1_14_lag[i] - age_up*IC1_15_lag[i] - f[i]*IC1_15[i] + r[i]*EC1_15[i]
+  deriv(IC2_15[]) <- age_up*IC2_14_lag[i] - age_up*IC2_15_lag[i] - f[i]*IC2_15[i] + r[i]*EC2_15[i]
+  deriv(IC3_15[]) <- age_up*IC3_14_lag[i] - age_up*IC3_15_lag[i] - f[i]*IC3_15[i] + r[i]*EC3_15[i]
+  deriv(IC4_15[]) <- age_up*IC4_14_lag[i] - age_up*IC4_15_lag[i] - f[i]*IC4_15[i] + r[i]*EC4_15[i]
   
-  deriv(IC1_16[]) <- age_up*IC1_15_lag[i] - age_up*IC1_16_lag[i]
-  deriv(IC2_16[]) <- age_up*IC2_15_lag[i] - age_up*IC2_16_lag[i]
-  deriv(IC3_16[]) <- age_up*IC3_15_lag[i] - age_up*IC3_16_lag[i]
-  deriv(IC4_16[]) <- age_up*IC4_15_lag[i] - age_up*IC4_16_lag[i]
+  deriv(IC1_16[]) <- age_up*IC1_15_lag[i] - age_up*IC1_16_lag[i] - f[i]*IC1_16[i] + r[i]*EC1_16[i]
+  deriv(IC2_16[]) <- age_up*IC2_15_lag[i] - age_up*IC2_16_lag[i] - f[i]*IC2_16[i] + r[i]*EC2_16[i]
+  deriv(IC3_16[]) <- age_up*IC3_15_lag[i] - age_up*IC3_16_lag[i] - f[i]*IC3_16[i] + r[i]*EC3_16[i]
+  deriv(IC4_16[]) <- age_up*IC4_15_lag[i] - age_up*IC4_16_lag[i] - f[i]*IC4_16[i] + r[i]*EC4_16[i]
   
-  deriv(IC1_17[]) <- age_up*IC1_16_lag[i] - age_up*IC1_17_lag[i]
-  deriv(IC2_17[]) <- age_up*IC2_16_lag[i] - age_up*IC2_17_lag[i]
-  deriv(IC3_17[]) <- age_up*IC3_16_lag[i] - age_up*IC3_17_lag[i]
-  deriv(IC4_17[]) <- age_up*IC4_16_lag[i] - age_up*IC4_17_lag[i]
-  
-  
+  deriv(IC1_17[]) <- age_up*IC1_16_lag[i] - age_up*IC1_17_lag[i] - f[i]*IC1_17[i] + r[i]*EC1_17[i]
+  deriv(IC2_17[]) <- age_up*IC2_16_lag[i] - age_up*IC2_17_lag[i] - f[i]*IC2_17[i] + r[i]*EC2_17[i]
+  deriv(IC3_17[]) <- age_up*IC3_16_lag[i] - age_up*IC3_17_lag[i] - f[i]*IC3_17[i] + r[i]*EC3_17[i]
+  deriv(IC4_17[]) <- age_up*IC4_16_lag[i] - age_up*IC4_17_lag[i] - f[i]*IC4_17[i] + r[i]*EC4_17[i]
   
   
   
-  deriv(EC1_10[]) <- 0.25*excl_rate[i]*turn10[i] - age_up*EC1_10_lag[i]
-  deriv(EC2_10[]) <- 0.25*excl_rate[i]*turn10[i] - age_up*EC2_10_lag[i]
-  deriv(EC3_10[]) <- 0.25*excl_rate[i]*turn10[i] - age_up*EC3_10_lag[i]
-  deriv(EC4_10[]) <- 0.25*excl_rate[i]*turn10[i] - age_up*EC4_10_lag[i]
+  deriv(EC1_10[]) <- 0.967*excl_rate[i]*turn10[i] - age_up*EC1_10_lag[i] - r[i]*EC1_10[i] + f[i]*IC1_10[i]
+  deriv(EC2_10[]) <- 0.01*excl_rate[i]*turn10[i] - age_up*EC2_10_lag[i] - r[i]*EC2_10[i] + f[i]*IC2_10[i]
+  deriv(EC3_10[]) <- 0.003*excl_rate[i]*turn10[i] - age_up*EC3_10_lag[i] - r[i]*EC3_10[i] + f[i]*IC3_10[i]
+  deriv(EC4_10[]) <- 0.02*excl_rate[i]*turn10[i] - age_up*EC4_10_lag[i] - r[i]*EC4_10[i] + f[i]*IC4_10[i]
   
-  deriv(EC1_11[]) <- age_up*EC1_10_lag[i] - age_up*EC1_11_lag[i]
-  deriv(EC2_11[]) <- age_up*EC2_10_lag[i] - age_up*EC2_11_lag[i]
-  deriv(EC3_11[]) <- age_up*EC3_10_lag[i] - age_up*EC3_11_lag[i]
-  deriv(EC4_11[]) <- age_up*EC4_10_lag[i] - age_up*EC4_11_lag[i]
+  deriv(EC1_11[]) <- age_up*EC1_10_lag[i] - age_up*EC1_11_lag[i] - r[i]*EC1_11[i] + f[i]*IC1_11[i]
+  deriv(EC2_11[]) <- age_up*EC2_10_lag[i] - age_up*EC2_11_lag[i] - r[i]*EC2_11[i] + f[i]*IC2_11[i]
+  deriv(EC3_11[]) <- age_up*EC3_10_lag[i] - age_up*EC3_11_lag[i] - r[i]*EC3_11[i] + f[i]*IC3_11[i]
+  deriv(EC4_11[]) <- age_up*EC4_10_lag[i] - age_up*EC4_11_lag[i] - r[i]*EC4_11[i] + f[i]*IC4_11[i]
   
-  deriv(EC1_12[]) <- age_up*EC1_11_lag[i] - age_up*EC1_12_lag[i]
-  deriv(EC2_12[]) <- age_up*EC2_11_lag[i] - age_up*EC2_12_lag[i]
-  deriv(EC3_12[]) <- age_up*EC3_11_lag[i] - age_up*EC3_12_lag[i]
-  deriv(EC4_12[]) <- age_up*EC4_11_lag[i] - age_up*EC4_12_lag[i]
+  deriv(EC1_12[]) <- age_up*EC1_11_lag[i] - age_up*EC1_12_lag[i] - r[i]*EC1_12[i] + f[i]*IC1_12[i]
+  deriv(EC2_12[]) <- age_up*EC2_11_lag[i] - age_up*EC2_12_lag[i] - r[i]*EC2_12[i] + f[i]*IC2_12[i]
+  deriv(EC3_12[]) <- age_up*EC3_11_lag[i] - age_up*EC3_12_lag[i] - r[i]*EC3_12[i] + f[i]*IC3_12[i]
+  deriv(EC4_12[]) <- age_up*EC4_11_lag[i] - age_up*EC4_12_lag[i] - r[i]*EC4_12[i] + f[i]*IC4_12[i]
   
-  deriv(EC1_13[]) <- age_up*EC1_12_lag[i] - age_up*EC1_13_lag[i]
-  deriv(EC2_13[]) <- age_up*EC2_12_lag[i] - age_up*EC2_13_lag[i]
-  deriv(EC3_13[]) <- age_up*EC3_12_lag[i] - age_up*EC3_13_lag[i]
-  deriv(EC4_13[]) <- age_up*EC4_12_lag[i] - age_up*EC4_13_lag[i]
+  deriv(EC1_13[]) <- age_up*EC1_12_lag[i] - age_up*EC1_13_lag[i] - r[i]*EC1_13[i] + f[i]*IC1_13[i]
+  deriv(EC2_13[]) <- age_up*EC2_12_lag[i] - age_up*EC2_13_lag[i] - r[i]*EC2_13[i] + f[i]*IC2_13[i]
+  deriv(EC3_13[]) <- age_up*EC3_12_lag[i] - age_up*EC3_13_lag[i] - r[i]*EC3_13[i] + f[i]*IC3_13[i]
+  deriv(EC4_13[]) <- age_up*EC4_12_lag[i] - age_up*EC4_13_lag[i] - r[i]*EC4_13[i] + f[i]*IC4_13[i]
   
-  deriv(EC1_14[]) <- age_up*EC1_13_lag[i] - age_up*EC1_14_lag[i]
-  deriv(EC2_14[]) <- age_up*EC2_13_lag[i] - age_up*EC2_14_lag[i]
-  deriv(EC3_14[]) <- age_up*EC3_13_lag[i] - age_up*EC3_14_lag[i]
-  deriv(EC4_14[]) <- age_up*EC4_13_lag[i] - age_up*EC4_14_lag[i]
+  deriv(EC1_14[]) <- age_up*EC1_13_lag[i] - age_up*EC1_14_lag[i] - r[i]*EC1_14[i] + f[i]*IC1_14[i]
+  deriv(EC2_14[]) <- age_up*EC2_13_lag[i] - age_up*EC2_14_lag[i] - r[i]*EC2_14[i] + f[i]*IC2_14[i]
+  deriv(EC3_14[]) <- age_up*EC3_13_lag[i] - age_up*EC3_14_lag[i] - r[i]*EC3_14[i] + f[i]*IC3_14[i]
+  deriv(EC4_14[]) <- age_up*EC4_13_lag[i] - age_up*EC4_14_lag[i] - r[i]*EC4_14[i] + f[i]*IC4_14[i]
   
-  deriv(EC1_15[]) <- age_up*EC1_14_lag[i] - age_up*EC1_15_lag[i]
-  deriv(EC2_15[]) <- age_up*EC2_14_lag[i] - age_up*EC2_15_lag[i]
-  deriv(EC3_15[]) <- age_up*EC3_14_lag[i] - age_up*EC3_15_lag[i]
-  deriv(EC4_15[]) <- age_up*EC4_14_lag[i] - age_up*EC4_15_lag[i]
+  deriv(EC1_15[]) <- age_up*EC1_14_lag[i] - age_up*EC1_15_lag[i] - r[i]*EC1_15[i] + f[i]*IC1_15[i]
+  deriv(EC2_15[]) <- age_up*EC2_14_lag[i] - age_up*EC2_15_lag[i] - r[i]*EC2_15[i] + f[i]*IC2_15[i]
+  deriv(EC3_15[]) <- age_up*EC3_14_lag[i] - age_up*EC3_15_lag[i] - r[i]*EC3_15[i] + f[i]*IC3_15[i]
+  deriv(EC4_15[]) <- age_up*EC4_14_lag[i] - age_up*EC4_15_lag[i] - r[i]*EC4_15[i] + f[i]*IC4_15[i]
   
-  deriv(EC1_16[]) <- age_up*EC1_15_lag[i] - age_up*EC1_16_lag[i]
-  deriv(EC2_16[]) <- age_up*EC2_15_lag[i] - age_up*EC2_16_lag[i]
-  deriv(EC3_16[]) <- age_up*EC3_15_lag[i] - age_up*EC3_16_lag[i]
-  deriv(EC4_16[]) <- age_up*EC4_15_lag[i] - age_up*EC4_16_lag[i]
+  deriv(EC1_16[]) <- age_up*EC1_15_lag[i] - age_up*EC1_16_lag[i] - r[i]*EC1_16[i] + f[i]*IC1_16[i]
+  deriv(EC2_16[]) <- age_up*EC2_15_lag[i] - age_up*EC2_16_lag[i] - r[i]*EC2_16[i] + f[i]*IC2_16[i]
+  deriv(EC3_16[]) <- age_up*EC3_15_lag[i] - age_up*EC3_16_lag[i] - r[i]*EC3_16[i] + f[i]*IC3_16[i]
+  deriv(EC4_16[]) <- age_up*EC4_15_lag[i] - age_up*EC4_16_lag[i] - r[i]*EC4_16[i] + f[i]*IC4_16[i]
   
-  deriv(EC1_17[]) <- age_up*EC1_16_lag[i] - age_up*EC1_17_lag[i]
-  deriv(EC2_17[]) <- age_up*EC2_16_lag[i] - age_up*EC2_17_lag[i]
-  deriv(EC3_17[]) <- age_up*EC3_16_lag[i] - age_up*EC3_17_lag[i]
-  deriv(EC4_17[]) <- age_up*EC4_16_lag[i] - age_up*EC4_17_lag[i]
+  deriv(EC1_17[]) <- age_up*EC1_16_lag[i] - age_up*EC1_17_lag[i] - r[i]*EC1_17[i] + f[i]*IC1_17[i]
+  deriv(EC2_17[]) <- age_up*EC2_16_lag[i] - age_up*EC2_17_lag[i] - r[i]*EC2_17[i] + f[i]*IC2_17[i]
+  deriv(EC3_17[]) <- age_up*EC3_16_lag[i] - age_up*EC3_17_lag[i] - r[i]*EC3_17[i] + f[i]*IC3_17[i]
+  deriv(EC4_17[]) <- age_up*EC4_16_lag[i] - age_up*EC4_17_lag[i] - r[i]*EC4_17[i] + f[i]*IC4_17[i]
+  
   
   # interpolation section
-  turn10[] <- interpolate(tt, y, "linear")
+  turn10[] <- interpolate(tt, y, "spline")
   dim(turn10) <- N_gender
   tt[] <- user()
   y[, ] <- user()
   dim(tt) <- user()
   dim(y) <- c(length(tt), length(turn10))
   
-  tau2 <- user(40)
+  r[] <- interpolate(rft, ri, "spline")
+  dim(r) <- N_gender
+  rft[] <- user()
+  ri[, ] <- user()
+  dim(rft) <- user()
+  dim(ri) <- c(length(rft), length(r))
+  
+  f[] <- interpolate(rft, fa, "spline")
+  dim(f) <- N_gender
+  fa[, ] <- user()
+  dim(fa) <- c(length(rft), length(f))
   
   
 },
@@ -563,6 +574,9 @@ target = 'c')
 
 casc_pars <- list(tt = t_turn10,
                   y = v_turn10,
+                  rft = rf_t_scenario,
+                  ri = rise_scenario,
+                  fa = fall_scenario,
                   
                   IC1_10_ini = c(care_ic %>% 
                                    filter(age == 10,
@@ -1167,7 +1181,7 @@ casc_pars <- list(tt = t_turn10,
                                    select(pri_excl) %>% 
                                    unlist()),
                   tau = 20,
-                  tau2 = 25
+                  tau2 = 0
 )
 
 
