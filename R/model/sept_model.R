@@ -1,4 +1,45 @@
-
+cl_draft = odin::odin({
+ 
+##############################################################################################################################
+##PARAMETERS########################################################################################################################################
+##############################################################################################################################
+  # number of gender classes
+  N_gender <- user(2)
+  
+  # age AND class mixing :()
+  beta <- user(0.25) 
+  
+  #gender mixing
+  x[,] <- user(0) 
+  
+  #contact rate per week - 1 a day for 7 days
+  c <- user(7) 
+  
+  #recruitment per contact?
+  rec_i[] <- user(0)
+  rec_e[] <- user(0) 
+  rec_p[] <- user(0) 
+  rec_cust <- user(0) 
+  
+  
+  # rate of ageing out of your age compartment - 1/52
+  age_up <- user(1/52) 
+  # desination on ageing in
+  pc_incl <- user(0)
+  pc_excl <- user(0)
+    
+  
+  #percentage of custody remands that result in a custodial sentence
+  r2c <- user(0.33) 
+  
+  
+  det <- user(0) #rate of CL workers resolving to stop while doing a custodial sentence (note, they can be recruited back later)
+  des <- user(0.000) #probability of desisting at other times
+  
+  
+  
+  #PARAMETERS THAT MIGHT BE DELETED LATER
+  
 ##############################################################################################################################
 ## SETTING DIMENSIONS ####################################################################
 ##############################################################################################################################
@@ -1689,6 +1730,7 @@ dim(EC4S2J5W_17) <- N_gender
 ##############################################################################################################################
 ## groups of states ####################################################################
 ##############################################################################################################################
+# community states
 dim(com_IU_10) <- N_gender
 dim(com_EU_10) <- N_gender
 dim(com_PU_10) <- N_gender
@@ -1787,6 +1829,109 @@ dim(com_E_17) <- N_gender
 dim(com_P_17) <- N_gender
 
 dim(com) <- N_gender
+
+
+# incarcerated states
+dim(cust_IU_10) <- N_gender
+dim(cust_EU_10) <- N_gender
+dim(cust_PU_10) <- N_gender
+
+dim(cust_IU_11) <- N_gender
+dim(cust_EU_11) <- N_gender
+dim(cust_PU_11) <- N_gender
+
+dim(cust_IU_12) <- N_gender
+dim(cust_EU_12) <- N_gender
+dim(cust_PU_12) <- N_gender
+
+dim(cust_IU_13) <- N_gender
+dim(cust_EU_13) <- N_gender
+dim(cust_PU_13) <- N_gender
+
+dim(cust_IU_14) <- N_gender
+dim(cust_EU_14) <- N_gender
+dim(cust_PU_14) <- N_gender
+
+dim(cust_IU_15) <- N_gender
+dim(cust_EU_15) <- N_gender
+dim(cust_PU_15) <- N_gender
+
+dim(cust_IU_16) <- N_gender
+dim(cust_EU_16) <- N_gender
+dim(cust_PU_16) <- N_gender
+
+dim(cust_IU_17) <- N_gender
+dim(cust_EU_17) <- N_gender
+dim(cust_PU_17) <- N_gender
+
+
+dim(cust_IW_10) <- N_gender
+dim(cust_EW_10) <- N_gender
+dim(cust_PW_10) <- N_gender
+
+dim(cust_IW_11) <- N_gender
+dim(cust_EW_11) <- N_gender
+dim(cust_PW_11) <- N_gender
+
+dim(cust_IW_12) <- N_gender
+dim(cust_EW_12) <- N_gender
+dim(cust_PW_12) <- N_gender
+
+dim(cust_IW_13) <- N_gender
+dim(cust_EW_13) <- N_gender
+dim(cust_PW_13) <- N_gender
+
+dim(cust_IW_14) <- N_gender
+dim(cust_EW_14) <- N_gender
+dim(cust_PW_14) <- N_gender
+
+dim(cust_IW_15) <- N_gender
+dim(cust_EW_15) <- N_gender
+dim(cust_PW_15) <- N_gender
+
+dim(cust_IW_16) <- N_gender
+dim(cust_EW_16) <- N_gender
+dim(cust_PW_16) <- N_gender
+
+dim(cust_IW_17) <- N_gender
+dim(cust_EW_17) <- N_gender
+dim(cust_PW_17) <- N_gender
+
+
+dim(cust_I_10) <- N_gender
+dim(cust_E_10) <- N_gender
+dim(cust_P_10) <- N_gender
+
+dim(cust_I_11) <- N_gender
+dim(cust_E_11) <- N_gender
+dim(cust_P_11) <- N_gender
+
+dim(cust_I_12) <- N_gender
+dim(cust_E_12) <- N_gender
+dim(cust_P_12) <- N_gender
+
+dim(cust_I_13) <- N_gender
+dim(cust_E_13) <- N_gender
+dim(cust_P_13) <- N_gender
+
+dim(cust_I_14) <- N_gender
+dim(cust_E_14) <- N_gender
+dim(cust_P_14) <- N_gender
+
+dim(cust_I_15) <- N_gender
+dim(cust_E_15) <- N_gender
+dim(cust_P_15) <- N_gender
+
+dim(cust_I_16) <- N_gender
+dim(cust_E_16) <- N_gender
+dim(cust_P_16) <- N_gender
+
+dim(cust_I_17) <- N_gender
+dim(cust_E_17) <- N_gender
+dim(cust_P_17) <- N_gender
+
+dim(cust) <- N_gender
+
 
 ##############################################################################################################################
 ## flows ####################################################################
@@ -10586,10 +10731,1893 @@ dim(cl_mix_i_17) <- c(N_gender, N_gender)
 dim(cl_mix_e_17) <- c(N_gender, N_gender)
 dim(cl_mix_p_17) <- c(N_gender, N_gender)
 
+
+##############################################################################################################################
+## parameters ####################################################################
+##############################################################################################################################
+
+
+dim(t10_ic1s1j1u) <- N_gender
+dim(t10_ic2s1j1u) <- N_gender
+dim(t10_ic3s1j1u) <- N_gender
+dim(t10_ic4s1j1u) <- N_gender
+
+dim(t10_ic1s2j1u) <- N_gender
+dim(t10_ic2s2j1u) <- N_gender
+dim(t10_ic3s2j1u) <- N_gender
+dim(t10_ic4s2j1u) <- N_gender
+
+dim(t10_ic1s1j2u) <- N_gender
+dim(t10_ic2s1j2u) <- N_gender
+dim(t10_ic3s1j2u) <- N_gender
+dim(t10_ic4s1j2u) <- N_gender
+
+dim(t10_ic1s2j2u) <- N_gender
+dim(t10_ic2s2j2u) <- N_gender
+dim(t10_ic3s2j2u) <- N_gender
+dim(t10_ic4s2j2u) <- N_gender
+
+dim(t10_ic1s1j3u) <- N_gender
+dim(t10_ic2s1j3u) <- N_gender
+dim(t10_ic3s1j3u) <- N_gender
+dim(t10_ic4s1j3u) <- N_gender
+
+dim(t10_ic1s2j3u) <- N_gender
+dim(t10_ic2s2j3u) <- N_gender
+dim(t10_ic3s2j3u) <- N_gender
+dim(t10_ic4s2j3u) <- N_gender
+
+dim(t10_ic1s1j4u) <- N_gender
+dim(t10_ic2s1j4u) <- N_gender
+dim(t10_ic3s1j4u) <- N_gender
+dim(t10_ic4s1j4u) <- N_gender
+
+dim(t10_ic1s2j4u) <- N_gender
+dim(t10_ic2s2j4u) <- N_gender
+dim(t10_ic3s2j4u) <- N_gender
+dim(t10_ic4s2j4u) <- N_gender
+
+dim(t10_ic1s1j5u) <- N_gender
+dim(t10_ic2s1j5u) <- N_gender
+dim(t10_ic3s1j5u) <- N_gender
+dim(t10_ic4s1j5u) <- N_gender
+
+dim(t10_ic1s2j5u) <- N_gender
+dim(t10_ic2s2j5u) <- N_gender
+dim(t10_ic3s2j5u) <- N_gender
+dim(t10_ic4s2j5u) <- N_gender
+
+dim(t10_ic1s1j1w) <- N_gender
+dim(t10_ic2s1j1w) <- N_gender
+dim(t10_ic3s1j1w) <- N_gender
+dim(t10_ic4s1j1w) <- N_gender
+
+dim(t10_ic1s2j1w) <- N_gender
+dim(t10_ic2s2j1w) <- N_gender
+dim(t10_ic3s2j1w) <- N_gender
+dim(t10_ic4s2j1w) <- N_gender
+
+dim(t10_ic1s1j2w) <- N_gender
+dim(t10_ic2s1j2w) <- N_gender
+dim(t10_ic3s1j2w) <- N_gender
+dim(t10_ic4s1j2w) <- N_gender
+
+dim(t10_ic1s2j2w) <- N_gender
+dim(t10_ic2s2j2w) <- N_gender
+dim(t10_ic3s2j2w) <- N_gender
+dim(t10_ic4s2j2w) <- N_gender
+
+dim(t10_ic1s1j3w) <- N_gender
+dim(t10_ic2s1j3w) <- N_gender
+dim(t10_ic3s1j3w) <- N_gender
+dim(t10_ic4s1j3w) <- N_gender
+
+dim(t10_ic1s2j3w) <- N_gender
+dim(t10_ic2s2j3w) <- N_gender
+dim(t10_ic3s2j3w) <- N_gender
+dim(t10_ic4s2j3w) <- N_gender
+
+dim(t10_ic1s1j4w) <- N_gender
+dim(t10_ic2s1j4w) <- N_gender
+dim(t10_ic3s1j4w) <- N_gender
+dim(t10_ic4s1j4w) <- N_gender
+
+dim(t10_ic1s2j4w) <- N_gender
+dim(t10_ic2s2j4w) <- N_gender
+dim(t10_ic3s2j4w) <- N_gender
+dim(t10_ic4s2j4w) <- N_gender
+
+dim(t10_ic1s1j5w) <- N_gender
+dim(t10_ic2s1j5w) <- N_gender
+dim(t10_ic3s1j5w) <- N_gender
+dim(t10_ic4s1j5w) <- N_gender
+
+dim(t10_ic1s2j5w) <- N_gender
+dim(t10_ic2s2j5w) <- N_gender
+dim(t10_ic3s2j5w) <- N_gender
+dim(t10_ic4s2j5w) <- N_gender
+
+dim(t10_ec1s1j1u) <- N_gender
+dim(t10_ec2s1j1u) <- N_gender
+dim(t10_ec3s1j1u) <- N_gender
+dim(t10_ec4s1j1u) <- N_gender
+
+dim(t10_ec1s2j1u) <- N_gender
+dim(t10_ec2s2j1u) <- N_gender
+dim(t10_ec3s2j1u) <- N_gender
+dim(t10_ec4s2j1u) <- N_gender
+
+dim(t10_ec1s1j2u) <- N_gender
+dim(t10_ec2s1j2u) <- N_gender
+dim(t10_ec3s1j2u) <- N_gender
+dim(t10_ec4s1j2u) <- N_gender
+
+dim(t10_ec1s2j2u) <- N_gender
+dim(t10_ec2s2j2u) <- N_gender
+dim(t10_ec3s2j2u) <- N_gender
+dim(t10_ec4s2j2u) <- N_gender
+
+dim(t10_ec1s1j3u) <- N_gender
+dim(t10_ec2s1j3u) <- N_gender
+dim(t10_ec3s1j3u) <- N_gender
+dim(t10_ec4s1j3u) <- N_gender
+
+dim(t10_ec1s2j3u) <- N_gender
+dim(t10_ec2s2j3u) <- N_gender
+dim(t10_ec3s2j3u) <- N_gender
+dim(t10_ec4s2j3u) <- N_gender
+
+dim(t10_ec1s1j4u) <- N_gender
+dim(t10_ec2s1j4u) <- N_gender
+dim(t10_ec3s1j4u) <- N_gender
+dim(t10_ec4s1j4u) <- N_gender
+
+dim(t10_ec1s2j4u) <- N_gender
+dim(t10_ec2s2j4u) <- N_gender
+dim(t10_ec3s2j4u) <- N_gender
+dim(t10_ec4s2j4u) <- N_gender
+
+dim(t10_ec1s1j5u) <- N_gender
+dim(t10_ec2s1j5u) <- N_gender
+dim(t10_ec3s1j5u) <- N_gender
+dim(t10_ec4s1j5u) <- N_gender
+
+dim(t10_ec1s2j5u) <- N_gender
+dim(t10_ec2s2j5u) <- N_gender
+dim(t10_ec3s2j5u) <- N_gender
+dim(t10_ec4s2j5u) <- N_gender
+
+dim(t10_ec1s1j1w) <- N_gender
+dim(t10_ec2s1j1w) <- N_gender
+dim(t10_ec3s1j1w) <- N_gender
+dim(t10_ec4s1j1w) <- N_gender
+
+dim(t10_ec1s2j1w) <- N_gender
+dim(t10_ec2s2j1w) <- N_gender
+dim(t10_ec3s2j1w) <- N_gender
+dim(t10_ec4s2j1w) <- N_gender
+
+dim(t10_ec1s1j2w) <- N_gender
+dim(t10_ec2s1j2w) <- N_gender
+dim(t10_ec3s1j2w) <- N_gender
+dim(t10_ec4s1j2w) <- N_gender
+
+dim(t10_ec1s2j2w) <- N_gender
+dim(t10_ec2s2j2w) <- N_gender
+dim(t10_ec3s2j2w) <- N_gender
+dim(t10_ec4s2j2w) <- N_gender
+
+dim(t10_ec1s1j3w) <- N_gender
+dim(t10_ec2s1j3w) <- N_gender
+dim(t10_ec3s1j3w) <- N_gender
+dim(t10_ec4s1j3w) <- N_gender
+
+dim(t10_ec1s2j3w) <- N_gender
+dim(t10_ec2s2j3w) <- N_gender
+dim(t10_ec3s2j3w) <- N_gender
+dim(t10_ec4s2j3w) <- N_gender
+
+dim(t10_ec1s1j4w) <- N_gender
+dim(t10_ec2s1j4w) <- N_gender
+dim(t10_ec3s1j4w) <- N_gender
+dim(t10_ec4s1j4w) <- N_gender
+
+dim(t10_ec1s2j4w) <- N_gender
+dim(t10_ec2s2j4w) <- N_gender
+dim(t10_ec3s2j4w) <- N_gender
+dim(t10_ec4s2j4w) <- N_gender
+
+dim(t10_ec1s1j5w) <- N_gender
+dim(t10_ec2s1j5w) <- N_gender
+dim(t10_ec3s1j5w) <- N_gender
+dim(t10_ec4s1j5w) <- N_gender
+
+dim(t10_ec1s2j5w) <- N_gender
+dim(t10_ec2s2j5w) <- N_gender
+dim(t10_ec3s2j5w) <- N_gender
+dim(t10_ec4s2j5w) <- N_gender
+
+
 ##############################################################################################################################
 # DIFFERENTIAL EQUATIONS # # #  # # #
 ###############################################################################################################################
+deriv(IC1S1J1U_10[]) <- age_IC1S1J1U_10[i] + pov_IC1S1J1U_10[i] + care_IC1S1J1U_10[i] + sch_IC1S1J1U_10[i] + jus_IC1S1J1U_10[i] + cl_IC1S1J1U_10[i]
+deriv(IC2S1J1U_10[]) <- age_IC2S1J1U_10[i] + pov_IC2S1J1U_10[i] + care_IC2S1J1U_10[i] + sch_IC2S1J1U_10[i] + jus_IC2S1J1U_10[i] + cl_IC2S1J1U_10[i]
+deriv(IC3S1J1U_10[]) <- age_IC3S1J1U_10[i] + pov_IC3S1J1U_10[i] + care_IC3S1J1U_10[i] + sch_IC3S1J1U_10[i] + jus_IC3S1J1U_10[i] + cl_IC3S1J1U_10[i]
+deriv(IC4S1J1U_10[]) <- age_IC4S1J1U_10[i] + pov_IC4S1J1U_10[i] + care_IC4S1J1U_10[i] + sch_IC4S1J1U_10[i] + jus_IC4S1J1U_10[i] + cl_IC4S1J1U_10[i]
 
+deriv(IC1S1J1U_11[]) <- age_IC1S1J1U_11[i] + pov_IC1S1J1U_11[i] + care_IC1S1J1U_11[i] + sch_IC1S1J1U_11[i] + jus_IC1S1J1U_11[i] + cl_IC1S1J1U_11[i]
+deriv(IC2S1J1U_11[]) <- age_IC2S1J1U_11[i] + pov_IC2S1J1U_11[i] + care_IC2S1J1U_11[i] + sch_IC2S1J1U_11[i] + jus_IC2S1J1U_11[i] + cl_IC2S1J1U_11[i]
+deriv(IC3S1J1U_11[]) <- age_IC3S1J1U_11[i] + pov_IC3S1J1U_11[i] + care_IC3S1J1U_11[i] + sch_IC3S1J1U_11[i] + jus_IC3S1J1U_11[i] + cl_IC3S1J1U_11[i]
+deriv(IC4S1J1U_11[]) <- age_IC4S1J1U_11[i] + pov_IC4S1J1U_11[i] + care_IC4S1J1U_11[i] + sch_IC4S1J1U_11[i] + jus_IC4S1J1U_11[i] + cl_IC4S1J1U_11[i]
+
+deriv(IC1S1J1U_12[]) <- age_IC1S1J1U_12[i] + pov_IC1S1J1U_12[i] + care_IC1S1J1U_12[i] + sch_IC1S1J1U_12[i] + jus_IC1S1J1U_12[i] + cl_IC1S1J1U_12[i]
+deriv(IC2S1J1U_12[]) <- age_IC2S1J1U_12[i] + pov_IC2S1J1U_12[i] + care_IC2S1J1U_12[i] + sch_IC2S1J1U_12[i] + jus_IC2S1J1U_12[i] + cl_IC2S1J1U_12[i]
+deriv(IC3S1J1U_12[]) <- age_IC3S1J1U_12[i] + pov_IC3S1J1U_12[i] + care_IC3S1J1U_12[i] + sch_IC3S1J1U_12[i] + jus_IC3S1J1U_12[i] + cl_IC3S1J1U_12[i]
+deriv(IC4S1J1U_12[]) <- age_IC4S1J1U_12[i] + pov_IC4S1J1U_12[i] + care_IC4S1J1U_12[i] + sch_IC4S1J1U_12[i] + jus_IC4S1J1U_12[i] + cl_IC4S1J1U_12[i]
+
+deriv(IC1S1J1U_13[]) <- age_IC1S1J1U_13[i] + pov_IC1S1J1U_13[i] + care_IC1S1J1U_13[i] + sch_IC1S1J1U_13[i] + jus_IC1S1J1U_13[i] + cl_IC1S1J1U_13[i]
+deriv(IC2S1J1U_13[]) <- age_IC2S1J1U_13[i] + pov_IC2S1J1U_13[i] + care_IC2S1J1U_13[i] + sch_IC2S1J1U_13[i] + jus_IC2S1J1U_13[i] + cl_IC2S1J1U_13[i]
+deriv(IC3S1J1U_13[]) <- age_IC3S1J1U_13[i] + pov_IC3S1J1U_13[i] + care_IC3S1J1U_13[i] + sch_IC3S1J1U_13[i] + jus_IC3S1J1U_13[i] + cl_IC3S1J1U_13[i]
+deriv(IC4S1J1U_13[]) <- age_IC4S1J1U_13[i] + pov_IC4S1J1U_13[i] + care_IC4S1J1U_13[i] + sch_IC4S1J1U_13[i] + jus_IC4S1J1U_13[i] + cl_IC4S1J1U_13[i]
+
+deriv(IC1S1J1U_14[]) <- age_IC1S1J1U_14[i] + pov_IC1S1J1U_14[i] + care_IC1S1J1U_14[i] + sch_IC1S1J1U_14[i] + jus_IC1S1J1U_14[i] + cl_IC1S1J1U_14[i]
+deriv(IC2S1J1U_14[]) <- age_IC2S1J1U_14[i] + pov_IC2S1J1U_14[i] + care_IC2S1J1U_14[i] + sch_IC2S1J1U_14[i] + jus_IC2S1J1U_14[i] + cl_IC2S1J1U_14[i]
+deriv(IC3S1J1U_14[]) <- age_IC3S1J1U_14[i] + pov_IC3S1J1U_14[i] + care_IC3S1J1U_14[i] + sch_IC3S1J1U_14[i] + jus_IC3S1J1U_14[i] + cl_IC3S1J1U_14[i]
+deriv(IC4S1J1U_14[]) <- age_IC4S1J1U_14[i] + pov_IC4S1J1U_14[i] + care_IC4S1J1U_14[i] + sch_IC4S1J1U_14[i] + jus_IC4S1J1U_14[i] + cl_IC4S1J1U_14[i]
+
+deriv(IC1S1J1U_15[]) <- age_IC1S1J1U_15[i] + pov_IC1S1J1U_15[i] + care_IC1S1J1U_15[i] + sch_IC1S1J1U_15[i] + jus_IC1S1J1U_15[i] + cl_IC1S1J1U_15[i]
+deriv(IC2S1J1U_15[]) <- age_IC2S1J1U_15[i] + pov_IC2S1J1U_15[i] + care_IC2S1J1U_15[i] + sch_IC2S1J1U_15[i] + jus_IC2S1J1U_15[i] + cl_IC2S1J1U_15[i]
+deriv(IC3S1J1U_15[]) <- age_IC3S1J1U_15[i] + pov_IC3S1J1U_15[i] + care_IC3S1J1U_15[i] + sch_IC3S1J1U_15[i] + jus_IC3S1J1U_15[i] + cl_IC3S1J1U_15[i]
+deriv(IC4S1J1U_15[]) <- age_IC4S1J1U_15[i] + pov_IC4S1J1U_15[i] + care_IC4S1J1U_15[i] + sch_IC4S1J1U_15[i] + jus_IC4S1J1U_15[i] + cl_IC4S1J1U_15[i]
+
+deriv(IC1S1J1U_16[]) <- age_IC1S1J1U_16[i] + pov_IC1S1J1U_16[i] + care_IC1S1J1U_16[i] + sch_IC1S1J1U_16[i] + jus_IC1S1J1U_16[i] + cl_IC1S1J1U_16[i]
+deriv(IC2S1J1U_16[]) <- age_IC2S1J1U_16[i] + pov_IC2S1J1U_16[i] + care_IC2S1J1U_16[i] + sch_IC2S1J1U_16[i] + jus_IC2S1J1U_16[i] + cl_IC2S1J1U_16[i]
+deriv(IC3S1J1U_16[]) <- age_IC3S1J1U_16[i] + pov_IC3S1J1U_16[i] + care_IC3S1J1U_16[i] + sch_IC3S1J1U_16[i] + jus_IC3S1J1U_16[i] + cl_IC3S1J1U_16[i]
+deriv(IC4S1J1U_16[]) <- age_IC4S1J1U_16[i] + pov_IC4S1J1U_16[i] + care_IC4S1J1U_16[i] + sch_IC4S1J1U_16[i] + jus_IC4S1J1U_16[i] + cl_IC4S1J1U_16[i]
+
+deriv(IC1S1J1U_17[]) <- age_IC1S1J1U_17[i] + pov_IC1S1J1U_17[i] + care_IC1S1J1U_17[i] + sch_IC1S1J1U_17[i] + jus_IC1S1J1U_17[i] + cl_IC1S1J1U_17[i]
+deriv(IC2S1J1U_17[]) <- age_IC2S1J1U_17[i] + pov_IC2S1J1U_17[i] + care_IC2S1J1U_17[i] + sch_IC2S1J1U_17[i] + jus_IC2S1J1U_17[i] + cl_IC2S1J1U_17[i]
+deriv(IC3S1J1U_17[]) <- age_IC3S1J1U_17[i] + pov_IC3S1J1U_17[i] + care_IC3S1J1U_17[i] + sch_IC3S1J1U_17[i] + jus_IC3S1J1U_17[i] + cl_IC3S1J1U_17[i]
+deriv(IC4S1J1U_17[]) <- age_IC4S1J1U_17[i] + pov_IC4S1J1U_17[i] + care_IC4S1J1U_17[i] + sch_IC4S1J1U_17[i] + jus_IC4S1J1U_17[i] + cl_IC4S1J1U_17[i]
+
+
+
+deriv(IC1S2J1U_10[]) <- age_IC1S2J1U_10[i] + pov_IC1S2J1U_10[i] + care_IC1S2J1U_10[i] + sch_IC1S2J1U_10[i] + jus_IC1S2J1U_10[i] + cl_IC1S2J1U_10[i]
+deriv(IC2S2J1U_10[]) <- age_IC2S2J1U_10[i] + pov_IC2S2J1U_10[i] + care_IC2S2J1U_10[i] + sch_IC2S2J1U_10[i] + jus_IC2S2J1U_10[i] + cl_IC2S2J1U_10[i]
+deriv(IC3S2J1U_10[]) <- age_IC3S2J1U_10[i] + pov_IC3S2J1U_10[i] + care_IC3S2J1U_10[i] + sch_IC3S2J1U_10[i] + jus_IC3S2J1U_10[i] + cl_IC3S2J1U_10[i]
+deriv(IC4S2J1U_10[]) <- age_IC4S2J1U_10[i] + pov_IC4S2J1U_10[i] + care_IC4S2J1U_10[i] + sch_IC4S2J1U_10[i] + jus_IC4S2J1U_10[i] + cl_IC4S2J1U_10[i]
+
+deriv(IC1S2J1U_11[]) <- age_IC1S2J1U_11[i] + pov_IC1S2J1U_11[i] + care_IC1S2J1U_11[i] + sch_IC1S2J1U_11[i] + jus_IC1S2J1U_11[i] + cl_IC1S2J1U_11[i]
+deriv(IC2S2J1U_11[]) <- age_IC2S2J1U_11[i] + pov_IC2S2J1U_11[i] + care_IC2S2J1U_11[i] + sch_IC2S2J1U_11[i] + jus_IC2S2J1U_11[i] + cl_IC2S2J1U_11[i]
+deriv(IC3S2J1U_11[]) <- age_IC3S2J1U_11[i] + pov_IC3S2J1U_11[i] + care_IC3S2J1U_11[i] + sch_IC3S2J1U_11[i] + jus_IC3S2J1U_11[i] + cl_IC3S2J1U_11[i]
+deriv(IC4S2J1U_11[]) <- age_IC4S2J1U_11[i] + pov_IC4S2J1U_11[i] + care_IC4S2J1U_11[i] + sch_IC4S2J1U_11[i] + jus_IC4S2J1U_11[i] + cl_IC4S2J1U_11[i]
+
+deriv(IC1S2J1U_12[]) <- age_IC1S2J1U_12[i] + pov_IC1S2J1U_12[i] + care_IC1S2J1U_12[i] + sch_IC1S2J1U_12[i] + jus_IC1S2J1U_12[i] + cl_IC1S2J1U_12[i]
+deriv(IC2S2J1U_12[]) <- age_IC2S2J1U_12[i] + pov_IC2S2J1U_12[i] + care_IC2S2J1U_12[i] + sch_IC2S2J1U_12[i] + jus_IC2S2J1U_12[i] + cl_IC2S2J1U_12[i]
+deriv(IC3S2J1U_12[]) <- age_IC3S2J1U_12[i] + pov_IC3S2J1U_12[i] + care_IC3S2J1U_12[i] + sch_IC3S2J1U_12[i] + jus_IC3S2J1U_12[i] + cl_IC3S2J1U_12[i]
+deriv(IC4S2J1U_12[]) <- age_IC4S2J1U_12[i] + pov_IC4S2J1U_12[i] + care_IC4S2J1U_12[i] + sch_IC4S2J1U_12[i] + jus_IC4S2J1U_12[i] + cl_IC4S2J1U_12[i]
+
+deriv(IC1S2J1U_13[]) <- age_IC1S2J1U_13[i] + pov_IC1S2J1U_13[i] + care_IC1S2J1U_13[i] + sch_IC1S2J1U_13[i] + jus_IC1S2J1U_13[i] + cl_IC1S2J1U_13[i]
+deriv(IC2S2J1U_13[]) <- age_IC2S2J1U_13[i] + pov_IC2S2J1U_13[i] + care_IC2S2J1U_13[i] + sch_IC2S2J1U_13[i] + jus_IC2S2J1U_13[i] + cl_IC2S2J1U_13[i]
+deriv(IC3S2J1U_13[]) <- age_IC3S2J1U_13[i] + pov_IC3S2J1U_13[i] + care_IC3S2J1U_13[i] + sch_IC3S2J1U_13[i] + jus_IC3S2J1U_13[i] + cl_IC3S2J1U_13[i]
+deriv(IC4S2J1U_13[]) <- age_IC4S2J1U_13[i] + pov_IC4S2J1U_13[i] + care_IC4S2J1U_13[i] + sch_IC4S2J1U_13[i] + jus_IC4S2J1U_13[i] + cl_IC4S2J1U_13[i]
+
+deriv(IC1S2J1U_14[]) <- age_IC1S2J1U_14[i] + pov_IC1S2J1U_14[i] + care_IC1S2J1U_14[i] + sch_IC1S2J1U_14[i] + jus_IC1S2J1U_14[i] + cl_IC1S2J1U_14[i]
+deriv(IC2S2J1U_14[]) <- age_IC2S2J1U_14[i] + pov_IC2S2J1U_14[i] + care_IC2S2J1U_14[i] + sch_IC2S2J1U_14[i] + jus_IC2S2J1U_14[i] + cl_IC2S2J1U_14[i]
+deriv(IC3S2J1U_14[]) <- age_IC3S2J1U_14[i] + pov_IC3S2J1U_14[i] + care_IC3S2J1U_14[i] + sch_IC3S2J1U_14[i] + jus_IC3S2J1U_14[i] + cl_IC3S2J1U_14[i]
+deriv(IC4S2J1U_14[]) <- age_IC4S2J1U_14[i] + pov_IC4S2J1U_14[i] + care_IC4S2J1U_14[i] + sch_IC4S2J1U_14[i] + jus_IC4S2J1U_14[i] + cl_IC4S2J1U_14[i]
+
+deriv(IC1S2J1U_15[]) <- age_IC1S2J1U_15[i] + pov_IC1S2J1U_15[i] + care_IC1S2J1U_15[i] + sch_IC1S2J1U_15[i] + jus_IC1S2J1U_15[i] + cl_IC1S2J1U_15[i]
+deriv(IC2S2J1U_15[]) <- age_IC2S2J1U_15[i] + pov_IC2S2J1U_15[i] + care_IC2S2J1U_15[i] + sch_IC2S2J1U_15[i] + jus_IC2S2J1U_15[i] + cl_IC2S2J1U_15[i]
+deriv(IC3S2J1U_15[]) <- age_IC3S2J1U_15[i] + pov_IC3S2J1U_15[i] + care_IC3S2J1U_15[i] + sch_IC3S2J1U_15[i] + jus_IC3S2J1U_15[i] + cl_IC3S2J1U_15[i]
+deriv(IC4S2J1U_15[]) <- age_IC4S2J1U_15[i] + pov_IC4S2J1U_15[i] + care_IC4S2J1U_15[i] + sch_IC4S2J1U_15[i] + jus_IC4S2J1U_15[i] + cl_IC4S2J1U_15[i]
+
+deriv(IC1S2J1U_16[]) <- age_IC1S2J1U_16[i] + pov_IC1S2J1U_16[i] + care_IC1S2J1U_16[i] + sch_IC1S2J1U_16[i] + jus_IC1S2J1U_16[i] + cl_IC1S2J1U_16[i]
+deriv(IC2S2J1U_16[]) <- age_IC2S2J1U_16[i] + pov_IC2S2J1U_16[i] + care_IC2S2J1U_16[i] + sch_IC2S2J1U_16[i] + jus_IC2S2J1U_16[i] + cl_IC2S2J1U_16[i]
+deriv(IC3S2J1U_16[]) <- age_IC3S2J1U_16[i] + pov_IC3S2J1U_16[i] + care_IC3S2J1U_16[i] + sch_IC3S2J1U_16[i] + jus_IC3S2J1U_16[i] + cl_IC3S2J1U_16[i]
+deriv(IC4S2J1U_16[]) <- age_IC4S2J1U_16[i] + pov_IC4S2J1U_16[i] + care_IC4S2J1U_16[i] + sch_IC4S2J1U_16[i] + jus_IC4S2J1U_16[i] + cl_IC4S2J1U_16[i]
+
+deriv(IC1S2J1U_17[]) <- age_IC1S2J1U_17[i] + pov_IC1S2J1U_17[i] + care_IC1S2J1U_17[i] + sch_IC1S2J1U_17[i] + jus_IC1S2J1U_17[i] + cl_IC1S2J1U_17[i]
+deriv(IC2S2J1U_17[]) <- age_IC2S2J1U_17[i] + pov_IC2S2J1U_17[i] + care_IC2S2J1U_17[i] + sch_IC2S2J1U_17[i] + jus_IC2S2J1U_17[i] + cl_IC2S2J1U_17[i]
+deriv(IC3S2J1U_17[]) <- age_IC3S2J1U_17[i] + pov_IC3S2J1U_17[i] + care_IC3S2J1U_17[i] + sch_IC3S2J1U_17[i] + jus_IC3S2J1U_17[i] + cl_IC3S2J1U_17[i]
+deriv(IC4S2J1U_17[]) <- age_IC4S2J1U_17[i] + pov_IC4S2J1U_17[i] + care_IC4S2J1U_17[i] + sch_IC4S2J1U_17[i] + jus_IC4S2J1U_17[i] + cl_IC4S2J1U_17[i]
+
+
+
+deriv(IC1S1J2U_10[]) <- age_IC1S1J2U_10[i] + pov_IC1S1J2U_10[i] + care_IC1S1J2U_10[i] + sch_IC1S1J2U_10[i] + jus_IC1S1J2U_10[i] + cl_IC1S1J2U_10[i]
+deriv(IC2S1J2U_10[]) <- age_IC2S1J2U_10[i] + pov_IC2S1J2U_10[i] + care_IC2S1J2U_10[i] + sch_IC2S1J2U_10[i] + jus_IC2S1J2U_10[i] + cl_IC2S1J2U_10[i]
+deriv(IC3S1J2U_10[]) <- age_IC3S1J2U_10[i] + pov_IC3S1J2U_10[i] + care_IC3S1J2U_10[i] + sch_IC3S1J2U_10[i] + jus_IC3S1J2U_10[i] + cl_IC3S1J2U_10[i]
+deriv(IC4S1J2U_10[]) <- age_IC4S1J2U_10[i] + pov_IC4S1J2U_10[i] + care_IC4S1J2U_10[i] + sch_IC4S1J2U_10[i] + jus_IC4S1J2U_10[i] + cl_IC4S1J2U_10[i]
+
+deriv(IC1S1J2U_11[]) <- age_IC1S1J2U_11[i] + pov_IC1S1J2U_11[i] + care_IC1S1J2U_11[i] + sch_IC1S1J2U_11[i] + jus_IC1S1J2U_11[i] + cl_IC1S1J2U_11[i]
+deriv(IC2S1J2U_11[]) <- age_IC2S1J2U_11[i] + pov_IC2S1J2U_11[i] + care_IC2S1J2U_11[i] + sch_IC2S1J2U_11[i] + jus_IC2S1J2U_11[i] + cl_IC2S1J2U_11[i]
+deriv(IC3S1J2U_11[]) <- age_IC3S1J2U_11[i] + pov_IC3S1J2U_11[i] + care_IC3S1J2U_11[i] + sch_IC3S1J2U_11[i] + jus_IC3S1J2U_11[i] + cl_IC3S1J2U_11[i]
+deriv(IC4S1J2U_11[]) <- age_IC4S1J2U_11[i] + pov_IC4S1J2U_11[i] + care_IC4S1J2U_11[i] + sch_IC4S1J2U_11[i] + jus_IC4S1J2U_11[i] + cl_IC4S1J2U_11[i]
+
+deriv(IC1S1J2U_12[]) <- age_IC1S1J2U_12[i] + pov_IC1S1J2U_12[i] + care_IC1S1J2U_12[i] + sch_IC1S1J2U_12[i] + jus_IC1S1J2U_12[i] + cl_IC1S1J2U_12[i]
+deriv(IC2S1J2U_12[]) <- age_IC2S1J2U_12[i] + pov_IC2S1J2U_12[i] + care_IC2S1J2U_12[i] + sch_IC2S1J2U_12[i] + jus_IC2S1J2U_12[i] + cl_IC2S1J2U_12[i]
+deriv(IC3S1J2U_12[]) <- age_IC3S1J2U_12[i] + pov_IC3S1J2U_12[i] + care_IC3S1J2U_12[i] + sch_IC3S1J2U_12[i] + jus_IC3S1J2U_12[i] + cl_IC3S1J2U_12[i]
+deriv(IC4S1J2U_12[]) <- age_IC4S1J2U_12[i] + pov_IC4S1J2U_12[i] + care_IC4S1J2U_12[i] + sch_IC4S1J2U_12[i] + jus_IC4S1J2U_12[i] + cl_IC4S1J2U_12[i]
+
+deriv(IC1S1J2U_13[]) <- age_IC1S1J2U_13[i] + pov_IC1S1J2U_13[i] + care_IC1S1J2U_13[i] + sch_IC1S1J2U_13[i] + jus_IC1S1J2U_13[i] + cl_IC1S1J2U_13[i]
+deriv(IC2S1J2U_13[]) <- age_IC2S1J2U_13[i] + pov_IC2S1J2U_13[i] + care_IC2S1J2U_13[i] + sch_IC2S1J2U_13[i] + jus_IC2S1J2U_13[i] + cl_IC2S1J2U_13[i]
+deriv(IC3S1J2U_13[]) <- age_IC3S1J2U_13[i] + pov_IC3S1J2U_13[i] + care_IC3S1J2U_13[i] + sch_IC3S1J2U_13[i] + jus_IC3S1J2U_13[i] + cl_IC3S1J2U_13[i]
+deriv(IC4S1J2U_13[]) <- age_IC4S1J2U_13[i] + pov_IC4S1J2U_13[i] + care_IC4S1J2U_13[i] + sch_IC4S1J2U_13[i] + jus_IC4S1J2U_13[i] + cl_IC4S1J2U_13[i]
+
+deriv(IC1S1J2U_14[]) <- age_IC1S1J2U_14[i] + pov_IC1S1J2U_14[i] + care_IC1S1J2U_14[i] + sch_IC1S1J2U_14[i] + jus_IC1S1J2U_14[i] + cl_IC1S1J2U_14[i]
+deriv(IC2S1J2U_14[]) <- age_IC2S1J2U_14[i] + pov_IC2S1J2U_14[i] + care_IC2S1J2U_14[i] + sch_IC2S1J2U_14[i] + jus_IC2S1J2U_14[i] + cl_IC2S1J2U_14[i]
+deriv(IC3S1J2U_14[]) <- age_IC3S1J2U_14[i] + pov_IC3S1J2U_14[i] + care_IC3S1J2U_14[i] + sch_IC3S1J2U_14[i] + jus_IC3S1J2U_14[i] + cl_IC3S1J2U_14[i]
+deriv(IC4S1J2U_14[]) <- age_IC4S1J2U_14[i] + pov_IC4S1J2U_14[i] + care_IC4S1J2U_14[i] + sch_IC4S1J2U_14[i] + jus_IC4S1J2U_14[i] + cl_IC4S1J2U_14[i]
+
+deriv(IC1S1J2U_15[]) <- age_IC1S1J2U_15[i] + pov_IC1S1J2U_15[i] + care_IC1S1J2U_15[i] + sch_IC1S1J2U_15[i] + jus_IC1S1J2U_15[i] + cl_IC1S1J2U_15[i]
+deriv(IC2S1J2U_15[]) <- age_IC2S1J2U_15[i] + pov_IC2S1J2U_15[i] + care_IC2S1J2U_15[i] + sch_IC2S1J2U_15[i] + jus_IC2S1J2U_15[i] + cl_IC2S1J2U_15[i]
+deriv(IC3S1J2U_15[]) <- age_IC3S1J2U_15[i] + pov_IC3S1J2U_15[i] + care_IC3S1J2U_15[i] + sch_IC3S1J2U_15[i] + jus_IC3S1J2U_15[i] + cl_IC3S1J2U_15[i]
+deriv(IC4S1J2U_15[]) <- age_IC4S1J2U_15[i] + pov_IC4S1J2U_15[i] + care_IC4S1J2U_15[i] + sch_IC4S1J2U_15[i] + jus_IC4S1J2U_15[i] + cl_IC4S1J2U_15[i]
+
+deriv(IC1S1J2U_16[]) <- age_IC1S1J2U_16[i] + pov_IC1S1J2U_16[i] + care_IC1S1J2U_16[i] + sch_IC1S1J2U_16[i] + jus_IC1S1J2U_16[i] + cl_IC1S1J2U_16[i]
+deriv(IC2S1J2U_16[]) <- age_IC2S1J2U_16[i] + pov_IC2S1J2U_16[i] + care_IC2S1J2U_16[i] + sch_IC2S1J2U_16[i] + jus_IC2S1J2U_16[i] + cl_IC2S1J2U_16[i]
+deriv(IC3S1J2U_16[]) <- age_IC3S1J2U_16[i] + pov_IC3S1J2U_16[i] + care_IC3S1J2U_16[i] + sch_IC3S1J2U_16[i] + jus_IC3S1J2U_16[i] + cl_IC3S1J2U_16[i]
+deriv(IC4S1J2U_16[]) <- age_IC4S1J2U_16[i] + pov_IC4S1J2U_16[i] + care_IC4S1J2U_16[i] + sch_IC4S1J2U_16[i] + jus_IC4S1J2U_16[i] + cl_IC4S1J2U_16[i]
+
+deriv(IC1S1J2U_17[]) <- age_IC1S1J2U_17[i] + pov_IC1S1J2U_17[i] + care_IC1S1J2U_17[i] + sch_IC1S1J2U_17[i] + jus_IC1S1J2U_17[i] + cl_IC1S1J2U_17[i]
+deriv(IC2S1J2U_17[]) <- age_IC2S1J2U_17[i] + pov_IC2S1J2U_17[i] + care_IC2S1J2U_17[i] + sch_IC2S1J2U_17[i] + jus_IC2S1J2U_17[i] + cl_IC2S1J2U_17[i]
+deriv(IC3S1J2U_17[]) <- age_IC3S1J2U_17[i] + pov_IC3S1J2U_17[i] + care_IC3S1J2U_17[i] + sch_IC3S1J2U_17[i] + jus_IC3S1J2U_17[i] + cl_IC3S1J2U_17[i]
+deriv(IC4S1J2U_17[]) <- age_IC4S1J2U_17[i] + pov_IC4S1J2U_17[i] + care_IC4S1J2U_17[i] + sch_IC4S1J2U_17[i] + jus_IC4S1J2U_17[i] + cl_IC4S1J2U_17[i]
+
+
+
+deriv(IC1S2J2U_10[]) <- age_IC1S2J2U_10[i] + pov_IC1S2J2U_10[i] + care_IC1S2J2U_10[i] + sch_IC1S2J2U_10[i] + jus_IC1S2J2U_10[i] + cl_IC1S2J2U_10[i]
+deriv(IC2S2J2U_10[]) <- age_IC2S2J2U_10[i] + pov_IC2S2J2U_10[i] + care_IC2S2J2U_10[i] + sch_IC2S2J2U_10[i] + jus_IC2S2J2U_10[i] + cl_IC2S2J2U_10[i]
+deriv(IC3S2J2U_10[]) <- age_IC3S2J2U_10[i] + pov_IC3S2J2U_10[i] + care_IC3S2J2U_10[i] + sch_IC3S2J2U_10[i] + jus_IC3S2J2U_10[i] + cl_IC3S2J2U_10[i]
+deriv(IC4S2J2U_10[]) <- age_IC4S2J2U_10[i] + pov_IC4S2J2U_10[i] + care_IC4S2J2U_10[i] + sch_IC4S2J2U_10[i] + jus_IC4S2J2U_10[i] + cl_IC4S2J2U_10[i]
+
+deriv(IC1S2J2U_11[]) <- age_IC1S2J2U_11[i] + pov_IC1S2J2U_11[i] + care_IC1S2J2U_11[i] + sch_IC1S2J2U_11[i] + jus_IC1S2J2U_11[i] + cl_IC1S2J2U_11[i]
+deriv(IC2S2J2U_11[]) <- age_IC2S2J2U_11[i] + pov_IC2S2J2U_11[i] + care_IC2S2J2U_11[i] + sch_IC2S2J2U_11[i] + jus_IC2S2J2U_11[i] + cl_IC2S2J2U_11[i]
+deriv(IC3S2J2U_11[]) <- age_IC3S2J2U_11[i] + pov_IC3S2J2U_11[i] + care_IC3S2J2U_11[i] + sch_IC3S2J2U_11[i] + jus_IC3S2J2U_11[i] + cl_IC3S2J2U_11[i]
+deriv(IC4S2J2U_11[]) <- age_IC4S2J2U_11[i] + pov_IC4S2J2U_11[i] + care_IC4S2J2U_11[i] + sch_IC4S2J2U_11[i] + jus_IC4S2J2U_11[i] + cl_IC4S2J2U_11[i]
+
+deriv(IC1S2J2U_12[]) <- age_IC1S2J2U_12[i] + pov_IC1S2J2U_12[i] + care_IC1S2J2U_12[i] + sch_IC1S2J2U_12[i] + jus_IC1S2J2U_12[i] + cl_IC1S2J2U_12[i]
+deriv(IC2S2J2U_12[]) <- age_IC2S2J2U_12[i] + pov_IC2S2J2U_12[i] + care_IC2S2J2U_12[i] + sch_IC2S2J2U_12[i] + jus_IC2S2J2U_12[i] + cl_IC2S2J2U_12[i]
+deriv(IC3S2J2U_12[]) <- age_IC3S2J2U_12[i] + pov_IC3S2J2U_12[i] + care_IC3S2J2U_12[i] + sch_IC3S2J2U_12[i] + jus_IC3S2J2U_12[i] + cl_IC3S2J2U_12[i]
+deriv(IC4S2J2U_12[]) <- age_IC4S2J2U_12[i] + pov_IC4S2J2U_12[i] + care_IC4S2J2U_12[i] + sch_IC4S2J2U_12[i] + jus_IC4S2J2U_12[i] + cl_IC4S2J2U_12[i]
+
+deriv(IC1S2J2U_13[]) <- age_IC1S2J2U_13[i] + pov_IC1S2J2U_13[i] + care_IC1S2J2U_13[i] + sch_IC1S2J2U_13[i] + jus_IC1S2J2U_13[i] + cl_IC1S2J2U_13[i]
+deriv(IC2S2J2U_13[]) <- age_IC2S2J2U_13[i] + pov_IC2S2J2U_13[i] + care_IC2S2J2U_13[i] + sch_IC2S2J2U_13[i] + jus_IC2S2J2U_13[i] + cl_IC2S2J2U_13[i]
+deriv(IC3S2J2U_13[]) <- age_IC3S2J2U_13[i] + pov_IC3S2J2U_13[i] + care_IC3S2J2U_13[i] + sch_IC3S2J2U_13[i] + jus_IC3S2J2U_13[i] + cl_IC3S2J2U_13[i]
+deriv(IC4S2J2U_13[]) <- age_IC4S2J2U_13[i] + pov_IC4S2J2U_13[i] + care_IC4S2J2U_13[i] + sch_IC4S2J2U_13[i] + jus_IC4S2J2U_13[i] + cl_IC4S2J2U_13[i]
+
+deriv(IC1S2J2U_14[]) <- age_IC1S2J2U_14[i] + pov_IC1S2J2U_14[i] + care_IC1S2J2U_14[i] + sch_IC1S2J2U_14[i] + jus_IC1S2J2U_14[i] + cl_IC1S2J2U_14[i]
+deriv(IC2S2J2U_14[]) <- age_IC2S2J2U_14[i] + pov_IC2S2J2U_14[i] + care_IC2S2J2U_14[i] + sch_IC2S2J2U_14[i] + jus_IC2S2J2U_14[i] + cl_IC2S2J2U_14[i]
+deriv(IC3S2J2U_14[]) <- age_IC3S2J2U_14[i] + pov_IC3S2J2U_14[i] + care_IC3S2J2U_14[i] + sch_IC3S2J2U_14[i] + jus_IC3S2J2U_14[i] + cl_IC3S2J2U_14[i]
+deriv(IC4S2J2U_14[]) <- age_IC4S2J2U_14[i] + pov_IC4S2J2U_14[i] + care_IC4S2J2U_14[i] + sch_IC4S2J2U_14[i] + jus_IC4S2J2U_14[i] + cl_IC4S2J2U_14[i]
+
+deriv(IC1S2J2U_15[]) <- age_IC1S2J2U_15[i] + pov_IC1S2J2U_15[i] + care_IC1S2J2U_15[i] + sch_IC1S2J2U_15[i] + jus_IC1S2J2U_15[i] + cl_IC1S2J2U_15[i]
+deriv(IC2S2J2U_15[]) <- age_IC2S2J2U_15[i] + pov_IC2S2J2U_15[i] + care_IC2S2J2U_15[i] + sch_IC2S2J2U_15[i] + jus_IC2S2J2U_15[i] + cl_IC2S2J2U_15[i]
+deriv(IC3S2J2U_15[]) <- age_IC3S2J2U_15[i] + pov_IC3S2J2U_15[i] + care_IC3S2J2U_15[i] + sch_IC3S2J2U_15[i] + jus_IC3S2J2U_15[i] + cl_IC3S2J2U_15[i]
+deriv(IC4S2J2U_15[]) <- age_IC4S2J2U_15[i] + pov_IC4S2J2U_15[i] + care_IC4S2J2U_15[i] + sch_IC4S2J2U_15[i] + jus_IC4S2J2U_15[i] + cl_IC4S2J2U_15[i]
+
+deriv(IC1S2J2U_16[]) <- age_IC1S2J2U_16[i] + pov_IC1S2J2U_16[i] + care_IC1S2J2U_16[i] + sch_IC1S2J2U_16[i] + jus_IC1S2J2U_16[i] + cl_IC1S2J2U_16[i]
+deriv(IC2S2J2U_16[]) <- age_IC2S2J2U_16[i] + pov_IC2S2J2U_16[i] + care_IC2S2J2U_16[i] + sch_IC2S2J2U_16[i] + jus_IC2S2J2U_16[i] + cl_IC2S2J2U_16[i]
+deriv(IC3S2J2U_16[]) <- age_IC3S2J2U_16[i] + pov_IC3S2J2U_16[i] + care_IC3S2J2U_16[i] + sch_IC3S2J2U_16[i] + jus_IC3S2J2U_16[i] + cl_IC3S2J2U_16[i]
+deriv(IC4S2J2U_16[]) <- age_IC4S2J2U_16[i] + pov_IC4S2J2U_16[i] + care_IC4S2J2U_16[i] + sch_IC4S2J2U_16[i] + jus_IC4S2J2U_16[i] + cl_IC4S2J2U_16[i]
+
+deriv(IC1S2J2U_17[]) <- age_IC1S2J2U_17[i] + pov_IC1S2J2U_17[i] + care_IC1S2J2U_17[i] + sch_IC1S2J2U_17[i] + jus_IC1S2J2U_17[i] + cl_IC1S2J2U_17[i]
+deriv(IC2S2J2U_17[]) <- age_IC2S2J2U_17[i] + pov_IC2S2J2U_17[i] + care_IC2S2J2U_17[i] + sch_IC2S2J2U_17[i] + jus_IC2S2J2U_17[i] + cl_IC2S2J2U_17[i]
+deriv(IC3S2J2U_17[]) <- age_IC3S2J2U_17[i] + pov_IC3S2J2U_17[i] + care_IC3S2J2U_17[i] + sch_IC3S2J2U_17[i] + jus_IC3S2J2U_17[i] + cl_IC3S2J2U_17[i]
+deriv(IC4S2J2U_17[]) <- age_IC4S2J2U_17[i] + pov_IC4S2J2U_17[i] + care_IC4S2J2U_17[i] + sch_IC4S2J2U_17[i] + jus_IC4S2J2U_17[i] + cl_IC4S2J2U_17[i]
+
+
+
+deriv(IC1S1J3U_10[]) <- age_IC1S1J3U_10[i] + pov_IC1S1J3U_10[i] + care_IC1S1J3U_10[i] + sch_IC1S1J3U_10[i] + jus_IC1S1J3U_10[i] + cl_IC1S1J3U_10[i]
+deriv(IC2S1J3U_10[]) <- age_IC2S1J3U_10[i] + pov_IC2S1J3U_10[i] + care_IC2S1J3U_10[i] + sch_IC2S1J3U_10[i] + jus_IC2S1J3U_10[i] + cl_IC2S1J3U_10[i]
+deriv(IC3S1J3U_10[]) <- age_IC3S1J3U_10[i] + pov_IC3S1J3U_10[i] + care_IC3S1J3U_10[i] + sch_IC3S1J3U_10[i] + jus_IC3S1J3U_10[i] + cl_IC3S1J3U_10[i]
+deriv(IC4S1J3U_10[]) <- age_IC4S1J3U_10[i] + pov_IC4S1J3U_10[i] + care_IC4S1J3U_10[i] + sch_IC4S1J3U_10[i] + jus_IC4S1J3U_10[i] + cl_IC4S1J3U_10[i]
+
+deriv(IC1S1J3U_11[]) <- age_IC1S1J3U_11[i] + pov_IC1S1J3U_11[i] + care_IC1S1J3U_11[i] + sch_IC1S1J3U_11[i] + jus_IC1S1J3U_11[i] + cl_IC1S1J3U_11[i]
+deriv(IC2S1J3U_11[]) <- age_IC2S1J3U_11[i] + pov_IC2S1J3U_11[i] + care_IC2S1J3U_11[i] + sch_IC2S1J3U_11[i] + jus_IC2S1J3U_11[i] + cl_IC2S1J3U_11[i]
+deriv(IC3S1J3U_11[]) <- age_IC3S1J3U_11[i] + pov_IC3S1J3U_11[i] + care_IC3S1J3U_11[i] + sch_IC3S1J3U_11[i] + jus_IC3S1J3U_11[i] + cl_IC3S1J3U_11[i]
+deriv(IC4S1J3U_11[]) <- age_IC4S1J3U_11[i] + pov_IC4S1J3U_11[i] + care_IC4S1J3U_11[i] + sch_IC4S1J3U_11[i] + jus_IC4S1J3U_11[i] + cl_IC4S1J3U_11[i]
+
+deriv(IC1S1J3U_12[]) <- age_IC1S1J3U_12[i] + pov_IC1S1J3U_12[i] + care_IC1S1J3U_12[i] + sch_IC1S1J3U_12[i] + jus_IC1S1J3U_12[i] + cl_IC1S1J3U_12[i]
+deriv(IC2S1J3U_12[]) <- age_IC2S1J3U_12[i] + pov_IC2S1J3U_12[i] + care_IC2S1J3U_12[i] + sch_IC2S1J3U_12[i] + jus_IC2S1J3U_12[i] + cl_IC2S1J3U_12[i]
+deriv(IC3S1J3U_12[]) <- age_IC3S1J3U_12[i] + pov_IC3S1J3U_12[i] + care_IC3S1J3U_12[i] + sch_IC3S1J3U_12[i] + jus_IC3S1J3U_12[i] + cl_IC3S1J3U_12[i]
+deriv(IC4S1J3U_12[]) <- age_IC4S1J3U_12[i] + pov_IC4S1J3U_12[i] + care_IC4S1J3U_12[i] + sch_IC4S1J3U_12[i] + jus_IC4S1J3U_12[i] + cl_IC4S1J3U_12[i]
+
+deriv(IC1S1J3U_13[]) <- age_IC1S1J3U_13[i] + pov_IC1S1J3U_13[i] + care_IC1S1J3U_13[i] + sch_IC1S1J3U_13[i] + jus_IC1S1J3U_13[i] + cl_IC1S1J3U_13[i]
+deriv(IC2S1J3U_13[]) <- age_IC2S1J3U_13[i] + pov_IC2S1J3U_13[i] + care_IC2S1J3U_13[i] + sch_IC2S1J3U_13[i] + jus_IC2S1J3U_13[i] + cl_IC2S1J3U_13[i]
+deriv(IC3S1J3U_13[]) <- age_IC3S1J3U_13[i] + pov_IC3S1J3U_13[i] + care_IC3S1J3U_13[i] + sch_IC3S1J3U_13[i] + jus_IC3S1J3U_13[i] + cl_IC3S1J3U_13[i]
+deriv(IC4S1J3U_13[]) <- age_IC4S1J3U_13[i] + pov_IC4S1J3U_13[i] + care_IC4S1J3U_13[i] + sch_IC4S1J3U_13[i] + jus_IC4S1J3U_13[i] + cl_IC4S1J3U_13[i]
+
+deriv(IC1S1J3U_14[]) <- age_IC1S1J3U_14[i] + pov_IC1S1J3U_14[i] + care_IC1S1J3U_14[i] + sch_IC1S1J3U_14[i] + jus_IC1S1J3U_14[i] + cl_IC1S1J3U_14[i]
+deriv(IC2S1J3U_14[]) <- age_IC2S1J3U_14[i] + pov_IC2S1J3U_14[i] + care_IC2S1J3U_14[i] + sch_IC2S1J3U_14[i] + jus_IC2S1J3U_14[i] + cl_IC2S1J3U_14[i]
+deriv(IC3S1J3U_14[]) <- age_IC3S1J3U_14[i] + pov_IC3S1J3U_14[i] + care_IC3S1J3U_14[i] + sch_IC3S1J3U_14[i] + jus_IC3S1J3U_14[i] + cl_IC3S1J3U_14[i]
+deriv(IC4S1J3U_14[]) <- age_IC4S1J3U_14[i] + pov_IC4S1J3U_14[i] + care_IC4S1J3U_14[i] + sch_IC4S1J3U_14[i] + jus_IC4S1J3U_14[i] + cl_IC4S1J3U_14[i]
+
+deriv(IC1S1J3U_15[]) <- age_IC1S1J3U_15[i] + pov_IC1S1J3U_15[i] + care_IC1S1J3U_15[i] + sch_IC1S1J3U_15[i] + jus_IC1S1J3U_15[i] + cl_IC1S1J3U_15[i]
+deriv(IC2S1J3U_15[]) <- age_IC2S1J3U_15[i] + pov_IC2S1J3U_15[i] + care_IC2S1J3U_15[i] + sch_IC2S1J3U_15[i] + jus_IC2S1J3U_15[i] + cl_IC2S1J3U_15[i]
+deriv(IC3S1J3U_15[]) <- age_IC3S1J3U_15[i] + pov_IC3S1J3U_15[i] + care_IC3S1J3U_15[i] + sch_IC3S1J3U_15[i] + jus_IC3S1J3U_15[i] + cl_IC3S1J3U_15[i]
+deriv(IC4S1J3U_15[]) <- age_IC4S1J3U_15[i] + pov_IC4S1J3U_15[i] + care_IC4S1J3U_15[i] + sch_IC4S1J3U_15[i] + jus_IC4S1J3U_15[i] + cl_IC4S1J3U_15[i]
+
+deriv(IC1S1J3U_16[]) <- age_IC1S1J3U_16[i] + pov_IC1S1J3U_16[i] + care_IC1S1J3U_16[i] + sch_IC1S1J3U_16[i] + jus_IC1S1J3U_16[i] + cl_IC1S1J3U_16[i]
+deriv(IC2S1J3U_16[]) <- age_IC2S1J3U_16[i] + pov_IC2S1J3U_16[i] + care_IC2S1J3U_16[i] + sch_IC2S1J3U_16[i] + jus_IC2S1J3U_16[i] + cl_IC2S1J3U_16[i]
+deriv(IC3S1J3U_16[]) <- age_IC3S1J3U_16[i] + pov_IC3S1J3U_16[i] + care_IC3S1J3U_16[i] + sch_IC3S1J3U_16[i] + jus_IC3S1J3U_16[i] + cl_IC3S1J3U_16[i]
+deriv(IC4S1J3U_16[]) <- age_IC4S1J3U_16[i] + pov_IC4S1J3U_16[i] + care_IC4S1J3U_16[i] + sch_IC4S1J3U_16[i] + jus_IC4S1J3U_16[i] + cl_IC4S1J3U_16[i]
+
+deriv(IC1S1J3U_17[]) <- age_IC1S1J3U_17[i] + pov_IC1S1J3U_17[i] + care_IC1S1J3U_17[i] + sch_IC1S1J3U_17[i] + jus_IC1S1J3U_17[i] + cl_IC1S1J3U_17[i]
+deriv(IC2S1J3U_17[]) <- age_IC2S1J3U_17[i] + pov_IC2S1J3U_17[i] + care_IC2S1J3U_17[i] + sch_IC2S1J3U_17[i] + jus_IC2S1J3U_17[i] + cl_IC2S1J3U_17[i]
+deriv(IC3S1J3U_17[]) <- age_IC3S1J3U_17[i] + pov_IC3S1J3U_17[i] + care_IC3S1J3U_17[i] + sch_IC3S1J3U_17[i] + jus_IC3S1J3U_17[i] + cl_IC3S1J3U_17[i]
+deriv(IC4S1J3U_17[]) <- age_IC4S1J3U_17[i] + pov_IC4S1J3U_17[i] + care_IC4S1J3U_17[i] + sch_IC4S1J3U_17[i] + jus_IC4S1J3U_17[i] + cl_IC4S1J3U_17[i]
+
+
+
+deriv(IC1S2J3U_10[]) <- age_IC1S2J3U_10[i] + pov_IC1S2J3U_10[i] + care_IC1S2J3U_10[i] + sch_IC1S2J3U_10[i] + jus_IC1S2J3U_10[i] + cl_IC1S2J3U_10[i]
+deriv(IC2S2J3U_10[]) <- age_IC2S2J3U_10[i] + pov_IC2S2J3U_10[i] + care_IC2S2J3U_10[i] + sch_IC2S2J3U_10[i] + jus_IC2S2J3U_10[i] + cl_IC2S2J3U_10[i]
+deriv(IC3S2J3U_10[]) <- age_IC3S2J3U_10[i] + pov_IC3S2J3U_10[i] + care_IC3S2J3U_10[i] + sch_IC3S2J3U_10[i] + jus_IC3S2J3U_10[i] + cl_IC3S2J3U_10[i]
+deriv(IC4S2J3U_10[]) <- age_IC4S2J3U_10[i] + pov_IC4S2J3U_10[i] + care_IC4S2J3U_10[i] + sch_IC4S2J3U_10[i] + jus_IC4S2J3U_10[i] + cl_IC4S2J3U_10[i]
+
+deriv(IC1S2J3U_11[]) <- age_IC1S2J3U_11[i] + pov_IC1S2J3U_11[i] + care_IC1S2J3U_11[i] + sch_IC1S2J3U_11[i] + jus_IC1S2J3U_11[i] + cl_IC1S2J3U_11[i]
+deriv(IC2S2J3U_11[]) <- age_IC2S2J3U_11[i] + pov_IC2S2J3U_11[i] + care_IC2S2J3U_11[i] + sch_IC2S2J3U_11[i] + jus_IC2S2J3U_11[i] + cl_IC2S2J3U_11[i]
+deriv(IC3S2J3U_11[]) <- age_IC3S2J3U_11[i] + pov_IC3S2J3U_11[i] + care_IC3S2J3U_11[i] + sch_IC3S2J3U_11[i] + jus_IC3S2J3U_11[i] + cl_IC3S2J3U_11[i]
+deriv(IC4S2J3U_11[]) <- age_IC4S2J3U_11[i] + pov_IC4S2J3U_11[i] + care_IC4S2J3U_11[i] + sch_IC4S2J3U_11[i] + jus_IC4S2J3U_11[i] + cl_IC4S2J3U_11[i]
+
+deriv(IC1S2J3U_12[]) <- age_IC1S2J3U_12[i] + pov_IC1S2J3U_12[i] + care_IC1S2J3U_12[i] + sch_IC1S2J3U_12[i] + jus_IC1S2J3U_12[i] + cl_IC1S2J3U_12[i]
+deriv(IC2S2J3U_12[]) <- age_IC2S2J3U_12[i] + pov_IC2S2J3U_12[i] + care_IC2S2J3U_12[i] + sch_IC2S2J3U_12[i] + jus_IC2S2J3U_12[i] + cl_IC2S2J3U_12[i]
+deriv(IC3S2J3U_12[]) <- age_IC3S2J3U_12[i] + pov_IC3S2J3U_12[i] + care_IC3S2J3U_12[i] + sch_IC3S2J3U_12[i] + jus_IC3S2J3U_12[i] + cl_IC3S2J3U_12[i]
+deriv(IC4S2J3U_12[]) <- age_IC4S2J3U_12[i] + pov_IC4S2J3U_12[i] + care_IC4S2J3U_12[i] + sch_IC4S2J3U_12[i] + jus_IC4S2J3U_12[i] + cl_IC4S2J3U_12[i]
+
+deriv(IC1S2J3U_13[]) <- age_IC1S2J3U_13[i] + pov_IC1S2J3U_13[i] + care_IC1S2J3U_13[i] + sch_IC1S2J3U_13[i] + jus_IC1S2J3U_13[i] + cl_IC1S2J3U_13[i]
+deriv(IC2S2J3U_13[]) <- age_IC2S2J3U_13[i] + pov_IC2S2J3U_13[i] + care_IC2S2J3U_13[i] + sch_IC2S2J3U_13[i] + jus_IC2S2J3U_13[i] + cl_IC2S2J3U_13[i]
+deriv(IC3S2J3U_13[]) <- age_IC3S2J3U_13[i] + pov_IC3S2J3U_13[i] + care_IC3S2J3U_13[i] + sch_IC3S2J3U_13[i] + jus_IC3S2J3U_13[i] + cl_IC3S2J3U_13[i]
+deriv(IC4S2J3U_13[]) <- age_IC4S2J3U_13[i] + pov_IC4S2J3U_13[i] + care_IC4S2J3U_13[i] + sch_IC4S2J3U_13[i] + jus_IC4S2J3U_13[i] + cl_IC4S2J3U_13[i]
+
+deriv(IC1S2J3U_14[]) <- age_IC1S2J3U_14[i] + pov_IC1S2J3U_14[i] + care_IC1S2J3U_14[i] + sch_IC1S2J3U_14[i] + jus_IC1S2J3U_14[i] + cl_IC1S2J3U_14[i]
+deriv(IC2S2J3U_14[]) <- age_IC2S2J3U_14[i] + pov_IC2S2J3U_14[i] + care_IC2S2J3U_14[i] + sch_IC2S2J3U_14[i] + jus_IC2S2J3U_14[i] + cl_IC2S2J3U_14[i]
+deriv(IC3S2J3U_14[]) <- age_IC3S2J3U_14[i] + pov_IC3S2J3U_14[i] + care_IC3S2J3U_14[i] + sch_IC3S2J3U_14[i] + jus_IC3S2J3U_14[i] + cl_IC3S2J3U_14[i]
+deriv(IC4S2J3U_14[]) <- age_IC4S2J3U_14[i] + pov_IC4S2J3U_14[i] + care_IC4S2J3U_14[i] + sch_IC4S2J3U_14[i] + jus_IC4S2J3U_14[i] + cl_IC4S2J3U_14[i]
+
+deriv(IC1S2J3U_15[]) <- age_IC1S2J3U_15[i] + pov_IC1S2J3U_15[i] + care_IC1S2J3U_15[i] + sch_IC1S2J3U_15[i] + jus_IC1S2J3U_15[i] + cl_IC1S2J3U_15[i]
+deriv(IC2S2J3U_15[]) <- age_IC2S2J3U_15[i] + pov_IC2S2J3U_15[i] + care_IC2S2J3U_15[i] + sch_IC2S2J3U_15[i] + jus_IC2S2J3U_15[i] + cl_IC2S2J3U_15[i]
+deriv(IC3S2J3U_15[]) <- age_IC3S2J3U_15[i] + pov_IC3S2J3U_15[i] + care_IC3S2J3U_15[i] + sch_IC3S2J3U_15[i] + jus_IC3S2J3U_15[i] + cl_IC3S2J3U_15[i]
+deriv(IC4S2J3U_15[]) <- age_IC4S2J3U_15[i] + pov_IC4S2J3U_15[i] + care_IC4S2J3U_15[i] + sch_IC4S2J3U_15[i] + jus_IC4S2J3U_15[i] + cl_IC4S2J3U_15[i]
+
+deriv(IC1S2J3U_16[]) <- age_IC1S2J3U_16[i] + pov_IC1S2J3U_16[i] + care_IC1S2J3U_16[i] + sch_IC1S2J3U_16[i] + jus_IC1S2J3U_16[i] + cl_IC1S2J3U_16[i]
+deriv(IC2S2J3U_16[]) <- age_IC2S2J3U_16[i] + pov_IC2S2J3U_16[i] + care_IC2S2J3U_16[i] + sch_IC2S2J3U_16[i] + jus_IC2S2J3U_16[i] + cl_IC2S2J3U_16[i]
+deriv(IC3S2J3U_16[]) <- age_IC3S2J3U_16[i] + pov_IC3S2J3U_16[i] + care_IC3S2J3U_16[i] + sch_IC3S2J3U_16[i] + jus_IC3S2J3U_16[i] + cl_IC3S2J3U_16[i]
+deriv(IC4S2J3U_16[]) <- age_IC4S2J3U_16[i] + pov_IC4S2J3U_16[i] + care_IC4S2J3U_16[i] + sch_IC4S2J3U_16[i] + jus_IC4S2J3U_16[i] + cl_IC4S2J3U_16[i]
+
+deriv(IC1S2J3U_17[]) <- age_IC1S2J3U_17[i] + pov_IC1S2J3U_17[i] + care_IC1S2J3U_17[i] + sch_IC1S2J3U_17[i] + jus_IC1S2J3U_17[i] + cl_IC1S2J3U_17[i]
+deriv(IC2S2J3U_17[]) <- age_IC2S2J3U_17[i] + pov_IC2S2J3U_17[i] + care_IC2S2J3U_17[i] + sch_IC2S2J3U_17[i] + jus_IC2S2J3U_17[i] + cl_IC2S2J3U_17[i]
+deriv(IC3S2J3U_17[]) <- age_IC3S2J3U_17[i] + pov_IC3S2J3U_17[i] + care_IC3S2J3U_17[i] + sch_IC3S2J3U_17[i] + jus_IC3S2J3U_17[i] + cl_IC3S2J3U_17[i]
+deriv(IC4S2J3U_17[]) <- age_IC4S2J3U_17[i] + pov_IC4S2J3U_17[i] + care_IC4S2J3U_17[i] + sch_IC4S2J3U_17[i] + jus_IC4S2J3U_17[i] + cl_IC4S2J3U_17[i]
+
+
+
+deriv(IC1S1J4U_10[]) <- age_IC1S1J4U_10[i] + pov_IC1S1J4U_10[i] + jus_IC1S1J4U_10[i] + cl_IC1S1J4U_10[i]
+deriv(IC2S1J4U_10[]) <- age_IC2S1J4U_10[i] + pov_IC2S1J4U_10[i] + jus_IC2S1J4U_10[i] + cl_IC2S1J4U_10[i]
+deriv(IC3S1J4U_10[]) <- age_IC3S1J4U_10[i] + pov_IC3S1J4U_10[i] + jus_IC3S1J4U_10[i] + cl_IC3S1J4U_10[i]
+deriv(IC4S1J4U_10[]) <- age_IC4S1J4U_10[i] + pov_IC4S1J4U_10[i] + jus_IC4S1J4U_10[i] + cl_IC4S1J4U_10[i]
+
+deriv(IC1S1J4U_11[]) <- age_IC1S1J4U_11[i] + pov_IC1S1J4U_11[i] + jus_IC1S1J4U_11[i] + cl_IC1S1J4U_11[i]
+deriv(IC2S1J4U_11[]) <- age_IC2S1J4U_11[i] + pov_IC2S1J4U_11[i] + jus_IC2S1J4U_11[i] + cl_IC2S1J4U_11[i]
+deriv(IC3S1J4U_11[]) <- age_IC3S1J4U_11[i] + pov_IC3S1J4U_11[i] + jus_IC3S1J4U_11[i] + cl_IC3S1J4U_11[i]
+deriv(IC4S1J4U_11[]) <- age_IC4S1J4U_11[i] + pov_IC4S1J4U_11[i] + jus_IC4S1J4U_11[i] + cl_IC4S1J4U_11[i]
+
+deriv(IC1S1J4U_12[]) <- age_IC1S1J4U_12[i] + pov_IC1S1J4U_12[i] + jus_IC1S1J4U_12[i] + cl_IC1S1J4U_12[i]
+deriv(IC2S1J4U_12[]) <- age_IC2S1J4U_12[i] + pov_IC2S1J4U_12[i] + jus_IC2S1J4U_12[i] + cl_IC2S1J4U_12[i]
+deriv(IC3S1J4U_12[]) <- age_IC3S1J4U_12[i] + pov_IC3S1J4U_12[i] + jus_IC3S1J4U_12[i] + cl_IC3S1J4U_12[i]
+deriv(IC4S1J4U_12[]) <- age_IC4S1J4U_12[i] + pov_IC4S1J4U_12[i] + jus_IC4S1J4U_12[i] + cl_IC4S1J4U_12[i]
+
+deriv(IC1S1J4U_13[]) <- age_IC1S1J4U_13[i] + pov_IC1S1J4U_13[i] + jus_IC1S1J4U_13[i] + cl_IC1S1J4U_13[i]
+deriv(IC2S1J4U_13[]) <- age_IC2S1J4U_13[i] + pov_IC2S1J4U_13[i] + jus_IC2S1J4U_13[i] + cl_IC2S1J4U_13[i]
+deriv(IC3S1J4U_13[]) <- age_IC3S1J4U_13[i] + pov_IC3S1J4U_13[i] + jus_IC3S1J4U_13[i] + cl_IC3S1J4U_13[i]
+deriv(IC4S1J4U_13[]) <- age_IC4S1J4U_13[i] + pov_IC4S1J4U_13[i] + jus_IC4S1J4U_13[i] + cl_IC4S1J4U_13[i]
+
+deriv(IC1S1J4U_14[]) <- age_IC1S1J4U_14[i] + pov_IC1S1J4U_14[i] + jus_IC1S1J4U_14[i] + cl_IC1S1J4U_14[i]
+deriv(IC2S1J4U_14[]) <- age_IC2S1J4U_14[i] + pov_IC2S1J4U_14[i] + jus_IC2S1J4U_14[i] + cl_IC2S1J4U_14[i]
+deriv(IC3S1J4U_14[]) <- age_IC3S1J4U_14[i] + pov_IC3S1J4U_14[i] + jus_IC3S1J4U_14[i] + cl_IC3S1J4U_14[i]
+deriv(IC4S1J4U_14[]) <- age_IC4S1J4U_14[i] + pov_IC4S1J4U_14[i] + jus_IC4S1J4U_14[i] + cl_IC4S1J4U_14[i]
+
+deriv(IC1S1J4U_15[]) <- age_IC1S1J4U_15[i] + pov_IC1S1J4U_15[i] + jus_IC1S1J4U_15[i] + cl_IC1S1J4U_15[i]
+deriv(IC2S1J4U_15[]) <- age_IC2S1J4U_15[i] + pov_IC2S1J4U_15[i] + jus_IC2S1J4U_15[i] + cl_IC2S1J4U_15[i]
+deriv(IC3S1J4U_15[]) <- age_IC3S1J4U_15[i] + pov_IC3S1J4U_15[i] + jus_IC3S1J4U_15[i] + cl_IC3S1J4U_15[i]
+deriv(IC4S1J4U_15[]) <- age_IC4S1J4U_15[i] + pov_IC4S1J4U_15[i] + jus_IC4S1J4U_15[i] + cl_IC4S1J4U_15[i]
+
+deriv(IC1S1J4U_16[]) <- age_IC1S1J4U_16[i] + pov_IC1S1J4U_16[i] + jus_IC1S1J4U_16[i] + cl_IC1S1J4U_16[i]
+deriv(IC2S1J4U_16[]) <- age_IC2S1J4U_16[i] + pov_IC2S1J4U_16[i] + jus_IC2S1J4U_16[i] + cl_IC2S1J4U_16[i]
+deriv(IC3S1J4U_16[]) <- age_IC3S1J4U_16[i] + pov_IC3S1J4U_16[i] + jus_IC3S1J4U_16[i] + cl_IC3S1J4U_16[i]
+deriv(IC4S1J4U_16[]) <- age_IC4S1J4U_16[i] + pov_IC4S1J4U_16[i] + jus_IC4S1J4U_16[i] + cl_IC4S1J4U_16[i]
+
+deriv(IC1S1J4U_17[]) <- age_IC1S1J4U_17[i] + pov_IC1S1J4U_17[i] + jus_IC1S1J4U_17[i] + cl_IC1S1J4U_17[i]
+deriv(IC2S1J4U_17[]) <- age_IC2S1J4U_17[i] + pov_IC2S1J4U_17[i] + jus_IC2S1J4U_17[i] + cl_IC2S1J4U_17[i]
+deriv(IC3S1J4U_17[]) <- age_IC3S1J4U_17[i] + pov_IC3S1J4U_17[i] + jus_IC3S1J4U_17[i] + cl_IC3S1J4U_17[i]
+deriv(IC4S1J4U_17[]) <- age_IC4S1J4U_17[i] + pov_IC4S1J4U_17[i] + jus_IC4S1J4U_17[i] + cl_IC4S1J4U_17[i]
+
+
+
+deriv(IC1S2J4U_10[]) <- age_IC1S2J4U_10[i] + pov_IC1S2J4U_10[i] + jus_IC1S2J4U_10[i] + cl_IC1S2J4U_10[i]
+deriv(IC2S2J4U_10[]) <- age_IC2S2J4U_10[i] + pov_IC2S2J4U_10[i] + jus_IC2S2J4U_10[i] + cl_IC2S2J4U_10[i]
+deriv(IC3S2J4U_10[]) <- age_IC3S2J4U_10[i] + pov_IC3S2J4U_10[i] + jus_IC3S2J4U_10[i] + cl_IC3S2J4U_10[i]
+deriv(IC4S2J4U_10[]) <- age_IC4S2J4U_10[i] + pov_IC4S2J4U_10[i] + jus_IC4S2J4U_10[i] + cl_IC4S2J4U_10[i]
+
+deriv(IC1S2J4U_11[]) <- age_IC1S2J4U_11[i] + pov_IC1S2J4U_11[i] + jus_IC1S2J4U_11[i] + cl_IC1S2J4U_11[i]
+deriv(IC2S2J4U_11[]) <- age_IC2S2J4U_11[i] + pov_IC2S2J4U_11[i] + jus_IC2S2J4U_11[i] + cl_IC2S2J4U_11[i]
+deriv(IC3S2J4U_11[]) <- age_IC3S2J4U_11[i] + pov_IC3S2J4U_11[i] + jus_IC3S2J4U_11[i] + cl_IC3S2J4U_11[i]
+deriv(IC4S2J4U_11[]) <- age_IC4S2J4U_11[i] + pov_IC4S2J4U_11[i] + jus_IC4S2J4U_11[i] + cl_IC4S2J4U_11[i]
+
+deriv(IC1S2J4U_12[]) <- age_IC1S2J4U_12[i] + pov_IC1S2J4U_12[i] + jus_IC1S2J4U_12[i] + cl_IC1S2J4U_12[i]
+deriv(IC2S2J4U_12[]) <- age_IC2S2J4U_12[i] + pov_IC2S2J4U_12[i] + jus_IC2S2J4U_12[i] + cl_IC2S2J4U_12[i]
+deriv(IC3S2J4U_12[]) <- age_IC3S2J4U_12[i] + pov_IC3S2J4U_12[i] + jus_IC3S2J4U_12[i] + cl_IC3S2J4U_12[i]
+deriv(IC4S2J4U_12[]) <- age_IC4S2J4U_12[i] + pov_IC4S2J4U_12[i] + jus_IC4S2J4U_12[i] + cl_IC4S2J4U_12[i]
+
+deriv(IC1S2J4U_13[]) <- age_IC1S2J4U_13[i] + pov_IC1S2J4U_13[i] + jus_IC1S2J4U_13[i] + cl_IC1S2J4U_13[i]
+deriv(IC2S2J4U_13[]) <- age_IC2S2J4U_13[i] + pov_IC2S2J4U_13[i] + jus_IC2S2J4U_13[i] + cl_IC2S2J4U_13[i]
+deriv(IC3S2J4U_13[]) <- age_IC3S2J4U_13[i] + pov_IC3S2J4U_13[i] + jus_IC3S2J4U_13[i] + cl_IC3S2J4U_13[i]
+deriv(IC4S2J4U_13[]) <- age_IC4S2J4U_13[i] + pov_IC4S2J4U_13[i] + jus_IC4S2J4U_13[i] + cl_IC4S2J4U_13[i]
+
+deriv(IC1S2J4U_14[]) <- age_IC1S2J4U_14[i] + pov_IC1S2J4U_14[i] + jus_IC1S2J4U_14[i] + cl_IC1S2J4U_14[i]
+deriv(IC2S2J4U_14[]) <- age_IC2S2J4U_14[i] + pov_IC2S2J4U_14[i] + jus_IC2S2J4U_14[i] + cl_IC2S2J4U_14[i]
+deriv(IC3S2J4U_14[]) <- age_IC3S2J4U_14[i] + pov_IC3S2J4U_14[i] + jus_IC3S2J4U_14[i] + cl_IC3S2J4U_14[i]
+deriv(IC4S2J4U_14[]) <- age_IC4S2J4U_14[i] + pov_IC4S2J4U_14[i] + jus_IC4S2J4U_14[i] + cl_IC4S2J4U_14[i]
+
+deriv(IC1S2J4U_15[]) <- age_IC1S2J4U_15[i] + pov_IC1S2J4U_15[i] + jus_IC1S2J4U_15[i] + cl_IC1S2J4U_15[i]
+deriv(IC2S2J4U_15[]) <- age_IC2S2J4U_15[i] + pov_IC2S2J4U_15[i] + jus_IC2S2J4U_15[i] + cl_IC2S2J4U_15[i]
+deriv(IC3S2J4U_15[]) <- age_IC3S2J4U_15[i] + pov_IC3S2J4U_15[i] + jus_IC3S2J4U_15[i] + cl_IC3S2J4U_15[i]
+deriv(IC4S2J4U_15[]) <- age_IC4S2J4U_15[i] + pov_IC4S2J4U_15[i] + jus_IC4S2J4U_15[i] + cl_IC4S2J4U_15[i]
+
+deriv(IC1S2J4U_16[]) <- age_IC1S2J4U_16[i] + pov_IC1S2J4U_16[i] + jus_IC1S2J4U_16[i] + cl_IC1S2J4U_16[i]
+deriv(IC2S2J4U_16[]) <- age_IC2S2J4U_16[i] + pov_IC2S2J4U_16[i] + jus_IC2S2J4U_16[i] + cl_IC2S2J4U_16[i]
+deriv(IC3S2J4U_16[]) <- age_IC3S2J4U_16[i] + pov_IC3S2J4U_16[i] + jus_IC3S2J4U_16[i] + cl_IC3S2J4U_16[i]
+deriv(IC4S2J4U_16[]) <- age_IC4S2J4U_16[i] + pov_IC4S2J4U_16[i] + jus_IC4S2J4U_16[i] + cl_IC4S2J4U_16[i]
+
+deriv(IC1S2J4U_17[]) <- age_IC1S2J4U_17[i] + pov_IC1S2J4U_17[i] + jus_IC1S2J4U_17[i] + cl_IC1S2J4U_17[i]
+deriv(IC2S2J4U_17[]) <- age_IC2S2J4U_17[i] + pov_IC2S2J4U_17[i] + jus_IC2S2J4U_17[i] + cl_IC2S2J4U_17[i]
+deriv(IC3S2J4U_17[]) <- age_IC3S2J4U_17[i] + pov_IC3S2J4U_17[i] + jus_IC3S2J4U_17[i] + cl_IC3S2J4U_17[i]
+deriv(IC4S2J4U_17[]) <- age_IC4S2J4U_17[i] + pov_IC4S2J4U_17[i] + jus_IC4S2J4U_17[i] + cl_IC4S2J4U_17[i]
+
+
+
+deriv(IC1S1J5U_10[]) <- age_IC1S1J5U_10[i] + pov_IC1S1J5U_10[i] + jus_IC1S1J5U_10[i] + cl_IC1S1J5U_10[i]
+deriv(IC2S1J5U_10[]) <- age_IC2S1J5U_10[i] + pov_IC2S1J5U_10[i] + jus_IC2S1J5U_10[i] + cl_IC2S1J5U_10[i]
+deriv(IC3S1J5U_10[]) <- age_IC3S1J5U_10[i] + pov_IC3S1J5U_10[i] + jus_IC3S1J5U_10[i] + cl_IC3S1J5U_10[i]
+deriv(IC4S1J5U_10[]) <- age_IC4S1J5U_10[i] + pov_IC4S1J5U_10[i] + jus_IC4S1J5U_10[i] + cl_IC4S1J5U_10[i]
+
+deriv(IC1S1J5U_11[]) <- age_IC1S1J5U_11[i] + pov_IC1S1J5U_11[i] + jus_IC1S1J5U_11[i] + cl_IC1S1J5U_11[i]
+deriv(IC2S1J5U_11[]) <- age_IC2S1J5U_11[i] + pov_IC2S1J5U_11[i] + jus_IC2S1J5U_11[i] + cl_IC2S1J5U_11[i]
+deriv(IC3S1J5U_11[]) <- age_IC3S1J5U_11[i] + pov_IC3S1J5U_11[i] + jus_IC3S1J5U_11[i] + cl_IC3S1J5U_11[i]
+deriv(IC4S1J5U_11[]) <- age_IC4S1J5U_11[i] + pov_IC4S1J5U_11[i] + jus_IC4S1J5U_11[i] + cl_IC4S1J5U_11[i]
+
+deriv(IC1S1J5U_12[]) <- age_IC1S1J5U_12[i] + pov_IC1S1J5U_12[i] + jus_IC1S1J5U_12[i] + cl_IC1S1J5U_12[i]
+deriv(IC2S1J5U_12[]) <- age_IC2S1J5U_12[i] + pov_IC2S1J5U_12[i] + jus_IC2S1J5U_12[i] + cl_IC2S1J5U_12[i]
+deriv(IC3S1J5U_12[]) <- age_IC3S1J5U_12[i] + pov_IC3S1J5U_12[i] + jus_IC3S1J5U_12[i] + cl_IC3S1J5U_12[i]
+deriv(IC4S1J5U_12[]) <- age_IC4S1J5U_12[i] + pov_IC4S1J5U_12[i] + jus_IC4S1J5U_12[i] + cl_IC4S1J5U_12[i]
+
+deriv(IC1S1J5U_13[]) <- age_IC1S1J5U_13[i] + pov_IC1S1J5U_13[i] + jus_IC1S1J5U_13[i] + cl_IC1S1J5U_13[i]
+deriv(IC2S1J5U_13[]) <- age_IC2S1J5U_13[i] + pov_IC2S1J5U_13[i] + jus_IC2S1J5U_13[i] + cl_IC2S1J5U_13[i]
+deriv(IC3S1J5U_13[]) <- age_IC3S1J5U_13[i] + pov_IC3S1J5U_13[i] + jus_IC3S1J5U_13[i] + cl_IC3S1J5U_13[i]
+deriv(IC4S1J5U_13[]) <- age_IC4S1J5U_13[i] + pov_IC4S1J5U_13[i] + jus_IC4S1J5U_13[i] + cl_IC4S1J5U_13[i]
+
+deriv(IC1S1J5U_14[]) <- age_IC1S1J5U_14[i] + pov_IC1S1J5U_14[i] + jus_IC1S1J5U_14[i] + cl_IC1S1J5U_14[i]
+deriv(IC2S1J5U_14[]) <- age_IC2S1J5U_14[i] + pov_IC2S1J5U_14[i] + jus_IC2S1J5U_14[i] + cl_IC2S1J5U_14[i]
+deriv(IC3S1J5U_14[]) <- age_IC3S1J5U_14[i] + pov_IC3S1J5U_14[i] + jus_IC3S1J5U_14[i] + cl_IC3S1J5U_14[i]
+deriv(IC4S1J5U_14[]) <- age_IC4S1J5U_14[i] + pov_IC4S1J5U_14[i] + jus_IC4S1J5U_14[i] + cl_IC4S1J5U_14[i]
+
+deriv(IC1S1J5U_15[]) <- age_IC1S1J5U_15[i] + pov_IC1S1J5U_15[i] + jus_IC1S1J5U_15[i] + cl_IC1S1J5U_15[i]
+deriv(IC2S1J5U_15[]) <- age_IC2S1J5U_15[i] + pov_IC2S1J5U_15[i] + jus_IC2S1J5U_15[i] + cl_IC2S1J5U_15[i]
+deriv(IC3S1J5U_15[]) <- age_IC3S1J5U_15[i] + pov_IC3S1J5U_15[i] + jus_IC3S1J5U_15[i] + cl_IC3S1J5U_15[i]
+deriv(IC4S1J5U_15[]) <- age_IC4S1J5U_15[i] + pov_IC4S1J5U_15[i] + jus_IC4S1J5U_15[i] + cl_IC4S1J5U_15[i]
+
+deriv(IC1S1J5U_16[]) <- age_IC1S1J5U_16[i] + pov_IC1S1J5U_16[i] + jus_IC1S1J5U_16[i] + cl_IC1S1J5U_16[i]
+deriv(IC2S1J5U_16[]) <- age_IC2S1J5U_16[i] + pov_IC2S1J5U_16[i] + jus_IC2S1J5U_16[i] + cl_IC2S1J5U_16[i]
+deriv(IC3S1J5U_16[]) <- age_IC3S1J5U_16[i] + pov_IC3S1J5U_16[i] + jus_IC3S1J5U_16[i] + cl_IC3S1J5U_16[i]
+deriv(IC4S1J5U_16[]) <- age_IC4S1J5U_16[i] + pov_IC4S1J5U_16[i] + jus_IC4S1J5U_16[i] + cl_IC4S1J5U_16[i]
+
+deriv(IC1S1J5U_17[]) <- age_IC1S1J5U_17[i] + pov_IC1S1J5U_17[i] + jus_IC1S1J5U_17[i] + cl_IC1S1J5U_17[i]
+deriv(IC2S1J5U_17[]) <- age_IC2S1J5U_17[i] + pov_IC2S1J5U_17[i] + jus_IC2S1J5U_17[i] + cl_IC2S1J5U_17[i]
+deriv(IC3S1J5U_17[]) <- age_IC3S1J5U_17[i] + pov_IC3S1J5U_17[i] + jus_IC3S1J5U_17[i] + cl_IC3S1J5U_17[i]
+deriv(IC4S1J5U_17[]) <- age_IC4S1J5U_17[i] + pov_IC4S1J5U_17[i] + jus_IC4S1J5U_17[i] + cl_IC4S1J5U_17[i]
+
+
+
+deriv(IC1S2J5U_10[]) <- age_IC1S2J5U_10[i] + pov_IC1S2J5U_10[i] + jus_IC1S2J5U_10[i] + cl_IC1S2J5U_10[i]
+deriv(IC2S2J5U_10[]) <- age_IC2S2J5U_10[i] + pov_IC2S2J5U_10[i] + jus_IC2S2J5U_10[i] + cl_IC2S2J5U_10[i]
+deriv(IC3S2J5U_10[]) <- age_IC3S2J5U_10[i] + pov_IC3S2J5U_10[i] + jus_IC3S2J5U_10[i] + cl_IC3S2J5U_10[i]
+deriv(IC4S2J5U_10[]) <- age_IC4S2J5U_10[i] + pov_IC4S2J5U_10[i] + jus_IC4S2J5U_10[i] + cl_IC4S2J5U_10[i]
+
+deriv(IC1S2J5U_11[]) <- age_IC1S2J5U_11[i] + pov_IC1S2J5U_11[i] + jus_IC1S2J5U_11[i] + cl_IC1S2J5U_11[i]
+deriv(IC2S2J5U_11[]) <- age_IC2S2J5U_11[i] + pov_IC2S2J5U_11[i] + jus_IC2S2J5U_11[i] + cl_IC2S2J5U_11[i]
+deriv(IC3S2J5U_11[]) <- age_IC3S2J5U_11[i] + pov_IC3S2J5U_11[i] + jus_IC3S2J5U_11[i] + cl_IC3S2J5U_11[i]
+deriv(IC4S2J5U_11[]) <- age_IC4S2J5U_11[i] + pov_IC4S2J5U_11[i] + jus_IC4S2J5U_11[i] + cl_IC4S2J5U_11[i]
+
+deriv(IC1S2J5U_12[]) <- age_IC1S2J5U_12[i] + pov_IC1S2J5U_12[i] + jus_IC1S2J5U_12[i] + cl_IC1S2J5U_12[i]
+deriv(IC2S2J5U_12[]) <- age_IC2S2J5U_12[i] + pov_IC2S2J5U_12[i] + jus_IC2S2J5U_12[i] + cl_IC2S2J5U_12[i]
+deriv(IC3S2J5U_12[]) <- age_IC3S2J5U_12[i] + pov_IC3S2J5U_12[i] + jus_IC3S2J5U_12[i] + cl_IC3S2J5U_12[i]
+deriv(IC4S2J5U_12[]) <- age_IC4S2J5U_12[i] + pov_IC4S2J5U_12[i] + jus_IC4S2J5U_12[i] + cl_IC4S2J5U_12[i]
+
+deriv(IC1S2J5U_13[]) <- age_IC1S2J5U_13[i] + pov_IC1S2J5U_13[i] + jus_IC1S2J5U_13[i] + cl_IC1S2J5U_13[i]
+deriv(IC2S2J5U_13[]) <- age_IC2S2J5U_13[i] + pov_IC2S2J5U_13[i] + jus_IC2S2J5U_13[i] + cl_IC2S2J5U_13[i]
+deriv(IC3S2J5U_13[]) <- age_IC3S2J5U_13[i] + pov_IC3S2J5U_13[i] + jus_IC3S2J5U_13[i] + cl_IC3S2J5U_13[i]
+deriv(IC4S2J5U_13[]) <- age_IC4S2J5U_13[i] + pov_IC4S2J5U_13[i] + jus_IC4S2J5U_13[i] + cl_IC4S2J5U_13[i]
+
+deriv(IC1S2J5U_14[]) <- age_IC1S2J5U_14[i] + pov_IC1S2J5U_14[i] + jus_IC1S2J5U_14[i] + cl_IC1S2J5U_14[i]
+deriv(IC2S2J5U_14[]) <- age_IC2S2J5U_14[i] + pov_IC2S2J5U_14[i] + jus_IC2S2J5U_14[i] + cl_IC2S2J5U_14[i]
+deriv(IC3S2J5U_14[]) <- age_IC3S2J5U_14[i] + pov_IC3S2J5U_14[i] + jus_IC3S2J5U_14[i] + cl_IC3S2J5U_14[i]
+deriv(IC4S2J5U_14[]) <- age_IC4S2J5U_14[i] + pov_IC4S2J5U_14[i] + jus_IC4S2J5U_14[i] + cl_IC4S2J5U_14[i]
+
+deriv(IC1S2J5U_15[]) <- age_IC1S2J5U_15[i] + pov_IC1S2J5U_15[i] + jus_IC1S2J5U_15[i] + cl_IC1S2J5U_15[i]
+deriv(IC2S2J5U_15[]) <- age_IC2S2J5U_15[i] + pov_IC2S2J5U_15[i] + jus_IC2S2J5U_15[i] + cl_IC2S2J5U_15[i]
+deriv(IC3S2J5U_15[]) <- age_IC3S2J5U_15[i] + pov_IC3S2J5U_15[i] + jus_IC3S2J5U_15[i] + cl_IC3S2J5U_15[i]
+deriv(IC4S2J5U_15[]) <- age_IC4S2J5U_15[i] + pov_IC4S2J5U_15[i] + jus_IC4S2J5U_15[i] + cl_IC4S2J5U_15[i]
+
+deriv(IC1S2J5U_16[]) <- age_IC1S2J5U_16[i] + pov_IC1S2J5U_16[i] + jus_IC1S2J5U_16[i] + cl_IC1S2J5U_16[i]
+deriv(IC2S2J5U_16[]) <- age_IC2S2J5U_16[i] + pov_IC2S2J5U_16[i] + jus_IC2S2J5U_16[i] + cl_IC2S2J5U_16[i]
+deriv(IC3S2J5U_16[]) <- age_IC3S2J5U_16[i] + pov_IC3S2J5U_16[i] + jus_IC3S2J5U_16[i] + cl_IC3S2J5U_16[i]
+deriv(IC4S2J5U_16[]) <- age_IC4S2J5U_16[i] + pov_IC4S2J5U_16[i] + jus_IC4S2J5U_16[i] + cl_IC4S2J5U_16[i]
+
+deriv(IC1S2J5U_17[]) <- age_IC1S2J5U_17[i] + pov_IC1S2J5U_17[i] + jus_IC1S2J5U_17[i] + cl_IC1S2J5U_17[i]
+deriv(IC2S2J5U_17[]) <- age_IC2S2J5U_17[i] + pov_IC2S2J5U_17[i] + jus_IC2S2J5U_17[i] + cl_IC2S2J5U_17[i]
+deriv(IC3S2J5U_17[]) <- age_IC3S2J5U_17[i] + pov_IC3S2J5U_17[i] + jus_IC3S2J5U_17[i] + cl_IC3S2J5U_17[i]
+deriv(IC4S2J5U_17[]) <- age_IC4S2J5U_17[i] + pov_IC4S2J5U_17[i] + jus_IC4S2J5U_17[i] + cl_IC4S2J5U_17[i]
+
+
+
+deriv(IC1S1J1W_10[]) <- age_IC1S1J1W_10[i] + pov_IC1S1J1W_10[i] + care_IC1S1J1W_10[i] + sch_IC1S1J1W_10[i] + jus_IC1S1J1W_10[i] + cl_IC1S1J1W_10[i]
+deriv(IC2S1J1W_10[]) <- age_IC2S1J1W_10[i] + pov_IC2S1J1W_10[i] + care_IC2S1J1W_10[i] + sch_IC2S1J1W_10[i] + jus_IC2S1J1W_10[i] + cl_IC2S1J1W_10[i]
+deriv(IC3S1J1W_10[]) <- age_IC3S1J1W_10[i] + pov_IC3S1J1W_10[i] + care_IC3S1J1W_10[i] + sch_IC3S1J1W_10[i] + jus_IC3S1J1W_10[i] + cl_IC3S1J1W_10[i]
+deriv(IC4S1J1W_10[]) <- age_IC4S1J1W_10[i] + pov_IC4S1J1W_10[i] + care_IC4S1J1W_10[i] + sch_IC4S1J1W_10[i] + jus_IC4S1J1W_10[i] + cl_IC4S1J1W_10[i]
+
+deriv(IC1S1J1W_11[]) <- age_IC1S1J1W_11[i] + pov_IC1S1J1W_11[i] + care_IC1S1J1W_11[i] + sch_IC1S1J1W_11[i] + jus_IC1S1J1W_11[i] + cl_IC1S1J1W_11[i]
+deriv(IC2S1J1W_11[]) <- age_IC2S1J1W_11[i] + pov_IC2S1J1W_11[i] + care_IC2S1J1W_11[i] + sch_IC2S1J1W_11[i] + jus_IC2S1J1W_11[i] + cl_IC2S1J1W_11[i]
+deriv(IC3S1J1W_11[]) <- age_IC3S1J1W_11[i] + pov_IC3S1J1W_11[i] + care_IC3S1J1W_11[i] + sch_IC3S1J1W_11[i] + jus_IC3S1J1W_11[i] + cl_IC3S1J1W_11[i]
+deriv(IC4S1J1W_11[]) <- age_IC4S1J1W_11[i] + pov_IC4S1J1W_11[i] + care_IC4S1J1W_11[i] + sch_IC4S1J1W_11[i] + jus_IC4S1J1W_11[i] + cl_IC4S1J1W_11[i]
+
+deriv(IC1S1J1W_12[]) <- age_IC1S1J1W_12[i] + pov_IC1S1J1W_12[i] + care_IC1S1J1W_12[i] + sch_IC1S1J1W_12[i] + jus_IC1S1J1W_12[i] + cl_IC1S1J1W_12[i]
+deriv(IC2S1J1W_12[]) <- age_IC2S1J1W_12[i] + pov_IC2S1J1W_12[i] + care_IC2S1J1W_12[i] + sch_IC2S1J1W_12[i] + jus_IC2S1J1W_12[i] + cl_IC2S1J1W_12[i]
+deriv(IC3S1J1W_12[]) <- age_IC3S1J1W_12[i] + pov_IC3S1J1W_12[i] + care_IC3S1J1W_12[i] + sch_IC3S1J1W_12[i] + jus_IC3S1J1W_12[i] + cl_IC3S1J1W_12[i]
+deriv(IC4S1J1W_12[]) <- age_IC4S1J1W_12[i] + pov_IC4S1J1W_12[i] + care_IC4S1J1W_12[i] + sch_IC4S1J1W_12[i] + jus_IC4S1J1W_12[i] + cl_IC4S1J1W_12[i]
+
+deriv(IC1S1J1W_13[]) <- age_IC1S1J1W_13[i] + pov_IC1S1J1W_13[i] + care_IC1S1J1W_13[i] + sch_IC1S1J1W_13[i] + jus_IC1S1J1W_13[i] + cl_IC1S1J1W_13[i]
+deriv(IC2S1J1W_13[]) <- age_IC2S1J1W_13[i] + pov_IC2S1J1W_13[i] + care_IC2S1J1W_13[i] + sch_IC2S1J1W_13[i] + jus_IC2S1J1W_13[i] + cl_IC2S1J1W_13[i]
+deriv(IC3S1J1W_13[]) <- age_IC3S1J1W_13[i] + pov_IC3S1J1W_13[i] + care_IC3S1J1W_13[i] + sch_IC3S1J1W_13[i] + jus_IC3S1J1W_13[i] + cl_IC3S1J1W_13[i]
+deriv(IC4S1J1W_13[]) <- age_IC4S1J1W_13[i] + pov_IC4S1J1W_13[i] + care_IC4S1J1W_13[i] + sch_IC4S1J1W_13[i] + jus_IC4S1J1W_13[i] + cl_IC4S1J1W_13[i]
+
+deriv(IC1S1J1W_14[]) <- age_IC1S1J1W_14[i] + pov_IC1S1J1W_14[i] + care_IC1S1J1W_14[i] + sch_IC1S1J1W_14[i] + jus_IC1S1J1W_14[i] + cl_IC1S1J1W_14[i]
+deriv(IC2S1J1W_14[]) <- age_IC2S1J1W_14[i] + pov_IC2S1J1W_14[i] + care_IC2S1J1W_14[i] + sch_IC2S1J1W_14[i] + jus_IC2S1J1W_14[i] + cl_IC2S1J1W_14[i]
+deriv(IC3S1J1W_14[]) <- age_IC3S1J1W_14[i] + pov_IC3S1J1W_14[i] + care_IC3S1J1W_14[i] + sch_IC3S1J1W_14[i] + jus_IC3S1J1W_14[i] + cl_IC3S1J1W_14[i]
+deriv(IC4S1J1W_14[]) <- age_IC4S1J1W_14[i] + pov_IC4S1J1W_14[i] + care_IC4S1J1W_14[i] + sch_IC4S1J1W_14[i] + jus_IC4S1J1W_14[i] + cl_IC4S1J1W_14[i]
+
+deriv(IC1S1J1W_15[]) <- age_IC1S1J1W_15[i] + pov_IC1S1J1W_15[i] + care_IC1S1J1W_15[i] + sch_IC1S1J1W_15[i] + jus_IC1S1J1W_15[i] + cl_IC1S1J1W_15[i]
+deriv(IC2S1J1W_15[]) <- age_IC2S1J1W_15[i] + pov_IC2S1J1W_15[i] + care_IC2S1J1W_15[i] + sch_IC2S1J1W_15[i] + jus_IC2S1J1W_15[i] + cl_IC2S1J1W_15[i]
+deriv(IC3S1J1W_15[]) <- age_IC3S1J1W_15[i] + pov_IC3S1J1W_15[i] + care_IC3S1J1W_15[i] + sch_IC3S1J1W_15[i] + jus_IC3S1J1W_15[i] + cl_IC3S1J1W_15[i]
+deriv(IC4S1J1W_15[]) <- age_IC4S1J1W_15[i] + pov_IC4S1J1W_15[i] + care_IC4S1J1W_15[i] + sch_IC4S1J1W_15[i] + jus_IC4S1J1W_15[i] + cl_IC4S1J1W_15[i]
+
+deriv(IC1S1J1W_16[]) <- age_IC1S1J1W_16[i] + pov_IC1S1J1W_16[i] + care_IC1S1J1W_16[i] + sch_IC1S1J1W_16[i] + jus_IC1S1J1W_16[i] + cl_IC1S1J1W_16[i]
+deriv(IC2S1J1W_16[]) <- age_IC2S1J1W_16[i] + pov_IC2S1J1W_16[i] + care_IC2S1J1W_16[i] + sch_IC2S1J1W_16[i] + jus_IC2S1J1W_16[i] + cl_IC2S1J1W_16[i]
+deriv(IC3S1J1W_16[]) <- age_IC3S1J1W_16[i] + pov_IC3S1J1W_16[i] + care_IC3S1J1W_16[i] + sch_IC3S1J1W_16[i] + jus_IC3S1J1W_16[i] + cl_IC3S1J1W_16[i]
+deriv(IC4S1J1W_16[]) <- age_IC4S1J1W_16[i] + pov_IC4S1J1W_16[i] + care_IC4S1J1W_16[i] + sch_IC4S1J1W_16[i] + jus_IC4S1J1W_16[i] + cl_IC4S1J1W_16[i]
+
+deriv(IC1S1J1W_17[]) <- age_IC1S1J1W_17[i] + pov_IC1S1J1W_17[i] + care_IC1S1J1W_17[i] + sch_IC1S1J1W_17[i] + jus_IC1S1J1W_17[i] + cl_IC1S1J1W_17[i]
+deriv(IC2S1J1W_17[]) <- age_IC2S1J1W_17[i] + pov_IC2S1J1W_17[i] + care_IC2S1J1W_17[i] + sch_IC2S1J1W_17[i] + jus_IC2S1J1W_17[i] + cl_IC2S1J1W_17[i]
+deriv(IC3S1J1W_17[]) <- age_IC3S1J1W_17[i] + pov_IC3S1J1W_17[i] + care_IC3S1J1W_17[i] + sch_IC3S1J1W_17[i] + jus_IC3S1J1W_17[i] + cl_IC3S1J1W_17[i]
+deriv(IC4S1J1W_17[]) <- age_IC4S1J1W_17[i] + pov_IC4S1J1W_17[i] + care_IC4S1J1W_17[i] + sch_IC4S1J1W_17[i] + jus_IC4S1J1W_17[i] + cl_IC4S1J1W_17[i]
+
+
+
+deriv(IC1S2J1W_10[]) <- age_IC1S2J1W_10[i] + pov_IC1S2J1W_10[i] + care_IC1S2J1W_10[i] + sch_IC1S2J1W_10[i] + jus_IC1S2J1W_10[i] + cl_IC1S2J1W_10[i]
+deriv(IC2S2J1W_10[]) <- age_IC2S2J1W_10[i] + pov_IC2S2J1W_10[i] + care_IC2S2J1W_10[i] + sch_IC2S2J1W_10[i] + jus_IC2S2J1W_10[i] + cl_IC2S2J1W_10[i]
+deriv(IC3S2J1W_10[]) <- age_IC3S2J1W_10[i] + pov_IC3S2J1W_10[i] + care_IC3S2J1W_10[i] + sch_IC3S2J1W_10[i] + jus_IC3S2J1W_10[i] + cl_IC3S2J1W_10[i]
+deriv(IC4S2J1W_10[]) <- age_IC4S2J1W_10[i] + pov_IC4S2J1W_10[i] + care_IC4S2J1W_10[i] + sch_IC4S2J1W_10[i] + jus_IC4S2J1W_10[i] + cl_IC4S2J1W_10[i]
+
+deriv(IC1S2J1W_11[]) <- age_IC1S2J1W_11[i] + pov_IC1S2J1W_11[i] + care_IC1S2J1W_11[i] + sch_IC1S2J1W_11[i] + jus_IC1S2J1W_11[i] + cl_IC1S2J1W_11[i]
+deriv(IC2S2J1W_11[]) <- age_IC2S2J1W_11[i] + pov_IC2S2J1W_11[i] + care_IC2S2J1W_11[i] + sch_IC2S2J1W_11[i] + jus_IC2S2J1W_11[i] + cl_IC2S2J1W_11[i]
+deriv(IC3S2J1W_11[]) <- age_IC3S2J1W_11[i] + pov_IC3S2J1W_11[i] + care_IC3S2J1W_11[i] + sch_IC3S2J1W_11[i] + jus_IC3S2J1W_11[i] + cl_IC3S2J1W_11[i]
+deriv(IC4S2J1W_11[]) <- age_IC4S2J1W_11[i] + pov_IC4S2J1W_11[i] + care_IC4S2J1W_11[i] + sch_IC4S2J1W_11[i] + jus_IC4S2J1W_11[i] + cl_IC4S2J1W_11[i]
+
+deriv(IC1S2J1W_12[]) <- age_IC1S2J1W_12[i] + pov_IC1S2J1W_12[i] + care_IC1S2J1W_12[i] + sch_IC1S2J1W_12[i] + jus_IC1S2J1W_12[i] + cl_IC1S2J1W_12[i]
+deriv(IC2S2J1W_12[]) <- age_IC2S2J1W_12[i] + pov_IC2S2J1W_12[i] + care_IC2S2J1W_12[i] + sch_IC2S2J1W_12[i] + jus_IC2S2J1W_12[i] + cl_IC2S2J1W_12[i]
+deriv(IC3S2J1W_12[]) <- age_IC3S2J1W_12[i] + pov_IC3S2J1W_12[i] + care_IC3S2J1W_12[i] + sch_IC3S2J1W_12[i] + jus_IC3S2J1W_12[i] + cl_IC3S2J1W_12[i]
+deriv(IC4S2J1W_12[]) <- age_IC4S2J1W_12[i] + pov_IC4S2J1W_12[i] + care_IC4S2J1W_12[i] + sch_IC4S2J1W_12[i] + jus_IC4S2J1W_12[i] + cl_IC4S2J1W_12[i]
+
+deriv(IC1S2J1W_13[]) <- age_IC1S2J1W_13[i] + pov_IC1S2J1W_13[i] + care_IC1S2J1W_13[i] + sch_IC1S2J1W_13[i] + jus_IC1S2J1W_13[i] + cl_IC1S2J1W_13[i]
+deriv(IC2S2J1W_13[]) <- age_IC2S2J1W_13[i] + pov_IC2S2J1W_13[i] + care_IC2S2J1W_13[i] + sch_IC2S2J1W_13[i] + jus_IC2S2J1W_13[i] + cl_IC2S2J1W_13[i]
+deriv(IC3S2J1W_13[]) <- age_IC3S2J1W_13[i] + pov_IC3S2J1W_13[i] + care_IC3S2J1W_13[i] + sch_IC3S2J1W_13[i] + jus_IC3S2J1W_13[i] + cl_IC3S2J1W_13[i]
+deriv(IC4S2J1W_13[]) <- age_IC4S2J1W_13[i] + pov_IC4S2J1W_13[i] + care_IC4S2J1W_13[i] + sch_IC4S2J1W_13[i] + jus_IC4S2J1W_13[i] + cl_IC4S2J1W_13[i]
+
+deriv(IC1S2J1W_14[]) <- age_IC1S2J1W_14[i] + pov_IC1S2J1W_14[i] + care_IC1S2J1W_14[i] + sch_IC1S2J1W_14[i] + jus_IC1S2J1W_14[i] + cl_IC1S2J1W_14[i]
+deriv(IC2S2J1W_14[]) <- age_IC2S2J1W_14[i] + pov_IC2S2J1W_14[i] + care_IC2S2J1W_14[i] + sch_IC2S2J1W_14[i] + jus_IC2S2J1W_14[i] + cl_IC2S2J1W_14[i]
+deriv(IC3S2J1W_14[]) <- age_IC3S2J1W_14[i] + pov_IC3S2J1W_14[i] + care_IC3S2J1W_14[i] + sch_IC3S2J1W_14[i] + jus_IC3S2J1W_14[i] + cl_IC3S2J1W_14[i]
+deriv(IC4S2J1W_14[]) <- age_IC4S2J1W_14[i] + pov_IC4S2J1W_14[i] + care_IC4S2J1W_14[i] + sch_IC4S2J1W_14[i] + jus_IC4S2J1W_14[i] + cl_IC4S2J1W_14[i]
+
+deriv(IC1S2J1W_15[]) <- age_IC1S2J1W_15[i] + pov_IC1S2J1W_15[i] + care_IC1S2J1W_15[i] + sch_IC1S2J1W_15[i] + jus_IC1S2J1W_15[i] + cl_IC1S2J1W_15[i]
+deriv(IC2S2J1W_15[]) <- age_IC2S2J1W_15[i] + pov_IC2S2J1W_15[i] + care_IC2S2J1W_15[i] + sch_IC2S2J1W_15[i] + jus_IC2S2J1W_15[i] + cl_IC2S2J1W_15[i]
+deriv(IC3S2J1W_15[]) <- age_IC3S2J1W_15[i] + pov_IC3S2J1W_15[i] + care_IC3S2J1W_15[i] + sch_IC3S2J1W_15[i] + jus_IC3S2J1W_15[i] + cl_IC3S2J1W_15[i]
+deriv(IC4S2J1W_15[]) <- age_IC4S2J1W_15[i] + pov_IC4S2J1W_15[i] + care_IC4S2J1W_15[i] + sch_IC4S2J1W_15[i] + jus_IC4S2J1W_15[i] + cl_IC4S2J1W_15[i]
+
+deriv(IC1S2J1W_16[]) <- age_IC1S2J1W_16[i] + pov_IC1S2J1W_16[i] + care_IC1S2J1W_16[i] + sch_IC1S2J1W_16[i] + jus_IC1S2J1W_16[i] + cl_IC1S2J1W_16[i]
+deriv(IC2S2J1W_16[]) <- age_IC2S2J1W_16[i] + pov_IC2S2J1W_16[i] + care_IC2S2J1W_16[i] + sch_IC2S2J1W_16[i] + jus_IC2S2J1W_16[i] + cl_IC2S2J1W_16[i]
+deriv(IC3S2J1W_16[]) <- age_IC3S2J1W_16[i] + pov_IC3S2J1W_16[i] + care_IC3S2J1W_16[i] + sch_IC3S2J1W_16[i] + jus_IC3S2J1W_16[i] + cl_IC3S2J1W_16[i]
+deriv(IC4S2J1W_16[]) <- age_IC4S2J1W_16[i] + pov_IC4S2J1W_16[i] + care_IC4S2J1W_16[i] + sch_IC4S2J1W_16[i] + jus_IC4S2J1W_16[i] + cl_IC4S2J1W_16[i]
+
+deriv(IC1S2J1W_17[]) <- age_IC1S2J1W_17[i] + pov_IC1S2J1W_17[i] + care_IC1S2J1W_17[i] + sch_IC1S2J1W_17[i] + jus_IC1S2J1W_17[i] + cl_IC1S2J1W_17[i]
+deriv(IC2S2J1W_17[]) <- age_IC2S2J1W_17[i] + pov_IC2S2J1W_17[i] + care_IC2S2J1W_17[i] + sch_IC2S2J1W_17[i] + jus_IC2S2J1W_17[i] + cl_IC2S2J1W_17[i]
+deriv(IC3S2J1W_17[]) <- age_IC3S2J1W_17[i] + pov_IC3S2J1W_17[i] + care_IC3S2J1W_17[i] + sch_IC3S2J1W_17[i] + jus_IC3S2J1W_17[i] + cl_IC3S2J1W_17[i]
+deriv(IC4S2J1W_17[]) <- age_IC4S2J1W_17[i] + pov_IC4S2J1W_17[i] + care_IC4S2J1W_17[i] + sch_IC4S2J1W_17[i] + jus_IC4S2J1W_17[i] + cl_IC4S2J1W_17[i]
+
+
+
+deriv(IC1S1J2W_10[]) <- age_IC1S1J2W_10[i] + pov_IC1S1J2W_10[i] + care_IC1S1J2W_10[i] + sch_IC1S1J2W_10[i] + jus_IC1S1J2W_10[i] + cl_IC1S1J2W_10[i]
+deriv(IC2S1J2W_10[]) <- age_IC2S1J2W_10[i] + pov_IC2S1J2W_10[i] + care_IC2S1J2W_10[i] + sch_IC2S1J2W_10[i] + jus_IC2S1J2W_10[i] + cl_IC2S1J2W_10[i]
+deriv(IC3S1J2W_10[]) <- age_IC3S1J2W_10[i] + pov_IC3S1J2W_10[i] + care_IC3S1J2W_10[i] + sch_IC3S1J2W_10[i] + jus_IC3S1J2W_10[i] + cl_IC3S1J2W_10[i]
+deriv(IC4S1J2W_10[]) <- age_IC4S1J2W_10[i] + pov_IC4S1J2W_10[i] + care_IC4S1J2W_10[i] + sch_IC4S1J2W_10[i] + jus_IC4S1J2W_10[i] + cl_IC4S1J2W_10[i]
+
+deriv(IC1S1J2W_11[]) <- age_IC1S1J2W_11[i] + pov_IC1S1J2W_11[i] + care_IC1S1J2W_11[i] + sch_IC1S1J2W_11[i] + jus_IC1S1J2W_11[i] + cl_IC1S1J2W_11[i]
+deriv(IC2S1J2W_11[]) <- age_IC2S1J2W_11[i] + pov_IC2S1J2W_11[i] + care_IC2S1J2W_11[i] + sch_IC2S1J2W_11[i] + jus_IC2S1J2W_11[i] + cl_IC2S1J2W_11[i]
+deriv(IC3S1J2W_11[]) <- age_IC3S1J2W_11[i] + pov_IC3S1J2W_11[i] + care_IC3S1J2W_11[i] + sch_IC3S1J2W_11[i] + jus_IC3S1J2W_11[i] + cl_IC3S1J2W_11[i]
+deriv(IC4S1J2W_11[]) <- age_IC4S1J2W_11[i] + pov_IC4S1J2W_11[i] + care_IC4S1J2W_11[i] + sch_IC4S1J2W_11[i] + jus_IC4S1J2W_11[i] + cl_IC4S1J2W_11[i]
+
+deriv(IC1S1J2W_12[]) <- age_IC1S1J2W_12[i] + pov_IC1S1J2W_12[i] + care_IC1S1J2W_12[i] + sch_IC1S1J2W_12[i] + jus_IC1S1J2W_12[i] + cl_IC1S1J2W_12[i]
+deriv(IC2S1J2W_12[]) <- age_IC2S1J2W_12[i] + pov_IC2S1J2W_12[i] + care_IC2S1J2W_12[i] + sch_IC2S1J2W_12[i] + jus_IC2S1J2W_12[i] + cl_IC2S1J2W_12[i]
+deriv(IC3S1J2W_12[]) <- age_IC3S1J2W_12[i] + pov_IC3S1J2W_12[i] + care_IC3S1J2W_12[i] + sch_IC3S1J2W_12[i] + jus_IC3S1J2W_12[i] + cl_IC3S1J2W_12[i]
+deriv(IC4S1J2W_12[]) <- age_IC4S1J2W_12[i] + pov_IC4S1J2W_12[i] + care_IC4S1J2W_12[i] + sch_IC4S1J2W_12[i] + jus_IC4S1J2W_12[i] + cl_IC4S1J2W_12[i]
+
+deriv(IC1S1J2W_13[]) <- age_IC1S1J2W_13[i] + pov_IC1S1J2W_13[i] + care_IC1S1J2W_13[i] + sch_IC1S1J2W_13[i] + jus_IC1S1J2W_13[i] + cl_IC1S1J2W_13[i]
+deriv(IC2S1J2W_13[]) <- age_IC2S1J2W_13[i] + pov_IC2S1J2W_13[i] + care_IC2S1J2W_13[i] + sch_IC2S1J2W_13[i] + jus_IC2S1J2W_13[i] + cl_IC2S1J2W_13[i]
+deriv(IC3S1J2W_13[]) <- age_IC3S1J2W_13[i] + pov_IC3S1J2W_13[i] + care_IC3S1J2W_13[i] + sch_IC3S1J2W_13[i] + jus_IC3S1J2W_13[i] + cl_IC3S1J2W_13[i]
+deriv(IC4S1J2W_13[]) <- age_IC4S1J2W_13[i] + pov_IC4S1J2W_13[i] + care_IC4S1J2W_13[i] + sch_IC4S1J2W_13[i] + jus_IC4S1J2W_13[i] + cl_IC4S1J2W_13[i]
+
+deriv(IC1S1J2W_14[]) <- age_IC1S1J2W_14[i] + pov_IC1S1J2W_14[i] + care_IC1S1J2W_14[i] + sch_IC1S1J2W_14[i] + jus_IC1S1J2W_14[i] + cl_IC1S1J2W_14[i]
+deriv(IC2S1J2W_14[]) <- age_IC2S1J2W_14[i] + pov_IC2S1J2W_14[i] + care_IC2S1J2W_14[i] + sch_IC2S1J2W_14[i] + jus_IC2S1J2W_14[i] + cl_IC2S1J2W_14[i]
+deriv(IC3S1J2W_14[]) <- age_IC3S1J2W_14[i] + pov_IC3S1J2W_14[i] + care_IC3S1J2W_14[i] + sch_IC3S1J2W_14[i] + jus_IC3S1J2W_14[i] + cl_IC3S1J2W_14[i]
+deriv(IC4S1J2W_14[]) <- age_IC4S1J2W_14[i] + pov_IC4S1J2W_14[i] + care_IC4S1J2W_14[i] + sch_IC4S1J2W_14[i] + jus_IC4S1J2W_14[i] + cl_IC4S1J2W_14[i]
+
+deriv(IC1S1J2W_15[]) <- age_IC1S1J2W_15[i] + pov_IC1S1J2W_15[i] + care_IC1S1J2W_15[i] + sch_IC1S1J2W_15[i] + jus_IC1S1J2W_15[i] + cl_IC1S1J2W_15[i]
+deriv(IC2S1J2W_15[]) <- age_IC2S1J2W_15[i] + pov_IC2S1J2W_15[i] + care_IC2S1J2W_15[i] + sch_IC2S1J2W_15[i] + jus_IC2S1J2W_15[i] + cl_IC2S1J2W_15[i]
+deriv(IC3S1J2W_15[]) <- age_IC3S1J2W_15[i] + pov_IC3S1J2W_15[i] + care_IC3S1J2W_15[i] + sch_IC3S1J2W_15[i] + jus_IC3S1J2W_15[i] + cl_IC3S1J2W_15[i]
+deriv(IC4S1J2W_15[]) <- age_IC4S1J2W_15[i] + pov_IC4S1J2W_15[i] + care_IC4S1J2W_15[i] + sch_IC4S1J2W_15[i] + jus_IC4S1J2W_15[i] + cl_IC4S1J2W_15[i]
+
+deriv(IC1S1J2W_16[]) <- age_IC1S1J2W_16[i] + pov_IC1S1J2W_16[i] + care_IC1S1J2W_16[i] + sch_IC1S1J2W_16[i] + jus_IC1S1J2W_16[i] + cl_IC1S1J2W_16[i]
+deriv(IC2S1J2W_16[]) <- age_IC2S1J2W_16[i] + pov_IC2S1J2W_16[i] + care_IC2S1J2W_16[i] + sch_IC2S1J2W_16[i] + jus_IC2S1J2W_16[i] + cl_IC2S1J2W_16[i]
+deriv(IC3S1J2W_16[]) <- age_IC3S1J2W_16[i] + pov_IC3S1J2W_16[i] + care_IC3S1J2W_16[i] + sch_IC3S1J2W_16[i] + jus_IC3S1J2W_16[i] + cl_IC3S1J2W_16[i]
+deriv(IC4S1J2W_16[]) <- age_IC4S1J2W_16[i] + pov_IC4S1J2W_16[i] + care_IC4S1J2W_16[i] + sch_IC4S1J2W_16[i] + jus_IC4S1J2W_16[i] + cl_IC4S1J2W_16[i]
+
+deriv(IC1S1J2W_17[]) <- age_IC1S1J2W_17[i] + pov_IC1S1J2W_17[i] + care_IC1S1J2W_17[i] + sch_IC1S1J2W_17[i] + jus_IC1S1J2W_17[i] + cl_IC1S1J2W_17[i]
+deriv(IC2S1J2W_17[]) <- age_IC2S1J2W_17[i] + pov_IC2S1J2W_17[i] + care_IC2S1J2W_17[i] + sch_IC2S1J2W_17[i] + jus_IC2S1J2W_17[i] + cl_IC2S1J2W_17[i]
+deriv(IC3S1J2W_17[]) <- age_IC3S1J2W_17[i] + pov_IC3S1J2W_17[i] + care_IC3S1J2W_17[i] + sch_IC3S1J2W_17[i] + jus_IC3S1J2W_17[i] + cl_IC3S1J2W_17[i]
+deriv(IC4S1J2W_17[]) <- age_IC4S1J2W_17[i] + pov_IC4S1J2W_17[i] + care_IC4S1J2W_17[i] + sch_IC4S1J2W_17[i] + jus_IC4S1J2W_17[i] + cl_IC4S1J2W_17[i]
+
+
+
+deriv(IC1S2J2W_10[]) <- age_IC1S2J2W_10[i] + pov_IC1S2J2W_10[i] + care_IC1S2J2W_10[i] + sch_IC1S2J2W_10[i] + jus_IC1S2J2W_10[i] + cl_IC1S2J2W_10[i]
+deriv(IC2S2J2W_10[]) <- age_IC2S2J2W_10[i] + pov_IC2S2J2W_10[i] + care_IC2S2J2W_10[i] + sch_IC2S2J2W_10[i] + jus_IC2S2J2W_10[i] + cl_IC2S2J2W_10[i]
+deriv(IC3S2J2W_10[]) <- age_IC3S2J2W_10[i] + pov_IC3S2J2W_10[i] + care_IC3S2J2W_10[i] + sch_IC3S2J2W_10[i] + jus_IC3S2J2W_10[i] + cl_IC3S2J2W_10[i]
+deriv(IC4S2J2W_10[]) <- age_IC4S2J2W_10[i] + pov_IC4S2J2W_10[i] + care_IC4S2J2W_10[i] + sch_IC4S2J2W_10[i] + jus_IC4S2J2W_10[i] + cl_IC4S2J2W_10[i]
+
+deriv(IC1S2J2W_11[]) <- age_IC1S2J2W_11[i] + pov_IC1S2J2W_11[i] + care_IC1S2J2W_11[i] + sch_IC1S2J2W_11[i] + jus_IC1S2J2W_11[i] + cl_IC1S2J2W_11[i]
+deriv(IC2S2J2W_11[]) <- age_IC2S2J2W_11[i] + pov_IC2S2J2W_11[i] + care_IC2S2J2W_11[i] + sch_IC2S2J2W_11[i] + jus_IC2S2J2W_11[i] + cl_IC2S2J2W_11[i]
+deriv(IC3S2J2W_11[]) <- age_IC3S2J2W_11[i] + pov_IC3S2J2W_11[i] + care_IC3S2J2W_11[i] + sch_IC3S2J2W_11[i] + jus_IC3S2J2W_11[i] + cl_IC3S2J2W_11[i]
+deriv(IC4S2J2W_11[]) <- age_IC4S2J2W_11[i] + pov_IC4S2J2W_11[i] + care_IC4S2J2W_11[i] + sch_IC4S2J2W_11[i] + jus_IC4S2J2W_11[i] + cl_IC4S2J2W_11[i]
+
+deriv(IC1S2J2W_12[]) <- age_IC1S2J2W_12[i] + pov_IC1S2J2W_12[i] + care_IC1S2J2W_12[i] + sch_IC1S2J2W_12[i] + jus_IC1S2J2W_12[i] + cl_IC1S2J2W_12[i]
+deriv(IC2S2J2W_12[]) <- age_IC2S2J2W_12[i] + pov_IC2S2J2W_12[i] + care_IC2S2J2W_12[i] + sch_IC2S2J2W_12[i] + jus_IC2S2J2W_12[i] + cl_IC2S2J2W_12[i]
+deriv(IC3S2J2W_12[]) <- age_IC3S2J2W_12[i] + pov_IC3S2J2W_12[i] + care_IC3S2J2W_12[i] + sch_IC3S2J2W_12[i] + jus_IC3S2J2W_12[i] + cl_IC3S2J2W_12[i]
+deriv(IC4S2J2W_12[]) <- age_IC4S2J2W_12[i] + pov_IC4S2J2W_12[i] + care_IC4S2J2W_12[i] + sch_IC4S2J2W_12[i] + jus_IC4S2J2W_12[i] + cl_IC4S2J2W_12[i]
+
+deriv(IC1S2J2W_13[]) <- age_IC1S2J2W_13[i] + pov_IC1S2J2W_13[i] + care_IC1S2J2W_13[i] + sch_IC1S2J2W_13[i] + jus_IC1S2J2W_13[i] + cl_IC1S2J2W_13[i]
+deriv(IC2S2J2W_13[]) <- age_IC2S2J2W_13[i] + pov_IC2S2J2W_13[i] + care_IC2S2J2W_13[i] + sch_IC2S2J2W_13[i] + jus_IC2S2J2W_13[i] + cl_IC2S2J2W_13[i]
+deriv(IC3S2J2W_13[]) <- age_IC3S2J2W_13[i] + pov_IC3S2J2W_13[i] + care_IC3S2J2W_13[i] + sch_IC3S2J2W_13[i] + jus_IC3S2J2W_13[i] + cl_IC3S2J2W_13[i]
+deriv(IC4S2J2W_13[]) <- age_IC4S2J2W_13[i] + pov_IC4S2J2W_13[i] + care_IC4S2J2W_13[i] + sch_IC4S2J2W_13[i] + jus_IC4S2J2W_13[i] + cl_IC4S2J2W_13[i]
+
+deriv(IC1S2J2W_14[]) <- age_IC1S2J2W_14[i] + pov_IC1S2J2W_14[i] + care_IC1S2J2W_14[i] + sch_IC1S2J2W_14[i] + jus_IC1S2J2W_14[i] + cl_IC1S2J2W_14[i]
+deriv(IC2S2J2W_14[]) <- age_IC2S2J2W_14[i] + pov_IC2S2J2W_14[i] + care_IC2S2J2W_14[i] + sch_IC2S2J2W_14[i] + jus_IC2S2J2W_14[i] + cl_IC2S2J2W_14[i]
+deriv(IC3S2J2W_14[]) <- age_IC3S2J2W_14[i] + pov_IC3S2J2W_14[i] + care_IC3S2J2W_14[i] + sch_IC3S2J2W_14[i] + jus_IC3S2J2W_14[i] + cl_IC3S2J2W_14[i]
+deriv(IC4S2J2W_14[]) <- age_IC4S2J2W_14[i] + pov_IC4S2J2W_14[i] + care_IC4S2J2W_14[i] + sch_IC4S2J2W_14[i] + jus_IC4S2J2W_14[i] + cl_IC4S2J2W_14[i]
+
+deriv(IC1S2J2W_15[]) <- age_IC1S2J2W_15[i] + pov_IC1S2J2W_15[i] + care_IC1S2J2W_15[i] + sch_IC1S2J2W_15[i] + jus_IC1S2J2W_15[i] + cl_IC1S2J2W_15[i]
+deriv(IC2S2J2W_15[]) <- age_IC2S2J2W_15[i] + pov_IC2S2J2W_15[i] + care_IC2S2J2W_15[i] + sch_IC2S2J2W_15[i] + jus_IC2S2J2W_15[i] + cl_IC2S2J2W_15[i]
+deriv(IC3S2J2W_15[]) <- age_IC3S2J2W_15[i] + pov_IC3S2J2W_15[i] + care_IC3S2J2W_15[i] + sch_IC3S2J2W_15[i] + jus_IC3S2J2W_15[i] + cl_IC3S2J2W_15[i]
+deriv(IC4S2J2W_15[]) <- age_IC4S2J2W_15[i] + pov_IC4S2J2W_15[i] + care_IC4S2J2W_15[i] + sch_IC4S2J2W_15[i] + jus_IC4S2J2W_15[i] + cl_IC4S2J2W_15[i]
+
+deriv(IC1S2J2W_16[]) <- age_IC1S2J2W_16[i] + pov_IC1S2J2W_16[i] + care_IC1S2J2W_16[i] + sch_IC1S2J2W_16[i] + jus_IC1S2J2W_16[i] + cl_IC1S2J2W_16[i]
+deriv(IC2S2J2W_16[]) <- age_IC2S2J2W_16[i] + pov_IC2S2J2W_16[i] + care_IC2S2J2W_16[i] + sch_IC2S2J2W_16[i] + jus_IC2S2J2W_16[i] + cl_IC2S2J2W_16[i]
+deriv(IC3S2J2W_16[]) <- age_IC3S2J2W_16[i] + pov_IC3S2J2W_16[i] + care_IC3S2J2W_16[i] + sch_IC3S2J2W_16[i] + jus_IC3S2J2W_16[i] + cl_IC3S2J2W_16[i]
+deriv(IC4S2J2W_16[]) <- age_IC4S2J2W_16[i] + pov_IC4S2J2W_16[i] + care_IC4S2J2W_16[i] + sch_IC4S2J2W_16[i] + jus_IC4S2J2W_16[i] + cl_IC4S2J2W_16[i]
+
+deriv(IC1S2J2W_17[]) <- age_IC1S2J2W_17[i] + pov_IC1S2J2W_17[i] + care_IC1S2J2W_17[i] + sch_IC1S2J2W_17[i] + jus_IC1S2J2W_17[i] + cl_IC1S2J2W_17[i]
+deriv(IC2S2J2W_17[]) <- age_IC2S2J2W_17[i] + pov_IC2S2J2W_17[i] + care_IC2S2J2W_17[i] + sch_IC2S2J2W_17[i] + jus_IC2S2J2W_17[i] + cl_IC2S2J2W_17[i]
+deriv(IC3S2J2W_17[]) <- age_IC3S2J2W_17[i] + pov_IC3S2J2W_17[i] + care_IC3S2J2W_17[i] + sch_IC3S2J2W_17[i] + jus_IC3S2J2W_17[i] + cl_IC3S2J2W_17[i]
+deriv(IC4S2J2W_17[]) <- age_IC4S2J2W_17[i] + pov_IC4S2J2W_17[i] + care_IC4S2J2W_17[i] + sch_IC4S2J2W_17[i] + jus_IC4S2J2W_17[i] + cl_IC4S2J2W_17[i]
+
+
+
+deriv(IC1S1J3W_10[]) <- age_IC1S1J3W_10[i] + pov_IC1S1J3W_10[i] + care_IC1S1J3W_10[i] + sch_IC1S1J3W_10[i] + jus_IC1S1J3W_10[i] + cl_IC1S1J3W_10[i]
+deriv(IC2S1J3W_10[]) <- age_IC2S1J3W_10[i] + pov_IC2S1J3W_10[i] + care_IC2S1J3W_10[i] + sch_IC2S1J3W_10[i] + jus_IC2S1J3W_10[i] + cl_IC2S1J3W_10[i]
+deriv(IC3S1J3W_10[]) <- age_IC3S1J3W_10[i] + pov_IC3S1J3W_10[i] + care_IC3S1J3W_10[i] + sch_IC3S1J3W_10[i] + jus_IC3S1J3W_10[i] + cl_IC3S1J3W_10[i]
+deriv(IC4S1J3W_10[]) <- age_IC4S1J3W_10[i] + pov_IC4S1J3W_10[i] + care_IC4S1J3W_10[i] + sch_IC4S1J3W_10[i] + jus_IC4S1J3W_10[i] + cl_IC4S1J3W_10[i]
+
+deriv(IC1S1J3W_11[]) <- age_IC1S1J3W_11[i] + pov_IC1S1J3W_11[i] + care_IC1S1J3W_11[i] + sch_IC1S1J3W_11[i] + jus_IC1S1J3W_11[i] + cl_IC1S1J3W_11[i]
+deriv(IC2S1J3W_11[]) <- age_IC2S1J3W_11[i] + pov_IC2S1J3W_11[i] + care_IC2S1J3W_11[i] + sch_IC2S1J3W_11[i] + jus_IC2S1J3W_11[i] + cl_IC2S1J3W_11[i]
+deriv(IC3S1J3W_11[]) <- age_IC3S1J3W_11[i] + pov_IC3S1J3W_11[i] + care_IC3S1J3W_11[i] + sch_IC3S1J3W_11[i] + jus_IC3S1J3W_11[i] + cl_IC3S1J3W_11[i]
+deriv(IC4S1J3W_11[]) <- age_IC4S1J3W_11[i] + pov_IC4S1J3W_11[i] + care_IC4S1J3W_11[i] + sch_IC4S1J3W_11[i] + jus_IC4S1J3W_11[i] + cl_IC4S1J3W_11[i]
+
+deriv(IC1S1J3W_12[]) <- age_IC1S1J3W_12[i] + pov_IC1S1J3W_12[i] + care_IC1S1J3W_12[i] + sch_IC1S1J3W_12[i] + jus_IC1S1J3W_12[i] + cl_IC1S1J3W_12[i]
+deriv(IC2S1J3W_12[]) <- age_IC2S1J3W_12[i] + pov_IC2S1J3W_12[i] + care_IC2S1J3W_12[i] + sch_IC2S1J3W_12[i] + jus_IC2S1J3W_12[i] + cl_IC2S1J3W_12[i]
+deriv(IC3S1J3W_12[]) <- age_IC3S1J3W_12[i] + pov_IC3S1J3W_12[i] + care_IC3S1J3W_12[i] + sch_IC3S1J3W_12[i] + jus_IC3S1J3W_12[i] + cl_IC3S1J3W_12[i]
+deriv(IC4S1J3W_12[]) <- age_IC4S1J3W_12[i] + pov_IC4S1J3W_12[i] + care_IC4S1J3W_12[i] + sch_IC4S1J3W_12[i] + jus_IC4S1J3W_12[i] + cl_IC4S1J3W_12[i]
+
+deriv(IC1S1J3W_13[]) <- age_IC1S1J3W_13[i] + pov_IC1S1J3W_13[i] + care_IC1S1J3W_13[i] + sch_IC1S1J3W_13[i] + jus_IC1S1J3W_13[i] + cl_IC1S1J3W_13[i]
+deriv(IC2S1J3W_13[]) <- age_IC2S1J3W_13[i] + pov_IC2S1J3W_13[i] + care_IC2S1J3W_13[i] + sch_IC2S1J3W_13[i] + jus_IC2S1J3W_13[i] + cl_IC2S1J3W_13[i]
+deriv(IC3S1J3W_13[]) <- age_IC3S1J3W_13[i] + pov_IC3S1J3W_13[i] + care_IC3S1J3W_13[i] + sch_IC3S1J3W_13[i] + jus_IC3S1J3W_13[i] + cl_IC3S1J3W_13[i]
+deriv(IC4S1J3W_13[]) <- age_IC4S1J3W_13[i] + pov_IC4S1J3W_13[i] + care_IC4S1J3W_13[i] + sch_IC4S1J3W_13[i] + jus_IC4S1J3W_13[i] + cl_IC4S1J3W_13[i]
+
+deriv(IC1S1J3W_14[]) <- age_IC1S1J3W_14[i] + pov_IC1S1J3W_14[i] + care_IC1S1J3W_14[i] + sch_IC1S1J3W_14[i] + jus_IC1S1J3W_14[i] + cl_IC1S1J3W_14[i]
+deriv(IC2S1J3W_14[]) <- age_IC2S1J3W_14[i] + pov_IC2S1J3W_14[i] + care_IC2S1J3W_14[i] + sch_IC2S1J3W_14[i] + jus_IC2S1J3W_14[i] + cl_IC2S1J3W_14[i]
+deriv(IC3S1J3W_14[]) <- age_IC3S1J3W_14[i] + pov_IC3S1J3W_14[i] + care_IC3S1J3W_14[i] + sch_IC3S1J3W_14[i] + jus_IC3S1J3W_14[i] + cl_IC3S1J3W_14[i]
+deriv(IC4S1J3W_14[]) <- age_IC4S1J3W_14[i] + pov_IC4S1J3W_14[i] + care_IC4S1J3W_14[i] + sch_IC4S1J3W_14[i] + jus_IC4S1J3W_14[i] + cl_IC4S1J3W_14[i]
+
+deriv(IC1S1J3W_15[]) <- age_IC1S1J3W_15[i] + pov_IC1S1J3W_15[i] + care_IC1S1J3W_15[i] + sch_IC1S1J3W_15[i] + jus_IC1S1J3W_15[i] + cl_IC1S1J3W_15[i]
+deriv(IC2S1J3W_15[]) <- age_IC2S1J3W_15[i] + pov_IC2S1J3W_15[i] + care_IC2S1J3W_15[i] + sch_IC2S1J3W_15[i] + jus_IC2S1J3W_15[i] + cl_IC2S1J3W_15[i]
+deriv(IC3S1J3W_15[]) <- age_IC3S1J3W_15[i] + pov_IC3S1J3W_15[i] + care_IC3S1J3W_15[i] + sch_IC3S1J3W_15[i] + jus_IC3S1J3W_15[i] + cl_IC3S1J3W_15[i]
+deriv(IC4S1J3W_15[]) <- age_IC4S1J3W_15[i] + pov_IC4S1J3W_15[i] + care_IC4S1J3W_15[i] + sch_IC4S1J3W_15[i] + jus_IC4S1J3W_15[i] + cl_IC4S1J3W_15[i]
+
+deriv(IC1S1J3W_16[]) <- age_IC1S1J3W_16[i] + pov_IC1S1J3W_16[i] + care_IC1S1J3W_16[i] + sch_IC1S1J3W_16[i] + jus_IC1S1J3W_16[i] + cl_IC1S1J3W_16[i]
+deriv(IC2S1J3W_16[]) <- age_IC2S1J3W_16[i] + pov_IC2S1J3W_16[i] + care_IC2S1J3W_16[i] + sch_IC2S1J3W_16[i] + jus_IC2S1J3W_16[i] + cl_IC2S1J3W_16[i]
+deriv(IC3S1J3W_16[]) <- age_IC3S1J3W_16[i] + pov_IC3S1J3W_16[i] + care_IC3S1J3W_16[i] + sch_IC3S1J3W_16[i] + jus_IC3S1J3W_16[i] + cl_IC3S1J3W_16[i]
+deriv(IC4S1J3W_16[]) <- age_IC4S1J3W_16[i] + pov_IC4S1J3W_16[i] + care_IC4S1J3W_16[i] + sch_IC4S1J3W_16[i] + jus_IC4S1J3W_16[i] + cl_IC4S1J3W_16[i]
+
+deriv(IC1S1J3W_17[]) <- age_IC1S1J3W_17[i] + pov_IC1S1J3W_17[i] + care_IC1S1J3W_17[i] + sch_IC1S1J3W_17[i] + jus_IC1S1J3W_17[i] + cl_IC1S1J3W_17[i]
+deriv(IC2S1J3W_17[]) <- age_IC2S1J3W_17[i] + pov_IC2S1J3W_17[i] + care_IC2S1J3W_17[i] + sch_IC2S1J3W_17[i] + jus_IC2S1J3W_17[i] + cl_IC2S1J3W_17[i]
+deriv(IC3S1J3W_17[]) <- age_IC3S1J3W_17[i] + pov_IC3S1J3W_17[i] + care_IC3S1J3W_17[i] + sch_IC3S1J3W_17[i] + jus_IC3S1J3W_17[i] + cl_IC3S1J3W_17[i]
+deriv(IC4S1J3W_17[]) <- age_IC4S1J3W_17[i] + pov_IC4S1J3W_17[i] + care_IC4S1J3W_17[i] + sch_IC4S1J3W_17[i] + jus_IC4S1J3W_17[i] + cl_IC4S1J3W_17[i]
+
+
+
+deriv(IC1S2J3W_10[]) <- age_IC1S2J3W_10[i] + pov_IC1S2J3W_10[i] + care_IC1S2J3W_10[i] + sch_IC1S2J3W_10[i] + jus_IC1S2J3W_10[i] + cl_IC1S2J3W_10[i]
+deriv(IC2S2J3W_10[]) <- age_IC2S2J3W_10[i] + pov_IC2S2J3W_10[i] + care_IC2S2J3W_10[i] + sch_IC2S2J3W_10[i] + jus_IC2S2J3W_10[i] + cl_IC2S2J3W_10[i]
+deriv(IC3S2J3W_10[]) <- age_IC3S2J3W_10[i] + pov_IC3S2J3W_10[i] + care_IC3S2J3W_10[i] + sch_IC3S2J3W_10[i] + jus_IC3S2J3W_10[i] + cl_IC3S2J3W_10[i]
+deriv(IC4S2J3W_10[]) <- age_IC4S2J3W_10[i] + pov_IC4S2J3W_10[i] + care_IC4S2J3W_10[i] + sch_IC4S2J3W_10[i] + jus_IC4S2J3W_10[i] + cl_IC4S2J3W_10[i]
+
+deriv(IC1S2J3W_11[]) <- age_IC1S2J3W_11[i] + pov_IC1S2J3W_11[i] + care_IC1S2J3W_11[i] + sch_IC1S2J3W_11[i] + jus_IC1S2J3W_11[i] + cl_IC1S2J3W_11[i]
+deriv(IC2S2J3W_11[]) <- age_IC2S2J3W_11[i] + pov_IC2S2J3W_11[i] + care_IC2S2J3W_11[i] + sch_IC2S2J3W_11[i] + jus_IC2S2J3W_11[i] + cl_IC2S2J3W_11[i]
+deriv(IC3S2J3W_11[]) <- age_IC3S2J3W_11[i] + pov_IC3S2J3W_11[i] + care_IC3S2J3W_11[i] + sch_IC3S2J3W_11[i] + jus_IC3S2J3W_11[i] + cl_IC3S2J3W_11[i]
+deriv(IC4S2J3W_11[]) <- age_IC4S2J3W_11[i] + pov_IC4S2J3W_11[i] + care_IC4S2J3W_11[i] + sch_IC4S2J3W_11[i] + jus_IC4S2J3W_11[i] + cl_IC4S2J3W_11[i]
+
+deriv(IC1S2J3W_12[]) <- age_IC1S2J3W_12[i] + pov_IC1S2J3W_12[i] + care_IC1S2J3W_12[i] + sch_IC1S2J3W_12[i] + jus_IC1S2J3W_12[i] + cl_IC1S2J3W_12[i]
+deriv(IC2S2J3W_12[]) <- age_IC2S2J3W_12[i] + pov_IC2S2J3W_12[i] + care_IC2S2J3W_12[i] + sch_IC2S2J3W_12[i] + jus_IC2S2J3W_12[i] + cl_IC2S2J3W_12[i]
+deriv(IC3S2J3W_12[]) <- age_IC3S2J3W_12[i] + pov_IC3S2J3W_12[i] + care_IC3S2J3W_12[i] + sch_IC3S2J3W_12[i] + jus_IC3S2J3W_12[i] + cl_IC3S2J3W_12[i]
+deriv(IC4S2J3W_12[]) <- age_IC4S2J3W_12[i] + pov_IC4S2J3W_12[i] + care_IC4S2J3W_12[i] + sch_IC4S2J3W_12[i] + jus_IC4S2J3W_12[i] + cl_IC4S2J3W_12[i]
+
+deriv(IC1S2J3W_13[]) <- age_IC1S2J3W_13[i] + pov_IC1S2J3W_13[i] + care_IC1S2J3W_13[i] + sch_IC1S2J3W_13[i] + jus_IC1S2J3W_13[i] + cl_IC1S2J3W_13[i]
+deriv(IC2S2J3W_13[]) <- age_IC2S2J3W_13[i] + pov_IC2S2J3W_13[i] + care_IC2S2J3W_13[i] + sch_IC2S2J3W_13[i] + jus_IC2S2J3W_13[i] + cl_IC2S2J3W_13[i]
+deriv(IC3S2J3W_13[]) <- age_IC3S2J3W_13[i] + pov_IC3S2J3W_13[i] + care_IC3S2J3W_13[i] + sch_IC3S2J3W_13[i] + jus_IC3S2J3W_13[i] + cl_IC3S2J3W_13[i]
+deriv(IC4S2J3W_13[]) <- age_IC4S2J3W_13[i] + pov_IC4S2J3W_13[i] + care_IC4S2J3W_13[i] + sch_IC4S2J3W_13[i] + jus_IC4S2J3W_13[i] + cl_IC4S2J3W_13[i]
+
+deriv(IC1S2J3W_14[]) <- age_IC1S2J3W_14[i] + pov_IC1S2J3W_14[i] + care_IC1S2J3W_14[i] + sch_IC1S2J3W_14[i] + jus_IC1S2J3W_14[i] + cl_IC1S2J3W_14[i]
+deriv(IC2S2J3W_14[]) <- age_IC2S2J3W_14[i] + pov_IC2S2J3W_14[i] + care_IC2S2J3W_14[i] + sch_IC2S2J3W_14[i] + jus_IC2S2J3W_14[i] + cl_IC2S2J3W_14[i]
+deriv(IC3S2J3W_14[]) <- age_IC3S2J3W_14[i] + pov_IC3S2J3W_14[i] + care_IC3S2J3W_14[i] + sch_IC3S2J3W_14[i] + jus_IC3S2J3W_14[i] + cl_IC3S2J3W_14[i]
+deriv(IC4S2J3W_14[]) <- age_IC4S2J3W_14[i] + pov_IC4S2J3W_14[i] + care_IC4S2J3W_14[i] + sch_IC4S2J3W_14[i] + jus_IC4S2J3W_14[i] + cl_IC4S2J3W_14[i]
+
+deriv(IC1S2J3W_15[]) <- age_IC1S2J3W_15[i] + pov_IC1S2J3W_15[i] + care_IC1S2J3W_15[i] + sch_IC1S2J3W_15[i] + jus_IC1S2J3W_15[i] + cl_IC1S2J3W_15[i]
+deriv(IC2S2J3W_15[]) <- age_IC2S2J3W_15[i] + pov_IC2S2J3W_15[i] + care_IC2S2J3W_15[i] + sch_IC2S2J3W_15[i] + jus_IC2S2J3W_15[i] + cl_IC2S2J3W_15[i]
+deriv(IC3S2J3W_15[]) <- age_IC3S2J3W_15[i] + pov_IC3S2J3W_15[i] + care_IC3S2J3W_15[i] + sch_IC3S2J3W_15[i] + jus_IC3S2J3W_15[i] + cl_IC3S2J3W_15[i]
+deriv(IC4S2J3W_15[]) <- age_IC4S2J3W_15[i] + pov_IC4S2J3W_15[i] + care_IC4S2J3W_15[i] + sch_IC4S2J3W_15[i] + jus_IC4S2J3W_15[i] + cl_IC4S2J3W_15[i]
+
+deriv(IC1S2J3W_16[]) <- age_IC1S2J3W_16[i] + pov_IC1S2J3W_16[i] + care_IC1S2J3W_16[i] + sch_IC1S2J3W_16[i] + jus_IC1S2J3W_16[i] + cl_IC1S2J3W_16[i]
+deriv(IC2S2J3W_16[]) <- age_IC2S2J3W_16[i] + pov_IC2S2J3W_16[i] + care_IC2S2J3W_16[i] + sch_IC2S2J3W_16[i] + jus_IC2S2J3W_16[i] + cl_IC2S2J3W_16[i]
+deriv(IC3S2J3W_16[]) <- age_IC3S2J3W_16[i] + pov_IC3S2J3W_16[i] + care_IC3S2J3W_16[i] + sch_IC3S2J3W_16[i] + jus_IC3S2J3W_16[i] + cl_IC3S2J3W_16[i]
+deriv(IC4S2J3W_16[]) <- age_IC4S2J3W_16[i] + pov_IC4S2J3W_16[i] + care_IC4S2J3W_16[i] + sch_IC4S2J3W_16[i] + jus_IC4S2J3W_16[i] + cl_IC4S2J3W_16[i]
+
+deriv(IC1S2J3W_17[]) <- age_IC1S2J3W_17[i] + pov_IC1S2J3W_17[i] + care_IC1S2J3W_17[i] + sch_IC1S2J3W_17[i] + jus_IC1S2J3W_17[i] + cl_IC1S2J3W_17[i]
+deriv(IC2S2J3W_17[]) <- age_IC2S2J3W_17[i] + pov_IC2S2J3W_17[i] + care_IC2S2J3W_17[i] + sch_IC2S2J3W_17[i] + jus_IC2S2J3W_17[i] + cl_IC2S2J3W_17[i]
+deriv(IC3S2J3W_17[]) <- age_IC3S2J3W_17[i] + pov_IC3S2J3W_17[i] + care_IC3S2J3W_17[i] + sch_IC3S2J3W_17[i] + jus_IC3S2J3W_17[i] + cl_IC3S2J3W_17[i]
+deriv(IC4S2J3W_17[]) <- age_IC4S2J3W_17[i] + pov_IC4S2J3W_17[i] + care_IC4S2J3W_17[i] + sch_IC4S2J3W_17[i] + jus_IC4S2J3W_17[i] + cl_IC4S2J3W_17[i]
+
+
+
+deriv(IC1S1J4W_10[]) <- age_IC1S1J4W_10[i] + pov_IC1S1J4W_10[i] + jus_IC1S1J4W_10[i] + cl_IC1S1J4W_10[i]
+deriv(IC2S1J4W_10[]) <- age_IC2S1J4W_10[i] + pov_IC2S1J4W_10[i] + jus_IC2S1J4W_10[i] + cl_IC2S1J4W_10[i]
+deriv(IC3S1J4W_10[]) <- age_IC3S1J4W_10[i] + pov_IC3S1J4W_10[i] + jus_IC3S1J4W_10[i] + cl_IC3S1J4W_10[i]
+deriv(IC4S1J4W_10[]) <- age_IC4S1J4W_10[i] + pov_IC4S1J4W_10[i] + jus_IC4S1J4W_10[i] + cl_IC4S1J4W_10[i]
+
+deriv(IC1S1J4W_11[]) <- age_IC1S1J4W_11[i] + pov_IC1S1J4W_11[i] + jus_IC1S1J4W_11[i] + cl_IC1S1J4W_11[i]
+deriv(IC2S1J4W_11[]) <- age_IC2S1J4W_11[i] + pov_IC2S1J4W_11[i] + jus_IC2S1J4W_11[i] + cl_IC2S1J4W_11[i]
+deriv(IC3S1J4W_11[]) <- age_IC3S1J4W_11[i] + pov_IC3S1J4W_11[i] + jus_IC3S1J4W_11[i] + cl_IC3S1J4W_11[i]
+deriv(IC4S1J4W_11[]) <- age_IC4S1J4W_11[i] + pov_IC4S1J4W_11[i] + jus_IC4S1J4W_11[i] + cl_IC4S1J4W_11[i]
+
+deriv(IC1S1J4W_12[]) <- age_IC1S1J4W_12[i] + pov_IC1S1J4W_12[i] + jus_IC1S1J4W_12[i] + cl_IC1S1J4W_12[i]
+deriv(IC2S1J4W_12[]) <- age_IC2S1J4W_12[i] + pov_IC2S1J4W_12[i] + jus_IC2S1J4W_12[i] + cl_IC2S1J4W_12[i]
+deriv(IC3S1J4W_12[]) <- age_IC3S1J4W_12[i] + pov_IC3S1J4W_12[i] + jus_IC3S1J4W_12[i] + cl_IC3S1J4W_12[i]
+deriv(IC4S1J4W_12[]) <- age_IC4S1J4W_12[i] + pov_IC4S1J4W_12[i] + jus_IC4S1J4W_12[i] + cl_IC4S1J4W_12[i]
+
+deriv(IC1S1J4W_13[]) <- age_IC1S1J4W_13[i] + pov_IC1S1J4W_13[i] + jus_IC1S1J4W_13[i] + cl_IC1S1J4W_13[i]
+deriv(IC2S1J4W_13[]) <- age_IC2S1J4W_13[i] + pov_IC2S1J4W_13[i] + jus_IC2S1J4W_13[i] + cl_IC2S1J4W_13[i]
+deriv(IC3S1J4W_13[]) <- age_IC3S1J4W_13[i] + pov_IC3S1J4W_13[i] + jus_IC3S1J4W_13[i] + cl_IC3S1J4W_13[i]
+deriv(IC4S1J4W_13[]) <- age_IC4S1J4W_13[i] + pov_IC4S1J4W_13[i] + jus_IC4S1J4W_13[i] + cl_IC4S1J4W_13[i]
+
+deriv(IC1S1J4W_14[]) <- age_IC1S1J4W_14[i] + pov_IC1S1J4W_14[i] + jus_IC1S1J4W_14[i] + cl_IC1S1J4W_14[i]
+deriv(IC2S1J4W_14[]) <- age_IC2S1J4W_14[i] + pov_IC2S1J4W_14[i] + jus_IC2S1J4W_14[i] + cl_IC2S1J4W_14[i]
+deriv(IC3S1J4W_14[]) <- age_IC3S1J4W_14[i] + pov_IC3S1J4W_14[i] + jus_IC3S1J4W_14[i] + cl_IC3S1J4W_14[i]
+deriv(IC4S1J4W_14[]) <- age_IC4S1J4W_14[i] + pov_IC4S1J4W_14[i] + jus_IC4S1J4W_14[i] + cl_IC4S1J4W_14[i]
+
+deriv(IC1S1J4W_15[]) <- age_IC1S1J4W_15[i] + pov_IC1S1J4W_15[i] + jus_IC1S1J4W_15[i] + cl_IC1S1J4W_15[i]
+deriv(IC2S1J4W_15[]) <- age_IC2S1J4W_15[i] + pov_IC2S1J4W_15[i] + jus_IC2S1J4W_15[i] + cl_IC2S1J4W_15[i]
+deriv(IC3S1J4W_15[]) <- age_IC3S1J4W_15[i] + pov_IC3S1J4W_15[i] + jus_IC3S1J4W_15[i] + cl_IC3S1J4W_15[i]
+deriv(IC4S1J4W_15[]) <- age_IC4S1J4W_15[i] + pov_IC4S1J4W_15[i] + jus_IC4S1J4W_15[i] + cl_IC4S1J4W_15[i]
+
+deriv(IC1S1J4W_16[]) <- age_IC1S1J4W_16[i] + pov_IC1S1J4W_16[i] + jus_IC1S1J4W_16[i] + cl_IC1S1J4W_16[i]
+deriv(IC2S1J4W_16[]) <- age_IC2S1J4W_16[i] + pov_IC2S1J4W_16[i] + jus_IC2S1J4W_16[i] + cl_IC2S1J4W_16[i]
+deriv(IC3S1J4W_16[]) <- age_IC3S1J4W_16[i] + pov_IC3S1J4W_16[i] + jus_IC3S1J4W_16[i] + cl_IC3S1J4W_16[i]
+deriv(IC4S1J4W_16[]) <- age_IC4S1J4W_16[i] + pov_IC4S1J4W_16[i] + jus_IC4S1J4W_16[i] + cl_IC4S1J4W_16[i]
+
+deriv(IC1S1J4W_17[]) <- age_IC1S1J4W_17[i] + pov_IC1S1J4W_17[i] + jus_IC1S1J4W_17[i] + cl_IC1S1J4W_17[i]
+deriv(IC2S1J4W_17[]) <- age_IC2S1J4W_17[i] + pov_IC2S1J4W_17[i] + jus_IC2S1J4W_17[i] + cl_IC2S1J4W_17[i]
+deriv(IC3S1J4W_17[]) <- age_IC3S1J4W_17[i] + pov_IC3S1J4W_17[i] + jus_IC3S1J4W_17[i] + cl_IC3S1J4W_17[i]
+deriv(IC4S1J4W_17[]) <- age_IC4S1J4W_17[i] + pov_IC4S1J4W_17[i] + jus_IC4S1J4W_17[i] + cl_IC4S1J4W_17[i]
+
+
+
+deriv(IC1S2J4W_10[]) <- age_IC1S2J4W_10[i] + pov_IC1S2J4W_10[i] + jus_IC1S2J4W_10[i] + cl_IC1S2J4W_10[i]
+deriv(IC2S2J4W_10[]) <- age_IC2S2J4W_10[i] + pov_IC2S2J4W_10[i] + jus_IC2S2J4W_10[i] + cl_IC2S2J4W_10[i]
+deriv(IC3S2J4W_10[]) <- age_IC3S2J4W_10[i] + pov_IC3S2J4W_10[i] + jus_IC3S2J4W_10[i] + cl_IC3S2J4W_10[i]
+deriv(IC4S2J4W_10[]) <- age_IC4S2J4W_10[i] + pov_IC4S2J4W_10[i] + jus_IC4S2J4W_10[i] + cl_IC4S2J4W_10[i]
+
+deriv(IC1S2J4W_11[]) <- age_IC1S2J4W_11[i] + pov_IC1S2J4W_11[i] + jus_IC1S2J4W_11[i] + cl_IC1S2J4W_11[i]
+deriv(IC2S2J4W_11[]) <- age_IC2S2J4W_11[i] + pov_IC2S2J4W_11[i] + jus_IC2S2J4W_11[i] + cl_IC2S2J4W_11[i]
+deriv(IC3S2J4W_11[]) <- age_IC3S2J4W_11[i] + pov_IC3S2J4W_11[i] + jus_IC3S2J4W_11[i] + cl_IC3S2J4W_11[i]
+deriv(IC4S2J4W_11[]) <- age_IC4S2J4W_11[i] + pov_IC4S2J4W_11[i] + jus_IC4S2J4W_11[i] + cl_IC4S2J4W_11[i]
+
+deriv(IC1S2J4W_12[]) <- age_IC1S2J4W_12[i] + pov_IC1S2J4W_12[i] + jus_IC1S2J4W_12[i] + cl_IC1S2J4W_12[i]
+deriv(IC2S2J4W_12[]) <- age_IC2S2J4W_12[i] + pov_IC2S2J4W_12[i] + jus_IC2S2J4W_12[i] + cl_IC2S2J4W_12[i]
+deriv(IC3S2J4W_12[]) <- age_IC3S2J4W_12[i] + pov_IC3S2J4W_12[i] + jus_IC3S2J4W_12[i] + cl_IC3S2J4W_12[i]
+deriv(IC4S2J4W_12[]) <- age_IC4S2J4W_12[i] + pov_IC4S2J4W_12[i] + jus_IC4S2J4W_12[i] + cl_IC4S2J4W_12[i]
+
+deriv(IC1S2J4W_13[]) <- age_IC1S2J4W_13[i] + pov_IC1S2J4W_13[i] + jus_IC1S2J4W_13[i] + cl_IC1S2J4W_13[i]
+deriv(IC2S2J4W_13[]) <- age_IC2S2J4W_13[i] + pov_IC2S2J4W_13[i] + jus_IC2S2J4W_13[i] + cl_IC2S2J4W_13[i]
+deriv(IC3S2J4W_13[]) <- age_IC3S2J4W_13[i] + pov_IC3S2J4W_13[i] + jus_IC3S2J4W_13[i] + cl_IC3S2J4W_13[i]
+deriv(IC4S2J4W_13[]) <- age_IC4S2J4W_13[i] + pov_IC4S2J4W_13[i] + jus_IC4S2J4W_13[i] + cl_IC4S2J4W_13[i]
+
+deriv(IC1S2J4W_14[]) <- age_IC1S2J4W_14[i] + pov_IC1S2J4W_14[i] + jus_IC1S2J4W_14[i] + cl_IC1S2J4W_14[i]
+deriv(IC2S2J4W_14[]) <- age_IC2S2J4W_14[i] + pov_IC2S2J4W_14[i] + jus_IC2S2J4W_14[i] + cl_IC2S2J4W_14[i]
+deriv(IC3S2J4W_14[]) <- age_IC3S2J4W_14[i] + pov_IC3S2J4W_14[i] + jus_IC3S2J4W_14[i] + cl_IC3S2J4W_14[i]
+deriv(IC4S2J4W_14[]) <- age_IC4S2J4W_14[i] + pov_IC4S2J4W_14[i] + jus_IC4S2J4W_14[i] + cl_IC4S2J4W_14[i]
+
+deriv(IC1S2J4W_15[]) <- age_IC1S2J4W_15[i] + pov_IC1S2J4W_15[i] + jus_IC1S2J4W_15[i] + cl_IC1S2J4W_15[i]
+deriv(IC2S2J4W_15[]) <- age_IC2S2J4W_15[i] + pov_IC2S2J4W_15[i] + jus_IC2S2J4W_15[i] + cl_IC2S2J4W_15[i]
+deriv(IC3S2J4W_15[]) <- age_IC3S2J4W_15[i] + pov_IC3S2J4W_15[i] + jus_IC3S2J4W_15[i] + cl_IC3S2J4W_15[i]
+deriv(IC4S2J4W_15[]) <- age_IC4S2J4W_15[i] + pov_IC4S2J4W_15[i] + jus_IC4S2J4W_15[i] + cl_IC4S2J4W_15[i]
+
+deriv(IC1S2J4W_16[]) <- age_IC1S2J4W_16[i] + pov_IC1S2J4W_16[i] + jus_IC1S2J4W_16[i] + cl_IC1S2J4W_16[i]
+deriv(IC2S2J4W_16[]) <- age_IC2S2J4W_16[i] + pov_IC2S2J4W_16[i] + jus_IC2S2J4W_16[i] + cl_IC2S2J4W_16[i]
+deriv(IC3S2J4W_16[]) <- age_IC3S2J4W_16[i] + pov_IC3S2J4W_16[i] + jus_IC3S2J4W_16[i] + cl_IC3S2J4W_16[i]
+deriv(IC4S2J4W_16[]) <- age_IC4S2J4W_16[i] + pov_IC4S2J4W_16[i] + jus_IC4S2J4W_16[i] + cl_IC4S2J4W_16[i]
+
+deriv(IC1S2J4W_17[]) <- age_IC1S2J4W_17[i] + pov_IC1S2J4W_17[i] + jus_IC1S2J4W_17[i] + cl_IC1S2J4W_17[i]
+deriv(IC2S2J4W_17[]) <- age_IC2S2J4W_17[i] + pov_IC2S2J4W_17[i] + jus_IC2S2J4W_17[i] + cl_IC2S2J4W_17[i]
+deriv(IC3S2J4W_17[]) <- age_IC3S2J4W_17[i] + pov_IC3S2J4W_17[i] + jus_IC3S2J4W_17[i] + cl_IC3S2J4W_17[i]
+deriv(IC4S2J4W_17[]) <- age_IC4S2J4W_17[i] + pov_IC4S2J4W_17[i] + jus_IC4S2J4W_17[i] + cl_IC4S2J4W_17[i]
+
+
+
+deriv(IC1S1J5W_10[]) <- age_IC1S1J5W_10[i] + pov_IC1S1J5W_10[i] + jus_IC1S1J5W_10[i] + cl_IC1S1J5W_10[i]
+deriv(IC2S1J5W_10[]) <- age_IC2S1J5W_10[i] + pov_IC2S1J5W_10[i] + jus_IC2S1J5W_10[i] + cl_IC2S1J5W_10[i]
+deriv(IC3S1J5W_10[]) <- age_IC3S1J5W_10[i] + pov_IC3S1J5W_10[i] + jus_IC3S1J5W_10[i] + cl_IC3S1J5W_10[i]
+deriv(IC4S1J5W_10[]) <- age_IC4S1J5W_10[i] + pov_IC4S1J5W_10[i] + jus_IC4S1J5W_10[i] + cl_IC4S1J5W_10[i]
+
+deriv(IC1S1J5W_11[]) <- age_IC1S1J5W_11[i] + pov_IC1S1J5W_11[i] + jus_IC1S1J5W_11[i] + cl_IC1S1J5W_11[i]
+deriv(IC2S1J5W_11[]) <- age_IC2S1J5W_11[i] + pov_IC2S1J5W_11[i] + jus_IC2S1J5W_11[i] + cl_IC2S1J5W_11[i]
+deriv(IC3S1J5W_11[]) <- age_IC3S1J5W_11[i] + pov_IC3S1J5W_11[i] + jus_IC3S1J5W_11[i] + cl_IC3S1J5W_11[i]
+deriv(IC4S1J5W_11[]) <- age_IC4S1J5W_11[i] + pov_IC4S1J5W_11[i] + jus_IC4S1J5W_11[i] + cl_IC4S1J5W_11[i]
+
+deriv(IC1S1J5W_12[]) <- age_IC1S1J5W_12[i] + pov_IC1S1J5W_12[i] + jus_IC1S1J5W_12[i] + cl_IC1S1J5W_12[i]
+deriv(IC2S1J5W_12[]) <- age_IC2S1J5W_12[i] + pov_IC2S1J5W_12[i] + jus_IC2S1J5W_12[i] + cl_IC2S1J5W_12[i]
+deriv(IC3S1J5W_12[]) <- age_IC3S1J5W_12[i] + pov_IC3S1J5W_12[i] + jus_IC3S1J5W_12[i] + cl_IC3S1J5W_12[i]
+deriv(IC4S1J5W_12[]) <- age_IC4S1J5W_12[i] + pov_IC4S1J5W_12[i] + jus_IC4S1J5W_12[i] + cl_IC4S1J5W_12[i]
+
+deriv(IC1S1J5W_13[]) <- age_IC1S1J5W_13[i] + pov_IC1S1J5W_13[i] + jus_IC1S1J5W_13[i] + cl_IC1S1J5W_13[i]
+deriv(IC2S1J5W_13[]) <- age_IC2S1J5W_13[i] + pov_IC2S1J5W_13[i] + jus_IC2S1J5W_13[i] + cl_IC2S1J5W_13[i]
+deriv(IC3S1J5W_13[]) <- age_IC3S1J5W_13[i] + pov_IC3S1J5W_13[i] + jus_IC3S1J5W_13[i] + cl_IC3S1J5W_13[i]
+deriv(IC4S1J5W_13[]) <- age_IC4S1J5W_13[i] + pov_IC4S1J5W_13[i] + jus_IC4S1J5W_13[i] + cl_IC4S1J5W_13[i]
+
+deriv(IC1S1J5W_14[]) <- age_IC1S1J5W_14[i] + pov_IC1S1J5W_14[i] + jus_IC1S1J5W_14[i] + cl_IC1S1J5W_14[i]
+deriv(IC2S1J5W_14[]) <- age_IC2S1J5W_14[i] + pov_IC2S1J5W_14[i] + jus_IC2S1J5W_14[i] + cl_IC2S1J5W_14[i]
+deriv(IC3S1J5W_14[]) <- age_IC3S1J5W_14[i] + pov_IC3S1J5W_14[i] + jus_IC3S1J5W_14[i] + cl_IC3S1J5W_14[i]
+deriv(IC4S1J5W_14[]) <- age_IC4S1J5W_14[i] + pov_IC4S1J5W_14[i] + jus_IC4S1J5W_14[i] + cl_IC4S1J5W_14[i]
+
+deriv(IC1S1J5W_15[]) <- age_IC1S1J5W_15[i] + pov_IC1S1J5W_15[i] + jus_IC1S1J5W_15[i] + cl_IC1S1J5W_15[i]
+deriv(IC2S1J5W_15[]) <- age_IC2S1J5W_15[i] + pov_IC2S1J5W_15[i] + jus_IC2S1J5W_15[i] + cl_IC2S1J5W_15[i]
+deriv(IC3S1J5W_15[]) <- age_IC3S1J5W_15[i] + pov_IC3S1J5W_15[i] + jus_IC3S1J5W_15[i] + cl_IC3S1J5W_15[i]
+deriv(IC4S1J5W_15[]) <- age_IC4S1J5W_15[i] + pov_IC4S1J5W_15[i] + jus_IC4S1J5W_15[i] + cl_IC4S1J5W_15[i]
+
+deriv(IC1S1J5W_16[]) <- age_IC1S1J5W_16[i] + pov_IC1S1J5W_16[i] + jus_IC1S1J5W_16[i] + cl_IC1S1J5W_16[i]
+deriv(IC2S1J5W_16[]) <- age_IC2S1J5W_16[i] + pov_IC2S1J5W_16[i] + jus_IC2S1J5W_16[i] + cl_IC2S1J5W_16[i]
+deriv(IC3S1J5W_16[]) <- age_IC3S1J5W_16[i] + pov_IC3S1J5W_16[i] + jus_IC3S1J5W_16[i] + cl_IC3S1J5W_16[i]
+deriv(IC4S1J5W_16[]) <- age_IC4S1J5W_16[i] + pov_IC4S1J5W_16[i] + jus_IC4S1J5W_16[i] + cl_IC4S1J5W_16[i]
+
+deriv(IC1S1J5W_17[]) <- age_IC1S1J5W_17[i] + pov_IC1S1J5W_17[i] + jus_IC1S1J5W_17[i] + cl_IC1S1J5W_17[i]
+deriv(IC2S1J5W_17[]) <- age_IC2S1J5W_17[i] + pov_IC2S1J5W_17[i] + jus_IC2S1J5W_17[i] + cl_IC2S1J5W_17[i]
+deriv(IC3S1J5W_17[]) <- age_IC3S1J5W_17[i] + pov_IC3S1J5W_17[i] + jus_IC3S1J5W_17[i] + cl_IC3S1J5W_17[i]
+deriv(IC4S1J5W_17[]) <- age_IC4S1J5W_17[i] + pov_IC4S1J5W_17[i] + jus_IC4S1J5W_17[i] + cl_IC4S1J5W_17[i]
+
+
+
+deriv(IC1S2J5W_10[]) <- age_IC1S2J5W_10[i] + pov_IC1S2J5W_10[i] + jus_IC1S2J5W_10[i] + cl_IC1S2J5W_10[i]
+deriv(IC2S2J5W_10[]) <- age_IC2S2J5W_10[i] + pov_IC2S2J5W_10[i] + jus_IC2S2J5W_10[i] + cl_IC2S2J5W_10[i]
+deriv(IC3S2J5W_10[]) <- age_IC3S2J5W_10[i] + pov_IC3S2J5W_10[i] + jus_IC3S2J5W_10[i] + cl_IC3S2J5W_10[i]
+deriv(IC4S2J5W_10[]) <- age_IC4S2J5W_10[i] + pov_IC4S2J5W_10[i] + jus_IC4S2J5W_10[i] + cl_IC4S2J5W_10[i]
+
+deriv(IC1S2J5W_11[]) <- age_IC1S2J5W_11[i] + pov_IC1S2J5W_11[i] + jus_IC1S2J5W_11[i] + cl_IC1S2J5W_11[i]
+deriv(IC2S2J5W_11[]) <- age_IC2S2J5W_11[i] + pov_IC2S2J5W_11[i] + jus_IC2S2J5W_11[i] + cl_IC2S2J5W_11[i]
+deriv(IC3S2J5W_11[]) <- age_IC3S2J5W_11[i] + pov_IC3S2J5W_11[i] + jus_IC3S2J5W_11[i] + cl_IC3S2J5W_11[i]
+deriv(IC4S2J5W_11[]) <- age_IC4S2J5W_11[i] + pov_IC4S2J5W_11[i] + jus_IC4S2J5W_11[i] + cl_IC4S2J5W_11[i]
+
+deriv(IC1S2J5W_12[]) <- age_IC1S2J5W_12[i] + pov_IC1S2J5W_12[i] + jus_IC1S2J5W_12[i] + cl_IC1S2J5W_12[i]
+deriv(IC2S2J5W_12[]) <- age_IC2S2J5W_12[i] + pov_IC2S2J5W_12[i] + jus_IC2S2J5W_12[i] + cl_IC2S2J5W_12[i]
+deriv(IC3S2J5W_12[]) <- age_IC3S2J5W_12[i] + pov_IC3S2J5W_12[i] + jus_IC3S2J5W_12[i] + cl_IC3S2J5W_12[i]
+deriv(IC4S2J5W_12[]) <- age_IC4S2J5W_12[i] + pov_IC4S2J5W_12[i] + jus_IC4S2J5W_12[i] + cl_IC4S2J5W_12[i]
+
+deriv(IC1S2J5W_13[]) <- age_IC1S2J5W_13[i] + pov_IC1S2J5W_13[i] + jus_IC1S2J5W_13[i] + cl_IC1S2J5W_13[i]
+deriv(IC2S2J5W_13[]) <- age_IC2S2J5W_13[i] + pov_IC2S2J5W_13[i] + jus_IC2S2J5W_13[i] + cl_IC2S2J5W_13[i]
+deriv(IC3S2J5W_13[]) <- age_IC3S2J5W_13[i] + pov_IC3S2J5W_13[i] + jus_IC3S2J5W_13[i] + cl_IC3S2J5W_13[i]
+deriv(IC4S2J5W_13[]) <- age_IC4S2J5W_13[i] + pov_IC4S2J5W_13[i] + jus_IC4S2J5W_13[i] + cl_IC4S2J5W_13[i]
+
+deriv(IC1S2J5W_14[]) <- age_IC1S2J5W_14[i] + pov_IC1S2J5W_14[i] + jus_IC1S2J5W_14[i] + cl_IC1S2J5W_14[i]
+deriv(IC2S2J5W_14[]) <- age_IC2S2J5W_14[i] + pov_IC2S2J5W_14[i] + jus_IC2S2J5W_14[i] + cl_IC2S2J5W_14[i]
+deriv(IC3S2J5W_14[]) <- age_IC3S2J5W_14[i] + pov_IC3S2J5W_14[i] + jus_IC3S2J5W_14[i] + cl_IC3S2J5W_14[i]
+deriv(IC4S2J5W_14[]) <- age_IC4S2J5W_14[i] + pov_IC4S2J5W_14[i] + jus_IC4S2J5W_14[i] + cl_IC4S2J5W_14[i]
+
+deriv(IC1S2J5W_15[]) <- age_IC1S2J5W_15[i] + pov_IC1S2J5W_15[i] + jus_IC1S2J5W_15[i] + cl_IC1S2J5W_15[i]
+deriv(IC2S2J5W_15[]) <- age_IC2S2J5W_15[i] + pov_IC2S2J5W_15[i] + jus_IC2S2J5W_15[i] + cl_IC2S2J5W_15[i]
+deriv(IC3S2J5W_15[]) <- age_IC3S2J5W_15[i] + pov_IC3S2J5W_15[i] + jus_IC3S2J5W_15[i] + cl_IC3S2J5W_15[i]
+deriv(IC4S2J5W_15[]) <- age_IC4S2J5W_15[i] + pov_IC4S2J5W_15[i] + jus_IC4S2J5W_15[i] + cl_IC4S2J5W_15[i]
+
+deriv(IC1S2J5W_16[]) <- age_IC1S2J5W_16[i] + pov_IC1S2J5W_16[i] + jus_IC1S2J5W_16[i] + cl_IC1S2J5W_16[i]
+deriv(IC2S2J5W_16[]) <- age_IC2S2J5W_16[i] + pov_IC2S2J5W_16[i] + jus_IC2S2J5W_16[i] + cl_IC2S2J5W_16[i]
+deriv(IC3S2J5W_16[]) <- age_IC3S2J5W_16[i] + pov_IC3S2J5W_16[i] + jus_IC3S2J5W_16[i] + cl_IC3S2J5W_16[i]
+deriv(IC4S2J5W_16[]) <- age_IC4S2J5W_16[i] + pov_IC4S2J5W_16[i] + jus_IC4S2J5W_16[i] + cl_IC4S2J5W_16[i]
+
+deriv(IC1S2J5W_17[]) <- age_IC1S2J5W_17[i] + pov_IC1S2J5W_17[i] + jus_IC1S2J5W_17[i] + cl_IC1S2J5W_17[i]
+deriv(IC2S2J5W_17[]) <- age_IC2S2J5W_17[i] + pov_IC2S2J5W_17[i] + jus_IC2S2J5W_17[i] + cl_IC2S2J5W_17[i]
+deriv(IC3S2J5W_17[]) <- age_IC3S2J5W_17[i] + pov_IC3S2J5W_17[i] + jus_IC3S2J5W_17[i] + cl_IC3S2J5W_17[i]
+deriv(IC4S2J5W_17[]) <- age_IC4S2J5W_17[i] + pov_IC4S2J5W_17[i] + jus_IC4S2J5W_17[i] + cl_IC4S2J5W_17[i]
+
+
+
+deriv(EC1S1J1U_10[]) <- age_EC1S1J1U_10[i] + pov_EC1S1J1U_10[i] + care_EC1S1J1U_10[i] + sch_EC1S1J1U_10[i] + jus_EC1S1J1U_10[i] + cl_EC1S1J1U_10[i]
+deriv(EC2S1J1U_10[]) <- age_EC2S1J1U_10[i] + pov_EC2S1J1U_10[i] + care_EC2S1J1U_10[i] + sch_EC2S1J1U_10[i] + jus_EC2S1J1U_10[i] + cl_EC2S1J1U_10[i]
+deriv(EC3S1J1U_10[]) <- age_EC3S1J1U_10[i] + pov_EC3S1J1U_10[i] + care_EC3S1J1U_10[i] + sch_EC3S1J1U_10[i] + jus_EC3S1J1U_10[i] + cl_EC3S1J1U_10[i]
+deriv(EC4S1J1U_10[]) <- age_EC4S1J1U_10[i] + pov_EC4S1J1U_10[i] + care_EC4S1J1U_10[i] + sch_EC4S1J1U_10[i] + jus_EC4S1J1U_10[i] + cl_EC4S1J1U_10[i]
+
+deriv(EC1S1J1U_11[]) <- age_EC1S1J1U_11[i] + pov_EC1S1J1U_11[i] + care_EC1S1J1U_11[i] + sch_EC1S1J1U_11[i] + jus_EC1S1J1U_11[i] + cl_EC1S1J1U_11[i]
+deriv(EC2S1J1U_11[]) <- age_EC2S1J1U_11[i] + pov_EC2S1J1U_11[i] + care_EC2S1J1U_11[i] + sch_EC2S1J1U_11[i] + jus_EC2S1J1U_11[i] + cl_EC2S1J1U_11[i]
+deriv(EC3S1J1U_11[]) <- age_EC3S1J1U_11[i] + pov_EC3S1J1U_11[i] + care_EC3S1J1U_11[i] + sch_EC3S1J1U_11[i] + jus_EC3S1J1U_11[i] + cl_EC3S1J1U_11[i]
+deriv(EC4S1J1U_11[]) <- age_EC4S1J1U_11[i] + pov_EC4S1J1U_11[i] + care_EC4S1J1U_11[i] + sch_EC4S1J1U_11[i] + jus_EC4S1J1U_11[i] + cl_EC4S1J1U_11[i]
+
+deriv(EC1S1J1U_12[]) <- age_EC1S1J1U_12[i] + pov_EC1S1J1U_12[i] + care_EC1S1J1U_12[i] + sch_EC1S1J1U_12[i] + jus_EC1S1J1U_12[i] + cl_EC1S1J1U_12[i]
+deriv(EC2S1J1U_12[]) <- age_EC2S1J1U_12[i] + pov_EC2S1J1U_12[i] + care_EC2S1J1U_12[i] + sch_EC2S1J1U_12[i] + jus_EC2S1J1U_12[i] + cl_EC2S1J1U_12[i]
+deriv(EC3S1J1U_12[]) <- age_EC3S1J1U_12[i] + pov_EC3S1J1U_12[i] + care_EC3S1J1U_12[i] + sch_EC3S1J1U_12[i] + jus_EC3S1J1U_12[i] + cl_EC3S1J1U_12[i]
+deriv(EC4S1J1U_12[]) <- age_EC4S1J1U_12[i] + pov_EC4S1J1U_12[i] + care_EC4S1J1U_12[i] + sch_EC4S1J1U_12[i] + jus_EC4S1J1U_12[i] + cl_EC4S1J1U_12[i]
+
+deriv(EC1S1J1U_13[]) <- age_EC1S1J1U_13[i] + pov_EC1S1J1U_13[i] + care_EC1S1J1U_13[i] + sch_EC1S1J1U_13[i] + jus_EC1S1J1U_13[i] + cl_EC1S1J1U_13[i]
+deriv(EC2S1J1U_13[]) <- age_EC2S1J1U_13[i] + pov_EC2S1J1U_13[i] + care_EC2S1J1U_13[i] + sch_EC2S1J1U_13[i] + jus_EC2S1J1U_13[i] + cl_EC2S1J1U_13[i]
+deriv(EC3S1J1U_13[]) <- age_EC3S1J1U_13[i] + pov_EC3S1J1U_13[i] + care_EC3S1J1U_13[i] + sch_EC3S1J1U_13[i] + jus_EC3S1J1U_13[i] + cl_EC3S1J1U_13[i]
+deriv(EC4S1J1U_13[]) <- age_EC4S1J1U_13[i] + pov_EC4S1J1U_13[i] + care_EC4S1J1U_13[i] + sch_EC4S1J1U_13[i] + jus_EC4S1J1U_13[i] + cl_EC4S1J1U_13[i]
+
+deriv(EC1S1J1U_14[]) <- age_EC1S1J1U_14[i] + pov_EC1S1J1U_14[i] + care_EC1S1J1U_14[i] + sch_EC1S1J1U_14[i] + jus_EC1S1J1U_14[i] + cl_EC1S1J1U_14[i]
+deriv(EC2S1J1U_14[]) <- age_EC2S1J1U_14[i] + pov_EC2S1J1U_14[i] + care_EC2S1J1U_14[i] + sch_EC2S1J1U_14[i] + jus_EC2S1J1U_14[i] + cl_EC2S1J1U_14[i]
+deriv(EC3S1J1U_14[]) <- age_EC3S1J1U_14[i] + pov_EC3S1J1U_14[i] + care_EC3S1J1U_14[i] + sch_EC3S1J1U_14[i] + jus_EC3S1J1U_14[i] + cl_EC3S1J1U_14[i]
+deriv(EC4S1J1U_14[]) <- age_EC4S1J1U_14[i] + pov_EC4S1J1U_14[i] + care_EC4S1J1U_14[i] + sch_EC4S1J1U_14[i] + jus_EC4S1J1U_14[i] + cl_EC4S1J1U_14[i]
+
+deriv(EC1S1J1U_15[]) <- age_EC1S1J1U_15[i] + pov_EC1S1J1U_15[i] + care_EC1S1J1U_15[i] + sch_EC1S1J1U_15[i] + jus_EC1S1J1U_15[i] + cl_EC1S1J1U_15[i]
+deriv(EC2S1J1U_15[]) <- age_EC2S1J1U_15[i] + pov_EC2S1J1U_15[i] + care_EC2S1J1U_15[i] + sch_EC2S1J1U_15[i] + jus_EC2S1J1U_15[i] + cl_EC2S1J1U_15[i]
+deriv(EC3S1J1U_15[]) <- age_EC3S1J1U_15[i] + pov_EC3S1J1U_15[i] + care_EC3S1J1U_15[i] + sch_EC3S1J1U_15[i] + jus_EC3S1J1U_15[i] + cl_EC3S1J1U_15[i]
+deriv(EC4S1J1U_15[]) <- age_EC4S1J1U_15[i] + pov_EC4S1J1U_15[i] + care_EC4S1J1U_15[i] + sch_EC4S1J1U_15[i] + jus_EC4S1J1U_15[i] + cl_EC4S1J1U_15[i]
+
+deriv(EC1S1J1U_16[]) <- age_EC1S1J1U_16[i] + pov_EC1S1J1U_16[i] + care_EC1S1J1U_16[i] + sch_EC1S1J1U_16[i] + jus_EC1S1J1U_16[i] + cl_EC1S1J1U_16[i]
+deriv(EC2S1J1U_16[]) <- age_EC2S1J1U_16[i] + pov_EC2S1J1U_16[i] + care_EC2S1J1U_16[i] + sch_EC2S1J1U_16[i] + jus_EC2S1J1U_16[i] + cl_EC2S1J1U_16[i]
+deriv(EC3S1J1U_16[]) <- age_EC3S1J1U_16[i] + pov_EC3S1J1U_16[i] + care_EC3S1J1U_16[i] + sch_EC3S1J1U_16[i] + jus_EC3S1J1U_16[i] + cl_EC3S1J1U_16[i]
+deriv(EC4S1J1U_16[]) <- age_EC4S1J1U_16[i] + pov_EC4S1J1U_16[i] + care_EC4S1J1U_16[i] + sch_EC4S1J1U_16[i] + jus_EC4S1J1U_16[i] + cl_EC4S1J1U_16[i]
+
+deriv(EC1S1J1U_17[]) <- age_EC1S1J1U_17[i] + pov_EC1S1J1U_17[i] + care_EC1S1J1U_17[i] + sch_EC1S1J1U_17[i] + jus_EC1S1J1U_17[i] + cl_EC1S1J1U_17[i]
+deriv(EC2S1J1U_17[]) <- age_EC2S1J1U_17[i] + pov_EC2S1J1U_17[i] + care_EC2S1J1U_17[i] + sch_EC2S1J1U_17[i] + jus_EC2S1J1U_17[i] + cl_EC2S1J1U_17[i]
+deriv(EC3S1J1U_17[]) <- age_EC3S1J1U_17[i] + pov_EC3S1J1U_17[i] + care_EC3S1J1U_17[i] + sch_EC3S1J1U_17[i] + jus_EC3S1J1U_17[i] + cl_EC3S1J1U_17[i]
+deriv(EC4S1J1U_17[]) <- age_EC4S1J1U_17[i] + pov_EC4S1J1U_17[i] + care_EC4S1J1U_17[i] + sch_EC4S1J1U_17[i] + jus_EC4S1J1U_17[i] + cl_EC4S1J1U_17[i]
+
+
+
+deriv(EC1S2J1U_10[]) <- age_EC1S2J1U_10[i] + pov_EC1S2J1U_10[i] + care_EC1S2J1U_10[i] + sch_EC1S2J1U_10[i] + jus_EC1S2J1U_10[i] + cl_EC1S2J1U_10[i]
+deriv(EC2S2J1U_10[]) <- age_EC2S2J1U_10[i] + pov_EC2S2J1U_10[i] + care_EC2S2J1U_10[i] + sch_EC2S2J1U_10[i] + jus_EC2S2J1U_10[i] + cl_EC2S2J1U_10[i]
+deriv(EC3S2J1U_10[]) <- age_EC3S2J1U_10[i] + pov_EC3S2J1U_10[i] + care_EC3S2J1U_10[i] + sch_EC3S2J1U_10[i] + jus_EC3S2J1U_10[i] + cl_EC3S2J1U_10[i]
+deriv(EC4S2J1U_10[]) <- age_EC4S2J1U_10[i] + pov_EC4S2J1U_10[i] + care_EC4S2J1U_10[i] + sch_EC4S2J1U_10[i] + jus_EC4S2J1U_10[i] + cl_EC4S2J1U_10[i]
+
+deriv(EC1S2J1U_11[]) <- age_EC1S2J1U_11[i] + pov_EC1S2J1U_11[i] + care_EC1S2J1U_11[i] + sch_EC1S2J1U_11[i] + jus_EC1S2J1U_11[i] + cl_EC1S2J1U_11[i]
+deriv(EC2S2J1U_11[]) <- age_EC2S2J1U_11[i] + pov_EC2S2J1U_11[i] + care_EC2S2J1U_11[i] + sch_EC2S2J1U_11[i] + jus_EC2S2J1U_11[i] + cl_EC2S2J1U_11[i]
+deriv(EC3S2J1U_11[]) <- age_EC3S2J1U_11[i] + pov_EC3S2J1U_11[i] + care_EC3S2J1U_11[i] + sch_EC3S2J1U_11[i] + jus_EC3S2J1U_11[i] + cl_EC3S2J1U_11[i]
+deriv(EC4S2J1U_11[]) <- age_EC4S2J1U_11[i] + pov_EC4S2J1U_11[i] + care_EC4S2J1U_11[i] + sch_EC4S2J1U_11[i] + jus_EC4S2J1U_11[i] + cl_EC4S2J1U_11[i]
+
+deriv(EC1S2J1U_12[]) <- age_EC1S2J1U_12[i] + pov_EC1S2J1U_12[i] + care_EC1S2J1U_12[i] + sch_EC1S2J1U_12[i] + jus_EC1S2J1U_12[i] + cl_EC1S2J1U_12[i]
+deriv(EC2S2J1U_12[]) <- age_EC2S2J1U_12[i] + pov_EC2S2J1U_12[i] + care_EC2S2J1U_12[i] + sch_EC2S2J1U_12[i] + jus_EC2S2J1U_12[i] + cl_EC2S2J1U_12[i]
+deriv(EC3S2J1U_12[]) <- age_EC3S2J1U_12[i] + pov_EC3S2J1U_12[i] + care_EC3S2J1U_12[i] + sch_EC3S2J1U_12[i] + jus_EC3S2J1U_12[i] + cl_EC3S2J1U_12[i]
+deriv(EC4S2J1U_12[]) <- age_EC4S2J1U_12[i] + pov_EC4S2J1U_12[i] + care_EC4S2J1U_12[i] + sch_EC4S2J1U_12[i] + jus_EC4S2J1U_12[i] + cl_EC4S2J1U_12[i]
+
+deriv(EC1S2J1U_13[]) <- age_EC1S2J1U_13[i] + pov_EC1S2J1U_13[i] + care_EC1S2J1U_13[i] + sch_EC1S2J1U_13[i] + jus_EC1S2J1U_13[i] + cl_EC1S2J1U_13[i]
+deriv(EC2S2J1U_13[]) <- age_EC2S2J1U_13[i] + pov_EC2S2J1U_13[i] + care_EC2S2J1U_13[i] + sch_EC2S2J1U_13[i] + jus_EC2S2J1U_13[i] + cl_EC2S2J1U_13[i]
+deriv(EC3S2J1U_13[]) <- age_EC3S2J1U_13[i] + pov_EC3S2J1U_13[i] + care_EC3S2J1U_13[i] + sch_EC3S2J1U_13[i] + jus_EC3S2J1U_13[i] + cl_EC3S2J1U_13[i]
+deriv(EC4S2J1U_13[]) <- age_EC4S2J1U_13[i] + pov_EC4S2J1U_13[i] + care_EC4S2J1U_13[i] + sch_EC4S2J1U_13[i] + jus_EC4S2J1U_13[i] + cl_EC4S2J1U_13[i]
+
+deriv(EC1S2J1U_14[]) <- age_EC1S2J1U_14[i] + pov_EC1S2J1U_14[i] + care_EC1S2J1U_14[i] + sch_EC1S2J1U_14[i] + jus_EC1S2J1U_14[i] + cl_EC1S2J1U_14[i]
+deriv(EC2S2J1U_14[]) <- age_EC2S2J1U_14[i] + pov_EC2S2J1U_14[i] + care_EC2S2J1U_14[i] + sch_EC2S2J1U_14[i] + jus_EC2S2J1U_14[i] + cl_EC2S2J1U_14[i]
+deriv(EC3S2J1U_14[]) <- age_EC3S2J1U_14[i] + pov_EC3S2J1U_14[i] + care_EC3S2J1U_14[i] + sch_EC3S2J1U_14[i] + jus_EC3S2J1U_14[i] + cl_EC3S2J1U_14[i]
+deriv(EC4S2J1U_14[]) <- age_EC4S2J1U_14[i] + pov_EC4S2J1U_14[i] + care_EC4S2J1U_14[i] + sch_EC4S2J1U_14[i] + jus_EC4S2J1U_14[i] + cl_EC4S2J1U_14[i]
+
+deriv(EC1S2J1U_15[]) <- age_EC1S2J1U_15[i] + pov_EC1S2J1U_15[i] + care_EC1S2J1U_15[i] + sch_EC1S2J1U_15[i] + jus_EC1S2J1U_15[i] + cl_EC1S2J1U_15[i]
+deriv(EC2S2J1U_15[]) <- age_EC2S2J1U_15[i] + pov_EC2S2J1U_15[i] + care_EC2S2J1U_15[i] + sch_EC2S2J1U_15[i] + jus_EC2S2J1U_15[i] + cl_EC2S2J1U_15[i]
+deriv(EC3S2J1U_15[]) <- age_EC3S2J1U_15[i] + pov_EC3S2J1U_15[i] + care_EC3S2J1U_15[i] + sch_EC3S2J1U_15[i] + jus_EC3S2J1U_15[i] + cl_EC3S2J1U_15[i]
+deriv(EC4S2J1U_15[]) <- age_EC4S2J1U_15[i] + pov_EC4S2J1U_15[i] + care_EC4S2J1U_15[i] + sch_EC4S2J1U_15[i] + jus_EC4S2J1U_15[i] + cl_EC4S2J1U_15[i]
+
+deriv(EC1S2J1U_16[]) <- age_EC1S2J1U_16[i] + pov_EC1S2J1U_16[i] + care_EC1S2J1U_16[i] + sch_EC1S2J1U_16[i] + jus_EC1S2J1U_16[i] + cl_EC1S2J1U_16[i]
+deriv(EC2S2J1U_16[]) <- age_EC2S2J1U_16[i] + pov_EC2S2J1U_16[i] + care_EC2S2J1U_16[i] + sch_EC2S2J1U_16[i] + jus_EC2S2J1U_16[i] + cl_EC2S2J1U_16[i]
+deriv(EC3S2J1U_16[]) <- age_EC3S2J1U_16[i] + pov_EC3S2J1U_16[i] + care_EC3S2J1U_16[i] + sch_EC3S2J1U_16[i] + jus_EC3S2J1U_16[i] + cl_EC3S2J1U_16[i]
+deriv(EC4S2J1U_16[]) <- age_EC4S2J1U_16[i] + pov_EC4S2J1U_16[i] + care_EC4S2J1U_16[i] + sch_EC4S2J1U_16[i] + jus_EC4S2J1U_16[i] + cl_EC4S2J1U_16[i]
+
+deriv(EC1S2J1U_17[]) <- age_EC1S2J1U_17[i] + pov_EC1S2J1U_17[i] + care_EC1S2J1U_17[i] + sch_EC1S2J1U_17[i] + jus_EC1S2J1U_17[i] + cl_EC1S2J1U_17[i]
+deriv(EC2S2J1U_17[]) <- age_EC2S2J1U_17[i] + pov_EC2S2J1U_17[i] + care_EC2S2J1U_17[i] + sch_EC2S2J1U_17[i] + jus_EC2S2J1U_17[i] + cl_EC2S2J1U_17[i]
+deriv(EC3S2J1U_17[]) <- age_EC3S2J1U_17[i] + pov_EC3S2J1U_17[i] + care_EC3S2J1U_17[i] + sch_EC3S2J1U_17[i] + jus_EC3S2J1U_17[i] + cl_EC3S2J1U_17[i]
+deriv(EC4S2J1U_17[]) <- age_EC4S2J1U_17[i] + pov_EC4S2J1U_17[i] + care_EC4S2J1U_17[i] + sch_EC4S2J1U_17[i] + jus_EC4S2J1U_17[i] + cl_EC4S2J1U_17[i]
+
+
+
+deriv(EC1S1J2U_10[]) <- age_EC1S1J2U_10[i] + pov_EC1S1J2U_10[i] + care_EC1S1J2U_10[i] + sch_EC1S1J2U_10[i] + jus_EC1S1J2U_10[i] + cl_EC1S1J2U_10[i]
+deriv(EC2S1J2U_10[]) <- age_EC2S1J2U_10[i] + pov_EC2S1J2U_10[i] + care_EC2S1J2U_10[i] + sch_EC2S1J2U_10[i] + jus_EC2S1J2U_10[i] + cl_EC2S1J2U_10[i]
+deriv(EC3S1J2U_10[]) <- age_EC3S1J2U_10[i] + pov_EC3S1J2U_10[i] + care_EC3S1J2U_10[i] + sch_EC3S1J2U_10[i] + jus_EC3S1J2U_10[i] + cl_EC3S1J2U_10[i]
+deriv(EC4S1J2U_10[]) <- age_EC4S1J2U_10[i] + pov_EC4S1J2U_10[i] + care_EC4S1J2U_10[i] + sch_EC4S1J2U_10[i] + jus_EC4S1J2U_10[i] + cl_EC4S1J2U_10[i]
+
+deriv(EC1S1J2U_11[]) <- age_EC1S1J2U_11[i] + pov_EC1S1J2U_11[i] + care_EC1S1J2U_11[i] + sch_EC1S1J2U_11[i] + jus_EC1S1J2U_11[i] + cl_EC1S1J2U_11[i]
+deriv(EC2S1J2U_11[]) <- age_EC2S1J2U_11[i] + pov_EC2S1J2U_11[i] + care_EC2S1J2U_11[i] + sch_EC2S1J2U_11[i] + jus_EC2S1J2U_11[i] + cl_EC2S1J2U_11[i]
+deriv(EC3S1J2U_11[]) <- age_EC3S1J2U_11[i] + pov_EC3S1J2U_11[i] + care_EC3S1J2U_11[i] + sch_EC3S1J2U_11[i] + jus_EC3S1J2U_11[i] + cl_EC3S1J2U_11[i]
+deriv(EC4S1J2U_11[]) <- age_EC4S1J2U_11[i] + pov_EC4S1J2U_11[i] + care_EC4S1J2U_11[i] + sch_EC4S1J2U_11[i] + jus_EC4S1J2U_11[i] + cl_EC4S1J2U_11[i]
+
+deriv(EC1S1J2U_12[]) <- age_EC1S1J2U_12[i] + pov_EC1S1J2U_12[i] + care_EC1S1J2U_12[i] + sch_EC1S1J2U_12[i] + jus_EC1S1J2U_12[i] + cl_EC1S1J2U_12[i]
+deriv(EC2S1J2U_12[]) <- age_EC2S1J2U_12[i] + pov_EC2S1J2U_12[i] + care_EC2S1J2U_12[i] + sch_EC2S1J2U_12[i] + jus_EC2S1J2U_12[i] + cl_EC2S1J2U_12[i]
+deriv(EC3S1J2U_12[]) <- age_EC3S1J2U_12[i] + pov_EC3S1J2U_12[i] + care_EC3S1J2U_12[i] + sch_EC3S1J2U_12[i] + jus_EC3S1J2U_12[i] + cl_EC3S1J2U_12[i]
+deriv(EC4S1J2U_12[]) <- age_EC4S1J2U_12[i] + pov_EC4S1J2U_12[i] + care_EC4S1J2U_12[i] + sch_EC4S1J2U_12[i] + jus_EC4S1J2U_12[i] + cl_EC4S1J2U_12[i]
+
+deriv(EC1S1J2U_13[]) <- age_EC1S1J2U_13[i] + pov_EC1S1J2U_13[i] + care_EC1S1J2U_13[i] + sch_EC1S1J2U_13[i] + jus_EC1S1J2U_13[i] + cl_EC1S1J2U_13[i]
+deriv(EC2S1J2U_13[]) <- age_EC2S1J2U_13[i] + pov_EC2S1J2U_13[i] + care_EC2S1J2U_13[i] + sch_EC2S1J2U_13[i] + jus_EC2S1J2U_13[i] + cl_EC2S1J2U_13[i]
+deriv(EC3S1J2U_13[]) <- age_EC3S1J2U_13[i] + pov_EC3S1J2U_13[i] + care_EC3S1J2U_13[i] + sch_EC3S1J2U_13[i] + jus_EC3S1J2U_13[i] + cl_EC3S1J2U_13[i]
+deriv(EC4S1J2U_13[]) <- age_EC4S1J2U_13[i] + pov_EC4S1J2U_13[i] + care_EC4S1J2U_13[i] + sch_EC4S1J2U_13[i] + jus_EC4S1J2U_13[i] + cl_EC4S1J2U_13[i]
+
+deriv(EC1S1J2U_14[]) <- age_EC1S1J2U_14[i] + pov_EC1S1J2U_14[i] + care_EC1S1J2U_14[i] + sch_EC1S1J2U_14[i] + jus_EC1S1J2U_14[i] + cl_EC1S1J2U_14[i]
+deriv(EC2S1J2U_14[]) <- age_EC2S1J2U_14[i] + pov_EC2S1J2U_14[i] + care_EC2S1J2U_14[i] + sch_EC2S1J2U_14[i] + jus_EC2S1J2U_14[i] + cl_EC2S1J2U_14[i]
+deriv(EC3S1J2U_14[]) <- age_EC3S1J2U_14[i] + pov_EC3S1J2U_14[i] + care_EC3S1J2U_14[i] + sch_EC3S1J2U_14[i] + jus_EC3S1J2U_14[i] + cl_EC3S1J2U_14[i]
+deriv(EC4S1J2U_14[]) <- age_EC4S1J2U_14[i] + pov_EC4S1J2U_14[i] + care_EC4S1J2U_14[i] + sch_EC4S1J2U_14[i] + jus_EC4S1J2U_14[i] + cl_EC4S1J2U_14[i]
+
+deriv(EC1S1J2U_15[]) <- age_EC1S1J2U_15[i] + pov_EC1S1J2U_15[i] + care_EC1S1J2U_15[i] + sch_EC1S1J2U_15[i] + jus_EC1S1J2U_15[i] + cl_EC1S1J2U_15[i]
+deriv(EC2S1J2U_15[]) <- age_EC2S1J2U_15[i] + pov_EC2S1J2U_15[i] + care_EC2S1J2U_15[i] + sch_EC2S1J2U_15[i] + jus_EC2S1J2U_15[i] + cl_EC2S1J2U_15[i]
+deriv(EC3S1J2U_15[]) <- age_EC3S1J2U_15[i] + pov_EC3S1J2U_15[i] + care_EC3S1J2U_15[i] + sch_EC3S1J2U_15[i] + jus_EC3S1J2U_15[i] + cl_EC3S1J2U_15[i]
+deriv(EC4S1J2U_15[]) <- age_EC4S1J2U_15[i] + pov_EC4S1J2U_15[i] + care_EC4S1J2U_15[i] + sch_EC4S1J2U_15[i] + jus_EC4S1J2U_15[i] + cl_EC4S1J2U_15[i]
+
+deriv(EC1S1J2U_16[]) <- age_EC1S1J2U_16[i] + pov_EC1S1J2U_16[i] + care_EC1S1J2U_16[i] + sch_EC1S1J2U_16[i] + jus_EC1S1J2U_16[i] + cl_EC1S1J2U_16[i]
+deriv(EC2S1J2U_16[]) <- age_EC2S1J2U_16[i] + pov_EC2S1J2U_16[i] + care_EC2S1J2U_16[i] + sch_EC2S1J2U_16[i] + jus_EC2S1J2U_16[i] + cl_EC2S1J2U_16[i]
+deriv(EC3S1J2U_16[]) <- age_EC3S1J2U_16[i] + pov_EC3S1J2U_16[i] + care_EC3S1J2U_16[i] + sch_EC3S1J2U_16[i] + jus_EC3S1J2U_16[i] + cl_EC3S1J2U_16[i]
+deriv(EC4S1J2U_16[]) <- age_EC4S1J2U_16[i] + pov_EC4S1J2U_16[i] + care_EC4S1J2U_16[i] + sch_EC4S1J2U_16[i] + jus_EC4S1J2U_16[i] + cl_EC4S1J2U_16[i]
+
+deriv(EC1S1J2U_17[]) <- age_EC1S1J2U_17[i] + pov_EC1S1J2U_17[i] + care_EC1S1J2U_17[i] + sch_EC1S1J2U_17[i] + jus_EC1S1J2U_17[i] + cl_EC1S1J2U_17[i]
+deriv(EC2S1J2U_17[]) <- age_EC2S1J2U_17[i] + pov_EC2S1J2U_17[i] + care_EC2S1J2U_17[i] + sch_EC2S1J2U_17[i] + jus_EC2S1J2U_17[i] + cl_EC2S1J2U_17[i]
+deriv(EC3S1J2U_17[]) <- age_EC3S1J2U_17[i] + pov_EC3S1J2U_17[i] + care_EC3S1J2U_17[i] + sch_EC3S1J2U_17[i] + jus_EC3S1J2U_17[i] + cl_EC3S1J2U_17[i]
+deriv(EC4S1J2U_17[]) <- age_EC4S1J2U_17[i] + pov_EC4S1J2U_17[i] + care_EC4S1J2U_17[i] + sch_EC4S1J2U_17[i] + jus_EC4S1J2U_17[i] + cl_EC4S1J2U_17[i]
+
+
+
+deriv(EC1S2J2U_10[]) <- age_EC1S2J2U_10[i] + pov_EC1S2J2U_10[i] + care_EC1S2J2U_10[i] + sch_EC1S2J2U_10[i] + jus_EC1S2J2U_10[i] + cl_EC1S2J2U_10[i]
+deriv(EC2S2J2U_10[]) <- age_EC2S2J2U_10[i] + pov_EC2S2J2U_10[i] + care_EC2S2J2U_10[i] + sch_EC2S2J2U_10[i] + jus_EC2S2J2U_10[i] + cl_EC2S2J2U_10[i]
+deriv(EC3S2J2U_10[]) <- age_EC3S2J2U_10[i] + pov_EC3S2J2U_10[i] + care_EC3S2J2U_10[i] + sch_EC3S2J2U_10[i] + jus_EC3S2J2U_10[i] + cl_EC3S2J2U_10[i]
+deriv(EC4S2J2U_10[]) <- age_EC4S2J2U_10[i] + pov_EC4S2J2U_10[i] + care_EC4S2J2U_10[i] + sch_EC4S2J2U_10[i] + jus_EC4S2J2U_10[i] + cl_EC4S2J2U_10[i]
+
+deriv(EC1S2J2U_11[]) <- age_EC1S2J2U_11[i] + pov_EC1S2J2U_11[i] + care_EC1S2J2U_11[i] + sch_EC1S2J2U_11[i] + jus_EC1S2J2U_11[i] + cl_EC1S2J2U_11[i]
+deriv(EC2S2J2U_11[]) <- age_EC2S2J2U_11[i] + pov_EC2S2J2U_11[i] + care_EC2S2J2U_11[i] + sch_EC2S2J2U_11[i] + jus_EC2S2J2U_11[i] + cl_EC2S2J2U_11[i]
+deriv(EC3S2J2U_11[]) <- age_EC3S2J2U_11[i] + pov_EC3S2J2U_11[i] + care_EC3S2J2U_11[i] + sch_EC3S2J2U_11[i] + jus_EC3S2J2U_11[i] + cl_EC3S2J2U_11[i]
+deriv(EC4S2J2U_11[]) <- age_EC4S2J2U_11[i] + pov_EC4S2J2U_11[i] + care_EC4S2J2U_11[i] + sch_EC4S2J2U_11[i] + jus_EC4S2J2U_11[i] + cl_EC4S2J2U_11[i]
+
+deriv(EC1S2J2U_12[]) <- age_EC1S2J2U_12[i] + pov_EC1S2J2U_12[i] + care_EC1S2J2U_12[i] + sch_EC1S2J2U_12[i] + jus_EC1S2J2U_12[i] + cl_EC1S2J2U_12[i]
+deriv(EC2S2J2U_12[]) <- age_EC2S2J2U_12[i] + pov_EC2S2J2U_12[i] + care_EC2S2J2U_12[i] + sch_EC2S2J2U_12[i] + jus_EC2S2J2U_12[i] + cl_EC2S2J2U_12[i]
+deriv(EC3S2J2U_12[]) <- age_EC3S2J2U_12[i] + pov_EC3S2J2U_12[i] + care_EC3S2J2U_12[i] + sch_EC3S2J2U_12[i] + jus_EC3S2J2U_12[i] + cl_EC3S2J2U_12[i]
+deriv(EC4S2J2U_12[]) <- age_EC4S2J2U_12[i] + pov_EC4S2J2U_12[i] + care_EC4S2J2U_12[i] + sch_EC4S2J2U_12[i] + jus_EC4S2J2U_12[i] + cl_EC4S2J2U_12[i]
+
+deriv(EC1S2J2U_13[]) <- age_EC1S2J2U_13[i] + pov_EC1S2J2U_13[i] + care_EC1S2J2U_13[i] + sch_EC1S2J2U_13[i] + jus_EC1S2J2U_13[i] + cl_EC1S2J2U_13[i]
+deriv(EC2S2J2U_13[]) <- age_EC2S2J2U_13[i] + pov_EC2S2J2U_13[i] + care_EC2S2J2U_13[i] + sch_EC2S2J2U_13[i] + jus_EC2S2J2U_13[i] + cl_EC2S2J2U_13[i]
+deriv(EC3S2J2U_13[]) <- age_EC3S2J2U_13[i] + pov_EC3S2J2U_13[i] + care_EC3S2J2U_13[i] + sch_EC3S2J2U_13[i] + jus_EC3S2J2U_13[i] + cl_EC3S2J2U_13[i]
+deriv(EC4S2J2U_13[]) <- age_EC4S2J2U_13[i] + pov_EC4S2J2U_13[i] + care_EC4S2J2U_13[i] + sch_EC4S2J2U_13[i] + jus_EC4S2J2U_13[i] + cl_EC4S2J2U_13[i]
+
+deriv(EC1S2J2U_14[]) <- age_EC1S2J2U_14[i] + pov_EC1S2J2U_14[i] + care_EC1S2J2U_14[i] + sch_EC1S2J2U_14[i] + jus_EC1S2J2U_14[i] + cl_EC1S2J2U_14[i]
+deriv(EC2S2J2U_14[]) <- age_EC2S2J2U_14[i] + pov_EC2S2J2U_14[i] + care_EC2S2J2U_14[i] + sch_EC2S2J2U_14[i] + jus_EC2S2J2U_14[i] + cl_EC2S2J2U_14[i]
+deriv(EC3S2J2U_14[]) <- age_EC3S2J2U_14[i] + pov_EC3S2J2U_14[i] + care_EC3S2J2U_14[i] + sch_EC3S2J2U_14[i] + jus_EC3S2J2U_14[i] + cl_EC3S2J2U_14[i]
+deriv(EC4S2J2U_14[]) <- age_EC4S2J2U_14[i] + pov_EC4S2J2U_14[i] + care_EC4S2J2U_14[i] + sch_EC4S2J2U_14[i] + jus_EC4S2J2U_14[i] + cl_EC4S2J2U_14[i]
+
+deriv(EC1S2J2U_15[]) <- age_EC1S2J2U_15[i] + pov_EC1S2J2U_15[i] + care_EC1S2J2U_15[i] + sch_EC1S2J2U_15[i] + jus_EC1S2J2U_15[i] + cl_EC1S2J2U_15[i]
+deriv(EC2S2J2U_15[]) <- age_EC2S2J2U_15[i] + pov_EC2S2J2U_15[i] + care_EC2S2J2U_15[i] + sch_EC2S2J2U_15[i] + jus_EC2S2J2U_15[i] + cl_EC2S2J2U_15[i]
+deriv(EC3S2J2U_15[]) <- age_EC3S2J2U_15[i] + pov_EC3S2J2U_15[i] + care_EC3S2J2U_15[i] + sch_EC3S2J2U_15[i] + jus_EC3S2J2U_15[i] + cl_EC3S2J2U_15[i]
+deriv(EC4S2J2U_15[]) <- age_EC4S2J2U_15[i] + pov_EC4S2J2U_15[i] + care_EC4S2J2U_15[i] + sch_EC4S2J2U_15[i] + jus_EC4S2J2U_15[i] + cl_EC4S2J2U_15[i]
+
+deriv(EC1S2J2U_16[]) <- age_EC1S2J2U_16[i] + pov_EC1S2J2U_16[i] + care_EC1S2J2U_16[i] + sch_EC1S2J2U_16[i] + jus_EC1S2J2U_16[i] + cl_EC1S2J2U_16[i]
+deriv(EC2S2J2U_16[]) <- age_EC2S2J2U_16[i] + pov_EC2S2J2U_16[i] + care_EC2S2J2U_16[i] + sch_EC2S2J2U_16[i] + jus_EC2S2J2U_16[i] + cl_EC2S2J2U_16[i]
+deriv(EC3S2J2U_16[]) <- age_EC3S2J2U_16[i] + pov_EC3S2J2U_16[i] + care_EC3S2J2U_16[i] + sch_EC3S2J2U_16[i] + jus_EC3S2J2U_16[i] + cl_EC3S2J2U_16[i]
+deriv(EC4S2J2U_16[]) <- age_EC4S2J2U_16[i] + pov_EC4S2J2U_16[i] + care_EC4S2J2U_16[i] + sch_EC4S2J2U_16[i] + jus_EC4S2J2U_16[i] + cl_EC4S2J2U_16[i]
+
+deriv(EC1S2J2U_17[]) <- age_EC1S2J2U_17[i] + pov_EC1S2J2U_17[i] + care_EC1S2J2U_17[i] + sch_EC1S2J2U_17[i] + jus_EC1S2J2U_17[i] + cl_EC1S2J2U_17[i]
+deriv(EC2S2J2U_17[]) <- age_EC2S2J2U_17[i] + pov_EC2S2J2U_17[i] + care_EC2S2J2U_17[i] + sch_EC2S2J2U_17[i] + jus_EC2S2J2U_17[i] + cl_EC2S2J2U_17[i]
+deriv(EC3S2J2U_17[]) <- age_EC3S2J2U_17[i] + pov_EC3S2J2U_17[i] + care_EC3S2J2U_17[i] + sch_EC3S2J2U_17[i] + jus_EC3S2J2U_17[i] + cl_EC3S2J2U_17[i]
+deriv(EC4S2J2U_17[]) <- age_EC4S2J2U_17[i] + pov_EC4S2J2U_17[i] + care_EC4S2J2U_17[i] + sch_EC4S2J2U_17[i] + jus_EC4S2J2U_17[i] + cl_EC4S2J2U_17[i]
+
+
+
+deriv(EC1S1J3U_10[]) <- age_EC1S1J3U_10[i] + pov_EC1S1J3U_10[i] + care_EC1S1J3U_10[i] + sch_EC1S1J3U_10[i] + jus_EC1S1J3U_10[i] + cl_EC1S1J3U_10[i]
+deriv(EC2S1J3U_10[]) <- age_EC2S1J3U_10[i] + pov_EC2S1J3U_10[i] + care_EC2S1J3U_10[i] + sch_EC2S1J3U_10[i] + jus_EC2S1J3U_10[i] + cl_EC2S1J3U_10[i]
+deriv(EC3S1J3U_10[]) <- age_EC3S1J3U_10[i] + pov_EC3S1J3U_10[i] + care_EC3S1J3U_10[i] + sch_EC3S1J3U_10[i] + jus_EC3S1J3U_10[i] + cl_EC3S1J3U_10[i]
+deriv(EC4S1J3U_10[]) <- age_EC4S1J3U_10[i] + pov_EC4S1J3U_10[i] + care_EC4S1J3U_10[i] + sch_EC4S1J3U_10[i] + jus_EC4S1J3U_10[i] + cl_EC4S1J3U_10[i]
+
+deriv(EC1S1J3U_11[]) <- age_EC1S1J3U_11[i] + pov_EC1S1J3U_11[i] + care_EC1S1J3U_11[i] + sch_EC1S1J3U_11[i] + jus_EC1S1J3U_11[i] + cl_EC1S1J3U_11[i]
+deriv(EC2S1J3U_11[]) <- age_EC2S1J3U_11[i] + pov_EC2S1J3U_11[i] + care_EC2S1J3U_11[i] + sch_EC2S1J3U_11[i] + jus_EC2S1J3U_11[i] + cl_EC2S1J3U_11[i]
+deriv(EC3S1J3U_11[]) <- age_EC3S1J3U_11[i] + pov_EC3S1J3U_11[i] + care_EC3S1J3U_11[i] + sch_EC3S1J3U_11[i] + jus_EC3S1J3U_11[i] + cl_EC3S1J3U_11[i]
+deriv(EC4S1J3U_11[]) <- age_EC4S1J3U_11[i] + pov_EC4S1J3U_11[i] + care_EC4S1J3U_11[i] + sch_EC4S1J3U_11[i] + jus_EC4S1J3U_11[i] + cl_EC4S1J3U_11[i]
+
+deriv(EC1S1J3U_12[]) <- age_EC1S1J3U_12[i] + pov_EC1S1J3U_12[i] + care_EC1S1J3U_12[i] + sch_EC1S1J3U_12[i] + jus_EC1S1J3U_12[i] + cl_EC1S1J3U_12[i]
+deriv(EC2S1J3U_12[]) <- age_EC2S1J3U_12[i] + pov_EC2S1J3U_12[i] + care_EC2S1J3U_12[i] + sch_EC2S1J3U_12[i] + jus_EC2S1J3U_12[i] + cl_EC2S1J3U_12[i]
+deriv(EC3S1J3U_12[]) <- age_EC3S1J3U_12[i] + pov_EC3S1J3U_12[i] + care_EC3S1J3U_12[i] + sch_EC3S1J3U_12[i] + jus_EC3S1J3U_12[i] + cl_EC3S1J3U_12[i]
+deriv(EC4S1J3U_12[]) <- age_EC4S1J3U_12[i] + pov_EC4S1J3U_12[i] + care_EC4S1J3U_12[i] + sch_EC4S1J3U_12[i] + jus_EC4S1J3U_12[i] + cl_EC4S1J3U_12[i]
+
+deriv(EC1S1J3U_13[]) <- age_EC1S1J3U_13[i] + pov_EC1S1J3U_13[i] + care_EC1S1J3U_13[i] + sch_EC1S1J3U_13[i] + jus_EC1S1J3U_13[i] + cl_EC1S1J3U_13[i]
+deriv(EC2S1J3U_13[]) <- age_EC2S1J3U_13[i] + pov_EC2S1J3U_13[i] + care_EC2S1J3U_13[i] + sch_EC2S1J3U_13[i] + jus_EC2S1J3U_13[i] + cl_EC2S1J3U_13[i]
+deriv(EC3S1J3U_13[]) <- age_EC3S1J3U_13[i] + pov_EC3S1J3U_13[i] + care_EC3S1J3U_13[i] + sch_EC3S1J3U_13[i] + jus_EC3S1J3U_13[i] + cl_EC3S1J3U_13[i]
+deriv(EC4S1J3U_13[]) <- age_EC4S1J3U_13[i] + pov_EC4S1J3U_13[i] + care_EC4S1J3U_13[i] + sch_EC4S1J3U_13[i] + jus_EC4S1J3U_13[i] + cl_EC4S1J3U_13[i]
+
+deriv(EC1S1J3U_14[]) <- age_EC1S1J3U_14[i] + pov_EC1S1J3U_14[i] + care_EC1S1J3U_14[i] + sch_EC1S1J3U_14[i] + jus_EC1S1J3U_14[i] + cl_EC1S1J3U_14[i]
+deriv(EC2S1J3U_14[]) <- age_EC2S1J3U_14[i] + pov_EC2S1J3U_14[i] + care_EC2S1J3U_14[i] + sch_EC2S1J3U_14[i] + jus_EC2S1J3U_14[i] + cl_EC2S1J3U_14[i]
+deriv(EC3S1J3U_14[]) <- age_EC3S1J3U_14[i] + pov_EC3S1J3U_14[i] + care_EC3S1J3U_14[i] + sch_EC3S1J3U_14[i] + jus_EC3S1J3U_14[i] + cl_EC3S1J3U_14[i]
+deriv(EC4S1J3U_14[]) <- age_EC4S1J3U_14[i] + pov_EC4S1J3U_14[i] + care_EC4S1J3U_14[i] + sch_EC4S1J3U_14[i] + jus_EC4S1J3U_14[i] + cl_EC4S1J3U_14[i]
+
+deriv(EC1S1J3U_15[]) <- age_EC1S1J3U_15[i] + pov_EC1S1J3U_15[i] + care_EC1S1J3U_15[i] + sch_EC1S1J3U_15[i] + jus_EC1S1J3U_15[i] + cl_EC1S1J3U_15[i]
+deriv(EC2S1J3U_15[]) <- age_EC2S1J3U_15[i] + pov_EC2S1J3U_15[i] + care_EC2S1J3U_15[i] + sch_EC2S1J3U_15[i] + jus_EC2S1J3U_15[i] + cl_EC2S1J3U_15[i]
+deriv(EC3S1J3U_15[]) <- age_EC3S1J3U_15[i] + pov_EC3S1J3U_15[i] + care_EC3S1J3U_15[i] + sch_EC3S1J3U_15[i] + jus_EC3S1J3U_15[i] + cl_EC3S1J3U_15[i]
+deriv(EC4S1J3U_15[]) <- age_EC4S1J3U_15[i] + pov_EC4S1J3U_15[i] + care_EC4S1J3U_15[i] + sch_EC4S1J3U_15[i] + jus_EC4S1J3U_15[i] + cl_EC4S1J3U_15[i]
+
+deriv(EC1S1J3U_16[]) <- age_EC1S1J3U_16[i] + pov_EC1S1J3U_16[i] + care_EC1S1J3U_16[i] + sch_EC1S1J3U_16[i] + jus_EC1S1J3U_16[i] + cl_EC1S1J3U_16[i]
+deriv(EC2S1J3U_16[]) <- age_EC2S1J3U_16[i] + pov_EC2S1J3U_16[i] + care_EC2S1J3U_16[i] + sch_EC2S1J3U_16[i] + jus_EC2S1J3U_16[i] + cl_EC2S1J3U_16[i]
+deriv(EC3S1J3U_16[]) <- age_EC3S1J3U_16[i] + pov_EC3S1J3U_16[i] + care_EC3S1J3U_16[i] + sch_EC3S1J3U_16[i] + jus_EC3S1J3U_16[i] + cl_EC3S1J3U_16[i]
+deriv(EC4S1J3U_16[]) <- age_EC4S1J3U_16[i] + pov_EC4S1J3U_16[i] + care_EC4S1J3U_16[i] + sch_EC4S1J3U_16[i] + jus_EC4S1J3U_16[i] + cl_EC4S1J3U_16[i]
+
+deriv(EC1S1J3U_17[]) <- age_EC1S1J3U_17[i] + pov_EC1S1J3U_17[i] + care_EC1S1J3U_17[i] + sch_EC1S1J3U_17[i] + jus_EC1S1J3U_17[i] + cl_EC1S1J3U_17[i]
+deriv(EC2S1J3U_17[]) <- age_EC2S1J3U_17[i] + pov_EC2S1J3U_17[i] + care_EC2S1J3U_17[i] + sch_EC2S1J3U_17[i] + jus_EC2S1J3U_17[i] + cl_EC2S1J3U_17[i]
+deriv(EC3S1J3U_17[]) <- age_EC3S1J3U_17[i] + pov_EC3S1J3U_17[i] + care_EC3S1J3U_17[i] + sch_EC3S1J3U_17[i] + jus_EC3S1J3U_17[i] + cl_EC3S1J3U_17[i]
+deriv(EC4S1J3U_17[]) <- age_EC4S1J3U_17[i] + pov_EC4S1J3U_17[i] + care_EC4S1J3U_17[i] + sch_EC4S1J3U_17[i] + jus_EC4S1J3U_17[i] + cl_EC4S1J3U_17[i]
+
+
+
+deriv(EC1S2J3U_10[]) <- age_EC1S2J3U_10[i] + pov_EC1S2J3U_10[i] + care_EC1S2J3U_10[i] + sch_EC1S2J3U_10[i] + jus_EC1S2J3U_10[i] + cl_EC1S2J3U_10[i]
+deriv(EC2S2J3U_10[]) <- age_EC2S2J3U_10[i] + pov_EC2S2J3U_10[i] + care_EC2S2J3U_10[i] + sch_EC2S2J3U_10[i] + jus_EC2S2J3U_10[i] + cl_EC2S2J3U_10[i]
+deriv(EC3S2J3U_10[]) <- age_EC3S2J3U_10[i] + pov_EC3S2J3U_10[i] + care_EC3S2J3U_10[i] + sch_EC3S2J3U_10[i] + jus_EC3S2J3U_10[i] + cl_EC3S2J3U_10[i]
+deriv(EC4S2J3U_10[]) <- age_EC4S2J3U_10[i] + pov_EC4S2J3U_10[i] + care_EC4S2J3U_10[i] + sch_EC4S2J3U_10[i] + jus_EC4S2J3U_10[i] + cl_EC4S2J3U_10[i]
+
+deriv(EC1S2J3U_11[]) <- age_EC1S2J3U_11[i] + pov_EC1S2J3U_11[i] + care_EC1S2J3U_11[i] + sch_EC1S2J3U_11[i] + jus_EC1S2J3U_11[i] + cl_EC1S2J3U_11[i]
+deriv(EC2S2J3U_11[]) <- age_EC2S2J3U_11[i] + pov_EC2S2J3U_11[i] + care_EC2S2J3U_11[i] + sch_EC2S2J3U_11[i] + jus_EC2S2J3U_11[i] + cl_EC2S2J3U_11[i]
+deriv(EC3S2J3U_11[]) <- age_EC3S2J3U_11[i] + pov_EC3S2J3U_11[i] + care_EC3S2J3U_11[i] + sch_EC3S2J3U_11[i] + jus_EC3S2J3U_11[i] + cl_EC3S2J3U_11[i]
+deriv(EC4S2J3U_11[]) <- age_EC4S2J3U_11[i] + pov_EC4S2J3U_11[i] + care_EC4S2J3U_11[i] + sch_EC4S2J3U_11[i] + jus_EC4S2J3U_11[i] + cl_EC4S2J3U_11[i]
+
+deriv(EC1S2J3U_12[]) <- age_EC1S2J3U_12[i] + pov_EC1S2J3U_12[i] + care_EC1S2J3U_12[i] + sch_EC1S2J3U_12[i] + jus_EC1S2J3U_12[i] + cl_EC1S2J3U_12[i]
+deriv(EC2S2J3U_12[]) <- age_EC2S2J3U_12[i] + pov_EC2S2J3U_12[i] + care_EC2S2J3U_12[i] + sch_EC2S2J3U_12[i] + jus_EC2S2J3U_12[i] + cl_EC2S2J3U_12[i]
+deriv(EC3S2J3U_12[]) <- age_EC3S2J3U_12[i] + pov_EC3S2J3U_12[i] + care_EC3S2J3U_12[i] + sch_EC3S2J3U_12[i] + jus_EC3S2J3U_12[i] + cl_EC3S2J3U_12[i]
+deriv(EC4S2J3U_12[]) <- age_EC4S2J3U_12[i] + pov_EC4S2J3U_12[i] + care_EC4S2J3U_12[i] + sch_EC4S2J3U_12[i] + jus_EC4S2J3U_12[i] + cl_EC4S2J3U_12[i]
+
+deriv(EC1S2J3U_13[]) <- age_EC1S2J3U_13[i] + pov_EC1S2J3U_13[i] + care_EC1S2J3U_13[i] + sch_EC1S2J3U_13[i] + jus_EC1S2J3U_13[i] + cl_EC1S2J3U_13[i]
+deriv(EC2S2J3U_13[]) <- age_EC2S2J3U_13[i] + pov_EC2S2J3U_13[i] + care_EC2S2J3U_13[i] + sch_EC2S2J3U_13[i] + jus_EC2S2J3U_13[i] + cl_EC2S2J3U_13[i]
+deriv(EC3S2J3U_13[]) <- age_EC3S2J3U_13[i] + pov_EC3S2J3U_13[i] + care_EC3S2J3U_13[i] + sch_EC3S2J3U_13[i] + jus_EC3S2J3U_13[i] + cl_EC3S2J3U_13[i]
+deriv(EC4S2J3U_13[]) <- age_EC4S2J3U_13[i] + pov_EC4S2J3U_13[i] + care_EC4S2J3U_13[i] + sch_EC4S2J3U_13[i] + jus_EC4S2J3U_13[i] + cl_EC4S2J3U_13[i]
+
+deriv(EC1S2J3U_14[]) <- age_EC1S2J3U_14[i] + pov_EC1S2J3U_14[i] + care_EC1S2J3U_14[i] + sch_EC1S2J3U_14[i] + jus_EC1S2J3U_14[i] + cl_EC1S2J3U_14[i]
+deriv(EC2S2J3U_14[]) <- age_EC2S2J3U_14[i] + pov_EC2S2J3U_14[i] + care_EC2S2J3U_14[i] + sch_EC2S2J3U_14[i] + jus_EC2S2J3U_14[i] + cl_EC2S2J3U_14[i]
+deriv(EC3S2J3U_14[]) <- age_EC3S2J3U_14[i] + pov_EC3S2J3U_14[i] + care_EC3S2J3U_14[i] + sch_EC3S2J3U_14[i] + jus_EC3S2J3U_14[i] + cl_EC3S2J3U_14[i]
+deriv(EC4S2J3U_14[]) <- age_EC4S2J3U_14[i] + pov_EC4S2J3U_14[i] + care_EC4S2J3U_14[i] + sch_EC4S2J3U_14[i] + jus_EC4S2J3U_14[i] + cl_EC4S2J3U_14[i]
+
+deriv(EC1S2J3U_15[]) <- age_EC1S2J3U_15[i] + pov_EC1S2J3U_15[i] + care_EC1S2J3U_15[i] + sch_EC1S2J3U_15[i] + jus_EC1S2J3U_15[i] + cl_EC1S2J3U_15[i]
+deriv(EC2S2J3U_15[]) <- age_EC2S2J3U_15[i] + pov_EC2S2J3U_15[i] + care_EC2S2J3U_15[i] + sch_EC2S2J3U_15[i] + jus_EC2S2J3U_15[i] + cl_EC2S2J3U_15[i]
+deriv(EC3S2J3U_15[]) <- age_EC3S2J3U_15[i] + pov_EC3S2J3U_15[i] + care_EC3S2J3U_15[i] + sch_EC3S2J3U_15[i] + jus_EC3S2J3U_15[i] + cl_EC3S2J3U_15[i]
+deriv(EC4S2J3U_15[]) <- age_EC4S2J3U_15[i] + pov_EC4S2J3U_15[i] + care_EC4S2J3U_15[i] + sch_EC4S2J3U_15[i] + jus_EC4S2J3U_15[i] + cl_EC4S2J3U_15[i]
+
+deriv(EC1S2J3U_16[]) <- age_EC1S2J3U_16[i] + pov_EC1S2J3U_16[i] + care_EC1S2J3U_16[i] + sch_EC1S2J3U_16[i] + jus_EC1S2J3U_16[i] + cl_EC1S2J3U_16[i]
+deriv(EC2S2J3U_16[]) <- age_EC2S2J3U_16[i] + pov_EC2S2J3U_16[i] + care_EC2S2J3U_16[i] + sch_EC2S2J3U_16[i] + jus_EC2S2J3U_16[i] + cl_EC2S2J3U_16[i]
+deriv(EC3S2J3U_16[]) <- age_EC3S2J3U_16[i] + pov_EC3S2J3U_16[i] + care_EC3S2J3U_16[i] + sch_EC3S2J3U_16[i] + jus_EC3S2J3U_16[i] + cl_EC3S2J3U_16[i]
+deriv(EC4S2J3U_16[]) <- age_EC4S2J3U_16[i] + pov_EC4S2J3U_16[i] + care_EC4S2J3U_16[i] + sch_EC4S2J3U_16[i] + jus_EC4S2J3U_16[i] + cl_EC4S2J3U_16[i]
+
+deriv(EC1S2J3U_17[]) <- age_EC1S2J3U_17[i] + pov_EC1S2J3U_17[i] + care_EC1S2J3U_17[i] + sch_EC1S2J3U_17[i] + jus_EC1S2J3U_17[i] + cl_EC1S2J3U_17[i]
+deriv(EC2S2J3U_17[]) <- age_EC2S2J3U_17[i] + pov_EC2S2J3U_17[i] + care_EC2S2J3U_17[i] + sch_EC2S2J3U_17[i] + jus_EC2S2J3U_17[i] + cl_EC2S2J3U_17[i]
+deriv(EC3S2J3U_17[]) <- age_EC3S2J3U_17[i] + pov_EC3S2J3U_17[i] + care_EC3S2J3U_17[i] + sch_EC3S2J3U_17[i] + jus_EC3S2J3U_17[i] + cl_EC3S2J3U_17[i]
+deriv(EC4S2J3U_17[]) <- age_EC4S2J3U_17[i] + pov_EC4S2J3U_17[i] + care_EC4S2J3U_17[i] + sch_EC4S2J3U_17[i] + jus_EC4S2J3U_17[i] + cl_EC4S2J3U_17[i]
+
+
+
+deriv(EC1S1J4U_10[]) <- age_EC1S1J4U_10[i] + pov_EC1S1J4U_10[i] + jus_EC1S1J4U_10[i] + cl_EC1S1J4U_10[i]
+deriv(EC2S1J4U_10[]) <- age_EC2S1J4U_10[i] + pov_EC2S1J4U_10[i] + jus_EC2S1J4U_10[i] + cl_EC2S1J4U_10[i]
+deriv(EC3S1J4U_10[]) <- age_EC3S1J4U_10[i] + pov_EC3S1J4U_10[i] + jus_EC3S1J4U_10[i] + cl_EC3S1J4U_10[i]
+deriv(EC4S1J4U_10[]) <- age_EC4S1J4U_10[i] + pov_EC4S1J4U_10[i] + jus_EC4S1J4U_10[i] + cl_EC4S1J4U_10[i]
+
+deriv(EC1S1J4U_11[]) <- age_EC1S1J4U_11[i] + pov_EC1S1J4U_11[i] + jus_EC1S1J4U_11[i] + cl_EC1S1J4U_11[i]
+deriv(EC2S1J4U_11[]) <- age_EC2S1J4U_11[i] + pov_EC2S1J4U_11[i] + jus_EC2S1J4U_11[i] + cl_EC2S1J4U_11[i]
+deriv(EC3S1J4U_11[]) <- age_EC3S1J4U_11[i] + pov_EC3S1J4U_11[i] + jus_EC3S1J4U_11[i] + cl_EC3S1J4U_11[i]
+deriv(EC4S1J4U_11[]) <- age_EC4S1J4U_11[i] + pov_EC4S1J4U_11[i] + jus_EC4S1J4U_11[i] + cl_EC4S1J4U_11[i]
+
+deriv(EC1S1J4U_12[]) <- age_EC1S1J4U_12[i] + pov_EC1S1J4U_12[i] + jus_EC1S1J4U_12[i] + cl_EC1S1J4U_12[i]
+deriv(EC2S1J4U_12[]) <- age_EC2S1J4U_12[i] + pov_EC2S1J4U_12[i] + jus_EC2S1J4U_12[i] + cl_EC2S1J4U_12[i]
+deriv(EC3S1J4U_12[]) <- age_EC3S1J4U_12[i] + pov_EC3S1J4U_12[i] + jus_EC3S1J4U_12[i] + cl_EC3S1J4U_12[i]
+deriv(EC4S1J4U_12[]) <- age_EC4S1J4U_12[i] + pov_EC4S1J4U_12[i] + jus_EC4S1J4U_12[i] + cl_EC4S1J4U_12[i]
+
+deriv(EC1S1J4U_13[]) <- age_EC1S1J4U_13[i] + pov_EC1S1J4U_13[i] + jus_EC1S1J4U_13[i] + cl_EC1S1J4U_13[i]
+deriv(EC2S1J4U_13[]) <- age_EC2S1J4U_13[i] + pov_EC2S1J4U_13[i] + jus_EC2S1J4U_13[i] + cl_EC2S1J4U_13[i]
+deriv(EC3S1J4U_13[]) <- age_EC3S1J4U_13[i] + pov_EC3S1J4U_13[i] + jus_EC3S1J4U_13[i] + cl_EC3S1J4U_13[i]
+deriv(EC4S1J4U_13[]) <- age_EC4S1J4U_13[i] + pov_EC4S1J4U_13[i] + jus_EC4S1J4U_13[i] + cl_EC4S1J4U_13[i]
+
+deriv(EC1S1J4U_14[]) <- age_EC1S1J4U_14[i] + pov_EC1S1J4U_14[i] + jus_EC1S1J4U_14[i] + cl_EC1S1J4U_14[i]
+deriv(EC2S1J4U_14[]) <- age_EC2S1J4U_14[i] + pov_EC2S1J4U_14[i] + jus_EC2S1J4U_14[i] + cl_EC2S1J4U_14[i]
+deriv(EC3S1J4U_14[]) <- age_EC3S1J4U_14[i] + pov_EC3S1J4U_14[i] + jus_EC3S1J4U_14[i] + cl_EC3S1J4U_14[i]
+deriv(EC4S1J4U_14[]) <- age_EC4S1J4U_14[i] + pov_EC4S1J4U_14[i] + jus_EC4S1J4U_14[i] + cl_EC4S1J4U_14[i]
+
+deriv(EC1S1J4U_15[]) <- age_EC1S1J4U_15[i] + pov_EC1S1J4U_15[i] + jus_EC1S1J4U_15[i] + cl_EC1S1J4U_15[i]
+deriv(EC2S1J4U_15[]) <- age_EC2S1J4U_15[i] + pov_EC2S1J4U_15[i] + jus_EC2S1J4U_15[i] + cl_EC2S1J4U_15[i]
+deriv(EC3S1J4U_15[]) <- age_EC3S1J4U_15[i] + pov_EC3S1J4U_15[i] + jus_EC3S1J4U_15[i] + cl_EC3S1J4U_15[i]
+deriv(EC4S1J4U_15[]) <- age_EC4S1J4U_15[i] + pov_EC4S1J4U_15[i] + jus_EC4S1J4U_15[i] + cl_EC4S1J4U_15[i]
+
+deriv(EC1S1J4U_16[]) <- age_EC1S1J4U_16[i] + pov_EC1S1J4U_16[i] + jus_EC1S1J4U_16[i] + cl_EC1S1J4U_16[i]
+deriv(EC2S1J4U_16[]) <- age_EC2S1J4U_16[i] + pov_EC2S1J4U_16[i] + jus_EC2S1J4U_16[i] + cl_EC2S1J4U_16[i]
+deriv(EC3S1J4U_16[]) <- age_EC3S1J4U_16[i] + pov_EC3S1J4U_16[i] + jus_EC3S1J4U_16[i] + cl_EC3S1J4U_16[i]
+deriv(EC4S1J4U_16[]) <- age_EC4S1J4U_16[i] + pov_EC4S1J4U_16[i] + jus_EC4S1J4U_16[i] + cl_EC4S1J4U_16[i]
+
+deriv(EC1S1J4U_17[]) <- age_EC1S1J4U_17[i] + pov_EC1S1J4U_17[i] + jus_EC1S1J4U_17[i] + cl_EC1S1J4U_17[i]
+deriv(EC2S1J4U_17[]) <- age_EC2S1J4U_17[i] + pov_EC2S1J4U_17[i] + jus_EC2S1J4U_17[i] + cl_EC2S1J4U_17[i]
+deriv(EC3S1J4U_17[]) <- age_EC3S1J4U_17[i] + pov_EC3S1J4U_17[i] + jus_EC3S1J4U_17[i] + cl_EC3S1J4U_17[i]
+deriv(EC4S1J4U_17[]) <- age_EC4S1J4U_17[i] + pov_EC4S1J4U_17[i] + jus_EC4S1J4U_17[i] + cl_EC4S1J4U_17[i]
+
+
+
+deriv(EC1S2J4U_10[]) <- age_EC1S2J4U_10[i] + pov_EC1S2J4U_10[i] + jus_EC1S2J4U_10[i] + cl_EC1S2J4U_10[i]
+deriv(EC2S2J4U_10[]) <- age_EC2S2J4U_10[i] + pov_EC2S2J4U_10[i] + jus_EC2S2J4U_10[i] + cl_EC2S2J4U_10[i]
+deriv(EC3S2J4U_10[]) <- age_EC3S2J4U_10[i] + pov_EC3S2J4U_10[i] + jus_EC3S2J4U_10[i] + cl_EC3S2J4U_10[i]
+deriv(EC4S2J4U_10[]) <- age_EC4S2J4U_10[i] + pov_EC4S2J4U_10[i] + jus_EC4S2J4U_10[i] + cl_EC4S2J4U_10[i]
+
+deriv(EC1S2J4U_11[]) <- age_EC1S2J4U_11[i] + pov_EC1S2J4U_11[i] + jus_EC1S2J4U_11[i] + cl_EC1S2J4U_11[i]
+deriv(EC2S2J4U_11[]) <- age_EC2S2J4U_11[i] + pov_EC2S2J4U_11[i] + jus_EC2S2J4U_11[i] + cl_EC2S2J4U_11[i]
+deriv(EC3S2J4U_11[]) <- age_EC3S2J4U_11[i] + pov_EC3S2J4U_11[i] + jus_EC3S2J4U_11[i] + cl_EC3S2J4U_11[i]
+deriv(EC4S2J4U_11[]) <- age_EC4S2J4U_11[i] + pov_EC4S2J4U_11[i] + jus_EC4S2J4U_11[i] + cl_EC4S2J4U_11[i]
+
+deriv(EC1S2J4U_12[]) <- age_EC1S2J4U_12[i] + pov_EC1S2J4U_12[i] + jus_EC1S2J4U_12[i] + cl_EC1S2J4U_12[i]
+deriv(EC2S2J4U_12[]) <- age_EC2S2J4U_12[i] + pov_EC2S2J4U_12[i] + jus_EC2S2J4U_12[i] + cl_EC2S2J4U_12[i]
+deriv(EC3S2J4U_12[]) <- age_EC3S2J4U_12[i] + pov_EC3S2J4U_12[i] + jus_EC3S2J4U_12[i] + cl_EC3S2J4U_12[i]
+deriv(EC4S2J4U_12[]) <- age_EC4S2J4U_12[i] + pov_EC4S2J4U_12[i] + jus_EC4S2J4U_12[i] + cl_EC4S2J4U_12[i]
+
+deriv(EC1S2J4U_13[]) <- age_EC1S2J4U_13[i] + pov_EC1S2J4U_13[i] + jus_EC1S2J4U_13[i] + cl_EC1S2J4U_13[i]
+deriv(EC2S2J4U_13[]) <- age_EC2S2J4U_13[i] + pov_EC2S2J4U_13[i] + jus_EC2S2J4U_13[i] + cl_EC2S2J4U_13[i]
+deriv(EC3S2J4U_13[]) <- age_EC3S2J4U_13[i] + pov_EC3S2J4U_13[i] + jus_EC3S2J4U_13[i] + cl_EC3S2J4U_13[i]
+deriv(EC4S2J4U_13[]) <- age_EC4S2J4U_13[i] + pov_EC4S2J4U_13[i] + jus_EC4S2J4U_13[i] + cl_EC4S2J4U_13[i]
+
+deriv(EC1S2J4U_14[]) <- age_EC1S2J4U_14[i] + pov_EC1S2J4U_14[i] + jus_EC1S2J4U_14[i] + cl_EC1S2J4U_14[i]
+deriv(EC2S2J4U_14[]) <- age_EC2S2J4U_14[i] + pov_EC2S2J4U_14[i] + jus_EC2S2J4U_14[i] + cl_EC2S2J4U_14[i]
+deriv(EC3S2J4U_14[]) <- age_EC3S2J4U_14[i] + pov_EC3S2J4U_14[i] + jus_EC3S2J4U_14[i] + cl_EC3S2J4U_14[i]
+deriv(EC4S2J4U_14[]) <- age_EC4S2J4U_14[i] + pov_EC4S2J4U_14[i] + jus_EC4S2J4U_14[i] + cl_EC4S2J4U_14[i]
+
+deriv(EC1S2J4U_15[]) <- age_EC1S2J4U_15[i] + pov_EC1S2J4U_15[i] + jus_EC1S2J4U_15[i] + cl_EC1S2J4U_15[i]
+deriv(EC2S2J4U_15[]) <- age_EC2S2J4U_15[i] + pov_EC2S2J4U_15[i] + jus_EC2S2J4U_15[i] + cl_EC2S2J4U_15[i]
+deriv(EC3S2J4U_15[]) <- age_EC3S2J4U_15[i] + pov_EC3S2J4U_15[i] + jus_EC3S2J4U_15[i] + cl_EC3S2J4U_15[i]
+deriv(EC4S2J4U_15[]) <- age_EC4S2J4U_15[i] + pov_EC4S2J4U_15[i] + jus_EC4S2J4U_15[i] + cl_EC4S2J4U_15[i]
+
+deriv(EC1S2J4U_16[]) <- age_EC1S2J4U_16[i] + pov_EC1S2J4U_16[i] + jus_EC1S2J4U_16[i] + cl_EC1S2J4U_16[i]
+deriv(EC2S2J4U_16[]) <- age_EC2S2J4U_16[i] + pov_EC2S2J4U_16[i] + jus_EC2S2J4U_16[i] + cl_EC2S2J4U_16[i]
+deriv(EC3S2J4U_16[]) <- age_EC3S2J4U_16[i] + pov_EC3S2J4U_16[i] + jus_EC3S2J4U_16[i] + cl_EC3S2J4U_16[i]
+deriv(EC4S2J4U_16[]) <- age_EC4S2J4U_16[i] + pov_EC4S2J4U_16[i] + jus_EC4S2J4U_16[i] + cl_EC4S2J4U_16[i]
+
+deriv(EC1S2J4U_17[]) <- age_EC1S2J4U_17[i] + pov_EC1S2J4U_17[i] + jus_EC1S2J4U_17[i] + cl_EC1S2J4U_17[i]
+deriv(EC2S2J4U_17[]) <- age_EC2S2J4U_17[i] + pov_EC2S2J4U_17[i] + jus_EC2S2J4U_17[i] + cl_EC2S2J4U_17[i]
+deriv(EC3S2J4U_17[]) <- age_EC3S2J4U_17[i] + pov_EC3S2J4U_17[i] + jus_EC3S2J4U_17[i] + cl_EC3S2J4U_17[i]
+deriv(EC4S2J4U_17[]) <- age_EC4S2J4U_17[i] + pov_EC4S2J4U_17[i] + jus_EC4S2J4U_17[i] + cl_EC4S2J4U_17[i]
+
+
+
+deriv(EC1S1J5U_10[]) <- age_EC1S1J5U_10[i] + pov_EC1S1J5U_10[i] + jus_EC1S1J5U_10[i] + cl_EC1S1J5U_10[i]
+deriv(EC2S1J5U_10[]) <- age_EC2S1J5U_10[i] + pov_EC2S1J5U_10[i] + jus_EC2S1J5U_10[i] + cl_EC2S1J5U_10[i]
+deriv(EC3S1J5U_10[]) <- age_EC3S1J5U_10[i] + pov_EC3S1J5U_10[i] + jus_EC3S1J5U_10[i] + cl_EC3S1J5U_10[i]
+deriv(EC4S1J5U_10[]) <- age_EC4S1J5U_10[i] + pov_EC4S1J5U_10[i] + jus_EC4S1J5U_10[i] + cl_EC4S1J5U_10[i]
+
+deriv(EC1S1J5U_11[]) <- age_EC1S1J5U_11[i] + pov_EC1S1J5U_11[i] + jus_EC1S1J5U_11[i] + cl_EC1S1J5U_11[i]
+deriv(EC2S1J5U_11[]) <- age_EC2S1J5U_11[i] + pov_EC2S1J5U_11[i] + jus_EC2S1J5U_11[i] + cl_EC2S1J5U_11[i]
+deriv(EC3S1J5U_11[]) <- age_EC3S1J5U_11[i] + pov_EC3S1J5U_11[i] + jus_EC3S1J5U_11[i] + cl_EC3S1J5U_11[i]
+deriv(EC4S1J5U_11[]) <- age_EC4S1J5U_11[i] + pov_EC4S1J5U_11[i] + jus_EC4S1J5U_11[i] + cl_EC4S1J5U_11[i]
+
+deriv(EC1S1J5U_12[]) <- age_EC1S1J5U_12[i] + pov_EC1S1J5U_12[i] + jus_EC1S1J5U_12[i] + cl_EC1S1J5U_12[i]
+deriv(EC2S1J5U_12[]) <- age_EC2S1J5U_12[i] + pov_EC2S1J5U_12[i] + jus_EC2S1J5U_12[i] + cl_EC2S1J5U_12[i]
+deriv(EC3S1J5U_12[]) <- age_EC3S1J5U_12[i] + pov_EC3S1J5U_12[i] + jus_EC3S1J5U_12[i] + cl_EC3S1J5U_12[i]
+deriv(EC4S1J5U_12[]) <- age_EC4S1J5U_12[i] + pov_EC4S1J5U_12[i] + jus_EC4S1J5U_12[i] + cl_EC4S1J5U_12[i]
+
+deriv(EC1S1J5U_13[]) <- age_EC1S1J5U_13[i] + pov_EC1S1J5U_13[i] + jus_EC1S1J5U_13[i] + cl_EC1S1J5U_13[i]
+deriv(EC2S1J5U_13[]) <- age_EC2S1J5U_13[i] + pov_EC2S1J5U_13[i] + jus_EC2S1J5U_13[i] + cl_EC2S1J5U_13[i]
+deriv(EC3S1J5U_13[]) <- age_EC3S1J5U_13[i] + pov_EC3S1J5U_13[i] + jus_EC3S1J5U_13[i] + cl_EC3S1J5U_13[i]
+deriv(EC4S1J5U_13[]) <- age_EC4S1J5U_13[i] + pov_EC4S1J5U_13[i] + jus_EC4S1J5U_13[i] + cl_EC4S1J5U_13[i]
+
+deriv(EC1S1J5U_14[]) <- age_EC1S1J5U_14[i] + pov_EC1S1J5U_14[i] + jus_EC1S1J5U_14[i] + cl_EC1S1J5U_14[i]
+deriv(EC2S1J5U_14[]) <- age_EC2S1J5U_14[i] + pov_EC2S1J5U_14[i] + jus_EC2S1J5U_14[i] + cl_EC2S1J5U_14[i]
+deriv(EC3S1J5U_14[]) <- age_EC3S1J5U_14[i] + pov_EC3S1J5U_14[i] + jus_EC3S1J5U_14[i] + cl_EC3S1J5U_14[i]
+deriv(EC4S1J5U_14[]) <- age_EC4S1J5U_14[i] + pov_EC4S1J5U_14[i] + jus_EC4S1J5U_14[i] + cl_EC4S1J5U_14[i]
+
+deriv(EC1S1J5U_15[]) <- age_EC1S1J5U_15[i] + pov_EC1S1J5U_15[i] + jus_EC1S1J5U_15[i] + cl_EC1S1J5U_15[i]
+deriv(EC2S1J5U_15[]) <- age_EC2S1J5U_15[i] + pov_EC2S1J5U_15[i] + jus_EC2S1J5U_15[i] + cl_EC2S1J5U_15[i]
+deriv(EC3S1J5U_15[]) <- age_EC3S1J5U_15[i] + pov_EC3S1J5U_15[i] + jus_EC3S1J5U_15[i] + cl_EC3S1J5U_15[i]
+deriv(EC4S1J5U_15[]) <- age_EC4S1J5U_15[i] + pov_EC4S1J5U_15[i] + jus_EC4S1J5U_15[i] + cl_EC4S1J5U_15[i]
+
+deriv(EC1S1J5U_16[]) <- age_EC1S1J5U_16[i] + pov_EC1S1J5U_16[i] + jus_EC1S1J5U_16[i] + cl_EC1S1J5U_16[i]
+deriv(EC2S1J5U_16[]) <- age_EC2S1J5U_16[i] + pov_EC2S1J5U_16[i] + jus_EC2S1J5U_16[i] + cl_EC2S1J5U_16[i]
+deriv(EC3S1J5U_16[]) <- age_EC3S1J5U_16[i] + pov_EC3S1J5U_16[i] + jus_EC3S1J5U_16[i] + cl_EC3S1J5U_16[i]
+deriv(EC4S1J5U_16[]) <- age_EC4S1J5U_16[i] + pov_EC4S1J5U_16[i] + jus_EC4S1J5U_16[i] + cl_EC4S1J5U_16[i]
+
+deriv(EC1S1J5U_17[]) <- age_EC1S1J5U_17[i] + pov_EC1S1J5U_17[i] + jus_EC1S1J5U_17[i] + cl_EC1S1J5U_17[i]
+deriv(EC2S1J5U_17[]) <- age_EC2S1J5U_17[i] + pov_EC2S1J5U_17[i] + jus_EC2S1J5U_17[i] + cl_EC2S1J5U_17[i]
+deriv(EC3S1J5U_17[]) <- age_EC3S1J5U_17[i] + pov_EC3S1J5U_17[i] + jus_EC3S1J5U_17[i] + cl_EC3S1J5U_17[i]
+deriv(EC4S1J5U_17[]) <- age_EC4S1J5U_17[i] + pov_EC4S1J5U_17[i] + jus_EC4S1J5U_17[i] + cl_EC4S1J5U_17[i]
+
+
+
+deriv(EC1S2J5U_10[]) <- age_EC1S2J5U_10[i] + pov_EC1S2J5U_10[i] + jus_EC1S2J5U_10[i] + cl_EC1S2J5U_10[i]
+deriv(EC2S2J5U_10[]) <- age_EC2S2J5U_10[i] + pov_EC2S2J5U_10[i] + jus_EC2S2J5U_10[i] + cl_EC2S2J5U_10[i]
+deriv(EC3S2J5U_10[]) <- age_EC3S2J5U_10[i] + pov_EC3S2J5U_10[i] + jus_EC3S2J5U_10[i] + cl_EC3S2J5U_10[i]
+deriv(EC4S2J5U_10[]) <- age_EC4S2J5U_10[i] + pov_EC4S2J5U_10[i] + jus_EC4S2J5U_10[i] + cl_EC4S2J5U_10[i]
+
+deriv(EC1S2J5U_11[]) <- age_EC1S2J5U_11[i] + pov_EC1S2J5U_11[i] + jus_EC1S2J5U_11[i] + cl_EC1S2J5U_11[i]
+deriv(EC2S2J5U_11[]) <- age_EC2S2J5U_11[i] + pov_EC2S2J5U_11[i] + jus_EC2S2J5U_11[i] + cl_EC2S2J5U_11[i]
+deriv(EC3S2J5U_11[]) <- age_EC3S2J5U_11[i] + pov_EC3S2J5U_11[i] + jus_EC3S2J5U_11[i] + cl_EC3S2J5U_11[i]
+deriv(EC4S2J5U_11[]) <- age_EC4S2J5U_11[i] + pov_EC4S2J5U_11[i] + jus_EC4S2J5U_11[i] + cl_EC4S2J5U_11[i]
+
+deriv(EC1S2J5U_12[]) <- age_EC1S2J5U_12[i] + pov_EC1S2J5U_12[i] + jus_EC1S2J5U_12[i] + cl_EC1S2J5U_12[i]
+deriv(EC2S2J5U_12[]) <- age_EC2S2J5U_12[i] + pov_EC2S2J5U_12[i] + jus_EC2S2J5U_12[i] + cl_EC2S2J5U_12[i]
+deriv(EC3S2J5U_12[]) <- age_EC3S2J5U_12[i] + pov_EC3S2J5U_12[i] + jus_EC3S2J5U_12[i] + cl_EC3S2J5U_12[i]
+deriv(EC4S2J5U_12[]) <- age_EC4S2J5U_12[i] + pov_EC4S2J5U_12[i] + jus_EC4S2J5U_12[i] + cl_EC4S2J5U_12[i]
+
+deriv(EC1S2J5U_13[]) <- age_EC1S2J5U_13[i] + pov_EC1S2J5U_13[i] + jus_EC1S2J5U_13[i] + cl_EC1S2J5U_13[i]
+deriv(EC2S2J5U_13[]) <- age_EC2S2J5U_13[i] + pov_EC2S2J5U_13[i] + jus_EC2S2J5U_13[i] + cl_EC2S2J5U_13[i]
+deriv(EC3S2J5U_13[]) <- age_EC3S2J5U_13[i] + pov_EC3S2J5U_13[i] + jus_EC3S2J5U_13[i] + cl_EC3S2J5U_13[i]
+deriv(EC4S2J5U_13[]) <- age_EC4S2J5U_13[i] + pov_EC4S2J5U_13[i] + jus_EC4S2J5U_13[i] + cl_EC4S2J5U_13[i]
+
+deriv(EC1S2J5U_14[]) <- age_EC1S2J5U_14[i] + pov_EC1S2J5U_14[i] + jus_EC1S2J5U_14[i] + cl_EC1S2J5U_14[i]
+deriv(EC2S2J5U_14[]) <- age_EC2S2J5U_14[i] + pov_EC2S2J5U_14[i] + jus_EC2S2J5U_14[i] + cl_EC2S2J5U_14[i]
+deriv(EC3S2J5U_14[]) <- age_EC3S2J5U_14[i] + pov_EC3S2J5U_14[i] + jus_EC3S2J5U_14[i] + cl_EC3S2J5U_14[i]
+deriv(EC4S2J5U_14[]) <- age_EC4S2J5U_14[i] + pov_EC4S2J5U_14[i] + jus_EC4S2J5U_14[i] + cl_EC4S2J5U_14[i]
+
+deriv(EC1S2J5U_15[]) <- age_EC1S2J5U_15[i] + pov_EC1S2J5U_15[i] + jus_EC1S2J5U_15[i] + cl_EC1S2J5U_15[i]
+deriv(EC2S2J5U_15[]) <- age_EC2S2J5U_15[i] + pov_EC2S2J5U_15[i] + jus_EC2S2J5U_15[i] + cl_EC2S2J5U_15[i]
+deriv(EC3S2J5U_15[]) <- age_EC3S2J5U_15[i] + pov_EC3S2J5U_15[i] + jus_EC3S2J5U_15[i] + cl_EC3S2J5U_15[i]
+deriv(EC4S2J5U_15[]) <- age_EC4S2J5U_15[i] + pov_EC4S2J5U_15[i] + jus_EC4S2J5U_15[i] + cl_EC4S2J5U_15[i]
+
+deriv(EC1S2J5U_16[]) <- age_EC1S2J5U_16[i] + pov_EC1S2J5U_16[i] + jus_EC1S2J5U_16[i] + cl_EC1S2J5U_16[i]
+deriv(EC2S2J5U_16[]) <- age_EC2S2J5U_16[i] + pov_EC2S2J5U_16[i] + jus_EC2S2J5U_16[i] + cl_EC2S2J5U_16[i]
+deriv(EC3S2J5U_16[]) <- age_EC3S2J5U_16[i] + pov_EC3S2J5U_16[i] + jus_EC3S2J5U_16[i] + cl_EC3S2J5U_16[i]
+deriv(EC4S2J5U_16[]) <- age_EC4S2J5U_16[i] + pov_EC4S2J5U_16[i] + jus_EC4S2J5U_16[i] + cl_EC4S2J5U_16[i]
+
+deriv(EC1S2J5U_17[]) <- age_EC1S2J5U_17[i] + pov_EC1S2J5U_17[i] + jus_EC1S2J5U_17[i] + cl_EC1S2J5U_17[i]
+deriv(EC2S2J5U_17[]) <- age_EC2S2J5U_17[i] + pov_EC2S2J5U_17[i] + jus_EC2S2J5U_17[i] + cl_EC2S2J5U_17[i]
+deriv(EC3S2J5U_17[]) <- age_EC3S2J5U_17[i] + pov_EC3S2J5U_17[i] + jus_EC3S2J5U_17[i] + cl_EC3S2J5U_17[i]
+deriv(EC4S2J5U_17[]) <- age_EC4S2J5U_17[i] + pov_EC4S2J5U_17[i] + jus_EC4S2J5U_17[i] + cl_EC4S2J5U_17[i]
+
+
+
+deriv(EC1S1J1W_10[]) <- age_EC1S1J1W_10[i] + pov_EC1S1J1W_10[i] + care_EC1S1J1W_10[i] + sch_EC1S1J1W_10[i] + jus_EC1S1J1W_10[i] + cl_EC1S1J1W_10[i]
+deriv(EC2S1J1W_10[]) <- age_EC2S1J1W_10[i] + pov_EC2S1J1W_10[i] + care_EC2S1J1W_10[i] + sch_EC2S1J1W_10[i] + jus_EC2S1J1W_10[i] + cl_EC2S1J1W_10[i]
+deriv(EC3S1J1W_10[]) <- age_EC3S1J1W_10[i] + pov_EC3S1J1W_10[i] + care_EC3S1J1W_10[i] + sch_EC3S1J1W_10[i] + jus_EC3S1J1W_10[i] + cl_EC3S1J1W_10[i]
+deriv(EC4S1J1W_10[]) <- age_EC4S1J1W_10[i] + pov_EC4S1J1W_10[i] + care_EC4S1J1W_10[i] + sch_EC4S1J1W_10[i] + jus_EC4S1J1W_10[i] + cl_EC4S1J1W_10[i]
+
+deriv(EC1S1J1W_11[]) <- age_EC1S1J1W_11[i] + pov_EC1S1J1W_11[i] + care_EC1S1J1W_11[i] + sch_EC1S1J1W_11[i] + jus_EC1S1J1W_11[i] + cl_EC1S1J1W_11[i]
+deriv(EC2S1J1W_11[]) <- age_EC2S1J1W_11[i] + pov_EC2S1J1W_11[i] + care_EC2S1J1W_11[i] + sch_EC2S1J1W_11[i] + jus_EC2S1J1W_11[i] + cl_EC2S1J1W_11[i]
+deriv(EC3S1J1W_11[]) <- age_EC3S1J1W_11[i] + pov_EC3S1J1W_11[i] + care_EC3S1J1W_11[i] + sch_EC3S1J1W_11[i] + jus_EC3S1J1W_11[i] + cl_EC3S1J1W_11[i]
+deriv(EC4S1J1W_11[]) <- age_EC4S1J1W_11[i] + pov_EC4S1J1W_11[i] + care_EC4S1J1W_11[i] + sch_EC4S1J1W_11[i] + jus_EC4S1J1W_11[i] + cl_EC4S1J1W_11[i]
+
+deriv(EC1S1J1W_12[]) <- age_EC1S1J1W_12[i] + pov_EC1S1J1W_12[i] + care_EC1S1J1W_12[i] + sch_EC1S1J1W_12[i] + jus_EC1S1J1W_12[i] + cl_EC1S1J1W_12[i]
+deriv(EC2S1J1W_12[]) <- age_EC2S1J1W_12[i] + pov_EC2S1J1W_12[i] + care_EC2S1J1W_12[i] + sch_EC2S1J1W_12[i] + jus_EC2S1J1W_12[i] + cl_EC2S1J1W_12[i]
+deriv(EC3S1J1W_12[]) <- age_EC3S1J1W_12[i] + pov_EC3S1J1W_12[i] + care_EC3S1J1W_12[i] + sch_EC3S1J1W_12[i] + jus_EC3S1J1W_12[i] + cl_EC3S1J1W_12[i]
+deriv(EC4S1J1W_12[]) <- age_EC4S1J1W_12[i] + pov_EC4S1J1W_12[i] + care_EC4S1J1W_12[i] + sch_EC4S1J1W_12[i] + jus_EC4S1J1W_12[i] + cl_EC4S1J1W_12[i]
+
+deriv(EC1S1J1W_13[]) <- age_EC1S1J1W_13[i] + pov_EC1S1J1W_13[i] + care_EC1S1J1W_13[i] + sch_EC1S1J1W_13[i] + jus_EC1S1J1W_13[i] + cl_EC1S1J1W_13[i]
+deriv(EC2S1J1W_13[]) <- age_EC2S1J1W_13[i] + pov_EC2S1J1W_13[i] + care_EC2S1J1W_13[i] + sch_EC2S1J1W_13[i] + jus_EC2S1J1W_13[i] + cl_EC2S1J1W_13[i]
+deriv(EC3S1J1W_13[]) <- age_EC3S1J1W_13[i] + pov_EC3S1J1W_13[i] + care_EC3S1J1W_13[i] + sch_EC3S1J1W_13[i] + jus_EC3S1J1W_13[i] + cl_EC3S1J1W_13[i]
+deriv(EC4S1J1W_13[]) <- age_EC4S1J1W_13[i] + pov_EC4S1J1W_13[i] + care_EC4S1J1W_13[i] + sch_EC4S1J1W_13[i] + jus_EC4S1J1W_13[i] + cl_EC4S1J1W_13[i]
+
+deriv(EC1S1J1W_14[]) <- age_EC1S1J1W_14[i] + pov_EC1S1J1W_14[i] + care_EC1S1J1W_14[i] + sch_EC1S1J1W_14[i] + jus_EC1S1J1W_14[i] + cl_EC1S1J1W_14[i]
+deriv(EC2S1J1W_14[]) <- age_EC2S1J1W_14[i] + pov_EC2S1J1W_14[i] + care_EC2S1J1W_14[i] + sch_EC2S1J1W_14[i] + jus_EC2S1J1W_14[i] + cl_EC2S1J1W_14[i]
+deriv(EC3S1J1W_14[]) <- age_EC3S1J1W_14[i] + pov_EC3S1J1W_14[i] + care_EC3S1J1W_14[i] + sch_EC3S1J1W_14[i] + jus_EC3S1J1W_14[i] + cl_EC3S1J1W_14[i]
+deriv(EC4S1J1W_14[]) <- age_EC4S1J1W_14[i] + pov_EC4S1J1W_14[i] + care_EC4S1J1W_14[i] + sch_EC4S1J1W_14[i] + jus_EC4S1J1W_14[i] + cl_EC4S1J1W_14[i]
+
+deriv(EC1S1J1W_15[]) <- age_EC1S1J1W_15[i] + pov_EC1S1J1W_15[i] + care_EC1S1J1W_15[i] + sch_EC1S1J1W_15[i] + jus_EC1S1J1W_15[i] + cl_EC1S1J1W_15[i]
+deriv(EC2S1J1W_15[]) <- age_EC2S1J1W_15[i] + pov_EC2S1J1W_15[i] + care_EC2S1J1W_15[i] + sch_EC2S1J1W_15[i] + jus_EC2S1J1W_15[i] + cl_EC2S1J1W_15[i]
+deriv(EC3S1J1W_15[]) <- age_EC3S1J1W_15[i] + pov_EC3S1J1W_15[i] + care_EC3S1J1W_15[i] + sch_EC3S1J1W_15[i] + jus_EC3S1J1W_15[i] + cl_EC3S1J1W_15[i]
+deriv(EC4S1J1W_15[]) <- age_EC4S1J1W_15[i] + pov_EC4S1J1W_15[i] + care_EC4S1J1W_15[i] + sch_EC4S1J1W_15[i] + jus_EC4S1J1W_15[i] + cl_EC4S1J1W_15[i]
+
+deriv(EC1S1J1W_16[]) <- age_EC1S1J1W_16[i] + pov_EC1S1J1W_16[i] + care_EC1S1J1W_16[i] + sch_EC1S1J1W_16[i] + jus_EC1S1J1W_16[i] + cl_EC1S1J1W_16[i]
+deriv(EC2S1J1W_16[]) <- age_EC2S1J1W_16[i] + pov_EC2S1J1W_16[i] + care_EC2S1J1W_16[i] + sch_EC2S1J1W_16[i] + jus_EC2S1J1W_16[i] + cl_EC2S1J1W_16[i]
+deriv(EC3S1J1W_16[]) <- age_EC3S1J1W_16[i] + pov_EC3S1J1W_16[i] + care_EC3S1J1W_16[i] + sch_EC3S1J1W_16[i] + jus_EC3S1J1W_16[i] + cl_EC3S1J1W_16[i]
+deriv(EC4S1J1W_16[]) <- age_EC4S1J1W_16[i] + pov_EC4S1J1W_16[i] + care_EC4S1J1W_16[i] + sch_EC4S1J1W_16[i] + jus_EC4S1J1W_16[i] + cl_EC4S1J1W_16[i]
+
+deriv(EC1S1J1W_17[]) <- age_EC1S1J1W_17[i] + pov_EC1S1J1W_17[i] + care_EC1S1J1W_17[i] + sch_EC1S1J1W_17[i] + jus_EC1S1J1W_17[i] + cl_EC1S1J1W_17[i]
+deriv(EC2S1J1W_17[]) <- age_EC2S1J1W_17[i] + pov_EC2S1J1W_17[i] + care_EC2S1J1W_17[i] + sch_EC2S1J1W_17[i] + jus_EC2S1J1W_17[i] + cl_EC2S1J1W_17[i]
+deriv(EC3S1J1W_17[]) <- age_EC3S1J1W_17[i] + pov_EC3S1J1W_17[i] + care_EC3S1J1W_17[i] + sch_EC3S1J1W_17[i] + jus_EC3S1J1W_17[i] + cl_EC3S1J1W_17[i]
+deriv(EC4S1J1W_17[]) <- age_EC4S1J1W_17[i] + pov_EC4S1J1W_17[i] + care_EC4S1J1W_17[i] + sch_EC4S1J1W_17[i] + jus_EC4S1J1W_17[i] + cl_EC4S1J1W_17[i]
+
+
+
+deriv(EC1S2J1W_10[]) <- age_EC1S2J1W_10[i] + pov_EC1S2J1W_10[i] + care_EC1S2J1W_10[i] + sch_EC1S2J1W_10[i] + jus_EC1S2J1W_10[i] + cl_EC1S2J1W_10[i]
+deriv(EC2S2J1W_10[]) <- age_EC2S2J1W_10[i] + pov_EC2S2J1W_10[i] + care_EC2S2J1W_10[i] + sch_EC2S2J1W_10[i] + jus_EC2S2J1W_10[i] + cl_EC2S2J1W_10[i]
+deriv(EC3S2J1W_10[]) <- age_EC3S2J1W_10[i] + pov_EC3S2J1W_10[i] + care_EC3S2J1W_10[i] + sch_EC3S2J1W_10[i] + jus_EC3S2J1W_10[i] + cl_EC3S2J1W_10[i]
+deriv(EC4S2J1W_10[]) <- age_EC4S2J1W_10[i] + pov_EC4S2J1W_10[i] + care_EC4S2J1W_10[i] + sch_EC4S2J1W_10[i] + jus_EC4S2J1W_10[i] + cl_EC4S2J1W_10[i]
+
+deriv(EC1S2J1W_11[]) <- age_EC1S2J1W_11[i] + pov_EC1S2J1W_11[i] + care_EC1S2J1W_11[i] + sch_EC1S2J1W_11[i] + jus_EC1S2J1W_11[i] + cl_EC1S2J1W_11[i]
+deriv(EC2S2J1W_11[]) <- age_EC2S2J1W_11[i] + pov_EC2S2J1W_11[i] + care_EC2S2J1W_11[i] + sch_EC2S2J1W_11[i] + jus_EC2S2J1W_11[i] + cl_EC2S2J1W_11[i]
+deriv(EC3S2J1W_11[]) <- age_EC3S2J1W_11[i] + pov_EC3S2J1W_11[i] + care_EC3S2J1W_11[i] + sch_EC3S2J1W_11[i] + jus_EC3S2J1W_11[i] + cl_EC3S2J1W_11[i]
+deriv(EC4S2J1W_11[]) <- age_EC4S2J1W_11[i] + pov_EC4S2J1W_11[i] + care_EC4S2J1W_11[i] + sch_EC4S2J1W_11[i] + jus_EC4S2J1W_11[i] + cl_EC4S2J1W_11[i]
+
+deriv(EC1S2J1W_12[]) <- age_EC1S2J1W_12[i] + pov_EC1S2J1W_12[i] + care_EC1S2J1W_12[i] + sch_EC1S2J1W_12[i] + jus_EC1S2J1W_12[i] + cl_EC1S2J1W_12[i]
+deriv(EC2S2J1W_12[]) <- age_EC2S2J1W_12[i] + pov_EC2S2J1W_12[i] + care_EC2S2J1W_12[i] + sch_EC2S2J1W_12[i] + jus_EC2S2J1W_12[i] + cl_EC2S2J1W_12[i]
+deriv(EC3S2J1W_12[]) <- age_EC3S2J1W_12[i] + pov_EC3S2J1W_12[i] + care_EC3S2J1W_12[i] + sch_EC3S2J1W_12[i] + jus_EC3S2J1W_12[i] + cl_EC3S2J1W_12[i]
+deriv(EC4S2J1W_12[]) <- age_EC4S2J1W_12[i] + pov_EC4S2J1W_12[i] + care_EC4S2J1W_12[i] + sch_EC4S2J1W_12[i] + jus_EC4S2J1W_12[i] + cl_EC4S2J1W_12[i]
+
+deriv(EC1S2J1W_13[]) <- age_EC1S2J1W_13[i] + pov_EC1S2J1W_13[i] + care_EC1S2J1W_13[i] + sch_EC1S2J1W_13[i] + jus_EC1S2J1W_13[i] + cl_EC1S2J1W_13[i]
+deriv(EC2S2J1W_13[]) <- age_EC2S2J1W_13[i] + pov_EC2S2J1W_13[i] + care_EC2S2J1W_13[i] + sch_EC2S2J1W_13[i] + jus_EC2S2J1W_13[i] + cl_EC2S2J1W_13[i]
+deriv(EC3S2J1W_13[]) <- age_EC3S2J1W_13[i] + pov_EC3S2J1W_13[i] + care_EC3S2J1W_13[i] + sch_EC3S2J1W_13[i] + jus_EC3S2J1W_13[i] + cl_EC3S2J1W_13[i]
+deriv(EC4S2J1W_13[]) <- age_EC4S2J1W_13[i] + pov_EC4S2J1W_13[i] + care_EC4S2J1W_13[i] + sch_EC4S2J1W_13[i] + jus_EC4S2J1W_13[i] + cl_EC4S2J1W_13[i]
+
+deriv(EC1S2J1W_14[]) <- age_EC1S2J1W_14[i] + pov_EC1S2J1W_14[i] + care_EC1S2J1W_14[i] + sch_EC1S2J1W_14[i] + jus_EC1S2J1W_14[i] + cl_EC1S2J1W_14[i]
+deriv(EC2S2J1W_14[]) <- age_EC2S2J1W_14[i] + pov_EC2S2J1W_14[i] + care_EC2S2J1W_14[i] + sch_EC2S2J1W_14[i] + jus_EC2S2J1W_14[i] + cl_EC2S2J1W_14[i]
+deriv(EC3S2J1W_14[]) <- age_EC3S2J1W_14[i] + pov_EC3S2J1W_14[i] + care_EC3S2J1W_14[i] + sch_EC3S2J1W_14[i] + jus_EC3S2J1W_14[i] + cl_EC3S2J1W_14[i]
+deriv(EC4S2J1W_14[]) <- age_EC4S2J1W_14[i] + pov_EC4S2J1W_14[i] + care_EC4S2J1W_14[i] + sch_EC4S2J1W_14[i] + jus_EC4S2J1W_14[i] + cl_EC4S2J1W_14[i]
+
+deriv(EC1S2J1W_15[]) <- age_EC1S2J1W_15[i] + pov_EC1S2J1W_15[i] + care_EC1S2J1W_15[i] + sch_EC1S2J1W_15[i] + jus_EC1S2J1W_15[i] + cl_EC1S2J1W_15[i]
+deriv(EC2S2J1W_15[]) <- age_EC2S2J1W_15[i] + pov_EC2S2J1W_15[i] + care_EC2S2J1W_15[i] + sch_EC2S2J1W_15[i] + jus_EC2S2J1W_15[i] + cl_EC2S2J1W_15[i]
+deriv(EC3S2J1W_15[]) <- age_EC3S2J1W_15[i] + pov_EC3S2J1W_15[i] + care_EC3S2J1W_15[i] + sch_EC3S2J1W_15[i] + jus_EC3S2J1W_15[i] + cl_EC3S2J1W_15[i]
+deriv(EC4S2J1W_15[]) <- age_EC4S2J1W_15[i] + pov_EC4S2J1W_15[i] + care_EC4S2J1W_15[i] + sch_EC4S2J1W_15[i] + jus_EC4S2J1W_15[i] + cl_EC4S2J1W_15[i]
+
+deriv(EC1S2J1W_16[]) <- age_EC1S2J1W_16[i] + pov_EC1S2J1W_16[i] + care_EC1S2J1W_16[i] + sch_EC1S2J1W_16[i] + jus_EC1S2J1W_16[i] + cl_EC1S2J1W_16[i]
+deriv(EC2S2J1W_16[]) <- age_EC2S2J1W_16[i] + pov_EC2S2J1W_16[i] + care_EC2S2J1W_16[i] + sch_EC2S2J1W_16[i] + jus_EC2S2J1W_16[i] + cl_EC2S2J1W_16[i]
+deriv(EC3S2J1W_16[]) <- age_EC3S2J1W_16[i] + pov_EC3S2J1W_16[i] + care_EC3S2J1W_16[i] + sch_EC3S2J1W_16[i] + jus_EC3S2J1W_16[i] + cl_EC3S2J1W_16[i]
+deriv(EC4S2J1W_16[]) <- age_EC4S2J1W_16[i] + pov_EC4S2J1W_16[i] + care_EC4S2J1W_16[i] + sch_EC4S2J1W_16[i] + jus_EC4S2J1W_16[i] + cl_EC4S2J1W_16[i]
+
+deriv(EC1S2J1W_17[]) <- age_EC1S2J1W_17[i] + pov_EC1S2J1W_17[i] + care_EC1S2J1W_17[i] + sch_EC1S2J1W_17[i] + jus_EC1S2J1W_17[i] + cl_EC1S2J1W_17[i]
+deriv(EC2S2J1W_17[]) <- age_EC2S2J1W_17[i] + pov_EC2S2J1W_17[i] + care_EC2S2J1W_17[i] + sch_EC2S2J1W_17[i] + jus_EC2S2J1W_17[i] + cl_EC2S2J1W_17[i]
+deriv(EC3S2J1W_17[]) <- age_EC3S2J1W_17[i] + pov_EC3S2J1W_17[i] + care_EC3S2J1W_17[i] + sch_EC3S2J1W_17[i] + jus_EC3S2J1W_17[i] + cl_EC3S2J1W_17[i]
+deriv(EC4S2J1W_17[]) <- age_EC4S2J1W_17[i] + pov_EC4S2J1W_17[i] + care_EC4S2J1W_17[i] + sch_EC4S2J1W_17[i] + jus_EC4S2J1W_17[i] + cl_EC4S2J1W_17[i]
+
+
+
+deriv(EC1S1J2W_10[]) <- age_EC1S1J2W_10[i] + pov_EC1S1J2W_10[i] + care_EC1S1J2W_10[i] + sch_EC1S1J2W_10[i] + jus_EC1S1J2W_10[i] + cl_EC1S1J2W_10[i]
+deriv(EC2S1J2W_10[]) <- age_EC2S1J2W_10[i] + pov_EC2S1J2W_10[i] + care_EC2S1J2W_10[i] + sch_EC2S1J2W_10[i] + jus_EC2S1J2W_10[i] + cl_EC2S1J2W_10[i]
+deriv(EC3S1J2W_10[]) <- age_EC3S1J2W_10[i] + pov_EC3S1J2W_10[i] + care_EC3S1J2W_10[i] + sch_EC3S1J2W_10[i] + jus_EC3S1J2W_10[i] + cl_EC3S1J2W_10[i]
+deriv(EC4S1J2W_10[]) <- age_EC4S1J2W_10[i] + pov_EC4S1J2W_10[i] + care_EC4S1J2W_10[i] + sch_EC4S1J2W_10[i] + jus_EC4S1J2W_10[i] + cl_EC4S1J2W_10[i]
+
+deriv(EC1S1J2W_11[]) <- age_EC1S1J2W_11[i] + pov_EC1S1J2W_11[i] + care_EC1S1J2W_11[i] + sch_EC1S1J2W_11[i] + jus_EC1S1J2W_11[i] + cl_EC1S1J2W_11[i]
+deriv(EC2S1J2W_11[]) <- age_EC2S1J2W_11[i] + pov_EC2S1J2W_11[i] + care_EC2S1J2W_11[i] + sch_EC2S1J2W_11[i] + jus_EC2S1J2W_11[i] + cl_EC2S1J2W_11[i]
+deriv(EC3S1J2W_11[]) <- age_EC3S1J2W_11[i] + pov_EC3S1J2W_11[i] + care_EC3S1J2W_11[i] + sch_EC3S1J2W_11[i] + jus_EC3S1J2W_11[i] + cl_EC3S1J2W_11[i]
+deriv(EC4S1J2W_11[]) <- age_EC4S1J2W_11[i] + pov_EC4S1J2W_11[i] + care_EC4S1J2W_11[i] + sch_EC4S1J2W_11[i] + jus_EC4S1J2W_11[i] + cl_EC4S1J2W_11[i]
+
+deriv(EC1S1J2W_12[]) <- age_EC1S1J2W_12[i] + pov_EC1S1J2W_12[i] + care_EC1S1J2W_12[i] + sch_EC1S1J2W_12[i] + jus_EC1S1J2W_12[i] + cl_EC1S1J2W_12[i]
+deriv(EC2S1J2W_12[]) <- age_EC2S1J2W_12[i] + pov_EC2S1J2W_12[i] + care_EC2S1J2W_12[i] + sch_EC2S1J2W_12[i] + jus_EC2S1J2W_12[i] + cl_EC2S1J2W_12[i]
+deriv(EC3S1J2W_12[]) <- age_EC3S1J2W_12[i] + pov_EC3S1J2W_12[i] + care_EC3S1J2W_12[i] + sch_EC3S1J2W_12[i] + jus_EC3S1J2W_12[i] + cl_EC3S1J2W_12[i]
+deriv(EC4S1J2W_12[]) <- age_EC4S1J2W_12[i] + pov_EC4S1J2W_12[i] + care_EC4S1J2W_12[i] + sch_EC4S1J2W_12[i] + jus_EC4S1J2W_12[i] + cl_EC4S1J2W_12[i]
+
+deriv(EC1S1J2W_13[]) <- age_EC1S1J2W_13[i] + pov_EC1S1J2W_13[i] + care_EC1S1J2W_13[i] + sch_EC1S1J2W_13[i] + jus_EC1S1J2W_13[i] + cl_EC1S1J2W_13[i]
+deriv(EC2S1J2W_13[]) <- age_EC2S1J2W_13[i] + pov_EC2S1J2W_13[i] + care_EC2S1J2W_13[i] + sch_EC2S1J2W_13[i] + jus_EC2S1J2W_13[i] + cl_EC2S1J2W_13[i]
+deriv(EC3S1J2W_13[]) <- age_EC3S1J2W_13[i] + pov_EC3S1J2W_13[i] + care_EC3S1J2W_13[i] + sch_EC3S1J2W_13[i] + jus_EC3S1J2W_13[i] + cl_EC3S1J2W_13[i]
+deriv(EC4S1J2W_13[]) <- age_EC4S1J2W_13[i] + pov_EC4S1J2W_13[i] + care_EC4S1J2W_13[i] + sch_EC4S1J2W_13[i] + jus_EC4S1J2W_13[i] + cl_EC4S1J2W_13[i]
+
+deriv(EC1S1J2W_14[]) <- age_EC1S1J2W_14[i] + pov_EC1S1J2W_14[i] + care_EC1S1J2W_14[i] + sch_EC1S1J2W_14[i] + jus_EC1S1J2W_14[i] + cl_EC1S1J2W_14[i]
+deriv(EC2S1J2W_14[]) <- age_EC2S1J2W_14[i] + pov_EC2S1J2W_14[i] + care_EC2S1J2W_14[i] + sch_EC2S1J2W_14[i] + jus_EC2S1J2W_14[i] + cl_EC2S1J2W_14[i]
+deriv(EC3S1J2W_14[]) <- age_EC3S1J2W_14[i] + pov_EC3S1J2W_14[i] + care_EC3S1J2W_14[i] + sch_EC3S1J2W_14[i] + jus_EC3S1J2W_14[i] + cl_EC3S1J2W_14[i]
+deriv(EC4S1J2W_14[]) <- age_EC4S1J2W_14[i] + pov_EC4S1J2W_14[i] + care_EC4S1J2W_14[i] + sch_EC4S1J2W_14[i] + jus_EC4S1J2W_14[i] + cl_EC4S1J2W_14[i]
+
+deriv(EC1S1J2W_15[]) <- age_EC1S1J2W_15[i] + pov_EC1S1J2W_15[i] + care_EC1S1J2W_15[i] + sch_EC1S1J2W_15[i] + jus_EC1S1J2W_15[i] + cl_EC1S1J2W_15[i]
+deriv(EC2S1J2W_15[]) <- age_EC2S1J2W_15[i] + pov_EC2S1J2W_15[i] + care_EC2S1J2W_15[i] + sch_EC2S1J2W_15[i] + jus_EC2S1J2W_15[i] + cl_EC2S1J2W_15[i]
+deriv(EC3S1J2W_15[]) <- age_EC3S1J2W_15[i] + pov_EC3S1J2W_15[i] + care_EC3S1J2W_15[i] + sch_EC3S1J2W_15[i] + jus_EC3S1J2W_15[i] + cl_EC3S1J2W_15[i]
+deriv(EC4S1J2W_15[]) <- age_EC4S1J2W_15[i] + pov_EC4S1J2W_15[i] + care_EC4S1J2W_15[i] + sch_EC4S1J2W_15[i] + jus_EC4S1J2W_15[i] + cl_EC4S1J2W_15[i]
+
+deriv(EC1S1J2W_16[]) <- age_EC1S1J2W_16[i] + pov_EC1S1J2W_16[i] + care_EC1S1J2W_16[i] + sch_EC1S1J2W_16[i] + jus_EC1S1J2W_16[i] + cl_EC1S1J2W_16[i]
+deriv(EC2S1J2W_16[]) <- age_EC2S1J2W_16[i] + pov_EC2S1J2W_16[i] + care_EC2S1J2W_16[i] + sch_EC2S1J2W_16[i] + jus_EC2S1J2W_16[i] + cl_EC2S1J2W_16[i]
+deriv(EC3S1J2W_16[]) <- age_EC3S1J2W_16[i] + pov_EC3S1J2W_16[i] + care_EC3S1J2W_16[i] + sch_EC3S1J2W_16[i] + jus_EC3S1J2W_16[i] + cl_EC3S1J2W_16[i]
+deriv(EC4S1J2W_16[]) <- age_EC4S1J2W_16[i] + pov_EC4S1J2W_16[i] + care_EC4S1J2W_16[i] + sch_EC4S1J2W_16[i] + jus_EC4S1J2W_16[i] + cl_EC4S1J2W_16[i]
+
+deriv(EC1S1J2W_17[]) <- age_EC1S1J2W_17[i] + pov_EC1S1J2W_17[i] + care_EC1S1J2W_17[i] + sch_EC1S1J2W_17[i] + jus_EC1S1J2W_17[i] + cl_EC1S1J2W_17[i]
+deriv(EC2S1J2W_17[]) <- age_EC2S1J2W_17[i] + pov_EC2S1J2W_17[i] + care_EC2S1J2W_17[i] + sch_EC2S1J2W_17[i] + jus_EC2S1J2W_17[i] + cl_EC2S1J2W_17[i]
+deriv(EC3S1J2W_17[]) <- age_EC3S1J2W_17[i] + pov_EC3S1J2W_17[i] + care_EC3S1J2W_17[i] + sch_EC3S1J2W_17[i] + jus_EC3S1J2W_17[i] + cl_EC3S1J2W_17[i]
+deriv(EC4S1J2W_17[]) <- age_EC4S1J2W_17[i] + pov_EC4S1J2W_17[i] + care_EC4S1J2W_17[i] + sch_EC4S1J2W_17[i] + jus_EC4S1J2W_17[i] + cl_EC4S1J2W_17[i]
+
+
+
+deriv(EC1S2J2W_10[]) <- age_EC1S2J2W_10[i] + pov_EC1S2J2W_10[i] + care_EC1S2J2W_10[i] + sch_EC1S2J2W_10[i] + jus_EC1S2J2W_10[i] + cl_EC1S2J2W_10[i]
+deriv(EC2S2J2W_10[]) <- age_EC2S2J2W_10[i] + pov_EC2S2J2W_10[i] + care_EC2S2J2W_10[i] + sch_EC2S2J2W_10[i] + jus_EC2S2J2W_10[i] + cl_EC2S2J2W_10[i]
+deriv(EC3S2J2W_10[]) <- age_EC3S2J2W_10[i] + pov_EC3S2J2W_10[i] + care_EC3S2J2W_10[i] + sch_EC3S2J2W_10[i] + jus_EC3S2J2W_10[i] + cl_EC3S2J2W_10[i]
+deriv(EC4S2J2W_10[]) <- age_EC4S2J2W_10[i] + pov_EC4S2J2W_10[i] + care_EC4S2J2W_10[i] + sch_EC4S2J2W_10[i] + jus_EC4S2J2W_10[i] + cl_EC4S2J2W_10[i]
+
+deriv(EC1S2J2W_11[]) <- age_EC1S2J2W_11[i] + pov_EC1S2J2W_11[i] + care_EC1S2J2W_11[i] + sch_EC1S2J2W_11[i] + jus_EC1S2J2W_11[i] + cl_EC1S2J2W_11[i]
+deriv(EC2S2J2W_11[]) <- age_EC2S2J2W_11[i] + pov_EC2S2J2W_11[i] + care_EC2S2J2W_11[i] + sch_EC2S2J2W_11[i] + jus_EC2S2J2W_11[i] + cl_EC2S2J2W_11[i]
+deriv(EC3S2J2W_11[]) <- age_EC3S2J2W_11[i] + pov_EC3S2J2W_11[i] + care_EC3S2J2W_11[i] + sch_EC3S2J2W_11[i] + jus_EC3S2J2W_11[i] + cl_EC3S2J2W_11[i]
+deriv(EC4S2J2W_11[]) <- age_EC4S2J2W_11[i] + pov_EC4S2J2W_11[i] + care_EC4S2J2W_11[i] + sch_EC4S2J2W_11[i] + jus_EC4S2J2W_11[i] + cl_EC4S2J2W_11[i]
+
+deriv(EC1S2J2W_12[]) <- age_EC1S2J2W_12[i] + pov_EC1S2J2W_12[i] + care_EC1S2J2W_12[i] + sch_EC1S2J2W_12[i] + jus_EC1S2J2W_12[i] + cl_EC1S2J2W_12[i]
+deriv(EC2S2J2W_12[]) <- age_EC2S2J2W_12[i] + pov_EC2S2J2W_12[i] + care_EC2S2J2W_12[i] + sch_EC2S2J2W_12[i] + jus_EC2S2J2W_12[i] + cl_EC2S2J2W_12[i]
+deriv(EC3S2J2W_12[]) <- age_EC3S2J2W_12[i] + pov_EC3S2J2W_12[i] + care_EC3S2J2W_12[i] + sch_EC3S2J2W_12[i] + jus_EC3S2J2W_12[i] + cl_EC3S2J2W_12[i]
+deriv(EC4S2J2W_12[]) <- age_EC4S2J2W_12[i] + pov_EC4S2J2W_12[i] + care_EC4S2J2W_12[i] + sch_EC4S2J2W_12[i] + jus_EC4S2J2W_12[i] + cl_EC4S2J2W_12[i]
+
+deriv(EC1S2J2W_13[]) <- age_EC1S2J2W_13[i] + pov_EC1S2J2W_13[i] + care_EC1S2J2W_13[i] + sch_EC1S2J2W_13[i] + jus_EC1S2J2W_13[i] + cl_EC1S2J2W_13[i]
+deriv(EC2S2J2W_13[]) <- age_EC2S2J2W_13[i] + pov_EC2S2J2W_13[i] + care_EC2S2J2W_13[i] + sch_EC2S2J2W_13[i] + jus_EC2S2J2W_13[i] + cl_EC2S2J2W_13[i]
+deriv(EC3S2J2W_13[]) <- age_EC3S2J2W_13[i] + pov_EC3S2J2W_13[i] + care_EC3S2J2W_13[i] + sch_EC3S2J2W_13[i] + jus_EC3S2J2W_13[i] + cl_EC3S2J2W_13[i]
+deriv(EC4S2J2W_13[]) <- age_EC4S2J2W_13[i] + pov_EC4S2J2W_13[i] + care_EC4S2J2W_13[i] + sch_EC4S2J2W_13[i] + jus_EC4S2J2W_13[i] + cl_EC4S2J2W_13[i]
+
+deriv(EC1S2J2W_14[]) <- age_EC1S2J2W_14[i] + pov_EC1S2J2W_14[i] + care_EC1S2J2W_14[i] + sch_EC1S2J2W_14[i] + jus_EC1S2J2W_14[i] + cl_EC1S2J2W_14[i]
+deriv(EC2S2J2W_14[]) <- age_EC2S2J2W_14[i] + pov_EC2S2J2W_14[i] + care_EC2S2J2W_14[i] + sch_EC2S2J2W_14[i] + jus_EC2S2J2W_14[i] + cl_EC2S2J2W_14[i]
+deriv(EC3S2J2W_14[]) <- age_EC3S2J2W_14[i] + pov_EC3S2J2W_14[i] + care_EC3S2J2W_14[i] + sch_EC3S2J2W_14[i] + jus_EC3S2J2W_14[i] + cl_EC3S2J2W_14[i]
+deriv(EC4S2J2W_14[]) <- age_EC4S2J2W_14[i] + pov_EC4S2J2W_14[i] + care_EC4S2J2W_14[i] + sch_EC4S2J2W_14[i] + jus_EC4S2J2W_14[i] + cl_EC4S2J2W_14[i]
+
+deriv(EC1S2J2W_15[]) <- age_EC1S2J2W_15[i] + pov_EC1S2J2W_15[i] + care_EC1S2J2W_15[i] + sch_EC1S2J2W_15[i] + jus_EC1S2J2W_15[i] + cl_EC1S2J2W_15[i]
+deriv(EC2S2J2W_15[]) <- age_EC2S2J2W_15[i] + pov_EC2S2J2W_15[i] + care_EC2S2J2W_15[i] + sch_EC2S2J2W_15[i] + jus_EC2S2J2W_15[i] + cl_EC2S2J2W_15[i]
+deriv(EC3S2J2W_15[]) <- age_EC3S2J2W_15[i] + pov_EC3S2J2W_15[i] + care_EC3S2J2W_15[i] + sch_EC3S2J2W_15[i] + jus_EC3S2J2W_15[i] + cl_EC3S2J2W_15[i]
+deriv(EC4S2J2W_15[]) <- age_EC4S2J2W_15[i] + pov_EC4S2J2W_15[i] + care_EC4S2J2W_15[i] + sch_EC4S2J2W_15[i] + jus_EC4S2J2W_15[i] + cl_EC4S2J2W_15[i]
+
+deriv(EC1S2J2W_16[]) <- age_EC1S2J2W_16[i] + pov_EC1S2J2W_16[i] + care_EC1S2J2W_16[i] + sch_EC1S2J2W_16[i] + jus_EC1S2J2W_16[i] + cl_EC1S2J2W_16[i]
+deriv(EC2S2J2W_16[]) <- age_EC2S2J2W_16[i] + pov_EC2S2J2W_16[i] + care_EC2S2J2W_16[i] + sch_EC2S2J2W_16[i] + jus_EC2S2J2W_16[i] + cl_EC2S2J2W_16[i]
+deriv(EC3S2J2W_16[]) <- age_EC3S2J2W_16[i] + pov_EC3S2J2W_16[i] + care_EC3S2J2W_16[i] + sch_EC3S2J2W_16[i] + jus_EC3S2J2W_16[i] + cl_EC3S2J2W_16[i]
+deriv(EC4S2J2W_16[]) <- age_EC4S2J2W_16[i] + pov_EC4S2J2W_16[i] + care_EC4S2J2W_16[i] + sch_EC4S2J2W_16[i] + jus_EC4S2J2W_16[i] + cl_EC4S2J2W_16[i]
+
+deriv(EC1S2J2W_17[]) <- age_EC1S2J2W_17[i] + pov_EC1S2J2W_17[i] + care_EC1S2J2W_17[i] + sch_EC1S2J2W_17[i] + jus_EC1S2J2W_17[i] + cl_EC1S2J2W_17[i]
+deriv(EC2S2J2W_17[]) <- age_EC2S2J2W_17[i] + pov_EC2S2J2W_17[i] + care_EC2S2J2W_17[i] + sch_EC2S2J2W_17[i] + jus_EC2S2J2W_17[i] + cl_EC2S2J2W_17[i]
+deriv(EC3S2J2W_17[]) <- age_EC3S2J2W_17[i] + pov_EC3S2J2W_17[i] + care_EC3S2J2W_17[i] + sch_EC3S2J2W_17[i] + jus_EC3S2J2W_17[i] + cl_EC3S2J2W_17[i]
+deriv(EC4S2J2W_17[]) <- age_EC4S2J2W_17[i] + pov_EC4S2J2W_17[i] + care_EC4S2J2W_17[i] + sch_EC4S2J2W_17[i] + jus_EC4S2J2W_17[i] + cl_EC4S2J2W_17[i]
+
+
+
+deriv(EC1S1J3W_10[]) <- age_EC1S1J3W_10[i] + pov_EC1S1J3W_10[i] + care_EC1S1J3W_10[i] + sch_EC1S1J3W_10[i] + jus_EC1S1J3W_10[i] + cl_EC1S1J3W_10[i]
+deriv(EC2S1J3W_10[]) <- age_EC2S1J3W_10[i] + pov_EC2S1J3W_10[i] + care_EC2S1J3W_10[i] + sch_EC2S1J3W_10[i] + jus_EC2S1J3W_10[i] + cl_EC2S1J3W_10[i]
+deriv(EC3S1J3W_10[]) <- age_EC3S1J3W_10[i] + pov_EC3S1J3W_10[i] + care_EC3S1J3W_10[i] + sch_EC3S1J3W_10[i] + jus_EC3S1J3W_10[i] + cl_EC3S1J3W_10[i]
+deriv(EC4S1J3W_10[]) <- age_EC4S1J3W_10[i] + pov_EC4S1J3W_10[i] + care_EC4S1J3W_10[i] + sch_EC4S1J3W_10[i] + jus_EC4S1J3W_10[i] + cl_EC4S1J3W_10[i]
+
+deriv(EC1S1J3W_11[]) <- age_EC1S1J3W_11[i] + pov_EC1S1J3W_11[i] + care_EC1S1J3W_11[i] + sch_EC1S1J3W_11[i] + jus_EC1S1J3W_11[i] + cl_EC1S1J3W_11[i]
+deriv(EC2S1J3W_11[]) <- age_EC2S1J3W_11[i] + pov_EC2S1J3W_11[i] + care_EC2S1J3W_11[i] + sch_EC2S1J3W_11[i] + jus_EC2S1J3W_11[i] + cl_EC2S1J3W_11[i]
+deriv(EC3S1J3W_11[]) <- age_EC3S1J3W_11[i] + pov_EC3S1J3W_11[i] + care_EC3S1J3W_11[i] + sch_EC3S1J3W_11[i] + jus_EC3S1J3W_11[i] + cl_EC3S1J3W_11[i]
+deriv(EC4S1J3W_11[]) <- age_EC4S1J3W_11[i] + pov_EC4S1J3W_11[i] + care_EC4S1J3W_11[i] + sch_EC4S1J3W_11[i] + jus_EC4S1J3W_11[i] + cl_EC4S1J3W_11[i]
+
+deriv(EC1S1J3W_12[]) <- age_EC1S1J3W_12[i] + pov_EC1S1J3W_12[i] + care_EC1S1J3W_12[i] + sch_EC1S1J3W_12[i] + jus_EC1S1J3W_12[i] + cl_EC1S1J3W_12[i]
+deriv(EC2S1J3W_12[]) <- age_EC2S1J3W_12[i] + pov_EC2S1J3W_12[i] + care_EC2S1J3W_12[i] + sch_EC2S1J3W_12[i] + jus_EC2S1J3W_12[i] + cl_EC2S1J3W_12[i]
+deriv(EC3S1J3W_12[]) <- age_EC3S1J3W_12[i] + pov_EC3S1J3W_12[i] + care_EC3S1J3W_12[i] + sch_EC3S1J3W_12[i] + jus_EC3S1J3W_12[i] + cl_EC3S1J3W_12[i]
+deriv(EC4S1J3W_12[]) <- age_EC4S1J3W_12[i] + pov_EC4S1J3W_12[i] + care_EC4S1J3W_12[i] + sch_EC4S1J3W_12[i] + jus_EC4S1J3W_12[i] + cl_EC4S1J3W_12[i]
+
+deriv(EC1S1J3W_13[]) <- age_EC1S1J3W_13[i] + pov_EC1S1J3W_13[i] + care_EC1S1J3W_13[i] + sch_EC1S1J3W_13[i] + jus_EC1S1J3W_13[i] + cl_EC1S1J3W_13[i]
+deriv(EC2S1J3W_13[]) <- age_EC2S1J3W_13[i] + pov_EC2S1J3W_13[i] + care_EC2S1J3W_13[i] + sch_EC2S1J3W_13[i] + jus_EC2S1J3W_13[i] + cl_EC2S1J3W_13[i]
+deriv(EC3S1J3W_13[]) <- age_EC3S1J3W_13[i] + pov_EC3S1J3W_13[i] + care_EC3S1J3W_13[i] + sch_EC3S1J3W_13[i] + jus_EC3S1J3W_13[i] + cl_EC3S1J3W_13[i]
+deriv(EC4S1J3W_13[]) <- age_EC4S1J3W_13[i] + pov_EC4S1J3W_13[i] + care_EC4S1J3W_13[i] + sch_EC4S1J3W_13[i] + jus_EC4S1J3W_13[i] + cl_EC4S1J3W_13[i]
+
+deriv(EC1S1J3W_14[]) <- age_EC1S1J3W_14[i] + pov_EC1S1J3W_14[i] + care_EC1S1J3W_14[i] + sch_EC1S1J3W_14[i] + jus_EC1S1J3W_14[i] + cl_EC1S1J3W_14[i]
+deriv(EC2S1J3W_14[]) <- age_EC2S1J3W_14[i] + pov_EC2S1J3W_14[i] + care_EC2S1J3W_14[i] + sch_EC2S1J3W_14[i] + jus_EC2S1J3W_14[i] + cl_EC2S1J3W_14[i]
+deriv(EC3S1J3W_14[]) <- age_EC3S1J3W_14[i] + pov_EC3S1J3W_14[i] + care_EC3S1J3W_14[i] + sch_EC3S1J3W_14[i] + jus_EC3S1J3W_14[i] + cl_EC3S1J3W_14[i]
+deriv(EC4S1J3W_14[]) <- age_EC4S1J3W_14[i] + pov_EC4S1J3W_14[i] + care_EC4S1J3W_14[i] + sch_EC4S1J3W_14[i] + jus_EC4S1J3W_14[i] + cl_EC4S1J3W_14[i]
+
+deriv(EC1S1J3W_15[]) <- age_EC1S1J3W_15[i] + pov_EC1S1J3W_15[i] + care_EC1S1J3W_15[i] + sch_EC1S1J3W_15[i] + jus_EC1S1J3W_15[i] + cl_EC1S1J3W_15[i]
+deriv(EC2S1J3W_15[]) <- age_EC2S1J3W_15[i] + pov_EC2S1J3W_15[i] + care_EC2S1J3W_15[i] + sch_EC2S1J3W_15[i] + jus_EC2S1J3W_15[i] + cl_EC2S1J3W_15[i]
+deriv(EC3S1J3W_15[]) <- age_EC3S1J3W_15[i] + pov_EC3S1J3W_15[i] + care_EC3S1J3W_15[i] + sch_EC3S1J3W_15[i] + jus_EC3S1J3W_15[i] + cl_EC3S1J3W_15[i]
+deriv(EC4S1J3W_15[]) <- age_EC4S1J3W_15[i] + pov_EC4S1J3W_15[i] + care_EC4S1J3W_15[i] + sch_EC4S1J3W_15[i] + jus_EC4S1J3W_15[i] + cl_EC4S1J3W_15[i]
+
+deriv(EC1S1J3W_16[]) <- age_EC1S1J3W_16[i] + pov_EC1S1J3W_16[i] + care_EC1S1J3W_16[i] + sch_EC1S1J3W_16[i] + jus_EC1S1J3W_16[i] + cl_EC1S1J3W_16[i]
+deriv(EC2S1J3W_16[]) <- age_EC2S1J3W_16[i] + pov_EC2S1J3W_16[i] + care_EC2S1J3W_16[i] + sch_EC2S1J3W_16[i] + jus_EC2S1J3W_16[i] + cl_EC2S1J3W_16[i]
+deriv(EC3S1J3W_16[]) <- age_EC3S1J3W_16[i] + pov_EC3S1J3W_16[i] + care_EC3S1J3W_16[i] + sch_EC3S1J3W_16[i] + jus_EC3S1J3W_16[i] + cl_EC3S1J3W_16[i]
+deriv(EC4S1J3W_16[]) <- age_EC4S1J3W_16[i] + pov_EC4S1J3W_16[i] + care_EC4S1J3W_16[i] + sch_EC4S1J3W_16[i] + jus_EC4S1J3W_16[i] + cl_EC4S1J3W_16[i]
+
+deriv(EC1S1J3W_17[]) <- age_EC1S1J3W_17[i] + pov_EC1S1J3W_17[i] + care_EC1S1J3W_17[i] + sch_EC1S1J3W_17[i] + jus_EC1S1J3W_17[i] + cl_EC1S1J3W_17[i]
+deriv(EC2S1J3W_17[]) <- age_EC2S1J3W_17[i] + pov_EC2S1J3W_17[i] + care_EC2S1J3W_17[i] + sch_EC2S1J3W_17[i] + jus_EC2S1J3W_17[i] + cl_EC2S1J3W_17[i]
+deriv(EC3S1J3W_17[]) <- age_EC3S1J3W_17[i] + pov_EC3S1J3W_17[i] + care_EC3S1J3W_17[i] + sch_EC3S1J3W_17[i] + jus_EC3S1J3W_17[i] + cl_EC3S1J3W_17[i]
+deriv(EC4S1J3W_17[]) <- age_EC4S1J3W_17[i] + pov_EC4S1J3W_17[i] + care_EC4S1J3W_17[i] + sch_EC4S1J3W_17[i] + jus_EC4S1J3W_17[i] + cl_EC4S1J3W_17[i]
+
+
+
+deriv(EC1S2J3W_10[]) <- age_EC1S2J3W_10[i] + pov_EC1S2J3W_10[i] + care_EC1S2J3W_10[i] + sch_EC1S2J3W_10[i] + jus_EC1S2J3W_10[i] + cl_EC1S2J3W_10[i]
+deriv(EC2S2J3W_10[]) <- age_EC2S2J3W_10[i] + pov_EC2S2J3W_10[i] + care_EC2S2J3W_10[i] + sch_EC2S2J3W_10[i] + jus_EC2S2J3W_10[i] + cl_EC2S2J3W_10[i]
+deriv(EC3S2J3W_10[]) <- age_EC3S2J3W_10[i] + pov_EC3S2J3W_10[i] + care_EC3S2J3W_10[i] + sch_EC3S2J3W_10[i] + jus_EC3S2J3W_10[i] + cl_EC3S2J3W_10[i]
+deriv(EC4S2J3W_10[]) <- age_EC4S2J3W_10[i] + pov_EC4S2J3W_10[i] + care_EC4S2J3W_10[i] + sch_EC4S2J3W_10[i] + jus_EC4S2J3W_10[i] + cl_EC4S2J3W_10[i]
+
+deriv(EC1S2J3W_11[]) <- age_EC1S2J3W_11[i] + pov_EC1S2J3W_11[i] + care_EC1S2J3W_11[i] + sch_EC1S2J3W_11[i] + jus_EC1S2J3W_11[i] + cl_EC1S2J3W_11[i]
+deriv(EC2S2J3W_11[]) <- age_EC2S2J3W_11[i] + pov_EC2S2J3W_11[i] + care_EC2S2J3W_11[i] + sch_EC2S2J3W_11[i] + jus_EC2S2J3W_11[i] + cl_EC2S2J3W_11[i]
+deriv(EC3S2J3W_11[]) <- age_EC3S2J3W_11[i] + pov_EC3S2J3W_11[i] + care_EC3S2J3W_11[i] + sch_EC3S2J3W_11[i] + jus_EC3S2J3W_11[i] + cl_EC3S2J3W_11[i]
+deriv(EC4S2J3W_11[]) <- age_EC4S2J3W_11[i] + pov_EC4S2J3W_11[i] + care_EC4S2J3W_11[i] + sch_EC4S2J3W_11[i] + jus_EC4S2J3W_11[i] + cl_EC4S2J3W_11[i]
+
+deriv(EC1S2J3W_12[]) <- age_EC1S2J3W_12[i] + pov_EC1S2J3W_12[i] + care_EC1S2J3W_12[i] + sch_EC1S2J3W_12[i] + jus_EC1S2J3W_12[i] + cl_EC1S2J3W_12[i]
+deriv(EC2S2J3W_12[]) <- age_EC2S2J3W_12[i] + pov_EC2S2J3W_12[i] + care_EC2S2J3W_12[i] + sch_EC2S2J3W_12[i] + jus_EC2S2J3W_12[i] + cl_EC2S2J3W_12[i]
+deriv(EC3S2J3W_12[]) <- age_EC3S2J3W_12[i] + pov_EC3S2J3W_12[i] + care_EC3S2J3W_12[i] + sch_EC3S2J3W_12[i] + jus_EC3S2J3W_12[i] + cl_EC3S2J3W_12[i]
+deriv(EC4S2J3W_12[]) <- age_EC4S2J3W_12[i] + pov_EC4S2J3W_12[i] + care_EC4S2J3W_12[i] + sch_EC4S2J3W_12[i] + jus_EC4S2J3W_12[i] + cl_EC4S2J3W_12[i]
+
+deriv(EC1S2J3W_13[]) <- age_EC1S2J3W_13[i] + pov_EC1S2J3W_13[i] + care_EC1S2J3W_13[i] + sch_EC1S2J3W_13[i] + jus_EC1S2J3W_13[i] + cl_EC1S2J3W_13[i]
+deriv(EC2S2J3W_13[]) <- age_EC2S2J3W_13[i] + pov_EC2S2J3W_13[i] + care_EC2S2J3W_13[i] + sch_EC2S2J3W_13[i] + jus_EC2S2J3W_13[i] + cl_EC2S2J3W_13[i]
+deriv(EC3S2J3W_13[]) <- age_EC3S2J3W_13[i] + pov_EC3S2J3W_13[i] + care_EC3S2J3W_13[i] + sch_EC3S2J3W_13[i] + jus_EC3S2J3W_13[i] + cl_EC3S2J3W_13[i]
+deriv(EC4S2J3W_13[]) <- age_EC4S2J3W_13[i] + pov_EC4S2J3W_13[i] + care_EC4S2J3W_13[i] + sch_EC4S2J3W_13[i] + jus_EC4S2J3W_13[i] + cl_EC4S2J3W_13[i]
+
+deriv(EC1S2J3W_14[]) <- age_EC1S2J3W_14[i] + pov_EC1S2J3W_14[i] + care_EC1S2J3W_14[i] + sch_EC1S2J3W_14[i] + jus_EC1S2J3W_14[i] + cl_EC1S2J3W_14[i]
+deriv(EC2S2J3W_14[]) <- age_EC2S2J3W_14[i] + pov_EC2S2J3W_14[i] + care_EC2S2J3W_14[i] + sch_EC2S2J3W_14[i] + jus_EC2S2J3W_14[i] + cl_EC2S2J3W_14[i]
+deriv(EC3S2J3W_14[]) <- age_EC3S2J3W_14[i] + pov_EC3S2J3W_14[i] + care_EC3S2J3W_14[i] + sch_EC3S2J3W_14[i] + jus_EC3S2J3W_14[i] + cl_EC3S2J3W_14[i]
+deriv(EC4S2J3W_14[]) <- age_EC4S2J3W_14[i] + pov_EC4S2J3W_14[i] + care_EC4S2J3W_14[i] + sch_EC4S2J3W_14[i] + jus_EC4S2J3W_14[i] + cl_EC4S2J3W_14[i]
+
+deriv(EC1S2J3W_15[]) <- age_EC1S2J3W_15[i] + pov_EC1S2J3W_15[i] + care_EC1S2J3W_15[i] + sch_EC1S2J3W_15[i] + jus_EC1S2J3W_15[i] + cl_EC1S2J3W_15[i]
+deriv(EC2S2J3W_15[]) <- age_EC2S2J3W_15[i] + pov_EC2S2J3W_15[i] + care_EC2S2J3W_15[i] + sch_EC2S2J3W_15[i] + jus_EC2S2J3W_15[i] + cl_EC2S2J3W_15[i]
+deriv(EC3S2J3W_15[]) <- age_EC3S2J3W_15[i] + pov_EC3S2J3W_15[i] + care_EC3S2J3W_15[i] + sch_EC3S2J3W_15[i] + jus_EC3S2J3W_15[i] + cl_EC3S2J3W_15[i]
+deriv(EC4S2J3W_15[]) <- age_EC4S2J3W_15[i] + pov_EC4S2J3W_15[i] + care_EC4S2J3W_15[i] + sch_EC4S2J3W_15[i] + jus_EC4S2J3W_15[i] + cl_EC4S2J3W_15[i]
+
+deriv(EC1S2J3W_16[]) <- age_EC1S2J3W_16[i] + pov_EC1S2J3W_16[i] + care_EC1S2J3W_16[i] + sch_EC1S2J3W_16[i] + jus_EC1S2J3W_16[i] + cl_EC1S2J3W_16[i]
+deriv(EC2S2J3W_16[]) <- age_EC2S2J3W_16[i] + pov_EC2S2J3W_16[i] + care_EC2S2J3W_16[i] + sch_EC2S2J3W_16[i] + jus_EC2S2J3W_16[i] + cl_EC2S2J3W_16[i]
+deriv(EC3S2J3W_16[]) <- age_EC3S2J3W_16[i] + pov_EC3S2J3W_16[i] + care_EC3S2J3W_16[i] + sch_EC3S2J3W_16[i] + jus_EC3S2J3W_16[i] + cl_EC3S2J3W_16[i]
+deriv(EC4S2J3W_16[]) <- age_EC4S2J3W_16[i] + pov_EC4S2J3W_16[i] + care_EC4S2J3W_16[i] + sch_EC4S2J3W_16[i] + jus_EC4S2J3W_16[i] + cl_EC4S2J3W_16[i]
+
+deriv(EC1S2J3W_17[]) <- age_EC1S2J3W_17[i] + pov_EC1S2J3W_17[i] + care_EC1S2J3W_17[i] + sch_EC1S2J3W_17[i] + jus_EC1S2J3W_17[i] + cl_EC1S2J3W_17[i]
+deriv(EC2S2J3W_17[]) <- age_EC2S2J3W_17[i] + pov_EC2S2J3W_17[i] + care_EC2S2J3W_17[i] + sch_EC2S2J3W_17[i] + jus_EC2S2J3W_17[i] + cl_EC2S2J3W_17[i]
+deriv(EC3S2J3W_17[]) <- age_EC3S2J3W_17[i] + pov_EC3S2J3W_17[i] + care_EC3S2J3W_17[i] + sch_EC3S2J3W_17[i] + jus_EC3S2J3W_17[i] + cl_EC3S2J3W_17[i]
+deriv(EC4S2J3W_17[]) <- age_EC4S2J3W_17[i] + pov_EC4S2J3W_17[i] + care_EC4S2J3W_17[i] + sch_EC4S2J3W_17[i] + jus_EC4S2J3W_17[i] + cl_EC4S2J3W_17[i]
+
+
+
+deriv(EC1S1J4W_10[]) <- age_EC1S1J4W_10[i] + pov_EC1S1J4W_10[i] + jus_EC1S1J4W_10[i] + cl_EC1S1J4W_10[i]
+deriv(EC2S1J4W_10[]) <- age_EC2S1J4W_10[i] + pov_EC2S1J4W_10[i] + jus_EC2S1J4W_10[i] + cl_EC2S1J4W_10[i]
+deriv(EC3S1J4W_10[]) <- age_EC3S1J4W_10[i] + pov_EC3S1J4W_10[i] + jus_EC3S1J4W_10[i] + cl_EC3S1J4W_10[i]
+deriv(EC4S1J4W_10[]) <- age_EC4S1J4W_10[i] + pov_EC4S1J4W_10[i] + jus_EC4S1J4W_10[i] + cl_EC4S1J4W_10[i]
+
+deriv(EC1S1J4W_11[]) <- age_EC1S1J4W_11[i] + pov_EC1S1J4W_11[i] + jus_EC1S1J4W_11[i] + cl_EC1S1J4W_11[i]
+deriv(EC2S1J4W_11[]) <- age_EC2S1J4W_11[i] + pov_EC2S1J4W_11[i] + jus_EC2S1J4W_11[i] + cl_EC2S1J4W_11[i]
+deriv(EC3S1J4W_11[]) <- age_EC3S1J4W_11[i] + pov_EC3S1J4W_11[i] + jus_EC3S1J4W_11[i] + cl_EC3S1J4W_11[i]
+deriv(EC4S1J4W_11[]) <- age_EC4S1J4W_11[i] + pov_EC4S1J4W_11[i] + jus_EC4S1J4W_11[i] + cl_EC4S1J4W_11[i]
+
+deriv(EC1S1J4W_12[]) <- age_EC1S1J4W_12[i] + pov_EC1S1J4W_12[i] + jus_EC1S1J4W_12[i] + cl_EC1S1J4W_12[i]
+deriv(EC2S1J4W_12[]) <- age_EC2S1J4W_12[i] + pov_EC2S1J4W_12[i] + jus_EC2S1J4W_12[i] + cl_EC2S1J4W_12[i]
+deriv(EC3S1J4W_12[]) <- age_EC3S1J4W_12[i] + pov_EC3S1J4W_12[i] + jus_EC3S1J4W_12[i] + cl_EC3S1J4W_12[i]
+deriv(EC4S1J4W_12[]) <- age_EC4S1J4W_12[i] + pov_EC4S1J4W_12[i] + jus_EC4S1J4W_12[i] + cl_EC4S1J4W_12[i]
+
+deriv(EC1S1J4W_13[]) <- age_EC1S1J4W_13[i] + pov_EC1S1J4W_13[i] + jus_EC1S1J4W_13[i] + cl_EC1S1J4W_13[i]
+deriv(EC2S1J4W_13[]) <- age_EC2S1J4W_13[i] + pov_EC2S1J4W_13[i] + jus_EC2S1J4W_13[i] + cl_EC2S1J4W_13[i]
+deriv(EC3S1J4W_13[]) <- age_EC3S1J4W_13[i] + pov_EC3S1J4W_13[i] + jus_EC3S1J4W_13[i] + cl_EC3S1J4W_13[i]
+deriv(EC4S1J4W_13[]) <- age_EC4S1J4W_13[i] + pov_EC4S1J4W_13[i] + jus_EC4S1J4W_13[i] + cl_EC4S1J4W_13[i]
+
+deriv(EC1S1J4W_14[]) <- age_EC1S1J4W_14[i] + pov_EC1S1J4W_14[i] + jus_EC1S1J4W_14[i] + cl_EC1S1J4W_14[i]
+deriv(EC2S1J4W_14[]) <- age_EC2S1J4W_14[i] + pov_EC2S1J4W_14[i] + jus_EC2S1J4W_14[i] + cl_EC2S1J4W_14[i]
+deriv(EC3S1J4W_14[]) <- age_EC3S1J4W_14[i] + pov_EC3S1J4W_14[i] + jus_EC3S1J4W_14[i] + cl_EC3S1J4W_14[i]
+deriv(EC4S1J4W_14[]) <- age_EC4S1J4W_14[i] + pov_EC4S1J4W_14[i] + jus_EC4S1J4W_14[i] + cl_EC4S1J4W_14[i]
+
+deriv(EC1S1J4W_15[]) <- age_EC1S1J4W_15[i] + pov_EC1S1J4W_15[i] + jus_EC1S1J4W_15[i] + cl_EC1S1J4W_15[i]
+deriv(EC2S1J4W_15[]) <- age_EC2S1J4W_15[i] + pov_EC2S1J4W_15[i] + jus_EC2S1J4W_15[i] + cl_EC2S1J4W_15[i]
+deriv(EC3S1J4W_15[]) <- age_EC3S1J4W_15[i] + pov_EC3S1J4W_15[i] + jus_EC3S1J4W_15[i] + cl_EC3S1J4W_15[i]
+deriv(EC4S1J4W_15[]) <- age_EC4S1J4W_15[i] + pov_EC4S1J4W_15[i] + jus_EC4S1J4W_15[i] + cl_EC4S1J4W_15[i]
+
+deriv(EC1S1J4W_16[]) <- age_EC1S1J4W_16[i] + pov_EC1S1J4W_16[i] + jus_EC1S1J4W_16[i] + cl_EC1S1J4W_16[i]
+deriv(EC2S1J4W_16[]) <- age_EC2S1J4W_16[i] + pov_EC2S1J4W_16[i] + jus_EC2S1J4W_16[i] + cl_EC2S1J4W_16[i]
+deriv(EC3S1J4W_16[]) <- age_EC3S1J4W_16[i] + pov_EC3S1J4W_16[i] + jus_EC3S1J4W_16[i] + cl_EC3S1J4W_16[i]
+deriv(EC4S1J4W_16[]) <- age_EC4S1J4W_16[i] + pov_EC4S1J4W_16[i] + jus_EC4S1J4W_16[i] + cl_EC4S1J4W_16[i]
+
+deriv(EC1S1J4W_17[]) <- age_EC1S1J4W_17[i] + pov_EC1S1J4W_17[i] + jus_EC1S1J4W_17[i] + cl_EC1S1J4W_17[i]
+deriv(EC2S1J4W_17[]) <- age_EC2S1J4W_17[i] + pov_EC2S1J4W_17[i] + jus_EC2S1J4W_17[i] + cl_EC2S1J4W_17[i]
+deriv(EC3S1J4W_17[]) <- age_EC3S1J4W_17[i] + pov_EC3S1J4W_17[i] + jus_EC3S1J4W_17[i] + cl_EC3S1J4W_17[i]
+deriv(EC4S1J4W_17[]) <- age_EC4S1J4W_17[i] + pov_EC4S1J4W_17[i] + jus_EC4S1J4W_17[i] + cl_EC4S1J4W_17[i]
+
+
+
+deriv(EC1S2J4W_10[]) <- age_EC1S2J4W_10[i] + pov_EC1S2J4W_10[i] + jus_EC1S2J4W_10[i] + cl_EC1S2J4W_10[i]
+deriv(EC2S2J4W_10[]) <- age_EC2S2J4W_10[i] + pov_EC2S2J4W_10[i] + jus_EC2S2J4W_10[i] + cl_EC2S2J4W_10[i]
+deriv(EC3S2J4W_10[]) <- age_EC3S2J4W_10[i] + pov_EC3S2J4W_10[i] + jus_EC3S2J4W_10[i] + cl_EC3S2J4W_10[i]
+deriv(EC4S2J4W_10[]) <- age_EC4S2J4W_10[i] + pov_EC4S2J4W_10[i] + jus_EC4S2J4W_10[i] + cl_EC4S2J4W_10[i]
+
+deriv(EC1S2J4W_11[]) <- age_EC1S2J4W_11[i] + pov_EC1S2J4W_11[i] + jus_EC1S2J4W_11[i] + cl_EC1S2J4W_11[i]
+deriv(EC2S2J4W_11[]) <- age_EC2S2J4W_11[i] + pov_EC2S2J4W_11[i] + jus_EC2S2J4W_11[i] + cl_EC2S2J4W_11[i]
+deriv(EC3S2J4W_11[]) <- age_EC3S2J4W_11[i] + pov_EC3S2J4W_11[i] + jus_EC3S2J4W_11[i] + cl_EC3S2J4W_11[i]
+deriv(EC4S2J4W_11[]) <- age_EC4S2J4W_11[i] + pov_EC4S2J4W_11[i] + jus_EC4S2J4W_11[i] + cl_EC4S2J4W_11[i]
+
+deriv(EC1S2J4W_12[]) <- age_EC1S2J4W_12[i] + pov_EC1S2J4W_12[i] + jus_EC1S2J4W_12[i] + cl_EC1S2J4W_12[i]
+deriv(EC2S2J4W_12[]) <- age_EC2S2J4W_12[i] + pov_EC2S2J4W_12[i] + jus_EC2S2J4W_12[i] + cl_EC2S2J4W_12[i]
+deriv(EC3S2J4W_12[]) <- age_EC3S2J4W_12[i] + pov_EC3S2J4W_12[i] + jus_EC3S2J4W_12[i] + cl_EC3S2J4W_12[i]
+deriv(EC4S2J4W_12[]) <- age_EC4S2J4W_12[i] + pov_EC4S2J4W_12[i] + jus_EC4S2J4W_12[i] + cl_EC4S2J4W_12[i]
+
+deriv(EC1S2J4W_13[]) <- age_EC1S2J4W_13[i] + pov_EC1S2J4W_13[i] + jus_EC1S2J4W_13[i] + cl_EC1S2J4W_13[i]
+deriv(EC2S2J4W_13[]) <- age_EC2S2J4W_13[i] + pov_EC2S2J4W_13[i] + jus_EC2S2J4W_13[i] + cl_EC2S2J4W_13[i]
+deriv(EC3S2J4W_13[]) <- age_EC3S2J4W_13[i] + pov_EC3S2J4W_13[i] + jus_EC3S2J4W_13[i] + cl_EC3S2J4W_13[i]
+deriv(EC4S2J4W_13[]) <- age_EC4S2J4W_13[i] + pov_EC4S2J4W_13[i] + jus_EC4S2J4W_13[i] + cl_EC4S2J4W_13[i]
+
+deriv(EC1S2J4W_14[]) <- age_EC1S2J4W_14[i] + pov_EC1S2J4W_14[i] + jus_EC1S2J4W_14[i] + cl_EC1S2J4W_14[i]
+deriv(EC2S2J4W_14[]) <- age_EC2S2J4W_14[i] + pov_EC2S2J4W_14[i] + jus_EC2S2J4W_14[i] + cl_EC2S2J4W_14[i]
+deriv(EC3S2J4W_14[]) <- age_EC3S2J4W_14[i] + pov_EC3S2J4W_14[i] + jus_EC3S2J4W_14[i] + cl_EC3S2J4W_14[i]
+deriv(EC4S2J4W_14[]) <- age_EC4S2J4W_14[i] + pov_EC4S2J4W_14[i] + jus_EC4S2J4W_14[i] + cl_EC4S2J4W_14[i]
+
+deriv(EC1S2J4W_15[]) <- age_EC1S2J4W_15[i] + pov_EC1S2J4W_15[i] + jus_EC1S2J4W_15[i] + cl_EC1S2J4W_15[i]
+deriv(EC2S2J4W_15[]) <- age_EC2S2J4W_15[i] + pov_EC2S2J4W_15[i] + jus_EC2S2J4W_15[i] + cl_EC2S2J4W_15[i]
+deriv(EC3S2J4W_15[]) <- age_EC3S2J4W_15[i] + pov_EC3S2J4W_15[i] + jus_EC3S2J4W_15[i] + cl_EC3S2J4W_15[i]
+deriv(EC4S2J4W_15[]) <- age_EC4S2J4W_15[i] + pov_EC4S2J4W_15[i] + jus_EC4S2J4W_15[i] + cl_EC4S2J4W_15[i]
+
+deriv(EC1S2J4W_16[]) <- age_EC1S2J4W_16[i] + pov_EC1S2J4W_16[i] + jus_EC1S2J4W_16[i] + cl_EC1S2J4W_16[i]
+deriv(EC2S2J4W_16[]) <- age_EC2S2J4W_16[i] + pov_EC2S2J4W_16[i] + jus_EC2S2J4W_16[i] + cl_EC2S2J4W_16[i]
+deriv(EC3S2J4W_16[]) <- age_EC3S2J4W_16[i] + pov_EC3S2J4W_16[i] + jus_EC3S2J4W_16[i] + cl_EC3S2J4W_16[i]
+deriv(EC4S2J4W_16[]) <- age_EC4S2J4W_16[i] + pov_EC4S2J4W_16[i] + jus_EC4S2J4W_16[i] + cl_EC4S2J4W_16[i]
+
+deriv(EC1S2J4W_17[]) <- age_EC1S2J4W_17[i] + pov_EC1S2J4W_17[i] + jus_EC1S2J4W_17[i] + cl_EC1S2J4W_17[i]
+deriv(EC2S2J4W_17[]) <- age_EC2S2J4W_17[i] + pov_EC2S2J4W_17[i] + jus_EC2S2J4W_17[i] + cl_EC2S2J4W_17[i]
+deriv(EC3S2J4W_17[]) <- age_EC3S2J4W_17[i] + pov_EC3S2J4W_17[i] + jus_EC3S2J4W_17[i] + cl_EC3S2J4W_17[i]
+deriv(EC4S2J4W_17[]) <- age_EC4S2J4W_17[i] + pov_EC4S2J4W_17[i] + jus_EC4S2J4W_17[i] + cl_EC4S2J4W_17[i]
+
+
+
+deriv(EC1S1J5W_10[]) <- age_EC1S1J5W_10[i] + pov_EC1S1J5W_10[i] + jus_EC1S1J5W_10[i] + cl_EC1S1J5W_10[i]
+deriv(EC2S1J5W_10[]) <- age_EC2S1J5W_10[i] + pov_EC2S1J5W_10[i] + jus_EC2S1J5W_10[i] + cl_EC2S1J5W_10[i]
+deriv(EC3S1J5W_10[]) <- age_EC3S1J5W_10[i] + pov_EC3S1J5W_10[i] + jus_EC3S1J5W_10[i] + cl_EC3S1J5W_10[i]
+deriv(EC4S1J5W_10[]) <- age_EC4S1J5W_10[i] + pov_EC4S1J5W_10[i] + jus_EC4S1J5W_10[i] + cl_EC4S1J5W_10[i]
+
+deriv(EC1S1J5W_11[]) <- age_EC1S1J5W_11[i] + pov_EC1S1J5W_11[i] + jus_EC1S1J5W_11[i] + cl_EC1S1J5W_11[i]
+deriv(EC2S1J5W_11[]) <- age_EC2S1J5W_11[i] + pov_EC2S1J5W_11[i] + jus_EC2S1J5W_11[i] + cl_EC2S1J5W_11[i]
+deriv(EC3S1J5W_11[]) <- age_EC3S1J5W_11[i] + pov_EC3S1J5W_11[i] + jus_EC3S1J5W_11[i] + cl_EC3S1J5W_11[i]
+deriv(EC4S1J5W_11[]) <- age_EC4S1J5W_11[i] + pov_EC4S1J5W_11[i] + jus_EC4S1J5W_11[i] + cl_EC4S1J5W_11[i]
+
+deriv(EC1S1J5W_12[]) <- age_EC1S1J5W_12[i] + pov_EC1S1J5W_12[i] + jus_EC1S1J5W_12[i] + cl_EC1S1J5W_12[i]
+deriv(EC2S1J5W_12[]) <- age_EC2S1J5W_12[i] + pov_EC2S1J5W_12[i] + jus_EC2S1J5W_12[i] + cl_EC2S1J5W_12[i]
+deriv(EC3S1J5W_12[]) <- age_EC3S1J5W_12[i] + pov_EC3S1J5W_12[i] + jus_EC3S1J5W_12[i] + cl_EC3S1J5W_12[i]
+deriv(EC4S1J5W_12[]) <- age_EC4S1J5W_12[i] + pov_EC4S1J5W_12[i] + jus_EC4S1J5W_12[i] + cl_EC4S1J5W_12[i]
+
+deriv(EC1S1J5W_13[]) <- age_EC1S1J5W_13[i] + pov_EC1S1J5W_13[i] + jus_EC1S1J5W_13[i] + cl_EC1S1J5W_13[i]
+deriv(EC2S1J5W_13[]) <- age_EC2S1J5W_13[i] + pov_EC2S1J5W_13[i] + jus_EC2S1J5W_13[i] + cl_EC2S1J5W_13[i]
+deriv(EC3S1J5W_13[]) <- age_EC3S1J5W_13[i] + pov_EC3S1J5W_13[i] + jus_EC3S1J5W_13[i] + cl_EC3S1J5W_13[i]
+deriv(EC4S1J5W_13[]) <- age_EC4S1J5W_13[i] + pov_EC4S1J5W_13[i] + jus_EC4S1J5W_13[i] + cl_EC4S1J5W_13[i]
+
+deriv(EC1S1J5W_14[]) <- age_EC1S1J5W_14[i] + pov_EC1S1J5W_14[i] + jus_EC1S1J5W_14[i] + cl_EC1S1J5W_14[i]
+deriv(EC2S1J5W_14[]) <- age_EC2S1J5W_14[i] + pov_EC2S1J5W_14[i] + jus_EC2S1J5W_14[i] + cl_EC2S1J5W_14[i]
+deriv(EC3S1J5W_14[]) <- age_EC3S1J5W_14[i] + pov_EC3S1J5W_14[i] + jus_EC3S1J5W_14[i] + cl_EC3S1J5W_14[i]
+deriv(EC4S1J5W_14[]) <- age_EC4S1J5W_14[i] + pov_EC4S1J5W_14[i] + jus_EC4S1J5W_14[i] + cl_EC4S1J5W_14[i]
+
+deriv(EC1S1J5W_15[]) <- age_EC1S1J5W_15[i] + pov_EC1S1J5W_15[i] + jus_EC1S1J5W_15[i] + cl_EC1S1J5W_15[i]
+deriv(EC2S1J5W_15[]) <- age_EC2S1J5W_15[i] + pov_EC2S1J5W_15[i] + jus_EC2S1J5W_15[i] + cl_EC2S1J5W_15[i]
+deriv(EC3S1J5W_15[]) <- age_EC3S1J5W_15[i] + pov_EC3S1J5W_15[i] + jus_EC3S1J5W_15[i] + cl_EC3S1J5W_15[i]
+deriv(EC4S1J5W_15[]) <- age_EC4S1J5W_15[i] + pov_EC4S1J5W_15[i] + jus_EC4S1J5W_15[i] + cl_EC4S1J5W_15[i]
+
+deriv(EC1S1J5W_16[]) <- age_EC1S1J5W_16[i] + pov_EC1S1J5W_16[i] + jus_EC1S1J5W_16[i] + cl_EC1S1J5W_16[i]
+deriv(EC2S1J5W_16[]) <- age_EC2S1J5W_16[i] + pov_EC2S1J5W_16[i] + jus_EC2S1J5W_16[i] + cl_EC2S1J5W_16[i]
+deriv(EC3S1J5W_16[]) <- age_EC3S1J5W_16[i] + pov_EC3S1J5W_16[i] + jus_EC3S1J5W_16[i] + cl_EC3S1J5W_16[i]
+deriv(EC4S1J5W_16[]) <- age_EC4S1J5W_16[i] + pov_EC4S1J5W_16[i] + jus_EC4S1J5W_16[i] + cl_EC4S1J5W_16[i]
+
+deriv(EC1S1J5W_17[]) <- age_EC1S1J5W_17[i] + pov_EC1S1J5W_17[i] + jus_EC1S1J5W_17[i] + cl_EC1S1J5W_17[i]
+deriv(EC2S1J5W_17[]) <- age_EC2S1J5W_17[i] + pov_EC2S1J5W_17[i] + jus_EC2S1J5W_17[i] + cl_EC2S1J5W_17[i]
+deriv(EC3S1J5W_17[]) <- age_EC3S1J5W_17[i] + pov_EC3S1J5W_17[i] + jus_EC3S1J5W_17[i] + cl_EC3S1J5W_17[i]
+deriv(EC4S1J5W_17[]) <- age_EC4S1J5W_17[i] + pov_EC4S1J5W_17[i] + jus_EC4S1J5W_17[i] + cl_EC4S1J5W_17[i]
+
+
+
+deriv(EC1S2J5W_10[]) <- age_EC1S2J5W_10[i] + pov_EC1S2J5W_10[i] + jus_EC1S2J5W_10[i] + cl_EC1S2J5W_10[i]
+deriv(EC2S2J5W_10[]) <- age_EC2S2J5W_10[i] + pov_EC2S2J5W_10[i] + jus_EC2S2J5W_10[i] + cl_EC2S2J5W_10[i]
+deriv(EC3S2J5W_10[]) <- age_EC3S2J5W_10[i] + pov_EC3S2J5W_10[i] + jus_EC3S2J5W_10[i] + cl_EC3S2J5W_10[i]
+deriv(EC4S2J5W_10[]) <- age_EC4S2J5W_10[i] + pov_EC4S2J5W_10[i] + jus_EC4S2J5W_10[i] + cl_EC4S2J5W_10[i]
+
+deriv(EC1S2J5W_11[]) <- age_EC1S2J5W_11[i] + pov_EC1S2J5W_11[i] + jus_EC1S2J5W_11[i] + cl_EC1S2J5W_11[i]
+deriv(EC2S2J5W_11[]) <- age_EC2S2J5W_11[i] + pov_EC2S2J5W_11[i] + jus_EC2S2J5W_11[i] + cl_EC2S2J5W_11[i]
+deriv(EC3S2J5W_11[]) <- age_EC3S2J5W_11[i] + pov_EC3S2J5W_11[i] + jus_EC3S2J5W_11[i] + cl_EC3S2J5W_11[i]
+deriv(EC4S2J5W_11[]) <- age_EC4S2J5W_11[i] + pov_EC4S2J5W_11[i] + jus_EC4S2J5W_11[i] + cl_EC4S2J5W_11[i]
+
+deriv(EC1S2J5W_12[]) <- age_EC1S2J5W_12[i] + pov_EC1S2J5W_12[i] + jus_EC1S2J5W_12[i] + cl_EC1S2J5W_12[i]
+deriv(EC2S2J5W_12[]) <- age_EC2S2J5W_12[i] + pov_EC2S2J5W_12[i] + jus_EC2S2J5W_12[i] + cl_EC2S2J5W_12[i]
+deriv(EC3S2J5W_12[]) <- age_EC3S2J5W_12[i] + pov_EC3S2J5W_12[i] + jus_EC3S2J5W_12[i] + cl_EC3S2J5W_12[i]
+deriv(EC4S2J5W_12[]) <- age_EC4S2J5W_12[i] + pov_EC4S2J5W_12[i] + jus_EC4S2J5W_12[i] + cl_EC4S2J5W_12[i]
+
+deriv(EC1S2J5W_13[]) <- age_EC1S2J5W_13[i] + pov_EC1S2J5W_13[i] + jus_EC1S2J5W_13[i] + cl_EC1S2J5W_13[i]
+deriv(EC2S2J5W_13[]) <- age_EC2S2J5W_13[i] + pov_EC2S2J5W_13[i] + jus_EC2S2J5W_13[i] + cl_EC2S2J5W_13[i]
+deriv(EC3S2J5W_13[]) <- age_EC3S2J5W_13[i] + pov_EC3S2J5W_13[i] + jus_EC3S2J5W_13[i] + cl_EC3S2J5W_13[i]
+deriv(EC4S2J5W_13[]) <- age_EC4S2J5W_13[i] + pov_EC4S2J5W_13[i] + jus_EC4S2J5W_13[i] + cl_EC4S2J5W_13[i]
+
+deriv(EC1S2J5W_14[]) <- age_EC1S2J5W_14[i] + pov_EC1S2J5W_14[i] + jus_EC1S2J5W_14[i] + cl_EC1S2J5W_14[i]
+deriv(EC2S2J5W_14[]) <- age_EC2S2J5W_14[i] + pov_EC2S2J5W_14[i] + jus_EC2S2J5W_14[i] + cl_EC2S2J5W_14[i]
+deriv(EC3S2J5W_14[]) <- age_EC3S2J5W_14[i] + pov_EC3S2J5W_14[i] + jus_EC3S2J5W_14[i] + cl_EC3S2J5W_14[i]
+deriv(EC4S2J5W_14[]) <- age_EC4S2J5W_14[i] + pov_EC4S2J5W_14[i] + jus_EC4S2J5W_14[i] + cl_EC4S2J5W_14[i]
+
+deriv(EC1S2J5W_15[]) <- age_EC1S2J5W_15[i] + pov_EC1S2J5W_15[i] + jus_EC1S2J5W_15[i] + cl_EC1S2J5W_15[i]
+deriv(EC2S2J5W_15[]) <- age_EC2S2J5W_15[i] + pov_EC2S2J5W_15[i] + jus_EC2S2J5W_15[i] + cl_EC2S2J5W_15[i]
+deriv(EC3S2J5W_15[]) <- age_EC3S2J5W_15[i] + pov_EC3S2J5W_15[i] + jus_EC3S2J5W_15[i] + cl_EC3S2J5W_15[i]
+deriv(EC4S2J5W_15[]) <- age_EC4S2J5W_15[i] + pov_EC4S2J5W_15[i] + jus_EC4S2J5W_15[i] + cl_EC4S2J5W_15[i]
+
+deriv(EC1S2J5W_16[]) <- age_EC1S2J5W_16[i] + pov_EC1S2J5W_16[i] + jus_EC1S2J5W_16[i] + cl_EC1S2J5W_16[i]
+deriv(EC2S2J5W_16[]) <- age_EC2S2J5W_16[i] + pov_EC2S2J5W_16[i] + jus_EC2S2J5W_16[i] + cl_EC2S2J5W_16[i]
+deriv(EC3S2J5W_16[]) <- age_EC3S2J5W_16[i] + pov_EC3S2J5W_16[i] + jus_EC3S2J5W_16[i] + cl_EC3S2J5W_16[i]
+deriv(EC4S2J5W_16[]) <- age_EC4S2J5W_16[i] + pov_EC4S2J5W_16[i] + jus_EC4S2J5W_16[i] + cl_EC4S2J5W_16[i]
+
+deriv(EC1S2J5W_17[]) <- age_EC1S2J5W_17[i] + pov_EC1S2J5W_17[i] + jus_EC1S2J5W_17[i] + cl_EC1S2J5W_17[i]
+deriv(EC2S2J5W_17[]) <- age_EC2S2J5W_17[i] + pov_EC2S2J5W_17[i] + jus_EC2S2J5W_17[i] + cl_EC2S2J5W_17[i]
+deriv(EC3S2J5W_17[]) <- age_EC3S2J5W_17[i] + pov_EC3S2J5W_17[i] + jus_EC3S2J5W_17[i] + cl_EC3S2J5W_17[i]
+deriv(EC4S2J5W_17[]) <- age_EC4S2J5W_17[i] + pov_EC4S2J5W_17[i] + jus_EC4S2J5W_17[i] + cl_EC4S2J5W_17[i]
 
 
 ##############################################################################################################################
@@ -11373,8 +13401,109 @@ com_P_17[] <- com_PU_17[i] + com_PW_17[i]
 
 com[] <- com_I_10[i] + com_E_10[i] + com_P_10[i] + com_I_11[i] + com_E_11[i] + com_P_11[i] + com_I_12[i] + com_E_12[i] + com_P_12[i] + com_I_13[i] + com_E_13[i] + com_P_13[i] + com_I_14[i] + com_E_14[i] + com_P_14[i] + com_I_15[i] + com_E_15[i] + com_P_15[i] + com_I_16[i] + com_E_16[i] + com_P_16[i] + com_I_17[i] + com_E_17[i] + com_P_17[i]
 
+##############################################################################################################################
+#incarcerated groups # # ## # # # # # # # # # # # # # # # # # # # ## # # # # # # # # # # # # # # # # #
+##############################################################################################################################
+
+cust_IU_10[] <- IC1S1J4U_10[i] + IC2S1J4U_10[i] + IC4S1J4U_10[i] + IC1S1J5U_10[i] + IC2S1J5U_10[i] + IC4S1J5U_10[i]
+cust_EU_10[] <- EC1S1J4U_10[i] + EC2S1J4U_10[i] + EC4S1J4U_10[i] + EC1S1J5U_10[i] + EC2S1J5U_10[i] + EC4S1J5U_10[i]
+cust_PU_10[] <- IC3S1J4U_10[i] + IC1S2J4U_10[i] + IC2S2J4U_10[i] + IC3S2J4U_10[i] + IC4S2J4U_10[i] + IC3S1J5U_10[i] + IC1S2J5U_10[i] + IC2S2J5U_10[i] + IC3S2J5U_10[i] + IC4S2J5U_10[i] + EC3S1J4U_10[i] + EC1S2J4U_10[i] + EC2S2J4U_10[i] + EC3S2J4U_10[i] + EC4S2J4U_10[i] + EC3S1J5U_10[i] + EC1S2J5U_10[i] + EC2S2J5U_10[i] + EC3S2J5U_10[i] + EC4S2J5U_10[i]
+
+cust_IU_11[] <- IC1S1J4U_11[i] + IC2S1J4U_11[i] + IC4S1J4U_11[i] + IC1S1J5U_11[i] + IC2S1J5U_11[i] + IC4S1J5U_11[i]
+cust_EU_11[] <- EC1S1J4U_11[i] + EC2S1J4U_11[i] + EC4S1J4U_11[i] + EC1S1J5U_11[i] + EC2S1J5U_11[i] + EC4S1J5U_11[i]
+cust_PU_11[] <- IC3S1J4U_11[i] + IC1S2J4U_11[i] + IC2S2J4U_11[i] + IC3S2J4U_11[i] + IC4S2J4U_11[i] + IC3S1J5U_11[i] + IC1S2J5U_11[i] + IC2S2J5U_11[i] + IC3S2J5U_11[i] + IC4S2J5U_11[i] + EC3S1J4U_11[i] + EC1S2J4U_11[i] + EC2S2J4U_11[i] + EC3S2J4U_11[i] + EC4S2J4U_11[i] + EC3S1J5U_11[i] + EC1S2J5U_11[i] + EC2S2J5U_11[i] + EC3S2J5U_11[i] + EC4S2J5U_11[i]
+
+cust_IU_12[] <- IC1S1J4U_12[i] + IC2S1J4U_12[i] + IC4S1J4U_12[i] + IC1S1J5U_12[i] + IC2S1J5U_12[i] + IC4S1J5U_12[i]
+cust_EU_12[] <- EC1S1J4U_12[i] + EC2S1J4U_12[i] + EC4S1J4U_12[i] + EC1S1J5U_12[i] + EC2S1J5U_12[i] + EC4S1J5U_12[i]
+cust_PU_12[] <- IC3S1J4U_12[i] + IC1S2J4U_12[i] + IC2S2J4U_12[i] + IC3S2J4U_12[i] + IC4S2J4U_12[i] + IC3S1J5U_12[i] + IC1S2J5U_12[i] + IC2S2J5U_12[i] + IC3S2J5U_12[i] + IC4S2J5U_12[i] + EC3S1J4U_12[i] + EC1S2J4U_12[i] + EC2S2J4U_12[i] + EC3S2J4U_12[i] + EC4S2J4U_12[i] + EC3S1J5U_12[i] + EC1S2J5U_12[i] + EC2S2J5U_12[i] + EC3S2J5U_12[i] + EC4S2J5U_12[i]
+
+cust_IU_13[] <- IC1S1J4U_13[i] + IC2S1J4U_13[i] + IC4S1J4U_13[i] + IC1S1J5U_13[i] + IC2S1J5U_13[i] + IC4S1J5U_13[i]
+cust_EU_13[] <- EC1S1J4U_13[i] + EC2S1J4U_13[i] + EC4S1J4U_13[i] + EC1S1J5U_13[i] + EC2S1J5U_13[i] + EC4S1J5U_13[i]
+cust_PU_13[] <- IC3S1J4U_13[i] + IC1S2J4U_13[i] + IC2S2J4U_13[i] + IC3S2J4U_13[i] + IC4S2J4U_13[i] + IC3S1J5U_13[i] + IC1S2J5U_13[i] + IC2S2J5U_13[i] + IC3S2J5U_13[i] + IC4S2J5U_13[i] + EC3S1J4U_13[i] + EC1S2J4U_13[i] + EC2S2J4U_13[i] + EC3S2J4U_13[i] + EC4S2J4U_13[i] + EC3S1J5U_13[i] + EC1S2J5U_13[i] + EC2S2J5U_13[i] + EC3S2J5U_13[i] + EC4S2J5U_13[i]
+
+cust_IU_14[] <- IC1S1J4U_14[i] + IC2S1J4U_14[i] + IC4S1J4U_14[i] + IC1S1J5U_14[i] + IC2S1J5U_14[i] + IC4S1J5U_14[i]
+cust_EU_14[] <- EC1S1J4U_14[i] + EC2S1J4U_14[i] + EC4S1J4U_14[i] + EC1S1J5U_14[i] + EC2S1J5U_14[i] + EC4S1J5U_14[i]
+cust_PU_14[] <- IC3S1J4U_14[i] + IC1S2J4U_14[i] + IC2S2J4U_14[i] + IC3S2J4U_14[i] + IC4S2J4U_14[i] + IC3S1J5U_14[i] + IC1S2J5U_14[i] + IC2S2J5U_14[i] + IC3S2J5U_14[i] + IC4S2J5U_14[i] + EC3S1J4U_14[i] + EC1S2J4U_14[i] + EC2S2J4U_14[i] + EC3S2J4U_14[i] + EC4S2J4U_14[i] + EC3S1J5U_14[i] + EC1S2J5U_14[i] + EC2S2J5U_14[i] + EC3S2J5U_14[i] + EC4S2J5U_14[i]
+
+cust_IU_15[] <- IC1S1J4U_15[i] + IC2S1J4U_15[i] + IC4S1J4U_15[i] + IC1S1J5U_15[i] + IC2S1J5U_15[i] + IC4S1J5U_15[i]
+cust_EU_15[] <- EC1S1J4U_15[i] + EC2S1J4U_15[i] + EC4S1J4U_15[i] + EC1S1J5U_15[i] + EC2S1J5U_15[i] + EC4S1J5U_15[i]
+cust_PU_15[] <- IC3S1J4U_15[i] + IC1S2J4U_15[i] + IC2S2J4U_15[i] + IC3S2J4U_15[i] + IC4S2J4U_15[i] + IC3S1J5U_15[i] + IC1S2J5U_15[i] + IC2S2J5U_15[i] + IC3S2J5U_15[i] + IC4S2J5U_15[i] + EC3S1J4U_15[i] + EC1S2J4U_15[i] + EC2S2J4U_15[i] + EC3S2J4U_15[i] + EC4S2J4U_15[i] + EC3S1J5U_15[i] + EC1S2J5U_15[i] + EC2S2J5U_15[i] + EC3S2J5U_15[i] + EC4S2J5U_15[i]
+
+cust_IU_16[] <- IC1S1J4U_16[i] + IC2S1J4U_16[i] + IC4S1J4U_16[i] + IC1S1J5U_16[i] + IC2S1J5U_16[i] + IC4S1J5U_16[i]
+cust_EU_16[] <- EC1S1J4U_16[i] + EC2S1J4U_16[i] + EC4S1J4U_16[i] + EC1S1J5U_16[i] + EC2S1J5U_16[i] + EC4S1J5U_16[i]
+cust_PU_16[] <- IC3S1J4U_16[i] + IC1S2J4U_16[i] + IC2S2J4U_16[i] + IC3S2J4U_16[i] + IC4S2J4U_16[i] + IC3S1J5U_16[i] + IC1S2J5U_16[i] + IC2S2J5U_16[i] + IC3S2J5U_16[i] + IC4S2J5U_16[i] + EC3S1J4U_16[i] + EC1S2J4U_16[i] + EC2S2J4U_16[i] + EC3S2J4U_16[i] + EC4S2J4U_16[i] + EC3S1J5U_16[i] + EC1S2J5U_16[i] + EC2S2J5U_16[i] + EC3S2J5U_16[i] + EC4S2J5U_16[i]
+
+cust_IU_17[] <- IC1S1J4U_17[i] + IC2S1J4U_17[i] + IC4S1J4U_17[i] + IC1S1J5U_17[i] + IC2S1J5U_17[i] + IC4S1J5U_17[i]
+cust_EU_17[] <- EC1S1J4U_17[i] + EC2S1J4U_17[i] + EC4S1J4U_17[i] + EC1S1J5U_17[i] + EC2S1J5U_17[i] + EC4S1J5U_17[i]
+cust_PU_17[] <- IC3S1J4U_17[i] + IC1S2J4U_17[i] + IC2S2J4U_17[i] + IC3S2J4U_17[i] + IC4S2J4U_17[i] + IC3S1J5U_17[i] + IC1S2J5U_17[i] + IC2S2J5U_17[i] + IC3S2J5U_17[i] + IC4S2J5U_17[i] + EC3S1J4U_17[i] + EC1S2J4U_17[i] + EC2S2J4U_17[i] + EC3S2J4U_17[i] + EC4S2J4U_17[i] + EC3S1J5U_17[i] + EC1S2J5U_17[i] + EC2S2J5U_17[i] + EC3S2J5U_17[i] + EC4S2J5U_17[i]
 
 
+cust_IW_10[] <- IC1S1J4W_10[i] + IC2S1J4W_10[i] + IC4S1J4W_10[i] + IC1S1J5W_10[i] + IC2S1J5W_10[i] + IC4S1J5W_10[i]
+cust_EW_10[] <- EC1S1J4W_10[i] + EC2S1J4W_10[i] + EC4S1J4W_10[i] + EC1S1J5W_10[i] + EC2S1J5W_10[i] + EC4S1J5W_10[i]
+cust_PW_10[] <- IC3S1J4W_10[i] + IC1S2J4W_10[i] + IC2S2J4W_10[i] + IC3S2J4W_10[i] + IC4S2J4W_10[i] + IC3S1J5W_10[i] + IC1S2J5W_10[i] + IC2S2J5W_10[i] + IC3S2J5W_10[i] + IC4S2J5W_10[i] + EC3S1J4W_10[i] + EC1S2J4W_10[i] + EC2S2J4W_10[i] + EC3S2J4W_10[i] + EC4S2J4W_10[i] + EC3S1J5W_10[i] + EC1S2J5W_10[i] + EC2S2J5W_10[i] + EC3S2J5W_10[i] + EC4S2J5W_10[i]
+
+cust_IW_11[] <- IC1S1J4W_11[i] + IC2S1J4W_11[i] + IC4S1J4W_11[i] + IC1S1J5W_11[i] + IC2S1J5W_11[i] + IC4S1J5W_11[i]
+cust_EW_11[] <- EC1S1J4W_11[i] + EC2S1J4W_11[i] + EC4S1J4W_11[i] + EC1S1J5W_11[i] + EC2S1J5W_11[i] + EC4S1J5W_11[i]
+cust_PW_11[] <- IC3S1J4W_11[i] + IC1S2J4W_11[i] + IC2S2J4W_11[i] + IC3S2J4W_11[i] + IC4S2J4W_11[i] + IC3S1J5W_11[i] + IC1S2J5W_11[i] + IC2S2J5W_11[i] + IC3S2J5W_11[i] + IC4S2J5W_11[i] + EC3S1J4W_11[i] + EC1S2J4W_11[i] + EC2S2J4W_11[i] + EC3S2J4W_11[i] + EC4S2J4W_11[i] + EC3S1J5W_11[i] + EC1S2J5W_11[i] + EC2S2J5W_11[i] + EC3S2J5W_11[i] + EC4S2J5W_11[i]
+
+cust_IW_12[] <- IC1S1J4W_12[i] + IC2S1J4W_12[i] + IC4S1J4W_12[i] + IC1S1J5W_12[i] + IC2S1J5W_12[i] + IC4S1J5W_12[i]
+cust_EW_12[] <- EC1S1J4W_12[i] + EC2S1J4W_12[i] + EC4S1J4W_12[i] + EC1S1J5W_12[i] + EC2S1J5W_12[i] + EC4S1J5W_12[i]
+cust_PW_12[] <- IC3S1J4W_12[i] + IC1S2J4W_12[i] + IC2S2J4W_12[i] + IC3S2J4W_12[i] + IC4S2J4W_12[i] + IC3S1J5W_12[i] + IC1S2J5W_12[i] + IC2S2J5W_12[i] + IC3S2J5W_12[i] + IC4S2J5W_12[i] + EC3S1J4W_12[i] + EC1S2J4W_12[i] + EC2S2J4W_12[i] + EC3S2J4W_12[i] + EC4S2J4W_12[i] + EC3S1J5W_12[i] + EC1S2J5W_12[i] + EC2S2J5W_12[i] + EC3S2J5W_12[i] + EC4S2J5W_12[i]
+
+cust_IW_13[] <- IC1S1J4W_13[i] + IC2S1J4W_13[i] + IC4S1J4W_13[i] + IC1S1J5W_13[i] + IC2S1J5W_13[i] + IC4S1J5W_13[i]
+cust_EW_13[] <- EC1S1J4W_13[i] + EC2S1J4W_13[i] + EC4S1J4W_13[i] + EC1S1J5W_13[i] + EC2S1J5W_13[i] + EC4S1J5W_13[i]
+cust_PW_13[] <- IC3S1J4W_13[i] + IC1S2J4W_13[i] + IC2S2J4W_13[i] + IC3S2J4W_13[i] + IC4S2J4W_13[i] + IC3S1J5W_13[i] + IC1S2J5W_13[i] + IC2S2J5W_13[i] + IC3S2J5W_13[i] + IC4S2J5W_13[i] + EC3S1J4W_13[i] + EC1S2J4W_13[i] + EC2S2J4W_13[i] + EC3S2J4W_13[i] + EC4S2J4W_13[i] + EC3S1J5W_13[i] + EC1S2J5W_13[i] + EC2S2J5W_13[i] + EC3S2J5W_13[i] + EC4S2J5W_13[i]
+
+cust_IW_14[] <- IC1S1J4W_14[i] + IC2S1J4W_14[i] + IC4S1J4W_14[i] + IC1S1J5W_14[i] + IC2S1J5W_14[i] + IC4S1J5W_14[i]
+cust_EW_14[] <- EC1S1J4W_14[i] + EC2S1J4W_14[i] + EC4S1J4W_14[i] + EC1S1J5W_14[i] + EC2S1J5W_14[i] + EC4S1J5W_14[i]
+cust_PW_14[] <- IC3S1J4W_14[i] + IC1S2J4W_14[i] + IC2S2J4W_14[i] + IC3S2J4W_14[i] + IC4S2J4W_14[i] + IC3S1J5W_14[i] + IC1S2J5W_14[i] + IC2S2J5W_14[i] + IC3S2J5W_14[i] + IC4S2J5W_14[i] + EC3S1J4W_14[i] + EC1S2J4W_14[i] + EC2S2J4W_14[i] + EC3S2J4W_14[i] + EC4S2J4W_14[i] + EC3S1J5W_14[i] + EC1S2J5W_14[i] + EC2S2J5W_14[i] + EC3S2J5W_14[i] + EC4S2J5W_14[i]
+
+cust_IW_15[] <- IC1S1J4W_15[i] + IC2S1J4W_15[i] + IC4S1J4W_15[i] + IC1S1J5W_15[i] + IC2S1J5W_15[i] + IC4S1J5W_15[i]
+cust_EW_15[] <- EC1S1J4W_15[i] + EC2S1J4W_15[i] + EC4S1J4W_15[i] + EC1S1J5W_15[i] + EC2S1J5W_15[i] + EC4S1J5W_15[i]
+cust_PW_15[] <- IC3S1J4W_15[i] + IC1S2J4W_15[i] + IC2S2J4W_15[i] + IC3S2J4W_15[i] + IC4S2J4W_15[i] + IC3S1J5W_15[i] + IC1S2J5W_15[i] + IC2S2J5W_15[i] + IC3S2J5W_15[i] + IC4S2J5W_15[i] + EC3S1J4W_15[i] + EC1S2J4W_15[i] + EC2S2J4W_15[i] + EC3S2J4W_15[i] + EC4S2J4W_15[i] + EC3S1J5W_15[i] + EC1S2J5W_15[i] + EC2S2J5W_15[i] + EC3S2J5W_15[i] + EC4S2J5W_15[i]
+
+cust_IW_16[] <- IC1S1J4W_16[i] + IC2S1J4W_16[i] + IC4S1J4W_16[i] + IC1S1J5W_16[i] + IC2S1J5W_16[i] + IC4S1J5W_16[i]
+cust_EW_16[] <- EC1S1J4W_16[i] + EC2S1J4W_16[i] + EC4S1J4W_16[i] + EC1S1J5W_16[i] + EC2S1J5W_16[i] + EC4S1J5W_16[i]
+cust_PW_16[] <- IC3S1J4W_16[i] + IC1S2J4W_16[i] + IC2S2J4W_16[i] + IC3S2J4W_16[i] + IC4S2J4W_16[i] + IC3S1J5W_16[i] + IC1S2J5W_16[i] + IC2S2J5W_16[i] + IC3S2J5W_16[i] + IC4S2J5W_16[i] + EC3S1J4W_16[i] + EC1S2J4W_16[i] + EC2S2J4W_16[i] + EC3S2J4W_16[i] + EC4S2J4W_16[i] + EC3S1J5W_16[i] + EC1S2J5W_16[i] + EC2S2J5W_16[i] + EC3S2J5W_16[i] + EC4S2J5W_16[i]
+
+cust_IW_17[] <- IC1S1J4W_17[i] + IC2S1J4W_17[i] + IC4S1J4W_17[i] + IC1S1J5W_17[i] + IC2S1J5W_17[i] + IC4S1J5W_17[i]
+cust_EW_17[] <- EC1S1J4W_17[i] + EC2S1J4W_17[i] + EC4S1J4W_17[i] + EC1S1J5W_17[i] + EC2S1J5W_17[i] + EC4S1J5W_17[i]
+cust_PW_17[] <- IC3S1J4W_17[i] + IC1S2J4W_17[i] + IC2S2J4W_17[i] + IC3S2J4W_17[i] + IC4S2J4W_17[i] + IC3S1J5W_17[i] + IC1S2J5W_17[i] + IC2S2J5W_17[i] + IC3S2J5W_17[i] + IC4S2J5W_17[i] + EC3S1J4W_17[i] + EC1S2J4W_17[i] + EC2S2J4W_17[i] + EC3S2J4W_17[i] + EC4S2J4W_17[i] + EC3S1J5W_17[i] + EC1S2J5W_17[i] + EC2S2J5W_17[i] + EC3S2J5W_17[i] + EC4S2J5W_17[i]
+
+
+cust_I_10[]  <- cust_IU_10[i]  + cust_IW_10[i] 
+cust_E_10[]  <- cust_EU_10[i]  + cust_EW_10[i] 
+cust_P_10[]  <- cust_PU_10[i]  + cust_PW_10[i] 
+
+cust_I_11[]  <- cust_IU_11[i]  + cust_IW_11[i] 
+cust_E_11[]  <- cust_EU_11[i]  + cust_EW_11[i] 
+cust_P_11[]  <- cust_PU_11[i]  + cust_PW_11[i] 
+
+cust_I_12[]  <- cust_IU_12[i]  + cust_IW_12[i] 
+cust_E_12[]  <- cust_EU_12[i]  + cust_EW_12[i] 
+cust_P_12[]  <- cust_PU_12[i]  + cust_PW_12[i] 
+
+cust_I_13[]  <- cust_IU_13[i]  + cust_IW_13[i] 
+cust_E_13[]  <- cust_EU_13[i]  + cust_EW_13[i] 
+cust_P_13[]  <- cust_PU_13[i]  + cust_PW_13[i] 
+
+cust_I_14[]  <- cust_IU_14[i]  + cust_IW_14[i] 
+cust_E_14[]  <- cust_EU_14[i]  + cust_EW_14[i] 
+cust_P_14[]  <- cust_PU_14[i]  + cust_PW_14[i] 
+
+cust_I_15[]  <- cust_IU_15[i]  + cust_IW_15[i] 
+cust_E_15[]  <- cust_EU_15[i]  + cust_EW_15[i] 
+cust_P_15[]  <- cust_PU_15[i]  + cust_PW_15[i] 
+
+cust_I_16[]  <- cust_IU_16[i]  + cust_IW_16[i] 
+cust_E_16[]  <- cust_EU_16[i]  + cust_EW_16[i] 
+cust_P_16[]  <- cust_PU_16[i]  + cust_PW_16[i] 
+
+cust_I_17[]  <- cust_IU_17[i]  + cust_IW_17[i] 
+cust_E_17[]  <- cust_EU_17[i]  + cust_EW_17[i] 
+cust_P_17[]  <- cust_PU_17[i]  + cust_PW_17[i] 
+
+cust[] <- cust_I_10[i] + cust_E_10[i] + cust_P_10[i] + cust_I_11[i] + cust_E_11[i] + cust_P_11[i] + cust_I_12[i] + cust_E_12[i] + cust_P_12[i] + cust_I_13[i] + cust_E_13[i] + cust_P_13[i] + cust_I_14[i] + cust_E_14[i] + cust_P_14[i] + cust_I_15[i] + cust_E_15[i] + cust_P_15[i] + cust_I_16[i] + cust_E_16[i] + cust_P_16[i] + cust_I_17[i] + cust_E_17[i] + cust_P_17[i] 
 
 ##############################################################################################################################
 #groups of flows
@@ -11453,10 +13582,10 @@ age_IC2S2J1U_15[] <- age_up*IC2S2J1U_14[i] - age_up*IC2S2J1U_15[i]
 age_IC3S2J1U_15[] <- age_up*IC3S2J1U_14[i] - age_up*IC3S2J1U_15[i]
 age_IC4S2J1U_15[] <- age_up*IC4S2J1U_14[i] - age_up*IC4S2J1U_15[i]
 
-age_IC1S2J1U_16[] <- age_up*((1 - neet16_ic1s2j1u[i])*IC1S2J1U_15[i]) + (1 - neet16_ic1s1j1u[i])*IC1S1J1U_15[i]) - age_up*IC1S2J1U_16[i]
-age_IC2S2J1U_16[] <- age_up*((1 - neet16_ic2s2j1u[i])*IC2S2J1U_15[i]) + (1 - neet16_ic2s1j1u[i])*IC2S1J1U_15[i]) - age_up*IC2S2J1U_16[i]
-age_IC3S2J1U_16[] <- age_up*((1 - neet16_ic3s2j1u[i])*IC3S2J1U_15[i]) + (1 - neet16_ic3s1j1u[i])*IC3S1J1U_15[i]) - age_up*IC3S2J1U_16[i]
-age_IC4S2J1U_16[] <- age_up*((1 - neet16_ic4s2j1u[i])*IC4S2J1U_15[i]) + (1 - neet16_ic4s1j1u[i])*IC4S1J1U_15[i]) - age_up*IC4S2J1U_16[i]
+age_IC1S2J1U_16[] <- age_up*((1 - neet16_ic1s2j1u[i])*IC1S2J1U_15[i] + (1 - neet16_ic1s1j1u[i])*IC1S1J1U_15[i]) - age_up*IC1S2J1U_16[i]
+age_IC2S2J1U_16[] <- age_up*((1 - neet16_ic2s2j1u[i])*IC2S2J1U_15[i] + (1 - neet16_ic2s1j1u[i])*IC2S1J1U_15[i]) - age_up*IC2S2J1U_16[i]
+age_IC3S2J1U_16[] <- age_up*((1 - neet16_ic3s2j1u[i])*IC3S2J1U_15[i] + (1 - neet16_ic3s1j1u[i])*IC3S1J1U_15[i]) - age_up*IC3S2J1U_16[i]
+age_IC4S2J1U_16[] <- age_up*((1 - neet16_ic4s2j1u[i])*IC4S2J1U_15[i] + (1 - neet16_ic4s1j1u[i])*IC4S1J1U_15[i]) - age_up*IC4S2J1U_16[i]
 
 age_IC1S2J1U_17[] <- age_up*IC1S2J1U_16[i] - age_up*IC1S2J1U_17[i]
 age_IC2S2J1U_17[] <- age_up*IC2S2J1U_16[i] - age_up*IC2S2J1U_17[i]
@@ -11537,10 +13666,10 @@ age_IC2S2J2U_15[] <- age_up*IC2S2J2U_14[i] - age_up*IC2S2J2U_15[i]
 age_IC3S2J2U_15[] <- age_up*IC3S2J2U_14[i] - age_up*IC3S2J2U_15[i]
 age_IC4S2J2U_15[] <- age_up*IC4S2J2U_14[i] - age_up*IC4S2J2U_15[i]
 
-age_IC1S2J2U_16[] <- age_up*((1 - neet16_ic1s2j2u[i])*IC1S2J2U_15[i]) + (1 - neet16_ic1s1j2u[i])*IC1S1J2U_15[i]) - age_up*IC1S2J2U_16[i]
-age_IC2S2J2U_16[] <- age_up*((1 - neet16_ic2s2j2u[i])*IC2S2J2U_15[i]) + (1 - neet16_ic2s1j2u[i])*IC2S1J2U_15[i]) - age_up*IC2S2J2U_16[i]
-age_IC3S2J2U_16[] <- age_up*((1 - neet16_ic3s2j2u[i])*IC3S2J2U_15[i]) + (1 - neet16_ic3s1j2u[i])*IC3S1J2U_15[i]) - age_up*IC3S2J2U_16[i]
-age_IC4S2J2U_16[] <- age_up*((1 - neet16_ic4s2j2u[i])*IC4S2J2U_15[i]) + (1 - neet16_ic4s1j2u[i])*IC4S1J2U_15[i]) - age_up*IC4S2J2U_16[i]
+age_IC1S2J2U_16[] <- age_up*((1 - neet16_ic1s2j2u[i])*IC1S2J2U_15[i] + (1 - neet16_ic1s1j2u[i])*IC1S1J2U_15[i]) - age_up*IC1S2J2U_16[i]
+age_IC2S2J2U_16[] <- age_up*((1 - neet16_ic2s2j2u[i])*IC2S2J2U_15[i] + (1 - neet16_ic2s1j2u[i])*IC2S1J2U_15[i]) - age_up*IC2S2J2U_16[i]
+age_IC3S2J2U_16[] <- age_up*((1 - neet16_ic3s2j2u[i])*IC3S2J2U_15[i] + (1 - neet16_ic3s1j2u[i])*IC3S1J2U_15[i]) - age_up*IC3S2J2U_16[i]
+age_IC4S2J2U_16[] <- age_up*((1 - neet16_ic4s2j2u[i])*IC4S2J2U_15[i] + (1 - neet16_ic4s1j2u[i])*IC4S1J2U_15[i]) - age_up*IC4S2J2U_16[i]
 
 age_IC1S2J2U_17[] <- age_up*IC1S2J2U_16[i] - age_up*IC1S2J2U_17[i]
 age_IC2S2J2U_17[] <- age_up*IC2S2J2U_16[i] - age_up*IC2S2J2U_17[i]
@@ -11621,10 +13750,10 @@ age_IC2S2J3U_15[] <- age_up*IC2S2J3U_14[i] - age_up*IC2S2J3U_15[i]
 age_IC3S2J3U_15[] <- age_up*IC3S2J3U_14[i] - age_up*IC3S2J3U_15[i]
 age_IC4S2J3U_15[] <- age_up*IC4S2J3U_14[i] - age_up*IC4S2J3U_15[i]
 
-age_IC1S2J3U_16[] <- age_up*((1 - neet16_ic1s2j3u[i])*IC1S2J3U_15[i]) + (1 - neet16_ic1s1j3u[i])*IC1S1J3U_15[i]) - age_up*IC1S2J3U_16[i]
-age_IC2S2J3U_16[] <- age_up*((1 - neet16_ic2s2j3u[i])*IC2S2J3U_15[i]) + (1 - neet16_ic2s1j3u[i])*IC2S1J3U_15[i]) - age_up*IC2S2J3U_16[i]
-age_IC3S2J3U_16[] <- age_up*((1 - neet16_ic3s2j3u[i])*IC3S2J3U_15[i]) + (1 - neet16_ic3s1j3u[i])*IC3S1J3U_15[i]) - age_up*IC3S2J3U_16[i]
-age_IC4S2J3U_16[] <- age_up*((1 - neet16_ic4s2j3u[i])*IC4S2J3U_15[i]) + (1 - neet16_ic4s1j3u[i])*IC4S1J3U_15[i]) - age_up*IC4S2J3U_16[i]
+age_IC1S2J3U_16[] <- age_up*((1 - neet16_ic1s2j3u[i])*IC1S2J3U_15[i] + (1 - neet16_ic1s1j3u[i])*IC1S1J3U_15[i]) - age_up*IC1S2J3U_16[i]
+age_IC2S2J3U_16[] <- age_up*((1 - neet16_ic2s2j3u[i])*IC2S2J3U_15[i] + (1 - neet16_ic2s1j3u[i])*IC2S1J3U_15[i]) - age_up*IC2S2J3U_16[i]
+age_IC3S2J3U_16[] <- age_up*((1 - neet16_ic3s2j3u[i])*IC3S2J3U_15[i] + (1 - neet16_ic3s1j3u[i])*IC3S1J3U_15[i]) - age_up*IC3S2J3U_16[i]
+age_IC4S2J3U_16[] <- age_up*((1 - neet16_ic4s2j3u[i])*IC4S2J3U_15[i] + (1 - neet16_ic4s1j3u[i])*IC4S1J3U_15[i]) - age_up*IC4S2J3U_16[i]
 
 age_IC1S2J3U_17[] <- age_up*IC1S2J3U_16[i] - age_up*IC1S2J3U_17[i]
 age_IC2S2J3U_17[] <- age_up*IC2S2J3U_16[i] - age_up*IC2S2J3U_17[i]
@@ -11705,10 +13834,10 @@ age_IC2S2J4U_15[] <- age_up*IC2S2J4U_14[i] - age_up*IC2S2J4U_15[i]
 age_IC3S2J4U_15[] <- age_up*IC3S2J4U_14[i] - age_up*IC3S2J4U_15[i]
 age_IC4S2J4U_15[] <- age_up*IC4S2J4U_14[i] - age_up*IC4S2J4U_15[i]
 
-age_IC1S2J4U_16[] <- age_up*((1 - neet16_ic1s2j4u[i])*IC1S2J4U_15[i]) + (1 - neet16_ic1s1j4u[i])*IC1S1J4U_15[i]) - age_up*IC1S2J4U_16[i]
-age_IC2S2J4U_16[] <- age_up*((1 - neet16_ic2s2j4u[i])*IC2S2J4U_15[i]) + (1 - neet16_ic2s1j4u[i])*IC2S1J4U_15[i]) - age_up*IC2S2J4U_16[i]
-age_IC3S2J4U_16[] <- age_up*((1 - neet16_ic3s2j4u[i])*IC3S2J4U_15[i]) + (1 - neet16_ic3s1j4u[i])*IC3S1J4U_15[i]) - age_up*IC3S2J4U_16[i]
-age_IC4S2J4U_16[] <- age_up*((1 - neet16_ic4s2j4u[i])*IC4S2J4U_15[i]) + (1 - neet16_ic4s1j4u[i])*IC4S1J4U_15[i]) - age_up*IC4S2J4U_16[i]
+age_IC1S2J4U_16[] <- age_up*((1 - neet16_ic1s2j4u[i])*IC1S2J4U_15[i] + (1 - neet16_ic1s1j4u[i])*IC1S1J4U_15[i]) - age_up*IC1S2J4U_16[i]
+age_IC2S2J4U_16[] <- age_up*((1 - neet16_ic2s2j4u[i])*IC2S2J4U_15[i] + (1 - neet16_ic2s1j4u[i])*IC2S1J4U_15[i]) - age_up*IC2S2J4U_16[i]
+age_IC3S2J4U_16[] <- age_up*((1 - neet16_ic3s2j4u[i])*IC3S2J4U_15[i] + (1 - neet16_ic3s1j4u[i])*IC3S1J4U_15[i]) - age_up*IC3S2J4U_16[i]
+age_IC4S2J4U_16[] <- age_up*((1 - neet16_ic4s2j4u[i])*IC4S2J4U_15[i] + (1 - neet16_ic4s1j4u[i])*IC4S1J4U_15[i]) - age_up*IC4S2J4U_16[i]
 
 age_IC1S2J4U_17[] <- age_up*IC1S2J4U_16[i] - age_up*IC1S2J4U_17[i]
 age_IC2S2J4U_17[] <- age_up*IC2S2J4U_16[i] - age_up*IC2S2J4U_17[i]
@@ -11789,10 +13918,10 @@ age_IC2S2J5U_15[] <- age_up*IC2S2J5U_14[i] - age_up*IC2S2J5U_15[i]
 age_IC3S2J5U_15[] <- age_up*IC3S2J5U_14[i] - age_up*IC3S2J5U_15[i]
 age_IC4S2J5U_15[] <- age_up*IC4S2J5U_14[i] - age_up*IC4S2J5U_15[i]
 
-age_IC1S2J5U_16[] <- age_up*((1 - neet16_ic1s2j5u[i])*IC1S2J5U_15[i]) + (1 - neet16_ic1s1j5u[i])*IC1S1J5U_15[i]) - age_up*IC1S2J5U_16[i]
-age_IC2S2J5U_16[] <- age_up*((1 - neet16_ic2s2j5u[i])*IC2S2J5U_15[i]) + (1 - neet16_ic2s1j5u[i])*IC2S1J5U_15[i]) - age_up*IC2S2J5U_16[i]
-age_IC3S2J5U_16[] <- age_up*((1 - neet16_ic3s2j5u[i])*IC3S2J5U_15[i]) + (1 - neet16_ic3s1j5u[i])*IC3S1J5U_15[i]) - age_up*IC3S2J5U_16[i]
-age_IC4S2J5U_16[] <- age_up*((1 - neet16_ic4s2j5u[i])*IC4S2J5U_15[i]) + (1 - neet16_ic4s1j5u[i])*IC4S1J5U_15[i]) - age_up*IC4S2J5U_16[i]
+age_IC1S2J5U_16[] <- age_up*((1 - neet16_ic1s2j5u[i])*IC1S2J5U_15[i] + (1 - neet16_ic1s1j5u[i])*IC1S1J5U_15[i]) - age_up*IC1S2J5U_16[i]
+age_IC2S2J5U_16[] <- age_up*((1 - neet16_ic2s2j5u[i])*IC2S2J5U_15[i] + (1 - neet16_ic2s1j5u[i])*IC2S1J5U_15[i]) - age_up*IC2S2J5U_16[i]
+age_IC3S2J5U_16[] <- age_up*((1 - neet16_ic3s2j5u[i])*IC3S2J5U_15[i] + (1 - neet16_ic3s1j5u[i])*IC3S1J5U_15[i]) - age_up*IC3S2J5U_16[i]
+age_IC4S2J5U_16[] <- age_up*((1 - neet16_ic4s2j5u[i])*IC4S2J5U_15[i] + (1 - neet16_ic4s1j5u[i])*IC4S1J5U_15[i]) - age_up*IC4S2J5U_16[i]
 
 age_IC1S2J5U_17[] <- age_up*IC1S2J5U_16[i] - age_up*IC1S2J5U_17[i]
 age_IC2S2J5U_17[] <- age_up*IC2S2J5U_16[i] - age_up*IC2S2J5U_17[i]
@@ -11873,10 +14002,10 @@ age_IC2S2J1W_15[] <- age_up*IC2S2J1W_14[i] - age_up*IC2S2J1W_15[i]
 age_IC3S2J1W_15[] <- age_up*IC3S2J1W_14[i] - age_up*IC3S2J1W_15[i]
 age_IC4S2J1W_15[] <- age_up*IC4S2J1W_14[i] - age_up*IC4S2J1W_15[i]
 
-age_IC1S2J1W_16[] <- age_up*((1 - neet16_ic1s2j1w[i])*IC1S2J1W_15[i]) + (1 - neet16_ic1s1j1w[i])*IC1S1J1W_15[i]) - age_up*IC1S2J1W_16[i]
-age_IC2S2J1W_16[] <- age_up*((1 - neet16_ic2s2j1w[i])*IC2S2J1W_15[i]) + (1 - neet16_ic2s1j1w[i])*IC2S1J1W_15[i]) - age_up*IC2S2J1W_16[i]
-age_IC3S2J1W_16[] <- age_up*((1 - neet16_ic3s2j1w[i])*IC3S2J1W_15[i]) + (1 - neet16_ic3s1j1w[i])*IC3S1J1W_15[i]) - age_up*IC3S2J1W_16[i]
-age_IC4S2J1W_16[] <- age_up*((1 - neet16_ic4s2j1w[i])*IC4S2J1W_15[i]) + (1 - neet16_ic4s1j1w[i])*IC4S1J1W_15[i]) - age_up*IC4S2J1W_16[i]
+age_IC1S2J1W_16[] <- age_up*((1 - neet16_ic1s2j1w[i])*IC1S2J1W_15[i] + (1 - neet16_ic1s1j1w[i])*IC1S1J1W_15[i]) - age_up*IC1S2J1W_16[i]
+age_IC2S2J1W_16[] <- age_up*((1 - neet16_ic2s2j1w[i])*IC2S2J1W_15[i] + (1 - neet16_ic2s1j1w[i])*IC2S1J1W_15[i]) - age_up*IC2S2J1W_16[i]
+age_IC3S2J1W_16[] <- age_up*((1 - neet16_ic3s2j1w[i])*IC3S2J1W_15[i] + (1 - neet16_ic3s1j1w[i])*IC3S1J1W_15[i]) - age_up*IC3S2J1W_16[i]
+age_IC4S2J1W_16[] <- age_up*((1 - neet16_ic4s2j1w[i])*IC4S2J1W_15[i] + (1 - neet16_ic4s1j1w[i])*IC4S1J1W_15[i]) - age_up*IC4S2J1W_16[i]
 
 age_IC1S2J1W_17[] <- age_up*IC1S2J1W_16[i] - age_up*IC1S2J1W_17[i]
 age_IC2S2J1W_17[] <- age_up*IC2S2J1W_16[i] - age_up*IC2S2J1W_17[i]
@@ -11957,10 +14086,10 @@ age_IC2S2J2W_15[] <- age_up*IC2S2J2W_14[i] - age_up*IC2S2J2W_15[i]
 age_IC3S2J2W_15[] <- age_up*IC3S2J2W_14[i] - age_up*IC3S2J2W_15[i]
 age_IC4S2J2W_15[] <- age_up*IC4S2J2W_14[i] - age_up*IC4S2J2W_15[i]
 
-age_IC1S2J2W_16[] <- age_up*((1 - neet16_ic1s2j2w[i])*IC1S2J2W_15[i]) + (1 - neet16_ic1s1j2w[i])*IC1S1J2W_15[i]) - age_up*IC1S2J2W_16[i]
-age_IC2S2J2W_16[] <- age_up*((1 - neet16_ic2s2j2w[i])*IC2S2J2W_15[i]) + (1 - neet16_ic2s1j2w[i])*IC2S1J2W_15[i]) - age_up*IC2S2J2W_16[i]
-age_IC3S2J2W_16[] <- age_up*((1 - neet16_ic3s2j2w[i])*IC3S2J2W_15[i]) + (1 - neet16_ic3s1j2w[i])*IC3S1J2W_15[i]) - age_up*IC3S2J2W_16[i]
-age_IC4S2J2W_16[] <- age_up*((1 - neet16_ic4s2j2w[i])*IC4S2J2W_15[i]) + (1 - neet16_ic4s1j2w[i])*IC4S1J2W_15[i]) - age_up*IC4S2J2W_16[i]
+age_IC1S2J2W_16[] <- age_up*((1 - neet16_ic1s2j2w[i])*IC1S2J2W_15[i] + (1 - neet16_ic1s1j2w[i])*IC1S1J2W_15[i]) - age_up*IC1S2J2W_16[i]
+age_IC2S2J2W_16[] <- age_up*((1 - neet16_ic2s2j2w[i])*IC2S2J2W_15[i] + (1 - neet16_ic2s1j2w[i])*IC2S1J2W_15[i]) - age_up*IC2S2J2W_16[i]
+age_IC3S2J2W_16[] <- age_up*((1 - neet16_ic3s2j2w[i])*IC3S2J2W_15[i] + (1 - neet16_ic3s1j2w[i])*IC3S1J2W_15[i]) - age_up*IC3S2J2W_16[i]
+age_IC4S2J2W_16[] <- age_up*((1 - neet16_ic4s2j2w[i])*IC4S2J2W_15[i] + (1 - neet16_ic4s1j2w[i])*IC4S1J2W_15[i]) - age_up*IC4S2J2W_16[i]
 
 age_IC1S2J2W_17[] <- age_up*IC1S2J2W_16[i] - age_up*IC1S2J2W_17[i]
 age_IC2S2J2W_17[] <- age_up*IC2S2J2W_16[i] - age_up*IC2S2J2W_17[i]
@@ -12041,10 +14170,10 @@ age_IC2S2J3W_15[] <- age_up*IC2S2J3W_14[i] - age_up*IC2S2J3W_15[i]
 age_IC3S2J3W_15[] <- age_up*IC3S2J3W_14[i] - age_up*IC3S2J3W_15[i]
 age_IC4S2J3W_15[] <- age_up*IC4S2J3W_14[i] - age_up*IC4S2J3W_15[i]
 
-age_IC1S2J3W_16[] <- age_up*((1 - neet16_ic1s2j3w[i])*IC1S2J3W_15[i]) + (1 - neet16_ic1s1j3w[i])*IC1S1J3W_15[i]) - age_up*IC1S2J3W_16[i]
-age_IC2S2J3W_16[] <- age_up*((1 - neet16_ic2s2j3w[i])*IC2S2J3W_15[i]) + (1 - neet16_ic2s1j3w[i])*IC2S1J3W_15[i]) - age_up*IC2S2J3W_16[i]
-age_IC3S2J3W_16[] <- age_up*((1 - neet16_ic3s2j3w[i])*IC3S2J3W_15[i]) + (1 - neet16_ic3s1j3w[i])*IC3S1J3W_15[i]) - age_up*IC3S2J3W_16[i]
-age_IC4S2J3W_16[] <- age_up*((1 - neet16_ic4s2j3w[i])*IC4S2J3W_15[i]) + (1 - neet16_ic4s1j3w[i])*IC4S1J3W_15[i]) - age_up*IC4S2J3W_16[i]
+age_IC1S2J3W_16[] <- age_up*((1 - neet16_ic1s2j3w[i])*IC1S2J3W_15[i] + (1 - neet16_ic1s1j3w[i])*IC1S1J3W_15[i]) - age_up*IC1S2J3W_16[i]
+age_IC2S2J3W_16[] <- age_up*((1 - neet16_ic2s2j3w[i])*IC2S2J3W_15[i] + (1 - neet16_ic2s1j3w[i])*IC2S1J3W_15[i]) - age_up*IC2S2J3W_16[i]
+age_IC3S2J3W_16[] <- age_up*((1 - neet16_ic3s2j3w[i])*IC3S2J3W_15[i] + (1 - neet16_ic3s1j3w[i])*IC3S1J3W_15[i]) - age_up*IC3S2J3W_16[i]
+age_IC4S2J3W_16[] <- age_up*((1 - neet16_ic4s2j3w[i])*IC4S2J3W_15[i] + (1 - neet16_ic4s1j3w[i])*IC4S1J3W_15[i]) - age_up*IC4S2J3W_16[i]
 
 age_IC1S2J3W_17[] <- age_up*IC1S2J3W_16[i] - age_up*IC1S2J3W_17[i]
 age_IC2S2J3W_17[] <- age_up*IC2S2J3W_16[i] - age_up*IC2S2J3W_17[i]
@@ -12125,10 +14254,10 @@ age_IC2S2J4W_15[] <- age_up*IC2S2J4W_14[i] - age_up*IC2S2J4W_15[i]
 age_IC3S2J4W_15[] <- age_up*IC3S2J4W_14[i] - age_up*IC3S2J4W_15[i]
 age_IC4S2J4W_15[] <- age_up*IC4S2J4W_14[i] - age_up*IC4S2J4W_15[i]
 
-age_IC1S2J4W_16[] <- age_up*((1 - neet16_ic1s2j4w[i])*IC1S2J4W_15[i]) + (1 - neet16_ic1s1j4w[i])*IC1S1J4W_15[i]) - age_up*IC1S2J4W_16[i]
-age_IC2S2J4W_16[] <- age_up*((1 - neet16_ic2s2j4w[i])*IC2S2J4W_15[i]) + (1 - neet16_ic2s1j4w[i])*IC2S1J4W_15[i]) - age_up*IC2S2J4W_16[i]
-age_IC3S2J4W_16[] <- age_up*((1 - neet16_ic3s2j4w[i])*IC3S2J4W_15[i]) + (1 - neet16_ic3s1j4w[i])*IC3S1J4W_15[i]) - age_up*IC3S2J4W_16[i]
-age_IC4S2J4W_16[] <- age_up*((1 - neet16_ic4s2j4w[i])*IC4S2J4W_15[i]) + (1 - neet16_ic4s1j4w[i])*IC4S1J4W_15[i]) - age_up*IC4S2J4W_16[i]
+age_IC1S2J4W_16[] <- age_up*((1 - neet16_ic1s2j4w[i])*IC1S2J4W_15[i] + (1 - neet16_ic1s1j4w[i])*IC1S1J4W_15[i]) - age_up*IC1S2J4W_16[i]
+age_IC2S2J4W_16[] <- age_up*((1 - neet16_ic2s2j4w[i])*IC2S2J4W_15[i] + (1 - neet16_ic2s1j4w[i])*IC2S1J4W_15[i]) - age_up*IC2S2J4W_16[i]
+age_IC3S2J4W_16[] <- age_up*((1 - neet16_ic3s2j4w[i])*IC3S2J4W_15[i] + (1 - neet16_ic3s1j4w[i])*IC3S1J4W_15[i]) - age_up*IC3S2J4W_16[i]
+age_IC4S2J4W_16[] <- age_up*((1 - neet16_ic4s2j4w[i])*IC4S2J4W_15[i] + (1 - neet16_ic4s1j4w[i])*IC4S1J4W_15[i]) - age_up*IC4S2J4W_16[i]
 
 age_IC1S2J4W_17[] <- age_up*IC1S2J4W_16[i] - age_up*IC1S2J4W_17[i]
 age_IC2S2J4W_17[] <- age_up*IC2S2J4W_16[i] - age_up*IC2S2J4W_17[i]
@@ -12209,10 +14338,10 @@ age_IC2S2J5W_15[] <- age_up*IC2S2J5W_14[i] - age_up*IC2S2J5W_15[i]
 age_IC3S2J5W_15[] <- age_up*IC3S2J5W_14[i] - age_up*IC3S2J5W_15[i]
 age_IC4S2J5W_15[] <- age_up*IC4S2J5W_14[i] - age_up*IC4S2J5W_15[i]
 
-age_IC1S2J5W_16[] <- age_up*((1 - neet16_ic1s2j5w[i])*IC1S2J5W_15[i]) + (1 - neet16_ic1s1j5w[i])*IC1S1J5W_15[i]) - age_up*IC1S2J5W_16[i]
-age_IC2S2J5W_16[] <- age_up*((1 - neet16_ic2s2j5w[i])*IC2S2J5W_15[i]) + (1 - neet16_ic2s1j5w[i])*IC2S1J5W_15[i]) - age_up*IC2S2J5W_16[i]
-age_IC3S2J5W_16[] <- age_up*((1 - neet16_ic3s2j5w[i])*IC3S2J5W_15[i]) + (1 - neet16_ic3s1j5w[i])*IC3S1J5W_15[i]) - age_up*IC3S2J5W_16[i]
-age_IC4S2J5W_16[] <- age_up*((1 - neet16_ic4s2j5w[i])*IC4S2J5W_15[i]) + (1 - neet16_ic4s1j5w[i])*IC4S1J5W_15[i]) - age_up*IC4S2J5W_16[i]
+age_IC1S2J5W_16[] <- age_up*((1 - neet16_ic1s2j5w[i])*IC1S2J5W_15[i] + (1 - neet16_ic1s1j5w[i])*IC1S1J5W_15[i]) - age_up*IC1S2J5W_16[i]
+age_IC2S2J5W_16[] <- age_up*((1 - neet16_ic2s2j5w[i])*IC2S2J5W_15[i] + (1 - neet16_ic2s1j5w[i])*IC2S1J5W_15[i]) - age_up*IC2S2J5W_16[i]
+age_IC3S2J5W_16[] <- age_up*((1 - neet16_ic3s2j5w[i])*IC3S2J5W_15[i] + (1 - neet16_ic3s1j5w[i])*IC3S1J5W_15[i]) - age_up*IC3S2J5W_16[i]
+age_IC4S2J5W_16[] <- age_up*((1 - neet16_ic4s2j5w[i])*IC4S2J5W_15[i] + (1 - neet16_ic4s1j5w[i])*IC4S1J5W_15[i]) - age_up*IC4S2J5W_16[i]
 
 age_IC1S2J5W_17[] <- age_up*IC1S2J5W_16[i] - age_up*IC1S2J5W_17[i]
 age_IC2S2J5W_17[] <- age_up*IC2S2J5W_16[i] - age_up*IC2S2J5W_17[i]
@@ -12293,10 +14422,10 @@ age_EC2S2J1U_15[] <- age_up*EC2S2J1U_14[i] - age_up*EC2S2J1U_15[i]
 age_EC3S2J1U_15[] <- age_up*EC3S2J1U_14[i] - age_up*EC3S2J1U_15[i]
 age_EC4S2J1U_15[] <- age_up*EC4S2J1U_14[i] - age_up*EC4S2J1U_15[i]
 
-age_EC1S2J1U_16[] <- age_up*((1 - neet16_ec1s2j1u[i])*EC1S2J1U_15[i]) + (1 - neet16_ec1s1j1u[i])*EC1S1J1U_15[i]) - age_up*EC1S2J1U_16[i]
-age_EC2S2J1U_16[] <- age_up*((1 - neet16_ec2s2j1u[i])*EC2S2J1U_15[i]) + (1 - neet16_ec2s1j1u[i])*EC2S1J1U_15[i]) - age_up*EC2S2J1U_16[i]
-age_EC3S2J1U_16[] <- age_up*((1 - neet16_ec3s2j1u[i])*EC3S2J1U_15[i]) + (1 - neet16_ec3s1j1u[i])*EC3S1J1U_15[i]) - age_up*EC3S2J1U_16[i]
-age_EC4S2J1U_16[] <- age_up*((1 - neet16_ec4s2j1u[i])*EC4S2J1U_15[i]) + (1 - neet16_ec4s1j1u[i])*EC4S1J1U_15[i]) - age_up*EC4S2J1U_16[i]
+age_EC1S2J1U_16[] <- age_up*((1 - neet16_ec1s2j1u[i])*EC1S2J1U_15[i] + (1 - neet16_ec1s1j1u[i])*EC1S1J1U_15[i]) - age_up*EC1S2J1U_16[i]
+age_EC2S2J1U_16[] <- age_up*((1 - neet16_ec2s2j1u[i])*EC2S2J1U_15[i] + (1 - neet16_ec2s1j1u[i])*EC2S1J1U_15[i]) - age_up*EC2S2J1U_16[i]
+age_EC3S2J1U_16[] <- age_up*((1 - neet16_ec3s2j1u[i])*EC3S2J1U_15[i] + (1 - neet16_ec3s1j1u[i])*EC3S1J1U_15[i]) - age_up*EC3S2J1U_16[i]
+age_EC4S2J1U_16[] <- age_up*((1 - neet16_ec4s2j1u[i])*EC4S2J1U_15[i] + (1 - neet16_ec4s1j1u[i])*EC4S1J1U_15[i]) - age_up*EC4S2J1U_16[i]
 
 age_EC1S2J1U_17[] <- age_up*EC1S2J1U_16[i] - age_up*EC1S2J1U_17[i]
 age_EC2S2J1U_17[] <- age_up*EC2S2J1U_16[i] - age_up*EC2S2J1U_17[i]
@@ -12377,10 +14506,10 @@ age_EC2S2J2U_15[] <- age_up*EC2S2J2U_14[i] - age_up*EC2S2J2U_15[i]
 age_EC3S2J2U_15[] <- age_up*EC3S2J2U_14[i] - age_up*EC3S2J2U_15[i]
 age_EC4S2J2U_15[] <- age_up*EC4S2J2U_14[i] - age_up*EC4S2J2U_15[i]
 
-age_EC1S2J2U_16[] <- age_up*((1 - neet16_ec1s2j2u[i])*EC1S2J2U_15[i]) + (1 - neet16_ec1s1j2u[i])*EC1S1J2U_15[i]) - age_up*EC1S2J2U_16[i]
-age_EC2S2J2U_16[] <- age_up*((1 - neet16_ec2s2j2u[i])*EC2S2J2U_15[i]) + (1 - neet16_ec2s1j2u[i])*EC2S1J2U_15[i]) - age_up*EC2S2J2U_16[i]
-age_EC3S2J2U_16[] <- age_up*((1 - neet16_ec3s2j2u[i])*EC3S2J2U_15[i]) + (1 - neet16_ec3s1j2u[i])*EC3S1J2U_15[i]) - age_up*EC3S2J2U_16[i]
-age_EC4S2J2U_16[] <- age_up*((1 - neet16_ec4s2j2u[i])*EC4S2J2U_15[i]) + (1 - neet16_ec4s1j2u[i])*EC4S1J2U_15[i]) - age_up*EC4S2J2U_16[i]
+age_EC1S2J2U_16[] <- age_up*((1 - neet16_ec1s2j2u[i])*EC1S2J2U_15[i] + (1 - neet16_ec1s1j2u[i])*EC1S1J2U_15[i]) - age_up*EC1S2J2U_16[i]
+age_EC2S2J2U_16[] <- age_up*((1 - neet16_ec2s2j2u[i])*EC2S2J2U_15[i] + (1 - neet16_ec2s1j2u[i])*EC2S1J2U_15[i]) - age_up*EC2S2J2U_16[i]
+age_EC3S2J2U_16[] <- age_up*((1 - neet16_ec3s2j2u[i])*EC3S2J2U_15[i] + (1 - neet16_ec3s1j2u[i])*EC3S1J2U_15[i]) - age_up*EC3S2J2U_16[i]
+age_EC4S2J2U_16[] <- age_up*((1 - neet16_ec4s2j2u[i])*EC4S2J2U_15[i] + (1 - neet16_ec4s1j2u[i])*EC4S1J2U_15[i]) - age_up*EC4S2J2U_16[i]
 
 age_EC1S2J2U_17[] <- age_up*EC1S2J2U_16[i] - age_up*EC1S2J2U_17[i]
 age_EC2S2J2U_17[] <- age_up*EC2S2J2U_16[i] - age_up*EC2S2J2U_17[i]
@@ -12461,10 +14590,10 @@ age_EC2S2J3U_15[] <- age_up*EC2S2J3U_14[i] - age_up*EC2S2J3U_15[i]
 age_EC3S2J3U_15[] <- age_up*EC3S2J3U_14[i] - age_up*EC3S2J3U_15[i]
 age_EC4S2J3U_15[] <- age_up*EC4S2J3U_14[i] - age_up*EC4S2J3U_15[i]
 
-age_EC1S2J3U_16[] <- age_up*((1 - neet16_ec1s2j3u[i])*EC1S2J3U_15[i]) + (1 - neet16_ec1s1j3u[i])*EC1S1J3U_15[i]) - age_up*EC1S2J3U_16[i]
-age_EC2S2J3U_16[] <- age_up*((1 - neet16_ec2s2j3u[i])*EC2S2J3U_15[i]) + (1 - neet16_ec2s1j3u[i])*EC2S1J3U_15[i]) - age_up*EC2S2J3U_16[i]
-age_EC3S2J3U_16[] <- age_up*((1 - neet16_ec3s2j3u[i])*EC3S2J3U_15[i]) + (1 - neet16_ec3s1j3u[i])*EC3S1J3U_15[i]) - age_up*EC3S2J3U_16[i]
-age_EC4S2J3U_16[] <- age_up*((1 - neet16_ec4s2j3u[i])*EC4S2J3U_15[i]) + (1 - neet16_ec4s1j3u[i])*EC4S1J3U_15[i]) - age_up*EC4S2J3U_16[i]
+age_EC1S2J3U_16[] <- age_up*((1 - neet16_ec1s2j3u[i])*EC1S2J3U_15[i] + (1 - neet16_ec1s1j3u[i])*EC1S1J3U_15[i]) - age_up*EC1S2J3U_16[i]
+age_EC2S2J3U_16[] <- age_up*((1 - neet16_ec2s2j3u[i])*EC2S2J3U_15[i] + (1 - neet16_ec2s1j3u[i])*EC2S1J3U_15[i]) - age_up*EC2S2J3U_16[i]
+age_EC3S2J3U_16[] <- age_up*((1 - neet16_ec3s2j3u[i])*EC3S2J3U_15[i] + (1 - neet16_ec3s1j3u[i])*EC3S1J3U_15[i]) - age_up*EC3S2J3U_16[i]
+age_EC4S2J3U_16[] <- age_up*((1 - neet16_ec4s2j3u[i])*EC4S2J3U_15[i] + (1 - neet16_ec4s1j3u[i])*EC4S1J3U_15[i]) - age_up*EC4S2J3U_16[i]
 
 age_EC1S2J3U_17[] <- age_up*EC1S2J3U_16[i] - age_up*EC1S2J3U_17[i]
 age_EC2S2J3U_17[] <- age_up*EC2S2J3U_16[i] - age_up*EC2S2J3U_17[i]
@@ -12545,10 +14674,10 @@ age_EC2S2J4U_15[] <- age_up*EC2S2J4U_14[i] - age_up*EC2S2J4U_15[i]
 age_EC3S2J4U_15[] <- age_up*EC3S2J4U_14[i] - age_up*EC3S2J4U_15[i]
 age_EC4S2J4U_15[] <- age_up*EC4S2J4U_14[i] - age_up*EC4S2J4U_15[i]
 
-age_EC1S2J4U_16[] <- age_up*((1 - neet16_ec1s2j4u[i])*EC1S2J4U_15[i]) + (1 - neet16_ec1s1j4u[i])*EC1S1J4U_15[i]) - age_up*EC1S2J4U_16[i]
-age_EC2S2J4U_16[] <- age_up*((1 - neet16_ec2s2j4u[i])*EC2S2J4U_15[i]) + (1 - neet16_ec2s1j4u[i])*EC2S1J4U_15[i]) - age_up*EC2S2J4U_16[i]
-age_EC3S2J4U_16[] <- age_up*((1 - neet16_ec3s2j4u[i])*EC3S2J4U_15[i]) + (1 - neet16_ec3s1j4u[i])*EC3S1J4U_15[i]) - age_up*EC3S2J4U_16[i]
-age_EC4S2J4U_16[] <- age_up*((1 - neet16_ec4s2j4u[i])*EC4S2J4U_15[i]) + (1 - neet16_ec4s1j4u[i])*EC4S1J4U_15[i]) - age_up*EC4S2J4U_16[i]
+age_EC1S2J4U_16[] <- age_up*((1 - neet16_ec1s2j4u[i])*EC1S2J4U_15[i] + (1 - neet16_ec1s1j4u[i])*EC1S1J4U_15[i]) - age_up*EC1S2J4U_16[i]
+age_EC2S2J4U_16[] <- age_up*((1 - neet16_ec2s2j4u[i])*EC2S2J4U_15[i] + (1 - neet16_ec2s1j4u[i])*EC2S1J4U_15[i]) - age_up*EC2S2J4U_16[i]
+age_EC3S2J4U_16[] <- age_up*((1 - neet16_ec3s2j4u[i])*EC3S2J4U_15[i] + (1 - neet16_ec3s1j4u[i])*EC3S1J4U_15[i]) - age_up*EC3S2J4U_16[i]
+age_EC4S2J4U_16[] <- age_up*((1 - neet16_ec4s2j4u[i])*EC4S2J4U_15[i] + (1 - neet16_ec4s1j4u[i])*EC4S1J4U_15[i]) - age_up*EC4S2J4U_16[i]
 
 age_EC1S2J4U_17[] <- age_up*EC1S2J4U_16[i] - age_up*EC1S2J4U_17[i]
 age_EC2S2J4U_17[] <- age_up*EC2S2J4U_16[i] - age_up*EC2S2J4U_17[i]
@@ -12629,10 +14758,10 @@ age_EC2S2J5U_15[] <- age_up*EC2S2J5U_14[i] - age_up*EC2S2J5U_15[i]
 age_EC3S2J5U_15[] <- age_up*EC3S2J5U_14[i] - age_up*EC3S2J5U_15[i]
 age_EC4S2J5U_15[] <- age_up*EC4S2J5U_14[i] - age_up*EC4S2J5U_15[i]
 
-age_EC1S2J5U_16[] <- age_up*((1 - neet16_ec1s2j5u[i])*EC1S2J5U_15[i]) + (1 - neet16_ec1s1j5u[i])*EC1S1J5U_15[i]) - age_up*EC1S2J5U_16[i]
-age_EC2S2J5U_16[] <- age_up*((1 - neet16_ec2s2j5u[i])*EC2S2J5U_15[i]) + (1 - neet16_ec2s1j5u[i])*EC2S1J5U_15[i]) - age_up*EC2S2J5U_16[i]
-age_EC3S2J5U_16[] <- age_up*((1 - neet16_ec3s2j5u[i])*EC3S2J5U_15[i]) + (1 - neet16_ec3s1j5u[i])*EC3S1J5U_15[i]) - age_up*EC3S2J5U_16[i]
-age_EC4S2J5U_16[] <- age_up*((1 - neet16_ec4s2j5u[i])*EC4S2J5U_15[i]) + (1 - neet16_ec4s1j5u[i])*EC4S1J5U_15[i]) - age_up*EC4S2J5U_16[i]
+age_EC1S2J5U_16[] <- age_up*((1 - neet16_ec1s2j5u[i])*EC1S2J5U_15[i] + (1 - neet16_ec1s1j5u[i])*EC1S1J5U_15[i]) - age_up*EC1S2J5U_16[i]
+age_EC2S2J5U_16[] <- age_up*((1 - neet16_ec2s2j5u[i])*EC2S2J5U_15[i] + (1 - neet16_ec2s1j5u[i])*EC2S1J5U_15[i]) - age_up*EC2S2J5U_16[i]
+age_EC3S2J5U_16[] <- age_up*((1 - neet16_ec3s2j5u[i])*EC3S2J5U_15[i] + (1 - neet16_ec3s1j5u[i])*EC3S1J5U_15[i]) - age_up*EC3S2J5U_16[i]
+age_EC4S2J5U_16[] <- age_up*((1 - neet16_ec4s2j5u[i])*EC4S2J5U_15[i] + (1 - neet16_ec4s1j5u[i])*EC4S1J5U_15[i]) - age_up*EC4S2J5U_16[i]
 
 age_EC1S2J5U_17[] <- age_up*EC1S2J5U_16[i] - age_up*EC1S2J5U_17[i]
 age_EC2S2J5U_17[] <- age_up*EC2S2J5U_16[i] - age_up*EC2S2J5U_17[i]
@@ -12713,10 +14842,10 @@ age_EC2S2J1W_15[] <- age_up*EC2S2J1W_14[i] - age_up*EC2S2J1W_15[i]
 age_EC3S2J1W_15[] <- age_up*EC3S2J1W_14[i] - age_up*EC3S2J1W_15[i]
 age_EC4S2J1W_15[] <- age_up*EC4S2J1W_14[i] - age_up*EC4S2J1W_15[i]
 
-age_EC1S2J1W_16[] <- age_up*((1 - neet16_ec1s2j1w[i])*EC1S2J1W_15[i]) + (1 - neet16_ec1s1j1w[i])*EC1S1J1W_15[i]) - age_up*EC1S2J1W_16[i]
-age_EC2S2J1W_16[] <- age_up*((1 - neet16_ec2s2j1w[i])*EC2S2J1W_15[i]) + (1 - neet16_ec2s1j1w[i])*EC2S1J1W_15[i]) - age_up*EC2S2J1W_16[i]
-age_EC3S2J1W_16[] <- age_up*((1 - neet16_ec3s2j1w[i])*EC3S2J1W_15[i]) + (1 - neet16_ec3s1j1w[i])*EC3S1J1W_15[i]) - age_up*EC3S2J1W_16[i]
-age_EC4S2J1W_16[] <- age_up*((1 - neet16_ec4s2j1w[i])*EC4S2J1W_15[i]) + (1 - neet16_ec4s1j1w[i])*EC4S1J1W_15[i]) - age_up*EC4S2J1W_16[i]
+age_EC1S2J1W_16[] <- age_up*((1 - neet16_ec1s2j1w[i])*EC1S2J1W_15[i] + (1 - neet16_ec1s1j1w[i])*EC1S1J1W_15[i]) - age_up*EC1S2J1W_16[i]
+age_EC2S2J1W_16[] <- age_up*((1 - neet16_ec2s2j1w[i])*EC2S2J1W_15[i] + (1 - neet16_ec2s1j1w[i])*EC2S1J1W_15[i]) - age_up*EC2S2J1W_16[i]
+age_EC3S2J1W_16[] <- age_up*((1 - neet16_ec3s2j1w[i])*EC3S2J1W_15[i] + (1 - neet16_ec3s1j1w[i])*EC3S1J1W_15[i]) - age_up*EC3S2J1W_16[i]
+age_EC4S2J1W_16[] <- age_up*((1 - neet16_ec4s2j1w[i])*EC4S2J1W_15[i] + (1 - neet16_ec4s1j1w[i])*EC4S1J1W_15[i]) - age_up*EC4S2J1W_16[i]
 
 age_EC1S2J1W_17[] <- age_up*EC1S2J1W_16[i] - age_up*EC1S2J1W_17[i]
 age_EC2S2J1W_17[] <- age_up*EC2S2J1W_16[i] - age_up*EC2S2J1W_17[i]
@@ -12797,10 +14926,10 @@ age_EC2S2J2W_15[] <- age_up*EC2S2J2W_14[i] - age_up*EC2S2J2W_15[i]
 age_EC3S2J2W_15[] <- age_up*EC3S2J2W_14[i] - age_up*EC3S2J2W_15[i]
 age_EC4S2J2W_15[] <- age_up*EC4S2J2W_14[i] - age_up*EC4S2J2W_15[i]
 
-age_EC1S2J2W_16[] <- age_up*((1 - neet16_ec1s2j2w[i])*EC1S2J2W_15[i]) + (1 - neet16_ec1s1j2w[i])*EC1S1J2W_15[i]) - age_up*EC1S2J2W_16[i]
-age_EC2S2J2W_16[] <- age_up*((1 - neet16_ec2s2j2w[i])*EC2S2J2W_15[i]) + (1 - neet16_ec2s1j2w[i])*EC2S1J2W_15[i]) - age_up*EC2S2J2W_16[i]
-age_EC3S2J2W_16[] <- age_up*((1 - neet16_ec3s2j2w[i])*EC3S2J2W_15[i]) + (1 - neet16_ec3s1j2w[i])*EC3S1J2W_15[i]) - age_up*EC3S2J2W_16[i]
-age_EC4S2J2W_16[] <- age_up*((1 - neet16_ec4s2j2w[i])*EC4S2J2W_15[i]) + (1 - neet16_ec4s1j2w[i])*EC4S1J2W_15[i]) - age_up*EC4S2J2W_16[i]
+age_EC1S2J2W_16[] <- age_up*((1 - neet16_ec1s2j2w[i])*EC1S2J2W_15[i] + (1 - neet16_ec1s1j2w[i])*EC1S1J2W_15[i]) - age_up*EC1S2J2W_16[i]
+age_EC2S2J2W_16[] <- age_up*((1 - neet16_ec2s2j2w[i])*EC2S2J2W_15[i] + (1 - neet16_ec2s1j2w[i])*EC2S1J2W_15[i]) - age_up*EC2S2J2W_16[i]
+age_EC3S2J2W_16[] <- age_up*((1 - neet16_ec3s2j2w[i])*EC3S2J2W_15[i] + (1 - neet16_ec3s1j2w[i])*EC3S1J2W_15[i]) - age_up*EC3S2J2W_16[i]
+age_EC4S2J2W_16[] <- age_up*((1 - neet16_ec4s2j2w[i])*EC4S2J2W_15[i] + (1 - neet16_ec4s1j2w[i])*EC4S1J2W_15[i]) - age_up*EC4S2J2W_16[i]
 
 age_EC1S2J2W_17[] <- age_up*EC1S2J2W_16[i] - age_up*EC1S2J2W_17[i]
 age_EC2S2J2W_17[] <- age_up*EC2S2J2W_16[i] - age_up*EC2S2J2W_17[i]
@@ -12881,10 +15010,10 @@ age_EC2S2J3W_15[] <- age_up*EC2S2J3W_14[i] - age_up*EC2S2J3W_15[i]
 age_EC3S2J3W_15[] <- age_up*EC3S2J3W_14[i] - age_up*EC3S2J3W_15[i]
 age_EC4S2J3W_15[] <- age_up*EC4S2J3W_14[i] - age_up*EC4S2J3W_15[i]
 
-age_EC1S2J3W_16[] <- age_up*((1 - neet16_ec1s2j3w[i])*EC1S2J3W_15[i]) + (1 - neet16_ec1s1j3w[i])*EC1S1J3W_15[i]) - age_up*EC1S2J3W_16[i]
-age_EC2S2J3W_16[] <- age_up*((1 - neet16_ec2s2j3w[i])*EC2S2J3W_15[i]) + (1 - neet16_ec2s1j3w[i])*EC2S1J3W_15[i]) - age_up*EC2S2J3W_16[i]
-age_EC3S2J3W_16[] <- age_up*((1 - neet16_ec3s2j3w[i])*EC3S2J3W_15[i]) + (1 - neet16_ec3s1j3w[i])*EC3S1J3W_15[i]) - age_up*EC3S2J3W_16[i]
-age_EC4S2J3W_16[] <- age_up*((1 - neet16_ec4s2j3w[i])*EC4S2J3W_15[i]) + (1 - neet16_ec4s1j3w[i])*EC4S1J3W_15[i]) - age_up*EC4S2J3W_16[i]
+age_EC1S2J3W_16[] <- age_up*((1 - neet16_ec1s2j3w[i])*EC1S2J3W_15[i] + (1 - neet16_ec1s1j3w[i])*EC1S1J3W_15[i]) - age_up*EC1S2J3W_16[i]
+age_EC2S2J3W_16[] <- age_up*((1 - neet16_ec2s2j3w[i])*EC2S2J3W_15[i] + (1 - neet16_ec2s1j3w[i])*EC2S1J3W_15[i]) - age_up*EC2S2J3W_16[i]
+age_EC3S2J3W_16[] <- age_up*((1 - neet16_ec3s2j3w[i])*EC3S2J3W_15[i] + (1 - neet16_ec3s1j3w[i])*EC3S1J3W_15[i]) - age_up*EC3S2J3W_16[i]
+age_EC4S2J3W_16[] <- age_up*((1 - neet16_ec4s2j3w[i])*EC4S2J3W_15[i] + (1 - neet16_ec4s1j3w[i])*EC4S1J3W_15[i]) - age_up*EC4S2J3W_16[i]
 
 age_EC1S2J3W_17[] <- age_up*EC1S2J3W_16[i] - age_up*EC1S2J3W_17[i]
 age_EC2S2J3W_17[] <- age_up*EC2S2J3W_16[i] - age_up*EC2S2J3W_17[i]
@@ -12965,10 +15094,10 @@ age_EC2S2J4W_15[] <- age_up*EC2S2J4W_14[i] - age_up*EC2S2J4W_15[i]
 age_EC3S2J4W_15[] <- age_up*EC3S2J4W_14[i] - age_up*EC3S2J4W_15[i]
 age_EC4S2J4W_15[] <- age_up*EC4S2J4W_14[i] - age_up*EC4S2J4W_15[i]
 
-age_EC1S2J4W_16[] <- age_up*((1 - neet16_ec1s2j4w[i])*EC1S2J4W_15[i]) + (1 - neet16_ec1s1j4w[i])*EC1S1J4W_15[i]) - age_up*EC1S2J4W_16[i]
-age_EC2S2J4W_16[] <- age_up*((1 - neet16_ec2s2j4w[i])*EC2S2J4W_15[i]) + (1 - neet16_ec2s1j4w[i])*EC2S1J4W_15[i]) - age_up*EC2S2J4W_16[i]
-age_EC3S2J4W_16[] <- age_up*((1 - neet16_ec3s2j4w[i])*EC3S2J4W_15[i]) + (1 - neet16_ec3s1j4w[i])*EC3S1J4W_15[i]) - age_up*EC3S2J4W_16[i]
-age_EC4S2J4W_16[] <- age_up*((1 - neet16_ec4s2j4w[i])*EC4S2J4W_15[i]) + (1 - neet16_ec4s1j4w[i])*EC4S1J4W_15[i]) - age_up*EC4S2J4W_16[i]
+age_EC1S2J4W_16[] <- age_up*((1 - neet16_ec1s2j4w[i])*EC1S2J4W_15[i] + (1 - neet16_ec1s1j4w[i])*EC1S1J4W_15[i]) - age_up*EC1S2J4W_16[i]
+age_EC2S2J4W_16[] <- age_up*((1 - neet16_ec2s2j4w[i])*EC2S2J4W_15[i] + (1 - neet16_ec2s1j4w[i])*EC2S1J4W_15[i]) - age_up*EC2S2J4W_16[i]
+age_EC3S2J4W_16[] <- age_up*((1 - neet16_ec3s2j4w[i])*EC3S2J4W_15[i] + (1 - neet16_ec3s1j4w[i])*EC3S1J4W_15[i]) - age_up*EC3S2J4W_16[i]
+age_EC4S2J4W_16[] <- age_up*((1 - neet16_ec4s2j4w[i])*EC4S2J4W_15[i] + (1 - neet16_ec4s1j4w[i])*EC4S1J4W_15[i]) - age_up*EC4S2J4W_16[i]
 
 age_EC1S2J4W_17[] <- age_up*EC1S2J4W_16[i] - age_up*EC1S2J4W_17[i]
 age_EC2S2J4W_17[] <- age_up*EC2S2J4W_16[i] - age_up*EC2S2J4W_17[i]
@@ -13049,10 +15178,10 @@ age_EC2S2J5W_15[] <- age_up*EC2S2J5W_14[i] - age_up*EC2S2J5W_15[i]
 age_EC3S2J5W_15[] <- age_up*EC3S2J5W_14[i] - age_up*EC3S2J5W_15[i]
 age_EC4S2J5W_15[] <- age_up*EC4S2J5W_14[i] - age_up*EC4S2J5W_15[i]
 
-age_EC1S2J5W_16[] <- age_up*((1 - neet16_ec1s2j5w[i])*EC1S2J5W_15[i]) + (1 - neet16_ec1s1j5w[i])*EC1S1J5W_15[i]) - age_up*EC1S2J5W_16[i]
-age_EC2S2J5W_16[] <- age_up*((1 - neet16_ec2s2j5w[i])*EC2S2J5W_15[i]) + (1 - neet16_ec2s1j5w[i])*EC2S1J5W_15[i]) - age_up*EC2S2J5W_16[i]
-age_EC3S2J5W_16[] <- age_up*((1 - neet16_ec3s2j5w[i])*EC3S2J5W_15[i]) + (1 - neet16_ec3s1j5w[i])*EC3S1J5W_15[i]) - age_up*EC3S2J5W_16[i]
-age_EC4S2J5W_16[] <- age_up*((1 - neet16_ec4s2j5w[i])*EC4S2J5W_15[i]) + (1 - neet16_ec4s1j5w[i])*EC4S1J5W_15[i]) - age_up*EC4S2J5W_16[i]
+age_EC1S2J5W_16[] <- age_up*((1 - neet16_ec1s2j5w[i])*EC1S2J5W_15[i] + (1 - neet16_ec1s1j5w[i])*EC1S1J5W_15[i]) - age_up*EC1S2J5W_16[i]
+age_EC2S2J5W_16[] <- age_up*((1 - neet16_ec2s2j5w[i])*EC2S2J5W_15[i] + (1 - neet16_ec2s1j5w[i])*EC2S1J5W_15[i]) - age_up*EC2S2J5W_16[i]
+age_EC3S2J5W_16[] <- age_up*((1 - neet16_ec3s2j5w[i])*EC3S2J5W_15[i] + (1 - neet16_ec3s1j5w[i])*EC3S1J5W_15[i]) - age_up*EC3S2J5W_16[i]
+age_EC4S2J5W_16[] <- age_up*((1 - neet16_ec4s2j5w[i])*EC4S2J5W_15[i] + (1 - neet16_ec4s1j5w[i])*EC4S1J5W_15[i]) - age_up*EC4S2J5W_16[i]
 
 age_EC1S2J5W_17[] <- age_up*EC1S2J5W_16[i] - age_up*EC1S2J5W_17[i]
 age_EC2S2J5W_17[] <- age_up*EC2S2J5W_16[i] - age_up*EC2S2J5W_17[i]
@@ -13060,6 +15189,3699 @@ age_EC3S2J5W_17[] <- age_up*EC3S2J5W_16[i] - age_up*EC3S2J5W_17[i]
 age_EC4S2J5W_17[] <- age_up*EC4S2J5W_16[i] - age_up*EC4S2J5W_17[i]
 
 
+# changes in child poverty
+pov_IC1S1J1U_10[] <- r[i]*EC1S1J1U_10[i] - f[i]*IC1S1J1U_10[i]
+pov_IC2S1J1U_10[] <- r[i]*EC2S1J1U_10[i] - f[i]*IC2S1J1U_10[i]
+pov_IC3S1J1U_10[] <- r[i]*EC3S1J1U_10[i] - f[i]*IC3S1J1U_10[i]
+pov_IC4S1J1U_10[] <- r[i]*EC4S1J1U_10[i] - f[i]*IC4S1J1U_10[i]
+
+pov_IC1S1J1U_11[] <- r[i]*EC1S1J1U_11[i] - f[i]*IC1S1J1U_11[i]
+pov_IC2S1J1U_11[] <- r[i]*EC2S1J1U_11[i] - f[i]*IC2S1J1U_11[i]
+pov_IC3S1J1U_11[] <- r[i]*EC3S1J1U_11[i] - f[i]*IC3S1J1U_11[i]
+pov_IC4S1J1U_11[] <- r[i]*EC4S1J1U_11[i] - f[i]*IC4S1J1U_11[i]
+
+pov_IC1S1J1U_12[] <- r[i]*EC1S1J1U_12[i] - f[i]*IC1S1J1U_12[i]
+pov_IC2S1J1U_12[] <- r[i]*EC2S1J1U_12[i] - f[i]*IC2S1J1U_12[i]
+pov_IC3S1J1U_12[] <- r[i]*EC3S1J1U_12[i] - f[i]*IC3S1J1U_12[i]
+pov_IC4S1J1U_12[] <- r[i]*EC4S1J1U_12[i] - f[i]*IC4S1J1U_12[i]
+
+pov_IC1S1J1U_13[] <- r[i]*EC1S1J1U_13[i] - f[i]*IC1S1J1U_13[i]
+pov_IC2S1J1U_13[] <- r[i]*EC2S1J1U_13[i] - f[i]*IC2S1J1U_13[i]
+pov_IC3S1J1U_13[] <- r[i]*EC3S1J1U_13[i] - f[i]*IC3S1J1U_13[i]
+pov_IC4S1J1U_13[] <- r[i]*EC4S1J1U_13[i] - f[i]*IC4S1J1U_13[i]
+
+pov_IC1S1J1U_14[] <- r[i]*EC1S1J1U_14[i] - f[i]*IC1S1J1U_14[i]
+pov_IC2S1J1U_14[] <- r[i]*EC2S1J1U_14[i] - f[i]*IC2S1J1U_14[i]
+pov_IC3S1J1U_14[] <- r[i]*EC3S1J1U_14[i] - f[i]*IC3S1J1U_14[i]
+pov_IC4S1J1U_14[] <- r[i]*EC4S1J1U_14[i] - f[i]*IC4S1J1U_14[i]
+
+pov_IC1S1J1U_15[] <- r[i]*EC1S1J1U_15[i] - f[i]*IC1S1J1U_15[i]
+pov_IC2S1J1U_15[] <- r[i]*EC2S1J1U_15[i] - f[i]*IC2S1J1U_15[i]
+pov_IC3S1J1U_15[] <- r[i]*EC3S1J1U_15[i] - f[i]*IC3S1J1U_15[i]
+pov_IC4S1J1U_15[] <- r[i]*EC4S1J1U_15[i] - f[i]*IC4S1J1U_15[i]
+
+pov_IC1S1J1U_16[] <- r[i]*EC1S1J1U_16[i] - f[i]*IC1S1J1U_16[i]
+pov_IC2S1J1U_16[] <- r[i]*EC2S1J1U_16[i] - f[i]*IC2S1J1U_16[i]
+pov_IC3S1J1U_16[] <- r[i]*EC3S1J1U_16[i] - f[i]*IC3S1J1U_16[i]
+pov_IC4S1J1U_16[] <- r[i]*EC4S1J1U_16[i] - f[i]*IC4S1J1U_16[i]
+
+pov_IC1S1J1U_17[] <- r[i]*EC1S1J1U_17[i] - f[i]*IC1S1J1U_17[i]
+pov_IC2S1J1U_17[] <- r[i]*EC2S1J1U_17[i] - f[i]*IC2S1J1U_17[i]
+pov_IC3S1J1U_17[] <- r[i]*EC3S1J1U_17[i] - f[i]*IC3S1J1U_17[i]
+pov_IC4S1J1U_17[] <- r[i]*EC4S1J1U_17[i] - f[i]*IC4S1J1U_17[i]
+
+
+
+pov_IC1S2J1U_10[] <- r[i]*EC1S2J1U_10[i] - f[i]*IC1S2J1U_10[i]
+pov_IC2S2J1U_10[] <- r[i]*EC2S2J1U_10[i] - f[i]*IC2S2J1U_10[i]
+pov_IC3S2J1U_10[] <- r[i]*EC3S2J1U_10[i] - f[i]*IC3S2J1U_10[i]
+pov_IC4S2J1U_10[] <- r[i]*EC4S2J1U_10[i] - f[i]*IC4S2J1U_10[i]
+
+pov_IC1S2J1U_11[] <- r[i]*EC1S2J1U_11[i] - f[i]*IC1S2J1U_11[i]
+pov_IC2S2J1U_11[] <- r[i]*EC2S2J1U_11[i] - f[i]*IC2S2J1U_11[i]
+pov_IC3S2J1U_11[] <- r[i]*EC3S2J1U_11[i] - f[i]*IC3S2J1U_11[i]
+pov_IC4S2J1U_11[] <- r[i]*EC4S2J1U_11[i] - f[i]*IC4S2J1U_11[i]
+
+pov_IC1S2J1U_12[] <- r[i]*EC1S2J1U_12[i] - f[i]*IC1S2J1U_12[i]
+pov_IC2S2J1U_12[] <- r[i]*EC2S2J1U_12[i] - f[i]*IC2S2J1U_12[i]
+pov_IC3S2J1U_12[] <- r[i]*EC3S2J1U_12[i] - f[i]*IC3S2J1U_12[i]
+pov_IC4S2J1U_12[] <- r[i]*EC4S2J1U_12[i] - f[i]*IC4S2J1U_12[i]
+
+pov_IC1S2J1U_13[] <- r[i]*EC1S2J1U_13[i] - f[i]*IC1S2J1U_13[i]
+pov_IC2S2J1U_13[] <- r[i]*EC2S2J1U_13[i] - f[i]*IC2S2J1U_13[i]
+pov_IC3S2J1U_13[] <- r[i]*EC3S2J1U_13[i] - f[i]*IC3S2J1U_13[i]
+pov_IC4S2J1U_13[] <- r[i]*EC4S2J1U_13[i] - f[i]*IC4S2J1U_13[i]
+
+pov_IC1S2J1U_14[] <- r[i]*EC1S2J1U_14[i] - f[i]*IC1S2J1U_14[i]
+pov_IC2S2J1U_14[] <- r[i]*EC2S2J1U_14[i] - f[i]*IC2S2J1U_14[i]
+pov_IC3S2J1U_14[] <- r[i]*EC3S2J1U_14[i] - f[i]*IC3S2J1U_14[i]
+pov_IC4S2J1U_14[] <- r[i]*EC4S2J1U_14[i] - f[i]*IC4S2J1U_14[i]
+
+pov_IC1S2J1U_15[] <- r[i]*EC1S2J1U_15[i] - f[i]*IC1S2J1U_15[i]
+pov_IC2S2J1U_15[] <- r[i]*EC2S2J1U_15[i] - f[i]*IC2S2J1U_15[i]
+pov_IC3S2J1U_15[] <- r[i]*EC3S2J1U_15[i] - f[i]*IC3S2J1U_15[i]
+pov_IC4S2J1U_15[] <- r[i]*EC4S2J1U_15[i] - f[i]*IC4S2J1U_15[i]
+
+pov_IC1S2J1U_16[] <- r[i]*EC1S2J1U_16[i] - f[i]*IC1S2J1U_16[i]
+pov_IC2S2J1U_16[] <- r[i]*EC2S2J1U_16[i] - f[i]*IC2S2J1U_16[i]
+pov_IC3S2J1U_16[] <- r[i]*EC3S2J1U_16[i] - f[i]*IC3S2J1U_16[i]
+pov_IC4S2J1U_16[] <- r[i]*EC4S2J1U_16[i] - f[i]*IC4S2J1U_16[i]
+
+pov_IC1S2J1U_17[] <- r[i]*EC1S2J1U_17[i] - f[i]*IC1S2J1U_17[i]
+pov_IC2S2J1U_17[] <- r[i]*EC2S2J1U_17[i] - f[i]*IC2S2J1U_17[i]
+pov_IC3S2J1U_17[] <- r[i]*EC3S2J1U_17[i] - f[i]*IC3S2J1U_17[i]
+pov_IC4S2J1U_17[] <- r[i]*EC4S2J1U_17[i] - f[i]*IC4S2J1U_17[i]
+
+
+
+pov_IC1S1J2U_10[] <- r[i]*EC1S1J2U_10[i] - f[i]*IC1S1J2U_10[i]
+pov_IC2S1J2U_10[] <- r[i]*EC2S1J2U_10[i] - f[i]*IC2S1J2U_10[i]
+pov_IC3S1J2U_10[] <- r[i]*EC3S1J2U_10[i] - f[i]*IC3S1J2U_10[i]
+pov_IC4S1J2U_10[] <- r[i]*EC4S1J2U_10[i] - f[i]*IC4S1J2U_10[i]
+
+pov_IC1S1J2U_11[] <- r[i]*EC1S1J2U_11[i] - f[i]*IC1S1J2U_11[i]
+pov_IC2S1J2U_11[] <- r[i]*EC2S1J2U_11[i] - f[i]*IC2S1J2U_11[i]
+pov_IC3S1J2U_11[] <- r[i]*EC3S1J2U_11[i] - f[i]*IC3S1J2U_11[i]
+pov_IC4S1J2U_11[] <- r[i]*EC4S1J2U_11[i] - f[i]*IC4S1J2U_11[i]
+
+pov_IC1S1J2U_12[] <- r[i]*EC1S1J2U_12[i] - f[i]*IC1S1J2U_12[i]
+pov_IC2S1J2U_12[] <- r[i]*EC2S1J2U_12[i] - f[i]*IC2S1J2U_12[i]
+pov_IC3S1J2U_12[] <- r[i]*EC3S1J2U_12[i] - f[i]*IC3S1J2U_12[i]
+pov_IC4S1J2U_12[] <- r[i]*EC4S1J2U_12[i] - f[i]*IC4S1J2U_12[i]
+
+pov_IC1S1J2U_13[] <- r[i]*EC1S1J2U_13[i] - f[i]*IC1S1J2U_13[i]
+pov_IC2S1J2U_13[] <- r[i]*EC2S1J2U_13[i] - f[i]*IC2S1J2U_13[i]
+pov_IC3S1J2U_13[] <- r[i]*EC3S1J2U_13[i] - f[i]*IC3S1J2U_13[i]
+pov_IC4S1J2U_13[] <- r[i]*EC4S1J2U_13[i] - f[i]*IC4S1J2U_13[i]
+
+pov_IC1S1J2U_14[] <- r[i]*EC1S1J2U_14[i] - f[i]*IC1S1J2U_14[i]
+pov_IC2S1J2U_14[] <- r[i]*EC2S1J2U_14[i] - f[i]*IC2S1J2U_14[i]
+pov_IC3S1J2U_14[] <- r[i]*EC3S1J2U_14[i] - f[i]*IC3S1J2U_14[i]
+pov_IC4S1J2U_14[] <- r[i]*EC4S1J2U_14[i] - f[i]*IC4S1J2U_14[i]
+
+pov_IC1S1J2U_15[] <- r[i]*EC1S1J2U_15[i] - f[i]*IC1S1J2U_15[i]
+pov_IC2S1J2U_15[] <- r[i]*EC2S1J2U_15[i] - f[i]*IC2S1J2U_15[i]
+pov_IC3S1J2U_15[] <- r[i]*EC3S1J2U_15[i] - f[i]*IC3S1J2U_15[i]
+pov_IC4S1J2U_15[] <- r[i]*EC4S1J2U_15[i] - f[i]*IC4S1J2U_15[i]
+
+pov_IC1S1J2U_16[] <- r[i]*EC1S1J2U_16[i] - f[i]*IC1S1J2U_16[i]
+pov_IC2S1J2U_16[] <- r[i]*EC2S1J2U_16[i] - f[i]*IC2S1J2U_16[i]
+pov_IC3S1J2U_16[] <- r[i]*EC3S1J2U_16[i] - f[i]*IC3S1J2U_16[i]
+pov_IC4S1J2U_16[] <- r[i]*EC4S1J2U_16[i] - f[i]*IC4S1J2U_16[i]
+
+pov_IC1S1J2U_17[] <- r[i]*EC1S1J2U_17[i] - f[i]*IC1S1J2U_17[i]
+pov_IC2S1J2U_17[] <- r[i]*EC2S1J2U_17[i] - f[i]*IC2S1J2U_17[i]
+pov_IC3S1J2U_17[] <- r[i]*EC3S1J2U_17[i] - f[i]*IC3S1J2U_17[i]
+pov_IC4S1J2U_17[] <- r[i]*EC4S1J2U_17[i] - f[i]*IC4S1J2U_17[i]
+
+
+
+pov_IC1S2J2U_10[] <- r[i]*EC1S2J2U_10[i] - f[i]*IC1S2J2U_10[i]
+pov_IC2S2J2U_10[] <- r[i]*EC2S2J2U_10[i] - f[i]*IC2S2J2U_10[i]
+pov_IC3S2J2U_10[] <- r[i]*EC3S2J2U_10[i] - f[i]*IC3S2J2U_10[i]
+pov_IC4S2J2U_10[] <- r[i]*EC4S2J2U_10[i] - f[i]*IC4S2J2U_10[i]
+
+pov_IC1S2J2U_11[] <- r[i]*EC1S2J2U_11[i] - f[i]*IC1S2J2U_11[i]
+pov_IC2S2J2U_11[] <- r[i]*EC2S2J2U_11[i] - f[i]*IC2S2J2U_11[i]
+pov_IC3S2J2U_11[] <- r[i]*EC3S2J2U_11[i] - f[i]*IC3S2J2U_11[i]
+pov_IC4S2J2U_11[] <- r[i]*EC4S2J2U_11[i] - f[i]*IC4S2J2U_11[i]
+
+pov_IC1S2J2U_12[] <- r[i]*EC1S2J2U_12[i] - f[i]*IC1S2J2U_12[i]
+pov_IC2S2J2U_12[] <- r[i]*EC2S2J2U_12[i] - f[i]*IC2S2J2U_12[i]
+pov_IC3S2J2U_12[] <- r[i]*EC3S2J2U_12[i] - f[i]*IC3S2J2U_12[i]
+pov_IC4S2J2U_12[] <- r[i]*EC4S2J2U_12[i] - f[i]*IC4S2J2U_12[i]
+
+pov_IC1S2J2U_13[] <- r[i]*EC1S2J2U_13[i] - f[i]*IC1S2J2U_13[i]
+pov_IC2S2J2U_13[] <- r[i]*EC2S2J2U_13[i] - f[i]*IC2S2J2U_13[i]
+pov_IC3S2J2U_13[] <- r[i]*EC3S2J2U_13[i] - f[i]*IC3S2J2U_13[i]
+pov_IC4S2J2U_13[] <- r[i]*EC4S2J2U_13[i] - f[i]*IC4S2J2U_13[i]
+
+pov_IC1S2J2U_14[] <- r[i]*EC1S2J2U_14[i] - f[i]*IC1S2J2U_14[i]
+pov_IC2S2J2U_14[] <- r[i]*EC2S2J2U_14[i] - f[i]*IC2S2J2U_14[i]
+pov_IC3S2J2U_14[] <- r[i]*EC3S2J2U_14[i] - f[i]*IC3S2J2U_14[i]
+pov_IC4S2J2U_14[] <- r[i]*EC4S2J2U_14[i] - f[i]*IC4S2J2U_14[i]
+
+pov_IC1S2J2U_15[] <- r[i]*EC1S2J2U_15[i] - f[i]*IC1S2J2U_15[i]
+pov_IC2S2J2U_15[] <- r[i]*EC2S2J2U_15[i] - f[i]*IC2S2J2U_15[i]
+pov_IC3S2J2U_15[] <- r[i]*EC3S2J2U_15[i] - f[i]*IC3S2J2U_15[i]
+pov_IC4S2J2U_15[] <- r[i]*EC4S2J2U_15[i] - f[i]*IC4S2J2U_15[i]
+
+pov_IC1S2J2U_16[] <- r[i]*EC1S2J2U_16[i] - f[i]*IC1S2J2U_16[i]
+pov_IC2S2J2U_16[] <- r[i]*EC2S2J2U_16[i] - f[i]*IC2S2J2U_16[i]
+pov_IC3S2J2U_16[] <- r[i]*EC3S2J2U_16[i] - f[i]*IC3S2J2U_16[i]
+pov_IC4S2J2U_16[] <- r[i]*EC4S2J2U_16[i] - f[i]*IC4S2J2U_16[i]
+
+pov_IC1S2J2U_17[] <- r[i]*EC1S2J2U_17[i] - f[i]*IC1S2J2U_17[i]
+pov_IC2S2J2U_17[] <- r[i]*EC2S2J2U_17[i] - f[i]*IC2S2J2U_17[i]
+pov_IC3S2J2U_17[] <- r[i]*EC3S2J2U_17[i] - f[i]*IC3S2J2U_17[i]
+pov_IC4S2J2U_17[] <- r[i]*EC4S2J2U_17[i] - f[i]*IC4S2J2U_17[i]
+
+
+
+pov_IC1S1J3U_10[] <- r[i]*EC1S1J3U_10[i] - f[i]*IC1S1J3U_10[i]
+pov_IC2S1J3U_10[] <- r[i]*EC2S1J3U_10[i] - f[i]*IC2S1J3U_10[i]
+pov_IC3S1J3U_10[] <- r[i]*EC3S1J3U_10[i] - f[i]*IC3S1J3U_10[i]
+pov_IC4S1J3U_10[] <- r[i]*EC4S1J3U_10[i] - f[i]*IC4S1J3U_10[i]
+
+pov_IC1S1J3U_11[] <- r[i]*EC1S1J3U_11[i] - f[i]*IC1S1J3U_11[i]
+pov_IC2S1J3U_11[] <- r[i]*EC2S1J3U_11[i] - f[i]*IC2S1J3U_11[i]
+pov_IC3S1J3U_11[] <- r[i]*EC3S1J3U_11[i] - f[i]*IC3S1J3U_11[i]
+pov_IC4S1J3U_11[] <- r[i]*EC4S1J3U_11[i] - f[i]*IC4S1J3U_11[i]
+
+pov_IC1S1J3U_12[] <- r[i]*EC1S1J3U_12[i] - f[i]*IC1S1J3U_12[i]
+pov_IC2S1J3U_12[] <- r[i]*EC2S1J3U_12[i] - f[i]*IC2S1J3U_12[i]
+pov_IC3S1J3U_12[] <- r[i]*EC3S1J3U_12[i] - f[i]*IC3S1J3U_12[i]
+pov_IC4S1J3U_12[] <- r[i]*EC4S1J3U_12[i] - f[i]*IC4S1J3U_12[i]
+
+pov_IC1S1J3U_13[] <- r[i]*EC1S1J3U_13[i] - f[i]*IC1S1J3U_13[i]
+pov_IC2S1J3U_13[] <- r[i]*EC2S1J3U_13[i] - f[i]*IC2S1J3U_13[i]
+pov_IC3S1J3U_13[] <- r[i]*EC3S1J3U_13[i] - f[i]*IC3S1J3U_13[i]
+pov_IC4S1J3U_13[] <- r[i]*EC4S1J3U_13[i] - f[i]*IC4S1J3U_13[i]
+
+pov_IC1S1J3U_14[] <- r[i]*EC1S1J3U_14[i] - f[i]*IC1S1J3U_14[i]
+pov_IC2S1J3U_14[] <- r[i]*EC2S1J3U_14[i] - f[i]*IC2S1J3U_14[i]
+pov_IC3S1J3U_14[] <- r[i]*EC3S1J3U_14[i] - f[i]*IC3S1J3U_14[i]
+pov_IC4S1J3U_14[] <- r[i]*EC4S1J3U_14[i] - f[i]*IC4S1J3U_14[i]
+
+pov_IC1S1J3U_15[] <- r[i]*EC1S1J3U_15[i] - f[i]*IC1S1J3U_15[i]
+pov_IC2S1J3U_15[] <- r[i]*EC2S1J3U_15[i] - f[i]*IC2S1J3U_15[i]
+pov_IC3S1J3U_15[] <- r[i]*EC3S1J3U_15[i] - f[i]*IC3S1J3U_15[i]
+pov_IC4S1J3U_15[] <- r[i]*EC4S1J3U_15[i] - f[i]*IC4S1J3U_15[i]
+
+pov_IC1S1J3U_16[] <- r[i]*EC1S1J3U_16[i] - f[i]*IC1S1J3U_16[i]
+pov_IC2S1J3U_16[] <- r[i]*EC2S1J3U_16[i] - f[i]*IC2S1J3U_16[i]
+pov_IC3S1J3U_16[] <- r[i]*EC3S1J3U_16[i] - f[i]*IC3S1J3U_16[i]
+pov_IC4S1J3U_16[] <- r[i]*EC4S1J3U_16[i] - f[i]*IC4S1J3U_16[i]
+
+pov_IC1S1J3U_17[] <- r[i]*EC1S1J3U_17[i] - f[i]*IC1S1J3U_17[i]
+pov_IC2S1J3U_17[] <- r[i]*EC2S1J3U_17[i] - f[i]*IC2S1J3U_17[i]
+pov_IC3S1J3U_17[] <- r[i]*EC3S1J3U_17[i] - f[i]*IC3S1J3U_17[i]
+pov_IC4S1J3U_17[] <- r[i]*EC4S1J3U_17[i] - f[i]*IC4S1J3U_17[i]
+
+
+
+pov_IC1S2J3U_10[] <- r[i]*EC1S2J3U_10[i] - f[i]*IC1S2J3U_10[i]
+pov_IC2S2J3U_10[] <- r[i]*EC2S2J3U_10[i] - f[i]*IC2S2J3U_10[i]
+pov_IC3S2J3U_10[] <- r[i]*EC3S2J3U_10[i] - f[i]*IC3S2J3U_10[i]
+pov_IC4S2J3U_10[] <- r[i]*EC4S2J3U_10[i] - f[i]*IC4S2J3U_10[i]
+
+pov_IC1S2J3U_11[] <- r[i]*EC1S2J3U_11[i] - f[i]*IC1S2J3U_11[i]
+pov_IC2S2J3U_11[] <- r[i]*EC2S2J3U_11[i] - f[i]*IC2S2J3U_11[i]
+pov_IC3S2J3U_11[] <- r[i]*EC3S2J3U_11[i] - f[i]*IC3S2J3U_11[i]
+pov_IC4S2J3U_11[] <- r[i]*EC4S2J3U_11[i] - f[i]*IC4S2J3U_11[i]
+
+pov_IC1S2J3U_12[] <- r[i]*EC1S2J3U_12[i] - f[i]*IC1S2J3U_12[i]
+pov_IC2S2J3U_12[] <- r[i]*EC2S2J3U_12[i] - f[i]*IC2S2J3U_12[i]
+pov_IC3S2J3U_12[] <- r[i]*EC3S2J3U_12[i] - f[i]*IC3S2J3U_12[i]
+pov_IC4S2J3U_12[] <- r[i]*EC4S2J3U_12[i] - f[i]*IC4S2J3U_12[i]
+
+pov_IC1S2J3U_13[] <- r[i]*EC1S2J3U_13[i] - f[i]*IC1S2J3U_13[i]
+pov_IC2S2J3U_13[] <- r[i]*EC2S2J3U_13[i] - f[i]*IC2S2J3U_13[i]
+pov_IC3S2J3U_13[] <- r[i]*EC3S2J3U_13[i] - f[i]*IC3S2J3U_13[i]
+pov_IC4S2J3U_13[] <- r[i]*EC4S2J3U_13[i] - f[i]*IC4S2J3U_13[i]
+
+pov_IC1S2J3U_14[] <- r[i]*EC1S2J3U_14[i] - f[i]*IC1S2J3U_14[i]
+pov_IC2S2J3U_14[] <- r[i]*EC2S2J3U_14[i] - f[i]*IC2S2J3U_14[i]
+pov_IC3S2J3U_14[] <- r[i]*EC3S2J3U_14[i] - f[i]*IC3S2J3U_14[i]
+pov_IC4S2J3U_14[] <- r[i]*EC4S2J3U_14[i] - f[i]*IC4S2J3U_14[i]
+
+pov_IC1S2J3U_15[] <- r[i]*EC1S2J3U_15[i] - f[i]*IC1S2J3U_15[i]
+pov_IC2S2J3U_15[] <- r[i]*EC2S2J3U_15[i] - f[i]*IC2S2J3U_15[i]
+pov_IC3S2J3U_15[] <- r[i]*EC3S2J3U_15[i] - f[i]*IC3S2J3U_15[i]
+pov_IC4S2J3U_15[] <- r[i]*EC4S2J3U_15[i] - f[i]*IC4S2J3U_15[i]
+
+pov_IC1S2J3U_16[] <- r[i]*EC1S2J3U_16[i] - f[i]*IC1S2J3U_16[i]
+pov_IC2S2J3U_16[] <- r[i]*EC2S2J3U_16[i] - f[i]*IC2S2J3U_16[i]
+pov_IC3S2J3U_16[] <- r[i]*EC3S2J3U_16[i] - f[i]*IC3S2J3U_16[i]
+pov_IC4S2J3U_16[] <- r[i]*EC4S2J3U_16[i] - f[i]*IC4S2J3U_16[i]
+
+pov_IC1S2J3U_17[] <- r[i]*EC1S2J3U_17[i] - f[i]*IC1S2J3U_17[i]
+pov_IC2S2J3U_17[] <- r[i]*EC2S2J3U_17[i] - f[i]*IC2S2J3U_17[i]
+pov_IC3S2J3U_17[] <- r[i]*EC3S2J3U_17[i] - f[i]*IC3S2J3U_17[i]
+pov_IC4S2J3U_17[] <- r[i]*EC4S2J3U_17[i] - f[i]*IC4S2J3U_17[i]
+
+
+
+pov_IC1S1J4U_10[] <- r[i]*EC1S1J4U_10[i] - f[i]*IC1S1J4U_10[i]
+pov_IC2S1J4U_10[] <- r[i]*EC2S1J4U_10[i] - f[i]*IC2S1J4U_10[i]
+pov_IC3S1J4U_10[] <- r[i]*EC3S1J4U_10[i] - f[i]*IC3S1J4U_10[i]
+pov_IC4S1J4U_10[] <- r[i]*EC4S1J4U_10[i] - f[i]*IC4S1J4U_10[i]
+
+pov_IC1S1J4U_11[] <- r[i]*EC1S1J4U_11[i] - f[i]*IC1S1J4U_11[i]
+pov_IC2S1J4U_11[] <- r[i]*EC2S1J4U_11[i] - f[i]*IC2S1J4U_11[i]
+pov_IC3S1J4U_11[] <- r[i]*EC3S1J4U_11[i] - f[i]*IC3S1J4U_11[i]
+pov_IC4S1J4U_11[] <- r[i]*EC4S1J4U_11[i] - f[i]*IC4S1J4U_11[i]
+
+pov_IC1S1J4U_12[] <- r[i]*EC1S1J4U_12[i] - f[i]*IC1S1J4U_12[i]
+pov_IC2S1J4U_12[] <- r[i]*EC2S1J4U_12[i] - f[i]*IC2S1J4U_12[i]
+pov_IC3S1J4U_12[] <- r[i]*EC3S1J4U_12[i] - f[i]*IC3S1J4U_12[i]
+pov_IC4S1J4U_12[] <- r[i]*EC4S1J4U_12[i] - f[i]*IC4S1J4U_12[i]
+
+pov_IC1S1J4U_13[] <- r[i]*EC1S1J4U_13[i] - f[i]*IC1S1J4U_13[i]
+pov_IC2S1J4U_13[] <- r[i]*EC2S1J4U_13[i] - f[i]*IC2S1J4U_13[i]
+pov_IC3S1J4U_13[] <- r[i]*EC3S1J4U_13[i] - f[i]*IC3S1J4U_13[i]
+pov_IC4S1J4U_13[] <- r[i]*EC4S1J4U_13[i] - f[i]*IC4S1J4U_13[i]
+
+pov_IC1S1J4U_14[] <- r[i]*EC1S1J4U_14[i] - f[i]*IC1S1J4U_14[i]
+pov_IC2S1J4U_14[] <- r[i]*EC2S1J4U_14[i] - f[i]*IC2S1J4U_14[i]
+pov_IC3S1J4U_14[] <- r[i]*EC3S1J4U_14[i] - f[i]*IC3S1J4U_14[i]
+pov_IC4S1J4U_14[] <- r[i]*EC4S1J4U_14[i] - f[i]*IC4S1J4U_14[i]
+
+pov_IC1S1J4U_15[] <- r[i]*EC1S1J4U_15[i] - f[i]*IC1S1J4U_15[i]
+pov_IC2S1J4U_15[] <- r[i]*EC2S1J4U_15[i] - f[i]*IC2S1J4U_15[i]
+pov_IC3S1J4U_15[] <- r[i]*EC3S1J4U_15[i] - f[i]*IC3S1J4U_15[i]
+pov_IC4S1J4U_15[] <- r[i]*EC4S1J4U_15[i] - f[i]*IC4S1J4U_15[i]
+
+pov_IC1S1J4U_16[] <- r[i]*EC1S1J4U_16[i] - f[i]*IC1S1J4U_16[i]
+pov_IC2S1J4U_16[] <- r[i]*EC2S1J4U_16[i] - f[i]*IC2S1J4U_16[i]
+pov_IC3S1J4U_16[] <- r[i]*EC3S1J4U_16[i] - f[i]*IC3S1J4U_16[i]
+pov_IC4S1J4U_16[] <- r[i]*EC4S1J4U_16[i] - f[i]*IC4S1J4U_16[i]
+
+pov_IC1S1J4U_17[] <- r[i]*EC1S1J4U_17[i] - f[i]*IC1S1J4U_17[i]
+pov_IC2S1J4U_17[] <- r[i]*EC2S1J4U_17[i] - f[i]*IC2S1J4U_17[i]
+pov_IC3S1J4U_17[] <- r[i]*EC3S1J4U_17[i] - f[i]*IC3S1J4U_17[i]
+pov_IC4S1J4U_17[] <- r[i]*EC4S1J4U_17[i] - f[i]*IC4S1J4U_17[i]
+
+
+
+pov_IC1S2J4U_10[] <- r[i]*EC1S2J4U_10[i] - f[i]*IC1S2J4U_10[i]
+pov_IC2S2J4U_10[] <- r[i]*EC2S2J4U_10[i] - f[i]*IC2S2J4U_10[i]
+pov_IC3S2J4U_10[] <- r[i]*EC3S2J4U_10[i] - f[i]*IC3S2J4U_10[i]
+pov_IC4S2J4U_10[] <- r[i]*EC4S2J4U_10[i] - f[i]*IC4S2J4U_10[i]
+
+pov_IC1S2J4U_11[] <- r[i]*EC1S2J4U_11[i] - f[i]*IC1S2J4U_11[i]
+pov_IC2S2J4U_11[] <- r[i]*EC2S2J4U_11[i] - f[i]*IC2S2J4U_11[i]
+pov_IC3S2J4U_11[] <- r[i]*EC3S2J4U_11[i] - f[i]*IC3S2J4U_11[i]
+pov_IC4S2J4U_11[] <- r[i]*EC4S2J4U_11[i] - f[i]*IC4S2J4U_11[i]
+
+pov_IC1S2J4U_12[] <- r[i]*EC1S2J4U_12[i] - f[i]*IC1S2J4U_12[i]
+pov_IC2S2J4U_12[] <- r[i]*EC2S2J4U_12[i] - f[i]*IC2S2J4U_12[i]
+pov_IC3S2J4U_12[] <- r[i]*EC3S2J4U_12[i] - f[i]*IC3S2J4U_12[i]
+pov_IC4S2J4U_12[] <- r[i]*EC4S2J4U_12[i] - f[i]*IC4S2J4U_12[i]
+
+pov_IC1S2J4U_13[] <- r[i]*EC1S2J4U_13[i] - f[i]*IC1S2J4U_13[i]
+pov_IC2S2J4U_13[] <- r[i]*EC2S2J4U_13[i] - f[i]*IC2S2J4U_13[i]
+pov_IC3S2J4U_13[] <- r[i]*EC3S2J4U_13[i] - f[i]*IC3S2J4U_13[i]
+pov_IC4S2J4U_13[] <- r[i]*EC4S2J4U_13[i] - f[i]*IC4S2J4U_13[i]
+
+pov_IC1S2J4U_14[] <- r[i]*EC1S2J4U_14[i] - f[i]*IC1S2J4U_14[i]
+pov_IC2S2J4U_14[] <- r[i]*EC2S2J4U_14[i] - f[i]*IC2S2J4U_14[i]
+pov_IC3S2J4U_14[] <- r[i]*EC3S2J4U_14[i] - f[i]*IC3S2J4U_14[i]
+pov_IC4S2J4U_14[] <- r[i]*EC4S2J4U_14[i] - f[i]*IC4S2J4U_14[i]
+
+pov_IC1S2J4U_15[] <- r[i]*EC1S2J4U_15[i] - f[i]*IC1S2J4U_15[i]
+pov_IC2S2J4U_15[] <- r[i]*EC2S2J4U_15[i] - f[i]*IC2S2J4U_15[i]
+pov_IC3S2J4U_15[] <- r[i]*EC3S2J4U_15[i] - f[i]*IC3S2J4U_15[i]
+pov_IC4S2J4U_15[] <- r[i]*EC4S2J4U_15[i] - f[i]*IC4S2J4U_15[i]
+
+pov_IC1S2J4U_16[] <- r[i]*EC1S2J4U_16[i] - f[i]*IC1S2J4U_16[i]
+pov_IC2S2J4U_16[] <- r[i]*EC2S2J4U_16[i] - f[i]*IC2S2J4U_16[i]
+pov_IC3S2J4U_16[] <- r[i]*EC3S2J4U_16[i] - f[i]*IC3S2J4U_16[i]
+pov_IC4S2J4U_16[] <- r[i]*EC4S2J4U_16[i] - f[i]*IC4S2J4U_16[i]
+
+pov_IC1S2J4U_17[] <- r[i]*EC1S2J4U_17[i] - f[i]*IC1S2J4U_17[i]
+pov_IC2S2J4U_17[] <- r[i]*EC2S2J4U_17[i] - f[i]*IC2S2J4U_17[i]
+pov_IC3S2J4U_17[] <- r[i]*EC3S2J4U_17[i] - f[i]*IC3S2J4U_17[i]
+pov_IC4S2J4U_17[] <- r[i]*EC4S2J4U_17[i] - f[i]*IC4S2J4U_17[i]
+
+
+
+pov_IC1S1J5U_10[] <- r[i]*EC1S1J5U_10[i] - f[i]*IC1S1J5U_10[i]
+pov_IC2S1J5U_10[] <- r[i]*EC2S1J5U_10[i] - f[i]*IC2S1J5U_10[i]
+pov_IC3S1J5U_10[] <- r[i]*EC3S1J5U_10[i] - f[i]*IC3S1J5U_10[i]
+pov_IC4S1J5U_10[] <- r[i]*EC4S1J5U_10[i] - f[i]*IC4S1J5U_10[i]
+
+pov_IC1S1J5U_11[] <- r[i]*EC1S1J5U_11[i] - f[i]*IC1S1J5U_11[i]
+pov_IC2S1J5U_11[] <- r[i]*EC2S1J5U_11[i] - f[i]*IC2S1J5U_11[i]
+pov_IC3S1J5U_11[] <- r[i]*EC3S1J5U_11[i] - f[i]*IC3S1J5U_11[i]
+pov_IC4S1J5U_11[] <- r[i]*EC4S1J5U_11[i] - f[i]*IC4S1J5U_11[i]
+
+pov_IC1S1J5U_12[] <- r[i]*EC1S1J5U_12[i] - f[i]*IC1S1J5U_12[i]
+pov_IC2S1J5U_12[] <- r[i]*EC2S1J5U_12[i] - f[i]*IC2S1J5U_12[i]
+pov_IC3S1J5U_12[] <- r[i]*EC3S1J5U_12[i] - f[i]*IC3S1J5U_12[i]
+pov_IC4S1J5U_12[] <- r[i]*EC4S1J5U_12[i] - f[i]*IC4S1J5U_12[i]
+
+pov_IC1S1J5U_13[] <- r[i]*EC1S1J5U_13[i] - f[i]*IC1S1J5U_13[i]
+pov_IC2S1J5U_13[] <- r[i]*EC2S1J5U_13[i] - f[i]*IC2S1J5U_13[i]
+pov_IC3S1J5U_13[] <- r[i]*EC3S1J5U_13[i] - f[i]*IC3S1J5U_13[i]
+pov_IC4S1J5U_13[] <- r[i]*EC4S1J5U_13[i] - f[i]*IC4S1J5U_13[i]
+
+pov_IC1S1J5U_14[] <- r[i]*EC1S1J5U_14[i] - f[i]*IC1S1J5U_14[i]
+pov_IC2S1J5U_14[] <- r[i]*EC2S1J5U_14[i] - f[i]*IC2S1J5U_14[i]
+pov_IC3S1J5U_14[] <- r[i]*EC3S1J5U_14[i] - f[i]*IC3S1J5U_14[i]
+pov_IC4S1J5U_14[] <- r[i]*EC4S1J5U_14[i] - f[i]*IC4S1J5U_14[i]
+
+pov_IC1S1J5U_15[] <- r[i]*EC1S1J5U_15[i] - f[i]*IC1S1J5U_15[i]
+pov_IC2S1J5U_15[] <- r[i]*EC2S1J5U_15[i] - f[i]*IC2S1J5U_15[i]
+pov_IC3S1J5U_15[] <- r[i]*EC3S1J5U_15[i] - f[i]*IC3S1J5U_15[i]
+pov_IC4S1J5U_15[] <- r[i]*EC4S1J5U_15[i] - f[i]*IC4S1J5U_15[i]
+
+pov_IC1S1J5U_16[] <- r[i]*EC1S1J5U_16[i] - f[i]*IC1S1J5U_16[i]
+pov_IC2S1J5U_16[] <- r[i]*EC2S1J5U_16[i] - f[i]*IC2S1J5U_16[i]
+pov_IC3S1J5U_16[] <- r[i]*EC3S1J5U_16[i] - f[i]*IC3S1J5U_16[i]
+pov_IC4S1J5U_16[] <- r[i]*EC4S1J5U_16[i] - f[i]*IC4S1J5U_16[i]
+
+pov_IC1S1J5U_17[] <- r[i]*EC1S1J5U_17[i] - f[i]*IC1S1J5U_17[i]
+pov_IC2S1J5U_17[] <- r[i]*EC2S1J5U_17[i] - f[i]*IC2S1J5U_17[i]
+pov_IC3S1J5U_17[] <- r[i]*EC3S1J5U_17[i] - f[i]*IC3S1J5U_17[i]
+pov_IC4S1J5U_17[] <- r[i]*EC4S1J5U_17[i] - f[i]*IC4S1J5U_17[i]
+
+
+
+pov_IC1S2J5U_10[] <- r[i]*EC1S2J5U_10[i] - f[i]*IC1S2J5U_10[i]
+pov_IC2S2J5U_10[] <- r[i]*EC2S2J5U_10[i] - f[i]*IC2S2J5U_10[i]
+pov_IC3S2J5U_10[] <- r[i]*EC3S2J5U_10[i] - f[i]*IC3S2J5U_10[i]
+pov_IC4S2J5U_10[] <- r[i]*EC4S2J5U_10[i] - f[i]*IC4S2J5U_10[i]
+
+pov_IC1S2J5U_11[] <- r[i]*EC1S2J5U_11[i] - f[i]*IC1S2J5U_11[i]
+pov_IC2S2J5U_11[] <- r[i]*EC2S2J5U_11[i] - f[i]*IC2S2J5U_11[i]
+pov_IC3S2J5U_11[] <- r[i]*EC3S2J5U_11[i] - f[i]*IC3S2J5U_11[i]
+pov_IC4S2J5U_11[] <- r[i]*EC4S2J5U_11[i] - f[i]*IC4S2J5U_11[i]
+
+pov_IC1S2J5U_12[] <- r[i]*EC1S2J5U_12[i] - f[i]*IC1S2J5U_12[i]
+pov_IC2S2J5U_12[] <- r[i]*EC2S2J5U_12[i] - f[i]*IC2S2J5U_12[i]
+pov_IC3S2J5U_12[] <- r[i]*EC3S2J5U_12[i] - f[i]*IC3S2J5U_12[i]
+pov_IC4S2J5U_12[] <- r[i]*EC4S2J5U_12[i] - f[i]*IC4S2J5U_12[i]
+
+pov_IC1S2J5U_13[] <- r[i]*EC1S2J5U_13[i] - f[i]*IC1S2J5U_13[i]
+pov_IC2S2J5U_13[] <- r[i]*EC2S2J5U_13[i] - f[i]*IC2S2J5U_13[i]
+pov_IC3S2J5U_13[] <- r[i]*EC3S2J5U_13[i] - f[i]*IC3S2J5U_13[i]
+pov_IC4S2J5U_13[] <- r[i]*EC4S2J5U_13[i] - f[i]*IC4S2J5U_13[i]
+
+pov_IC1S2J5U_14[] <- r[i]*EC1S2J5U_14[i] - f[i]*IC1S2J5U_14[i]
+pov_IC2S2J5U_14[] <- r[i]*EC2S2J5U_14[i] - f[i]*IC2S2J5U_14[i]
+pov_IC3S2J5U_14[] <- r[i]*EC3S2J5U_14[i] - f[i]*IC3S2J5U_14[i]
+pov_IC4S2J5U_14[] <- r[i]*EC4S2J5U_14[i] - f[i]*IC4S2J5U_14[i]
+
+pov_IC1S2J5U_15[] <- r[i]*EC1S2J5U_15[i] - f[i]*IC1S2J5U_15[i]
+pov_IC2S2J5U_15[] <- r[i]*EC2S2J5U_15[i] - f[i]*IC2S2J5U_15[i]
+pov_IC3S2J5U_15[] <- r[i]*EC3S2J5U_15[i] - f[i]*IC3S2J5U_15[i]
+pov_IC4S2J5U_15[] <- r[i]*EC4S2J5U_15[i] - f[i]*IC4S2J5U_15[i]
+
+pov_IC1S2J5U_16[] <- r[i]*EC1S2J5U_16[i] - f[i]*IC1S2J5U_16[i]
+pov_IC2S2J5U_16[] <- r[i]*EC2S2J5U_16[i] - f[i]*IC2S2J5U_16[i]
+pov_IC3S2J5U_16[] <- r[i]*EC3S2J5U_16[i] - f[i]*IC3S2J5U_16[i]
+pov_IC4S2J5U_16[] <- r[i]*EC4S2J5U_16[i] - f[i]*IC4S2J5U_16[i]
+
+pov_IC1S2J5U_17[] <- r[i]*EC1S2J5U_17[i] - f[i]*IC1S2J5U_17[i]
+pov_IC2S2J5U_17[] <- r[i]*EC2S2J5U_17[i] - f[i]*IC2S2J5U_17[i]
+pov_IC3S2J5U_17[] <- r[i]*EC3S2J5U_17[i] - f[i]*IC3S2J5U_17[i]
+pov_IC4S2J5U_17[] <- r[i]*EC4S2J5U_17[i] - f[i]*IC4S2J5U_17[i]
+
+
+
+pov_IC1S1J1W_10[] <- r[i]*EC1S1J1W_10[i] - f[i]*IC1S1J1W_10[i]
+pov_IC2S1J1W_10[] <- r[i]*EC2S1J1W_10[i] - f[i]*IC2S1J1W_10[i]
+pov_IC3S1J1W_10[] <- r[i]*EC3S1J1W_10[i] - f[i]*IC3S1J1W_10[i]
+pov_IC4S1J1W_10[] <- r[i]*EC4S1J1W_10[i] - f[i]*IC4S1J1W_10[i]
+
+pov_IC1S1J1W_11[] <- r[i]*EC1S1J1W_11[i] - f[i]*IC1S1J1W_11[i]
+pov_IC2S1J1W_11[] <- r[i]*EC2S1J1W_11[i] - f[i]*IC2S1J1W_11[i]
+pov_IC3S1J1W_11[] <- r[i]*EC3S1J1W_11[i] - f[i]*IC3S1J1W_11[i]
+pov_IC4S1J1W_11[] <- r[i]*EC4S1J1W_11[i] - f[i]*IC4S1J1W_11[i]
+
+pov_IC1S1J1W_12[] <- r[i]*EC1S1J1W_12[i] - f[i]*IC1S1J1W_12[i]
+pov_IC2S1J1W_12[] <- r[i]*EC2S1J1W_12[i] - f[i]*IC2S1J1W_12[i]
+pov_IC3S1J1W_12[] <- r[i]*EC3S1J1W_12[i] - f[i]*IC3S1J1W_12[i]
+pov_IC4S1J1W_12[] <- r[i]*EC4S1J1W_12[i] - f[i]*IC4S1J1W_12[i]
+
+pov_IC1S1J1W_13[] <- r[i]*EC1S1J1W_13[i] - f[i]*IC1S1J1W_13[i]
+pov_IC2S1J1W_13[] <- r[i]*EC2S1J1W_13[i] - f[i]*IC2S1J1W_13[i]
+pov_IC3S1J1W_13[] <- r[i]*EC3S1J1W_13[i] - f[i]*IC3S1J1W_13[i]
+pov_IC4S1J1W_13[] <- r[i]*EC4S1J1W_13[i] - f[i]*IC4S1J1W_13[i]
+
+pov_IC1S1J1W_14[] <- r[i]*EC1S1J1W_14[i] - f[i]*IC1S1J1W_14[i]
+pov_IC2S1J1W_14[] <- r[i]*EC2S1J1W_14[i] - f[i]*IC2S1J1W_14[i]
+pov_IC3S1J1W_14[] <- r[i]*EC3S1J1W_14[i] - f[i]*IC3S1J1W_14[i]
+pov_IC4S1J1W_14[] <- r[i]*EC4S1J1W_14[i] - f[i]*IC4S1J1W_14[i]
+
+pov_IC1S1J1W_15[] <- r[i]*EC1S1J1W_15[i] - f[i]*IC1S1J1W_15[i]
+pov_IC2S1J1W_15[] <- r[i]*EC2S1J1W_15[i] - f[i]*IC2S1J1W_15[i]
+pov_IC3S1J1W_15[] <- r[i]*EC3S1J1W_15[i] - f[i]*IC3S1J1W_15[i]
+pov_IC4S1J1W_15[] <- r[i]*EC4S1J1W_15[i] - f[i]*IC4S1J1W_15[i]
+
+pov_IC1S1J1W_16[] <- r[i]*EC1S1J1W_16[i] - f[i]*IC1S1J1W_16[i]
+pov_IC2S1J1W_16[] <- r[i]*EC2S1J1W_16[i] - f[i]*IC2S1J1W_16[i]
+pov_IC3S1J1W_16[] <- r[i]*EC3S1J1W_16[i] - f[i]*IC3S1J1W_16[i]
+pov_IC4S1J1W_16[] <- r[i]*EC4S1J1W_16[i] - f[i]*IC4S1J1W_16[i]
+
+pov_IC1S1J1W_17[] <- r[i]*EC1S1J1W_17[i] - f[i]*IC1S1J1W_17[i]
+pov_IC2S1J1W_17[] <- r[i]*EC2S1J1W_17[i] - f[i]*IC2S1J1W_17[i]
+pov_IC3S1J1W_17[] <- r[i]*EC3S1J1W_17[i] - f[i]*IC3S1J1W_17[i]
+pov_IC4S1J1W_17[] <- r[i]*EC4S1J1W_17[i] - f[i]*IC4S1J1W_17[i]
+
+
+
+pov_IC1S2J1W_10[] <- r[i]*EC1S2J1W_10[i] - f[i]*IC1S2J1W_10[i]
+pov_IC2S2J1W_10[] <- r[i]*EC2S2J1W_10[i] - f[i]*IC2S2J1W_10[i]
+pov_IC3S2J1W_10[] <- r[i]*EC3S2J1W_10[i] - f[i]*IC3S2J1W_10[i]
+pov_IC4S2J1W_10[] <- r[i]*EC4S2J1W_10[i] - f[i]*IC4S2J1W_10[i]
+
+pov_IC1S2J1W_11[] <- r[i]*EC1S2J1W_11[i] - f[i]*IC1S2J1W_11[i]
+pov_IC2S2J1W_11[] <- r[i]*EC2S2J1W_11[i] - f[i]*IC2S2J1W_11[i]
+pov_IC3S2J1W_11[] <- r[i]*EC3S2J1W_11[i] - f[i]*IC3S2J1W_11[i]
+pov_IC4S2J1W_11[] <- r[i]*EC4S2J1W_11[i] - f[i]*IC4S2J1W_11[i]
+
+pov_IC1S2J1W_12[] <- r[i]*EC1S2J1W_12[i] - f[i]*IC1S2J1W_12[i]
+pov_IC2S2J1W_12[] <- r[i]*EC2S2J1W_12[i] - f[i]*IC2S2J1W_12[i]
+pov_IC3S2J1W_12[] <- r[i]*EC3S2J1W_12[i] - f[i]*IC3S2J1W_12[i]
+pov_IC4S2J1W_12[] <- r[i]*EC4S2J1W_12[i] - f[i]*IC4S2J1W_12[i]
+
+pov_IC1S2J1W_13[] <- r[i]*EC1S2J1W_13[i] - f[i]*IC1S2J1W_13[i]
+pov_IC2S2J1W_13[] <- r[i]*EC2S2J1W_13[i] - f[i]*IC2S2J1W_13[i]
+pov_IC3S2J1W_13[] <- r[i]*EC3S2J1W_13[i] - f[i]*IC3S2J1W_13[i]
+pov_IC4S2J1W_13[] <- r[i]*EC4S2J1W_13[i] - f[i]*IC4S2J1W_13[i]
+
+pov_IC1S2J1W_14[] <- r[i]*EC1S2J1W_14[i] - f[i]*IC1S2J1W_14[i]
+pov_IC2S2J1W_14[] <- r[i]*EC2S2J1W_14[i] - f[i]*IC2S2J1W_14[i]
+pov_IC3S2J1W_14[] <- r[i]*EC3S2J1W_14[i] - f[i]*IC3S2J1W_14[i]
+pov_IC4S2J1W_14[] <- r[i]*EC4S2J1W_14[i] - f[i]*IC4S2J1W_14[i]
+
+pov_IC1S2J1W_15[] <- r[i]*EC1S2J1W_15[i] - f[i]*IC1S2J1W_15[i]
+pov_IC2S2J1W_15[] <- r[i]*EC2S2J1W_15[i] - f[i]*IC2S2J1W_15[i]
+pov_IC3S2J1W_15[] <- r[i]*EC3S2J1W_15[i] - f[i]*IC3S2J1W_15[i]
+pov_IC4S2J1W_15[] <- r[i]*EC4S2J1W_15[i] - f[i]*IC4S2J1W_15[i]
+
+pov_IC1S2J1W_16[] <- r[i]*EC1S2J1W_16[i] - f[i]*IC1S2J1W_16[i]
+pov_IC2S2J1W_16[] <- r[i]*EC2S2J1W_16[i] - f[i]*IC2S2J1W_16[i]
+pov_IC3S2J1W_16[] <- r[i]*EC3S2J1W_16[i] - f[i]*IC3S2J1W_16[i]
+pov_IC4S2J1W_16[] <- r[i]*EC4S2J1W_16[i] - f[i]*IC4S2J1W_16[i]
+
+pov_IC1S2J1W_17[] <- r[i]*EC1S2J1W_17[i] - f[i]*IC1S2J1W_17[i]
+pov_IC2S2J1W_17[] <- r[i]*EC2S2J1W_17[i] - f[i]*IC2S2J1W_17[i]
+pov_IC3S2J1W_17[] <- r[i]*EC3S2J1W_17[i] - f[i]*IC3S2J1W_17[i]
+pov_IC4S2J1W_17[] <- r[i]*EC4S2J1W_17[i] - f[i]*IC4S2J1W_17[i]
+
+
+
+pov_IC1S1J2W_10[] <- r[i]*EC1S1J2W_10[i] - f[i]*IC1S1J2W_10[i]
+pov_IC2S1J2W_10[] <- r[i]*EC2S1J2W_10[i] - f[i]*IC2S1J2W_10[i]
+pov_IC3S1J2W_10[] <- r[i]*EC3S1J2W_10[i] - f[i]*IC3S1J2W_10[i]
+pov_IC4S1J2W_10[] <- r[i]*EC4S1J2W_10[i] - f[i]*IC4S1J2W_10[i]
+
+pov_IC1S1J2W_11[] <- r[i]*EC1S1J2W_11[i] - f[i]*IC1S1J2W_11[i]
+pov_IC2S1J2W_11[] <- r[i]*EC2S1J2W_11[i] - f[i]*IC2S1J2W_11[i]
+pov_IC3S1J2W_11[] <- r[i]*EC3S1J2W_11[i] - f[i]*IC3S1J2W_11[i]
+pov_IC4S1J2W_11[] <- r[i]*EC4S1J2W_11[i] - f[i]*IC4S1J2W_11[i]
+
+pov_IC1S1J2W_12[] <- r[i]*EC1S1J2W_12[i] - f[i]*IC1S1J2W_12[i]
+pov_IC2S1J2W_12[] <- r[i]*EC2S1J2W_12[i] - f[i]*IC2S1J2W_12[i]
+pov_IC3S1J2W_12[] <- r[i]*EC3S1J2W_12[i] - f[i]*IC3S1J2W_12[i]
+pov_IC4S1J2W_12[] <- r[i]*EC4S1J2W_12[i] - f[i]*IC4S1J2W_12[i]
+
+pov_IC1S1J2W_13[] <- r[i]*EC1S1J2W_13[i] - f[i]*IC1S1J2W_13[i]
+pov_IC2S1J2W_13[] <- r[i]*EC2S1J2W_13[i] - f[i]*IC2S1J2W_13[i]
+pov_IC3S1J2W_13[] <- r[i]*EC3S1J2W_13[i] - f[i]*IC3S1J2W_13[i]
+pov_IC4S1J2W_13[] <- r[i]*EC4S1J2W_13[i] - f[i]*IC4S1J2W_13[i]
+
+pov_IC1S1J2W_14[] <- r[i]*EC1S1J2W_14[i] - f[i]*IC1S1J2W_14[i]
+pov_IC2S1J2W_14[] <- r[i]*EC2S1J2W_14[i] - f[i]*IC2S1J2W_14[i]
+pov_IC3S1J2W_14[] <- r[i]*EC3S1J2W_14[i] - f[i]*IC3S1J2W_14[i]
+pov_IC4S1J2W_14[] <- r[i]*EC4S1J2W_14[i] - f[i]*IC4S1J2W_14[i]
+
+pov_IC1S1J2W_15[] <- r[i]*EC1S1J2W_15[i] - f[i]*IC1S1J2W_15[i]
+pov_IC2S1J2W_15[] <- r[i]*EC2S1J2W_15[i] - f[i]*IC2S1J2W_15[i]
+pov_IC3S1J2W_15[] <- r[i]*EC3S1J2W_15[i] - f[i]*IC3S1J2W_15[i]
+pov_IC4S1J2W_15[] <- r[i]*EC4S1J2W_15[i] - f[i]*IC4S1J2W_15[i]
+
+pov_IC1S1J2W_16[] <- r[i]*EC1S1J2W_16[i] - f[i]*IC1S1J2W_16[i]
+pov_IC2S1J2W_16[] <- r[i]*EC2S1J2W_16[i] - f[i]*IC2S1J2W_16[i]
+pov_IC3S1J2W_16[] <- r[i]*EC3S1J2W_16[i] - f[i]*IC3S1J2W_16[i]
+pov_IC4S1J2W_16[] <- r[i]*EC4S1J2W_16[i] - f[i]*IC4S1J2W_16[i]
+
+pov_IC1S1J2W_17[] <- r[i]*EC1S1J2W_17[i] - f[i]*IC1S1J2W_17[i]
+pov_IC2S1J2W_17[] <- r[i]*EC2S1J2W_17[i] - f[i]*IC2S1J2W_17[i]
+pov_IC3S1J2W_17[] <- r[i]*EC3S1J2W_17[i] - f[i]*IC3S1J2W_17[i]
+pov_IC4S1J2W_17[] <- r[i]*EC4S1J2W_17[i] - f[i]*IC4S1J2W_17[i]
+
+
+
+pov_IC1S2J2W_10[] <- r[i]*EC1S2J2W_10[i] - f[i]*IC1S2J2W_10[i]
+pov_IC2S2J2W_10[] <- r[i]*EC2S2J2W_10[i] - f[i]*IC2S2J2W_10[i]
+pov_IC3S2J2W_10[] <- r[i]*EC3S2J2W_10[i] - f[i]*IC3S2J2W_10[i]
+pov_IC4S2J2W_10[] <- r[i]*EC4S2J2W_10[i] - f[i]*IC4S2J2W_10[i]
+
+pov_IC1S2J2W_11[] <- r[i]*EC1S2J2W_11[i] - f[i]*IC1S2J2W_11[i]
+pov_IC2S2J2W_11[] <- r[i]*EC2S2J2W_11[i] - f[i]*IC2S2J2W_11[i]
+pov_IC3S2J2W_11[] <- r[i]*EC3S2J2W_11[i] - f[i]*IC3S2J2W_11[i]
+pov_IC4S2J2W_11[] <- r[i]*EC4S2J2W_11[i] - f[i]*IC4S2J2W_11[i]
+
+pov_IC1S2J2W_12[] <- r[i]*EC1S2J2W_12[i] - f[i]*IC1S2J2W_12[i]
+pov_IC2S2J2W_12[] <- r[i]*EC2S2J2W_12[i] - f[i]*IC2S2J2W_12[i]
+pov_IC3S2J2W_12[] <- r[i]*EC3S2J2W_12[i] - f[i]*IC3S2J2W_12[i]
+pov_IC4S2J2W_12[] <- r[i]*EC4S2J2W_12[i] - f[i]*IC4S2J2W_12[i]
+
+pov_IC1S2J2W_13[] <- r[i]*EC1S2J2W_13[i] - f[i]*IC1S2J2W_13[i]
+pov_IC2S2J2W_13[] <- r[i]*EC2S2J2W_13[i] - f[i]*IC2S2J2W_13[i]
+pov_IC3S2J2W_13[] <- r[i]*EC3S2J2W_13[i] - f[i]*IC3S2J2W_13[i]
+pov_IC4S2J2W_13[] <- r[i]*EC4S2J2W_13[i] - f[i]*IC4S2J2W_13[i]
+
+pov_IC1S2J2W_14[] <- r[i]*EC1S2J2W_14[i] - f[i]*IC1S2J2W_14[i]
+pov_IC2S2J2W_14[] <- r[i]*EC2S2J2W_14[i] - f[i]*IC2S2J2W_14[i]
+pov_IC3S2J2W_14[] <- r[i]*EC3S2J2W_14[i] - f[i]*IC3S2J2W_14[i]
+pov_IC4S2J2W_14[] <- r[i]*EC4S2J2W_14[i] - f[i]*IC4S2J2W_14[i]
+
+pov_IC1S2J2W_15[] <- r[i]*EC1S2J2W_15[i] - f[i]*IC1S2J2W_15[i]
+pov_IC2S2J2W_15[] <- r[i]*EC2S2J2W_15[i] - f[i]*IC2S2J2W_15[i]
+pov_IC3S2J2W_15[] <- r[i]*EC3S2J2W_15[i] - f[i]*IC3S2J2W_15[i]
+pov_IC4S2J2W_15[] <- r[i]*EC4S2J2W_15[i] - f[i]*IC4S2J2W_15[i]
+
+pov_IC1S2J2W_16[] <- r[i]*EC1S2J2W_16[i] - f[i]*IC1S2J2W_16[i]
+pov_IC2S2J2W_16[] <- r[i]*EC2S2J2W_16[i] - f[i]*IC2S2J2W_16[i]
+pov_IC3S2J2W_16[] <- r[i]*EC3S2J2W_16[i] - f[i]*IC3S2J2W_16[i]
+pov_IC4S2J2W_16[] <- r[i]*EC4S2J2W_16[i] - f[i]*IC4S2J2W_16[i]
+
+pov_IC1S2J2W_17[] <- r[i]*EC1S2J2W_17[i] - f[i]*IC1S2J2W_17[i]
+pov_IC2S2J2W_17[] <- r[i]*EC2S2J2W_17[i] - f[i]*IC2S2J2W_17[i]
+pov_IC3S2J2W_17[] <- r[i]*EC3S2J2W_17[i] - f[i]*IC3S2J2W_17[i]
+pov_IC4S2J2W_17[] <- r[i]*EC4S2J2W_17[i] - f[i]*IC4S2J2W_17[i]
+
+
+
+pov_IC1S1J3W_10[] <- r[i]*EC1S1J3W_10[i] - f[i]*IC1S1J3W_10[i]
+pov_IC2S1J3W_10[] <- r[i]*EC2S1J3W_10[i] - f[i]*IC2S1J3W_10[i]
+pov_IC3S1J3W_10[] <- r[i]*EC3S1J3W_10[i] - f[i]*IC3S1J3W_10[i]
+pov_IC4S1J3W_10[] <- r[i]*EC4S1J3W_10[i] - f[i]*IC4S1J3W_10[i]
+
+pov_IC1S1J3W_11[] <- r[i]*EC1S1J3W_11[i] - f[i]*IC1S1J3W_11[i]
+pov_IC2S1J3W_11[] <- r[i]*EC2S1J3W_11[i] - f[i]*IC2S1J3W_11[i]
+pov_IC3S1J3W_11[] <- r[i]*EC3S1J3W_11[i] - f[i]*IC3S1J3W_11[i]
+pov_IC4S1J3W_11[] <- r[i]*EC4S1J3W_11[i] - f[i]*IC4S1J3W_11[i]
+
+pov_IC1S1J3W_12[] <- r[i]*EC1S1J3W_12[i] - f[i]*IC1S1J3W_12[i]
+pov_IC2S1J3W_12[] <- r[i]*EC2S1J3W_12[i] - f[i]*IC2S1J3W_12[i]
+pov_IC3S1J3W_12[] <- r[i]*EC3S1J3W_12[i] - f[i]*IC3S1J3W_12[i]
+pov_IC4S1J3W_12[] <- r[i]*EC4S1J3W_12[i] - f[i]*IC4S1J3W_12[i]
+
+pov_IC1S1J3W_13[] <- r[i]*EC1S1J3W_13[i] - f[i]*IC1S1J3W_13[i]
+pov_IC2S1J3W_13[] <- r[i]*EC2S1J3W_13[i] - f[i]*IC2S1J3W_13[i]
+pov_IC3S1J3W_13[] <- r[i]*EC3S1J3W_13[i] - f[i]*IC3S1J3W_13[i]
+pov_IC4S1J3W_13[] <- r[i]*EC4S1J3W_13[i] - f[i]*IC4S1J3W_13[i]
+
+pov_IC1S1J3W_14[] <- r[i]*EC1S1J3W_14[i] - f[i]*IC1S1J3W_14[i]
+pov_IC2S1J3W_14[] <- r[i]*EC2S1J3W_14[i] - f[i]*IC2S1J3W_14[i]
+pov_IC3S1J3W_14[] <- r[i]*EC3S1J3W_14[i] - f[i]*IC3S1J3W_14[i]
+pov_IC4S1J3W_14[] <- r[i]*EC4S1J3W_14[i] - f[i]*IC4S1J3W_14[i]
+
+pov_IC1S1J3W_15[] <- r[i]*EC1S1J3W_15[i] - f[i]*IC1S1J3W_15[i]
+pov_IC2S1J3W_15[] <- r[i]*EC2S1J3W_15[i] - f[i]*IC2S1J3W_15[i]
+pov_IC3S1J3W_15[] <- r[i]*EC3S1J3W_15[i] - f[i]*IC3S1J3W_15[i]
+pov_IC4S1J3W_15[] <- r[i]*EC4S1J3W_15[i] - f[i]*IC4S1J3W_15[i]
+
+pov_IC1S1J3W_16[] <- r[i]*EC1S1J3W_16[i] - f[i]*IC1S1J3W_16[i]
+pov_IC2S1J3W_16[] <- r[i]*EC2S1J3W_16[i] - f[i]*IC2S1J3W_16[i]
+pov_IC3S1J3W_16[] <- r[i]*EC3S1J3W_16[i] - f[i]*IC3S1J3W_16[i]
+pov_IC4S1J3W_16[] <- r[i]*EC4S1J3W_16[i] - f[i]*IC4S1J3W_16[i]
+
+pov_IC1S1J3W_17[] <- r[i]*EC1S1J3W_17[i] - f[i]*IC1S1J3W_17[i]
+pov_IC2S1J3W_17[] <- r[i]*EC2S1J3W_17[i] - f[i]*IC2S1J3W_17[i]
+pov_IC3S1J3W_17[] <- r[i]*EC3S1J3W_17[i] - f[i]*IC3S1J3W_17[i]
+pov_IC4S1J3W_17[] <- r[i]*EC4S1J3W_17[i] - f[i]*IC4S1J3W_17[i]
+
+
+
+pov_IC1S2J3W_10[] <- r[i]*EC1S2J3W_10[i] - f[i]*IC1S2J3W_10[i]
+pov_IC2S2J3W_10[] <- r[i]*EC2S2J3W_10[i] - f[i]*IC2S2J3W_10[i]
+pov_IC3S2J3W_10[] <- r[i]*EC3S2J3W_10[i] - f[i]*IC3S2J3W_10[i]
+pov_IC4S2J3W_10[] <- r[i]*EC4S2J3W_10[i] - f[i]*IC4S2J3W_10[i]
+
+pov_IC1S2J3W_11[] <- r[i]*EC1S2J3W_11[i] - f[i]*IC1S2J3W_11[i]
+pov_IC2S2J3W_11[] <- r[i]*EC2S2J3W_11[i] - f[i]*IC2S2J3W_11[i]
+pov_IC3S2J3W_11[] <- r[i]*EC3S2J3W_11[i] - f[i]*IC3S2J3W_11[i]
+pov_IC4S2J3W_11[] <- r[i]*EC4S2J3W_11[i] - f[i]*IC4S2J3W_11[i]
+
+pov_IC1S2J3W_12[] <- r[i]*EC1S2J3W_12[i] - f[i]*IC1S2J3W_12[i]
+pov_IC2S2J3W_12[] <- r[i]*EC2S2J3W_12[i] - f[i]*IC2S2J3W_12[i]
+pov_IC3S2J3W_12[] <- r[i]*EC3S2J3W_12[i] - f[i]*IC3S2J3W_12[i]
+pov_IC4S2J3W_12[] <- r[i]*EC4S2J3W_12[i] - f[i]*IC4S2J3W_12[i]
+
+pov_IC1S2J3W_13[] <- r[i]*EC1S2J3W_13[i] - f[i]*IC1S2J3W_13[i]
+pov_IC2S2J3W_13[] <- r[i]*EC2S2J3W_13[i] - f[i]*IC2S2J3W_13[i]
+pov_IC3S2J3W_13[] <- r[i]*EC3S2J3W_13[i] - f[i]*IC3S2J3W_13[i]
+pov_IC4S2J3W_13[] <- r[i]*EC4S2J3W_13[i] - f[i]*IC4S2J3W_13[i]
+
+pov_IC1S2J3W_14[] <- r[i]*EC1S2J3W_14[i] - f[i]*IC1S2J3W_14[i]
+pov_IC2S2J3W_14[] <- r[i]*EC2S2J3W_14[i] - f[i]*IC2S2J3W_14[i]
+pov_IC3S2J3W_14[] <- r[i]*EC3S2J3W_14[i] - f[i]*IC3S2J3W_14[i]
+pov_IC4S2J3W_14[] <- r[i]*EC4S2J3W_14[i] - f[i]*IC4S2J3W_14[i]
+
+pov_IC1S2J3W_15[] <- r[i]*EC1S2J3W_15[i] - f[i]*IC1S2J3W_15[i]
+pov_IC2S2J3W_15[] <- r[i]*EC2S2J3W_15[i] - f[i]*IC2S2J3W_15[i]
+pov_IC3S2J3W_15[] <- r[i]*EC3S2J3W_15[i] - f[i]*IC3S2J3W_15[i]
+pov_IC4S2J3W_15[] <- r[i]*EC4S2J3W_15[i] - f[i]*IC4S2J3W_15[i]
+
+pov_IC1S2J3W_16[] <- r[i]*EC1S2J3W_16[i] - f[i]*IC1S2J3W_16[i]
+pov_IC2S2J3W_16[] <- r[i]*EC2S2J3W_16[i] - f[i]*IC2S2J3W_16[i]
+pov_IC3S2J3W_16[] <- r[i]*EC3S2J3W_16[i] - f[i]*IC3S2J3W_16[i]
+pov_IC4S2J3W_16[] <- r[i]*EC4S2J3W_16[i] - f[i]*IC4S2J3W_16[i]
+
+pov_IC1S2J3W_17[] <- r[i]*EC1S2J3W_17[i] - f[i]*IC1S2J3W_17[i]
+pov_IC2S2J3W_17[] <- r[i]*EC2S2J3W_17[i] - f[i]*IC2S2J3W_17[i]
+pov_IC3S2J3W_17[] <- r[i]*EC3S2J3W_17[i] - f[i]*IC3S2J3W_17[i]
+pov_IC4S2J3W_17[] <- r[i]*EC4S2J3W_17[i] - f[i]*IC4S2J3W_17[i]
+
+
+
+pov_IC1S1J4W_10[] <- r[i]*EC1S1J4W_10[i] - f[i]*IC1S1J4W_10[i]
+pov_IC2S1J4W_10[] <- r[i]*EC2S1J4W_10[i] - f[i]*IC2S1J4W_10[i]
+pov_IC3S1J4W_10[] <- r[i]*EC3S1J4W_10[i] - f[i]*IC3S1J4W_10[i]
+pov_IC4S1J4W_10[] <- r[i]*EC4S1J4W_10[i] - f[i]*IC4S1J4W_10[i]
+
+pov_IC1S1J4W_11[] <- r[i]*EC1S1J4W_11[i] - f[i]*IC1S1J4W_11[i]
+pov_IC2S1J4W_11[] <- r[i]*EC2S1J4W_11[i] - f[i]*IC2S1J4W_11[i]
+pov_IC3S1J4W_11[] <- r[i]*EC3S1J4W_11[i] - f[i]*IC3S1J4W_11[i]
+pov_IC4S1J4W_11[] <- r[i]*EC4S1J4W_11[i] - f[i]*IC4S1J4W_11[i]
+
+pov_IC1S1J4W_12[] <- r[i]*EC1S1J4W_12[i] - f[i]*IC1S1J4W_12[i]
+pov_IC2S1J4W_12[] <- r[i]*EC2S1J4W_12[i] - f[i]*IC2S1J4W_12[i]
+pov_IC3S1J4W_12[] <- r[i]*EC3S1J4W_12[i] - f[i]*IC3S1J4W_12[i]
+pov_IC4S1J4W_12[] <- r[i]*EC4S1J4W_12[i] - f[i]*IC4S1J4W_12[i]
+
+pov_IC1S1J4W_13[] <- r[i]*EC1S1J4W_13[i] - f[i]*IC1S1J4W_13[i]
+pov_IC2S1J4W_13[] <- r[i]*EC2S1J4W_13[i] - f[i]*IC2S1J4W_13[i]
+pov_IC3S1J4W_13[] <- r[i]*EC3S1J4W_13[i] - f[i]*IC3S1J4W_13[i]
+pov_IC4S1J4W_13[] <- r[i]*EC4S1J4W_13[i] - f[i]*IC4S1J4W_13[i]
+
+pov_IC1S1J4W_14[] <- r[i]*EC1S1J4W_14[i] - f[i]*IC1S1J4W_14[i]
+pov_IC2S1J4W_14[] <- r[i]*EC2S1J4W_14[i] - f[i]*IC2S1J4W_14[i]
+pov_IC3S1J4W_14[] <- r[i]*EC3S1J4W_14[i] - f[i]*IC3S1J4W_14[i]
+pov_IC4S1J4W_14[] <- r[i]*EC4S1J4W_14[i] - f[i]*IC4S1J4W_14[i]
+
+pov_IC1S1J4W_15[] <- r[i]*EC1S1J4W_15[i] - f[i]*IC1S1J4W_15[i]
+pov_IC2S1J4W_15[] <- r[i]*EC2S1J4W_15[i] - f[i]*IC2S1J4W_15[i]
+pov_IC3S1J4W_15[] <- r[i]*EC3S1J4W_15[i] - f[i]*IC3S1J4W_15[i]
+pov_IC4S1J4W_15[] <- r[i]*EC4S1J4W_15[i] - f[i]*IC4S1J4W_15[i]
+
+pov_IC1S1J4W_16[] <- r[i]*EC1S1J4W_16[i] - f[i]*IC1S1J4W_16[i]
+pov_IC2S1J4W_16[] <- r[i]*EC2S1J4W_16[i] - f[i]*IC2S1J4W_16[i]
+pov_IC3S1J4W_16[] <- r[i]*EC3S1J4W_16[i] - f[i]*IC3S1J4W_16[i]
+pov_IC4S1J4W_16[] <- r[i]*EC4S1J4W_16[i] - f[i]*IC4S1J4W_16[i]
+
+pov_IC1S1J4W_17[] <- r[i]*EC1S1J4W_17[i] - f[i]*IC1S1J4W_17[i]
+pov_IC2S1J4W_17[] <- r[i]*EC2S1J4W_17[i] - f[i]*IC2S1J4W_17[i]
+pov_IC3S1J4W_17[] <- r[i]*EC3S1J4W_17[i] - f[i]*IC3S1J4W_17[i]
+pov_IC4S1J4W_17[] <- r[i]*EC4S1J4W_17[i] - f[i]*IC4S1J4W_17[i]
+
+
+
+pov_IC1S2J4W_10[] <- r[i]*EC1S2J4W_10[i] - f[i]*IC1S2J4W_10[i]
+pov_IC2S2J4W_10[] <- r[i]*EC2S2J4W_10[i] - f[i]*IC2S2J4W_10[i]
+pov_IC3S2J4W_10[] <- r[i]*EC3S2J4W_10[i] - f[i]*IC3S2J4W_10[i]
+pov_IC4S2J4W_10[] <- r[i]*EC4S2J4W_10[i] - f[i]*IC4S2J4W_10[i]
+
+pov_IC1S2J4W_11[] <- r[i]*EC1S2J4W_11[i] - f[i]*IC1S2J4W_11[i]
+pov_IC2S2J4W_11[] <- r[i]*EC2S2J4W_11[i] - f[i]*IC2S2J4W_11[i]
+pov_IC3S2J4W_11[] <- r[i]*EC3S2J4W_11[i] - f[i]*IC3S2J4W_11[i]
+pov_IC4S2J4W_11[] <- r[i]*EC4S2J4W_11[i] - f[i]*IC4S2J4W_11[i]
+
+pov_IC1S2J4W_12[] <- r[i]*EC1S2J4W_12[i] - f[i]*IC1S2J4W_12[i]
+pov_IC2S2J4W_12[] <- r[i]*EC2S2J4W_12[i] - f[i]*IC2S2J4W_12[i]
+pov_IC3S2J4W_12[] <- r[i]*EC3S2J4W_12[i] - f[i]*IC3S2J4W_12[i]
+pov_IC4S2J4W_12[] <- r[i]*EC4S2J4W_12[i] - f[i]*IC4S2J4W_12[i]
+
+pov_IC1S2J4W_13[] <- r[i]*EC1S2J4W_13[i] - f[i]*IC1S2J4W_13[i]
+pov_IC2S2J4W_13[] <- r[i]*EC2S2J4W_13[i] - f[i]*IC2S2J4W_13[i]
+pov_IC3S2J4W_13[] <- r[i]*EC3S2J4W_13[i] - f[i]*IC3S2J4W_13[i]
+pov_IC4S2J4W_13[] <- r[i]*EC4S2J4W_13[i] - f[i]*IC4S2J4W_13[i]
+
+pov_IC1S2J4W_14[] <- r[i]*EC1S2J4W_14[i] - f[i]*IC1S2J4W_14[i]
+pov_IC2S2J4W_14[] <- r[i]*EC2S2J4W_14[i] - f[i]*IC2S2J4W_14[i]
+pov_IC3S2J4W_14[] <- r[i]*EC3S2J4W_14[i] - f[i]*IC3S2J4W_14[i]
+pov_IC4S2J4W_14[] <- r[i]*EC4S2J4W_14[i] - f[i]*IC4S2J4W_14[i]
+
+pov_IC1S2J4W_15[] <- r[i]*EC1S2J4W_15[i] - f[i]*IC1S2J4W_15[i]
+pov_IC2S2J4W_15[] <- r[i]*EC2S2J4W_15[i] - f[i]*IC2S2J4W_15[i]
+pov_IC3S2J4W_15[] <- r[i]*EC3S2J4W_15[i] - f[i]*IC3S2J4W_15[i]
+pov_IC4S2J4W_15[] <- r[i]*EC4S2J4W_15[i] - f[i]*IC4S2J4W_15[i]
+
+pov_IC1S2J4W_16[] <- r[i]*EC1S2J4W_16[i] - f[i]*IC1S2J4W_16[i]
+pov_IC2S2J4W_16[] <- r[i]*EC2S2J4W_16[i] - f[i]*IC2S2J4W_16[i]
+pov_IC3S2J4W_16[] <- r[i]*EC3S2J4W_16[i] - f[i]*IC3S2J4W_16[i]
+pov_IC4S2J4W_16[] <- r[i]*EC4S2J4W_16[i] - f[i]*IC4S2J4W_16[i]
+
+pov_IC1S2J4W_17[] <- r[i]*EC1S2J4W_17[i] - f[i]*IC1S2J4W_17[i]
+pov_IC2S2J4W_17[] <- r[i]*EC2S2J4W_17[i] - f[i]*IC2S2J4W_17[i]
+pov_IC3S2J4W_17[] <- r[i]*EC3S2J4W_17[i] - f[i]*IC3S2J4W_17[i]
+pov_IC4S2J4W_17[] <- r[i]*EC4S2J4W_17[i] - f[i]*IC4S2J4W_17[i]
+
+
+
+pov_IC1S1J5W_10[] <- r[i]*EC1S1J5W_10[i] - f[i]*IC1S1J5W_10[i]
+pov_IC2S1J5W_10[] <- r[i]*EC2S1J5W_10[i] - f[i]*IC2S1J5W_10[i]
+pov_IC3S1J5W_10[] <- r[i]*EC3S1J5W_10[i] - f[i]*IC3S1J5W_10[i]
+pov_IC4S1J5W_10[] <- r[i]*EC4S1J5W_10[i] - f[i]*IC4S1J5W_10[i]
+
+pov_IC1S1J5W_11[] <- r[i]*EC1S1J5W_11[i] - f[i]*IC1S1J5W_11[i]
+pov_IC2S1J5W_11[] <- r[i]*EC2S1J5W_11[i] - f[i]*IC2S1J5W_11[i]
+pov_IC3S1J5W_11[] <- r[i]*EC3S1J5W_11[i] - f[i]*IC3S1J5W_11[i]
+pov_IC4S1J5W_11[] <- r[i]*EC4S1J5W_11[i] - f[i]*IC4S1J5W_11[i]
+
+pov_IC1S1J5W_12[] <- r[i]*EC1S1J5W_12[i] - f[i]*IC1S1J5W_12[i]
+pov_IC2S1J5W_12[] <- r[i]*EC2S1J5W_12[i] - f[i]*IC2S1J5W_12[i]
+pov_IC3S1J5W_12[] <- r[i]*EC3S1J5W_12[i] - f[i]*IC3S1J5W_12[i]
+pov_IC4S1J5W_12[] <- r[i]*EC4S1J5W_12[i] - f[i]*IC4S1J5W_12[i]
+
+pov_IC1S1J5W_13[] <- r[i]*EC1S1J5W_13[i] - f[i]*IC1S1J5W_13[i]
+pov_IC2S1J5W_13[] <- r[i]*EC2S1J5W_13[i] - f[i]*IC2S1J5W_13[i]
+pov_IC3S1J5W_13[] <- r[i]*EC3S1J5W_13[i] - f[i]*IC3S1J5W_13[i]
+pov_IC4S1J5W_13[] <- r[i]*EC4S1J5W_13[i] - f[i]*IC4S1J5W_13[i]
+
+pov_IC1S1J5W_14[] <- r[i]*EC1S1J5W_14[i] - f[i]*IC1S1J5W_14[i]
+pov_IC2S1J5W_14[] <- r[i]*EC2S1J5W_14[i] - f[i]*IC2S1J5W_14[i]
+pov_IC3S1J5W_14[] <- r[i]*EC3S1J5W_14[i] - f[i]*IC3S1J5W_14[i]
+pov_IC4S1J5W_14[] <- r[i]*EC4S1J5W_14[i] - f[i]*IC4S1J5W_14[i]
+
+pov_IC1S1J5W_15[] <- r[i]*EC1S1J5W_15[i] - f[i]*IC1S1J5W_15[i]
+pov_IC2S1J5W_15[] <- r[i]*EC2S1J5W_15[i] - f[i]*IC2S1J5W_15[i]
+pov_IC3S1J5W_15[] <- r[i]*EC3S1J5W_15[i] - f[i]*IC3S1J5W_15[i]
+pov_IC4S1J5W_15[] <- r[i]*EC4S1J5W_15[i] - f[i]*IC4S1J5W_15[i]
+
+pov_IC1S1J5W_16[] <- r[i]*EC1S1J5W_16[i] - f[i]*IC1S1J5W_16[i]
+pov_IC2S1J5W_16[] <- r[i]*EC2S1J5W_16[i] - f[i]*IC2S1J5W_16[i]
+pov_IC3S1J5W_16[] <- r[i]*EC3S1J5W_16[i] - f[i]*IC3S1J5W_16[i]
+pov_IC4S1J5W_16[] <- r[i]*EC4S1J5W_16[i] - f[i]*IC4S1J5W_16[i]
+
+pov_IC1S1J5W_17[] <- r[i]*EC1S1J5W_17[i] - f[i]*IC1S1J5W_17[i]
+pov_IC2S1J5W_17[] <- r[i]*EC2S1J5W_17[i] - f[i]*IC2S1J5W_17[i]
+pov_IC3S1J5W_17[] <- r[i]*EC3S1J5W_17[i] - f[i]*IC3S1J5W_17[i]
+pov_IC4S1J5W_17[] <- r[i]*EC4S1J5W_17[i] - f[i]*IC4S1J5W_17[i]
+
+
+
+pov_IC1S2J5W_10[] <- r[i]*EC1S2J5W_10[i] - f[i]*IC1S2J5W_10[i]
+pov_IC2S2J5W_10[] <- r[i]*EC2S2J5W_10[i] - f[i]*IC2S2J5W_10[i]
+pov_IC3S2J5W_10[] <- r[i]*EC3S2J5W_10[i] - f[i]*IC3S2J5W_10[i]
+pov_IC4S2J5W_10[] <- r[i]*EC4S2J5W_10[i] - f[i]*IC4S2J5W_10[i]
+
+pov_IC1S2J5W_11[] <- r[i]*EC1S2J5W_11[i] - f[i]*IC1S2J5W_11[i]
+pov_IC2S2J5W_11[] <- r[i]*EC2S2J5W_11[i] - f[i]*IC2S2J5W_11[i]
+pov_IC3S2J5W_11[] <- r[i]*EC3S2J5W_11[i] - f[i]*IC3S2J5W_11[i]
+pov_IC4S2J5W_11[] <- r[i]*EC4S2J5W_11[i] - f[i]*IC4S2J5W_11[i]
+
+pov_IC1S2J5W_12[] <- r[i]*EC1S2J5W_12[i] - f[i]*IC1S2J5W_12[i]
+pov_IC2S2J5W_12[] <- r[i]*EC2S2J5W_12[i] - f[i]*IC2S2J5W_12[i]
+pov_IC3S2J5W_12[] <- r[i]*EC3S2J5W_12[i] - f[i]*IC3S2J5W_12[i]
+pov_IC4S2J5W_12[] <- r[i]*EC4S2J5W_12[i] - f[i]*IC4S2J5W_12[i]
+
+pov_IC1S2J5W_13[] <- r[i]*EC1S2J5W_13[i] - f[i]*IC1S2J5W_13[i]
+pov_IC2S2J5W_13[] <- r[i]*EC2S2J5W_13[i] - f[i]*IC2S2J5W_13[i]
+pov_IC3S2J5W_13[] <- r[i]*EC3S2J5W_13[i] - f[i]*IC3S2J5W_13[i]
+pov_IC4S2J5W_13[] <- r[i]*EC4S2J5W_13[i] - f[i]*IC4S2J5W_13[i]
+
+pov_IC1S2J5W_14[] <- r[i]*EC1S2J5W_14[i] - f[i]*IC1S2J5W_14[i]
+pov_IC2S2J5W_14[] <- r[i]*EC2S2J5W_14[i] - f[i]*IC2S2J5W_14[i]
+pov_IC3S2J5W_14[] <- r[i]*EC3S2J5W_14[i] - f[i]*IC3S2J5W_14[i]
+pov_IC4S2J5W_14[] <- r[i]*EC4S2J5W_14[i] - f[i]*IC4S2J5W_14[i]
+
+pov_IC1S2J5W_15[] <- r[i]*EC1S2J5W_15[i] - f[i]*IC1S2J5W_15[i]
+pov_IC2S2J5W_15[] <- r[i]*EC2S2J5W_15[i] - f[i]*IC2S2J5W_15[i]
+pov_IC3S2J5W_15[] <- r[i]*EC3S2J5W_15[i] - f[i]*IC3S2J5W_15[i]
+pov_IC4S2J5W_15[] <- r[i]*EC4S2J5W_15[i] - f[i]*IC4S2J5W_15[i]
+
+pov_IC1S2J5W_16[] <- r[i]*EC1S2J5W_16[i] - f[i]*IC1S2J5W_16[i]
+pov_IC2S2J5W_16[] <- r[i]*EC2S2J5W_16[i] - f[i]*IC2S2J5W_16[i]
+pov_IC3S2J5W_16[] <- r[i]*EC3S2J5W_16[i] - f[i]*IC3S2J5W_16[i]
+pov_IC4S2J5W_16[] <- r[i]*EC4S2J5W_16[i] - f[i]*IC4S2J5W_16[i]
+
+pov_IC1S2J5W_17[] <- r[i]*EC1S2J5W_17[i] - f[i]*IC1S2J5W_17[i]
+pov_IC2S2J5W_17[] <- r[i]*EC2S2J5W_17[i] - f[i]*IC2S2J5W_17[i]
+pov_IC3S2J5W_17[] <- r[i]*EC3S2J5W_17[i] - f[i]*IC3S2J5W_17[i]
+pov_IC4S2J5W_17[] <- r[i]*EC4S2J5W_17[i] - f[i]*IC4S2J5W_17[i]
+
+
+
+pov_EC1S1J1U_10[] <- f[i]*IC1S1J1U_10[i] - r[i]*EC1S1J1U_10[i]
+pov_EC2S1J1U_10[] <- f[i]*IC2S1J1U_10[i] - r[i]*EC2S1J1U_10[i]
+pov_EC3S1J1U_10[] <- f[i]*IC3S1J1U_10[i] - r[i]*EC3S1J1U_10[i]
+pov_EC4S1J1U_10[] <- f[i]*IC4S1J1U_10[i] - r[i]*EC4S1J1U_10[i]
+
+pov_EC1S1J1U_11[] <- f[i]*IC1S1J1U_11[i] - r[i]*EC1S1J1U_11[i]
+pov_EC2S1J1U_11[] <- f[i]*IC2S1J1U_11[i] - r[i]*EC2S1J1U_11[i]
+pov_EC3S1J1U_11[] <- f[i]*IC3S1J1U_11[i] - r[i]*EC3S1J1U_11[i]
+pov_EC4S1J1U_11[] <- f[i]*IC4S1J1U_11[i] - r[i]*EC4S1J1U_11[i]
+
+pov_EC1S1J1U_12[] <- f[i]*IC1S1J1U_12[i] - r[i]*EC1S1J1U_12[i]
+pov_EC2S1J1U_12[] <- f[i]*IC2S1J1U_12[i] - r[i]*EC2S1J1U_12[i]
+pov_EC3S1J1U_12[] <- f[i]*IC3S1J1U_12[i] - r[i]*EC3S1J1U_12[i]
+pov_EC4S1J1U_12[] <- f[i]*IC4S1J1U_12[i] - r[i]*EC4S1J1U_12[i]
+
+pov_EC1S1J1U_13[] <- f[i]*IC1S1J1U_13[i] - r[i]*EC1S1J1U_13[i]
+pov_EC2S1J1U_13[] <- f[i]*IC2S1J1U_13[i] - r[i]*EC2S1J1U_13[i]
+pov_EC3S1J1U_13[] <- f[i]*IC3S1J1U_13[i] - r[i]*EC3S1J1U_13[i]
+pov_EC4S1J1U_13[] <- f[i]*IC4S1J1U_13[i] - r[i]*EC4S1J1U_13[i]
+
+pov_EC1S1J1U_14[] <- f[i]*IC1S1J1U_14[i] - r[i]*EC1S1J1U_14[i]
+pov_EC2S1J1U_14[] <- f[i]*IC2S1J1U_14[i] - r[i]*EC2S1J1U_14[i]
+pov_EC3S1J1U_14[] <- f[i]*IC3S1J1U_14[i] - r[i]*EC3S1J1U_14[i]
+pov_EC4S1J1U_14[] <- f[i]*IC4S1J1U_14[i] - r[i]*EC4S1J1U_14[i]
+
+pov_EC1S1J1U_15[] <- f[i]*IC1S1J1U_15[i] - r[i]*EC1S1J1U_15[i]
+pov_EC2S1J1U_15[] <- f[i]*IC2S1J1U_15[i] - r[i]*EC2S1J1U_15[i]
+pov_EC3S1J1U_15[] <- f[i]*IC3S1J1U_15[i] - r[i]*EC3S1J1U_15[i]
+pov_EC4S1J1U_15[] <- f[i]*IC4S1J1U_15[i] - r[i]*EC4S1J1U_15[i]
+
+pov_EC1S1J1U_16[] <- f[i]*IC1S1J1U_16[i] - r[i]*EC1S1J1U_16[i]
+pov_EC2S1J1U_16[] <- f[i]*IC2S1J1U_16[i] - r[i]*EC2S1J1U_16[i]
+pov_EC3S1J1U_16[] <- f[i]*IC3S1J1U_16[i] - r[i]*EC3S1J1U_16[i]
+pov_EC4S1J1U_16[] <- f[i]*IC4S1J1U_16[i] - r[i]*EC4S1J1U_16[i]
+
+pov_EC1S1J1U_17[] <- f[i]*IC1S1J1U_17[i] - r[i]*EC1S1J1U_17[i]
+pov_EC2S1J1U_17[] <- f[i]*IC2S1J1U_17[i] - r[i]*EC2S1J1U_17[i]
+pov_EC3S1J1U_17[] <- f[i]*IC3S1J1U_17[i] - r[i]*EC3S1J1U_17[i]
+pov_EC4S1J1U_17[] <- f[i]*IC4S1J1U_17[i] - r[i]*EC4S1J1U_17[i]
+
+
+
+pov_EC1S2J1U_10[] <- f[i]*IC1S2J1U_10[i] - r[i]*EC1S2J1U_10[i]
+pov_EC2S2J1U_10[] <- f[i]*IC2S2J1U_10[i] - r[i]*EC2S2J1U_10[i]
+pov_EC3S2J1U_10[] <- f[i]*IC3S2J1U_10[i] - r[i]*EC3S2J1U_10[i]
+pov_EC4S2J1U_10[] <- f[i]*IC4S2J1U_10[i] - r[i]*EC4S2J1U_10[i]
+
+pov_EC1S2J1U_11[] <- f[i]*IC1S2J1U_11[i] - r[i]*EC1S2J1U_11[i]
+pov_EC2S2J1U_11[] <- f[i]*IC2S2J1U_11[i] - r[i]*EC2S2J1U_11[i]
+pov_EC3S2J1U_11[] <- f[i]*IC3S2J1U_11[i] - r[i]*EC3S2J1U_11[i]
+pov_EC4S2J1U_11[] <- f[i]*IC4S2J1U_11[i] - r[i]*EC4S2J1U_11[i]
+
+pov_EC1S2J1U_12[] <- f[i]*IC1S2J1U_12[i] - r[i]*EC1S2J1U_12[i]
+pov_EC2S2J1U_12[] <- f[i]*IC2S2J1U_12[i] - r[i]*EC2S2J1U_12[i]
+pov_EC3S2J1U_12[] <- f[i]*IC3S2J1U_12[i] - r[i]*EC3S2J1U_12[i]
+pov_EC4S2J1U_12[] <- f[i]*IC4S2J1U_12[i] - r[i]*EC4S2J1U_12[i]
+
+pov_EC1S2J1U_13[] <- f[i]*IC1S2J1U_13[i] - r[i]*EC1S2J1U_13[i]
+pov_EC2S2J1U_13[] <- f[i]*IC2S2J1U_13[i] - r[i]*EC2S2J1U_13[i]
+pov_EC3S2J1U_13[] <- f[i]*IC3S2J1U_13[i] - r[i]*EC3S2J1U_13[i]
+pov_EC4S2J1U_13[] <- f[i]*IC4S2J1U_13[i] - r[i]*EC4S2J1U_13[i]
+
+pov_EC1S2J1U_14[] <- f[i]*IC1S2J1U_14[i] - r[i]*EC1S2J1U_14[i]
+pov_EC2S2J1U_14[] <- f[i]*IC2S2J1U_14[i] - r[i]*EC2S2J1U_14[i]
+pov_EC3S2J1U_14[] <- f[i]*IC3S2J1U_14[i] - r[i]*EC3S2J1U_14[i]
+pov_EC4S2J1U_14[] <- f[i]*IC4S2J1U_14[i] - r[i]*EC4S2J1U_14[i]
+
+pov_EC1S2J1U_15[] <- f[i]*IC1S2J1U_15[i] - r[i]*EC1S2J1U_15[i]
+pov_EC2S2J1U_15[] <- f[i]*IC2S2J1U_15[i] - r[i]*EC2S2J1U_15[i]
+pov_EC3S2J1U_15[] <- f[i]*IC3S2J1U_15[i] - r[i]*EC3S2J1U_15[i]
+pov_EC4S2J1U_15[] <- f[i]*IC4S2J1U_15[i] - r[i]*EC4S2J1U_15[i]
+
+pov_EC1S2J1U_16[] <- f[i]*IC1S2J1U_16[i] - r[i]*EC1S2J1U_16[i]
+pov_EC2S2J1U_16[] <- f[i]*IC2S2J1U_16[i] - r[i]*EC2S2J1U_16[i]
+pov_EC3S2J1U_16[] <- f[i]*IC3S2J1U_16[i] - r[i]*EC3S2J1U_16[i]
+pov_EC4S2J1U_16[] <- f[i]*IC4S2J1U_16[i] - r[i]*EC4S2J1U_16[i]
+
+pov_EC1S2J1U_17[] <- f[i]*IC1S2J1U_17[i] - r[i]*EC1S2J1U_17[i]
+pov_EC2S2J1U_17[] <- f[i]*IC2S2J1U_17[i] - r[i]*EC2S2J1U_17[i]
+pov_EC3S2J1U_17[] <- f[i]*IC3S2J1U_17[i] - r[i]*EC3S2J1U_17[i]
+pov_EC4S2J1U_17[] <- f[i]*IC4S2J1U_17[i] - r[i]*EC4S2J1U_17[i]
+
+
+
+pov_EC1S1J2U_10[] <- f[i]*IC1S1J2U_10[i] - r[i]*EC1S1J2U_10[i]
+pov_EC2S1J2U_10[] <- f[i]*IC2S1J2U_10[i] - r[i]*EC2S1J2U_10[i]
+pov_EC3S1J2U_10[] <- f[i]*IC3S1J2U_10[i] - r[i]*EC3S1J2U_10[i]
+pov_EC4S1J2U_10[] <- f[i]*IC4S1J2U_10[i] - r[i]*EC4S1J2U_10[i]
+
+pov_EC1S1J2U_11[] <- f[i]*IC1S1J2U_11[i] - r[i]*EC1S1J2U_11[i]
+pov_EC2S1J2U_11[] <- f[i]*IC2S1J2U_11[i] - r[i]*EC2S1J2U_11[i]
+pov_EC3S1J2U_11[] <- f[i]*IC3S1J2U_11[i] - r[i]*EC3S1J2U_11[i]
+pov_EC4S1J2U_11[] <- f[i]*IC4S1J2U_11[i] - r[i]*EC4S1J2U_11[i]
+
+pov_EC1S1J2U_12[] <- f[i]*IC1S1J2U_12[i] - r[i]*EC1S1J2U_12[i]
+pov_EC2S1J2U_12[] <- f[i]*IC2S1J2U_12[i] - r[i]*EC2S1J2U_12[i]
+pov_EC3S1J2U_12[] <- f[i]*IC3S1J2U_12[i] - r[i]*EC3S1J2U_12[i]
+pov_EC4S1J2U_12[] <- f[i]*IC4S1J2U_12[i] - r[i]*EC4S1J2U_12[i]
+
+pov_EC1S1J2U_13[] <- f[i]*IC1S1J2U_13[i] - r[i]*EC1S1J2U_13[i]
+pov_EC2S1J2U_13[] <- f[i]*IC2S1J2U_13[i] - r[i]*EC2S1J2U_13[i]
+pov_EC3S1J2U_13[] <- f[i]*IC3S1J2U_13[i] - r[i]*EC3S1J2U_13[i]
+pov_EC4S1J2U_13[] <- f[i]*IC4S1J2U_13[i] - r[i]*EC4S1J2U_13[i]
+
+pov_EC1S1J2U_14[] <- f[i]*IC1S1J2U_14[i] - r[i]*EC1S1J2U_14[i]
+pov_EC2S1J2U_14[] <- f[i]*IC2S1J2U_14[i] - r[i]*EC2S1J2U_14[i]
+pov_EC3S1J2U_14[] <- f[i]*IC3S1J2U_14[i] - r[i]*EC3S1J2U_14[i]
+pov_EC4S1J2U_14[] <- f[i]*IC4S1J2U_14[i] - r[i]*EC4S1J2U_14[i]
+
+pov_EC1S1J2U_15[] <- f[i]*IC1S1J2U_15[i] - r[i]*EC1S1J2U_15[i]
+pov_EC2S1J2U_15[] <- f[i]*IC2S1J2U_15[i] - r[i]*EC2S1J2U_15[i]
+pov_EC3S1J2U_15[] <- f[i]*IC3S1J2U_15[i] - r[i]*EC3S1J2U_15[i]
+pov_EC4S1J2U_15[] <- f[i]*IC4S1J2U_15[i] - r[i]*EC4S1J2U_15[i]
+
+pov_EC1S1J2U_16[] <- f[i]*IC1S1J2U_16[i] - r[i]*EC1S1J2U_16[i]
+pov_EC2S1J2U_16[] <- f[i]*IC2S1J2U_16[i] - r[i]*EC2S1J2U_16[i]
+pov_EC3S1J2U_16[] <- f[i]*IC3S1J2U_16[i] - r[i]*EC3S1J2U_16[i]
+pov_EC4S1J2U_16[] <- f[i]*IC4S1J2U_16[i] - r[i]*EC4S1J2U_16[i]
+
+pov_EC1S1J2U_17[] <- f[i]*IC1S1J2U_17[i] - r[i]*EC1S1J2U_17[i]
+pov_EC2S1J2U_17[] <- f[i]*IC2S1J2U_17[i] - r[i]*EC2S1J2U_17[i]
+pov_EC3S1J2U_17[] <- f[i]*IC3S1J2U_17[i] - r[i]*EC3S1J2U_17[i]
+pov_EC4S1J2U_17[] <- f[i]*IC4S1J2U_17[i] - r[i]*EC4S1J2U_17[i]
+
+
+
+pov_EC1S2J2U_10[] <- f[i]*IC1S2J2U_10[i] - r[i]*EC1S2J2U_10[i]
+pov_EC2S2J2U_10[] <- f[i]*IC2S2J2U_10[i] - r[i]*EC2S2J2U_10[i]
+pov_EC3S2J2U_10[] <- f[i]*IC3S2J2U_10[i] - r[i]*EC3S2J2U_10[i]
+pov_EC4S2J2U_10[] <- f[i]*IC4S2J2U_10[i] - r[i]*EC4S2J2U_10[i]
+
+pov_EC1S2J2U_11[] <- f[i]*IC1S2J2U_11[i] - r[i]*EC1S2J2U_11[i]
+pov_EC2S2J2U_11[] <- f[i]*IC2S2J2U_11[i] - r[i]*EC2S2J2U_11[i]
+pov_EC3S2J2U_11[] <- f[i]*IC3S2J2U_11[i] - r[i]*EC3S2J2U_11[i]
+pov_EC4S2J2U_11[] <- f[i]*IC4S2J2U_11[i] - r[i]*EC4S2J2U_11[i]
+
+pov_EC1S2J2U_12[] <- f[i]*IC1S2J2U_12[i] - r[i]*EC1S2J2U_12[i]
+pov_EC2S2J2U_12[] <- f[i]*IC2S2J2U_12[i] - r[i]*EC2S2J2U_12[i]
+pov_EC3S2J2U_12[] <- f[i]*IC3S2J2U_12[i] - r[i]*EC3S2J2U_12[i]
+pov_EC4S2J2U_12[] <- f[i]*IC4S2J2U_12[i] - r[i]*EC4S2J2U_12[i]
+
+pov_EC1S2J2U_13[] <- f[i]*IC1S2J2U_13[i] - r[i]*EC1S2J2U_13[i]
+pov_EC2S2J2U_13[] <- f[i]*IC2S2J2U_13[i] - r[i]*EC2S2J2U_13[i]
+pov_EC3S2J2U_13[] <- f[i]*IC3S2J2U_13[i] - r[i]*EC3S2J2U_13[i]
+pov_EC4S2J2U_13[] <- f[i]*IC4S2J2U_13[i] - r[i]*EC4S2J2U_13[i]
+
+pov_EC1S2J2U_14[] <- f[i]*IC1S2J2U_14[i] - r[i]*EC1S2J2U_14[i]
+pov_EC2S2J2U_14[] <- f[i]*IC2S2J2U_14[i] - r[i]*EC2S2J2U_14[i]
+pov_EC3S2J2U_14[] <- f[i]*IC3S2J2U_14[i] - r[i]*EC3S2J2U_14[i]
+pov_EC4S2J2U_14[] <- f[i]*IC4S2J2U_14[i] - r[i]*EC4S2J2U_14[i]
+
+pov_EC1S2J2U_15[] <- f[i]*IC1S2J2U_15[i] - r[i]*EC1S2J2U_15[i]
+pov_EC2S2J2U_15[] <- f[i]*IC2S2J2U_15[i] - r[i]*EC2S2J2U_15[i]
+pov_EC3S2J2U_15[] <- f[i]*IC3S2J2U_15[i] - r[i]*EC3S2J2U_15[i]
+pov_EC4S2J2U_15[] <- f[i]*IC4S2J2U_15[i] - r[i]*EC4S2J2U_15[i]
+
+pov_EC1S2J2U_16[] <- f[i]*IC1S2J2U_16[i] - r[i]*EC1S2J2U_16[i]
+pov_EC2S2J2U_16[] <- f[i]*IC2S2J2U_16[i] - r[i]*EC2S2J2U_16[i]
+pov_EC3S2J2U_16[] <- f[i]*IC3S2J2U_16[i] - r[i]*EC3S2J2U_16[i]
+pov_EC4S2J2U_16[] <- f[i]*IC4S2J2U_16[i] - r[i]*EC4S2J2U_16[i]
+
+pov_EC1S2J2U_17[] <- f[i]*IC1S2J2U_17[i] - r[i]*EC1S2J2U_17[i]
+pov_EC2S2J2U_17[] <- f[i]*IC2S2J2U_17[i] - r[i]*EC2S2J2U_17[i]
+pov_EC3S2J2U_17[] <- f[i]*IC3S2J2U_17[i] - r[i]*EC3S2J2U_17[i]
+pov_EC4S2J2U_17[] <- f[i]*IC4S2J2U_17[i] - r[i]*EC4S2J2U_17[i]
+
+
+
+pov_EC1S1J3U_10[] <- f[i]*IC1S1J3U_10[i] - r[i]*EC1S1J3U_10[i]
+pov_EC2S1J3U_10[] <- f[i]*IC2S1J3U_10[i] - r[i]*EC2S1J3U_10[i]
+pov_EC3S1J3U_10[] <- f[i]*IC3S1J3U_10[i] - r[i]*EC3S1J3U_10[i]
+pov_EC4S1J3U_10[] <- f[i]*IC4S1J3U_10[i] - r[i]*EC4S1J3U_10[i]
+
+pov_EC1S1J3U_11[] <- f[i]*IC1S1J3U_11[i] - r[i]*EC1S1J3U_11[i]
+pov_EC2S1J3U_11[] <- f[i]*IC2S1J3U_11[i] - r[i]*EC2S1J3U_11[i]
+pov_EC3S1J3U_11[] <- f[i]*IC3S1J3U_11[i] - r[i]*EC3S1J3U_11[i]
+pov_EC4S1J3U_11[] <- f[i]*IC4S1J3U_11[i] - r[i]*EC4S1J3U_11[i]
+
+pov_EC1S1J3U_12[] <- f[i]*IC1S1J3U_12[i] - r[i]*EC1S1J3U_12[i]
+pov_EC2S1J3U_12[] <- f[i]*IC2S1J3U_12[i] - r[i]*EC2S1J3U_12[i]
+pov_EC3S1J3U_12[] <- f[i]*IC3S1J3U_12[i] - r[i]*EC3S1J3U_12[i]
+pov_EC4S1J3U_12[] <- f[i]*IC4S1J3U_12[i] - r[i]*EC4S1J3U_12[i]
+
+pov_EC1S1J3U_13[] <- f[i]*IC1S1J3U_13[i] - r[i]*EC1S1J3U_13[i]
+pov_EC2S1J3U_13[] <- f[i]*IC2S1J3U_13[i] - r[i]*EC2S1J3U_13[i]
+pov_EC3S1J3U_13[] <- f[i]*IC3S1J3U_13[i] - r[i]*EC3S1J3U_13[i]
+pov_EC4S1J3U_13[] <- f[i]*IC4S1J3U_13[i] - r[i]*EC4S1J3U_13[i]
+
+pov_EC1S1J3U_14[] <- f[i]*IC1S1J3U_14[i] - r[i]*EC1S1J3U_14[i]
+pov_EC2S1J3U_14[] <- f[i]*IC2S1J3U_14[i] - r[i]*EC2S1J3U_14[i]
+pov_EC3S1J3U_14[] <- f[i]*IC3S1J3U_14[i] - r[i]*EC3S1J3U_14[i]
+pov_EC4S1J3U_14[] <- f[i]*IC4S1J3U_14[i] - r[i]*EC4S1J3U_14[i]
+
+pov_EC1S1J3U_15[] <- f[i]*IC1S1J3U_15[i] - r[i]*EC1S1J3U_15[i]
+pov_EC2S1J3U_15[] <- f[i]*IC2S1J3U_15[i] - r[i]*EC2S1J3U_15[i]
+pov_EC3S1J3U_15[] <- f[i]*IC3S1J3U_15[i] - r[i]*EC3S1J3U_15[i]
+pov_EC4S1J3U_15[] <- f[i]*IC4S1J3U_15[i] - r[i]*EC4S1J3U_15[i]
+
+pov_EC1S1J3U_16[] <- f[i]*IC1S1J3U_16[i] - r[i]*EC1S1J3U_16[i]
+pov_EC2S1J3U_16[] <- f[i]*IC2S1J3U_16[i] - r[i]*EC2S1J3U_16[i]
+pov_EC3S1J3U_16[] <- f[i]*IC3S1J3U_16[i] - r[i]*EC3S1J3U_16[i]
+pov_EC4S1J3U_16[] <- f[i]*IC4S1J3U_16[i] - r[i]*EC4S1J3U_16[i]
+
+pov_EC1S1J3U_17[] <- f[i]*IC1S1J3U_17[i] - r[i]*EC1S1J3U_17[i]
+pov_EC2S1J3U_17[] <- f[i]*IC2S1J3U_17[i] - r[i]*EC2S1J3U_17[i]
+pov_EC3S1J3U_17[] <- f[i]*IC3S1J3U_17[i] - r[i]*EC3S1J3U_17[i]
+pov_EC4S1J3U_17[] <- f[i]*IC4S1J3U_17[i] - r[i]*EC4S1J3U_17[i]
+
+
+
+pov_EC1S2J3U_10[] <- f[i]*IC1S2J3U_10[i] - r[i]*EC1S2J3U_10[i]
+pov_EC2S2J3U_10[] <- f[i]*IC2S2J3U_10[i] - r[i]*EC2S2J3U_10[i]
+pov_EC3S2J3U_10[] <- f[i]*IC3S2J3U_10[i] - r[i]*EC3S2J3U_10[i]
+pov_EC4S2J3U_10[] <- f[i]*IC4S2J3U_10[i] - r[i]*EC4S2J3U_10[i]
+
+pov_EC1S2J3U_11[] <- f[i]*IC1S2J3U_11[i] - r[i]*EC1S2J3U_11[i]
+pov_EC2S2J3U_11[] <- f[i]*IC2S2J3U_11[i] - r[i]*EC2S2J3U_11[i]
+pov_EC3S2J3U_11[] <- f[i]*IC3S2J3U_11[i] - r[i]*EC3S2J3U_11[i]
+pov_EC4S2J3U_11[] <- f[i]*IC4S2J3U_11[i] - r[i]*EC4S2J3U_11[i]
+
+pov_EC1S2J3U_12[] <- f[i]*IC1S2J3U_12[i] - r[i]*EC1S2J3U_12[i]
+pov_EC2S2J3U_12[] <- f[i]*IC2S2J3U_12[i] - r[i]*EC2S2J3U_12[i]
+pov_EC3S2J3U_12[] <- f[i]*IC3S2J3U_12[i] - r[i]*EC3S2J3U_12[i]
+pov_EC4S2J3U_12[] <- f[i]*IC4S2J3U_12[i] - r[i]*EC4S2J3U_12[i]
+
+pov_EC1S2J3U_13[] <- f[i]*IC1S2J3U_13[i] - r[i]*EC1S2J3U_13[i]
+pov_EC2S2J3U_13[] <- f[i]*IC2S2J3U_13[i] - r[i]*EC2S2J3U_13[i]
+pov_EC3S2J3U_13[] <- f[i]*IC3S2J3U_13[i] - r[i]*EC3S2J3U_13[i]
+pov_EC4S2J3U_13[] <- f[i]*IC4S2J3U_13[i] - r[i]*EC4S2J3U_13[i]
+
+pov_EC1S2J3U_14[] <- f[i]*IC1S2J3U_14[i] - r[i]*EC1S2J3U_14[i]
+pov_EC2S2J3U_14[] <- f[i]*IC2S2J3U_14[i] - r[i]*EC2S2J3U_14[i]
+pov_EC3S2J3U_14[] <- f[i]*IC3S2J3U_14[i] - r[i]*EC3S2J3U_14[i]
+pov_EC4S2J3U_14[] <- f[i]*IC4S2J3U_14[i] - r[i]*EC4S2J3U_14[i]
+
+pov_EC1S2J3U_15[] <- f[i]*IC1S2J3U_15[i] - r[i]*EC1S2J3U_15[i]
+pov_EC2S2J3U_15[] <- f[i]*IC2S2J3U_15[i] - r[i]*EC2S2J3U_15[i]
+pov_EC3S2J3U_15[] <- f[i]*IC3S2J3U_15[i] - r[i]*EC3S2J3U_15[i]
+pov_EC4S2J3U_15[] <- f[i]*IC4S2J3U_15[i] - r[i]*EC4S2J3U_15[i]
+
+pov_EC1S2J3U_16[] <- f[i]*IC1S2J3U_16[i] - r[i]*EC1S2J3U_16[i]
+pov_EC2S2J3U_16[] <- f[i]*IC2S2J3U_16[i] - r[i]*EC2S2J3U_16[i]
+pov_EC3S2J3U_16[] <- f[i]*IC3S2J3U_16[i] - r[i]*EC3S2J3U_16[i]
+pov_EC4S2J3U_16[] <- f[i]*IC4S2J3U_16[i] - r[i]*EC4S2J3U_16[i]
+
+pov_EC1S2J3U_17[] <- f[i]*IC1S2J3U_17[i] - r[i]*EC1S2J3U_17[i]
+pov_EC2S2J3U_17[] <- f[i]*IC2S2J3U_17[i] - r[i]*EC2S2J3U_17[i]
+pov_EC3S2J3U_17[] <- f[i]*IC3S2J3U_17[i] - r[i]*EC3S2J3U_17[i]
+pov_EC4S2J3U_17[] <- f[i]*IC4S2J3U_17[i] - r[i]*EC4S2J3U_17[i]
+
+
+
+pov_EC1S1J4U_10[] <- f[i]*IC1S1J4U_10[i] - r[i]*EC1S1J4U_10[i]
+pov_EC2S1J4U_10[] <- f[i]*IC2S1J4U_10[i] - r[i]*EC2S1J4U_10[i]
+pov_EC3S1J4U_10[] <- f[i]*IC3S1J4U_10[i] - r[i]*EC3S1J4U_10[i]
+pov_EC4S1J4U_10[] <- f[i]*IC4S1J4U_10[i] - r[i]*EC4S1J4U_10[i]
+
+pov_EC1S1J4U_11[] <- f[i]*IC1S1J4U_11[i] - r[i]*EC1S1J4U_11[i]
+pov_EC2S1J4U_11[] <- f[i]*IC2S1J4U_11[i] - r[i]*EC2S1J4U_11[i]
+pov_EC3S1J4U_11[] <- f[i]*IC3S1J4U_11[i] - r[i]*EC3S1J4U_11[i]
+pov_EC4S1J4U_11[] <- f[i]*IC4S1J4U_11[i] - r[i]*EC4S1J4U_11[i]
+
+pov_EC1S1J4U_12[] <- f[i]*IC1S1J4U_12[i] - r[i]*EC1S1J4U_12[i]
+pov_EC2S1J4U_12[] <- f[i]*IC2S1J4U_12[i] - r[i]*EC2S1J4U_12[i]
+pov_EC3S1J4U_12[] <- f[i]*IC3S1J4U_12[i] - r[i]*EC3S1J4U_12[i]
+pov_EC4S1J4U_12[] <- f[i]*IC4S1J4U_12[i] - r[i]*EC4S1J4U_12[i]
+
+pov_EC1S1J4U_13[] <- f[i]*IC1S1J4U_13[i] - r[i]*EC1S1J4U_13[i]
+pov_EC2S1J4U_13[] <- f[i]*IC2S1J4U_13[i] - r[i]*EC2S1J4U_13[i]
+pov_EC3S1J4U_13[] <- f[i]*IC3S1J4U_13[i] - r[i]*EC3S1J4U_13[i]
+pov_EC4S1J4U_13[] <- f[i]*IC4S1J4U_13[i] - r[i]*EC4S1J4U_13[i]
+
+pov_EC1S1J4U_14[] <- f[i]*IC1S1J4U_14[i] - r[i]*EC1S1J4U_14[i]
+pov_EC2S1J4U_14[] <- f[i]*IC2S1J4U_14[i] - r[i]*EC2S1J4U_14[i]
+pov_EC3S1J4U_14[] <- f[i]*IC3S1J4U_14[i] - r[i]*EC3S1J4U_14[i]
+pov_EC4S1J4U_14[] <- f[i]*IC4S1J4U_14[i] - r[i]*EC4S1J4U_14[i]
+
+pov_EC1S1J4U_15[] <- f[i]*IC1S1J4U_15[i] - r[i]*EC1S1J4U_15[i]
+pov_EC2S1J4U_15[] <- f[i]*IC2S1J4U_15[i] - r[i]*EC2S1J4U_15[i]
+pov_EC3S1J4U_15[] <- f[i]*IC3S1J4U_15[i] - r[i]*EC3S1J4U_15[i]
+pov_EC4S1J4U_15[] <- f[i]*IC4S1J4U_15[i] - r[i]*EC4S1J4U_15[i]
+
+pov_EC1S1J4U_16[] <- f[i]*IC1S1J4U_16[i] - r[i]*EC1S1J4U_16[i]
+pov_EC2S1J4U_16[] <- f[i]*IC2S1J4U_16[i] - r[i]*EC2S1J4U_16[i]
+pov_EC3S1J4U_16[] <- f[i]*IC3S1J4U_16[i] - r[i]*EC3S1J4U_16[i]
+pov_EC4S1J4U_16[] <- f[i]*IC4S1J4U_16[i] - r[i]*EC4S1J4U_16[i]
+
+pov_EC1S1J4U_17[] <- f[i]*IC1S1J4U_17[i] - r[i]*EC1S1J4U_17[i]
+pov_EC2S1J4U_17[] <- f[i]*IC2S1J4U_17[i] - r[i]*EC2S1J4U_17[i]
+pov_EC3S1J4U_17[] <- f[i]*IC3S1J4U_17[i] - r[i]*EC3S1J4U_17[i]
+pov_EC4S1J4U_17[] <- f[i]*IC4S1J4U_17[i] - r[i]*EC4S1J4U_17[i]
+
+
+
+pov_EC1S2J4U_10[] <- f[i]*IC1S2J4U_10[i] - r[i]*EC1S2J4U_10[i]
+pov_EC2S2J4U_10[] <- f[i]*IC2S2J4U_10[i] - r[i]*EC2S2J4U_10[i]
+pov_EC3S2J4U_10[] <- f[i]*IC3S2J4U_10[i] - r[i]*EC3S2J4U_10[i]
+pov_EC4S2J4U_10[] <- f[i]*IC4S2J4U_10[i] - r[i]*EC4S2J4U_10[i]
+
+pov_EC1S2J4U_11[] <- f[i]*IC1S2J4U_11[i] - r[i]*EC1S2J4U_11[i]
+pov_EC2S2J4U_11[] <- f[i]*IC2S2J4U_11[i] - r[i]*EC2S2J4U_11[i]
+pov_EC3S2J4U_11[] <- f[i]*IC3S2J4U_11[i] - r[i]*EC3S2J4U_11[i]
+pov_EC4S2J4U_11[] <- f[i]*IC4S2J4U_11[i] - r[i]*EC4S2J4U_11[i]
+
+pov_EC1S2J4U_12[] <- f[i]*IC1S2J4U_12[i] - r[i]*EC1S2J4U_12[i]
+pov_EC2S2J4U_12[] <- f[i]*IC2S2J4U_12[i] - r[i]*EC2S2J4U_12[i]
+pov_EC3S2J4U_12[] <- f[i]*IC3S2J4U_12[i] - r[i]*EC3S2J4U_12[i]
+pov_EC4S2J4U_12[] <- f[i]*IC4S2J4U_12[i] - r[i]*EC4S2J4U_12[i]
+
+pov_EC1S2J4U_13[] <- f[i]*IC1S2J4U_13[i] - r[i]*EC1S2J4U_13[i]
+pov_EC2S2J4U_13[] <- f[i]*IC2S2J4U_13[i] - r[i]*EC2S2J4U_13[i]
+pov_EC3S2J4U_13[] <- f[i]*IC3S2J4U_13[i] - r[i]*EC3S2J4U_13[i]
+pov_EC4S2J4U_13[] <- f[i]*IC4S2J4U_13[i] - r[i]*EC4S2J4U_13[i]
+
+pov_EC1S2J4U_14[] <- f[i]*IC1S2J4U_14[i] - r[i]*EC1S2J4U_14[i]
+pov_EC2S2J4U_14[] <- f[i]*IC2S2J4U_14[i] - r[i]*EC2S2J4U_14[i]
+pov_EC3S2J4U_14[] <- f[i]*IC3S2J4U_14[i] - r[i]*EC3S2J4U_14[i]
+pov_EC4S2J4U_14[] <- f[i]*IC4S2J4U_14[i] - r[i]*EC4S2J4U_14[i]
+
+pov_EC1S2J4U_15[] <- f[i]*IC1S2J4U_15[i] - r[i]*EC1S2J4U_15[i]
+pov_EC2S2J4U_15[] <- f[i]*IC2S2J4U_15[i] - r[i]*EC2S2J4U_15[i]
+pov_EC3S2J4U_15[] <- f[i]*IC3S2J4U_15[i] - r[i]*EC3S2J4U_15[i]
+pov_EC4S2J4U_15[] <- f[i]*IC4S2J4U_15[i] - r[i]*EC4S2J4U_15[i]
+
+pov_EC1S2J4U_16[] <- f[i]*IC1S2J4U_16[i] - r[i]*EC1S2J4U_16[i]
+pov_EC2S2J4U_16[] <- f[i]*IC2S2J4U_16[i] - r[i]*EC2S2J4U_16[i]
+pov_EC3S2J4U_16[] <- f[i]*IC3S2J4U_16[i] - r[i]*EC3S2J4U_16[i]
+pov_EC4S2J4U_16[] <- f[i]*IC4S2J4U_16[i] - r[i]*EC4S2J4U_16[i]
+
+pov_EC1S2J4U_17[] <- f[i]*IC1S2J4U_17[i] - r[i]*EC1S2J4U_17[i]
+pov_EC2S2J4U_17[] <- f[i]*IC2S2J4U_17[i] - r[i]*EC2S2J4U_17[i]
+pov_EC3S2J4U_17[] <- f[i]*IC3S2J4U_17[i] - r[i]*EC3S2J4U_17[i]
+pov_EC4S2J4U_17[] <- f[i]*IC4S2J4U_17[i] - r[i]*EC4S2J4U_17[i]
+
+
+
+pov_EC1S1J5U_10[] <- f[i]*IC1S1J5U_10[i] - r[i]*EC1S1J5U_10[i]
+pov_EC2S1J5U_10[] <- f[i]*IC2S1J5U_10[i] - r[i]*EC2S1J5U_10[i]
+pov_EC3S1J5U_10[] <- f[i]*IC3S1J5U_10[i] - r[i]*EC3S1J5U_10[i]
+pov_EC4S1J5U_10[] <- f[i]*IC4S1J5U_10[i] - r[i]*EC4S1J5U_10[i]
+
+pov_EC1S1J5U_11[] <- f[i]*IC1S1J5U_11[i] - r[i]*EC1S1J5U_11[i]
+pov_EC2S1J5U_11[] <- f[i]*IC2S1J5U_11[i] - r[i]*EC2S1J5U_11[i]
+pov_EC3S1J5U_11[] <- f[i]*IC3S1J5U_11[i] - r[i]*EC3S1J5U_11[i]
+pov_EC4S1J5U_11[] <- f[i]*IC4S1J5U_11[i] - r[i]*EC4S1J5U_11[i]
+
+pov_EC1S1J5U_12[] <- f[i]*IC1S1J5U_12[i] - r[i]*EC1S1J5U_12[i]
+pov_EC2S1J5U_12[] <- f[i]*IC2S1J5U_12[i] - r[i]*EC2S1J5U_12[i]
+pov_EC3S1J5U_12[] <- f[i]*IC3S1J5U_12[i] - r[i]*EC3S1J5U_12[i]
+pov_EC4S1J5U_12[] <- f[i]*IC4S1J5U_12[i] - r[i]*EC4S1J5U_12[i]
+
+pov_EC1S1J5U_13[] <- f[i]*IC1S1J5U_13[i] - r[i]*EC1S1J5U_13[i]
+pov_EC2S1J5U_13[] <- f[i]*IC2S1J5U_13[i] - r[i]*EC2S1J5U_13[i]
+pov_EC3S1J5U_13[] <- f[i]*IC3S1J5U_13[i] - r[i]*EC3S1J5U_13[i]
+pov_EC4S1J5U_13[] <- f[i]*IC4S1J5U_13[i] - r[i]*EC4S1J5U_13[i]
+
+pov_EC1S1J5U_14[] <- f[i]*IC1S1J5U_14[i] - r[i]*EC1S1J5U_14[i]
+pov_EC2S1J5U_14[] <- f[i]*IC2S1J5U_14[i] - r[i]*EC2S1J5U_14[i]
+pov_EC3S1J5U_14[] <- f[i]*IC3S1J5U_14[i] - r[i]*EC3S1J5U_14[i]
+pov_EC4S1J5U_14[] <- f[i]*IC4S1J5U_14[i] - r[i]*EC4S1J5U_14[i]
+
+pov_EC1S1J5U_15[] <- f[i]*IC1S1J5U_15[i] - r[i]*EC1S1J5U_15[i]
+pov_EC2S1J5U_15[] <- f[i]*IC2S1J5U_15[i] - r[i]*EC2S1J5U_15[i]
+pov_EC3S1J5U_15[] <- f[i]*IC3S1J5U_15[i] - r[i]*EC3S1J5U_15[i]
+pov_EC4S1J5U_15[] <- f[i]*IC4S1J5U_15[i] - r[i]*EC4S1J5U_15[i]
+
+pov_EC1S1J5U_16[] <- f[i]*IC1S1J5U_16[i] - r[i]*EC1S1J5U_16[i]
+pov_EC2S1J5U_16[] <- f[i]*IC2S1J5U_16[i] - r[i]*EC2S1J5U_16[i]
+pov_EC3S1J5U_16[] <- f[i]*IC3S1J5U_16[i] - r[i]*EC3S1J5U_16[i]
+pov_EC4S1J5U_16[] <- f[i]*IC4S1J5U_16[i] - r[i]*EC4S1J5U_16[i]
+
+pov_EC1S1J5U_17[] <- f[i]*IC1S1J5U_17[i] - r[i]*EC1S1J5U_17[i]
+pov_EC2S1J5U_17[] <- f[i]*IC2S1J5U_17[i] - r[i]*EC2S1J5U_17[i]
+pov_EC3S1J5U_17[] <- f[i]*IC3S1J5U_17[i] - r[i]*EC3S1J5U_17[i]
+pov_EC4S1J5U_17[] <- f[i]*IC4S1J5U_17[i] - r[i]*EC4S1J5U_17[i]
+
+
+
+pov_EC1S2J5U_10[] <- f[i]*IC1S2J5U_10[i] - r[i]*EC1S2J5U_10[i]
+pov_EC2S2J5U_10[] <- f[i]*IC2S2J5U_10[i] - r[i]*EC2S2J5U_10[i]
+pov_EC3S2J5U_10[] <- f[i]*IC3S2J5U_10[i] - r[i]*EC3S2J5U_10[i]
+pov_EC4S2J5U_10[] <- f[i]*IC4S2J5U_10[i] - r[i]*EC4S2J5U_10[i]
+
+pov_EC1S2J5U_11[] <- f[i]*IC1S2J5U_11[i] - r[i]*EC1S2J5U_11[i]
+pov_EC2S2J5U_11[] <- f[i]*IC2S2J5U_11[i] - r[i]*EC2S2J5U_11[i]
+pov_EC3S2J5U_11[] <- f[i]*IC3S2J5U_11[i] - r[i]*EC3S2J5U_11[i]
+pov_EC4S2J5U_11[] <- f[i]*IC4S2J5U_11[i] - r[i]*EC4S2J5U_11[i]
+
+pov_EC1S2J5U_12[] <- f[i]*IC1S2J5U_12[i] - r[i]*EC1S2J5U_12[i]
+pov_EC2S2J5U_12[] <- f[i]*IC2S2J5U_12[i] - r[i]*EC2S2J5U_12[i]
+pov_EC3S2J5U_12[] <- f[i]*IC3S2J5U_12[i] - r[i]*EC3S2J5U_12[i]
+pov_EC4S2J5U_12[] <- f[i]*IC4S2J5U_12[i] - r[i]*EC4S2J5U_12[i]
+
+pov_EC1S2J5U_13[] <- f[i]*IC1S2J5U_13[i] - r[i]*EC1S2J5U_13[i]
+pov_EC2S2J5U_13[] <- f[i]*IC2S2J5U_13[i] - r[i]*EC2S2J5U_13[i]
+pov_EC3S2J5U_13[] <- f[i]*IC3S2J5U_13[i] - r[i]*EC3S2J5U_13[i]
+pov_EC4S2J5U_13[] <- f[i]*IC4S2J5U_13[i] - r[i]*EC4S2J5U_13[i]
+
+pov_EC1S2J5U_14[] <- f[i]*IC1S2J5U_14[i] - r[i]*EC1S2J5U_14[i]
+pov_EC2S2J5U_14[] <- f[i]*IC2S2J5U_14[i] - r[i]*EC2S2J5U_14[i]
+pov_EC3S2J5U_14[] <- f[i]*IC3S2J5U_14[i] - r[i]*EC3S2J5U_14[i]
+pov_EC4S2J5U_14[] <- f[i]*IC4S2J5U_14[i] - r[i]*EC4S2J5U_14[i]
+
+pov_EC1S2J5U_15[] <- f[i]*IC1S2J5U_15[i] - r[i]*EC1S2J5U_15[i]
+pov_EC2S2J5U_15[] <- f[i]*IC2S2J5U_15[i] - r[i]*EC2S2J5U_15[i]
+pov_EC3S2J5U_15[] <- f[i]*IC3S2J5U_15[i] - r[i]*EC3S2J5U_15[i]
+pov_EC4S2J5U_15[] <- f[i]*IC4S2J5U_15[i] - r[i]*EC4S2J5U_15[i]
+
+pov_EC1S2J5U_16[] <- f[i]*IC1S2J5U_16[i] - r[i]*EC1S2J5U_16[i]
+pov_EC2S2J5U_16[] <- f[i]*IC2S2J5U_16[i] - r[i]*EC2S2J5U_16[i]
+pov_EC3S2J5U_16[] <- f[i]*IC3S2J5U_16[i] - r[i]*EC3S2J5U_16[i]
+pov_EC4S2J5U_16[] <- f[i]*IC4S2J5U_16[i] - r[i]*EC4S2J5U_16[i]
+
+pov_EC1S2J5U_17[] <- f[i]*IC1S2J5U_17[i] - r[i]*EC1S2J5U_17[i]
+pov_EC2S2J5U_17[] <- f[i]*IC2S2J5U_17[i] - r[i]*EC2S2J5U_17[i]
+pov_EC3S2J5U_17[] <- f[i]*IC3S2J5U_17[i] - r[i]*EC3S2J5U_17[i]
+pov_EC4S2J5U_17[] <- f[i]*IC4S2J5U_17[i] - r[i]*EC4S2J5U_17[i]
+
+
+
+pov_EC1S1J1W_10[] <- f[i]*IC1S1J1W_10[i] - r[i]*EC1S1J1W_10[i]
+pov_EC2S1J1W_10[] <- f[i]*IC2S1J1W_10[i] - r[i]*EC2S1J1W_10[i]
+pov_EC3S1J1W_10[] <- f[i]*IC3S1J1W_10[i] - r[i]*EC3S1J1W_10[i]
+pov_EC4S1J1W_10[] <- f[i]*IC4S1J1W_10[i] - r[i]*EC4S1J1W_10[i]
+
+pov_EC1S1J1W_11[] <- f[i]*IC1S1J1W_11[i] - r[i]*EC1S1J1W_11[i]
+pov_EC2S1J1W_11[] <- f[i]*IC2S1J1W_11[i] - r[i]*EC2S1J1W_11[i]
+pov_EC3S1J1W_11[] <- f[i]*IC3S1J1W_11[i] - r[i]*EC3S1J1W_11[i]
+pov_EC4S1J1W_11[] <- f[i]*IC4S1J1W_11[i] - r[i]*EC4S1J1W_11[i]
+
+pov_EC1S1J1W_12[] <- f[i]*IC1S1J1W_12[i] - r[i]*EC1S1J1W_12[i]
+pov_EC2S1J1W_12[] <- f[i]*IC2S1J1W_12[i] - r[i]*EC2S1J1W_12[i]
+pov_EC3S1J1W_12[] <- f[i]*IC3S1J1W_12[i] - r[i]*EC3S1J1W_12[i]
+pov_EC4S1J1W_12[] <- f[i]*IC4S1J1W_12[i] - r[i]*EC4S1J1W_12[i]
+
+pov_EC1S1J1W_13[] <- f[i]*IC1S1J1W_13[i] - r[i]*EC1S1J1W_13[i]
+pov_EC2S1J1W_13[] <- f[i]*IC2S1J1W_13[i] - r[i]*EC2S1J1W_13[i]
+pov_EC3S1J1W_13[] <- f[i]*IC3S1J1W_13[i] - r[i]*EC3S1J1W_13[i]
+pov_EC4S1J1W_13[] <- f[i]*IC4S1J1W_13[i] - r[i]*EC4S1J1W_13[i]
+
+pov_EC1S1J1W_14[] <- f[i]*IC1S1J1W_14[i] - r[i]*EC1S1J1W_14[i]
+pov_EC2S1J1W_14[] <- f[i]*IC2S1J1W_14[i] - r[i]*EC2S1J1W_14[i]
+pov_EC3S1J1W_14[] <- f[i]*IC3S1J1W_14[i] - r[i]*EC3S1J1W_14[i]
+pov_EC4S1J1W_14[] <- f[i]*IC4S1J1W_14[i] - r[i]*EC4S1J1W_14[i]
+
+pov_EC1S1J1W_15[] <- f[i]*IC1S1J1W_15[i] - r[i]*EC1S1J1W_15[i]
+pov_EC2S1J1W_15[] <- f[i]*IC2S1J1W_15[i] - r[i]*EC2S1J1W_15[i]
+pov_EC3S1J1W_15[] <- f[i]*IC3S1J1W_15[i] - r[i]*EC3S1J1W_15[i]
+pov_EC4S1J1W_15[] <- f[i]*IC4S1J1W_15[i] - r[i]*EC4S1J1W_15[i]
+
+pov_EC1S1J1W_16[] <- f[i]*IC1S1J1W_16[i] - r[i]*EC1S1J1W_16[i]
+pov_EC2S1J1W_16[] <- f[i]*IC2S1J1W_16[i] - r[i]*EC2S1J1W_16[i]
+pov_EC3S1J1W_16[] <- f[i]*IC3S1J1W_16[i] - r[i]*EC3S1J1W_16[i]
+pov_EC4S1J1W_16[] <- f[i]*IC4S1J1W_16[i] - r[i]*EC4S1J1W_16[i]
+
+pov_EC1S1J1W_17[] <- f[i]*IC1S1J1W_17[i] - r[i]*EC1S1J1W_17[i]
+pov_EC2S1J1W_17[] <- f[i]*IC2S1J1W_17[i] - r[i]*EC2S1J1W_17[i]
+pov_EC3S1J1W_17[] <- f[i]*IC3S1J1W_17[i] - r[i]*EC3S1J1W_17[i]
+pov_EC4S1J1W_17[] <- f[i]*IC4S1J1W_17[i] - r[i]*EC4S1J1W_17[i]
+
+
+
+pov_EC1S2J1W_10[] <- f[i]*IC1S2J1W_10[i] - r[i]*EC1S2J1W_10[i]
+pov_EC2S2J1W_10[] <- f[i]*IC2S2J1W_10[i] - r[i]*EC2S2J1W_10[i]
+pov_EC3S2J1W_10[] <- f[i]*IC3S2J1W_10[i] - r[i]*EC3S2J1W_10[i]
+pov_EC4S2J1W_10[] <- f[i]*IC4S2J1W_10[i] - r[i]*EC4S2J1W_10[i]
+
+pov_EC1S2J1W_11[] <- f[i]*IC1S2J1W_11[i] - r[i]*EC1S2J1W_11[i]
+pov_EC2S2J1W_11[] <- f[i]*IC2S2J1W_11[i] - r[i]*EC2S2J1W_11[i]
+pov_EC3S2J1W_11[] <- f[i]*IC3S2J1W_11[i] - r[i]*EC3S2J1W_11[i]
+pov_EC4S2J1W_11[] <- f[i]*IC4S2J1W_11[i] - r[i]*EC4S2J1W_11[i]
+
+pov_EC1S2J1W_12[] <- f[i]*IC1S2J1W_12[i] - r[i]*EC1S2J1W_12[i]
+pov_EC2S2J1W_12[] <- f[i]*IC2S2J1W_12[i] - r[i]*EC2S2J1W_12[i]
+pov_EC3S2J1W_12[] <- f[i]*IC3S2J1W_12[i] - r[i]*EC3S2J1W_12[i]
+pov_EC4S2J1W_12[] <- f[i]*IC4S2J1W_12[i] - r[i]*EC4S2J1W_12[i]
+
+pov_EC1S2J1W_13[] <- f[i]*IC1S2J1W_13[i] - r[i]*EC1S2J1W_13[i]
+pov_EC2S2J1W_13[] <- f[i]*IC2S2J1W_13[i] - r[i]*EC2S2J1W_13[i]
+pov_EC3S2J1W_13[] <- f[i]*IC3S2J1W_13[i] - r[i]*EC3S2J1W_13[i]
+pov_EC4S2J1W_13[] <- f[i]*IC4S2J1W_13[i] - r[i]*EC4S2J1W_13[i]
+
+pov_EC1S2J1W_14[] <- f[i]*IC1S2J1W_14[i] - r[i]*EC1S2J1W_14[i]
+pov_EC2S2J1W_14[] <- f[i]*IC2S2J1W_14[i] - r[i]*EC2S2J1W_14[i]
+pov_EC3S2J1W_14[] <- f[i]*IC3S2J1W_14[i] - r[i]*EC3S2J1W_14[i]
+pov_EC4S2J1W_14[] <- f[i]*IC4S2J1W_14[i] - r[i]*EC4S2J1W_14[i]
+
+pov_EC1S2J1W_15[] <- f[i]*IC1S2J1W_15[i] - r[i]*EC1S2J1W_15[i]
+pov_EC2S2J1W_15[] <- f[i]*IC2S2J1W_15[i] - r[i]*EC2S2J1W_15[i]
+pov_EC3S2J1W_15[] <- f[i]*IC3S2J1W_15[i] - r[i]*EC3S2J1W_15[i]
+pov_EC4S2J1W_15[] <- f[i]*IC4S2J1W_15[i] - r[i]*EC4S2J1W_15[i]
+
+pov_EC1S2J1W_16[] <- f[i]*IC1S2J1W_16[i] - r[i]*EC1S2J1W_16[i]
+pov_EC2S2J1W_16[] <- f[i]*IC2S2J1W_16[i] - r[i]*EC2S2J1W_16[i]
+pov_EC3S2J1W_16[] <- f[i]*IC3S2J1W_16[i] - r[i]*EC3S2J1W_16[i]
+pov_EC4S2J1W_16[] <- f[i]*IC4S2J1W_16[i] - r[i]*EC4S2J1W_16[i]
+
+pov_EC1S2J1W_17[] <- f[i]*IC1S2J1W_17[i] - r[i]*EC1S2J1W_17[i]
+pov_EC2S2J1W_17[] <- f[i]*IC2S2J1W_17[i] - r[i]*EC2S2J1W_17[i]
+pov_EC3S2J1W_17[] <- f[i]*IC3S2J1W_17[i] - r[i]*EC3S2J1W_17[i]
+pov_EC4S2J1W_17[] <- f[i]*IC4S2J1W_17[i] - r[i]*EC4S2J1W_17[i]
+
+
+
+pov_EC1S1J2W_10[] <- f[i]*IC1S1J2W_10[i] - r[i]*EC1S1J2W_10[i]
+pov_EC2S1J2W_10[] <- f[i]*IC2S1J2W_10[i] - r[i]*EC2S1J2W_10[i]
+pov_EC3S1J2W_10[] <- f[i]*IC3S1J2W_10[i] - r[i]*EC3S1J2W_10[i]
+pov_EC4S1J2W_10[] <- f[i]*IC4S1J2W_10[i] - r[i]*EC4S1J2W_10[i]
+
+pov_EC1S1J2W_11[] <- f[i]*IC1S1J2W_11[i] - r[i]*EC1S1J2W_11[i]
+pov_EC2S1J2W_11[] <- f[i]*IC2S1J2W_11[i] - r[i]*EC2S1J2W_11[i]
+pov_EC3S1J2W_11[] <- f[i]*IC3S1J2W_11[i] - r[i]*EC3S1J2W_11[i]
+pov_EC4S1J2W_11[] <- f[i]*IC4S1J2W_11[i] - r[i]*EC4S1J2W_11[i]
+
+pov_EC1S1J2W_12[] <- f[i]*IC1S1J2W_12[i] - r[i]*EC1S1J2W_12[i]
+pov_EC2S1J2W_12[] <- f[i]*IC2S1J2W_12[i] - r[i]*EC2S1J2W_12[i]
+pov_EC3S1J2W_12[] <- f[i]*IC3S1J2W_12[i] - r[i]*EC3S1J2W_12[i]
+pov_EC4S1J2W_12[] <- f[i]*IC4S1J2W_12[i] - r[i]*EC4S1J2W_12[i]
+
+pov_EC1S1J2W_13[] <- f[i]*IC1S1J2W_13[i] - r[i]*EC1S1J2W_13[i]
+pov_EC2S1J2W_13[] <- f[i]*IC2S1J2W_13[i] - r[i]*EC2S1J2W_13[i]
+pov_EC3S1J2W_13[] <- f[i]*IC3S1J2W_13[i] - r[i]*EC3S1J2W_13[i]
+pov_EC4S1J2W_13[] <- f[i]*IC4S1J2W_13[i] - r[i]*EC4S1J2W_13[i]
+
+pov_EC1S1J2W_14[] <- f[i]*IC1S1J2W_14[i] - r[i]*EC1S1J2W_14[i]
+pov_EC2S1J2W_14[] <- f[i]*IC2S1J2W_14[i] - r[i]*EC2S1J2W_14[i]
+pov_EC3S1J2W_14[] <- f[i]*IC3S1J2W_14[i] - r[i]*EC3S1J2W_14[i]
+pov_EC4S1J2W_14[] <- f[i]*IC4S1J2W_14[i] - r[i]*EC4S1J2W_14[i]
+
+pov_EC1S1J2W_15[] <- f[i]*IC1S1J2W_15[i] - r[i]*EC1S1J2W_15[i]
+pov_EC2S1J2W_15[] <- f[i]*IC2S1J2W_15[i] - r[i]*EC2S1J2W_15[i]
+pov_EC3S1J2W_15[] <- f[i]*IC3S1J2W_15[i] - r[i]*EC3S1J2W_15[i]
+pov_EC4S1J2W_15[] <- f[i]*IC4S1J2W_15[i] - r[i]*EC4S1J2W_15[i]
+
+pov_EC1S1J2W_16[] <- f[i]*IC1S1J2W_16[i] - r[i]*EC1S1J2W_16[i]
+pov_EC2S1J2W_16[] <- f[i]*IC2S1J2W_16[i] - r[i]*EC2S1J2W_16[i]
+pov_EC3S1J2W_16[] <- f[i]*IC3S1J2W_16[i] - r[i]*EC3S1J2W_16[i]
+pov_EC4S1J2W_16[] <- f[i]*IC4S1J2W_16[i] - r[i]*EC4S1J2W_16[i]
+
+pov_EC1S1J2W_17[] <- f[i]*IC1S1J2W_17[i] - r[i]*EC1S1J2W_17[i]
+pov_EC2S1J2W_17[] <- f[i]*IC2S1J2W_17[i] - r[i]*EC2S1J2W_17[i]
+pov_EC3S1J2W_17[] <- f[i]*IC3S1J2W_17[i] - r[i]*EC3S1J2W_17[i]
+pov_EC4S1J2W_17[] <- f[i]*IC4S1J2W_17[i] - r[i]*EC4S1J2W_17[i]
+
+
+
+pov_EC1S2J2W_10[] <- f[i]*IC1S2J2W_10[i] - r[i]*EC1S2J2W_10[i]
+pov_EC2S2J2W_10[] <- f[i]*IC2S2J2W_10[i] - r[i]*EC2S2J2W_10[i]
+pov_EC3S2J2W_10[] <- f[i]*IC3S2J2W_10[i] - r[i]*EC3S2J2W_10[i]
+pov_EC4S2J2W_10[] <- f[i]*IC4S2J2W_10[i] - r[i]*EC4S2J2W_10[i]
+
+pov_EC1S2J2W_11[] <- f[i]*IC1S2J2W_11[i] - r[i]*EC1S2J2W_11[i]
+pov_EC2S2J2W_11[] <- f[i]*IC2S2J2W_11[i] - r[i]*EC2S2J2W_11[i]
+pov_EC3S2J2W_11[] <- f[i]*IC3S2J2W_11[i] - r[i]*EC3S2J2W_11[i]
+pov_EC4S2J2W_11[] <- f[i]*IC4S2J2W_11[i] - r[i]*EC4S2J2W_11[i]
+
+pov_EC1S2J2W_12[] <- f[i]*IC1S2J2W_12[i] - r[i]*EC1S2J2W_12[i]
+pov_EC2S2J2W_12[] <- f[i]*IC2S2J2W_12[i] - r[i]*EC2S2J2W_12[i]
+pov_EC3S2J2W_12[] <- f[i]*IC3S2J2W_12[i] - r[i]*EC3S2J2W_12[i]
+pov_EC4S2J2W_12[] <- f[i]*IC4S2J2W_12[i] - r[i]*EC4S2J2W_12[i]
+
+pov_EC1S2J2W_13[] <- f[i]*IC1S2J2W_13[i] - r[i]*EC1S2J2W_13[i]
+pov_EC2S2J2W_13[] <- f[i]*IC2S2J2W_13[i] - r[i]*EC2S2J2W_13[i]
+pov_EC3S2J2W_13[] <- f[i]*IC3S2J2W_13[i] - r[i]*EC3S2J2W_13[i]
+pov_EC4S2J2W_13[] <- f[i]*IC4S2J2W_13[i] - r[i]*EC4S2J2W_13[i]
+
+pov_EC1S2J2W_14[] <- f[i]*IC1S2J2W_14[i] - r[i]*EC1S2J2W_14[i]
+pov_EC2S2J2W_14[] <- f[i]*IC2S2J2W_14[i] - r[i]*EC2S2J2W_14[i]
+pov_EC3S2J2W_14[] <- f[i]*IC3S2J2W_14[i] - r[i]*EC3S2J2W_14[i]
+pov_EC4S2J2W_14[] <- f[i]*IC4S2J2W_14[i] - r[i]*EC4S2J2W_14[i]
+
+pov_EC1S2J2W_15[] <- f[i]*IC1S2J2W_15[i] - r[i]*EC1S2J2W_15[i]
+pov_EC2S2J2W_15[] <- f[i]*IC2S2J2W_15[i] - r[i]*EC2S2J2W_15[i]
+pov_EC3S2J2W_15[] <- f[i]*IC3S2J2W_15[i] - r[i]*EC3S2J2W_15[i]
+pov_EC4S2J2W_15[] <- f[i]*IC4S2J2W_15[i] - r[i]*EC4S2J2W_15[i]
+
+pov_EC1S2J2W_16[] <- f[i]*IC1S2J2W_16[i] - r[i]*EC1S2J2W_16[i]
+pov_EC2S2J2W_16[] <- f[i]*IC2S2J2W_16[i] - r[i]*EC2S2J2W_16[i]
+pov_EC3S2J2W_16[] <- f[i]*IC3S2J2W_16[i] - r[i]*EC3S2J2W_16[i]
+pov_EC4S2J2W_16[] <- f[i]*IC4S2J2W_16[i] - r[i]*EC4S2J2W_16[i]
+
+pov_EC1S2J2W_17[] <- f[i]*IC1S2J2W_17[i] - r[i]*EC1S2J2W_17[i]
+pov_EC2S2J2W_17[] <- f[i]*IC2S2J2W_17[i] - r[i]*EC2S2J2W_17[i]
+pov_EC3S2J2W_17[] <- f[i]*IC3S2J2W_17[i] - r[i]*EC3S2J2W_17[i]
+pov_EC4S2J2W_17[] <- f[i]*IC4S2J2W_17[i] - r[i]*EC4S2J2W_17[i]
+
+
+
+pov_EC1S1J3W_10[] <- f[i]*IC1S1J3W_10[i] - r[i]*EC1S1J3W_10[i]
+pov_EC2S1J3W_10[] <- f[i]*IC2S1J3W_10[i] - r[i]*EC2S1J3W_10[i]
+pov_EC3S1J3W_10[] <- f[i]*IC3S1J3W_10[i] - r[i]*EC3S1J3W_10[i]
+pov_EC4S1J3W_10[] <- f[i]*IC4S1J3W_10[i] - r[i]*EC4S1J3W_10[i]
+
+pov_EC1S1J3W_11[] <- f[i]*IC1S1J3W_11[i] - r[i]*EC1S1J3W_11[i]
+pov_EC2S1J3W_11[] <- f[i]*IC2S1J3W_11[i] - r[i]*EC2S1J3W_11[i]
+pov_EC3S1J3W_11[] <- f[i]*IC3S1J3W_11[i] - r[i]*EC3S1J3W_11[i]
+pov_EC4S1J3W_11[] <- f[i]*IC4S1J3W_11[i] - r[i]*EC4S1J3W_11[i]
+
+pov_EC1S1J3W_12[] <- f[i]*IC1S1J3W_12[i] - r[i]*EC1S1J3W_12[i]
+pov_EC2S1J3W_12[] <- f[i]*IC2S1J3W_12[i] - r[i]*EC2S1J3W_12[i]
+pov_EC3S1J3W_12[] <- f[i]*IC3S1J3W_12[i] - r[i]*EC3S1J3W_12[i]
+pov_EC4S1J3W_12[] <- f[i]*IC4S1J3W_12[i] - r[i]*EC4S1J3W_12[i]
+
+pov_EC1S1J3W_13[] <- f[i]*IC1S1J3W_13[i] - r[i]*EC1S1J3W_13[i]
+pov_EC2S1J3W_13[] <- f[i]*IC2S1J3W_13[i] - r[i]*EC2S1J3W_13[i]
+pov_EC3S1J3W_13[] <- f[i]*IC3S1J3W_13[i] - r[i]*EC3S1J3W_13[i]
+pov_EC4S1J3W_13[] <- f[i]*IC4S1J3W_13[i] - r[i]*EC4S1J3W_13[i]
+
+pov_EC1S1J3W_14[] <- f[i]*IC1S1J3W_14[i] - r[i]*EC1S1J3W_14[i]
+pov_EC2S1J3W_14[] <- f[i]*IC2S1J3W_14[i] - r[i]*EC2S1J3W_14[i]
+pov_EC3S1J3W_14[] <- f[i]*IC3S1J3W_14[i] - r[i]*EC3S1J3W_14[i]
+pov_EC4S1J3W_14[] <- f[i]*IC4S1J3W_14[i] - r[i]*EC4S1J3W_14[i]
+
+pov_EC1S1J3W_15[] <- f[i]*IC1S1J3W_15[i] - r[i]*EC1S1J3W_15[i]
+pov_EC2S1J3W_15[] <- f[i]*IC2S1J3W_15[i] - r[i]*EC2S1J3W_15[i]
+pov_EC3S1J3W_15[] <- f[i]*IC3S1J3W_15[i] - r[i]*EC3S1J3W_15[i]
+pov_EC4S1J3W_15[] <- f[i]*IC4S1J3W_15[i] - r[i]*EC4S1J3W_15[i]
+
+pov_EC1S1J3W_16[] <- f[i]*IC1S1J3W_16[i] - r[i]*EC1S1J3W_16[i]
+pov_EC2S1J3W_16[] <- f[i]*IC2S1J3W_16[i] - r[i]*EC2S1J3W_16[i]
+pov_EC3S1J3W_16[] <- f[i]*IC3S1J3W_16[i] - r[i]*EC3S1J3W_16[i]
+pov_EC4S1J3W_16[] <- f[i]*IC4S1J3W_16[i] - r[i]*EC4S1J3W_16[i]
+
+pov_EC1S1J3W_17[] <- f[i]*IC1S1J3W_17[i] - r[i]*EC1S1J3W_17[i]
+pov_EC2S1J3W_17[] <- f[i]*IC2S1J3W_17[i] - r[i]*EC2S1J3W_17[i]
+pov_EC3S1J3W_17[] <- f[i]*IC3S1J3W_17[i] - r[i]*EC3S1J3W_17[i]
+pov_EC4S1J3W_17[] <- f[i]*IC4S1J3W_17[i] - r[i]*EC4S1J3W_17[i]
+
+
+
+pov_EC1S2J3W_10[] <- f[i]*IC1S2J3W_10[i] - r[i]*EC1S2J3W_10[i]
+pov_EC2S2J3W_10[] <- f[i]*IC2S2J3W_10[i] - r[i]*EC2S2J3W_10[i]
+pov_EC3S2J3W_10[] <- f[i]*IC3S2J3W_10[i] - r[i]*EC3S2J3W_10[i]
+pov_EC4S2J3W_10[] <- f[i]*IC4S2J3W_10[i] - r[i]*EC4S2J3W_10[i]
+
+pov_EC1S2J3W_11[] <- f[i]*IC1S2J3W_11[i] - r[i]*EC1S2J3W_11[i]
+pov_EC2S2J3W_11[] <- f[i]*IC2S2J3W_11[i] - r[i]*EC2S2J3W_11[i]
+pov_EC3S2J3W_11[] <- f[i]*IC3S2J3W_11[i] - r[i]*EC3S2J3W_11[i]
+pov_EC4S2J3W_11[] <- f[i]*IC4S2J3W_11[i] - r[i]*EC4S2J3W_11[i]
+
+pov_EC1S2J3W_12[] <- f[i]*IC1S2J3W_12[i] - r[i]*EC1S2J3W_12[i]
+pov_EC2S2J3W_12[] <- f[i]*IC2S2J3W_12[i] - r[i]*EC2S2J3W_12[i]
+pov_EC3S2J3W_12[] <- f[i]*IC3S2J3W_12[i] - r[i]*EC3S2J3W_12[i]
+pov_EC4S2J3W_12[] <- f[i]*IC4S2J3W_12[i] - r[i]*EC4S2J3W_12[i]
+
+pov_EC1S2J3W_13[] <- f[i]*IC1S2J3W_13[i] - r[i]*EC1S2J3W_13[i]
+pov_EC2S2J3W_13[] <- f[i]*IC2S2J3W_13[i] - r[i]*EC2S2J3W_13[i]
+pov_EC3S2J3W_13[] <- f[i]*IC3S2J3W_13[i] - r[i]*EC3S2J3W_13[i]
+pov_EC4S2J3W_13[] <- f[i]*IC4S2J3W_13[i] - r[i]*EC4S2J3W_13[i]
+
+pov_EC1S2J3W_14[] <- f[i]*IC1S2J3W_14[i] - r[i]*EC1S2J3W_14[i]
+pov_EC2S2J3W_14[] <- f[i]*IC2S2J3W_14[i] - r[i]*EC2S2J3W_14[i]
+pov_EC3S2J3W_14[] <- f[i]*IC3S2J3W_14[i] - r[i]*EC3S2J3W_14[i]
+pov_EC4S2J3W_14[] <- f[i]*IC4S2J3W_14[i] - r[i]*EC4S2J3W_14[i]
+
+pov_EC1S2J3W_15[] <- f[i]*IC1S2J3W_15[i] - r[i]*EC1S2J3W_15[i]
+pov_EC2S2J3W_15[] <- f[i]*IC2S2J3W_15[i] - r[i]*EC2S2J3W_15[i]
+pov_EC3S2J3W_15[] <- f[i]*IC3S2J3W_15[i] - r[i]*EC3S2J3W_15[i]
+pov_EC4S2J3W_15[] <- f[i]*IC4S2J3W_15[i] - r[i]*EC4S2J3W_15[i]
+
+pov_EC1S2J3W_16[] <- f[i]*IC1S2J3W_16[i] - r[i]*EC1S2J3W_16[i]
+pov_EC2S2J3W_16[] <- f[i]*IC2S2J3W_16[i] - r[i]*EC2S2J3W_16[i]
+pov_EC3S2J3W_16[] <- f[i]*IC3S2J3W_16[i] - r[i]*EC3S2J3W_16[i]
+pov_EC4S2J3W_16[] <- f[i]*IC4S2J3W_16[i] - r[i]*EC4S2J3W_16[i]
+
+pov_EC1S2J3W_17[] <- f[i]*IC1S2J3W_17[i] - r[i]*EC1S2J3W_17[i]
+pov_EC2S2J3W_17[] <- f[i]*IC2S2J3W_17[i] - r[i]*EC2S2J3W_17[i]
+pov_EC3S2J3W_17[] <- f[i]*IC3S2J3W_17[i] - r[i]*EC3S2J3W_17[i]
+pov_EC4S2J3W_17[] <- f[i]*IC4S2J3W_17[i] - r[i]*EC4S2J3W_17[i]
+
+
+
+pov_EC1S1J4W_10[] <- f[i]*IC1S1J4W_10[i] - r[i]*EC1S1J4W_10[i]
+pov_EC2S1J4W_10[] <- f[i]*IC2S1J4W_10[i] - r[i]*EC2S1J4W_10[i]
+pov_EC3S1J4W_10[] <- f[i]*IC3S1J4W_10[i] - r[i]*EC3S1J4W_10[i]
+pov_EC4S1J4W_10[] <- f[i]*IC4S1J4W_10[i] - r[i]*EC4S1J4W_10[i]
+
+pov_EC1S1J4W_11[] <- f[i]*IC1S1J4W_11[i] - r[i]*EC1S1J4W_11[i]
+pov_EC2S1J4W_11[] <- f[i]*IC2S1J4W_11[i] - r[i]*EC2S1J4W_11[i]
+pov_EC3S1J4W_11[] <- f[i]*IC3S1J4W_11[i] - r[i]*EC3S1J4W_11[i]
+pov_EC4S1J4W_11[] <- f[i]*IC4S1J4W_11[i] - r[i]*EC4S1J4W_11[i]
+
+pov_EC1S1J4W_12[] <- f[i]*IC1S1J4W_12[i] - r[i]*EC1S1J4W_12[i]
+pov_EC2S1J4W_12[] <- f[i]*IC2S1J4W_12[i] - r[i]*EC2S1J4W_12[i]
+pov_EC3S1J4W_12[] <- f[i]*IC3S1J4W_12[i] - r[i]*EC3S1J4W_12[i]
+pov_EC4S1J4W_12[] <- f[i]*IC4S1J4W_12[i] - r[i]*EC4S1J4W_12[i]
+
+pov_EC1S1J4W_13[] <- f[i]*IC1S1J4W_13[i] - r[i]*EC1S1J4W_13[i]
+pov_EC2S1J4W_13[] <- f[i]*IC2S1J4W_13[i] - r[i]*EC2S1J4W_13[i]
+pov_EC3S1J4W_13[] <- f[i]*IC3S1J4W_13[i] - r[i]*EC3S1J4W_13[i]
+pov_EC4S1J4W_13[] <- f[i]*IC4S1J4W_13[i] - r[i]*EC4S1J4W_13[i]
+
+pov_EC1S1J4W_14[] <- f[i]*IC1S1J4W_14[i] - r[i]*EC1S1J4W_14[i]
+pov_EC2S1J4W_14[] <- f[i]*IC2S1J4W_14[i] - r[i]*EC2S1J4W_14[i]
+pov_EC3S1J4W_14[] <- f[i]*IC3S1J4W_14[i] - r[i]*EC3S1J4W_14[i]
+pov_EC4S1J4W_14[] <- f[i]*IC4S1J4W_14[i] - r[i]*EC4S1J4W_14[i]
+
+pov_EC1S1J4W_15[] <- f[i]*IC1S1J4W_15[i] - r[i]*EC1S1J4W_15[i]
+pov_EC2S1J4W_15[] <- f[i]*IC2S1J4W_15[i] - r[i]*EC2S1J4W_15[i]
+pov_EC3S1J4W_15[] <- f[i]*IC3S1J4W_15[i] - r[i]*EC3S1J4W_15[i]
+pov_EC4S1J4W_15[] <- f[i]*IC4S1J4W_15[i] - r[i]*EC4S1J4W_15[i]
+
+pov_EC1S1J4W_16[] <- f[i]*IC1S1J4W_16[i] - r[i]*EC1S1J4W_16[i]
+pov_EC2S1J4W_16[] <- f[i]*IC2S1J4W_16[i] - r[i]*EC2S1J4W_16[i]
+pov_EC3S1J4W_16[] <- f[i]*IC3S1J4W_16[i] - r[i]*EC3S1J4W_16[i]
+pov_EC4S1J4W_16[] <- f[i]*IC4S1J4W_16[i] - r[i]*EC4S1J4W_16[i]
+
+pov_EC1S1J4W_17[] <- f[i]*IC1S1J4W_17[i] - r[i]*EC1S1J4W_17[i]
+pov_EC2S1J4W_17[] <- f[i]*IC2S1J4W_17[i] - r[i]*EC2S1J4W_17[i]
+pov_EC3S1J4W_17[] <- f[i]*IC3S1J4W_17[i] - r[i]*EC3S1J4W_17[i]
+pov_EC4S1J4W_17[] <- f[i]*IC4S1J4W_17[i] - r[i]*EC4S1J4W_17[i]
+
+
+
+pov_EC1S2J4W_10[] <- f[i]*IC1S2J4W_10[i] - r[i]*EC1S2J4W_10[i]
+pov_EC2S2J4W_10[] <- f[i]*IC2S2J4W_10[i] - r[i]*EC2S2J4W_10[i]
+pov_EC3S2J4W_10[] <- f[i]*IC3S2J4W_10[i] - r[i]*EC3S2J4W_10[i]
+pov_EC4S2J4W_10[] <- f[i]*IC4S2J4W_10[i] - r[i]*EC4S2J4W_10[i]
+
+pov_EC1S2J4W_11[] <- f[i]*IC1S2J4W_11[i] - r[i]*EC1S2J4W_11[i]
+pov_EC2S2J4W_11[] <- f[i]*IC2S2J4W_11[i] - r[i]*EC2S2J4W_11[i]
+pov_EC3S2J4W_11[] <- f[i]*IC3S2J4W_11[i] - r[i]*EC3S2J4W_11[i]
+pov_EC4S2J4W_11[] <- f[i]*IC4S2J4W_11[i] - r[i]*EC4S2J4W_11[i]
+
+pov_EC1S2J4W_12[] <- f[i]*IC1S2J4W_12[i] - r[i]*EC1S2J4W_12[i]
+pov_EC2S2J4W_12[] <- f[i]*IC2S2J4W_12[i] - r[i]*EC2S2J4W_12[i]
+pov_EC3S2J4W_12[] <- f[i]*IC3S2J4W_12[i] - r[i]*EC3S2J4W_12[i]
+pov_EC4S2J4W_12[] <- f[i]*IC4S2J4W_12[i] - r[i]*EC4S2J4W_12[i]
+
+pov_EC1S2J4W_13[] <- f[i]*IC1S2J4W_13[i] - r[i]*EC1S2J4W_13[i]
+pov_EC2S2J4W_13[] <- f[i]*IC2S2J4W_13[i] - r[i]*EC2S2J4W_13[i]
+pov_EC3S2J4W_13[] <- f[i]*IC3S2J4W_13[i] - r[i]*EC3S2J4W_13[i]
+pov_EC4S2J4W_13[] <- f[i]*IC4S2J4W_13[i] - r[i]*EC4S2J4W_13[i]
+
+pov_EC1S2J4W_14[] <- f[i]*IC1S2J4W_14[i] - r[i]*EC1S2J4W_14[i]
+pov_EC2S2J4W_14[] <- f[i]*IC2S2J4W_14[i] - r[i]*EC2S2J4W_14[i]
+pov_EC3S2J4W_14[] <- f[i]*IC3S2J4W_14[i] - r[i]*EC3S2J4W_14[i]
+pov_EC4S2J4W_14[] <- f[i]*IC4S2J4W_14[i] - r[i]*EC4S2J4W_14[i]
+
+pov_EC1S2J4W_15[] <- f[i]*IC1S2J4W_15[i] - r[i]*EC1S2J4W_15[i]
+pov_EC2S2J4W_15[] <- f[i]*IC2S2J4W_15[i] - r[i]*EC2S2J4W_15[i]
+pov_EC3S2J4W_15[] <- f[i]*IC3S2J4W_15[i] - r[i]*EC3S2J4W_15[i]
+pov_EC4S2J4W_15[] <- f[i]*IC4S2J4W_15[i] - r[i]*EC4S2J4W_15[i]
+
+pov_EC1S2J4W_16[] <- f[i]*IC1S2J4W_16[i] - r[i]*EC1S2J4W_16[i]
+pov_EC2S2J4W_16[] <- f[i]*IC2S2J4W_16[i] - r[i]*EC2S2J4W_16[i]
+pov_EC3S2J4W_16[] <- f[i]*IC3S2J4W_16[i] - r[i]*EC3S2J4W_16[i]
+pov_EC4S2J4W_16[] <- f[i]*IC4S2J4W_16[i] - r[i]*EC4S2J4W_16[i]
+
+pov_EC1S2J4W_17[] <- f[i]*IC1S2J4W_17[i] - r[i]*EC1S2J4W_17[i]
+pov_EC2S2J4W_17[] <- f[i]*IC2S2J4W_17[i] - r[i]*EC2S2J4W_17[i]
+pov_EC3S2J4W_17[] <- f[i]*IC3S2J4W_17[i] - r[i]*EC3S2J4W_17[i]
+pov_EC4S2J4W_17[] <- f[i]*IC4S2J4W_17[i] - r[i]*EC4S2J4W_17[i]
+
+
+
+pov_EC1S1J5W_10[] <- f[i]*IC1S1J5W_10[i] - r[i]*EC1S1J5W_10[i]
+pov_EC2S1J5W_10[] <- f[i]*IC2S1J5W_10[i] - r[i]*EC2S1J5W_10[i]
+pov_EC3S1J5W_10[] <- f[i]*IC3S1J5W_10[i] - r[i]*EC3S1J5W_10[i]
+pov_EC4S1J5W_10[] <- f[i]*IC4S1J5W_10[i] - r[i]*EC4S1J5W_10[i]
+
+pov_EC1S1J5W_11[] <- f[i]*IC1S1J5W_11[i] - r[i]*EC1S1J5W_11[i]
+pov_EC2S1J5W_11[] <- f[i]*IC2S1J5W_11[i] - r[i]*EC2S1J5W_11[i]
+pov_EC3S1J5W_11[] <- f[i]*IC3S1J5W_11[i] - r[i]*EC3S1J5W_11[i]
+pov_EC4S1J5W_11[] <- f[i]*IC4S1J5W_11[i] - r[i]*EC4S1J5W_11[i]
+
+pov_EC1S1J5W_12[] <- f[i]*IC1S1J5W_12[i] - r[i]*EC1S1J5W_12[i]
+pov_EC2S1J5W_12[] <- f[i]*IC2S1J5W_12[i] - r[i]*EC2S1J5W_12[i]
+pov_EC3S1J5W_12[] <- f[i]*IC3S1J5W_12[i] - r[i]*EC3S1J5W_12[i]
+pov_EC4S1J5W_12[] <- f[i]*IC4S1J5W_12[i] - r[i]*EC4S1J5W_12[i]
+
+pov_EC1S1J5W_13[] <- f[i]*IC1S1J5W_13[i] - r[i]*EC1S1J5W_13[i]
+pov_EC2S1J5W_13[] <- f[i]*IC2S1J5W_13[i] - r[i]*EC2S1J5W_13[i]
+pov_EC3S1J5W_13[] <- f[i]*IC3S1J5W_13[i] - r[i]*EC3S1J5W_13[i]
+pov_EC4S1J5W_13[] <- f[i]*IC4S1J5W_13[i] - r[i]*EC4S1J5W_13[i]
+
+pov_EC1S1J5W_14[] <- f[i]*IC1S1J5W_14[i] - r[i]*EC1S1J5W_14[i]
+pov_EC2S1J5W_14[] <- f[i]*IC2S1J5W_14[i] - r[i]*EC2S1J5W_14[i]
+pov_EC3S1J5W_14[] <- f[i]*IC3S1J5W_14[i] - r[i]*EC3S1J5W_14[i]
+pov_EC4S1J5W_14[] <- f[i]*IC4S1J5W_14[i] - r[i]*EC4S1J5W_14[i]
+
+pov_EC1S1J5W_15[] <- f[i]*IC1S1J5W_15[i] - r[i]*EC1S1J5W_15[i]
+pov_EC2S1J5W_15[] <- f[i]*IC2S1J5W_15[i] - r[i]*EC2S1J5W_15[i]
+pov_EC3S1J5W_15[] <- f[i]*IC3S1J5W_15[i] - r[i]*EC3S1J5W_15[i]
+pov_EC4S1J5W_15[] <- f[i]*IC4S1J5W_15[i] - r[i]*EC4S1J5W_15[i]
+
+pov_EC1S1J5W_16[] <- f[i]*IC1S1J5W_16[i] - r[i]*EC1S1J5W_16[i]
+pov_EC2S1J5W_16[] <- f[i]*IC2S1J5W_16[i] - r[i]*EC2S1J5W_16[i]
+pov_EC3S1J5W_16[] <- f[i]*IC3S1J5W_16[i] - r[i]*EC3S1J5W_16[i]
+pov_EC4S1J5W_16[] <- f[i]*IC4S1J5W_16[i] - r[i]*EC4S1J5W_16[i]
+
+pov_EC1S1J5W_17[] <- f[i]*IC1S1J5W_17[i] - r[i]*EC1S1J5W_17[i]
+pov_EC2S1J5W_17[] <- f[i]*IC2S1J5W_17[i] - r[i]*EC2S1J5W_17[i]
+pov_EC3S1J5W_17[] <- f[i]*IC3S1J5W_17[i] - r[i]*EC3S1J5W_17[i]
+pov_EC4S1J5W_17[] <- f[i]*IC4S1J5W_17[i] - r[i]*EC4S1J5W_17[i]
+
+
+
+pov_EC1S2J5W_10[] <- f[i]*IC1S2J5W_10[i] - r[i]*EC1S2J5W_10[i]
+pov_EC2S2J5W_10[] <- f[i]*IC2S2J5W_10[i] - r[i]*EC2S2J5W_10[i]
+pov_EC3S2J5W_10[] <- f[i]*IC3S2J5W_10[i] - r[i]*EC3S2J5W_10[i]
+pov_EC4S2J5W_10[] <- f[i]*IC4S2J5W_10[i] - r[i]*EC4S2J5W_10[i]
+
+pov_EC1S2J5W_11[] <- f[i]*IC1S2J5W_11[i] - r[i]*EC1S2J5W_11[i]
+pov_EC2S2J5W_11[] <- f[i]*IC2S2J5W_11[i] - r[i]*EC2S2J5W_11[i]
+pov_EC3S2J5W_11[] <- f[i]*IC3S2J5W_11[i] - r[i]*EC3S2J5W_11[i]
+pov_EC4S2J5W_11[] <- f[i]*IC4S2J5W_11[i] - r[i]*EC4S2J5W_11[i]
+
+pov_EC1S2J5W_12[] <- f[i]*IC1S2J5W_12[i] - r[i]*EC1S2J5W_12[i]
+pov_EC2S2J5W_12[] <- f[i]*IC2S2J5W_12[i] - r[i]*EC2S2J5W_12[i]
+pov_EC3S2J5W_12[] <- f[i]*IC3S2J5W_12[i] - r[i]*EC3S2J5W_12[i]
+pov_EC4S2J5W_12[] <- f[i]*IC4S2J5W_12[i] - r[i]*EC4S2J5W_12[i]
+
+pov_EC1S2J5W_13[] <- f[i]*IC1S2J5W_13[i] - r[i]*EC1S2J5W_13[i]
+pov_EC2S2J5W_13[] <- f[i]*IC2S2J5W_13[i] - r[i]*EC2S2J5W_13[i]
+pov_EC3S2J5W_13[] <- f[i]*IC3S2J5W_13[i] - r[i]*EC3S2J5W_13[i]
+pov_EC4S2J5W_13[] <- f[i]*IC4S2J5W_13[i] - r[i]*EC4S2J5W_13[i]
+
+pov_EC1S2J5W_14[] <- f[i]*IC1S2J5W_14[i] - r[i]*EC1S2J5W_14[i]
+pov_EC2S2J5W_14[] <- f[i]*IC2S2J5W_14[i] - r[i]*EC2S2J5W_14[i]
+pov_EC3S2J5W_14[] <- f[i]*IC3S2J5W_14[i] - r[i]*EC3S2J5W_14[i]
+pov_EC4S2J5W_14[] <- f[i]*IC4S2J5W_14[i] - r[i]*EC4S2J5W_14[i]
+
+pov_EC1S2J5W_15[] <- f[i]*IC1S2J5W_15[i] - r[i]*EC1S2J5W_15[i]
+pov_EC2S2J5W_15[] <- f[i]*IC2S2J5W_15[i] - r[i]*EC2S2J5W_15[i]
+pov_EC3S2J5W_15[] <- f[i]*IC3S2J5W_15[i] - r[i]*EC3S2J5W_15[i]
+pov_EC4S2J5W_15[] <- f[i]*IC4S2J5W_15[i] - r[i]*EC4S2J5W_15[i]
+
+pov_EC1S2J5W_16[] <- f[i]*IC1S2J5W_16[i] - r[i]*EC1S2J5W_16[i]
+pov_EC2S2J5W_16[] <- f[i]*IC2S2J5W_16[i] - r[i]*EC2S2J5W_16[i]
+pov_EC3S2J5W_16[] <- f[i]*IC3S2J5W_16[i] - r[i]*EC3S2J5W_16[i]
+pov_EC4S2J5W_16[] <- f[i]*IC4S2J5W_16[i] - r[i]*EC4S2J5W_16[i]
+
+pov_EC1S2J5W_17[] <- f[i]*IC1S2J5W_17[i] - r[i]*EC1S2J5W_17[i]
+pov_EC2S2J5W_17[] <- f[i]*IC2S2J5W_17[i] - r[i]*EC2S2J5W_17[i]
+pov_EC3S2J5W_17[] <- f[i]*IC3S2J5W_17[i] - r[i]*EC3S2J5W_17[i]
+pov_EC4S2J5W_17[] <- f[i]*IC4S2J5W_17[i] - r[i]*EC4S2J5W_17[i]
+
+# moving between care states
+care_IC1S1J1U_10[] <- -n2care_i_10[i]*IC1S1J1U_10[i]
+care_IC2S1J1U_10[] <- n2nr[i]*n2care_i_10[i]*IC1S1J1U_10[i] + p2nr[i]*p2care[i]*IC4S1J1U_10[i] + r2nr[i]*end_res[i]*IC3S1J1U_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1U_10[i]
+care_IC3S1J1U_10[] <- n2r[i]*n2care_i_10[i]*IC2S1J1U_10[i] + p2r[i]*p2care[i]*IC4S1J1U_10[i] + nr2r[i]*end_nr[i]*IC2S1J1U_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1U_10[i]
+care_IC4S1J1U_10[] <- nr2p[i]*end_nr[i]*IC2S1J1U_10[i] + r2p[i]*end_res[i]*IC3S1J1U_10[i] - p2care[i]*IC4S1J1U_10[i]
+
+care_IC1S1J1U_11[] <- -n2care_i_11[i]*IC1S1J1U_11[i]
+care_IC2S1J1U_11[] <- n2nr[i]*n2care_i_11[i]*IC1S1J1U_11[i] + p2nr[i]*p2care[i]*IC4S1J1U_11[i] + r2nr[i]*end_res[i]*IC3S1J1U_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1U_11[i]
+care_IC3S1J1U_11[] <- n2r[i]*n2care_i_11[i]*IC2S1J1U_11[i] + p2r[i]*p2care[i]*IC4S1J1U_11[i] + nr2r[i]*end_nr[i]*IC2S1J1U_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1U_11[i]
+care_IC4S1J1U_11[] <- nr2p[i]*end_nr[i]*IC2S1J1U_11[i] + r2p[i]*end_res[i]*IC3S1J1U_11[i] - p2care[i]*IC4S1J1U_11[i]
+
+care_IC1S1J1U_12[] <- -n2care_i_12[i]*IC1S1J1U_12[i]
+care_IC2S1J1U_12[] <- n2nr[i]*n2care_i_12[i]*IC1S1J1U_12[i] + p2nr[i]*p2care[i]*IC4S1J1U_12[i] + r2nr[i]*end_res[i]*IC3S1J1U_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1U_12[i]
+care_IC3S1J1U_12[] <- n2r[i]*n2care_i_12[i]*IC2S1J1U_12[i] + p2r[i]*p2care[i]*IC4S1J1U_12[i] + nr2r[i]*end_nr[i]*IC2S1J1U_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1U_12[i]
+care_IC4S1J1U_12[] <- nr2p[i]*end_nr[i]*IC2S1J1U_12[i] + r2p[i]*end_res[i]*IC3S1J1U_12[i] - p2care[i]*IC4S1J1U_12[i]
+
+care_IC1S1J1U_13[] <- -n2care_i_13[i]*IC1S1J1U_13[i]
+care_IC2S1J1U_13[] <- n2nr[i]*n2care_i_13[i]*IC1S1J1U_13[i] + p2nr[i]*p2care[i]*IC4S1J1U_13[i] + r2nr[i]*end_res[i]*IC3S1J1U_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1U_13[i]
+care_IC3S1J1U_13[] <- n2r[i]*n2care_i_13[i]*IC2S1J1U_13[i] + p2r[i]*p2care[i]*IC4S1J1U_13[i] + nr2r[i]*end_nr[i]*IC2S1J1U_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1U_13[i]
+care_IC4S1J1U_13[] <- nr2p[i]*end_nr[i]*IC2S1J1U_13[i] + r2p[i]*end_res[i]*IC3S1J1U_13[i] - p2care[i]*IC4S1J1U_13[i]
+
+care_IC1S1J1U_14[] <- -n2care_i_14[i]*IC1S1J1U_14[i]
+care_IC2S1J1U_14[] <- n2nr[i]*n2care_i_14[i]*IC1S1J1U_14[i] + p2nr[i]*p2care[i]*IC4S1J1U_14[i] + r2nr[i]*end_res[i]*IC3S1J1U_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1U_14[i]
+care_IC3S1J1U_14[] <- n2r[i]*n2care_i_14[i]*IC2S1J1U_14[i] + p2r[i]*p2care[i]*IC4S1J1U_14[i] + nr2r[i]*end_nr[i]*IC2S1J1U_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1U_14[i]
+care_IC4S1J1U_14[] <- nr2p[i]*end_nr[i]*IC2S1J1U_14[i] + r2p[i]*end_res[i]*IC3S1J1U_14[i] - p2care[i]*IC4S1J1U_14[i]
+
+care_IC1S1J1U_15[] <- -n2care_i_15[i]*IC1S1J1U_15[i]
+care_IC2S1J1U_15[] <- n2nr[i]*n2care_i_15[i]*IC1S1J1U_15[i] + p2nr[i]*p2care[i]*IC4S1J1U_15[i] + r2nr[i]*end_res[i]*IC3S1J1U_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1U_15[i]
+care_IC3S1J1U_15[] <- n2r[i]*n2care_i_15[i]*IC2S1J1U_15[i] + p2r[i]*p2care[i]*IC4S1J1U_15[i] + nr2r[i]*end_nr[i]*IC2S1J1U_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1U_15[i]
+care_IC4S1J1U_15[] <- nr2p[i]*end_nr[i]*IC2S1J1U_15[i] + r2p[i]*end_res[i]*IC3S1J1U_15[i] - p2care[i]*IC4S1J1U_15[i]
+
+care_IC1S1J1U_16[] <- -n2care_i_16[i]*IC1S1J1U_16[i]
+care_IC2S1J1U_16[] <- n2nr[i]*n2care_i_16[i]*IC1S1J1U_16[i] + p2nr[i]*p2care[i]*IC4S1J1U_16[i] + r2nr[i]*end_res[i]*IC3S1J1U_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1U_16[i]
+care_IC3S1J1U_16[] <- n2r[i]*n2care_i_16[i]*IC2S1J1U_16[i] + p2r[i]*p2care[i]*IC4S1J1U_16[i] + nr2r[i]*end_nr[i]*IC2S1J1U_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1U_16[i]
+care_IC4S1J1U_16[] <- nr2p[i]*end_nr[i]*IC2S1J1U_16[i] + r2p[i]*end_res[i]*IC3S1J1U_16[i] - p2care[i]*IC4S1J1U_16[i]
+
+care_IC1S1J1U_17[] <- -n2care_i_17[i]*IC1S1J1U_17[i]
+care_IC2S1J1U_17[] <- n2nr[i]*n2care_i_17[i]*IC1S1J1U_17[i] + p2nr[i]*p2care[i]*IC4S1J1U_17[i] + r2nr[i]*end_res[i]*IC3S1J1U_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1U_17[i]
+care_IC3S1J1U_17[] <- n2r[i]*n2care_i_17[i]*IC2S1J1U_17[i] + p2r[i]*p2care[i]*IC4S1J1U_17[i] + nr2r[i]*end_nr[i]*IC2S1J1U_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1U_17[i]
+care_IC4S1J1U_17[] <- nr2p[i]*end_nr[i]*IC2S1J1U_17[i] + r2p[i]*end_res[i]*IC3S1J1U_17[i] - p2care[i]*IC4S1J1U_17[i]
+
+
+
+care_IC1S2J1U_10[] <- -n2care_i_10[i]*IC1S2J1U_10[i]
+care_IC2S2J1U_10[] <- n2nr[i]*n2care_i_10[i]*IC1S2J1U_10[i] + p2nr[i]*p2care[i]*IC4S2J1U_10[i] + r2nr[i]*end_res[i]*IC3S2J1U_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1U_10[i]
+care_IC3S2J1U_10[] <- n2r[i]*n2care_i_10[i]*IC2S2J1U_10[i] + p2r[i]*p2care[i]*IC4S2J1U_10[i] + nr2r[i]*end_nr[i]*IC2S2J1U_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1U_10[i]
+care_IC4S2J1U_10[] <- nr2p[i]*end_nr[i]*IC2S2J1U_10[i] + r2p[i]*end_res[i]*IC3S2J1U_10[i] - p2care[i]*IC4S2J1U_10[i]
+
+care_IC1S2J1U_11[] <- -n2care_i_11[i]*IC1S2J1U_11[i]
+care_IC2S2J1U_11[] <- n2nr[i]*n2care_i_11[i]*IC1S2J1U_11[i] + p2nr[i]*p2care[i]*IC4S2J1U_11[i] + r2nr[i]*end_res[i]*IC3S2J1U_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1U_11[i]
+care_IC3S2J1U_11[] <- n2r[i]*n2care_i_11[i]*IC2S2J1U_11[i] + p2r[i]*p2care[i]*IC4S2J1U_11[i] + nr2r[i]*end_nr[i]*IC2S2J1U_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1U_11[i]
+care_IC4S2J1U_11[] <- nr2p[i]*end_nr[i]*IC2S2J1U_11[i] + r2p[i]*end_res[i]*IC3S2J1U_11[i] - p2care[i]*IC4S2J1U_11[i]
+
+care_IC1S2J1U_12[] <- -n2care_i_12[i]*IC1S2J1U_12[i]
+care_IC2S2J1U_12[] <- n2nr[i]*n2care_i_12[i]*IC1S2J1U_12[i] + p2nr[i]*p2care[i]*IC4S2J1U_12[i] + r2nr[i]*end_res[i]*IC3S2J1U_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1U_12[i]
+care_IC3S2J1U_12[] <- n2r[i]*n2care_i_12[i]*IC2S2J1U_12[i] + p2r[i]*p2care[i]*IC4S2J1U_12[i] + nr2r[i]*end_nr[i]*IC2S2J1U_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1U_12[i]
+care_IC4S2J1U_12[] <- nr2p[i]*end_nr[i]*IC2S2J1U_12[i] + r2p[i]*end_res[i]*IC3S2J1U_12[i] - p2care[i]*IC4S2J1U_12[i]
+
+care_IC1S2J1U_13[] <- -n2care_i_13[i]*IC1S2J1U_13[i]
+care_IC2S2J1U_13[] <- n2nr[i]*n2care_i_13[i]*IC1S2J1U_13[i] + p2nr[i]*p2care[i]*IC4S2J1U_13[i] + r2nr[i]*end_res[i]*IC3S2J1U_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1U_13[i]
+care_IC3S2J1U_13[] <- n2r[i]*n2care_i_13[i]*IC2S2J1U_13[i] + p2r[i]*p2care[i]*IC4S2J1U_13[i] + nr2r[i]*end_nr[i]*IC2S2J1U_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1U_13[i]
+care_IC4S2J1U_13[] <- nr2p[i]*end_nr[i]*IC2S2J1U_13[i] + r2p[i]*end_res[i]*IC3S2J1U_13[i] - p2care[i]*IC4S2J1U_13[i]
+
+care_IC1S2J1U_14[] <- -n2care_i_14[i]*IC1S2J1U_14[i]
+care_IC2S2J1U_14[] <- n2nr[i]*n2care_i_14[i]*IC1S2J1U_14[i] + p2nr[i]*p2care[i]*IC4S2J1U_14[i] + r2nr[i]*end_res[i]*IC3S2J1U_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1U_14[i]
+care_IC3S2J1U_14[] <- n2r[i]*n2care_i_14[i]*IC2S2J1U_14[i] + p2r[i]*p2care[i]*IC4S2J1U_14[i] + nr2r[i]*end_nr[i]*IC2S2J1U_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1U_14[i]
+care_IC4S2J1U_14[] <- nr2p[i]*end_nr[i]*IC2S2J1U_14[i] + r2p[i]*end_res[i]*IC3S2J1U_14[i] - p2care[i]*IC4S2J1U_14[i]
+
+care_IC1S2J1U_15[] <- -n2care_i_15[i]*IC1S2J1U_15[i]
+care_IC2S2J1U_15[] <- n2nr[i]*n2care_i_15[i]*IC1S2J1U_15[i] + p2nr[i]*p2care[i]*IC4S2J1U_15[i] + r2nr[i]*end_res[i]*IC3S2J1U_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1U_15[i]
+care_IC3S2J1U_15[] <- n2r[i]*n2care_i_15[i]*IC2S2J1U_15[i] + p2r[i]*p2care[i]*IC4S2J1U_15[i] + nr2r[i]*end_nr[i]*IC2S2J1U_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1U_15[i]
+care_IC4S2J1U_15[] <- nr2p[i]*end_nr[i]*IC2S2J1U_15[i] + r2p[i]*end_res[i]*IC3S2J1U_15[i] - p2care[i]*IC4S2J1U_15[i]
+
+care_IC1S2J1U_16[] <- -n2care_i_16[i]*IC1S2J1U_16[i]
+care_IC2S2J1U_16[] <- n2nr[i]*n2care_i_16[i]*IC1S2J1U_16[i] + p2nr[i]*p2care[i]*IC4S2J1U_16[i] + r2nr[i]*end_res[i]*IC3S2J1U_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1U_16[i]
+care_IC3S2J1U_16[] <- n2r[i]*n2care_i_16[i]*IC2S2J1U_16[i] + p2r[i]*p2care[i]*IC4S2J1U_16[i] + nr2r[i]*end_nr[i]*IC2S2J1U_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1U_16[i]
+care_IC4S2J1U_16[] <- nr2p[i]*end_nr[i]*IC2S2J1U_16[i] + r2p[i]*end_res[i]*IC3S2J1U_16[i] - p2care[i]*IC4S2J1U_16[i]
+
+care_IC1S2J1U_17[] <- -n2care_i_17[i]*IC1S2J1U_17[i]
+care_IC2S2J1U_17[] <- n2nr[i]*n2care_i_17[i]*IC1S2J1U_17[i] + p2nr[i]*p2care[i]*IC4S2J1U_17[i] + r2nr[i]*end_res[i]*IC3S2J1U_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1U_17[i]
+care_IC3S2J1U_17[] <- n2r[i]*n2care_i_17[i]*IC2S2J1U_17[i] + p2r[i]*p2care[i]*IC4S2J1U_17[i] + nr2r[i]*end_nr[i]*IC2S2J1U_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1U_17[i]
+care_IC4S2J1U_17[] <- nr2p[i]*end_nr[i]*IC2S2J1U_17[i] + r2p[i]*end_res[i]*IC3S2J1U_17[i] - p2care[i]*IC4S2J1U_17[i]
+
+
+
+care_IC1S1J2U_10[] <- -n2care_i_10[i]*IC1S1J2U_10[i]
+care_IC2S1J2U_10[] <- n2nr[i]*n2care_i_10[i]*IC1S1J2U_10[i] + p2nr[i]*p2care[i]*IC4S1J2U_10[i] + r2nr[i]*end_res[i]*IC3S1J2U_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2U_10[i]
+care_IC3S1J2U_10[] <- n2r[i]*n2care_i_10[i]*IC2S1J2U_10[i] + p2r[i]*p2care[i]*IC4S1J2U_10[i] + nr2r[i]*end_nr[i]*IC2S1J2U_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2U_10[i]
+care_IC4S1J2U_10[] <- nr2p[i]*end_nr[i]*IC2S1J2U_10[i] + r2p[i]*end_res[i]*IC3S1J2U_10[i] - p2care[i]*IC4S1J2U_10[i]
+
+care_IC1S1J2U_11[] <- -n2care_i_11[i]*IC1S1J2U_11[i]
+care_IC2S1J2U_11[] <- n2nr[i]*n2care_i_11[i]*IC1S1J2U_11[i] + p2nr[i]*p2care[i]*IC4S1J2U_11[i] + r2nr[i]*end_res[i]*IC3S1J2U_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2U_11[i]
+care_IC3S1J2U_11[] <- n2r[i]*n2care_i_11[i]*IC2S1J2U_11[i] + p2r[i]*p2care[i]*IC4S1J2U_11[i] + nr2r[i]*end_nr[i]*IC2S1J2U_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2U_11[i]
+care_IC4S1J2U_11[] <- nr2p[i]*end_nr[i]*IC2S1J2U_11[i] + r2p[i]*end_res[i]*IC3S1J2U_11[i] - p2care[i]*IC4S1J2U_11[i]
+
+care_IC1S1J2U_12[] <- -n2care_i_12[i]*IC1S1J2U_12[i]
+care_IC2S1J2U_12[] <- n2nr[i]*n2care_i_12[i]*IC1S1J2U_12[i] + p2nr[i]*p2care[i]*IC4S1J2U_12[i] + r2nr[i]*end_res[i]*IC3S1J2U_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2U_12[i]
+care_IC3S1J2U_12[] <- n2r[i]*n2care_i_12[i]*IC2S1J2U_12[i] + p2r[i]*p2care[i]*IC4S1J2U_12[i] + nr2r[i]*end_nr[i]*IC2S1J2U_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2U_12[i]
+care_IC4S1J2U_12[] <- nr2p[i]*end_nr[i]*IC2S1J2U_12[i] + r2p[i]*end_res[i]*IC3S1J2U_12[i] - p2care[i]*IC4S1J2U_12[i]
+
+care_IC1S1J2U_13[] <- -n2care_i_13[i]*IC1S1J2U_13[i]
+care_IC2S1J2U_13[] <- n2nr[i]*n2care_i_13[i]*IC1S1J2U_13[i] + p2nr[i]*p2care[i]*IC4S1J2U_13[i] + r2nr[i]*end_res[i]*IC3S1J2U_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2U_13[i]
+care_IC3S1J2U_13[] <- n2r[i]*n2care_i_13[i]*IC2S1J2U_13[i] + p2r[i]*p2care[i]*IC4S1J2U_13[i] + nr2r[i]*end_nr[i]*IC2S1J2U_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2U_13[i]
+care_IC4S1J2U_13[] <- nr2p[i]*end_nr[i]*IC2S1J2U_13[i] + r2p[i]*end_res[i]*IC3S1J2U_13[i] - p2care[i]*IC4S1J2U_13[i]
+
+care_IC1S1J2U_14[] <- -n2care_i_14[i]*IC1S1J2U_14[i]
+care_IC2S1J2U_14[] <- n2nr[i]*n2care_i_14[i]*IC1S1J2U_14[i] + p2nr[i]*p2care[i]*IC4S1J2U_14[i] + r2nr[i]*end_res[i]*IC3S1J2U_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2U_14[i]
+care_IC3S1J2U_14[] <- n2r[i]*n2care_i_14[i]*IC2S1J2U_14[i] + p2r[i]*p2care[i]*IC4S1J2U_14[i] + nr2r[i]*end_nr[i]*IC2S1J2U_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2U_14[i]
+care_IC4S1J2U_14[] <- nr2p[i]*end_nr[i]*IC2S1J2U_14[i] + r2p[i]*end_res[i]*IC3S1J2U_14[i] - p2care[i]*IC4S1J2U_14[i]
+
+care_IC1S1J2U_15[] <- -n2care_i_15[i]*IC1S1J2U_15[i]
+care_IC2S1J2U_15[] <- n2nr[i]*n2care_i_15[i]*IC1S1J2U_15[i] + p2nr[i]*p2care[i]*IC4S1J2U_15[i] + r2nr[i]*end_res[i]*IC3S1J2U_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2U_15[i]
+care_IC3S1J2U_15[] <- n2r[i]*n2care_i_15[i]*IC2S1J2U_15[i] + p2r[i]*p2care[i]*IC4S1J2U_15[i] + nr2r[i]*end_nr[i]*IC2S1J2U_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2U_15[i]
+care_IC4S1J2U_15[] <- nr2p[i]*end_nr[i]*IC2S1J2U_15[i] + r2p[i]*end_res[i]*IC3S1J2U_15[i] - p2care[i]*IC4S1J2U_15[i]
+
+care_IC1S1J2U_16[] <- -n2care_i_16[i]*IC1S1J2U_16[i]
+care_IC2S1J2U_16[] <- n2nr[i]*n2care_i_16[i]*IC1S1J2U_16[i] + p2nr[i]*p2care[i]*IC4S1J2U_16[i] + r2nr[i]*end_res[i]*IC3S1J2U_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2U_16[i]
+care_IC3S1J2U_16[] <- n2r[i]*n2care_i_16[i]*IC2S1J2U_16[i] + p2r[i]*p2care[i]*IC4S1J2U_16[i] + nr2r[i]*end_nr[i]*IC2S1J2U_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2U_16[i]
+care_IC4S1J2U_16[] <- nr2p[i]*end_nr[i]*IC2S1J2U_16[i] + r2p[i]*end_res[i]*IC3S1J2U_16[i] - p2care[i]*IC4S1J2U_16[i]
+
+care_IC1S1J2U_17[] <- -n2care_i_17[i]*IC1S1J2U_17[i]
+care_IC2S1J2U_17[] <- n2nr[i]*n2care_i_17[i]*IC1S1J2U_17[i] + p2nr[i]*p2care[i]*IC4S1J2U_17[i] + r2nr[i]*end_res[i]*IC3S1J2U_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2U_17[i]
+care_IC3S1J2U_17[] <- n2r[i]*n2care_i_17[i]*IC2S1J2U_17[i] + p2r[i]*p2care[i]*IC4S1J2U_17[i] + nr2r[i]*end_nr[i]*IC2S1J2U_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2U_17[i]
+care_IC4S1J2U_17[] <- nr2p[i]*end_nr[i]*IC2S1J2U_17[i] + r2p[i]*end_res[i]*IC3S1J2U_17[i] - p2care[i]*IC4S1J2U_17[i]
+
+
+
+care_IC1S2J2U_10[] <- -n2care_i_10[i]*IC1S2J2U_10[i]
+care_IC2S2J2U_10[] <- n2nr[i]*n2care_i_10[i]*IC1S2J2U_10[i] + p2nr[i]*p2care[i]*IC4S2J2U_10[i] + r2nr[i]*end_res[i]*IC3S2J2U_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2U_10[i]
+care_IC3S2J2U_10[] <- n2r[i]*n2care_i_10[i]*IC2S2J2U_10[i] + p2r[i]*p2care[i]*IC4S2J2U_10[i] + nr2r[i]*end_nr[i]*IC2S2J2U_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2U_10[i]
+care_IC4S2J2U_10[] <- nr2p[i]*end_nr[i]*IC2S2J2U_10[i] + r2p[i]*end_res[i]*IC3S2J2U_10[i] - p2care[i]*IC4S2J2U_10[i]
+
+care_IC1S2J2U_11[] <- -n2care_i_11[i]*IC1S2J2U_11[i]
+care_IC2S2J2U_11[] <- n2nr[i]*n2care_i_11[i]*IC1S2J2U_11[i] + p2nr[i]*p2care[i]*IC4S2J2U_11[i] + r2nr[i]*end_res[i]*IC3S2J2U_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2U_11[i]
+care_IC3S2J2U_11[] <- n2r[i]*n2care_i_11[i]*IC2S2J2U_11[i] + p2r[i]*p2care[i]*IC4S2J2U_11[i] + nr2r[i]*end_nr[i]*IC2S2J2U_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2U_11[i]
+care_IC4S2J2U_11[] <- nr2p[i]*end_nr[i]*IC2S2J2U_11[i] + r2p[i]*end_res[i]*IC3S2J2U_11[i] - p2care[i]*IC4S2J2U_11[i]
+
+care_IC1S2J2U_12[] <- -n2care_i_12[i]*IC1S2J2U_12[i]
+care_IC2S2J2U_12[] <- n2nr[i]*n2care_i_12[i]*IC1S2J2U_12[i] + p2nr[i]*p2care[i]*IC4S2J2U_12[i] + r2nr[i]*end_res[i]*IC3S2J2U_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2U_12[i]
+care_IC3S2J2U_12[] <- n2r[i]*n2care_i_12[i]*IC2S2J2U_12[i] + p2r[i]*p2care[i]*IC4S2J2U_12[i] + nr2r[i]*end_nr[i]*IC2S2J2U_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2U_12[i]
+care_IC4S2J2U_12[] <- nr2p[i]*end_nr[i]*IC2S2J2U_12[i] + r2p[i]*end_res[i]*IC3S2J2U_12[i] - p2care[i]*IC4S2J2U_12[i]
+
+care_IC1S2J2U_13[] <- -n2care_i_13[i]*IC1S2J2U_13[i]
+care_IC2S2J2U_13[] <- n2nr[i]*n2care_i_13[i]*IC1S2J2U_13[i] + p2nr[i]*p2care[i]*IC4S2J2U_13[i] + r2nr[i]*end_res[i]*IC3S2J2U_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2U_13[i]
+care_IC3S2J2U_13[] <- n2r[i]*n2care_i_13[i]*IC2S2J2U_13[i] + p2r[i]*p2care[i]*IC4S2J2U_13[i] + nr2r[i]*end_nr[i]*IC2S2J2U_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2U_13[i]
+care_IC4S2J2U_13[] <- nr2p[i]*end_nr[i]*IC2S2J2U_13[i] + r2p[i]*end_res[i]*IC3S2J2U_13[i] - p2care[i]*IC4S2J2U_13[i]
+
+care_IC1S2J2U_14[] <- -n2care_i_14[i]*IC1S2J2U_14[i]
+care_IC2S2J2U_14[] <- n2nr[i]*n2care_i_14[i]*IC1S2J2U_14[i] + p2nr[i]*p2care[i]*IC4S2J2U_14[i] + r2nr[i]*end_res[i]*IC3S2J2U_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2U_14[i]
+care_IC3S2J2U_14[] <- n2r[i]*n2care_i_14[i]*IC2S2J2U_14[i] + p2r[i]*p2care[i]*IC4S2J2U_14[i] + nr2r[i]*end_nr[i]*IC2S2J2U_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2U_14[i]
+care_IC4S2J2U_14[] <- nr2p[i]*end_nr[i]*IC2S2J2U_14[i] + r2p[i]*end_res[i]*IC3S2J2U_14[i] - p2care[i]*IC4S2J2U_14[i]
+
+care_IC1S2J2U_15[] <- -n2care_i_15[i]*IC1S2J2U_15[i]
+care_IC2S2J2U_15[] <- n2nr[i]*n2care_i_15[i]*IC1S2J2U_15[i] + p2nr[i]*p2care[i]*IC4S2J2U_15[i] + r2nr[i]*end_res[i]*IC3S2J2U_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2U_15[i]
+care_IC3S2J2U_15[] <- n2r[i]*n2care_i_15[i]*IC2S2J2U_15[i] + p2r[i]*p2care[i]*IC4S2J2U_15[i] + nr2r[i]*end_nr[i]*IC2S2J2U_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2U_15[i]
+care_IC4S2J2U_15[] <- nr2p[i]*end_nr[i]*IC2S2J2U_15[i] + r2p[i]*end_res[i]*IC3S2J2U_15[i] - p2care[i]*IC4S2J2U_15[i]
+
+care_IC1S2J2U_16[] <- -n2care_i_16[i]*IC1S2J2U_16[i]
+care_IC2S2J2U_16[] <- n2nr[i]*n2care_i_16[i]*IC1S2J2U_16[i] + p2nr[i]*p2care[i]*IC4S2J2U_16[i] + r2nr[i]*end_res[i]*IC3S2J2U_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2U_16[i]
+care_IC3S2J2U_16[] <- n2r[i]*n2care_i_16[i]*IC2S2J2U_16[i] + p2r[i]*p2care[i]*IC4S2J2U_16[i] + nr2r[i]*end_nr[i]*IC2S2J2U_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2U_16[i]
+care_IC4S2J2U_16[] <- nr2p[i]*end_nr[i]*IC2S2J2U_16[i] + r2p[i]*end_res[i]*IC3S2J2U_16[i] - p2care[i]*IC4S2J2U_16[i]
+
+care_IC1S2J2U_17[] <- -n2care_i_17[i]*IC1S2J2U_17[i]
+care_IC2S2J2U_17[] <- n2nr[i]*n2care_i_17[i]*IC1S2J2U_17[i] + p2nr[i]*p2care[i]*IC4S2J2U_17[i] + r2nr[i]*end_res[i]*IC3S2J2U_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2U_17[i]
+care_IC3S2J2U_17[] <- n2r[i]*n2care_i_17[i]*IC2S2J2U_17[i] + p2r[i]*p2care[i]*IC4S2J2U_17[i] + nr2r[i]*end_nr[i]*IC2S2J2U_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2U_17[i]
+care_IC4S2J2U_17[] <- nr2p[i]*end_nr[i]*IC2S2J2U_17[i] + r2p[i]*end_res[i]*IC3S2J2U_17[i] - p2care[i]*IC4S2J2U_17[i]
+
+
+
+care_IC1S1J3U_10[] <- -n2care_i_10[i]*IC1S1J3U_10[i]
+care_IC2S1J3U_10[] <- n2nr[i]*n2care_i_10[i]*IC1S1J3U_10[i] + p2nr[i]*p2care[i]*IC4S1J3U_10[i] + r2nr[i]*end_res[i]*IC3S1J3U_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3U_10[i]
+care_IC3S1J3U_10[] <- n2r[i]*n2care_i_10[i]*IC2S1J3U_10[i] + p2r[i]*p2care[i]*IC4S1J3U_10[i] + nr2r[i]*end_nr[i]*IC2S1J3U_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3U_10[i]
+care_IC4S1J3U_10[] <- nr2p[i]*end_nr[i]*IC2S1J3U_10[i] + r2p[i]*end_res[i]*IC3S1J3U_10[i] - p2care[i]*IC4S1J3U_10[i]
+
+care_IC1S1J3U_11[] <- -n2care_i_11[i]*IC1S1J3U_11[i]
+care_IC2S1J3U_11[] <- n2nr[i]*n2care_i_11[i]*IC1S1J3U_11[i] + p2nr[i]*p2care[i]*IC4S1J3U_11[i] + r2nr[i]*end_res[i]*IC3S1J3U_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3U_11[i]
+care_IC3S1J3U_11[] <- n2r[i]*n2care_i_11[i]*IC2S1J3U_11[i] + p2r[i]*p2care[i]*IC4S1J3U_11[i] + nr2r[i]*end_nr[i]*IC2S1J3U_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3U_11[i]
+care_IC4S1J3U_11[] <- nr2p[i]*end_nr[i]*IC2S1J3U_11[i] + r2p[i]*end_res[i]*IC3S1J3U_11[i] - p2care[i]*IC4S1J3U_11[i]
+
+care_IC1S1J3U_12[] <- -n2care_i_12[i]*IC1S1J3U_12[i]
+care_IC2S1J3U_12[] <- n2nr[i]*n2care_i_12[i]*IC1S1J3U_12[i] + p2nr[i]*p2care[i]*IC4S1J3U_12[i] + r2nr[i]*end_res[i]*IC3S1J3U_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3U_12[i]
+care_IC3S1J3U_12[] <- n2r[i]*n2care_i_12[i]*IC2S1J3U_12[i] + p2r[i]*p2care[i]*IC4S1J3U_12[i] + nr2r[i]*end_nr[i]*IC2S1J3U_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3U_12[i]
+care_IC4S1J3U_12[] <- nr2p[i]*end_nr[i]*IC2S1J3U_12[i] + r2p[i]*end_res[i]*IC3S1J3U_12[i] - p2care[i]*IC4S1J3U_12[i]
+
+care_IC1S1J3U_13[] <- -n2care_i_13[i]*IC1S1J3U_13[i]
+care_IC2S1J3U_13[] <- n2nr[i]*n2care_i_13[i]*IC1S1J3U_13[i] + p2nr[i]*p2care[i]*IC4S1J3U_13[i] + r2nr[i]*end_res[i]*IC3S1J3U_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3U_13[i]
+care_IC3S1J3U_13[] <- n2r[i]*n2care_i_13[i]*IC2S1J3U_13[i] + p2r[i]*p2care[i]*IC4S1J3U_13[i] + nr2r[i]*end_nr[i]*IC2S1J3U_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3U_13[i]
+care_IC4S1J3U_13[] <- nr2p[i]*end_nr[i]*IC2S1J3U_13[i] + r2p[i]*end_res[i]*IC3S1J3U_13[i] - p2care[i]*IC4S1J3U_13[i]
+
+care_IC1S1J3U_14[] <- -n2care_i_14[i]*IC1S1J3U_14[i]
+care_IC2S1J3U_14[] <- n2nr[i]*n2care_i_14[i]*IC1S1J3U_14[i] + p2nr[i]*p2care[i]*IC4S1J3U_14[i] + r2nr[i]*end_res[i]*IC3S1J3U_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3U_14[i]
+care_IC3S1J3U_14[] <- n2r[i]*n2care_i_14[i]*IC2S1J3U_14[i] + p2r[i]*p2care[i]*IC4S1J3U_14[i] + nr2r[i]*end_nr[i]*IC2S1J3U_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3U_14[i]
+care_IC4S1J3U_14[] <- nr2p[i]*end_nr[i]*IC2S1J3U_14[i] + r2p[i]*end_res[i]*IC3S1J3U_14[i] - p2care[i]*IC4S1J3U_14[i]
+
+care_IC1S1J3U_15[] <- -n2care_i_15[i]*IC1S1J3U_15[i]
+care_IC2S1J3U_15[] <- n2nr[i]*n2care_i_15[i]*IC1S1J3U_15[i] + p2nr[i]*p2care[i]*IC4S1J3U_15[i] + r2nr[i]*end_res[i]*IC3S1J3U_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3U_15[i]
+care_IC3S1J3U_15[] <- n2r[i]*n2care_i_15[i]*IC2S1J3U_15[i] + p2r[i]*p2care[i]*IC4S1J3U_15[i] + nr2r[i]*end_nr[i]*IC2S1J3U_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3U_15[i]
+care_IC4S1J3U_15[] <- nr2p[i]*end_nr[i]*IC2S1J3U_15[i] + r2p[i]*end_res[i]*IC3S1J3U_15[i] - p2care[i]*IC4S1J3U_15[i]
+
+care_IC1S1J3U_16[] <- -n2care_i_16[i]*IC1S1J3U_16[i]
+care_IC2S1J3U_16[] <- n2nr[i]*n2care_i_16[i]*IC1S1J3U_16[i] + p2nr[i]*p2care[i]*IC4S1J3U_16[i] + r2nr[i]*end_res[i]*IC3S1J3U_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3U_16[i]
+care_IC3S1J3U_16[] <- n2r[i]*n2care_i_16[i]*IC2S1J3U_16[i] + p2r[i]*p2care[i]*IC4S1J3U_16[i] + nr2r[i]*end_nr[i]*IC2S1J3U_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3U_16[i]
+care_IC4S1J3U_16[] <- nr2p[i]*end_nr[i]*IC2S1J3U_16[i] + r2p[i]*end_res[i]*IC3S1J3U_16[i] - p2care[i]*IC4S1J3U_16[i]
+
+care_IC1S1J3U_17[] <- -n2care_i_17[i]*IC1S1J3U_17[i]
+care_IC2S1J3U_17[] <- n2nr[i]*n2care_i_17[i]*IC1S1J3U_17[i] + p2nr[i]*p2care[i]*IC4S1J3U_17[i] + r2nr[i]*end_res[i]*IC3S1J3U_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3U_17[i]
+care_IC3S1J3U_17[] <- n2r[i]*n2care_i_17[i]*IC2S1J3U_17[i] + p2r[i]*p2care[i]*IC4S1J3U_17[i] + nr2r[i]*end_nr[i]*IC2S1J3U_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3U_17[i]
+care_IC4S1J3U_17[] <- nr2p[i]*end_nr[i]*IC2S1J3U_17[i] + r2p[i]*end_res[i]*IC3S1J3U_17[i] - p2care[i]*IC4S1J3U_17[i]
+
+
+
+care_IC1S2J3U_10[] <- -n2care_i_10[i]*IC1S2J3U_10[i]
+care_IC2S2J3U_10[] <- n2nr[i]*n2care_i_10[i]*IC1S2J3U_10[i] + p2nr[i]*p2care[i]*IC4S2J3U_10[i] + r2nr[i]*end_res[i]*IC3S2J3U_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3U_10[i]
+care_IC3S2J3U_10[] <- n2r[i]*n2care_i_10[i]*IC2S2J3U_10[i] + p2r[i]*p2care[i]*IC4S2J3U_10[i] + nr2r[i]*end_nr[i]*IC2S2J3U_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3U_10[i]
+care_IC4S2J3U_10[] <- nr2p[i]*end_nr[i]*IC2S2J3U_10[i] + r2p[i]*end_res[i]*IC3S2J3U_10[i] - p2care[i]*IC4S2J3U_10[i]
+
+care_IC1S2J3U_11[] <- -n2care_i_11[i]*IC1S2J3U_11[i]
+care_IC2S2J3U_11[] <- n2nr[i]*n2care_i_11[i]*IC1S2J3U_11[i] + p2nr[i]*p2care[i]*IC4S2J3U_11[i] + r2nr[i]*end_res[i]*IC3S2J3U_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3U_11[i]
+care_IC3S2J3U_11[] <- n2r[i]*n2care_i_11[i]*IC2S2J3U_11[i] + p2r[i]*p2care[i]*IC4S2J3U_11[i] + nr2r[i]*end_nr[i]*IC2S2J3U_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3U_11[i]
+care_IC4S2J3U_11[] <- nr2p[i]*end_nr[i]*IC2S2J3U_11[i] + r2p[i]*end_res[i]*IC3S2J3U_11[i] - p2care[i]*IC4S2J3U_11[i]
+
+care_IC1S2J3U_12[] <- -n2care_i_12[i]*IC1S2J3U_12[i]
+care_IC2S2J3U_12[] <- n2nr[i]*n2care_i_12[i]*IC1S2J3U_12[i] + p2nr[i]*p2care[i]*IC4S2J3U_12[i] + r2nr[i]*end_res[i]*IC3S2J3U_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3U_12[i]
+care_IC3S2J3U_12[] <- n2r[i]*n2care_i_12[i]*IC2S2J3U_12[i] + p2r[i]*p2care[i]*IC4S2J3U_12[i] + nr2r[i]*end_nr[i]*IC2S2J3U_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3U_12[i]
+care_IC4S2J3U_12[] <- nr2p[i]*end_nr[i]*IC2S2J3U_12[i] + r2p[i]*end_res[i]*IC3S2J3U_12[i] - p2care[i]*IC4S2J3U_12[i]
+
+care_IC1S2J3U_13[] <- -n2care_i_13[i]*IC1S2J3U_13[i]
+care_IC2S2J3U_13[] <- n2nr[i]*n2care_i_13[i]*IC1S2J3U_13[i] + p2nr[i]*p2care[i]*IC4S2J3U_13[i] + r2nr[i]*end_res[i]*IC3S2J3U_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3U_13[i]
+care_IC3S2J3U_13[] <- n2r[i]*n2care_i_13[i]*IC2S2J3U_13[i] + p2r[i]*p2care[i]*IC4S2J3U_13[i] + nr2r[i]*end_nr[i]*IC2S2J3U_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3U_13[i]
+care_IC4S2J3U_13[] <- nr2p[i]*end_nr[i]*IC2S2J3U_13[i] + r2p[i]*end_res[i]*IC3S2J3U_13[i] - p2care[i]*IC4S2J3U_13[i]
+
+care_IC1S2J3U_14[] <- -n2care_i_14[i]*IC1S2J3U_14[i]
+care_IC2S2J3U_14[] <- n2nr[i]*n2care_i_14[i]*IC1S2J3U_14[i] + p2nr[i]*p2care[i]*IC4S2J3U_14[i] + r2nr[i]*end_res[i]*IC3S2J3U_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3U_14[i]
+care_IC3S2J3U_14[] <- n2r[i]*n2care_i_14[i]*IC2S2J3U_14[i] + p2r[i]*p2care[i]*IC4S2J3U_14[i] + nr2r[i]*end_nr[i]*IC2S2J3U_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3U_14[i]
+care_IC4S2J3U_14[] <- nr2p[i]*end_nr[i]*IC2S2J3U_14[i] + r2p[i]*end_res[i]*IC3S2J3U_14[i] - p2care[i]*IC4S2J3U_14[i]
+
+care_IC1S2J3U_15[] <- -n2care_i_15[i]*IC1S2J3U_15[i]
+care_IC2S2J3U_15[] <- n2nr[i]*n2care_i_15[i]*IC1S2J3U_15[i] + p2nr[i]*p2care[i]*IC4S2J3U_15[i] + r2nr[i]*end_res[i]*IC3S2J3U_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3U_15[i]
+care_IC3S2J3U_15[] <- n2r[i]*n2care_i_15[i]*IC2S2J3U_15[i] + p2r[i]*p2care[i]*IC4S2J3U_15[i] + nr2r[i]*end_nr[i]*IC2S2J3U_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3U_15[i]
+care_IC4S2J3U_15[] <- nr2p[i]*end_nr[i]*IC2S2J3U_15[i] + r2p[i]*end_res[i]*IC3S2J3U_15[i] - p2care[i]*IC4S2J3U_15[i]
+
+care_IC1S2J3U_16[] <- -n2care_i_16[i]*IC1S2J3U_16[i]
+care_IC2S2J3U_16[] <- n2nr[i]*n2care_i_16[i]*IC1S2J3U_16[i] + p2nr[i]*p2care[i]*IC4S2J3U_16[i] + r2nr[i]*end_res[i]*IC3S2J3U_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3U_16[i]
+care_IC3S2J3U_16[] <- n2r[i]*n2care_i_16[i]*IC2S2J3U_16[i] + p2r[i]*p2care[i]*IC4S2J3U_16[i] + nr2r[i]*end_nr[i]*IC2S2J3U_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3U_16[i]
+care_IC4S2J3U_16[] <- nr2p[i]*end_nr[i]*IC2S2J3U_16[i] + r2p[i]*end_res[i]*IC3S2J3U_16[i] - p2care[i]*IC4S2J3U_16[i]
+
+care_IC1S2J3U_17[] <- -n2care_i_17[i]*IC1S2J3U_17[i]
+care_IC2S2J3U_17[] <- n2nr[i]*n2care_i_17[i]*IC1S2J3U_17[i] + p2nr[i]*p2care[i]*IC4S2J3U_17[i] + r2nr[i]*end_res[i]*IC3S2J3U_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3U_17[i]
+care_IC3S2J3U_17[] <- n2r[i]*n2care_i_17[i]*IC2S2J3U_17[i] + p2r[i]*p2care[i]*IC4S2J3U_17[i] + nr2r[i]*end_nr[i]*IC2S2J3U_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3U_17[i]
+care_IC4S2J3U_17[] <- nr2p[i]*end_nr[i]*IC2S2J3U_17[i] + r2p[i]*end_res[i]*IC3S2J3U_17[i] - p2care[i]*IC4S2J3U_17[i]
+
+
+
+care_IC1S1J1W_10[] <- -n2care_i_10[i]*IC1S1J1W_10[i]
+care_IC2S1J1W_10[] <- n2nr[i]*n2care_i_10[i]*IC1S1J1W_10[i] + p2nr[i]*p2care[i]*IC4S1J1W_10[i] + r2nr[i]*end_res[i]*IC3S1J1W_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1W_10[i]
+care_IC3S1J1W_10[] <- n2r[i]*n2care_i_10[i]*IC2S1J1W_10[i] + p2r[i]*p2care[i]*IC4S1J1W_10[i] + nr2r[i]*end_nr[i]*IC2S1J1W_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1W_10[i]
+care_IC4S1J1W_10[] <- nr2p[i]*end_nr[i]*IC2S1J1W_10[i] + r2p[i]*end_res[i]*IC3S1J1W_10[i] - p2care[i]*IC4S1J1W_10[i]
+
+care_IC1S1J1W_11[] <- -n2care_i_11[i]*IC1S1J1W_11[i]
+care_IC2S1J1W_11[] <- n2nr[i]*n2care_i_11[i]*IC1S1J1W_11[i] + p2nr[i]*p2care[i]*IC4S1J1W_11[i] + r2nr[i]*end_res[i]*IC3S1J1W_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1W_11[i]
+care_IC3S1J1W_11[] <- n2r[i]*n2care_i_11[i]*IC2S1J1W_11[i] + p2r[i]*p2care[i]*IC4S1J1W_11[i] + nr2r[i]*end_nr[i]*IC2S1J1W_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1W_11[i]
+care_IC4S1J1W_11[] <- nr2p[i]*end_nr[i]*IC2S1J1W_11[i] + r2p[i]*end_res[i]*IC3S1J1W_11[i] - p2care[i]*IC4S1J1W_11[i]
+
+care_IC1S1J1W_12[] <- -n2care_i_12[i]*IC1S1J1W_12[i]
+care_IC2S1J1W_12[] <- n2nr[i]*n2care_i_12[i]*IC1S1J1W_12[i] + p2nr[i]*p2care[i]*IC4S1J1W_12[i] + r2nr[i]*end_res[i]*IC3S1J1W_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1W_12[i]
+care_IC3S1J1W_12[] <- n2r[i]*n2care_i_12[i]*IC2S1J1W_12[i] + p2r[i]*p2care[i]*IC4S1J1W_12[i] + nr2r[i]*end_nr[i]*IC2S1J1W_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1W_12[i]
+care_IC4S1J1W_12[] <- nr2p[i]*end_nr[i]*IC2S1J1W_12[i] + r2p[i]*end_res[i]*IC3S1J1W_12[i] - p2care[i]*IC4S1J1W_12[i]
+
+care_IC1S1J1W_13[] <- -n2care_i_13[i]*IC1S1J1W_13[i]
+care_IC2S1J1W_13[] <- n2nr[i]*n2care_i_13[i]*IC1S1J1W_13[i] + p2nr[i]*p2care[i]*IC4S1J1W_13[i] + r2nr[i]*end_res[i]*IC3S1J1W_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1W_13[i]
+care_IC3S1J1W_13[] <- n2r[i]*n2care_i_13[i]*IC2S1J1W_13[i] + p2r[i]*p2care[i]*IC4S1J1W_13[i] + nr2r[i]*end_nr[i]*IC2S1J1W_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1W_13[i]
+care_IC4S1J1W_13[] <- nr2p[i]*end_nr[i]*IC2S1J1W_13[i] + r2p[i]*end_res[i]*IC3S1J1W_13[i] - p2care[i]*IC4S1J1W_13[i]
+
+care_IC1S1J1W_14[] <- -n2care_i_14[i]*IC1S1J1W_14[i]
+care_IC2S1J1W_14[] <- n2nr[i]*n2care_i_14[i]*IC1S1J1W_14[i] + p2nr[i]*p2care[i]*IC4S1J1W_14[i] + r2nr[i]*end_res[i]*IC3S1J1W_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1W_14[i]
+care_IC3S1J1W_14[] <- n2r[i]*n2care_i_14[i]*IC2S1J1W_14[i] + p2r[i]*p2care[i]*IC4S1J1W_14[i] + nr2r[i]*end_nr[i]*IC2S1J1W_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1W_14[i]
+care_IC4S1J1W_14[] <- nr2p[i]*end_nr[i]*IC2S1J1W_14[i] + r2p[i]*end_res[i]*IC3S1J1W_14[i] - p2care[i]*IC4S1J1W_14[i]
+
+care_IC1S1J1W_15[] <- -n2care_i_15[i]*IC1S1J1W_15[i]
+care_IC2S1J1W_15[] <- n2nr[i]*n2care_i_15[i]*IC1S1J1W_15[i] + p2nr[i]*p2care[i]*IC4S1J1W_15[i] + r2nr[i]*end_res[i]*IC3S1J1W_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1W_15[i]
+care_IC3S1J1W_15[] <- n2r[i]*n2care_i_15[i]*IC2S1J1W_15[i] + p2r[i]*p2care[i]*IC4S1J1W_15[i] + nr2r[i]*end_nr[i]*IC2S1J1W_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1W_15[i]
+care_IC4S1J1W_15[] <- nr2p[i]*end_nr[i]*IC2S1J1W_15[i] + r2p[i]*end_res[i]*IC3S1J1W_15[i] - p2care[i]*IC4S1J1W_15[i]
+
+care_IC1S1J1W_16[] <- -n2care_i_16[i]*IC1S1J1W_16[i]
+care_IC2S1J1W_16[] <- n2nr[i]*n2care_i_16[i]*IC1S1J1W_16[i] + p2nr[i]*p2care[i]*IC4S1J1W_16[i] + r2nr[i]*end_res[i]*IC3S1J1W_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1W_16[i]
+care_IC3S1J1W_16[] <- n2r[i]*n2care_i_16[i]*IC2S1J1W_16[i] + p2r[i]*p2care[i]*IC4S1J1W_16[i] + nr2r[i]*end_nr[i]*IC2S1J1W_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1W_16[i]
+care_IC4S1J1W_16[] <- nr2p[i]*end_nr[i]*IC2S1J1W_16[i] + r2p[i]*end_res[i]*IC3S1J1W_16[i] - p2care[i]*IC4S1J1W_16[i]
+
+care_IC1S1J1W_17[] <- -n2care_i_17[i]*IC1S1J1W_17[i]
+care_IC2S1J1W_17[] <- n2nr[i]*n2care_i_17[i]*IC1S1J1W_17[i] + p2nr[i]*p2care[i]*IC4S1J1W_17[i] + r2nr[i]*end_res[i]*IC3S1J1W_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J1W_17[i]
+care_IC3S1J1W_17[] <- n2r[i]*n2care_i_17[i]*IC2S1J1W_17[i] + p2r[i]*p2care[i]*IC4S1J1W_17[i] + nr2r[i]*end_nr[i]*IC2S1J1W_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J1W_17[i]
+care_IC4S1J1W_17[] <- nr2p[i]*end_nr[i]*IC2S1J1W_17[i] + r2p[i]*end_res[i]*IC3S1J1W_17[i] - p2care[i]*IC4S1J1W_17[i]
+
+
+
+care_IC1S2J1W_10[] <- -n2care_i_10[i]*IC1S2J1W_10[i]
+care_IC2S2J1W_10[] <- n2nr[i]*n2care_i_10[i]*IC1S2J1W_10[i] + p2nr[i]*p2care[i]*IC4S2J1W_10[i] + r2nr[i]*end_res[i]*IC3S2J1W_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1W_10[i]
+care_IC3S2J1W_10[] <- n2r[i]*n2care_i_10[i]*IC2S2J1W_10[i] + p2r[i]*p2care[i]*IC4S2J1W_10[i] + nr2r[i]*end_nr[i]*IC2S2J1W_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1W_10[i]
+care_IC4S2J1W_10[] <- nr2p[i]*end_nr[i]*IC2S2J1W_10[i] + r2p[i]*end_res[i]*IC3S2J1W_10[i] - p2care[i]*IC4S2J1W_10[i]
+
+care_IC1S2J1W_11[] <- -n2care_i_11[i]*IC1S2J1W_11[i]
+care_IC2S2J1W_11[] <- n2nr[i]*n2care_i_11[i]*IC1S2J1W_11[i] + p2nr[i]*p2care[i]*IC4S2J1W_11[i] + r2nr[i]*end_res[i]*IC3S2J1W_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1W_11[i]
+care_IC3S2J1W_11[] <- n2r[i]*n2care_i_11[i]*IC2S2J1W_11[i] + p2r[i]*p2care[i]*IC4S2J1W_11[i] + nr2r[i]*end_nr[i]*IC2S2J1W_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1W_11[i]
+care_IC4S2J1W_11[] <- nr2p[i]*end_nr[i]*IC2S2J1W_11[i] + r2p[i]*end_res[i]*IC3S2J1W_11[i] - p2care[i]*IC4S2J1W_11[i]
+
+care_IC1S2J1W_12[] <- -n2care_i_12[i]*IC1S2J1W_12[i]
+care_IC2S2J1W_12[] <- n2nr[i]*n2care_i_12[i]*IC1S2J1W_12[i] + p2nr[i]*p2care[i]*IC4S2J1W_12[i] + r2nr[i]*end_res[i]*IC3S2J1W_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1W_12[i]
+care_IC3S2J1W_12[] <- n2r[i]*n2care_i_12[i]*IC2S2J1W_12[i] + p2r[i]*p2care[i]*IC4S2J1W_12[i] + nr2r[i]*end_nr[i]*IC2S2J1W_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1W_12[i]
+care_IC4S2J1W_12[] <- nr2p[i]*end_nr[i]*IC2S2J1W_12[i] + r2p[i]*end_res[i]*IC3S2J1W_12[i] - p2care[i]*IC4S2J1W_12[i]
+
+care_IC1S2J1W_13[] <- -n2care_i_13[i]*IC1S2J1W_13[i]
+care_IC2S2J1W_13[] <- n2nr[i]*n2care_i_13[i]*IC1S2J1W_13[i] + p2nr[i]*p2care[i]*IC4S2J1W_13[i] + r2nr[i]*end_res[i]*IC3S2J1W_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1W_13[i]
+care_IC3S2J1W_13[] <- n2r[i]*n2care_i_13[i]*IC2S2J1W_13[i] + p2r[i]*p2care[i]*IC4S2J1W_13[i] + nr2r[i]*end_nr[i]*IC2S2J1W_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1W_13[i]
+care_IC4S2J1W_13[] <- nr2p[i]*end_nr[i]*IC2S2J1W_13[i] + r2p[i]*end_res[i]*IC3S2J1W_13[i] - p2care[i]*IC4S2J1W_13[i]
+
+care_IC1S2J1W_14[] <- -n2care_i_14[i]*IC1S2J1W_14[i]
+care_IC2S2J1W_14[] <- n2nr[i]*n2care_i_14[i]*IC1S2J1W_14[i] + p2nr[i]*p2care[i]*IC4S2J1W_14[i] + r2nr[i]*end_res[i]*IC3S2J1W_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1W_14[i]
+care_IC3S2J1W_14[] <- n2r[i]*n2care_i_14[i]*IC2S2J1W_14[i] + p2r[i]*p2care[i]*IC4S2J1W_14[i] + nr2r[i]*end_nr[i]*IC2S2J1W_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1W_14[i]
+care_IC4S2J1W_14[] <- nr2p[i]*end_nr[i]*IC2S2J1W_14[i] + r2p[i]*end_res[i]*IC3S2J1W_14[i] - p2care[i]*IC4S2J1W_14[i]
+
+care_IC1S2J1W_15[] <- -n2care_i_15[i]*IC1S2J1W_15[i]
+care_IC2S2J1W_15[] <- n2nr[i]*n2care_i_15[i]*IC1S2J1W_15[i] + p2nr[i]*p2care[i]*IC4S2J1W_15[i] + r2nr[i]*end_res[i]*IC3S2J1W_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1W_15[i]
+care_IC3S2J1W_15[] <- n2r[i]*n2care_i_15[i]*IC2S2J1W_15[i] + p2r[i]*p2care[i]*IC4S2J1W_15[i] + nr2r[i]*end_nr[i]*IC2S2J1W_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1W_15[i]
+care_IC4S2J1W_15[] <- nr2p[i]*end_nr[i]*IC2S2J1W_15[i] + r2p[i]*end_res[i]*IC3S2J1W_15[i] - p2care[i]*IC4S2J1W_15[i]
+
+care_IC1S2J1W_16[] <- -n2care_i_16[i]*IC1S2J1W_16[i]
+care_IC2S2J1W_16[] <- n2nr[i]*n2care_i_16[i]*IC1S2J1W_16[i] + p2nr[i]*p2care[i]*IC4S2J1W_16[i] + r2nr[i]*end_res[i]*IC3S2J1W_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1W_16[i]
+care_IC3S2J1W_16[] <- n2r[i]*n2care_i_16[i]*IC2S2J1W_16[i] + p2r[i]*p2care[i]*IC4S2J1W_16[i] + nr2r[i]*end_nr[i]*IC2S2J1W_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1W_16[i]
+care_IC4S2J1W_16[] <- nr2p[i]*end_nr[i]*IC2S2J1W_16[i] + r2p[i]*end_res[i]*IC3S2J1W_16[i] - p2care[i]*IC4S2J1W_16[i]
+
+care_IC1S2J1W_17[] <- -n2care_i_17[i]*IC1S2J1W_17[i]
+care_IC2S2J1W_17[] <- n2nr[i]*n2care_i_17[i]*IC1S2J1W_17[i] + p2nr[i]*p2care[i]*IC4S2J1W_17[i] + r2nr[i]*end_res[i]*IC3S2J1W_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J1W_17[i]
+care_IC3S2J1W_17[] <- n2r[i]*n2care_i_17[i]*IC2S2J1W_17[i] + p2r[i]*p2care[i]*IC4S2J1W_17[i] + nr2r[i]*end_nr[i]*IC2S2J1W_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J1W_17[i]
+care_IC4S2J1W_17[] <- nr2p[i]*end_nr[i]*IC2S2J1W_17[i] + r2p[i]*end_res[i]*IC3S2J1W_17[i] - p2care[i]*IC4S2J1W_17[i]
+
+
+
+care_IC1S1J2W_10[] <- -n2care_i_10[i]*IC1S1J2W_10[i]
+care_IC2S1J2W_10[] <- n2nr[i]*n2care_i_10[i]*IC1S1J2W_10[i] + p2nr[i]*p2care[i]*IC4S1J2W_10[i] + r2nr[i]*end_res[i]*IC3S1J2W_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2W_10[i]
+care_IC3S1J2W_10[] <- n2r[i]*n2care_i_10[i]*IC2S1J2W_10[i] + p2r[i]*p2care[i]*IC4S1J2W_10[i] + nr2r[i]*end_nr[i]*IC2S1J2W_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2W_10[i]
+care_IC4S1J2W_10[] <- nr2p[i]*end_nr[i]*IC2S1J2W_10[i] + r2p[i]*end_res[i]*IC3S1J2W_10[i] - p2care[i]*IC4S1J2W_10[i]
+
+care_IC1S1J2W_11[] <- -n2care_i_11[i]*IC1S1J2W_11[i]
+care_IC2S1J2W_11[] <- n2nr[i]*n2care_i_11[i]*IC1S1J2W_11[i] + p2nr[i]*p2care[i]*IC4S1J2W_11[i] + r2nr[i]*end_res[i]*IC3S1J2W_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2W_11[i]
+care_IC3S1J2W_11[] <- n2r[i]*n2care_i_11[i]*IC2S1J2W_11[i] + p2r[i]*p2care[i]*IC4S1J2W_11[i] + nr2r[i]*end_nr[i]*IC2S1J2W_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2W_11[i]
+care_IC4S1J2W_11[] <- nr2p[i]*end_nr[i]*IC2S1J2W_11[i] + r2p[i]*end_res[i]*IC3S1J2W_11[i] - p2care[i]*IC4S1J2W_11[i]
+
+care_IC1S1J2W_12[] <- -n2care_i_12[i]*IC1S1J2W_12[i]
+care_IC2S1J2W_12[] <- n2nr[i]*n2care_i_12[i]*IC1S1J2W_12[i] + p2nr[i]*p2care[i]*IC4S1J2W_12[i] + r2nr[i]*end_res[i]*IC3S1J2W_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2W_12[i]
+care_IC3S1J2W_12[] <- n2r[i]*n2care_i_12[i]*IC2S1J2W_12[i] + p2r[i]*p2care[i]*IC4S1J2W_12[i] + nr2r[i]*end_nr[i]*IC2S1J2W_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2W_12[i]
+care_IC4S1J2W_12[] <- nr2p[i]*end_nr[i]*IC2S1J2W_12[i] + r2p[i]*end_res[i]*IC3S1J2W_12[i] - p2care[i]*IC4S1J2W_12[i]
+
+care_IC1S1J2W_13[] <- -n2care_i_13[i]*IC1S1J2W_13[i]
+care_IC2S1J2W_13[] <- n2nr[i]*n2care_i_13[i]*IC1S1J2W_13[i] + p2nr[i]*p2care[i]*IC4S1J2W_13[i] + r2nr[i]*end_res[i]*IC3S1J2W_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2W_13[i]
+care_IC3S1J2W_13[] <- n2r[i]*n2care_i_13[i]*IC2S1J2W_13[i] + p2r[i]*p2care[i]*IC4S1J2W_13[i] + nr2r[i]*end_nr[i]*IC2S1J2W_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2W_13[i]
+care_IC4S1J2W_13[] <- nr2p[i]*end_nr[i]*IC2S1J2W_13[i] + r2p[i]*end_res[i]*IC3S1J2W_13[i] - p2care[i]*IC4S1J2W_13[i]
+
+care_IC1S1J2W_14[] <- -n2care_i_14[i]*IC1S1J2W_14[i]
+care_IC2S1J2W_14[] <- n2nr[i]*n2care_i_14[i]*IC1S1J2W_14[i] + p2nr[i]*p2care[i]*IC4S1J2W_14[i] + r2nr[i]*end_res[i]*IC3S1J2W_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2W_14[i]
+care_IC3S1J2W_14[] <- n2r[i]*n2care_i_14[i]*IC2S1J2W_14[i] + p2r[i]*p2care[i]*IC4S1J2W_14[i] + nr2r[i]*end_nr[i]*IC2S1J2W_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2W_14[i]
+care_IC4S1J2W_14[] <- nr2p[i]*end_nr[i]*IC2S1J2W_14[i] + r2p[i]*end_res[i]*IC3S1J2W_14[i] - p2care[i]*IC4S1J2W_14[i]
+
+care_IC1S1J2W_15[] <- -n2care_i_15[i]*IC1S1J2W_15[i]
+care_IC2S1J2W_15[] <- n2nr[i]*n2care_i_15[i]*IC1S1J2W_15[i] + p2nr[i]*p2care[i]*IC4S1J2W_15[i] + r2nr[i]*end_res[i]*IC3S1J2W_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2W_15[i]
+care_IC3S1J2W_15[] <- n2r[i]*n2care_i_15[i]*IC2S1J2W_15[i] + p2r[i]*p2care[i]*IC4S1J2W_15[i] + nr2r[i]*end_nr[i]*IC2S1J2W_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2W_15[i]
+care_IC4S1J2W_15[] <- nr2p[i]*end_nr[i]*IC2S1J2W_15[i] + r2p[i]*end_res[i]*IC3S1J2W_15[i] - p2care[i]*IC4S1J2W_15[i]
+
+care_IC1S1J2W_16[] <- -n2care_i_16[i]*IC1S1J2W_16[i]
+care_IC2S1J2W_16[] <- n2nr[i]*n2care_i_16[i]*IC1S1J2W_16[i] + p2nr[i]*p2care[i]*IC4S1J2W_16[i] + r2nr[i]*end_res[i]*IC3S1J2W_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2W_16[i]
+care_IC3S1J2W_16[] <- n2r[i]*n2care_i_16[i]*IC2S1J2W_16[i] + p2r[i]*p2care[i]*IC4S1J2W_16[i] + nr2r[i]*end_nr[i]*IC2S1J2W_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2W_16[i]
+care_IC4S1J2W_16[] <- nr2p[i]*end_nr[i]*IC2S1J2W_16[i] + r2p[i]*end_res[i]*IC3S1J2W_16[i] - p2care[i]*IC4S1J2W_16[i]
+
+care_IC1S1J2W_17[] <- -n2care_i_17[i]*IC1S1J2W_17[i]
+care_IC2S1J2W_17[] <- n2nr[i]*n2care_i_17[i]*IC1S1J2W_17[i] + p2nr[i]*p2care[i]*IC4S1J2W_17[i] + r2nr[i]*end_res[i]*IC3S1J2W_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J2W_17[i]
+care_IC3S1J2W_17[] <- n2r[i]*n2care_i_17[i]*IC2S1J2W_17[i] + p2r[i]*p2care[i]*IC4S1J2W_17[i] + nr2r[i]*end_nr[i]*IC2S1J2W_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J2W_17[i]
+care_IC4S1J2W_17[] <- nr2p[i]*end_nr[i]*IC2S1J2W_17[i] + r2p[i]*end_res[i]*IC3S1J2W_17[i] - p2care[i]*IC4S1J2W_17[i]
+
+
+
+care_IC1S2J2W_10[] <- -n2care_i_10[i]*IC1S2J2W_10[i]
+care_IC2S2J2W_10[] <- n2nr[i]*n2care_i_10[i]*IC1S2J2W_10[i] + p2nr[i]*p2care[i]*IC4S2J2W_10[i] + r2nr[i]*end_res[i]*IC3S2J2W_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2W_10[i]
+care_IC3S2J2W_10[] <- n2r[i]*n2care_i_10[i]*IC2S2J2W_10[i] + p2r[i]*p2care[i]*IC4S2J2W_10[i] + nr2r[i]*end_nr[i]*IC2S2J2W_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2W_10[i]
+care_IC4S2J2W_10[] <- nr2p[i]*end_nr[i]*IC2S2J2W_10[i] + r2p[i]*end_res[i]*IC3S2J2W_10[i] - p2care[i]*IC4S2J2W_10[i]
+
+care_IC1S2J2W_11[] <- -n2care_i_11[i]*IC1S2J2W_11[i]
+care_IC2S2J2W_11[] <- n2nr[i]*n2care_i_11[i]*IC1S2J2W_11[i] + p2nr[i]*p2care[i]*IC4S2J2W_11[i] + r2nr[i]*end_res[i]*IC3S2J2W_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2W_11[i]
+care_IC3S2J2W_11[] <- n2r[i]*n2care_i_11[i]*IC2S2J2W_11[i] + p2r[i]*p2care[i]*IC4S2J2W_11[i] + nr2r[i]*end_nr[i]*IC2S2J2W_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2W_11[i]
+care_IC4S2J2W_11[] <- nr2p[i]*end_nr[i]*IC2S2J2W_11[i] + r2p[i]*end_res[i]*IC3S2J2W_11[i] - p2care[i]*IC4S2J2W_11[i]
+
+care_IC1S2J2W_12[] <- -n2care_i_12[i]*IC1S2J2W_12[i]
+care_IC2S2J2W_12[] <- n2nr[i]*n2care_i_12[i]*IC1S2J2W_12[i] + p2nr[i]*p2care[i]*IC4S2J2W_12[i] + r2nr[i]*end_res[i]*IC3S2J2W_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2W_12[i]
+care_IC3S2J2W_12[] <- n2r[i]*n2care_i_12[i]*IC2S2J2W_12[i] + p2r[i]*p2care[i]*IC4S2J2W_12[i] + nr2r[i]*end_nr[i]*IC2S2J2W_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2W_12[i]
+care_IC4S2J2W_12[] <- nr2p[i]*end_nr[i]*IC2S2J2W_12[i] + r2p[i]*end_res[i]*IC3S2J2W_12[i] - p2care[i]*IC4S2J2W_12[i]
+
+care_IC1S2J2W_13[] <- -n2care_i_13[i]*IC1S2J2W_13[i]
+care_IC2S2J2W_13[] <- n2nr[i]*n2care_i_13[i]*IC1S2J2W_13[i] + p2nr[i]*p2care[i]*IC4S2J2W_13[i] + r2nr[i]*end_res[i]*IC3S2J2W_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2W_13[i]
+care_IC3S2J2W_13[] <- n2r[i]*n2care_i_13[i]*IC2S2J2W_13[i] + p2r[i]*p2care[i]*IC4S2J2W_13[i] + nr2r[i]*end_nr[i]*IC2S2J2W_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2W_13[i]
+care_IC4S2J2W_13[] <- nr2p[i]*end_nr[i]*IC2S2J2W_13[i] + r2p[i]*end_res[i]*IC3S2J2W_13[i] - p2care[i]*IC4S2J2W_13[i]
+
+care_IC1S2J2W_14[] <- -n2care_i_14[i]*IC1S2J2W_14[i]
+care_IC2S2J2W_14[] <- n2nr[i]*n2care_i_14[i]*IC1S2J2W_14[i] + p2nr[i]*p2care[i]*IC4S2J2W_14[i] + r2nr[i]*end_res[i]*IC3S2J2W_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2W_14[i]
+care_IC3S2J2W_14[] <- n2r[i]*n2care_i_14[i]*IC2S2J2W_14[i] + p2r[i]*p2care[i]*IC4S2J2W_14[i] + nr2r[i]*end_nr[i]*IC2S2J2W_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2W_14[i]
+care_IC4S2J2W_14[] <- nr2p[i]*end_nr[i]*IC2S2J2W_14[i] + r2p[i]*end_res[i]*IC3S2J2W_14[i] - p2care[i]*IC4S2J2W_14[i]
+
+care_IC1S2J2W_15[] <- -n2care_i_15[i]*IC1S2J2W_15[i]
+care_IC2S2J2W_15[] <- n2nr[i]*n2care_i_15[i]*IC1S2J2W_15[i] + p2nr[i]*p2care[i]*IC4S2J2W_15[i] + r2nr[i]*end_res[i]*IC3S2J2W_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2W_15[i]
+care_IC3S2J2W_15[] <- n2r[i]*n2care_i_15[i]*IC2S2J2W_15[i] + p2r[i]*p2care[i]*IC4S2J2W_15[i] + nr2r[i]*end_nr[i]*IC2S2J2W_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2W_15[i]
+care_IC4S2J2W_15[] <- nr2p[i]*end_nr[i]*IC2S2J2W_15[i] + r2p[i]*end_res[i]*IC3S2J2W_15[i] - p2care[i]*IC4S2J2W_15[i]
+
+care_IC1S2J2W_16[] <- -n2care_i_16[i]*IC1S2J2W_16[i]
+care_IC2S2J2W_16[] <- n2nr[i]*n2care_i_16[i]*IC1S2J2W_16[i] + p2nr[i]*p2care[i]*IC4S2J2W_16[i] + r2nr[i]*end_res[i]*IC3S2J2W_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2W_16[i]
+care_IC3S2J2W_16[] <- n2r[i]*n2care_i_16[i]*IC2S2J2W_16[i] + p2r[i]*p2care[i]*IC4S2J2W_16[i] + nr2r[i]*end_nr[i]*IC2S2J2W_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2W_16[i]
+care_IC4S2J2W_16[] <- nr2p[i]*end_nr[i]*IC2S2J2W_16[i] + r2p[i]*end_res[i]*IC3S2J2W_16[i] - p2care[i]*IC4S2J2W_16[i]
+
+care_IC1S2J2W_17[] <- -n2care_i_17[i]*IC1S2J2W_17[i]
+care_IC2S2J2W_17[] <- n2nr[i]*n2care_i_17[i]*IC1S2J2W_17[i] + p2nr[i]*p2care[i]*IC4S2J2W_17[i] + r2nr[i]*end_res[i]*IC3S2J2W_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J2W_17[i]
+care_IC3S2J2W_17[] <- n2r[i]*n2care_i_17[i]*IC2S2J2W_17[i] + p2r[i]*p2care[i]*IC4S2J2W_17[i] + nr2r[i]*end_nr[i]*IC2S2J2W_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J2W_17[i]
+care_IC4S2J2W_17[] <- nr2p[i]*end_nr[i]*IC2S2J2W_17[i] + r2p[i]*end_res[i]*IC3S2J2W_17[i] - p2care[i]*IC4S2J2W_17[i]
+
+
+
+care_IC1S1J3W_10[] <- -n2care_i_10[i]*IC1S1J3W_10[i]
+care_IC2S1J3W_10[] <- n2nr[i]*n2care_i_10[i]*IC1S1J3W_10[i] + p2nr[i]*p2care[i]*IC4S1J3W_10[i] + r2nr[i]*end_res[i]*IC3S1J3W_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3W_10[i]
+care_IC3S1J3W_10[] <- n2r[i]*n2care_i_10[i]*IC2S1J3W_10[i] + p2r[i]*p2care[i]*IC4S1J3W_10[i] + nr2r[i]*end_nr[i]*IC2S1J3W_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3W_10[i]
+care_IC4S1J3W_10[] <- nr2p[i]*end_nr[i]*IC2S1J3W_10[i] + r2p[i]*end_res[i]*IC3S1J3W_10[i] - p2care[i]*IC4S1J3W_10[i]
+
+care_IC1S1J3W_11[] <- -n2care_i_11[i]*IC1S1J3W_11[i]
+care_IC2S1J3W_11[] <- n2nr[i]*n2care_i_11[i]*IC1S1J3W_11[i] + p2nr[i]*p2care[i]*IC4S1J3W_11[i] + r2nr[i]*end_res[i]*IC3S1J3W_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3W_11[i]
+care_IC3S1J3W_11[] <- n2r[i]*n2care_i_11[i]*IC2S1J3W_11[i] + p2r[i]*p2care[i]*IC4S1J3W_11[i] + nr2r[i]*end_nr[i]*IC2S1J3W_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3W_11[i]
+care_IC4S1J3W_11[] <- nr2p[i]*end_nr[i]*IC2S1J3W_11[i] + r2p[i]*end_res[i]*IC3S1J3W_11[i] - p2care[i]*IC4S1J3W_11[i]
+
+care_IC1S1J3W_12[] <- -n2care_i_12[i]*IC1S1J3W_12[i]
+care_IC2S1J3W_12[] <- n2nr[i]*n2care_i_12[i]*IC1S1J3W_12[i] + p2nr[i]*p2care[i]*IC4S1J3W_12[i] + r2nr[i]*end_res[i]*IC3S1J3W_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3W_12[i]
+care_IC3S1J3W_12[] <- n2r[i]*n2care_i_12[i]*IC2S1J3W_12[i] + p2r[i]*p2care[i]*IC4S1J3W_12[i] + nr2r[i]*end_nr[i]*IC2S1J3W_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3W_12[i]
+care_IC4S1J3W_12[] <- nr2p[i]*end_nr[i]*IC2S1J3W_12[i] + r2p[i]*end_res[i]*IC3S1J3W_12[i] - p2care[i]*IC4S1J3W_12[i]
+
+care_IC1S1J3W_13[] <- -n2care_i_13[i]*IC1S1J3W_13[i]
+care_IC2S1J3W_13[] <- n2nr[i]*n2care_i_13[i]*IC1S1J3W_13[i] + p2nr[i]*p2care[i]*IC4S1J3W_13[i] + r2nr[i]*end_res[i]*IC3S1J3W_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3W_13[i]
+care_IC3S1J3W_13[] <- n2r[i]*n2care_i_13[i]*IC2S1J3W_13[i] + p2r[i]*p2care[i]*IC4S1J3W_13[i] + nr2r[i]*end_nr[i]*IC2S1J3W_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3W_13[i]
+care_IC4S1J3W_13[] <- nr2p[i]*end_nr[i]*IC2S1J3W_13[i] + r2p[i]*end_res[i]*IC3S1J3W_13[i] - p2care[i]*IC4S1J3W_13[i]
+
+care_IC1S1J3W_14[] <- -n2care_i_14[i]*IC1S1J3W_14[i]
+care_IC2S1J3W_14[] <- n2nr[i]*n2care_i_14[i]*IC1S1J3W_14[i] + p2nr[i]*p2care[i]*IC4S1J3W_14[i] + r2nr[i]*end_res[i]*IC3S1J3W_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3W_14[i]
+care_IC3S1J3W_14[] <- n2r[i]*n2care_i_14[i]*IC2S1J3W_14[i] + p2r[i]*p2care[i]*IC4S1J3W_14[i] + nr2r[i]*end_nr[i]*IC2S1J3W_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3W_14[i]
+care_IC4S1J3W_14[] <- nr2p[i]*end_nr[i]*IC2S1J3W_14[i] + r2p[i]*end_res[i]*IC3S1J3W_14[i] - p2care[i]*IC4S1J3W_14[i]
+
+care_IC1S1J3W_15[] <- -n2care_i_15[i]*IC1S1J3W_15[i]
+care_IC2S1J3W_15[] <- n2nr[i]*n2care_i_15[i]*IC1S1J3W_15[i] + p2nr[i]*p2care[i]*IC4S1J3W_15[i] + r2nr[i]*end_res[i]*IC3S1J3W_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3W_15[i]
+care_IC3S1J3W_15[] <- n2r[i]*n2care_i_15[i]*IC2S1J3W_15[i] + p2r[i]*p2care[i]*IC4S1J3W_15[i] + nr2r[i]*end_nr[i]*IC2S1J3W_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3W_15[i]
+care_IC4S1J3W_15[] <- nr2p[i]*end_nr[i]*IC2S1J3W_15[i] + r2p[i]*end_res[i]*IC3S1J3W_15[i] - p2care[i]*IC4S1J3W_15[i]
+
+care_IC1S1J3W_16[] <- -n2care_i_16[i]*IC1S1J3W_16[i]
+care_IC2S1J3W_16[] <- n2nr[i]*n2care_i_16[i]*IC1S1J3W_16[i] + p2nr[i]*p2care[i]*IC4S1J3W_16[i] + r2nr[i]*end_res[i]*IC3S1J3W_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3W_16[i]
+care_IC3S1J3W_16[] <- n2r[i]*n2care_i_16[i]*IC2S1J3W_16[i] + p2r[i]*p2care[i]*IC4S1J3W_16[i] + nr2r[i]*end_nr[i]*IC2S1J3W_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3W_16[i]
+care_IC4S1J3W_16[] <- nr2p[i]*end_nr[i]*IC2S1J3W_16[i] + r2p[i]*end_res[i]*IC3S1J3W_16[i] - p2care[i]*IC4S1J3W_16[i]
+
+care_IC1S1J3W_17[] <- -n2care_i_17[i]*IC1S1J3W_17[i]
+care_IC2S1J3W_17[] <- n2nr[i]*n2care_i_17[i]*IC1S1J3W_17[i] + p2nr[i]*p2care[i]*IC4S1J3W_17[i] + r2nr[i]*end_res[i]*IC3S1J3W_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1J3W_17[i]
+care_IC3S1J3W_17[] <- n2r[i]*n2care_i_17[i]*IC2S1J3W_17[i] + p2r[i]*p2care[i]*IC4S1J3W_17[i] + nr2r[i]*end_nr[i]*IC2S1J3W_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1J3W_17[i]
+care_IC4S1J3W_17[] <- nr2p[i]*end_nr[i]*IC2S1J3W_17[i] + r2p[i]*end_res[i]*IC3S1J3W_17[i] - p2care[i]*IC4S1J3W_17[i]
+
+
+
+care_IC1S2J3W_10[] <- -n2care_i_10[i]*IC1S2J3W_10[i]
+care_IC2S2J3W_10[] <- n2nr[i]*n2care_i_10[i]*IC1S2J3W_10[i] + p2nr[i]*p2care[i]*IC4S2J3W_10[i] + r2nr[i]*end_res[i]*IC3S2J3W_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3W_10[i]
+care_IC3S2J3W_10[] <- n2r[i]*n2care_i_10[i]*IC2S2J3W_10[i] + p2r[i]*p2care[i]*IC4S2J3W_10[i] + nr2r[i]*end_nr[i]*IC2S2J3W_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3W_10[i]
+care_IC4S2J3W_10[] <- nr2p[i]*end_nr[i]*IC2S2J3W_10[i] + r2p[i]*end_res[i]*IC3S2J3W_10[i] - p2care[i]*IC4S2J3W_10[i]
+
+care_IC1S2J3W_11[] <- -n2care_i_11[i]*IC1S2J3W_11[i]
+care_IC2S2J3W_11[] <- n2nr[i]*n2care_i_11[i]*IC1S2J3W_11[i] + p2nr[i]*p2care[i]*IC4S2J3W_11[i] + r2nr[i]*end_res[i]*IC3S2J3W_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3W_11[i]
+care_IC3S2J3W_11[] <- n2r[i]*n2care_i_11[i]*IC2S2J3W_11[i] + p2r[i]*p2care[i]*IC4S2J3W_11[i] + nr2r[i]*end_nr[i]*IC2S2J3W_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3W_11[i]
+care_IC4S2J3W_11[] <- nr2p[i]*end_nr[i]*IC2S2J3W_11[i] + r2p[i]*end_res[i]*IC3S2J3W_11[i] - p2care[i]*IC4S2J3W_11[i]
+
+care_IC1S2J3W_12[] <- -n2care_i_12[i]*IC1S2J3W_12[i]
+care_IC2S2J3W_12[] <- n2nr[i]*n2care_i_12[i]*IC1S2J3W_12[i] + p2nr[i]*p2care[i]*IC4S2J3W_12[i] + r2nr[i]*end_res[i]*IC3S2J3W_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3W_12[i]
+care_IC3S2J3W_12[] <- n2r[i]*n2care_i_12[i]*IC2S2J3W_12[i] + p2r[i]*p2care[i]*IC4S2J3W_12[i] + nr2r[i]*end_nr[i]*IC2S2J3W_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3W_12[i]
+care_IC4S2J3W_12[] <- nr2p[i]*end_nr[i]*IC2S2J3W_12[i] + r2p[i]*end_res[i]*IC3S2J3W_12[i] - p2care[i]*IC4S2J3W_12[i]
+
+care_IC1S2J3W_13[] <- -n2care_i_13[i]*IC1S2J3W_13[i]
+care_IC2S2J3W_13[] <- n2nr[i]*n2care_i_13[i]*IC1S2J3W_13[i] + p2nr[i]*p2care[i]*IC4S2J3W_13[i] + r2nr[i]*end_res[i]*IC3S2J3W_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3W_13[i]
+care_IC3S2J3W_13[] <- n2r[i]*n2care_i_13[i]*IC2S2J3W_13[i] + p2r[i]*p2care[i]*IC4S2J3W_13[i] + nr2r[i]*end_nr[i]*IC2S2J3W_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3W_13[i]
+care_IC4S2J3W_13[] <- nr2p[i]*end_nr[i]*IC2S2J3W_13[i] + r2p[i]*end_res[i]*IC3S2J3W_13[i] - p2care[i]*IC4S2J3W_13[i]
+
+care_IC1S2J3W_14[] <- -n2care_i_14[i]*IC1S2J3W_14[i]
+care_IC2S2J3W_14[] <- n2nr[i]*n2care_i_14[i]*IC1S2J3W_14[i] + p2nr[i]*p2care[i]*IC4S2J3W_14[i] + r2nr[i]*end_res[i]*IC3S2J3W_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3W_14[i]
+care_IC3S2J3W_14[] <- n2r[i]*n2care_i_14[i]*IC2S2J3W_14[i] + p2r[i]*p2care[i]*IC4S2J3W_14[i] + nr2r[i]*end_nr[i]*IC2S2J3W_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3W_14[i]
+care_IC4S2J3W_14[] <- nr2p[i]*end_nr[i]*IC2S2J3W_14[i] + r2p[i]*end_res[i]*IC3S2J3W_14[i] - p2care[i]*IC4S2J3W_14[i]
+
+care_IC1S2J3W_15[] <- -n2care_i_15[i]*IC1S2J3W_15[i]
+care_IC2S2J3W_15[] <- n2nr[i]*n2care_i_15[i]*IC1S2J3W_15[i] + p2nr[i]*p2care[i]*IC4S2J3W_15[i] + r2nr[i]*end_res[i]*IC3S2J3W_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3W_15[i]
+care_IC3S2J3W_15[] <- n2r[i]*n2care_i_15[i]*IC2S2J3W_15[i] + p2r[i]*p2care[i]*IC4S2J3W_15[i] + nr2r[i]*end_nr[i]*IC2S2J3W_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3W_15[i]
+care_IC4S2J3W_15[] <- nr2p[i]*end_nr[i]*IC2S2J3W_15[i] + r2p[i]*end_res[i]*IC3S2J3W_15[i] - p2care[i]*IC4S2J3W_15[i]
+
+care_IC1S2J3W_16[] <- -n2care_i_16[i]*IC1S2J3W_16[i]
+care_IC2S2J3W_16[] <- n2nr[i]*n2care_i_16[i]*IC1S2J3W_16[i] + p2nr[i]*p2care[i]*IC4S2J3W_16[i] + r2nr[i]*end_res[i]*IC3S2J3W_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3W_16[i]
+care_IC3S2J3W_16[] <- n2r[i]*n2care_i_16[i]*IC2S2J3W_16[i] + p2r[i]*p2care[i]*IC4S2J3W_16[i] + nr2r[i]*end_nr[i]*IC2S2J3W_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3W_16[i]
+care_IC4S2J3W_16[] <- nr2p[i]*end_nr[i]*IC2S2J3W_16[i] + r2p[i]*end_res[i]*IC3S2J3W_16[i] - p2care[i]*IC4S2J3W_16[i]
+
+care_IC1S2J3W_17[] <- -n2care_i_17[i]*IC1S2J3W_17[i]
+care_IC2S2J3W_17[] <- n2nr[i]*n2care_i_17[i]*IC1S2J3W_17[i] + p2nr[i]*p2care[i]*IC4S2J3W_17[i] + r2nr[i]*end_res[i]*IC3S2J3W_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2J3W_17[i]
+care_IC3S2J3W_17[] <- n2r[i]*n2care_i_17[i]*IC2S2J3W_17[i] + p2r[i]*p2care[i]*IC4S2J3W_17[i] + nr2r[i]*end_nr[i]*IC2S2J3W_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2J3W_17[i]
+care_IC4S2J3W_17[] <- nr2p[i]*end_nr[i]*IC2S2J3W_17[i] + r2p[i]*end_res[i]*IC3S2J3W_17[i] - p2care[i]*IC4S2J3W_17[i]
+
+
+
+care_EC1S1J1U_10[] <- -n2care_e_10[i]*EC1S1J1U_10[i]
+care_EC2S1J1U_10[] <- n2nr[i]*n2care_e_10[i]*EC1S1J1U_10[i] + p2nr[i]*p2care[i]*EC4S1J1U_10[i] + r2nr[i]*end_res[i]*EC3S1J1U_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1U_10[i]
+care_EC3S1J1U_10[] <- n2r[i]*n2care_e_10[i]*EC2S1J1U_10[i] + p2r[i]*p2care[i]*EC4S1J1U_10[i] + nr2r[i]*end_nr[i]*EC2S1J1U_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1U_10[i]
+care_EC4S1J1U_10[] <- nr2p[i]*end_nr[i]*EC2S1J1U_10[i] + r2p[i]*end_res[i]*EC3S1J1U_10[i] - p2care[i]*EC4S1J1U_10[i]
+
+care_EC1S1J1U_11[] <- -n2care_e_11[i]*EC1S1J1U_11[i]
+care_EC2S1J1U_11[] <- n2nr[i]*n2care_e_11[i]*EC1S1J1U_11[i] + p2nr[i]*p2care[i]*EC4S1J1U_11[i] + r2nr[i]*end_res[i]*EC3S1J1U_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1U_11[i]
+care_EC3S1J1U_11[] <- n2r[i]*n2care_e_11[i]*EC2S1J1U_11[i] + p2r[i]*p2care[i]*EC4S1J1U_11[i] + nr2r[i]*end_nr[i]*EC2S1J1U_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1U_11[i]
+care_EC4S1J1U_11[] <- nr2p[i]*end_nr[i]*EC2S1J1U_11[i] + r2p[i]*end_res[i]*EC3S1J1U_11[i] - p2care[i]*EC4S1J1U_11[i]
+
+care_EC1S1J1U_12[] <- -n2care_e_12[i]*EC1S1J1U_12[i]
+care_EC2S1J1U_12[] <- n2nr[i]*n2care_e_12[i]*EC1S1J1U_12[i] + p2nr[i]*p2care[i]*EC4S1J1U_12[i] + r2nr[i]*end_res[i]*EC3S1J1U_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1U_12[i]
+care_EC3S1J1U_12[] <- n2r[i]*n2care_e_12[i]*EC2S1J1U_12[i] + p2r[i]*p2care[i]*EC4S1J1U_12[i] + nr2r[i]*end_nr[i]*EC2S1J1U_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1U_12[i]
+care_EC4S1J1U_12[] <- nr2p[i]*end_nr[i]*EC2S1J1U_12[i] + r2p[i]*end_res[i]*EC3S1J1U_12[i] - p2care[i]*EC4S1J1U_12[i]
+
+care_EC1S1J1U_13[] <- -n2care_e_13[i]*EC1S1J1U_13[i]
+care_EC2S1J1U_13[] <- n2nr[i]*n2care_e_13[i]*EC1S1J1U_13[i] + p2nr[i]*p2care[i]*EC4S1J1U_13[i] + r2nr[i]*end_res[i]*EC3S1J1U_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1U_13[i]
+care_EC3S1J1U_13[] <- n2r[i]*n2care_e_13[i]*EC2S1J1U_13[i] + p2r[i]*p2care[i]*EC4S1J1U_13[i] + nr2r[i]*end_nr[i]*EC2S1J1U_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1U_13[i]
+care_EC4S1J1U_13[] <- nr2p[i]*end_nr[i]*EC2S1J1U_13[i] + r2p[i]*end_res[i]*EC3S1J1U_13[i] - p2care[i]*EC4S1J1U_13[i]
+
+care_EC1S1J1U_14[] <- -n2care_e_14[i]*EC1S1J1U_14[i]
+care_EC2S1J1U_14[] <- n2nr[i]*n2care_e_14[i]*EC1S1J1U_14[i] + p2nr[i]*p2care[i]*EC4S1J1U_14[i] + r2nr[i]*end_res[i]*EC3S1J1U_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1U_14[i]
+care_EC3S1J1U_14[] <- n2r[i]*n2care_e_14[i]*EC2S1J1U_14[i] + p2r[i]*p2care[i]*EC4S1J1U_14[i] + nr2r[i]*end_nr[i]*EC2S1J1U_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1U_14[i]
+care_EC4S1J1U_14[] <- nr2p[i]*end_nr[i]*EC2S1J1U_14[i] + r2p[i]*end_res[i]*EC3S1J1U_14[i] - p2care[i]*EC4S1J1U_14[i]
+
+care_EC1S1J1U_15[] <- -n2care_e_15[i]*EC1S1J1U_15[i]
+care_EC2S1J1U_15[] <- n2nr[i]*n2care_e_15[i]*EC1S1J1U_15[i] + p2nr[i]*p2care[i]*EC4S1J1U_15[i] + r2nr[i]*end_res[i]*EC3S1J1U_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1U_15[i]
+care_EC3S1J1U_15[] <- n2r[i]*n2care_e_15[i]*EC2S1J1U_15[i] + p2r[i]*p2care[i]*EC4S1J1U_15[i] + nr2r[i]*end_nr[i]*EC2S1J1U_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1U_15[i]
+care_EC4S1J1U_15[] <- nr2p[i]*end_nr[i]*EC2S1J1U_15[i] + r2p[i]*end_res[i]*EC3S1J1U_15[i] - p2care[i]*EC4S1J1U_15[i]
+
+care_EC1S1J1U_16[] <- -n2care_e_16[i]*EC1S1J1U_16[i]
+care_EC2S1J1U_16[] <- n2nr[i]*n2care_e_16[i]*EC1S1J1U_16[i] + p2nr[i]*p2care[i]*EC4S1J1U_16[i] + r2nr[i]*end_res[i]*EC3S1J1U_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1U_16[i]
+care_EC3S1J1U_16[] <- n2r[i]*n2care_e_16[i]*EC2S1J1U_16[i] + p2r[i]*p2care[i]*EC4S1J1U_16[i] + nr2r[i]*end_nr[i]*EC2S1J1U_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1U_16[i]
+care_EC4S1J1U_16[] <- nr2p[i]*end_nr[i]*EC2S1J1U_16[i] + r2p[i]*end_res[i]*EC3S1J1U_16[i] - p2care[i]*EC4S1J1U_16[i]
+
+care_EC1S1J1U_17[] <- -n2care_e_17[i]*EC1S1J1U_17[i]
+care_EC2S1J1U_17[] <- n2nr[i]*n2care_e_17[i]*EC1S1J1U_17[i] + p2nr[i]*p2care[i]*EC4S1J1U_17[i] + r2nr[i]*end_res[i]*EC3S1J1U_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1U_17[i]
+care_EC3S1J1U_17[] <- n2r[i]*n2care_e_17[i]*EC2S1J1U_17[i] + p2r[i]*p2care[i]*EC4S1J1U_17[i] + nr2r[i]*end_nr[i]*EC2S1J1U_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1U_17[i]
+care_EC4S1J1U_17[] <- nr2p[i]*end_nr[i]*EC2S1J1U_17[i] + r2p[i]*end_res[i]*EC3S1J1U_17[i] - p2care[i]*EC4S1J1U_17[i]
+
+
+
+care_EC1S2J1U_10[] <- -n2care_e_10[i]*EC1S2J1U_10[i]
+care_EC2S2J1U_10[] <- n2nr[i]*n2care_e_10[i]*EC1S2J1U_10[i] + p2nr[i]*p2care[i]*EC4S2J1U_10[i] + r2nr[i]*end_res[i]*EC3S2J1U_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1U_10[i]
+care_EC3S2J1U_10[] <- n2r[i]*n2care_e_10[i]*EC2S2J1U_10[i] + p2r[i]*p2care[i]*EC4S2J1U_10[i] + nr2r[i]*end_nr[i]*EC2S2J1U_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1U_10[i]
+care_EC4S2J1U_10[] <- nr2p[i]*end_nr[i]*EC2S2J1U_10[i] + r2p[i]*end_res[i]*EC3S2J1U_10[i] - p2care[i]*EC4S2J1U_10[i]
+
+care_EC1S2J1U_11[] <- -n2care_e_11[i]*EC1S2J1U_11[i]
+care_EC2S2J1U_11[] <- n2nr[i]*n2care_e_11[i]*EC1S2J1U_11[i] + p2nr[i]*p2care[i]*EC4S2J1U_11[i] + r2nr[i]*end_res[i]*EC3S2J1U_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1U_11[i]
+care_EC3S2J1U_11[] <- n2r[i]*n2care_e_11[i]*EC2S2J1U_11[i] + p2r[i]*p2care[i]*EC4S2J1U_11[i] + nr2r[i]*end_nr[i]*EC2S2J1U_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1U_11[i]
+care_EC4S2J1U_11[] <- nr2p[i]*end_nr[i]*EC2S2J1U_11[i] + r2p[i]*end_res[i]*EC3S2J1U_11[i] - p2care[i]*EC4S2J1U_11[i]
+
+care_EC1S2J1U_12[] <- -n2care_e_12[i]*EC1S2J1U_12[i]
+care_EC2S2J1U_12[] <- n2nr[i]*n2care_e_12[i]*EC1S2J1U_12[i] + p2nr[i]*p2care[i]*EC4S2J1U_12[i] + r2nr[i]*end_res[i]*EC3S2J1U_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1U_12[i]
+care_EC3S2J1U_12[] <- n2r[i]*n2care_e_12[i]*EC2S2J1U_12[i] + p2r[i]*p2care[i]*EC4S2J1U_12[i] + nr2r[i]*end_nr[i]*EC2S2J1U_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1U_12[i]
+care_EC4S2J1U_12[] <- nr2p[i]*end_nr[i]*EC2S2J1U_12[i] + r2p[i]*end_res[i]*EC3S2J1U_12[i] - p2care[i]*EC4S2J1U_12[i]
+
+care_EC1S2J1U_13[] <- -n2care_e_13[i]*EC1S2J1U_13[i]
+care_EC2S2J1U_13[] <- n2nr[i]*n2care_e_13[i]*EC1S2J1U_13[i] + p2nr[i]*p2care[i]*EC4S2J1U_13[i] + r2nr[i]*end_res[i]*EC3S2J1U_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1U_13[i]
+care_EC3S2J1U_13[] <- n2r[i]*n2care_e_13[i]*EC2S2J1U_13[i] + p2r[i]*p2care[i]*EC4S2J1U_13[i] + nr2r[i]*end_nr[i]*EC2S2J1U_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1U_13[i]
+care_EC4S2J1U_13[] <- nr2p[i]*end_nr[i]*EC2S2J1U_13[i] + r2p[i]*end_res[i]*EC3S2J1U_13[i] - p2care[i]*EC4S2J1U_13[i]
+
+care_EC1S2J1U_14[] <- -n2care_e_14[i]*EC1S2J1U_14[i]
+care_EC2S2J1U_14[] <- n2nr[i]*n2care_e_14[i]*EC1S2J1U_14[i] + p2nr[i]*p2care[i]*EC4S2J1U_14[i] + r2nr[i]*end_res[i]*EC3S2J1U_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1U_14[i]
+care_EC3S2J1U_14[] <- n2r[i]*n2care_e_14[i]*EC2S2J1U_14[i] + p2r[i]*p2care[i]*EC4S2J1U_14[i] + nr2r[i]*end_nr[i]*EC2S2J1U_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1U_14[i]
+care_EC4S2J1U_14[] <- nr2p[i]*end_nr[i]*EC2S2J1U_14[i] + r2p[i]*end_res[i]*EC3S2J1U_14[i] - p2care[i]*EC4S2J1U_14[i]
+
+care_EC1S2J1U_15[] <- -n2care_e_15[i]*EC1S2J1U_15[i]
+care_EC2S2J1U_15[] <- n2nr[i]*n2care_e_15[i]*EC1S2J1U_15[i] + p2nr[i]*p2care[i]*EC4S2J1U_15[i] + r2nr[i]*end_res[i]*EC3S2J1U_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1U_15[i]
+care_EC3S2J1U_15[] <- n2r[i]*n2care_e_15[i]*EC2S2J1U_15[i] + p2r[i]*p2care[i]*EC4S2J1U_15[i] + nr2r[i]*end_nr[i]*EC2S2J1U_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1U_15[i]
+care_EC4S2J1U_15[] <- nr2p[i]*end_nr[i]*EC2S2J1U_15[i] + r2p[i]*end_res[i]*EC3S2J1U_15[i] - p2care[i]*EC4S2J1U_15[i]
+
+care_EC1S2J1U_16[] <- -n2care_e_16[i]*EC1S2J1U_16[i]
+care_EC2S2J1U_16[] <- n2nr[i]*n2care_e_16[i]*EC1S2J1U_16[i] + p2nr[i]*p2care[i]*EC4S2J1U_16[i] + r2nr[i]*end_res[i]*EC3S2J1U_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1U_16[i]
+care_EC3S2J1U_16[] <- n2r[i]*n2care_e_16[i]*EC2S2J1U_16[i] + p2r[i]*p2care[i]*EC4S2J1U_16[i] + nr2r[i]*end_nr[i]*EC2S2J1U_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1U_16[i]
+care_EC4S2J1U_16[] <- nr2p[i]*end_nr[i]*EC2S2J1U_16[i] + r2p[i]*end_res[i]*EC3S2J1U_16[i] - p2care[i]*EC4S2J1U_16[i]
+
+care_EC1S2J1U_17[] <- -n2care_e_17[i]*EC1S2J1U_17[i]
+care_EC2S2J1U_17[] <- n2nr[i]*n2care_e_17[i]*EC1S2J1U_17[i] + p2nr[i]*p2care[i]*EC4S2J1U_17[i] + r2nr[i]*end_res[i]*EC3S2J1U_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1U_17[i]
+care_EC3S2J1U_17[] <- n2r[i]*n2care_e_17[i]*EC2S2J1U_17[i] + p2r[i]*p2care[i]*EC4S2J1U_17[i] + nr2r[i]*end_nr[i]*EC2S2J1U_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1U_17[i]
+care_EC4S2J1U_17[] <- nr2p[i]*end_nr[i]*EC2S2J1U_17[i] + r2p[i]*end_res[i]*EC3S2J1U_17[i] - p2care[i]*EC4S2J1U_17[i]
+
+
+
+care_EC1S1J2U_10[] <- -n2care_e_10[i]*EC1S1J2U_10[i]
+care_EC2S1J2U_10[] <- n2nr[i]*n2care_e_10[i]*EC1S1J2U_10[i] + p2nr[i]*p2care[i]*EC4S1J2U_10[i] + r2nr[i]*end_res[i]*EC3S1J2U_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2U_10[i]
+care_EC3S1J2U_10[] <- n2r[i]*n2care_e_10[i]*EC2S1J2U_10[i] + p2r[i]*p2care[i]*EC4S1J2U_10[i] + nr2r[i]*end_nr[i]*EC2S1J2U_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2U_10[i]
+care_EC4S1J2U_10[] <- nr2p[i]*end_nr[i]*EC2S1J2U_10[i] + r2p[i]*end_res[i]*EC3S1J2U_10[i] - p2care[i]*EC4S1J2U_10[i]
+
+care_EC1S1J2U_11[] <- -n2care_e_11[i]*EC1S1J2U_11[i]
+care_EC2S1J2U_11[] <- n2nr[i]*n2care_e_11[i]*EC1S1J2U_11[i] + p2nr[i]*p2care[i]*EC4S1J2U_11[i] + r2nr[i]*end_res[i]*EC3S1J2U_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2U_11[i]
+care_EC3S1J2U_11[] <- n2r[i]*n2care_e_11[i]*EC2S1J2U_11[i] + p2r[i]*p2care[i]*EC4S1J2U_11[i] + nr2r[i]*end_nr[i]*EC2S1J2U_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2U_11[i]
+care_EC4S1J2U_11[] <- nr2p[i]*end_nr[i]*EC2S1J2U_11[i] + r2p[i]*end_res[i]*EC3S1J2U_11[i] - p2care[i]*EC4S1J2U_11[i]
+
+care_EC1S1J2U_12[] <- -n2care_e_12[i]*EC1S1J2U_12[i]
+care_EC2S1J2U_12[] <- n2nr[i]*n2care_e_12[i]*EC1S1J2U_12[i] + p2nr[i]*p2care[i]*EC4S1J2U_12[i] + r2nr[i]*end_res[i]*EC3S1J2U_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2U_12[i]
+care_EC3S1J2U_12[] <- n2r[i]*n2care_e_12[i]*EC2S1J2U_12[i] + p2r[i]*p2care[i]*EC4S1J2U_12[i] + nr2r[i]*end_nr[i]*EC2S1J2U_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2U_12[i]
+care_EC4S1J2U_12[] <- nr2p[i]*end_nr[i]*EC2S1J2U_12[i] + r2p[i]*end_res[i]*EC3S1J2U_12[i] - p2care[i]*EC4S1J2U_12[i]
+
+care_EC1S1J2U_13[] <- -n2care_e_13[i]*EC1S1J2U_13[i]
+care_EC2S1J2U_13[] <- n2nr[i]*n2care_e_13[i]*EC1S1J2U_13[i] + p2nr[i]*p2care[i]*EC4S1J2U_13[i] + r2nr[i]*end_res[i]*EC3S1J2U_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2U_13[i]
+care_EC3S1J2U_13[] <- n2r[i]*n2care_e_13[i]*EC2S1J2U_13[i] + p2r[i]*p2care[i]*EC4S1J2U_13[i] + nr2r[i]*end_nr[i]*EC2S1J2U_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2U_13[i]
+care_EC4S1J2U_13[] <- nr2p[i]*end_nr[i]*EC2S1J2U_13[i] + r2p[i]*end_res[i]*EC3S1J2U_13[i] - p2care[i]*EC4S1J2U_13[i]
+
+care_EC1S1J2U_14[] <- -n2care_e_14[i]*EC1S1J2U_14[i]
+care_EC2S1J2U_14[] <- n2nr[i]*n2care_e_14[i]*EC1S1J2U_14[i] + p2nr[i]*p2care[i]*EC4S1J2U_14[i] + r2nr[i]*end_res[i]*EC3S1J2U_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2U_14[i]
+care_EC3S1J2U_14[] <- n2r[i]*n2care_e_14[i]*EC2S1J2U_14[i] + p2r[i]*p2care[i]*EC4S1J2U_14[i] + nr2r[i]*end_nr[i]*EC2S1J2U_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2U_14[i]
+care_EC4S1J2U_14[] <- nr2p[i]*end_nr[i]*EC2S1J2U_14[i] + r2p[i]*end_res[i]*EC3S1J2U_14[i] - p2care[i]*EC4S1J2U_14[i]
+
+care_EC1S1J2U_15[] <- -n2care_e_15[i]*EC1S1J2U_15[i]
+care_EC2S1J2U_15[] <- n2nr[i]*n2care_e_15[i]*EC1S1J2U_15[i] + p2nr[i]*p2care[i]*EC4S1J2U_15[i] + r2nr[i]*end_res[i]*EC3S1J2U_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2U_15[i]
+care_EC3S1J2U_15[] <- n2r[i]*n2care_e_15[i]*EC2S1J2U_15[i] + p2r[i]*p2care[i]*EC4S1J2U_15[i] + nr2r[i]*end_nr[i]*EC2S1J2U_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2U_15[i]
+care_EC4S1J2U_15[] <- nr2p[i]*end_nr[i]*EC2S1J2U_15[i] + r2p[i]*end_res[i]*EC3S1J2U_15[i] - p2care[i]*EC4S1J2U_15[i]
+
+care_EC1S1J2U_16[] <- -n2care_e_16[i]*EC1S1J2U_16[i]
+care_EC2S1J2U_16[] <- n2nr[i]*n2care_e_16[i]*EC1S1J2U_16[i] + p2nr[i]*p2care[i]*EC4S1J2U_16[i] + r2nr[i]*end_res[i]*EC3S1J2U_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2U_16[i]
+care_EC3S1J2U_16[] <- n2r[i]*n2care_e_16[i]*EC2S1J2U_16[i] + p2r[i]*p2care[i]*EC4S1J2U_16[i] + nr2r[i]*end_nr[i]*EC2S1J2U_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2U_16[i]
+care_EC4S1J2U_16[] <- nr2p[i]*end_nr[i]*EC2S1J2U_16[i] + r2p[i]*end_res[i]*EC3S1J2U_16[i] - p2care[i]*EC4S1J2U_16[i]
+
+care_EC1S1J2U_17[] <- -n2care_e_17[i]*EC1S1J2U_17[i]
+care_EC2S1J2U_17[] <- n2nr[i]*n2care_e_17[i]*EC1S1J2U_17[i] + p2nr[i]*p2care[i]*EC4S1J2U_17[i] + r2nr[i]*end_res[i]*EC3S1J2U_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2U_17[i]
+care_EC3S1J2U_17[] <- n2r[i]*n2care_e_17[i]*EC2S1J2U_17[i] + p2r[i]*p2care[i]*EC4S1J2U_17[i] + nr2r[i]*end_nr[i]*EC2S1J2U_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2U_17[i]
+care_EC4S1J2U_17[] <- nr2p[i]*end_nr[i]*EC2S1J2U_17[i] + r2p[i]*end_res[i]*EC3S1J2U_17[i] - p2care[i]*EC4S1J2U_17[i]
+
+
+
+care_EC1S2J2U_10[] <- -n2care_e_10[i]*EC1S2J2U_10[i]
+care_EC2S2J2U_10[] <- n2nr[i]*n2care_e_10[i]*EC1S2J2U_10[i] + p2nr[i]*p2care[i]*EC4S2J2U_10[i] + r2nr[i]*end_res[i]*EC3S2J2U_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2U_10[i]
+care_EC3S2J2U_10[] <- n2r[i]*n2care_e_10[i]*EC2S2J2U_10[i] + p2r[i]*p2care[i]*EC4S2J2U_10[i] + nr2r[i]*end_nr[i]*EC2S2J2U_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2U_10[i]
+care_EC4S2J2U_10[] <- nr2p[i]*end_nr[i]*EC2S2J2U_10[i] + r2p[i]*end_res[i]*EC3S2J2U_10[i] - p2care[i]*EC4S2J2U_10[i]
+
+care_EC1S2J2U_11[] <- -n2care_e_11[i]*EC1S2J2U_11[i]
+care_EC2S2J2U_11[] <- n2nr[i]*n2care_e_11[i]*EC1S2J2U_11[i] + p2nr[i]*p2care[i]*EC4S2J2U_11[i] + r2nr[i]*end_res[i]*EC3S2J2U_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2U_11[i]
+care_EC3S2J2U_11[] <- n2r[i]*n2care_e_11[i]*EC2S2J2U_11[i] + p2r[i]*p2care[i]*EC4S2J2U_11[i] + nr2r[i]*end_nr[i]*EC2S2J2U_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2U_11[i]
+care_EC4S2J2U_11[] <- nr2p[i]*end_nr[i]*EC2S2J2U_11[i] + r2p[i]*end_res[i]*EC3S2J2U_11[i] - p2care[i]*EC4S2J2U_11[i]
+
+care_EC1S2J2U_12[] <- -n2care_e_12[i]*EC1S2J2U_12[i]
+care_EC2S2J2U_12[] <- n2nr[i]*n2care_e_12[i]*EC1S2J2U_12[i] + p2nr[i]*p2care[i]*EC4S2J2U_12[i] + r2nr[i]*end_res[i]*EC3S2J2U_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2U_12[i]
+care_EC3S2J2U_12[] <- n2r[i]*n2care_e_12[i]*EC2S2J2U_12[i] + p2r[i]*p2care[i]*EC4S2J2U_12[i] + nr2r[i]*end_nr[i]*EC2S2J2U_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2U_12[i]
+care_EC4S2J2U_12[] <- nr2p[i]*end_nr[i]*EC2S2J2U_12[i] + r2p[i]*end_res[i]*EC3S2J2U_12[i] - p2care[i]*EC4S2J2U_12[i]
+
+care_EC1S2J2U_13[] <- -n2care_e_13[i]*EC1S2J2U_13[i]
+care_EC2S2J2U_13[] <- n2nr[i]*n2care_e_13[i]*EC1S2J2U_13[i] + p2nr[i]*p2care[i]*EC4S2J2U_13[i] + r2nr[i]*end_res[i]*EC3S2J2U_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2U_13[i]
+care_EC3S2J2U_13[] <- n2r[i]*n2care_e_13[i]*EC2S2J2U_13[i] + p2r[i]*p2care[i]*EC4S2J2U_13[i] + nr2r[i]*end_nr[i]*EC2S2J2U_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2U_13[i]
+care_EC4S2J2U_13[] <- nr2p[i]*end_nr[i]*EC2S2J2U_13[i] + r2p[i]*end_res[i]*EC3S2J2U_13[i] - p2care[i]*EC4S2J2U_13[i]
+
+care_EC1S2J2U_14[] <- -n2care_e_14[i]*EC1S2J2U_14[i]
+care_EC2S2J2U_14[] <- n2nr[i]*n2care_e_14[i]*EC1S2J2U_14[i] + p2nr[i]*p2care[i]*EC4S2J2U_14[i] + r2nr[i]*end_res[i]*EC3S2J2U_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2U_14[i]
+care_EC3S2J2U_14[] <- n2r[i]*n2care_e_14[i]*EC2S2J2U_14[i] + p2r[i]*p2care[i]*EC4S2J2U_14[i] + nr2r[i]*end_nr[i]*EC2S2J2U_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2U_14[i]
+care_EC4S2J2U_14[] <- nr2p[i]*end_nr[i]*EC2S2J2U_14[i] + r2p[i]*end_res[i]*EC3S2J2U_14[i] - p2care[i]*EC4S2J2U_14[i]
+
+care_EC1S2J2U_15[] <- -n2care_e_15[i]*EC1S2J2U_15[i]
+care_EC2S2J2U_15[] <- n2nr[i]*n2care_e_15[i]*EC1S2J2U_15[i] + p2nr[i]*p2care[i]*EC4S2J2U_15[i] + r2nr[i]*end_res[i]*EC3S2J2U_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2U_15[i]
+care_EC3S2J2U_15[] <- n2r[i]*n2care_e_15[i]*EC2S2J2U_15[i] + p2r[i]*p2care[i]*EC4S2J2U_15[i] + nr2r[i]*end_nr[i]*EC2S2J2U_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2U_15[i]
+care_EC4S2J2U_15[] <- nr2p[i]*end_nr[i]*EC2S2J2U_15[i] + r2p[i]*end_res[i]*EC3S2J2U_15[i] - p2care[i]*EC4S2J2U_15[i]
+
+care_EC1S2J2U_16[] <- -n2care_e_16[i]*EC1S2J2U_16[i]
+care_EC2S2J2U_16[] <- n2nr[i]*n2care_e_16[i]*EC1S2J2U_16[i] + p2nr[i]*p2care[i]*EC4S2J2U_16[i] + r2nr[i]*end_res[i]*EC3S2J2U_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2U_16[i]
+care_EC3S2J2U_16[] <- n2r[i]*n2care_e_16[i]*EC2S2J2U_16[i] + p2r[i]*p2care[i]*EC4S2J2U_16[i] + nr2r[i]*end_nr[i]*EC2S2J2U_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2U_16[i]
+care_EC4S2J2U_16[] <- nr2p[i]*end_nr[i]*EC2S2J2U_16[i] + r2p[i]*end_res[i]*EC3S2J2U_16[i] - p2care[i]*EC4S2J2U_16[i]
+
+care_EC1S2J2U_17[] <- -n2care_e_17[i]*EC1S2J2U_17[i]
+care_EC2S2J2U_17[] <- n2nr[i]*n2care_e_17[i]*EC1S2J2U_17[i] + p2nr[i]*p2care[i]*EC4S2J2U_17[i] + r2nr[i]*end_res[i]*EC3S2J2U_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2U_17[i]
+care_EC3S2J2U_17[] <- n2r[i]*n2care_e_17[i]*EC2S2J2U_17[i] + p2r[i]*p2care[i]*EC4S2J2U_17[i] + nr2r[i]*end_nr[i]*EC2S2J2U_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2U_17[i]
+care_EC4S2J2U_17[] <- nr2p[i]*end_nr[i]*EC2S2J2U_17[i] + r2p[i]*end_res[i]*EC3S2J2U_17[i] - p2care[i]*EC4S2J2U_17[i]
+
+
+
+care_EC1S1J3U_10[] <- -n2care_e_10[i]*EC1S1J3U_10[i]
+care_EC2S1J3U_10[] <- n2nr[i]*n2care_e_10[i]*EC1S1J3U_10[i] + p2nr[i]*p2care[i]*EC4S1J3U_10[i] + r2nr[i]*end_res[i]*EC3S1J3U_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3U_10[i]
+care_EC3S1J3U_10[] <- n2r[i]*n2care_e_10[i]*EC2S1J3U_10[i] + p2r[i]*p2care[i]*EC4S1J3U_10[i] + nr2r[i]*end_nr[i]*EC2S1J3U_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3U_10[i]
+care_EC4S1J3U_10[] <- nr2p[i]*end_nr[i]*EC2S1J3U_10[i] + r2p[i]*end_res[i]*EC3S1J3U_10[i] - p2care[i]*EC4S1J3U_10[i]
+
+care_EC1S1J3U_11[] <- -n2care_e_11[i]*EC1S1J3U_11[i]
+care_EC2S1J3U_11[] <- n2nr[i]*n2care_e_11[i]*EC1S1J3U_11[i] + p2nr[i]*p2care[i]*EC4S1J3U_11[i] + r2nr[i]*end_res[i]*EC3S1J3U_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3U_11[i]
+care_EC3S1J3U_11[] <- n2r[i]*n2care_e_11[i]*EC2S1J3U_11[i] + p2r[i]*p2care[i]*EC4S1J3U_11[i] + nr2r[i]*end_nr[i]*EC2S1J3U_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3U_11[i]
+care_EC4S1J3U_11[] <- nr2p[i]*end_nr[i]*EC2S1J3U_11[i] + r2p[i]*end_res[i]*EC3S1J3U_11[i] - p2care[i]*EC4S1J3U_11[i]
+
+care_EC1S1J3U_12[] <- -n2care_e_12[i]*EC1S1J3U_12[i]
+care_EC2S1J3U_12[] <- n2nr[i]*n2care_e_12[i]*EC1S1J3U_12[i] + p2nr[i]*p2care[i]*EC4S1J3U_12[i] + r2nr[i]*end_res[i]*EC3S1J3U_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3U_12[i]
+care_EC3S1J3U_12[] <- n2r[i]*n2care_e_12[i]*EC2S1J3U_12[i] + p2r[i]*p2care[i]*EC4S1J3U_12[i] + nr2r[i]*end_nr[i]*EC2S1J3U_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3U_12[i]
+care_EC4S1J3U_12[] <- nr2p[i]*end_nr[i]*EC2S1J3U_12[i] + r2p[i]*end_res[i]*EC3S1J3U_12[i] - p2care[i]*EC4S1J3U_12[i]
+
+care_EC1S1J3U_13[] <- -n2care_e_13[i]*EC1S1J3U_13[i]
+care_EC2S1J3U_13[] <- n2nr[i]*n2care_e_13[i]*EC1S1J3U_13[i] + p2nr[i]*p2care[i]*EC4S1J3U_13[i] + r2nr[i]*end_res[i]*EC3S1J3U_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3U_13[i]
+care_EC3S1J3U_13[] <- n2r[i]*n2care_e_13[i]*EC2S1J3U_13[i] + p2r[i]*p2care[i]*EC4S1J3U_13[i] + nr2r[i]*end_nr[i]*EC2S1J3U_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3U_13[i]
+care_EC4S1J3U_13[] <- nr2p[i]*end_nr[i]*EC2S1J3U_13[i] + r2p[i]*end_res[i]*EC3S1J3U_13[i] - p2care[i]*EC4S1J3U_13[i]
+
+care_EC1S1J3U_14[] <- -n2care_e_14[i]*EC1S1J3U_14[i]
+care_EC2S1J3U_14[] <- n2nr[i]*n2care_e_14[i]*EC1S1J3U_14[i] + p2nr[i]*p2care[i]*EC4S1J3U_14[i] + r2nr[i]*end_res[i]*EC3S1J3U_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3U_14[i]
+care_EC3S1J3U_14[] <- n2r[i]*n2care_e_14[i]*EC2S1J3U_14[i] + p2r[i]*p2care[i]*EC4S1J3U_14[i] + nr2r[i]*end_nr[i]*EC2S1J3U_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3U_14[i]
+care_EC4S1J3U_14[] <- nr2p[i]*end_nr[i]*EC2S1J3U_14[i] + r2p[i]*end_res[i]*EC3S1J3U_14[i] - p2care[i]*EC4S1J3U_14[i]
+
+care_EC1S1J3U_15[] <- -n2care_e_15[i]*EC1S1J3U_15[i]
+care_EC2S1J3U_15[] <- n2nr[i]*n2care_e_15[i]*EC1S1J3U_15[i] + p2nr[i]*p2care[i]*EC4S1J3U_15[i] + r2nr[i]*end_res[i]*EC3S1J3U_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3U_15[i]
+care_EC3S1J3U_15[] <- n2r[i]*n2care_e_15[i]*EC2S1J3U_15[i] + p2r[i]*p2care[i]*EC4S1J3U_15[i] + nr2r[i]*end_nr[i]*EC2S1J3U_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3U_15[i]
+care_EC4S1J3U_15[] <- nr2p[i]*end_nr[i]*EC2S1J3U_15[i] + r2p[i]*end_res[i]*EC3S1J3U_15[i] - p2care[i]*EC4S1J3U_15[i]
+
+care_EC1S1J3U_16[] <- -n2care_e_16[i]*EC1S1J3U_16[i]
+care_EC2S1J3U_16[] <- n2nr[i]*n2care_e_16[i]*EC1S1J3U_16[i] + p2nr[i]*p2care[i]*EC4S1J3U_16[i] + r2nr[i]*end_res[i]*EC3S1J3U_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3U_16[i]
+care_EC3S1J3U_16[] <- n2r[i]*n2care_e_16[i]*EC2S1J3U_16[i] + p2r[i]*p2care[i]*EC4S1J3U_16[i] + nr2r[i]*end_nr[i]*EC2S1J3U_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3U_16[i]
+care_EC4S1J3U_16[] <- nr2p[i]*end_nr[i]*EC2S1J3U_16[i] + r2p[i]*end_res[i]*EC3S1J3U_16[i] - p2care[i]*EC4S1J3U_16[i]
+
+care_EC1S1J3U_17[] <- -n2care_e_17[i]*EC1S1J3U_17[i]
+care_EC2S1J3U_17[] <- n2nr[i]*n2care_e_17[i]*EC1S1J3U_17[i] + p2nr[i]*p2care[i]*EC4S1J3U_17[i] + r2nr[i]*end_res[i]*EC3S1J3U_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3U_17[i]
+care_EC3S1J3U_17[] <- n2r[i]*n2care_e_17[i]*EC2S1J3U_17[i] + p2r[i]*p2care[i]*EC4S1J3U_17[i] + nr2r[i]*end_nr[i]*EC2S1J3U_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3U_17[i]
+care_EC4S1J3U_17[] <- nr2p[i]*end_nr[i]*EC2S1J3U_17[i] + r2p[i]*end_res[i]*EC3S1J3U_17[i] - p2care[i]*EC4S1J3U_17[i]
+
+
+
+care_EC1S2J3U_10[] <- -n2care_e_10[i]*EC1S2J3U_10[i]
+care_EC2S2J3U_10[] <- n2nr[i]*n2care_e_10[i]*EC1S2J3U_10[i] + p2nr[i]*p2care[i]*EC4S2J3U_10[i] + r2nr[i]*end_res[i]*EC3S2J3U_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3U_10[i]
+care_EC3S2J3U_10[] <- n2r[i]*n2care_e_10[i]*EC2S2J3U_10[i] + p2r[i]*p2care[i]*EC4S2J3U_10[i] + nr2r[i]*end_nr[i]*EC2S2J3U_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3U_10[i]
+care_EC4S2J3U_10[] <- nr2p[i]*end_nr[i]*EC2S2J3U_10[i] + r2p[i]*end_res[i]*EC3S2J3U_10[i] - p2care[i]*EC4S2J3U_10[i]
+
+care_EC1S2J3U_11[] <- -n2care_e_11[i]*EC1S2J3U_11[i]
+care_EC2S2J3U_11[] <- n2nr[i]*n2care_e_11[i]*EC1S2J3U_11[i] + p2nr[i]*p2care[i]*EC4S2J3U_11[i] + r2nr[i]*end_res[i]*EC3S2J3U_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3U_11[i]
+care_EC3S2J3U_11[] <- n2r[i]*n2care_e_11[i]*EC2S2J3U_11[i] + p2r[i]*p2care[i]*EC4S2J3U_11[i] + nr2r[i]*end_nr[i]*EC2S2J3U_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3U_11[i]
+care_EC4S2J3U_11[] <- nr2p[i]*end_nr[i]*EC2S2J3U_11[i] + r2p[i]*end_res[i]*EC3S2J3U_11[i] - p2care[i]*EC4S2J3U_11[i]
+
+care_EC1S2J3U_12[] <- -n2care_e_12[i]*EC1S2J3U_12[i]
+care_EC2S2J3U_12[] <- n2nr[i]*n2care_e_12[i]*EC1S2J3U_12[i] + p2nr[i]*p2care[i]*EC4S2J3U_12[i] + r2nr[i]*end_res[i]*EC3S2J3U_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3U_12[i]
+care_EC3S2J3U_12[] <- n2r[i]*n2care_e_12[i]*EC2S2J3U_12[i] + p2r[i]*p2care[i]*EC4S2J3U_12[i] + nr2r[i]*end_nr[i]*EC2S2J3U_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3U_12[i]
+care_EC4S2J3U_12[] <- nr2p[i]*end_nr[i]*EC2S2J3U_12[i] + r2p[i]*end_res[i]*EC3S2J3U_12[i] - p2care[i]*EC4S2J3U_12[i]
+
+care_EC1S2J3U_13[] <- -n2care_e_13[i]*EC1S2J3U_13[i]
+care_EC2S2J3U_13[] <- n2nr[i]*n2care_e_13[i]*EC1S2J3U_13[i] + p2nr[i]*p2care[i]*EC4S2J3U_13[i] + r2nr[i]*end_res[i]*EC3S2J3U_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3U_13[i]
+care_EC3S2J3U_13[] <- n2r[i]*n2care_e_13[i]*EC2S2J3U_13[i] + p2r[i]*p2care[i]*EC4S2J3U_13[i] + nr2r[i]*end_nr[i]*EC2S2J3U_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3U_13[i]
+care_EC4S2J3U_13[] <- nr2p[i]*end_nr[i]*EC2S2J3U_13[i] + r2p[i]*end_res[i]*EC3S2J3U_13[i] - p2care[i]*EC4S2J3U_13[i]
+
+care_EC1S2J3U_14[] <- -n2care_e_14[i]*EC1S2J3U_14[i]
+care_EC2S2J3U_14[] <- n2nr[i]*n2care_e_14[i]*EC1S2J3U_14[i] + p2nr[i]*p2care[i]*EC4S2J3U_14[i] + r2nr[i]*end_res[i]*EC3S2J3U_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3U_14[i]
+care_EC3S2J3U_14[] <- n2r[i]*n2care_e_14[i]*EC2S2J3U_14[i] + p2r[i]*p2care[i]*EC4S2J3U_14[i] + nr2r[i]*end_nr[i]*EC2S2J3U_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3U_14[i]
+care_EC4S2J3U_14[] <- nr2p[i]*end_nr[i]*EC2S2J3U_14[i] + r2p[i]*end_res[i]*EC3S2J3U_14[i] - p2care[i]*EC4S2J3U_14[i]
+
+care_EC1S2J3U_15[] <- -n2care_e_15[i]*EC1S2J3U_15[i]
+care_EC2S2J3U_15[] <- n2nr[i]*n2care_e_15[i]*EC1S2J3U_15[i] + p2nr[i]*p2care[i]*EC4S2J3U_15[i] + r2nr[i]*end_res[i]*EC3S2J3U_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3U_15[i]
+care_EC3S2J3U_15[] <- n2r[i]*n2care_e_15[i]*EC2S2J3U_15[i] + p2r[i]*p2care[i]*EC4S2J3U_15[i] + nr2r[i]*end_nr[i]*EC2S2J3U_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3U_15[i]
+care_EC4S2J3U_15[] <- nr2p[i]*end_nr[i]*EC2S2J3U_15[i] + r2p[i]*end_res[i]*EC3S2J3U_15[i] - p2care[i]*EC4S2J3U_15[i]
+
+care_EC1S2J3U_16[] <- -n2care_e_16[i]*EC1S2J3U_16[i]
+care_EC2S2J3U_16[] <- n2nr[i]*n2care_e_16[i]*EC1S2J3U_16[i] + p2nr[i]*p2care[i]*EC4S2J3U_16[i] + r2nr[i]*end_res[i]*EC3S2J3U_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3U_16[i]
+care_EC3S2J3U_16[] <- n2r[i]*n2care_e_16[i]*EC2S2J3U_16[i] + p2r[i]*p2care[i]*EC4S2J3U_16[i] + nr2r[i]*end_nr[i]*EC2S2J3U_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3U_16[i]
+care_EC4S2J3U_16[] <- nr2p[i]*end_nr[i]*EC2S2J3U_16[i] + r2p[i]*end_res[i]*EC3S2J3U_16[i] - p2care[i]*EC4S2J3U_16[i]
+
+care_EC1S2J3U_17[] <- -n2care_e_17[i]*EC1S2J3U_17[i]
+care_EC2S2J3U_17[] <- n2nr[i]*n2care_e_17[i]*EC1S2J3U_17[i] + p2nr[i]*p2care[i]*EC4S2J3U_17[i] + r2nr[i]*end_res[i]*EC3S2J3U_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3U_17[i]
+care_EC3S2J3U_17[] <- n2r[i]*n2care_e_17[i]*EC2S2J3U_17[i] + p2r[i]*p2care[i]*EC4S2J3U_17[i] + nr2r[i]*end_nr[i]*EC2S2J3U_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3U_17[i]
+care_EC4S2J3U_17[] <- nr2p[i]*end_nr[i]*EC2S2J3U_17[i] + r2p[i]*end_res[i]*EC3S2J3U_17[i] - p2care[i]*EC4S2J3U_17[i]
+
+
+
+care_EC1S1J1W_10[] <- -n2care_e_10[i]*EC1S1J1W_10[i]
+care_EC2S1J1W_10[] <- n2nr[i]*n2care_e_10[i]*EC1S1J1W_10[i] + p2nr[i]*p2care[i]*EC4S1J1W_10[i] + r2nr[i]*end_res[i]*EC3S1J1W_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1W_10[i]
+care_EC3S1J1W_10[] <- n2r[i]*n2care_e_10[i]*EC2S1J1W_10[i] + p2r[i]*p2care[i]*EC4S1J1W_10[i] + nr2r[i]*end_nr[i]*EC2S1J1W_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1W_10[i]
+care_EC4S1J1W_10[] <- nr2p[i]*end_nr[i]*EC2S1J1W_10[i] + r2p[i]*end_res[i]*EC3S1J1W_10[i] - p2care[i]*EC4S1J1W_10[i]
+
+care_EC1S1J1W_11[] <- -n2care_e_11[i]*EC1S1J1W_11[i]
+care_EC2S1J1W_11[] <- n2nr[i]*n2care_e_11[i]*EC1S1J1W_11[i] + p2nr[i]*p2care[i]*EC4S1J1W_11[i] + r2nr[i]*end_res[i]*EC3S1J1W_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1W_11[i]
+care_EC3S1J1W_11[] <- n2r[i]*n2care_e_11[i]*EC2S1J1W_11[i] + p2r[i]*p2care[i]*EC4S1J1W_11[i] + nr2r[i]*end_nr[i]*EC2S1J1W_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1W_11[i]
+care_EC4S1J1W_11[] <- nr2p[i]*end_nr[i]*EC2S1J1W_11[i] + r2p[i]*end_res[i]*EC3S1J1W_11[i] - p2care[i]*EC4S1J1W_11[i]
+
+care_EC1S1J1W_12[] <- -n2care_e_12[i]*EC1S1J1W_12[i]
+care_EC2S1J1W_12[] <- n2nr[i]*n2care_e_12[i]*EC1S1J1W_12[i] + p2nr[i]*p2care[i]*EC4S1J1W_12[i] + r2nr[i]*end_res[i]*EC3S1J1W_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1W_12[i]
+care_EC3S1J1W_12[] <- n2r[i]*n2care_e_12[i]*EC2S1J1W_12[i] + p2r[i]*p2care[i]*EC4S1J1W_12[i] + nr2r[i]*end_nr[i]*EC2S1J1W_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1W_12[i]
+care_EC4S1J1W_12[] <- nr2p[i]*end_nr[i]*EC2S1J1W_12[i] + r2p[i]*end_res[i]*EC3S1J1W_12[i] - p2care[i]*EC4S1J1W_12[i]
+
+care_EC1S1J1W_13[] <- -n2care_e_13[i]*EC1S1J1W_13[i]
+care_EC2S1J1W_13[] <- n2nr[i]*n2care_e_13[i]*EC1S1J1W_13[i] + p2nr[i]*p2care[i]*EC4S1J1W_13[i] + r2nr[i]*end_res[i]*EC3S1J1W_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1W_13[i]
+care_EC3S1J1W_13[] <- n2r[i]*n2care_e_13[i]*EC2S1J1W_13[i] + p2r[i]*p2care[i]*EC4S1J1W_13[i] + nr2r[i]*end_nr[i]*EC2S1J1W_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1W_13[i]
+care_EC4S1J1W_13[] <- nr2p[i]*end_nr[i]*EC2S1J1W_13[i] + r2p[i]*end_res[i]*EC3S1J1W_13[i] - p2care[i]*EC4S1J1W_13[i]
+
+care_EC1S1J1W_14[] <- -n2care_e_14[i]*EC1S1J1W_14[i]
+care_EC2S1J1W_14[] <- n2nr[i]*n2care_e_14[i]*EC1S1J1W_14[i] + p2nr[i]*p2care[i]*EC4S1J1W_14[i] + r2nr[i]*end_res[i]*EC3S1J1W_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1W_14[i]
+care_EC3S1J1W_14[] <- n2r[i]*n2care_e_14[i]*EC2S1J1W_14[i] + p2r[i]*p2care[i]*EC4S1J1W_14[i] + nr2r[i]*end_nr[i]*EC2S1J1W_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1W_14[i]
+care_EC4S1J1W_14[] <- nr2p[i]*end_nr[i]*EC2S1J1W_14[i] + r2p[i]*end_res[i]*EC3S1J1W_14[i] - p2care[i]*EC4S1J1W_14[i]
+
+care_EC1S1J1W_15[] <- -n2care_e_15[i]*EC1S1J1W_15[i]
+care_EC2S1J1W_15[] <- n2nr[i]*n2care_e_15[i]*EC1S1J1W_15[i] + p2nr[i]*p2care[i]*EC4S1J1W_15[i] + r2nr[i]*end_res[i]*EC3S1J1W_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1W_15[i]
+care_EC3S1J1W_15[] <- n2r[i]*n2care_e_15[i]*EC2S1J1W_15[i] + p2r[i]*p2care[i]*EC4S1J1W_15[i] + nr2r[i]*end_nr[i]*EC2S1J1W_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1W_15[i]
+care_EC4S1J1W_15[] <- nr2p[i]*end_nr[i]*EC2S1J1W_15[i] + r2p[i]*end_res[i]*EC3S1J1W_15[i] - p2care[i]*EC4S1J1W_15[i]
+
+care_EC1S1J1W_16[] <- -n2care_e_16[i]*EC1S1J1W_16[i]
+care_EC2S1J1W_16[] <- n2nr[i]*n2care_e_16[i]*EC1S1J1W_16[i] + p2nr[i]*p2care[i]*EC4S1J1W_16[i] + r2nr[i]*end_res[i]*EC3S1J1W_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1W_16[i]
+care_EC3S1J1W_16[] <- n2r[i]*n2care_e_16[i]*EC2S1J1W_16[i] + p2r[i]*p2care[i]*EC4S1J1W_16[i] + nr2r[i]*end_nr[i]*EC2S1J1W_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1W_16[i]
+care_EC4S1J1W_16[] <- nr2p[i]*end_nr[i]*EC2S1J1W_16[i] + r2p[i]*end_res[i]*EC3S1J1W_16[i] - p2care[i]*EC4S1J1W_16[i]
+
+care_EC1S1J1W_17[] <- -n2care_e_17[i]*EC1S1J1W_17[i]
+care_EC2S1J1W_17[] <- n2nr[i]*n2care_e_17[i]*EC1S1J1W_17[i] + p2nr[i]*p2care[i]*EC4S1J1W_17[i] + r2nr[i]*end_res[i]*EC3S1J1W_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J1W_17[i]
+care_EC3S1J1W_17[] <- n2r[i]*n2care_e_17[i]*EC2S1J1W_17[i] + p2r[i]*p2care[i]*EC4S1J1W_17[i] + nr2r[i]*end_nr[i]*EC2S1J1W_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J1W_17[i]
+care_EC4S1J1W_17[] <- nr2p[i]*end_nr[i]*EC2S1J1W_17[i] + r2p[i]*end_res[i]*EC3S1J1W_17[i] - p2care[i]*EC4S1J1W_17[i]
+
+
+
+care_EC1S2J1W_10[] <- -n2care_e_10[i]*EC1S2J1W_10[i]
+care_EC2S2J1W_10[] <- n2nr[i]*n2care_e_10[i]*EC1S2J1W_10[i] + p2nr[i]*p2care[i]*EC4S2J1W_10[i] + r2nr[i]*end_res[i]*EC3S2J1W_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1W_10[i]
+care_EC3S2J1W_10[] <- n2r[i]*n2care_e_10[i]*EC2S2J1W_10[i] + p2r[i]*p2care[i]*EC4S2J1W_10[i] + nr2r[i]*end_nr[i]*EC2S2J1W_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1W_10[i]
+care_EC4S2J1W_10[] <- nr2p[i]*end_nr[i]*EC2S2J1W_10[i] + r2p[i]*end_res[i]*EC3S2J1W_10[i] - p2care[i]*EC4S2J1W_10[i]
+
+care_EC1S2J1W_11[] <- -n2care_e_11[i]*EC1S2J1W_11[i]
+care_EC2S2J1W_11[] <- n2nr[i]*n2care_e_11[i]*EC1S2J1W_11[i] + p2nr[i]*p2care[i]*EC4S2J1W_11[i] + r2nr[i]*end_res[i]*EC3S2J1W_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1W_11[i]
+care_EC3S2J1W_11[] <- n2r[i]*n2care_e_11[i]*EC2S2J1W_11[i] + p2r[i]*p2care[i]*EC4S2J1W_11[i] + nr2r[i]*end_nr[i]*EC2S2J1W_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1W_11[i]
+care_EC4S2J1W_11[] <- nr2p[i]*end_nr[i]*EC2S2J1W_11[i] + r2p[i]*end_res[i]*EC3S2J1W_11[i] - p2care[i]*EC4S2J1W_11[i]
+
+care_EC1S2J1W_12[] <- -n2care_e_12[i]*EC1S2J1W_12[i]
+care_EC2S2J1W_12[] <- n2nr[i]*n2care_e_12[i]*EC1S2J1W_12[i] + p2nr[i]*p2care[i]*EC4S2J1W_12[i] + r2nr[i]*end_res[i]*EC3S2J1W_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1W_12[i]
+care_EC3S2J1W_12[] <- n2r[i]*n2care_e_12[i]*EC2S2J1W_12[i] + p2r[i]*p2care[i]*EC4S2J1W_12[i] + nr2r[i]*end_nr[i]*EC2S2J1W_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1W_12[i]
+care_EC4S2J1W_12[] <- nr2p[i]*end_nr[i]*EC2S2J1W_12[i] + r2p[i]*end_res[i]*EC3S2J1W_12[i] - p2care[i]*EC4S2J1W_12[i]
+
+care_EC1S2J1W_13[] <- -n2care_e_13[i]*EC1S2J1W_13[i]
+care_EC2S2J1W_13[] <- n2nr[i]*n2care_e_13[i]*EC1S2J1W_13[i] + p2nr[i]*p2care[i]*EC4S2J1W_13[i] + r2nr[i]*end_res[i]*EC3S2J1W_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1W_13[i]
+care_EC3S2J1W_13[] <- n2r[i]*n2care_e_13[i]*EC2S2J1W_13[i] + p2r[i]*p2care[i]*EC4S2J1W_13[i] + nr2r[i]*end_nr[i]*EC2S2J1W_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1W_13[i]
+care_EC4S2J1W_13[] <- nr2p[i]*end_nr[i]*EC2S2J1W_13[i] + r2p[i]*end_res[i]*EC3S2J1W_13[i] - p2care[i]*EC4S2J1W_13[i]
+
+care_EC1S2J1W_14[] <- -n2care_e_14[i]*EC1S2J1W_14[i]
+care_EC2S2J1W_14[] <- n2nr[i]*n2care_e_14[i]*EC1S2J1W_14[i] + p2nr[i]*p2care[i]*EC4S2J1W_14[i] + r2nr[i]*end_res[i]*EC3S2J1W_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1W_14[i]
+care_EC3S2J1W_14[] <- n2r[i]*n2care_e_14[i]*EC2S2J1W_14[i] + p2r[i]*p2care[i]*EC4S2J1W_14[i] + nr2r[i]*end_nr[i]*EC2S2J1W_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1W_14[i]
+care_EC4S2J1W_14[] <- nr2p[i]*end_nr[i]*EC2S2J1W_14[i] + r2p[i]*end_res[i]*EC3S2J1W_14[i] - p2care[i]*EC4S2J1W_14[i]
+
+care_EC1S2J1W_15[] <- -n2care_e_15[i]*EC1S2J1W_15[i]
+care_EC2S2J1W_15[] <- n2nr[i]*n2care_e_15[i]*EC1S2J1W_15[i] + p2nr[i]*p2care[i]*EC4S2J1W_15[i] + r2nr[i]*end_res[i]*EC3S2J1W_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1W_15[i]
+care_EC3S2J1W_15[] <- n2r[i]*n2care_e_15[i]*EC2S2J1W_15[i] + p2r[i]*p2care[i]*EC4S2J1W_15[i] + nr2r[i]*end_nr[i]*EC2S2J1W_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1W_15[i]
+care_EC4S2J1W_15[] <- nr2p[i]*end_nr[i]*EC2S2J1W_15[i] + r2p[i]*end_res[i]*EC3S2J1W_15[i] - p2care[i]*EC4S2J1W_15[i]
+
+care_EC1S2J1W_16[] <- -n2care_e_16[i]*EC1S2J1W_16[i]
+care_EC2S2J1W_16[] <- n2nr[i]*n2care_e_16[i]*EC1S2J1W_16[i] + p2nr[i]*p2care[i]*EC4S2J1W_16[i] + r2nr[i]*end_res[i]*EC3S2J1W_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1W_16[i]
+care_EC3S2J1W_16[] <- n2r[i]*n2care_e_16[i]*EC2S2J1W_16[i] + p2r[i]*p2care[i]*EC4S2J1W_16[i] + nr2r[i]*end_nr[i]*EC2S2J1W_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1W_16[i]
+care_EC4S2J1W_16[] <- nr2p[i]*end_nr[i]*EC2S2J1W_16[i] + r2p[i]*end_res[i]*EC3S2J1W_16[i] - p2care[i]*EC4S2J1W_16[i]
+
+care_EC1S2J1W_17[] <- -n2care_e_17[i]*EC1S2J1W_17[i]
+care_EC2S2J1W_17[] <- n2nr[i]*n2care_e_17[i]*EC1S2J1W_17[i] + p2nr[i]*p2care[i]*EC4S2J1W_17[i] + r2nr[i]*end_res[i]*EC3S2J1W_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J1W_17[i]
+care_EC3S2J1W_17[] <- n2r[i]*n2care_e_17[i]*EC2S2J1W_17[i] + p2r[i]*p2care[i]*EC4S2J1W_17[i] + nr2r[i]*end_nr[i]*EC2S2J1W_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J1W_17[i]
+care_EC4S2J1W_17[] <- nr2p[i]*end_nr[i]*EC2S2J1W_17[i] + r2p[i]*end_res[i]*EC3S2J1W_17[i] - p2care[i]*EC4S2J1W_17[i]
+
+
+
+care_EC1S1J2W_10[] <- -n2care_e_10[i]*EC1S1J2W_10[i]
+care_EC2S1J2W_10[] <- n2nr[i]*n2care_e_10[i]*EC1S1J2W_10[i] + p2nr[i]*p2care[i]*EC4S1J2W_10[i] + r2nr[i]*end_res[i]*EC3S1J2W_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2W_10[i]
+care_EC3S1J2W_10[] <- n2r[i]*n2care_e_10[i]*EC2S1J2W_10[i] + p2r[i]*p2care[i]*EC4S1J2W_10[i] + nr2r[i]*end_nr[i]*EC2S1J2W_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2W_10[i]
+care_EC4S1J2W_10[] <- nr2p[i]*end_nr[i]*EC2S1J2W_10[i] + r2p[i]*end_res[i]*EC3S1J2W_10[i] - p2care[i]*EC4S1J2W_10[i]
+
+care_EC1S1J2W_11[] <- -n2care_e_11[i]*EC1S1J2W_11[i]
+care_EC2S1J2W_11[] <- n2nr[i]*n2care_e_11[i]*EC1S1J2W_11[i] + p2nr[i]*p2care[i]*EC4S1J2W_11[i] + r2nr[i]*end_res[i]*EC3S1J2W_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2W_11[i]
+care_EC3S1J2W_11[] <- n2r[i]*n2care_e_11[i]*EC2S1J2W_11[i] + p2r[i]*p2care[i]*EC4S1J2W_11[i] + nr2r[i]*end_nr[i]*EC2S1J2W_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2W_11[i]
+care_EC4S1J2W_11[] <- nr2p[i]*end_nr[i]*EC2S1J2W_11[i] + r2p[i]*end_res[i]*EC3S1J2W_11[i] - p2care[i]*EC4S1J2W_11[i]
+
+care_EC1S1J2W_12[] <- -n2care_e_12[i]*EC1S1J2W_12[i]
+care_EC2S1J2W_12[] <- n2nr[i]*n2care_e_12[i]*EC1S1J2W_12[i] + p2nr[i]*p2care[i]*EC4S1J2W_12[i] + r2nr[i]*end_res[i]*EC3S1J2W_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2W_12[i]
+care_EC3S1J2W_12[] <- n2r[i]*n2care_e_12[i]*EC2S1J2W_12[i] + p2r[i]*p2care[i]*EC4S1J2W_12[i] + nr2r[i]*end_nr[i]*EC2S1J2W_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2W_12[i]
+care_EC4S1J2W_12[] <- nr2p[i]*end_nr[i]*EC2S1J2W_12[i] + r2p[i]*end_res[i]*EC3S1J2W_12[i] - p2care[i]*EC4S1J2W_12[i]
+
+care_EC1S1J2W_13[] <- -n2care_e_13[i]*EC1S1J2W_13[i]
+care_EC2S1J2W_13[] <- n2nr[i]*n2care_e_13[i]*EC1S1J2W_13[i] + p2nr[i]*p2care[i]*EC4S1J2W_13[i] + r2nr[i]*end_res[i]*EC3S1J2W_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2W_13[i]
+care_EC3S1J2W_13[] <- n2r[i]*n2care_e_13[i]*EC2S1J2W_13[i] + p2r[i]*p2care[i]*EC4S1J2W_13[i] + nr2r[i]*end_nr[i]*EC2S1J2W_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2W_13[i]
+care_EC4S1J2W_13[] <- nr2p[i]*end_nr[i]*EC2S1J2W_13[i] + r2p[i]*end_res[i]*EC3S1J2W_13[i] - p2care[i]*EC4S1J2W_13[i]
+
+care_EC1S1J2W_14[] <- -n2care_e_14[i]*EC1S1J2W_14[i]
+care_EC2S1J2W_14[] <- n2nr[i]*n2care_e_14[i]*EC1S1J2W_14[i] + p2nr[i]*p2care[i]*EC4S1J2W_14[i] + r2nr[i]*end_res[i]*EC3S1J2W_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2W_14[i]
+care_EC3S1J2W_14[] <- n2r[i]*n2care_e_14[i]*EC2S1J2W_14[i] + p2r[i]*p2care[i]*EC4S1J2W_14[i] + nr2r[i]*end_nr[i]*EC2S1J2W_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2W_14[i]
+care_EC4S1J2W_14[] <- nr2p[i]*end_nr[i]*EC2S1J2W_14[i] + r2p[i]*end_res[i]*EC3S1J2W_14[i] - p2care[i]*EC4S1J2W_14[i]
+
+care_EC1S1J2W_15[] <- -n2care_e_15[i]*EC1S1J2W_15[i]
+care_EC2S1J2W_15[] <- n2nr[i]*n2care_e_15[i]*EC1S1J2W_15[i] + p2nr[i]*p2care[i]*EC4S1J2W_15[i] + r2nr[i]*end_res[i]*EC3S1J2W_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2W_15[i]
+care_EC3S1J2W_15[] <- n2r[i]*n2care_e_15[i]*EC2S1J2W_15[i] + p2r[i]*p2care[i]*EC4S1J2W_15[i] + nr2r[i]*end_nr[i]*EC2S1J2W_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2W_15[i]
+care_EC4S1J2W_15[] <- nr2p[i]*end_nr[i]*EC2S1J2W_15[i] + r2p[i]*end_res[i]*EC3S1J2W_15[i] - p2care[i]*EC4S1J2W_15[i]
+
+care_EC1S1J2W_16[] <- -n2care_e_16[i]*EC1S1J2W_16[i]
+care_EC2S1J2W_16[] <- n2nr[i]*n2care_e_16[i]*EC1S1J2W_16[i] + p2nr[i]*p2care[i]*EC4S1J2W_16[i] + r2nr[i]*end_res[i]*EC3S1J2W_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2W_16[i]
+care_EC3S1J2W_16[] <- n2r[i]*n2care_e_16[i]*EC2S1J2W_16[i] + p2r[i]*p2care[i]*EC4S1J2W_16[i] + nr2r[i]*end_nr[i]*EC2S1J2W_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2W_16[i]
+care_EC4S1J2W_16[] <- nr2p[i]*end_nr[i]*EC2S1J2W_16[i] + r2p[i]*end_res[i]*EC3S1J2W_16[i] - p2care[i]*EC4S1J2W_16[i]
+
+care_EC1S1J2W_17[] <- -n2care_e_17[i]*EC1S1J2W_17[i]
+care_EC2S1J2W_17[] <- n2nr[i]*n2care_e_17[i]*EC1S1J2W_17[i] + p2nr[i]*p2care[i]*EC4S1J2W_17[i] + r2nr[i]*end_res[i]*EC3S1J2W_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J2W_17[i]
+care_EC3S1J2W_17[] <- n2r[i]*n2care_e_17[i]*EC2S1J2W_17[i] + p2r[i]*p2care[i]*EC4S1J2W_17[i] + nr2r[i]*end_nr[i]*EC2S1J2W_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J2W_17[i]
+care_EC4S1J2W_17[] <- nr2p[i]*end_nr[i]*EC2S1J2W_17[i] + r2p[i]*end_res[i]*EC3S1J2W_17[i] - p2care[i]*EC4S1J2W_17[i]
+
+
+
+care_EC1S2J2W_10[] <- -n2care_e_10[i]*EC1S2J2W_10[i]
+care_EC2S2J2W_10[] <- n2nr[i]*n2care_e_10[i]*EC1S2J2W_10[i] + p2nr[i]*p2care[i]*EC4S2J2W_10[i] + r2nr[i]*end_res[i]*EC3S2J2W_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2W_10[i]
+care_EC3S2J2W_10[] <- n2r[i]*n2care_e_10[i]*EC2S2J2W_10[i] + p2r[i]*p2care[i]*EC4S2J2W_10[i] + nr2r[i]*end_nr[i]*EC2S2J2W_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2W_10[i]
+care_EC4S2J2W_10[] <- nr2p[i]*end_nr[i]*EC2S2J2W_10[i] + r2p[i]*end_res[i]*EC3S2J2W_10[i] - p2care[i]*EC4S2J2W_10[i]
+
+care_EC1S2J2W_11[] <- -n2care_e_11[i]*EC1S2J2W_11[i]
+care_EC2S2J2W_11[] <- n2nr[i]*n2care_e_11[i]*EC1S2J2W_11[i] + p2nr[i]*p2care[i]*EC4S2J2W_11[i] + r2nr[i]*end_res[i]*EC3S2J2W_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2W_11[i]
+care_EC3S2J2W_11[] <- n2r[i]*n2care_e_11[i]*EC2S2J2W_11[i] + p2r[i]*p2care[i]*EC4S2J2W_11[i] + nr2r[i]*end_nr[i]*EC2S2J2W_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2W_11[i]
+care_EC4S2J2W_11[] <- nr2p[i]*end_nr[i]*EC2S2J2W_11[i] + r2p[i]*end_res[i]*EC3S2J2W_11[i] - p2care[i]*EC4S2J2W_11[i]
+
+care_EC1S2J2W_12[] <- -n2care_e_12[i]*EC1S2J2W_12[i]
+care_EC2S2J2W_12[] <- n2nr[i]*n2care_e_12[i]*EC1S2J2W_12[i] + p2nr[i]*p2care[i]*EC4S2J2W_12[i] + r2nr[i]*end_res[i]*EC3S2J2W_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2W_12[i]
+care_EC3S2J2W_12[] <- n2r[i]*n2care_e_12[i]*EC2S2J2W_12[i] + p2r[i]*p2care[i]*EC4S2J2W_12[i] + nr2r[i]*end_nr[i]*EC2S2J2W_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2W_12[i]
+care_EC4S2J2W_12[] <- nr2p[i]*end_nr[i]*EC2S2J2W_12[i] + r2p[i]*end_res[i]*EC3S2J2W_12[i] - p2care[i]*EC4S2J2W_12[i]
+
+care_EC1S2J2W_13[] <- -n2care_e_13[i]*EC1S2J2W_13[i]
+care_EC2S2J2W_13[] <- n2nr[i]*n2care_e_13[i]*EC1S2J2W_13[i] + p2nr[i]*p2care[i]*EC4S2J2W_13[i] + r2nr[i]*end_res[i]*EC3S2J2W_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2W_13[i]
+care_EC3S2J2W_13[] <- n2r[i]*n2care_e_13[i]*EC2S2J2W_13[i] + p2r[i]*p2care[i]*EC4S2J2W_13[i] + nr2r[i]*end_nr[i]*EC2S2J2W_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2W_13[i]
+care_EC4S2J2W_13[] <- nr2p[i]*end_nr[i]*EC2S2J2W_13[i] + r2p[i]*end_res[i]*EC3S2J2W_13[i] - p2care[i]*EC4S2J2W_13[i]
+
+care_EC1S2J2W_14[] <- -n2care_e_14[i]*EC1S2J2W_14[i]
+care_EC2S2J2W_14[] <- n2nr[i]*n2care_e_14[i]*EC1S2J2W_14[i] + p2nr[i]*p2care[i]*EC4S2J2W_14[i] + r2nr[i]*end_res[i]*EC3S2J2W_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2W_14[i]
+care_EC3S2J2W_14[] <- n2r[i]*n2care_e_14[i]*EC2S2J2W_14[i] + p2r[i]*p2care[i]*EC4S2J2W_14[i] + nr2r[i]*end_nr[i]*EC2S2J2W_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2W_14[i]
+care_EC4S2J2W_14[] <- nr2p[i]*end_nr[i]*EC2S2J2W_14[i] + r2p[i]*end_res[i]*EC3S2J2W_14[i] - p2care[i]*EC4S2J2W_14[i]
+
+care_EC1S2J2W_15[] <- -n2care_e_15[i]*EC1S2J2W_15[i]
+care_EC2S2J2W_15[] <- n2nr[i]*n2care_e_15[i]*EC1S2J2W_15[i] + p2nr[i]*p2care[i]*EC4S2J2W_15[i] + r2nr[i]*end_res[i]*EC3S2J2W_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2W_15[i]
+care_EC3S2J2W_15[] <- n2r[i]*n2care_e_15[i]*EC2S2J2W_15[i] + p2r[i]*p2care[i]*EC4S2J2W_15[i] + nr2r[i]*end_nr[i]*EC2S2J2W_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2W_15[i]
+care_EC4S2J2W_15[] <- nr2p[i]*end_nr[i]*EC2S2J2W_15[i] + r2p[i]*end_res[i]*EC3S2J2W_15[i] - p2care[i]*EC4S2J2W_15[i]
+
+care_EC1S2J2W_16[] <- -n2care_e_16[i]*EC1S2J2W_16[i]
+care_EC2S2J2W_16[] <- n2nr[i]*n2care_e_16[i]*EC1S2J2W_16[i] + p2nr[i]*p2care[i]*EC4S2J2W_16[i] + r2nr[i]*end_res[i]*EC3S2J2W_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2W_16[i]
+care_EC3S2J2W_16[] <- n2r[i]*n2care_e_16[i]*EC2S2J2W_16[i] + p2r[i]*p2care[i]*EC4S2J2W_16[i] + nr2r[i]*end_nr[i]*EC2S2J2W_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2W_16[i]
+care_EC4S2J2W_16[] <- nr2p[i]*end_nr[i]*EC2S2J2W_16[i] + r2p[i]*end_res[i]*EC3S2J2W_16[i] - p2care[i]*EC4S2J2W_16[i]
+
+care_EC1S2J2W_17[] <- -n2care_e_17[i]*EC1S2J2W_17[i]
+care_EC2S2J2W_17[] <- n2nr[i]*n2care_e_17[i]*EC1S2J2W_17[i] + p2nr[i]*p2care[i]*EC4S2J2W_17[i] + r2nr[i]*end_res[i]*EC3S2J2W_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J2W_17[i]
+care_EC3S2J2W_17[] <- n2r[i]*n2care_e_17[i]*EC2S2J2W_17[i] + p2r[i]*p2care[i]*EC4S2J2W_17[i] + nr2r[i]*end_nr[i]*EC2S2J2W_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J2W_17[i]
+care_EC4S2J2W_17[] <- nr2p[i]*end_nr[i]*EC2S2J2W_17[i] + r2p[i]*end_res[i]*EC3S2J2W_17[i] - p2care[i]*EC4S2J2W_17[i]
+
+
+
+care_EC1S1J3W_10[] <- -n2care_e_10[i]*EC1S1J3W_10[i]
+care_EC2S1J3W_10[] <- n2nr[i]*n2care_e_10[i]*EC1S1J3W_10[i] + p2nr[i]*p2care[i]*EC4S1J3W_10[i] + r2nr[i]*end_res[i]*EC3S1J3W_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3W_10[i]
+care_EC3S1J3W_10[] <- n2r[i]*n2care_e_10[i]*EC2S1J3W_10[i] + p2r[i]*p2care[i]*EC4S1J3W_10[i] + nr2r[i]*end_nr[i]*EC2S1J3W_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3W_10[i]
+care_EC4S1J3W_10[] <- nr2p[i]*end_nr[i]*EC2S1J3W_10[i] + r2p[i]*end_res[i]*EC3S1J3W_10[i] - p2care[i]*EC4S1J3W_10[i]
+
+care_EC1S1J3W_11[] <- -n2care_e_11[i]*EC1S1J3W_11[i]
+care_EC2S1J3W_11[] <- n2nr[i]*n2care_e_11[i]*EC1S1J3W_11[i] + p2nr[i]*p2care[i]*EC4S1J3W_11[i] + r2nr[i]*end_res[i]*EC3S1J3W_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3W_11[i]
+care_EC3S1J3W_11[] <- n2r[i]*n2care_e_11[i]*EC2S1J3W_11[i] + p2r[i]*p2care[i]*EC4S1J3W_11[i] + nr2r[i]*end_nr[i]*EC2S1J3W_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3W_11[i]
+care_EC4S1J3W_11[] <- nr2p[i]*end_nr[i]*EC2S1J3W_11[i] + r2p[i]*end_res[i]*EC3S1J3W_11[i] - p2care[i]*EC4S1J3W_11[i]
+
+care_EC1S1J3W_12[] <- -n2care_e_12[i]*EC1S1J3W_12[i]
+care_EC2S1J3W_12[] <- n2nr[i]*n2care_e_12[i]*EC1S1J3W_12[i] + p2nr[i]*p2care[i]*EC4S1J3W_12[i] + r2nr[i]*end_res[i]*EC3S1J3W_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3W_12[i]
+care_EC3S1J3W_12[] <- n2r[i]*n2care_e_12[i]*EC2S1J3W_12[i] + p2r[i]*p2care[i]*EC4S1J3W_12[i] + nr2r[i]*end_nr[i]*EC2S1J3W_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3W_12[i]
+care_EC4S1J3W_12[] <- nr2p[i]*end_nr[i]*EC2S1J3W_12[i] + r2p[i]*end_res[i]*EC3S1J3W_12[i] - p2care[i]*EC4S1J3W_12[i]
+
+care_EC1S1J3W_13[] <- -n2care_e_13[i]*EC1S1J3W_13[i]
+care_EC2S1J3W_13[] <- n2nr[i]*n2care_e_13[i]*EC1S1J3W_13[i] + p2nr[i]*p2care[i]*EC4S1J3W_13[i] + r2nr[i]*end_res[i]*EC3S1J3W_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3W_13[i]
+care_EC3S1J3W_13[] <- n2r[i]*n2care_e_13[i]*EC2S1J3W_13[i] + p2r[i]*p2care[i]*EC4S1J3W_13[i] + nr2r[i]*end_nr[i]*EC2S1J3W_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3W_13[i]
+care_EC4S1J3W_13[] <- nr2p[i]*end_nr[i]*EC2S1J3W_13[i] + r2p[i]*end_res[i]*EC3S1J3W_13[i] - p2care[i]*EC4S1J3W_13[i]
+
+care_EC1S1J3W_14[] <- -n2care_e_14[i]*EC1S1J3W_14[i]
+care_EC2S1J3W_14[] <- n2nr[i]*n2care_e_14[i]*EC1S1J3W_14[i] + p2nr[i]*p2care[i]*EC4S1J3W_14[i] + r2nr[i]*end_res[i]*EC3S1J3W_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3W_14[i]
+care_EC3S1J3W_14[] <- n2r[i]*n2care_e_14[i]*EC2S1J3W_14[i] + p2r[i]*p2care[i]*EC4S1J3W_14[i] + nr2r[i]*end_nr[i]*EC2S1J3W_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3W_14[i]
+care_EC4S1J3W_14[] <- nr2p[i]*end_nr[i]*EC2S1J3W_14[i] + r2p[i]*end_res[i]*EC3S1J3W_14[i] - p2care[i]*EC4S1J3W_14[i]
+
+care_EC1S1J3W_15[] <- -n2care_e_15[i]*EC1S1J3W_15[i]
+care_EC2S1J3W_15[] <- n2nr[i]*n2care_e_15[i]*EC1S1J3W_15[i] + p2nr[i]*p2care[i]*EC4S1J3W_15[i] + r2nr[i]*end_res[i]*EC3S1J3W_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3W_15[i]
+care_EC3S1J3W_15[] <- n2r[i]*n2care_e_15[i]*EC2S1J3W_15[i] + p2r[i]*p2care[i]*EC4S1J3W_15[i] + nr2r[i]*end_nr[i]*EC2S1J3W_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3W_15[i]
+care_EC4S1J3W_15[] <- nr2p[i]*end_nr[i]*EC2S1J3W_15[i] + r2p[i]*end_res[i]*EC3S1J3W_15[i] - p2care[i]*EC4S1J3W_15[i]
+
+care_EC1S1J3W_16[] <- -n2care_e_16[i]*EC1S1J3W_16[i]
+care_EC2S1J3W_16[] <- n2nr[i]*n2care_e_16[i]*EC1S1J3W_16[i] + p2nr[i]*p2care[i]*EC4S1J3W_16[i] + r2nr[i]*end_res[i]*EC3S1J3W_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3W_16[i]
+care_EC3S1J3W_16[] <- n2r[i]*n2care_e_16[i]*EC2S1J3W_16[i] + p2r[i]*p2care[i]*EC4S1J3W_16[i] + nr2r[i]*end_nr[i]*EC2S1J3W_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3W_16[i]
+care_EC4S1J3W_16[] <- nr2p[i]*end_nr[i]*EC2S1J3W_16[i] + r2p[i]*end_res[i]*EC3S1J3W_16[i] - p2care[i]*EC4S1J3W_16[i]
+
+care_EC1S1J3W_17[] <- -n2care_e_17[i]*EC1S1J3W_17[i]
+care_EC2S1J3W_17[] <- n2nr[i]*n2care_e_17[i]*EC1S1J3W_17[i] + p2nr[i]*p2care[i]*EC4S1J3W_17[i] + r2nr[i]*end_res[i]*EC3S1J3W_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1J3W_17[i]
+care_EC3S1J3W_17[] <- n2r[i]*n2care_e_17[i]*EC2S1J3W_17[i] + p2r[i]*p2care[i]*EC4S1J3W_17[i] + nr2r[i]*end_nr[i]*EC2S1J3W_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1J3W_17[i]
+care_EC4S1J3W_17[] <- nr2p[i]*end_nr[i]*EC2S1J3W_17[i] + r2p[i]*end_res[i]*EC3S1J3W_17[i] - p2care[i]*EC4S1J3W_17[i]
+
+
+
+care_EC1S2J3W_10[] <- -n2care_e_10[i]*EC1S2J3W_10[i]
+care_EC2S2J3W_10[] <- n2nr[i]*n2care_e_10[i]*EC1S2J3W_10[i] + p2nr[i]*p2care[i]*EC4S2J3W_10[i] + r2nr[i]*end_res[i]*EC3S2J3W_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3W_10[i]
+care_EC3S2J3W_10[] <- n2r[i]*n2care_e_10[i]*EC2S2J3W_10[i] + p2r[i]*p2care[i]*EC4S2J3W_10[i] + nr2r[i]*end_nr[i]*EC2S2J3W_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3W_10[i]
+care_EC4S2J3W_10[] <- nr2p[i]*end_nr[i]*EC2S2J3W_10[i] + r2p[i]*end_res[i]*EC3S2J3W_10[i] - p2care[i]*EC4S2J3W_10[i]
+
+care_EC1S2J3W_11[] <- -n2care_e_11[i]*EC1S2J3W_11[i]
+care_EC2S2J3W_11[] <- n2nr[i]*n2care_e_11[i]*EC1S2J3W_11[i] + p2nr[i]*p2care[i]*EC4S2J3W_11[i] + r2nr[i]*end_res[i]*EC3S2J3W_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3W_11[i]
+care_EC3S2J3W_11[] <- n2r[i]*n2care_e_11[i]*EC2S2J3W_11[i] + p2r[i]*p2care[i]*EC4S2J3W_11[i] + nr2r[i]*end_nr[i]*EC2S2J3W_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3W_11[i]
+care_EC4S2J3W_11[] <- nr2p[i]*end_nr[i]*EC2S2J3W_11[i] + r2p[i]*end_res[i]*EC3S2J3W_11[i] - p2care[i]*EC4S2J3W_11[i]
+
+care_EC1S2J3W_12[] <- -n2care_e_12[i]*EC1S2J3W_12[i]
+care_EC2S2J3W_12[] <- n2nr[i]*n2care_e_12[i]*EC1S2J3W_12[i] + p2nr[i]*p2care[i]*EC4S2J3W_12[i] + r2nr[i]*end_res[i]*EC3S2J3W_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3W_12[i]
+care_EC3S2J3W_12[] <- n2r[i]*n2care_e_12[i]*EC2S2J3W_12[i] + p2r[i]*p2care[i]*EC4S2J3W_12[i] + nr2r[i]*end_nr[i]*EC2S2J3W_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3W_12[i]
+care_EC4S2J3W_12[] <- nr2p[i]*end_nr[i]*EC2S2J3W_12[i] + r2p[i]*end_res[i]*EC3S2J3W_12[i] - p2care[i]*EC4S2J3W_12[i]
+
+care_EC1S2J3W_13[] <- -n2care_e_13[i]*EC1S2J3W_13[i]
+care_EC2S2J3W_13[] <- n2nr[i]*n2care_e_13[i]*EC1S2J3W_13[i] + p2nr[i]*p2care[i]*EC4S2J3W_13[i] + r2nr[i]*end_res[i]*EC3S2J3W_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3W_13[i]
+care_EC3S2J3W_13[] <- n2r[i]*n2care_e_13[i]*EC2S2J3W_13[i] + p2r[i]*p2care[i]*EC4S2J3W_13[i] + nr2r[i]*end_nr[i]*EC2S2J3W_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3W_13[i]
+care_EC4S2J3W_13[] <- nr2p[i]*end_nr[i]*EC2S2J3W_13[i] + r2p[i]*end_res[i]*EC3S2J3W_13[i] - p2care[i]*EC4S2J3W_13[i]
+
+care_EC1S2J3W_14[] <- -n2care_e_14[i]*EC1S2J3W_14[i]
+care_EC2S2J3W_14[] <- n2nr[i]*n2care_e_14[i]*EC1S2J3W_14[i] + p2nr[i]*p2care[i]*EC4S2J3W_14[i] + r2nr[i]*end_res[i]*EC3S2J3W_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3W_14[i]
+care_EC3S2J3W_14[] <- n2r[i]*n2care_e_14[i]*EC2S2J3W_14[i] + p2r[i]*p2care[i]*EC4S2J3W_14[i] + nr2r[i]*end_nr[i]*EC2S2J3W_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3W_14[i]
+care_EC4S2J3W_14[] <- nr2p[i]*end_nr[i]*EC2S2J3W_14[i] + r2p[i]*end_res[i]*EC3S2J3W_14[i] - p2care[i]*EC4S2J3W_14[i]
+
+care_EC1S2J3W_15[] <- -n2care_e_15[i]*EC1S2J3W_15[i]
+care_EC2S2J3W_15[] <- n2nr[i]*n2care_e_15[i]*EC1S2J3W_15[i] + p2nr[i]*p2care[i]*EC4S2J3W_15[i] + r2nr[i]*end_res[i]*EC3S2J3W_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3W_15[i]
+care_EC3S2J3W_15[] <- n2r[i]*n2care_e_15[i]*EC2S2J3W_15[i] + p2r[i]*p2care[i]*EC4S2J3W_15[i] + nr2r[i]*end_nr[i]*EC2S2J3W_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3W_15[i]
+care_EC4S2J3W_15[] <- nr2p[i]*end_nr[i]*EC2S2J3W_15[i] + r2p[i]*end_res[i]*EC3S2J3W_15[i] - p2care[i]*EC4S2J3W_15[i]
+
+care_EC1S2J3W_16[] <- -n2care_e_16[i]*EC1S2J3W_16[i]
+care_EC2S2J3W_16[] <- n2nr[i]*n2care_e_16[i]*EC1S2J3W_16[i] + p2nr[i]*p2care[i]*EC4S2J3W_16[i] + r2nr[i]*end_res[i]*EC3S2J3W_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3W_16[i]
+care_EC3S2J3W_16[] <- n2r[i]*n2care_e_16[i]*EC2S2J3W_16[i] + p2r[i]*p2care[i]*EC4S2J3W_16[i] + nr2r[i]*end_nr[i]*EC2S2J3W_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3W_16[i]
+care_EC4S2J3W_16[] <- nr2p[i]*end_nr[i]*EC2S2J3W_16[i] + r2p[i]*end_res[i]*EC3S2J3W_16[i] - p2care[i]*EC4S2J3W_16[i]
+
+care_EC1S2J3W_17[] <- -n2care_e_17[i]*EC1S2J3W_17[i]
+care_EC2S2J3W_17[] <- n2nr[i]*n2care_e_17[i]*EC1S2J3W_17[i] + p2nr[i]*p2care[i]*EC4S2J3W_17[i] + r2nr[i]*end_res[i]*EC3S2J3W_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2J3W_17[i]
+care_EC3S2J3W_17[] <- n2r[i]*n2care_e_17[i]*EC2S2J3W_17[i] + p2r[i]*p2care[i]*EC4S2J3W_17[i] + nr2r[i]*end_nr[i]*EC2S2J3W_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2J3W_17[i]
+care_EC4S2J3W_17[] <- nr2p[i]*end_nr[i]*EC2S2J3W_17[i] + r2p[i]*end_res[i]*EC3S2J3W_17[i] - p2care[i]*EC4S2J3W_17[i]
+
+# moving between school states
+
+sch_IC1S1J1U_10[] <- -m2pru_ic1_10[i]*IC1S1J1U_10[i]
+sch_IC2S1J1U_10[] <- -m2pru_ic2_10[i]*IC2S1J1U_10[i]
+sch_IC3S1J1U_10[] <- -m2pru_ic3_10[i]*IC3S1J1U_10[i]
+sch_IC4S1J1U_10[] <- -m2pru_ic4_10[i]*IC4S1J1U_10[i]
+
+sch_IC1S1J1U_11[] <- -m2pru_ic1_11[i]*IC1S1J1U_11[i]
+sch_IC2S1J1U_11[] <- -m2pru_ic2_11[i]*IC2S1J1U_11[i]
+sch_IC3S1J1U_11[] <- -m2pru_ic3_11[i]*IC3S1J1U_11[i]
+sch_IC4S1J1U_11[] <- -m2pru_ic4_11[i]*IC4S1J1U_11[i]
+
+sch_IC1S1J1U_12[] <- -m2pru_ic1_12[i]*IC1S1J1U_12[i]
+sch_IC2S1J1U_12[] <- -m2pru_ic2_12[i]*IC2S1J1U_12[i]
+sch_IC3S1J1U_12[] <- -m2pru_ic3_12[i]*IC3S1J1U_12[i]
+sch_IC4S1J1U_12[] <- -m2pru_ic4_12[i]*IC4S1J1U_12[i]
+
+sch_IC1S1J1U_13[] <- -m2pru_ic1_13[i]*IC1S1J1U_13[i]
+sch_IC2S1J1U_13[] <- -m2pru_ic2_13[i]*IC2S1J1U_13[i]
+sch_IC3S1J1U_13[] <- -m2pru_ic3_13[i]*IC3S1J1U_13[i]
+sch_IC4S1J1U_13[] <- -m2pru_ic4_13[i]*IC4S1J1U_13[i]
+
+sch_IC1S1J1U_14[] <- -m2pru_ic1_14[i]*IC1S1J1U_14[i]
+sch_IC2S1J1U_14[] <- -m2pru_ic2_14[i]*IC2S1J1U_14[i]
+sch_IC3S1J1U_14[] <- -m2pru_ic3_14[i]*IC3S1J1U_14[i]
+sch_IC4S1J1U_14[] <- -m2pru_ic4_14[i]*IC4S1J1U_14[i]
+
+sch_IC1S1J1U_15[] <- -m2pru_ic1_15[i]*IC1S1J1U_15[i]
+sch_IC2S1J1U_15[] <- -m2pru_ic2_15[i]*IC2S1J1U_15[i]
+sch_IC3S1J1U_15[] <- -m2pru_ic3_15[i]*IC3S1J1U_15[i]
+sch_IC4S1J1U_15[] <- -m2pru_ic4_15[i]*IC4S1J1U_15[i]
+
+sch_IC1S1J1U_16[] <- neet2m_i[i]*IC1S2J1U_16[i] - m2neet_ic1_16[i]*IC1S1J1U_16[i]
+sch_IC2S1J1U_16[] <- neet2m_i[i]*IC2S2J1U_16[i] - m2neet_ic2_16[i]*IC2S1J1U_16[i]
+sch_IC3S1J1U_16[] <- neet2m_i[i]*IC3S2J1U_16[i] - m2neet_ic3_16[i]*IC3S1J1U_16[i]
+sch_IC4S1J1U_16[] <- neet2m_i[i]*IC4S2J1U_16[i] - m2neet_ic4_16[i]*IC4S1J1U_16[i]
+
+sch_IC1S1J1U_17[] <- neet2m_i[i]*IC1S2J1U_17[i] - m2neet_ic1_17[i]*IC1S1J1U_17[i]
+sch_IC2S1J1U_17[] <- neet2m_i[i]*IC2S2J1U_17[i] - m2neet_ic2_17[i]*IC2S1J1U_17[i]
+sch_IC3S1J1U_17[] <- neet2m_i[i]*IC3S2J1U_17[i] - m2neet_ic3_17[i]*IC3S1J1U_17[i]
+sch_IC4S1J1U_17[] <- neet2m_i[i]*IC4S2J1U_17[i] - m2neet_ic4_17[i]*IC4S1J1U_17[i]
+
+
+
+sch_IC1S2J1U_10[] <- m2pru_ic1_10[i]*IC1S1J1U_10[i]
+sch_IC2S2J1U_10[] <- m2pru_ic2_10[i]*IC2S1J1U_10[i]
+sch_IC3S2J1U_10[] <- m2pru_ic3_10[i]*IC3S1J1U_10[i]
+sch_IC4S2J1U_10[] <- m2pru_ic4_10[i]*IC4S1J1U_10[i]
+
+sch_IC1S2J1U_11[] <- m2pru_ic1_11[i]*IC1S1J1U_11[i]
+sch_IC2S2J1U_11[] <- m2pru_ic2_11[i]*IC2S1J1U_11[i]
+sch_IC3S2J1U_11[] <- m2pru_ic3_11[i]*IC3S1J1U_11[i]
+sch_IC4S2J1U_11[] <- m2pru_ic4_11[i]*IC4S1J1U_11[i]
+
+sch_IC1S2J1U_12[] <- m2pru_ic1_12[i]*IC1S1J1U_12[i]
+sch_IC2S2J1U_12[] <- m2pru_ic2_12[i]*IC2S1J1U_12[i]
+sch_IC3S2J1U_12[] <- m2pru_ic3_12[i]*IC3S1J1U_12[i]
+sch_IC4S2J1U_12[] <- m2pru_ic4_12[i]*IC4S1J1U_12[i]
+
+sch_IC1S2J1U_13[] <- m2pru_ic1_13[i]*IC1S1J1U_13[i]
+sch_IC2S2J1U_13[] <- m2pru_ic2_13[i]*IC2S1J1U_13[i]
+sch_IC3S2J1U_13[] <- m2pru_ic3_13[i]*IC3S1J1U_13[i]
+sch_IC4S2J1U_13[] <- m2pru_ic4_13[i]*IC4S1J1U_13[i]
+
+sch_IC1S2J1U_14[] <- m2pru_ic1_14[i]*IC1S1J1U_14[i]
+sch_IC2S2J1U_14[] <- m2pru_ic2_14[i]*IC2S1J1U_14[i]
+sch_IC3S2J1U_14[] <- m2pru_ic3_14[i]*IC3S1J1U_14[i]
+sch_IC4S2J1U_14[] <- m2pru_ic4_14[i]*IC4S1J1U_14[i]
+
+sch_IC1S2J1U_15[] <- m2pru_ic1_15[i]*IC1S1J1U_15[i]
+sch_IC2S2J1U_15[] <- m2pru_ic2_15[i]*IC2S1J1U_15[i]
+sch_IC3S2J1U_15[] <- m2pru_ic3_15[i]*IC3S1J1U_15[i]
+sch_IC4S2J1U_15[] <- m2pru_ic4_15[i]*IC4S1J1U_15[i]
+
+sch_IC1S2J1U_16[] <- m2neet_ic1_16[i]*IC1S1J1U_16[i] - neet2m_i[i]*IC1S2J1U_16[i]
+sch_IC2S2J1U_16[] <- m2neet_ic2_16[i]*IC2S1J1U_16[i] - neet2m_i[i]*IC2S2J1U_16[i]
+sch_IC3S2J1U_16[] <- m2neet_ic3_16[i]*IC3S1J1U_16[i] - neet2m_i[i]*IC3S2J1U_16[i]
+sch_IC4S2J1U_16[] <- m2neet_ic4_16[i]*IC4S1J1U_16[i] - neet2m_i[i]*IC4S2J1U_16[i]
+
+sch_IC1S2J1U_17[] <- m2neet_ic1_17[i]*IC1S1J1U_17[i] - neet2m_i[i]*IC1S2J1U_17[i]
+sch_IC2S2J1U_17[] <- m2neet_ic2_17[i]*IC2S1J1U_17[i] - neet2m_i[i]*IC2S2J1U_17[i]
+sch_IC3S2J1U_17[] <- m2neet_ic3_17[i]*IC3S1J1U_17[i] - neet2m_i[i]*IC3S2J1U_17[i]
+sch_IC4S2J1U_17[] <- m2neet_ic4_17[i]*IC4S1J1U_17[i] - neet2m_i[i]*IC4S2J1U_17[i]
+
+
+
+sch_IC1S1J2U_10[] <- -m2pru_ic1_10[i]*IC1S1J2U_10[i]
+sch_IC2S1J2U_10[] <- -m2pru_ic2_10[i]*IC2S1J2U_10[i]
+sch_IC3S1J2U_10[] <- -m2pru_ic3_10[i]*IC3S1J2U_10[i]
+sch_IC4S1J2U_10[] <- -m2pru_ic4_10[i]*IC4S1J2U_10[i]
+
+sch_IC1S1J2U_11[] <- -m2pru_ic1_11[i]*IC1S1J2U_11[i]
+sch_IC2S1J2U_11[] <- -m2pru_ic2_11[i]*IC2S1J2U_11[i]
+sch_IC3S1J2U_11[] <- -m2pru_ic3_11[i]*IC3S1J2U_11[i]
+sch_IC4S1J2U_11[] <- -m2pru_ic4_11[i]*IC4S1J2U_11[i]
+
+sch_IC1S1J2U_12[] <- -m2pru_ic1_12[i]*IC1S1J2U_12[i]
+sch_IC2S1J2U_12[] <- -m2pru_ic2_12[i]*IC2S1J2U_12[i]
+sch_IC3S1J2U_12[] <- -m2pru_ic3_12[i]*IC3S1J2U_12[i]
+sch_IC4S1J2U_12[] <- -m2pru_ic4_12[i]*IC4S1J2U_12[i]
+
+sch_IC1S1J2U_13[] <- -m2pru_ic1_13[i]*IC1S1J2U_13[i]
+sch_IC2S1J2U_13[] <- -m2pru_ic2_13[i]*IC2S1J2U_13[i]
+sch_IC3S1J2U_13[] <- -m2pru_ic3_13[i]*IC3S1J2U_13[i]
+sch_IC4S1J2U_13[] <- -m2pru_ic4_13[i]*IC4S1J2U_13[i]
+
+sch_IC1S1J2U_14[] <- -m2pru_ic1_14[i]*IC1S1J2U_14[i]
+sch_IC2S1J2U_14[] <- -m2pru_ic2_14[i]*IC2S1J2U_14[i]
+sch_IC3S1J2U_14[] <- -m2pru_ic3_14[i]*IC3S1J2U_14[i]
+sch_IC4S1J2U_14[] <- -m2pru_ic4_14[i]*IC4S1J2U_14[i]
+
+sch_IC1S1J2U_15[] <- -m2pru_ic1_15[i]*IC1S1J2U_15[i]
+sch_IC2S1J2U_15[] <- -m2pru_ic2_15[i]*IC2S1J2U_15[i]
+sch_IC3S1J2U_15[] <- -m2pru_ic3_15[i]*IC3S1J2U_15[i]
+sch_IC4S1J2U_15[] <- -m2pru_ic4_15[i]*IC4S1J2U_15[i]
+
+sch_IC1S1J2U_16[] <- neet2m_i[i]*IC1S2J2U_16[i] - m2neet_ic1_16[i]*IC1S1J2U_16[i]
+sch_IC2S1J2U_16[] <- neet2m_i[i]*IC2S2J2U_16[i] - m2neet_ic2_16[i]*IC2S1J2U_16[i]
+sch_IC3S1J2U_16[] <- neet2m_i[i]*IC3S2J2U_16[i] - m2neet_ic3_16[i]*IC3S1J2U_16[i]
+sch_IC4S1J2U_16[] <- neet2m_i[i]*IC4S2J2U_16[i] - m2neet_ic4_16[i]*IC4S1J2U_16[i]
+
+sch_IC1S1J2U_17[] <- neet2m_i[i]*IC1S2J2U_17[i] - m2neet_ic1_17[i]*IC1S1J2U_17[i]
+sch_IC2S1J2U_17[] <- neet2m_i[i]*IC2S2J2U_17[i] - m2neet_ic2_17[i]*IC2S1J2U_17[i]
+sch_IC3S1J2U_17[] <- neet2m_i[i]*IC3S2J2U_17[i] - m2neet_ic3_17[i]*IC3S1J2U_17[i]
+sch_IC4S1J2U_17[] <- neet2m_i[i]*IC4S2J2U_17[i] - m2neet_ic4_17[i]*IC4S1J2U_17[i]
+
+
+
+sch_IC1S2J2U_10[] <- m2pru_ic1_10[i]*IC1S1J2U_10[i]
+sch_IC2S2J2U_10[] <- m2pru_ic2_10[i]*IC2S1J2U_10[i]
+sch_IC3S2J2U_10[] <- m2pru_ic3_10[i]*IC3S1J2U_10[i]
+sch_IC4S2J2U_10[] <- m2pru_ic4_10[i]*IC4S1J2U_10[i]
+
+sch_IC1S2J2U_11[] <- m2pru_ic1_11[i]*IC1S1J2U_11[i]
+sch_IC2S2J2U_11[] <- m2pru_ic2_11[i]*IC2S1J2U_11[i]
+sch_IC3S2J2U_11[] <- m2pru_ic3_11[i]*IC3S1J2U_11[i]
+sch_IC4S2J2U_11[] <- m2pru_ic4_11[i]*IC4S1J2U_11[i]
+
+sch_IC1S2J2U_12[] <- m2pru_ic1_12[i]*IC1S1J2U_12[i]
+sch_IC2S2J2U_12[] <- m2pru_ic2_12[i]*IC2S1J2U_12[i]
+sch_IC3S2J2U_12[] <- m2pru_ic3_12[i]*IC3S1J2U_12[i]
+sch_IC4S2J2U_12[] <- m2pru_ic4_12[i]*IC4S1J2U_12[i]
+
+sch_IC1S2J2U_13[] <- m2pru_ic1_13[i]*IC1S1J2U_13[i]
+sch_IC2S2J2U_13[] <- m2pru_ic2_13[i]*IC2S1J2U_13[i]
+sch_IC3S2J2U_13[] <- m2pru_ic3_13[i]*IC3S1J2U_13[i]
+sch_IC4S2J2U_13[] <- m2pru_ic4_13[i]*IC4S1J2U_13[i]
+
+sch_IC1S2J2U_14[] <- m2pru_ic1_14[i]*IC1S1J2U_14[i]
+sch_IC2S2J2U_14[] <- m2pru_ic2_14[i]*IC2S1J2U_14[i]
+sch_IC3S2J2U_14[] <- m2pru_ic3_14[i]*IC3S1J2U_14[i]
+sch_IC4S2J2U_14[] <- m2pru_ic4_14[i]*IC4S1J2U_14[i]
+
+sch_IC1S2J2U_15[] <- m2pru_ic1_15[i]*IC1S1J2U_15[i]
+sch_IC2S2J2U_15[] <- m2pru_ic2_15[i]*IC2S1J2U_15[i]
+sch_IC3S2J2U_15[] <- m2pru_ic3_15[i]*IC3S1J2U_15[i]
+sch_IC4S2J2U_15[] <- m2pru_ic4_15[i]*IC4S1J2U_15[i]
+
+sch_IC1S2J2U_16[] <- m2neet_ic1_16[i]*IC1S1J2U_16[i] - neet2m_i[i]*IC1S2J2U_16[i]
+sch_IC2S2J2U_16[] <- m2neet_ic2_16[i]*IC2S1J2U_16[i] - neet2m_i[i]*IC2S2J2U_16[i]
+sch_IC3S2J2U_16[] <- m2neet_ic3_16[i]*IC3S1J2U_16[i] - neet2m_i[i]*IC3S2J2U_16[i]
+sch_IC4S2J2U_16[] <- m2neet_ic4_16[i]*IC4S1J2U_16[i] - neet2m_i[i]*IC4S2J2U_16[i]
+
+sch_IC1S2J2U_17[] <- m2neet_ic1_17[i]*IC1S1J2U_17[i] - neet2m_i[i]*IC1S2J2U_17[i]
+sch_IC2S2J2U_17[] <- m2neet_ic2_17[i]*IC2S1J2U_17[i] - neet2m_i[i]*IC2S2J2U_17[i]
+sch_IC3S2J2U_17[] <- m2neet_ic3_17[i]*IC3S1J2U_17[i] - neet2m_i[i]*IC3S2J2U_17[i]
+sch_IC4S2J2U_17[] <- m2neet_ic4_17[i]*IC4S1J2U_17[i] - neet2m_i[i]*IC4S2J2U_17[i]
+
+
+
+sch_IC1S1J3U_10[] <- -m2pru_ic1_10[i]*IC1S1J3U_10[i]
+sch_IC2S1J3U_10[] <- -m2pru_ic2_10[i]*IC2S1J3U_10[i]
+sch_IC3S1J3U_10[] <- -m2pru_ic3_10[i]*IC3S1J3U_10[i]
+sch_IC4S1J3U_10[] <- -m2pru_ic4_10[i]*IC4S1J3U_10[i]
+
+sch_IC1S1J3U_11[] <- -m2pru_ic1_11[i]*IC1S1J3U_11[i]
+sch_IC2S1J3U_11[] <- -m2pru_ic2_11[i]*IC2S1J3U_11[i]
+sch_IC3S1J3U_11[] <- -m2pru_ic3_11[i]*IC3S1J3U_11[i]
+sch_IC4S1J3U_11[] <- -m2pru_ic4_11[i]*IC4S1J3U_11[i]
+
+sch_IC1S1J3U_12[] <- -m2pru_ic1_12[i]*IC1S1J3U_12[i]
+sch_IC2S1J3U_12[] <- -m2pru_ic2_12[i]*IC2S1J3U_12[i]
+sch_IC3S1J3U_12[] <- -m2pru_ic3_12[i]*IC3S1J3U_12[i]
+sch_IC4S1J3U_12[] <- -m2pru_ic4_12[i]*IC4S1J3U_12[i]
+
+sch_IC1S1J3U_13[] <- -m2pru_ic1_13[i]*IC1S1J3U_13[i]
+sch_IC2S1J3U_13[] <- -m2pru_ic2_13[i]*IC2S1J3U_13[i]
+sch_IC3S1J3U_13[] <- -m2pru_ic3_13[i]*IC3S1J3U_13[i]
+sch_IC4S1J3U_13[] <- -m2pru_ic4_13[i]*IC4S1J3U_13[i]
+
+sch_IC1S1J3U_14[] <- -m2pru_ic1_14[i]*IC1S1J3U_14[i]
+sch_IC2S1J3U_14[] <- -m2pru_ic2_14[i]*IC2S1J3U_14[i]
+sch_IC3S1J3U_14[] <- -m2pru_ic3_14[i]*IC3S1J3U_14[i]
+sch_IC4S1J3U_14[] <- -m2pru_ic4_14[i]*IC4S1J3U_14[i]
+
+sch_IC1S1J3U_15[] <- -m2pru_ic1_15[i]*IC1S1J3U_15[i]
+sch_IC2S1J3U_15[] <- -m2pru_ic2_15[i]*IC2S1J3U_15[i]
+sch_IC3S1J3U_15[] <- -m2pru_ic3_15[i]*IC3S1J3U_15[i]
+sch_IC4S1J3U_15[] <- -m2pru_ic4_15[i]*IC4S1J3U_15[i]
+
+sch_IC1S1J3U_16[] <- neet2m_i[i]*IC1S2J3U_16[i] - m2neet_ic1_16[i]*IC1S1J3U_16[i]
+sch_IC2S1J3U_16[] <- neet2m_i[i]*IC2S2J3U_16[i] - m2neet_ic2_16[i]*IC2S1J3U_16[i]
+sch_IC3S1J3U_16[] <- neet2m_i[i]*IC3S2J3U_16[i] - m2neet_ic3_16[i]*IC3S1J3U_16[i]
+sch_IC4S1J3U_16[] <- neet2m_i[i]*IC4S2J3U_16[i] - m2neet_ic4_16[i]*IC4S1J3U_16[i]
+
+sch_IC1S1J3U_17[] <- neet2m_i[i]*IC1S2J3U_17[i] - m2neet_ic1_17[i]*IC1S1J3U_17[i]
+sch_IC2S1J3U_17[] <- neet2m_i[i]*IC2S2J3U_17[i] - m2neet_ic2_17[i]*IC2S1J3U_17[i]
+sch_IC3S1J3U_17[] <- neet2m_i[i]*IC3S2J3U_17[i] - m2neet_ic3_17[i]*IC3S1J3U_17[i]
+sch_IC4S1J3U_17[] <- neet2m_i[i]*IC4S2J3U_17[i] - m2neet_ic4_17[i]*IC4S1J3U_17[i]
+
+
+
+sch_IC1S2J3U_10[] <- m2pru_ic1_10[i]*IC1S1J3U_10[i]
+sch_IC2S2J3U_10[] <- m2pru_ic2_10[i]*IC2S1J3U_10[i]
+sch_IC3S2J3U_10[] <- m2pru_ic3_10[i]*IC3S1J3U_10[i]
+sch_IC4S2J3U_10[] <- m2pru_ic4_10[i]*IC4S1J3U_10[i]
+
+sch_IC1S2J3U_11[] <- m2pru_ic1_11[i]*IC1S1J3U_11[i]
+sch_IC2S2J3U_11[] <- m2pru_ic2_11[i]*IC2S1J3U_11[i]
+sch_IC3S2J3U_11[] <- m2pru_ic3_11[i]*IC3S1J3U_11[i]
+sch_IC4S2J3U_11[] <- m2pru_ic4_11[i]*IC4S1J3U_11[i]
+
+sch_IC1S2J3U_12[] <- m2pru_ic1_12[i]*IC1S1J3U_12[i]
+sch_IC2S2J3U_12[] <- m2pru_ic2_12[i]*IC2S1J3U_12[i]
+sch_IC3S2J3U_12[] <- m2pru_ic3_12[i]*IC3S1J3U_12[i]
+sch_IC4S2J3U_12[] <- m2pru_ic4_12[i]*IC4S1J3U_12[i]
+
+sch_IC1S2J3U_13[] <- m2pru_ic1_13[i]*IC1S1J3U_13[i]
+sch_IC2S2J3U_13[] <- m2pru_ic2_13[i]*IC2S1J3U_13[i]
+sch_IC3S2J3U_13[] <- m2pru_ic3_13[i]*IC3S1J3U_13[i]
+sch_IC4S2J3U_13[] <- m2pru_ic4_13[i]*IC4S1J3U_13[i]
+
+sch_IC1S2J3U_14[] <- m2pru_ic1_14[i]*IC1S1J3U_14[i]
+sch_IC2S2J3U_14[] <- m2pru_ic2_14[i]*IC2S1J3U_14[i]
+sch_IC3S2J3U_14[] <- m2pru_ic3_14[i]*IC3S1J3U_14[i]
+sch_IC4S2J3U_14[] <- m2pru_ic4_14[i]*IC4S1J3U_14[i]
+
+sch_IC1S2J3U_15[] <- m2pru_ic1_15[i]*IC1S1J3U_15[i]
+sch_IC2S2J3U_15[] <- m2pru_ic2_15[i]*IC2S1J3U_15[i]
+sch_IC3S2J3U_15[] <- m2pru_ic3_15[i]*IC3S1J3U_15[i]
+sch_IC4S2J3U_15[] <- m2pru_ic4_15[i]*IC4S1J3U_15[i]
+
+sch_IC1S2J3U_16[] <- m2neet_ic1_16[i]*IC1S1J3U_16[i] - neet2m_i[i]*IC1S2J3U_16[i]
+sch_IC2S2J3U_16[] <- m2neet_ic2_16[i]*IC2S1J3U_16[i] - neet2m_i[i]*IC2S2J3U_16[i]
+sch_IC3S2J3U_16[] <- m2neet_ic3_16[i]*IC3S1J3U_16[i] - neet2m_i[i]*IC3S2J3U_16[i]
+sch_IC4S2J3U_16[] <- m2neet_ic4_16[i]*IC4S1J3U_16[i] - neet2m_i[i]*IC4S2J3U_16[i]
+
+sch_IC1S2J3U_17[] <- m2neet_ic1_17[i]*IC1S1J3U_17[i] - neet2m_i[i]*IC1S2J3U_17[i]
+sch_IC2S2J3U_17[] <- m2neet_ic2_17[i]*IC2S1J3U_17[i] - neet2m_i[i]*IC2S2J3U_17[i]
+sch_IC3S2J3U_17[] <- m2neet_ic3_17[i]*IC3S1J3U_17[i] - neet2m_i[i]*IC3S2J3U_17[i]
+sch_IC4S2J3U_17[] <- m2neet_ic4_17[i]*IC4S1J3U_17[i] - neet2m_i[i]*IC4S2J3U_17[i]
+
+
+
+sch_IC1S1J1W_10[] <- -m2pru_ic1_10[i]*IC1S1J1W_10[i]
+sch_IC2S1J1W_10[] <- -m2pru_ic2_10[i]*IC2S1J1W_10[i]
+sch_IC3S1J1W_10[] <- -m2pru_ic3_10[i]*IC3S1J1W_10[i]
+sch_IC4S1J1W_10[] <- -m2pru_ic4_10[i]*IC4S1J1W_10[i]
+
+sch_IC1S1J1W_11[] <- -m2pru_ic1_11[i]*IC1S1J1W_11[i]
+sch_IC2S1J1W_11[] <- -m2pru_ic2_11[i]*IC2S1J1W_11[i]
+sch_IC3S1J1W_11[] <- -m2pru_ic3_11[i]*IC3S1J1W_11[i]
+sch_IC4S1J1W_11[] <- -m2pru_ic4_11[i]*IC4S1J1W_11[i]
+
+sch_IC1S1J1W_12[] <- -m2pru_ic1_12[i]*IC1S1J1W_12[i]
+sch_IC2S1J1W_12[] <- -m2pru_ic2_12[i]*IC2S1J1W_12[i]
+sch_IC3S1J1W_12[] <- -m2pru_ic3_12[i]*IC3S1J1W_12[i]
+sch_IC4S1J1W_12[] <- -m2pru_ic4_12[i]*IC4S1J1W_12[i]
+
+sch_IC1S1J1W_13[] <- -m2pru_ic1_13[i]*IC1S1J1W_13[i]
+sch_IC2S1J1W_13[] <- -m2pru_ic2_13[i]*IC2S1J1W_13[i]
+sch_IC3S1J1W_13[] <- -m2pru_ic3_13[i]*IC3S1J1W_13[i]
+sch_IC4S1J1W_13[] <- -m2pru_ic4_13[i]*IC4S1J1W_13[i]
+
+sch_IC1S1J1W_14[] <- -m2pru_ic1_14[i]*IC1S1J1W_14[i]
+sch_IC2S1J1W_14[] <- -m2pru_ic2_14[i]*IC2S1J1W_14[i]
+sch_IC3S1J1W_14[] <- -m2pru_ic3_14[i]*IC3S1J1W_14[i]
+sch_IC4S1J1W_14[] <- -m2pru_ic4_14[i]*IC4S1J1W_14[i]
+
+sch_IC1S1J1W_15[] <- -m2pru_ic1_15[i]*IC1S1J1W_15[i]
+sch_IC2S1J1W_15[] <- -m2pru_ic2_15[i]*IC2S1J1W_15[i]
+sch_IC3S1J1W_15[] <- -m2pru_ic3_15[i]*IC3S1J1W_15[i]
+sch_IC4S1J1W_15[] <- -m2pru_ic4_15[i]*IC4S1J1W_15[i]
+
+sch_IC1S1J1W_16[] <- neet2m_i[i]*IC1S2J1W_16[i] - m2neet_ic1_16[i]*IC1S1J1W_16[i]
+sch_IC2S1J1W_16[] <- neet2m_i[i]*IC2S2J1W_16[i] - m2neet_ic2_16[i]*IC2S1J1W_16[i]
+sch_IC3S1J1W_16[] <- neet2m_i[i]*IC3S2J1W_16[i] - m2neet_ic3_16[i]*IC3S1J1W_16[i]
+sch_IC4S1J1W_16[] <- neet2m_i[i]*IC4S2J1W_16[i] - m2neet_ic4_16[i]*IC4S1J1W_16[i]
+
+sch_IC1S1J1W_17[] <- neet2m_i[i]*IC1S2J1W_17[i] - m2neet_ic1_17[i]*IC1S1J1W_17[i]
+sch_IC2S1J1W_17[] <- neet2m_i[i]*IC2S2J1W_17[i] - m2neet_ic2_17[i]*IC2S1J1W_17[i]
+sch_IC3S1J1W_17[] <- neet2m_i[i]*IC3S2J1W_17[i] - m2neet_ic3_17[i]*IC3S1J1W_17[i]
+sch_IC4S1J1W_17[] <- neet2m_i[i]*IC4S2J1W_17[i] - m2neet_ic4_17[i]*IC4S1J1W_17[i]
+
+
+
+sch_IC1S2J1W_10[] <- m2pru_ic1_10[i]*IC1S1J1W_10[i]
+sch_IC2S2J1W_10[] <- m2pru_ic2_10[i]*IC2S1J1W_10[i]
+sch_IC3S2J1W_10[] <- m2pru_ic3_10[i]*IC3S1J1W_10[i]
+sch_IC4S2J1W_10[] <- m2pru_ic4_10[i]*IC4S1J1W_10[i]
+
+sch_IC1S2J1W_11[] <- m2pru_ic1_11[i]*IC1S1J1W_11[i]
+sch_IC2S2J1W_11[] <- m2pru_ic2_11[i]*IC2S1J1W_11[i]
+sch_IC3S2J1W_11[] <- m2pru_ic3_11[i]*IC3S1J1W_11[i]
+sch_IC4S2J1W_11[] <- m2pru_ic4_11[i]*IC4S1J1W_11[i]
+
+sch_IC1S2J1W_12[] <- m2pru_ic1_12[i]*IC1S1J1W_12[i]
+sch_IC2S2J1W_12[] <- m2pru_ic2_12[i]*IC2S1J1W_12[i]
+sch_IC3S2J1W_12[] <- m2pru_ic3_12[i]*IC3S1J1W_12[i]
+sch_IC4S2J1W_12[] <- m2pru_ic4_12[i]*IC4S1J1W_12[i]
+
+sch_IC1S2J1W_13[] <- m2pru_ic1_13[i]*IC1S1J1W_13[i]
+sch_IC2S2J1W_13[] <- m2pru_ic2_13[i]*IC2S1J1W_13[i]
+sch_IC3S2J1W_13[] <- m2pru_ic3_13[i]*IC3S1J1W_13[i]
+sch_IC4S2J1W_13[] <- m2pru_ic4_13[i]*IC4S1J1W_13[i]
+
+sch_IC1S2J1W_14[] <- m2pru_ic1_14[i]*IC1S1J1W_14[i]
+sch_IC2S2J1W_14[] <- m2pru_ic2_14[i]*IC2S1J1W_14[i]
+sch_IC3S2J1W_14[] <- m2pru_ic3_14[i]*IC3S1J1W_14[i]
+sch_IC4S2J1W_14[] <- m2pru_ic4_14[i]*IC4S1J1W_14[i]
+
+sch_IC1S2J1W_15[] <- m2pru_ic1_15[i]*IC1S1J1W_15[i]
+sch_IC2S2J1W_15[] <- m2pru_ic2_15[i]*IC2S1J1W_15[i]
+sch_IC3S2J1W_15[] <- m2pru_ic3_15[i]*IC3S1J1W_15[i]
+sch_IC4S2J1W_15[] <- m2pru_ic4_15[i]*IC4S1J1W_15[i]
+
+sch_IC1S2J1W_16[] <- m2neet_ic1_16[i]*IC1S1J1W_16[i] - neet2m_i[i]*IC1S2J1W_16[i]
+sch_IC2S2J1W_16[] <- m2neet_ic2_16[i]*IC2S1J1W_16[i] - neet2m_i[i]*IC2S2J1W_16[i]
+sch_IC3S2J1W_16[] <- m2neet_ic3_16[i]*IC3S1J1W_16[i] - neet2m_i[i]*IC3S2J1W_16[i]
+sch_IC4S2J1W_16[] <- m2neet_ic4_16[i]*IC4S1J1W_16[i] - neet2m_i[i]*IC4S2J1W_16[i]
+
+sch_IC1S2J1W_17[] <- m2neet_ic1_17[i]*IC1S1J1W_17[i] - neet2m_i[i]*IC1S2J1W_17[i]
+sch_IC2S2J1W_17[] <- m2neet_ic2_17[i]*IC2S1J1W_17[i] - neet2m_i[i]*IC2S2J1W_17[i]
+sch_IC3S2J1W_17[] <- m2neet_ic3_17[i]*IC3S1J1W_17[i] - neet2m_i[i]*IC3S2J1W_17[i]
+sch_IC4S2J1W_17[] <- m2neet_ic4_17[i]*IC4S1J1W_17[i] - neet2m_i[i]*IC4S2J1W_17[i]
+
+
+
+sch_IC1S1J2W_10[] <- -m2pru_ic1_10[i]*IC1S1J2W_10[i]
+sch_IC2S1J2W_10[] <- -m2pru_ic2_10[i]*IC2S1J2W_10[i]
+sch_IC3S1J2W_10[] <- -m2pru_ic3_10[i]*IC3S1J2W_10[i]
+sch_IC4S1J2W_10[] <- -m2pru_ic4_10[i]*IC4S1J2W_10[i]
+
+sch_IC1S1J2W_11[] <- -m2pru_ic1_11[i]*IC1S1J2W_11[i]
+sch_IC2S1J2W_11[] <- -m2pru_ic2_11[i]*IC2S1J2W_11[i]
+sch_IC3S1J2W_11[] <- -m2pru_ic3_11[i]*IC3S1J2W_11[i]
+sch_IC4S1J2W_11[] <- -m2pru_ic4_11[i]*IC4S1J2W_11[i]
+
+sch_IC1S1J2W_12[] <- -m2pru_ic1_12[i]*IC1S1J2W_12[i]
+sch_IC2S1J2W_12[] <- -m2pru_ic2_12[i]*IC2S1J2W_12[i]
+sch_IC3S1J2W_12[] <- -m2pru_ic3_12[i]*IC3S1J2W_12[i]
+sch_IC4S1J2W_12[] <- -m2pru_ic4_12[i]*IC4S1J2W_12[i]
+
+sch_IC1S1J2W_13[] <- -m2pru_ic1_13[i]*IC1S1J2W_13[i]
+sch_IC2S1J2W_13[] <- -m2pru_ic2_13[i]*IC2S1J2W_13[i]
+sch_IC3S1J2W_13[] <- -m2pru_ic3_13[i]*IC3S1J2W_13[i]
+sch_IC4S1J2W_13[] <- -m2pru_ic4_13[i]*IC4S1J2W_13[i]
+
+sch_IC1S1J2W_14[] <- -m2pru_ic1_14[i]*IC1S1J2W_14[i]
+sch_IC2S1J2W_14[] <- -m2pru_ic2_14[i]*IC2S1J2W_14[i]
+sch_IC3S1J2W_14[] <- -m2pru_ic3_14[i]*IC3S1J2W_14[i]
+sch_IC4S1J2W_14[] <- -m2pru_ic4_14[i]*IC4S1J2W_14[i]
+
+sch_IC1S1J2W_15[] <- -m2pru_ic1_15[i]*IC1S1J2W_15[i]
+sch_IC2S1J2W_15[] <- -m2pru_ic2_15[i]*IC2S1J2W_15[i]
+sch_IC3S1J2W_15[] <- -m2pru_ic3_15[i]*IC3S1J2W_15[i]
+sch_IC4S1J2W_15[] <- -m2pru_ic4_15[i]*IC4S1J2W_15[i]
+
+sch_IC1S1J2W_16[] <- neet2m_i[i]*IC1S2J2W_16[i] - m2neet_ic1_16[i]*IC1S1J2W_16[i]
+sch_IC2S1J2W_16[] <- neet2m_i[i]*IC2S2J2W_16[i] - m2neet_ic2_16[i]*IC2S1J2W_16[i]
+sch_IC3S1J2W_16[] <- neet2m_i[i]*IC3S2J2W_16[i] - m2neet_ic3_16[i]*IC3S1J2W_16[i]
+sch_IC4S1J2W_16[] <- neet2m_i[i]*IC4S2J2W_16[i] - m2neet_ic4_16[i]*IC4S1J2W_16[i]
+
+sch_IC1S1J2W_17[] <- neet2m_i[i]*IC1S2J2W_17[i] - m2neet_ic1_17[i]*IC1S1J2W_17[i]
+sch_IC2S1J2W_17[] <- neet2m_i[i]*IC2S2J2W_17[i] - m2neet_ic2_17[i]*IC2S1J2W_17[i]
+sch_IC3S1J2W_17[] <- neet2m_i[i]*IC3S2J2W_17[i] - m2neet_ic3_17[i]*IC3S1J2W_17[i]
+sch_IC4S1J2W_17[] <- neet2m_i[i]*IC4S2J2W_17[i] - m2neet_ic4_17[i]*IC4S1J2W_17[i]
+
+
+
+sch_IC1S2J2W_10[] <- m2pru_ic1_10[i]*IC1S1J2W_10[i]
+sch_IC2S2J2W_10[] <- m2pru_ic2_10[i]*IC2S1J2W_10[i]
+sch_IC3S2J2W_10[] <- m2pru_ic3_10[i]*IC3S1J2W_10[i]
+sch_IC4S2J2W_10[] <- m2pru_ic4_10[i]*IC4S1J2W_10[i]
+
+sch_IC1S2J2W_11[] <- m2pru_ic1_11[i]*IC1S1J2W_11[i]
+sch_IC2S2J2W_11[] <- m2pru_ic2_11[i]*IC2S1J2W_11[i]
+sch_IC3S2J2W_11[] <- m2pru_ic3_11[i]*IC3S1J2W_11[i]
+sch_IC4S2J2W_11[] <- m2pru_ic4_11[i]*IC4S1J2W_11[i]
+
+sch_IC1S2J2W_12[] <- m2pru_ic1_12[i]*IC1S1J2W_12[i]
+sch_IC2S2J2W_12[] <- m2pru_ic2_12[i]*IC2S1J2W_12[i]
+sch_IC3S2J2W_12[] <- m2pru_ic3_12[i]*IC3S1J2W_12[i]
+sch_IC4S2J2W_12[] <- m2pru_ic4_12[i]*IC4S1J2W_12[i]
+
+sch_IC1S2J2W_13[] <- m2pru_ic1_13[i]*IC1S1J2W_13[i]
+sch_IC2S2J2W_13[] <- m2pru_ic2_13[i]*IC2S1J2W_13[i]
+sch_IC3S2J2W_13[] <- m2pru_ic3_13[i]*IC3S1J2W_13[i]
+sch_IC4S2J2W_13[] <- m2pru_ic4_13[i]*IC4S1J2W_13[i]
+
+sch_IC1S2J2W_14[] <- m2pru_ic1_14[i]*IC1S1J2W_14[i]
+sch_IC2S2J2W_14[] <- m2pru_ic2_14[i]*IC2S1J2W_14[i]
+sch_IC3S2J2W_14[] <- m2pru_ic3_14[i]*IC3S1J2W_14[i]
+sch_IC4S2J2W_14[] <- m2pru_ic4_14[i]*IC4S1J2W_14[i]
+
+sch_IC1S2J2W_15[] <- m2pru_ic1_15[i]*IC1S1J2W_15[i]
+sch_IC2S2J2W_15[] <- m2pru_ic2_15[i]*IC2S1J2W_15[i]
+sch_IC3S2J2W_15[] <- m2pru_ic3_15[i]*IC3S1J2W_15[i]
+sch_IC4S2J2W_15[] <- m2pru_ic4_15[i]*IC4S1J2W_15[i]
+
+sch_IC1S2J2W_16[] <- m2neet_ic1_16[i]*IC1S1J2W_16[i] - neet2m_i[i]*IC1S2J2W_16[i]
+sch_IC2S2J2W_16[] <- m2neet_ic2_16[i]*IC2S1J2W_16[i] - neet2m_i[i]*IC2S2J2W_16[i]
+sch_IC3S2J2W_16[] <- m2neet_ic3_16[i]*IC3S1J2W_16[i] - neet2m_i[i]*IC3S2J2W_16[i]
+sch_IC4S2J2W_16[] <- m2neet_ic4_16[i]*IC4S1J2W_16[i] - neet2m_i[i]*IC4S2J2W_16[i]
+
+sch_IC1S2J2W_17[] <- m2neet_ic1_17[i]*IC1S1J2W_17[i] - neet2m_i[i]*IC1S2J2W_17[i]
+sch_IC2S2J2W_17[] <- m2neet_ic2_17[i]*IC2S1J2W_17[i] - neet2m_i[i]*IC2S2J2W_17[i]
+sch_IC3S2J2W_17[] <- m2neet_ic3_17[i]*IC3S1J2W_17[i] - neet2m_i[i]*IC3S2J2W_17[i]
+sch_IC4S2J2W_17[] <- m2neet_ic4_17[i]*IC4S1J2W_17[i] - neet2m_i[i]*IC4S2J2W_17[i]
+
+
+
+sch_IC1S1J3W_10[] <- -m2pru_ic1_10[i]*IC1S1J3W_10[i]
+sch_IC2S1J3W_10[] <- -m2pru_ic2_10[i]*IC2S1J3W_10[i]
+sch_IC3S1J3W_10[] <- -m2pru_ic3_10[i]*IC3S1J3W_10[i]
+sch_IC4S1J3W_10[] <- -m2pru_ic4_10[i]*IC4S1J3W_10[i]
+
+sch_IC1S1J3W_11[] <- -m2pru_ic1_11[i]*IC1S1J3W_11[i]
+sch_IC2S1J3W_11[] <- -m2pru_ic2_11[i]*IC2S1J3W_11[i]
+sch_IC3S1J3W_11[] <- -m2pru_ic3_11[i]*IC3S1J3W_11[i]
+sch_IC4S1J3W_11[] <- -m2pru_ic4_11[i]*IC4S1J3W_11[i]
+
+sch_IC1S1J3W_12[] <- -m2pru_ic1_12[i]*IC1S1J3W_12[i]
+sch_IC2S1J3W_12[] <- -m2pru_ic2_12[i]*IC2S1J3W_12[i]
+sch_IC3S1J3W_12[] <- -m2pru_ic3_12[i]*IC3S1J3W_12[i]
+sch_IC4S1J3W_12[] <- -m2pru_ic4_12[i]*IC4S1J3W_12[i]
+
+sch_IC1S1J3W_13[] <- -m2pru_ic1_13[i]*IC1S1J3W_13[i]
+sch_IC2S1J3W_13[] <- -m2pru_ic2_13[i]*IC2S1J3W_13[i]
+sch_IC3S1J3W_13[] <- -m2pru_ic3_13[i]*IC3S1J3W_13[i]
+sch_IC4S1J3W_13[] <- -m2pru_ic4_13[i]*IC4S1J3W_13[i]
+
+sch_IC1S1J3W_14[] <- -m2pru_ic1_14[i]*IC1S1J3W_14[i]
+sch_IC2S1J3W_14[] <- -m2pru_ic2_14[i]*IC2S1J3W_14[i]
+sch_IC3S1J3W_14[] <- -m2pru_ic3_14[i]*IC3S1J3W_14[i]
+sch_IC4S1J3W_14[] <- -m2pru_ic4_14[i]*IC4S1J3W_14[i]
+
+sch_IC1S1J3W_15[] <- -m2pru_ic1_15[i]*IC1S1J3W_15[i]
+sch_IC2S1J3W_15[] <- -m2pru_ic2_15[i]*IC2S1J3W_15[i]
+sch_IC3S1J3W_15[] <- -m2pru_ic3_15[i]*IC3S1J3W_15[i]
+sch_IC4S1J3W_15[] <- -m2pru_ic4_15[i]*IC4S1J3W_15[i]
+
+sch_IC1S1J3W_16[] <- neet2m_i[i]*IC1S2J3W_16[i] - m2neet_ic1_16[i]*IC1S1J3W_16[i]
+sch_IC2S1J3W_16[] <- neet2m_i[i]*IC2S2J3W_16[i] - m2neet_ic2_16[i]*IC2S1J3W_16[i]
+sch_IC3S1J3W_16[] <- neet2m_i[i]*IC3S2J3W_16[i] - m2neet_ic3_16[i]*IC3S1J3W_16[i]
+sch_IC4S1J3W_16[] <- neet2m_i[i]*IC4S2J3W_16[i] - m2neet_ic4_16[i]*IC4S1J3W_16[i]
+
+sch_IC1S1J3W_17[] <- neet2m_i[i]*IC1S2J3W_17[i] - m2neet_ic1_17[i]*IC1S1J3W_17[i]
+sch_IC2S1J3W_17[] <- neet2m_i[i]*IC2S2J3W_17[i] - m2neet_ic2_17[i]*IC2S1J3W_17[i]
+sch_IC3S1J3W_17[] <- neet2m_i[i]*IC3S2J3W_17[i] - m2neet_ic3_17[i]*IC3S1J3W_17[i]
+sch_IC4S1J3W_17[] <- neet2m_i[i]*IC4S2J3W_17[i] - m2neet_ic4_17[i]*IC4S1J3W_17[i]
+
+
+
+sch_IC1S2J3W_10[] <- m2pru_ic1_10[i]*IC1S1J3W_10[i]
+sch_IC2S2J3W_10[] <- m2pru_ic2_10[i]*IC2S1J3W_10[i]
+sch_IC3S2J3W_10[] <- m2pru_ic3_10[i]*IC3S1J3W_10[i]
+sch_IC4S2J3W_10[] <- m2pru_ic4_10[i]*IC4S1J3W_10[i]
+
+sch_IC1S2J3W_11[] <- m2pru_ic1_11[i]*IC1S1J3W_11[i]
+sch_IC2S2J3W_11[] <- m2pru_ic2_11[i]*IC2S1J3W_11[i]
+sch_IC3S2J3W_11[] <- m2pru_ic3_11[i]*IC3S1J3W_11[i]
+sch_IC4S2J3W_11[] <- m2pru_ic4_11[i]*IC4S1J3W_11[i]
+
+sch_IC1S2J3W_12[] <- m2pru_ic1_12[i]*IC1S1J3W_12[i]
+sch_IC2S2J3W_12[] <- m2pru_ic2_12[i]*IC2S1J3W_12[i]
+sch_IC3S2J3W_12[] <- m2pru_ic3_12[i]*IC3S1J3W_12[i]
+sch_IC4S2J3W_12[] <- m2pru_ic4_12[i]*IC4S1J3W_12[i]
+
+sch_IC1S2J3W_13[] <- m2pru_ic1_13[i]*IC1S1J3W_13[i]
+sch_IC2S2J3W_13[] <- m2pru_ic2_13[i]*IC2S1J3W_13[i]
+sch_IC3S2J3W_13[] <- m2pru_ic3_13[i]*IC3S1J3W_13[i]
+sch_IC4S2J3W_13[] <- m2pru_ic4_13[i]*IC4S1J3W_13[i]
+
+sch_IC1S2J3W_14[] <- m2pru_ic1_14[i]*IC1S1J3W_14[i]
+sch_IC2S2J3W_14[] <- m2pru_ic2_14[i]*IC2S1J3W_14[i]
+sch_IC3S2J3W_14[] <- m2pru_ic3_14[i]*IC3S1J3W_14[i]
+sch_IC4S2J3W_14[] <- m2pru_ic4_14[i]*IC4S1J3W_14[i]
+
+sch_IC1S2J3W_15[] <- m2pru_ic1_15[i]*IC1S1J3W_15[i]
+sch_IC2S2J3W_15[] <- m2pru_ic2_15[i]*IC2S1J3W_15[i]
+sch_IC3S2J3W_15[] <- m2pru_ic3_15[i]*IC3S1J3W_15[i]
+sch_IC4S2J3W_15[] <- m2pru_ic4_15[i]*IC4S1J3W_15[i]
+
+sch_IC1S2J3W_16[] <- m2neet_ic1_16[i]*IC1S1J3W_16[i] - neet2m_i[i]*IC1S2J3W_16[i]
+sch_IC2S2J3W_16[] <- m2neet_ic2_16[i]*IC2S1J3W_16[i] - neet2m_i[i]*IC2S2J3W_16[i]
+sch_IC3S2J3W_16[] <- m2neet_ic3_16[i]*IC3S1J3W_16[i] - neet2m_i[i]*IC3S2J3W_16[i]
+sch_IC4S2J3W_16[] <- m2neet_ic4_16[i]*IC4S1J3W_16[i] - neet2m_i[i]*IC4S2J3W_16[i]
+
+sch_IC1S2J3W_17[] <- m2neet_ic1_17[i]*IC1S1J3W_17[i] - neet2m_i[i]*IC1S2J3W_17[i]
+sch_IC2S2J3W_17[] <- m2neet_ic2_17[i]*IC2S1J3W_17[i] - neet2m_i[i]*IC2S2J3W_17[i]
+sch_IC3S2J3W_17[] <- m2neet_ic3_17[i]*IC3S1J3W_17[i] - neet2m_i[i]*IC3S2J3W_17[i]
+sch_IC4S2J3W_17[] <- m2neet_ic4_17[i]*IC4S1J3W_17[i] - neet2m_i[i]*IC4S2J3W_17[i]
+
+
+
+sch_EC1S1J1U_10[] <- -m2pru_ec1_10[i]*EC1S1J1U_10[i]
+sch_EC2S1J1U_10[] <- -m2pru_ec2_10[i]*EC2S1J1U_10[i]
+sch_EC3S1J1U_10[] <- -m2pru_ec3_10[i]*EC3S1J1U_10[i]
+sch_EC4S1J1U_10[] <- -m2pru_ec4_10[i]*EC4S1J1U_10[i]
+
+sch_EC1S1J1U_11[] <- -m2pru_ec1_11[i]*EC1S1J1U_11[i]
+sch_EC2S1J1U_11[] <- -m2pru_ec2_11[i]*EC2S1J1U_11[i]
+sch_EC3S1J1U_11[] <- -m2pru_ec3_11[i]*EC3S1J1U_11[i]
+sch_EC4S1J1U_11[] <- -m2pru_ec4_11[i]*EC4S1J1U_11[i]
+
+sch_EC1S1J1U_12[] <- -m2pru_ec1_12[i]*EC1S1J1U_12[i]
+sch_EC2S1J1U_12[] <- -m2pru_ec2_12[i]*EC2S1J1U_12[i]
+sch_EC3S1J1U_12[] <- -m2pru_ec3_12[i]*EC3S1J1U_12[i]
+sch_EC4S1J1U_12[] <- -m2pru_ec4_12[i]*EC4S1J1U_12[i]
+
+sch_EC1S1J1U_13[] <- -m2pru_ec1_13[i]*EC1S1J1U_13[i]
+sch_EC2S1J1U_13[] <- -m2pru_ec2_13[i]*EC2S1J1U_13[i]
+sch_EC3S1J1U_13[] <- -m2pru_ec3_13[i]*EC3S1J1U_13[i]
+sch_EC4S1J1U_13[] <- -m2pru_ec4_13[i]*EC4S1J1U_13[i]
+
+sch_EC1S1J1U_14[] <- -m2pru_ec1_14[i]*EC1S1J1U_14[i]
+sch_EC2S1J1U_14[] <- -m2pru_ec2_14[i]*EC2S1J1U_14[i]
+sch_EC3S1J1U_14[] <- -m2pru_ec3_14[i]*EC3S1J1U_14[i]
+sch_EC4S1J1U_14[] <- -m2pru_ec4_14[i]*EC4S1J1U_14[i]
+
+sch_EC1S1J1U_15[] <- -m2pru_ec1_15[i]*EC1S1J1U_15[i]
+sch_EC2S1J1U_15[] <- -m2pru_ec2_15[i]*EC2S1J1U_15[i]
+sch_EC3S1J1U_15[] <- -m2pru_ec3_15[i]*EC3S1J1U_15[i]
+sch_EC4S1J1U_15[] <- -m2pru_ec4_15[i]*EC4S1J1U_15[i]
+
+sch_EC1S1J1U_16[] <- neet2m_e[i]*EC1S2J1U_16[i] - m2neet_ec1_16[i]*EC1S1J1U_16[i]
+sch_EC2S1J1U_16[] <- neet2m_e[i]*EC2S2J1U_16[i] - m2neet_ec2_16[i]*EC2S1J1U_16[i]
+sch_EC3S1J1U_16[] <- neet2m_e[i]*EC3S2J1U_16[i] - m2neet_ec3_16[i]*EC3S1J1U_16[i]
+sch_EC4S1J1U_16[] <- neet2m_e[i]*EC4S2J1U_16[i] - m2neet_ec4_16[i]*EC4S1J1U_16[i]
+
+sch_EC1S1J1U_17[] <- neet2m_e[i]*EC1S2J1U_17[i] - m2neet_ec1_17[i]*EC1S1J1U_17[i]
+sch_EC2S1J1U_17[] <- neet2m_e[i]*EC2S2J1U_17[i] - m2neet_ec2_17[i]*EC2S1J1U_17[i]
+sch_EC3S1J1U_17[] <- neet2m_e[i]*EC3S2J1U_17[i] - m2neet_ec3_17[i]*EC3S1J1U_17[i]
+sch_EC4S1J1U_17[] <- neet2m_e[i]*EC4S2J1U_17[i] - m2neet_ec4_17[i]*EC4S1J1U_17[i]
+
+
+
+sch_EC1S2J1U_10[] <- m2pru_ec1_10[i]*EC1S1J1U_10[i]
+sch_EC2S2J1U_10[] <- m2pru_ec2_10[i]*EC2S1J1U_10[i]
+sch_EC3S2J1U_10[] <- m2pru_ec3_10[i]*EC3S1J1U_10[i]
+sch_EC4S2J1U_10[] <- m2pru_ec4_10[i]*EC4S1J1U_10[i]
+
+sch_EC1S2J1U_11[] <- m2pru_ec1_11[i]*EC1S1J1U_11[i]
+sch_EC2S2J1U_11[] <- m2pru_ec2_11[i]*EC2S1J1U_11[i]
+sch_EC3S2J1U_11[] <- m2pru_ec3_11[i]*EC3S1J1U_11[i]
+sch_EC4S2J1U_11[] <- m2pru_ec4_11[i]*EC4S1J1U_11[i]
+
+sch_EC1S2J1U_12[] <- m2pru_ec1_12[i]*EC1S1J1U_12[i]
+sch_EC2S2J1U_12[] <- m2pru_ec2_12[i]*EC2S1J1U_12[i]
+sch_EC3S2J1U_12[] <- m2pru_ec3_12[i]*EC3S1J1U_12[i]
+sch_EC4S2J1U_12[] <- m2pru_ec4_12[i]*EC4S1J1U_12[i]
+
+sch_EC1S2J1U_13[] <- m2pru_ec1_13[i]*EC1S1J1U_13[i]
+sch_EC2S2J1U_13[] <- m2pru_ec2_13[i]*EC2S1J1U_13[i]
+sch_EC3S2J1U_13[] <- m2pru_ec3_13[i]*EC3S1J1U_13[i]
+sch_EC4S2J1U_13[] <- m2pru_ec4_13[i]*EC4S1J1U_13[i]
+
+sch_EC1S2J1U_14[] <- m2pru_ec1_14[i]*EC1S1J1U_14[i]
+sch_EC2S2J1U_14[] <- m2pru_ec2_14[i]*EC2S1J1U_14[i]
+sch_EC3S2J1U_14[] <- m2pru_ec3_14[i]*EC3S1J1U_14[i]
+sch_EC4S2J1U_14[] <- m2pru_ec4_14[i]*EC4S1J1U_14[i]
+
+sch_EC1S2J1U_15[] <- m2pru_ec1_15[i]*EC1S1J1U_15[i]
+sch_EC2S2J1U_15[] <- m2pru_ec2_15[i]*EC2S1J1U_15[i]
+sch_EC3S2J1U_15[] <- m2pru_ec3_15[i]*EC3S1J1U_15[i]
+sch_EC4S2J1U_15[] <- m2pru_ec4_15[i]*EC4S1J1U_15[i]
+
+sch_EC1S2J1U_16[] <- m2neet_ec1_16[i]*EC1S1J1U_16[i] - neet2m_e[i]*EC1S2J1U_16[i]
+sch_EC2S2J1U_16[] <- m2neet_ec2_16[i]*EC2S1J1U_16[i] - neet2m_e[i]*EC2S2J1U_16[i]
+sch_EC3S2J1U_16[] <- m2neet_ec3_16[i]*EC3S1J1U_16[i] - neet2m_e[i]*EC3S2J1U_16[i]
+sch_EC4S2J1U_16[] <- m2neet_ec4_16[i]*EC4S1J1U_16[i] - neet2m_e[i]*EC4S2J1U_16[i]
+
+sch_EC1S2J1U_17[] <- m2neet_ec1_17[i]*EC1S1J1U_17[i] - neet2m_e[i]*EC1S2J1U_17[i]
+sch_EC2S2J1U_17[] <- m2neet_ec2_17[i]*EC2S1J1U_17[i] - neet2m_e[i]*EC2S2J1U_17[i]
+sch_EC3S2J1U_17[] <- m2neet_ec3_17[i]*EC3S1J1U_17[i] - neet2m_e[i]*EC3S2J1U_17[i]
+sch_EC4S2J1U_17[] <- m2neet_ec4_17[i]*EC4S1J1U_17[i] - neet2m_e[i]*EC4S2J1U_17[i]
+
+
+
+sch_EC1S1J2U_10[] <- -m2pru_ec1_10[i]*EC1S1J2U_10[i]
+sch_EC2S1J2U_10[] <- -m2pru_ec2_10[i]*EC2S1J2U_10[i]
+sch_EC3S1J2U_10[] <- -m2pru_ec3_10[i]*EC3S1J2U_10[i]
+sch_EC4S1J2U_10[] <- -m2pru_ec4_10[i]*EC4S1J2U_10[i]
+
+sch_EC1S1J2U_11[] <- -m2pru_ec1_11[i]*EC1S1J2U_11[i]
+sch_EC2S1J2U_11[] <- -m2pru_ec2_11[i]*EC2S1J2U_11[i]
+sch_EC3S1J2U_11[] <- -m2pru_ec3_11[i]*EC3S1J2U_11[i]
+sch_EC4S1J2U_11[] <- -m2pru_ec4_11[i]*EC4S1J2U_11[i]
+
+sch_EC1S1J2U_12[] <- -m2pru_ec1_12[i]*EC1S1J2U_12[i]
+sch_EC2S1J2U_12[] <- -m2pru_ec2_12[i]*EC2S1J2U_12[i]
+sch_EC3S1J2U_12[] <- -m2pru_ec3_12[i]*EC3S1J2U_12[i]
+sch_EC4S1J2U_12[] <- -m2pru_ec4_12[i]*EC4S1J2U_12[i]
+
+sch_EC1S1J2U_13[] <- -m2pru_ec1_13[i]*EC1S1J2U_13[i]
+sch_EC2S1J2U_13[] <- -m2pru_ec2_13[i]*EC2S1J2U_13[i]
+sch_EC3S1J2U_13[] <- -m2pru_ec3_13[i]*EC3S1J2U_13[i]
+sch_EC4S1J2U_13[] <- -m2pru_ec4_13[i]*EC4S1J2U_13[i]
+
+sch_EC1S1J2U_14[] <- -m2pru_ec1_14[i]*EC1S1J2U_14[i]
+sch_EC2S1J2U_14[] <- -m2pru_ec2_14[i]*EC2S1J2U_14[i]
+sch_EC3S1J2U_14[] <- -m2pru_ec3_14[i]*EC3S1J2U_14[i]
+sch_EC4S1J2U_14[] <- -m2pru_ec4_14[i]*EC4S1J2U_14[i]
+
+sch_EC1S1J2U_15[] <- -m2pru_ec1_15[i]*EC1S1J2U_15[i]
+sch_EC2S1J2U_15[] <- -m2pru_ec2_15[i]*EC2S1J2U_15[i]
+sch_EC3S1J2U_15[] <- -m2pru_ec3_15[i]*EC3S1J2U_15[i]
+sch_EC4S1J2U_15[] <- -m2pru_ec4_15[i]*EC4S1J2U_15[i]
+
+sch_EC1S1J2U_16[] <- neet2m_e[i]*EC1S2J2U_16[i] - m2neet_ec1_16[i]*EC1S1J2U_16[i]
+sch_EC2S1J2U_16[] <- neet2m_e[i]*EC2S2J2U_16[i] - m2neet_ec2_16[i]*EC2S1J2U_16[i]
+sch_EC3S1J2U_16[] <- neet2m_e[i]*EC3S2J2U_16[i] - m2neet_ec3_16[i]*EC3S1J2U_16[i]
+sch_EC4S1J2U_16[] <- neet2m_e[i]*EC4S2J2U_16[i] - m2neet_ec4_16[i]*EC4S1J2U_16[i]
+
+sch_EC1S1J2U_17[] <- neet2m_e[i]*EC1S2J2U_17[i] - m2neet_ec1_17[i]*EC1S1J2U_17[i]
+sch_EC2S1J2U_17[] <- neet2m_e[i]*EC2S2J2U_17[i] - m2neet_ec2_17[i]*EC2S1J2U_17[i]
+sch_EC3S1J2U_17[] <- neet2m_e[i]*EC3S2J2U_17[i] - m2neet_ec3_17[i]*EC3S1J2U_17[i]
+sch_EC4S1J2U_17[] <- neet2m_e[i]*EC4S2J2U_17[i] - m2neet_ec4_17[i]*EC4S1J2U_17[i]
+
+
+
+sch_EC1S2J2U_10[] <- m2pru_ec1_10[i]*EC1S1J2U_10[i]
+sch_EC2S2J2U_10[] <- m2pru_ec2_10[i]*EC2S1J2U_10[i]
+sch_EC3S2J2U_10[] <- m2pru_ec3_10[i]*EC3S1J2U_10[i]
+sch_EC4S2J2U_10[] <- m2pru_ec4_10[i]*EC4S1J2U_10[i]
+
+sch_EC1S2J2U_11[] <- m2pru_ec1_11[i]*EC1S1J2U_11[i]
+sch_EC2S2J2U_11[] <- m2pru_ec2_11[i]*EC2S1J2U_11[i]
+sch_EC3S2J2U_11[] <- m2pru_ec3_11[i]*EC3S1J2U_11[i]
+sch_EC4S2J2U_11[] <- m2pru_ec4_11[i]*EC4S1J2U_11[i]
+
+sch_EC1S2J2U_12[] <- m2pru_ec1_12[i]*EC1S1J2U_12[i]
+sch_EC2S2J2U_12[] <- m2pru_ec2_12[i]*EC2S1J2U_12[i]
+sch_EC3S2J2U_12[] <- m2pru_ec3_12[i]*EC3S1J2U_12[i]
+sch_EC4S2J2U_12[] <- m2pru_ec4_12[i]*EC4S1J2U_12[i]
+
+sch_EC1S2J2U_13[] <- m2pru_ec1_13[i]*EC1S1J2U_13[i]
+sch_EC2S2J2U_13[] <- m2pru_ec2_13[i]*EC2S1J2U_13[i]
+sch_EC3S2J2U_13[] <- m2pru_ec3_13[i]*EC3S1J2U_13[i]
+sch_EC4S2J2U_13[] <- m2pru_ec4_13[i]*EC4S1J2U_13[i]
+
+sch_EC1S2J2U_14[] <- m2pru_ec1_14[i]*EC1S1J2U_14[i]
+sch_EC2S2J2U_14[] <- m2pru_ec2_14[i]*EC2S1J2U_14[i]
+sch_EC3S2J2U_14[] <- m2pru_ec3_14[i]*EC3S1J2U_14[i]
+sch_EC4S2J2U_14[] <- m2pru_ec4_14[i]*EC4S1J2U_14[i]
+
+sch_EC1S2J2U_15[] <- m2pru_ec1_15[i]*EC1S1J2U_15[i]
+sch_EC2S2J2U_15[] <- m2pru_ec2_15[i]*EC2S1J2U_15[i]
+sch_EC3S2J2U_15[] <- m2pru_ec3_15[i]*EC3S1J2U_15[i]
+sch_EC4S2J2U_15[] <- m2pru_ec4_15[i]*EC4S1J2U_15[i]
+
+sch_EC1S2J2U_16[] <- m2neet_ec1_16[i]*EC1S1J2U_16[i] - neet2m_e[i]*EC1S2J2U_16[i]
+sch_EC2S2J2U_16[] <- m2neet_ec2_16[i]*EC2S1J2U_16[i] - neet2m_e[i]*EC2S2J2U_16[i]
+sch_EC3S2J2U_16[] <- m2neet_ec3_16[i]*EC3S1J2U_16[i] - neet2m_e[i]*EC3S2J2U_16[i]
+sch_EC4S2J2U_16[] <- m2neet_ec4_16[i]*EC4S1J2U_16[i] - neet2m_e[i]*EC4S2J2U_16[i]
+
+sch_EC1S2J2U_17[] <- m2neet_ec1_17[i]*EC1S1J2U_17[i] - neet2m_e[i]*EC1S2J2U_17[i]
+sch_EC2S2J2U_17[] <- m2neet_ec2_17[i]*EC2S1J2U_17[i] - neet2m_e[i]*EC2S2J2U_17[i]
+sch_EC3S2J2U_17[] <- m2neet_ec3_17[i]*EC3S1J2U_17[i] - neet2m_e[i]*EC3S2J2U_17[i]
+sch_EC4S2J2U_17[] <- m2neet_ec4_17[i]*EC4S1J2U_17[i] - neet2m_e[i]*EC4S2J2U_17[i]
+
+
+
+sch_EC1S1J3U_10[] <- -m2pru_ec1_10[i]*EC1S1J3U_10[i]
+sch_EC2S1J3U_10[] <- -m2pru_ec2_10[i]*EC2S1J3U_10[i]
+sch_EC3S1J3U_10[] <- -m2pru_ec3_10[i]*EC3S1J3U_10[i]
+sch_EC4S1J3U_10[] <- -m2pru_ec4_10[i]*EC4S1J3U_10[i]
+
+sch_EC1S1J3U_11[] <- -m2pru_ec1_11[i]*EC1S1J3U_11[i]
+sch_EC2S1J3U_11[] <- -m2pru_ec2_11[i]*EC2S1J3U_11[i]
+sch_EC3S1J3U_11[] <- -m2pru_ec3_11[i]*EC3S1J3U_11[i]
+sch_EC4S1J3U_11[] <- -m2pru_ec4_11[i]*EC4S1J3U_11[i]
+
+sch_EC1S1J3U_12[] <- -m2pru_ec1_12[i]*EC1S1J3U_12[i]
+sch_EC2S1J3U_12[] <- -m2pru_ec2_12[i]*EC2S1J3U_12[i]
+sch_EC3S1J3U_12[] <- -m2pru_ec3_12[i]*EC3S1J3U_12[i]
+sch_EC4S1J3U_12[] <- -m2pru_ec4_12[i]*EC4S1J3U_12[i]
+
+sch_EC1S1J3U_13[] <- -m2pru_ec1_13[i]*EC1S1J3U_13[i]
+sch_EC2S1J3U_13[] <- -m2pru_ec2_13[i]*EC2S1J3U_13[i]
+sch_EC3S1J3U_13[] <- -m2pru_ec3_13[i]*EC3S1J3U_13[i]
+sch_EC4S1J3U_13[] <- -m2pru_ec4_13[i]*EC4S1J3U_13[i]
+
+sch_EC1S1J3U_14[] <- -m2pru_ec1_14[i]*EC1S1J3U_14[i]
+sch_EC2S1J3U_14[] <- -m2pru_ec2_14[i]*EC2S1J3U_14[i]
+sch_EC3S1J3U_14[] <- -m2pru_ec3_14[i]*EC3S1J3U_14[i]
+sch_EC4S1J3U_14[] <- -m2pru_ec4_14[i]*EC4S1J3U_14[i]
+
+sch_EC1S1J3U_15[] <- -m2pru_ec1_15[i]*EC1S1J3U_15[i]
+sch_EC2S1J3U_15[] <- -m2pru_ec2_15[i]*EC2S1J3U_15[i]
+sch_EC3S1J3U_15[] <- -m2pru_ec3_15[i]*EC3S1J3U_15[i]
+sch_EC4S1J3U_15[] <- -m2pru_ec4_15[i]*EC4S1J3U_15[i]
+
+sch_EC1S1J3U_16[] <- neet2m_e[i]*EC1S2J3U_16[i] - m2neet_ec1_16[i]*EC1S1J3U_16[i]
+sch_EC2S1J3U_16[] <- neet2m_e[i]*EC2S2J3U_16[i] - m2neet_ec2_16[i]*EC2S1J3U_16[i]
+sch_EC3S1J3U_16[] <- neet2m_e[i]*EC3S2J3U_16[i] - m2neet_ec3_16[i]*EC3S1J3U_16[i]
+sch_EC4S1J3U_16[] <- neet2m_e[i]*EC4S2J3U_16[i] - m2neet_ec4_16[i]*EC4S1J3U_16[i]
+
+sch_EC1S1J3U_17[] <- neet2m_e[i]*EC1S2J3U_17[i] - m2neet_ec1_17[i]*EC1S1J3U_17[i]
+sch_EC2S1J3U_17[] <- neet2m_e[i]*EC2S2J3U_17[i] - m2neet_ec2_17[i]*EC2S1J3U_17[i]
+sch_EC3S1J3U_17[] <- neet2m_e[i]*EC3S2J3U_17[i] - m2neet_ec3_17[i]*EC3S1J3U_17[i]
+sch_EC4S1J3U_17[] <- neet2m_e[i]*EC4S2J3U_17[i] - m2neet_ec4_17[i]*EC4S1J3U_17[i]
+
+
+
+sch_EC1S2J3U_10[] <- m2pru_ec1_10[i]*EC1S1J3U_10[i]
+sch_EC2S2J3U_10[] <- m2pru_ec2_10[i]*EC2S1J3U_10[i]
+sch_EC3S2J3U_10[] <- m2pru_ec3_10[i]*EC3S1J3U_10[i]
+sch_EC4S2J3U_10[] <- m2pru_ec4_10[i]*EC4S1J3U_10[i]
+
+sch_EC1S2J3U_11[] <- m2pru_ec1_11[i]*EC1S1J3U_11[i]
+sch_EC2S2J3U_11[] <- m2pru_ec2_11[i]*EC2S1J3U_11[i]
+sch_EC3S2J3U_11[] <- m2pru_ec3_11[i]*EC3S1J3U_11[i]
+sch_EC4S2J3U_11[] <- m2pru_ec4_11[i]*EC4S1J3U_11[i]
+
+sch_EC1S2J3U_12[] <- m2pru_ec1_12[i]*EC1S1J3U_12[i]
+sch_EC2S2J3U_12[] <- m2pru_ec2_12[i]*EC2S1J3U_12[i]
+sch_EC3S2J3U_12[] <- m2pru_ec3_12[i]*EC3S1J3U_12[i]
+sch_EC4S2J3U_12[] <- m2pru_ec4_12[i]*EC4S1J3U_12[i]
+
+sch_EC1S2J3U_13[] <- m2pru_ec1_13[i]*EC1S1J3U_13[i]
+sch_EC2S2J3U_13[] <- m2pru_ec2_13[i]*EC2S1J3U_13[i]
+sch_EC3S2J3U_13[] <- m2pru_ec3_13[i]*EC3S1J3U_13[i]
+sch_EC4S2J3U_13[] <- m2pru_ec4_13[i]*EC4S1J3U_13[i]
+
+sch_EC1S2J3U_14[] <- m2pru_ec1_14[i]*EC1S1J3U_14[i]
+sch_EC2S2J3U_14[] <- m2pru_ec2_14[i]*EC2S1J3U_14[i]
+sch_EC3S2J3U_14[] <- m2pru_ec3_14[i]*EC3S1J3U_14[i]
+sch_EC4S2J3U_14[] <- m2pru_ec4_14[i]*EC4S1J3U_14[i]
+
+sch_EC1S2J3U_15[] <- m2pru_ec1_15[i]*EC1S1J3U_15[i]
+sch_EC2S2J3U_15[] <- m2pru_ec2_15[i]*EC2S1J3U_15[i]
+sch_EC3S2J3U_15[] <- m2pru_ec3_15[i]*EC3S1J3U_15[i]
+sch_EC4S2J3U_15[] <- m2pru_ec4_15[i]*EC4S1J3U_15[i]
+
+sch_EC1S2J3U_16[] <- m2neet_ec1_16[i]*EC1S1J3U_16[i] - neet2m_e[i]*EC1S2J3U_16[i]
+sch_EC2S2J3U_16[] <- m2neet_ec2_16[i]*EC2S1J3U_16[i] - neet2m_e[i]*EC2S2J3U_16[i]
+sch_EC3S2J3U_16[] <- m2neet_ec3_16[i]*EC3S1J3U_16[i] - neet2m_e[i]*EC3S2J3U_16[i]
+sch_EC4S2J3U_16[] <- m2neet_ec4_16[i]*EC4S1J3U_16[i] - neet2m_e[i]*EC4S2J3U_16[i]
+
+sch_EC1S2J3U_17[] <- m2neet_ec1_17[i]*EC1S1J3U_17[i] - neet2m_e[i]*EC1S2J3U_17[i]
+sch_EC2S2J3U_17[] <- m2neet_ec2_17[i]*EC2S1J3U_17[i] - neet2m_e[i]*EC2S2J3U_17[i]
+sch_EC3S2J3U_17[] <- m2neet_ec3_17[i]*EC3S1J3U_17[i] - neet2m_e[i]*EC3S2J3U_17[i]
+sch_EC4S2J3U_17[] <- m2neet_ec4_17[i]*EC4S1J3U_17[i] - neet2m_e[i]*EC4S2J3U_17[i]
+
+
+
+sch_EC1S1J1W_10[] <- -m2pru_ec1_10[i]*EC1S1J1W_10[i]
+sch_EC2S1J1W_10[] <- -m2pru_ec2_10[i]*EC2S1J1W_10[i]
+sch_EC3S1J1W_10[] <- -m2pru_ec3_10[i]*EC3S1J1W_10[i]
+sch_EC4S1J1W_10[] <- -m2pru_ec4_10[i]*EC4S1J1W_10[i]
+
+sch_EC1S1J1W_11[] <- -m2pru_ec1_11[i]*EC1S1J1W_11[i]
+sch_EC2S1J1W_11[] <- -m2pru_ec2_11[i]*EC2S1J1W_11[i]
+sch_EC3S1J1W_11[] <- -m2pru_ec3_11[i]*EC3S1J1W_11[i]
+sch_EC4S1J1W_11[] <- -m2pru_ec4_11[i]*EC4S1J1W_11[i]
+
+sch_EC1S1J1W_12[] <- -m2pru_ec1_12[i]*EC1S1J1W_12[i]
+sch_EC2S1J1W_12[] <- -m2pru_ec2_12[i]*EC2S1J1W_12[i]
+sch_EC3S1J1W_12[] <- -m2pru_ec3_12[i]*EC3S1J1W_12[i]
+sch_EC4S1J1W_12[] <- -m2pru_ec4_12[i]*EC4S1J1W_12[i]
+
+sch_EC1S1J1W_13[] <- -m2pru_ec1_13[i]*EC1S1J1W_13[i]
+sch_EC2S1J1W_13[] <- -m2pru_ec2_13[i]*EC2S1J1W_13[i]
+sch_EC3S1J1W_13[] <- -m2pru_ec3_13[i]*EC3S1J1W_13[i]
+sch_EC4S1J1W_13[] <- -m2pru_ec4_13[i]*EC4S1J1W_13[i]
+
+sch_EC1S1J1W_14[] <- -m2pru_ec1_14[i]*EC1S1J1W_14[i]
+sch_EC2S1J1W_14[] <- -m2pru_ec2_14[i]*EC2S1J1W_14[i]
+sch_EC3S1J1W_14[] <- -m2pru_ec3_14[i]*EC3S1J1W_14[i]
+sch_EC4S1J1W_14[] <- -m2pru_ec4_14[i]*EC4S1J1W_14[i]
+
+sch_EC1S1J1W_15[] <- -m2pru_ec1_15[i]*EC1S1J1W_15[i]
+sch_EC2S1J1W_15[] <- -m2pru_ec2_15[i]*EC2S1J1W_15[i]
+sch_EC3S1J1W_15[] <- -m2pru_ec3_15[i]*EC3S1J1W_15[i]
+sch_EC4S1J1W_15[] <- -m2pru_ec4_15[i]*EC4S1J1W_15[i]
+
+sch_EC1S1J1W_16[] <- neet2m_e[i]*EC1S2J1W_16[i] - m2neet_ec1_16[i]*EC1S1J1W_16[i]
+sch_EC2S1J1W_16[] <- neet2m_e[i]*EC2S2J1W_16[i] - m2neet_ec2_16[i]*EC2S1J1W_16[i]
+sch_EC3S1J1W_16[] <- neet2m_e[i]*EC3S2J1W_16[i] - m2neet_ec3_16[i]*EC3S1J1W_16[i]
+sch_EC4S1J1W_16[] <- neet2m_e[i]*EC4S2J1W_16[i] - m2neet_ec4_16[i]*EC4S1J1W_16[i]
+
+sch_EC1S1J1W_17[] <- neet2m_e[i]*EC1S2J1W_17[i] - m2neet_ec1_17[i]*EC1S1J1W_17[i]
+sch_EC2S1J1W_17[] <- neet2m_e[i]*EC2S2J1W_17[i] - m2neet_ec2_17[i]*EC2S1J1W_17[i]
+sch_EC3S1J1W_17[] <- neet2m_e[i]*EC3S2J1W_17[i] - m2neet_ec3_17[i]*EC3S1J1W_17[i]
+sch_EC4S1J1W_17[] <- neet2m_e[i]*EC4S2J1W_17[i] - m2neet_ec4_17[i]*EC4S1J1W_17[i]
+
+
+
+sch_EC1S2J1W_10[] <- m2pru_ec1_10[i]*EC1S1J1W_10[i]
+sch_EC2S2J1W_10[] <- m2pru_ec2_10[i]*EC2S1J1W_10[i]
+sch_EC3S2J1W_10[] <- m2pru_ec3_10[i]*EC3S1J1W_10[i]
+sch_EC4S2J1W_10[] <- m2pru_ec4_10[i]*EC4S1J1W_10[i]
+
+sch_EC1S2J1W_11[] <- m2pru_ec1_11[i]*EC1S1J1W_11[i]
+sch_EC2S2J1W_11[] <- m2pru_ec2_11[i]*EC2S1J1W_11[i]
+sch_EC3S2J1W_11[] <- m2pru_ec3_11[i]*EC3S1J1W_11[i]
+sch_EC4S2J1W_11[] <- m2pru_ec4_11[i]*EC4S1J1W_11[i]
+
+sch_EC1S2J1W_12[] <- m2pru_ec1_12[i]*EC1S1J1W_12[i]
+sch_EC2S2J1W_12[] <- m2pru_ec2_12[i]*EC2S1J1W_12[i]
+sch_EC3S2J1W_12[] <- m2pru_ec3_12[i]*EC3S1J1W_12[i]
+sch_EC4S2J1W_12[] <- m2pru_ec4_12[i]*EC4S1J1W_12[i]
+
+sch_EC1S2J1W_13[] <- m2pru_ec1_13[i]*EC1S1J1W_13[i]
+sch_EC2S2J1W_13[] <- m2pru_ec2_13[i]*EC2S1J1W_13[i]
+sch_EC3S2J1W_13[] <- m2pru_ec3_13[i]*EC3S1J1W_13[i]
+sch_EC4S2J1W_13[] <- m2pru_ec4_13[i]*EC4S1J1W_13[i]
+
+sch_EC1S2J1W_14[] <- m2pru_ec1_14[i]*EC1S1J1W_14[i]
+sch_EC2S2J1W_14[] <- m2pru_ec2_14[i]*EC2S1J1W_14[i]
+sch_EC3S2J1W_14[] <- m2pru_ec3_14[i]*EC3S1J1W_14[i]
+sch_EC4S2J1W_14[] <- m2pru_ec4_14[i]*EC4S1J1W_14[i]
+
+sch_EC1S2J1W_15[] <- m2pru_ec1_15[i]*EC1S1J1W_15[i]
+sch_EC2S2J1W_15[] <- m2pru_ec2_15[i]*EC2S1J1W_15[i]
+sch_EC3S2J1W_15[] <- m2pru_ec3_15[i]*EC3S1J1W_15[i]
+sch_EC4S2J1W_15[] <- m2pru_ec4_15[i]*EC4S1J1W_15[i]
+
+sch_EC1S2J1W_16[] <- m2neet_ec1_16[i]*EC1S1J1W_16[i] - neet2m_e[i]*EC1S2J1W_16[i]
+sch_EC2S2J1W_16[] <- m2neet_ec2_16[i]*EC2S1J1W_16[i] - neet2m_e[i]*EC2S2J1W_16[i]
+sch_EC3S2J1W_16[] <- m2neet_ec3_16[i]*EC3S1J1W_16[i] - neet2m_e[i]*EC3S2J1W_16[i]
+sch_EC4S2J1W_16[] <- m2neet_ec4_16[i]*EC4S1J1W_16[i] - neet2m_e[i]*EC4S2J1W_16[i]
+
+sch_EC1S2J1W_17[] <- m2neet_ec1_17[i]*EC1S1J1W_17[i] - neet2m_e[i]*EC1S2J1W_17[i]
+sch_EC2S2J1W_17[] <- m2neet_ec2_17[i]*EC2S1J1W_17[i] - neet2m_e[i]*EC2S2J1W_17[i]
+sch_EC3S2J1W_17[] <- m2neet_ec3_17[i]*EC3S1J1W_17[i] - neet2m_e[i]*EC3S2J1W_17[i]
+sch_EC4S2J1W_17[] <- m2neet_ec4_17[i]*EC4S1J1W_17[i] - neet2m_e[i]*EC4S2J1W_17[i]
+
+
+
+sch_EC1S1J2W_10[] <- -m2pru_ec1_10[i]*EC1S1J2W_10[i]
+sch_EC2S1J2W_10[] <- -m2pru_ec2_10[i]*EC2S1J2W_10[i]
+sch_EC3S1J2W_10[] <- -m2pru_ec3_10[i]*EC3S1J2W_10[i]
+sch_EC4S1J2W_10[] <- -m2pru_ec4_10[i]*EC4S1J2W_10[i]
+
+sch_EC1S1J2W_11[] <- -m2pru_ec1_11[i]*EC1S1J2W_11[i]
+sch_EC2S1J2W_11[] <- -m2pru_ec2_11[i]*EC2S1J2W_11[i]
+sch_EC3S1J2W_11[] <- -m2pru_ec3_11[i]*EC3S1J2W_11[i]
+sch_EC4S1J2W_11[] <- -m2pru_ec4_11[i]*EC4S1J2W_11[i]
+
+sch_EC1S1J2W_12[] <- -m2pru_ec1_12[i]*EC1S1J2W_12[i]
+sch_EC2S1J2W_12[] <- -m2pru_ec2_12[i]*EC2S1J2W_12[i]
+sch_EC3S1J2W_12[] <- -m2pru_ec3_12[i]*EC3S1J2W_12[i]
+sch_EC4S1J2W_12[] <- -m2pru_ec4_12[i]*EC4S1J2W_12[i]
+
+sch_EC1S1J2W_13[] <- -m2pru_ec1_13[i]*EC1S1J2W_13[i]
+sch_EC2S1J2W_13[] <- -m2pru_ec2_13[i]*EC2S1J2W_13[i]
+sch_EC3S1J2W_13[] <- -m2pru_ec3_13[i]*EC3S1J2W_13[i]
+sch_EC4S1J2W_13[] <- -m2pru_ec4_13[i]*EC4S1J2W_13[i]
+
+sch_EC1S1J2W_14[] <- -m2pru_ec1_14[i]*EC1S1J2W_14[i]
+sch_EC2S1J2W_14[] <- -m2pru_ec2_14[i]*EC2S1J2W_14[i]
+sch_EC3S1J2W_14[] <- -m2pru_ec3_14[i]*EC3S1J2W_14[i]
+sch_EC4S1J2W_14[] <- -m2pru_ec4_14[i]*EC4S1J2W_14[i]
+
+sch_EC1S1J2W_15[] <- -m2pru_ec1_15[i]*EC1S1J2W_15[i]
+sch_EC2S1J2W_15[] <- -m2pru_ec2_15[i]*EC2S1J2W_15[i]
+sch_EC3S1J2W_15[] <- -m2pru_ec3_15[i]*EC3S1J2W_15[i]
+sch_EC4S1J2W_15[] <- -m2pru_ec4_15[i]*EC4S1J2W_15[i]
+
+sch_EC1S1J2W_16[] <- neet2m_e[i]*EC1S2J2W_16[i] - m2neet_ec1_16[i]*EC1S1J2W_16[i]
+sch_EC2S1J2W_16[] <- neet2m_e[i]*EC2S2J2W_16[i] - m2neet_ec2_16[i]*EC2S1J2W_16[i]
+sch_EC3S1J2W_16[] <- neet2m_e[i]*EC3S2J2W_16[i] - m2neet_ec3_16[i]*EC3S1J2W_16[i]
+sch_EC4S1J2W_16[] <- neet2m_e[i]*EC4S2J2W_16[i] - m2neet_ec4_16[i]*EC4S1J2W_16[i]
+
+sch_EC1S1J2W_17[] <- neet2m_e[i]*EC1S2J2W_17[i] - m2neet_ec1_17[i]*EC1S1J2W_17[i]
+sch_EC2S1J2W_17[] <- neet2m_e[i]*EC2S2J2W_17[i] - m2neet_ec2_17[i]*EC2S1J2W_17[i]
+sch_EC3S1J2W_17[] <- neet2m_e[i]*EC3S2J2W_17[i] - m2neet_ec3_17[i]*EC3S1J2W_17[i]
+sch_EC4S1J2W_17[] <- neet2m_e[i]*EC4S2J2W_17[i] - m2neet_ec4_17[i]*EC4S1J2W_17[i]
+
+
+
+sch_EC1S2J2W_10[] <- m2pru_ec1_10[i]*EC1S1J2W_10[i]
+sch_EC2S2J2W_10[] <- m2pru_ec2_10[i]*EC2S1J2W_10[i]
+sch_EC3S2J2W_10[] <- m2pru_ec3_10[i]*EC3S1J2W_10[i]
+sch_EC4S2J2W_10[] <- m2pru_ec4_10[i]*EC4S1J2W_10[i]
+
+sch_EC1S2J2W_11[] <- m2pru_ec1_11[i]*EC1S1J2W_11[i]
+sch_EC2S2J2W_11[] <- m2pru_ec2_11[i]*EC2S1J2W_11[i]
+sch_EC3S2J2W_11[] <- m2pru_ec3_11[i]*EC3S1J2W_11[i]
+sch_EC4S2J2W_11[] <- m2pru_ec4_11[i]*EC4S1J2W_11[i]
+
+sch_EC1S2J2W_12[] <- m2pru_ec1_12[i]*EC1S1J2W_12[i]
+sch_EC2S2J2W_12[] <- m2pru_ec2_12[i]*EC2S1J2W_12[i]
+sch_EC3S2J2W_12[] <- m2pru_ec3_12[i]*EC3S1J2W_12[i]
+sch_EC4S2J2W_12[] <- m2pru_ec4_12[i]*EC4S1J2W_12[i]
+
+sch_EC1S2J2W_13[] <- m2pru_ec1_13[i]*EC1S1J2W_13[i]
+sch_EC2S2J2W_13[] <- m2pru_ec2_13[i]*EC2S1J2W_13[i]
+sch_EC3S2J2W_13[] <- m2pru_ec3_13[i]*EC3S1J2W_13[i]
+sch_EC4S2J2W_13[] <- m2pru_ec4_13[i]*EC4S1J2W_13[i]
+
+sch_EC1S2J2W_14[] <- m2pru_ec1_14[i]*EC1S1J2W_14[i]
+sch_EC2S2J2W_14[] <- m2pru_ec2_14[i]*EC2S1J2W_14[i]
+sch_EC3S2J2W_14[] <- m2pru_ec3_14[i]*EC3S1J2W_14[i]
+sch_EC4S2J2W_14[] <- m2pru_ec4_14[i]*EC4S1J2W_14[i]
+
+sch_EC1S2J2W_15[] <- m2pru_ec1_15[i]*EC1S1J2W_15[i]
+sch_EC2S2J2W_15[] <- m2pru_ec2_15[i]*EC2S1J2W_15[i]
+sch_EC3S2J2W_15[] <- m2pru_ec3_15[i]*EC3S1J2W_15[i]
+sch_EC4S2J2W_15[] <- m2pru_ec4_15[i]*EC4S1J2W_15[i]
+
+sch_EC1S2J2W_16[] <- m2neet_ec1_16[i]*EC1S1J2W_16[i] - neet2m_e[i]*EC1S2J2W_16[i]
+sch_EC2S2J2W_16[] <- m2neet_ec2_16[i]*EC2S1J2W_16[i] - neet2m_e[i]*EC2S2J2W_16[i]
+sch_EC3S2J2W_16[] <- m2neet_ec3_16[i]*EC3S1J2W_16[i] - neet2m_e[i]*EC3S2J2W_16[i]
+sch_EC4S2J2W_16[] <- m2neet_ec4_16[i]*EC4S1J2W_16[i] - neet2m_e[i]*EC4S2J2W_16[i]
+
+sch_EC1S2J2W_17[] <- m2neet_ec1_17[i]*EC1S1J2W_17[i] - neet2m_e[i]*EC1S2J2W_17[i]
+sch_EC2S2J2W_17[] <- m2neet_ec2_17[i]*EC2S1J2W_17[i] - neet2m_e[i]*EC2S2J2W_17[i]
+sch_EC3S2J2W_17[] <- m2neet_ec3_17[i]*EC3S1J2W_17[i] - neet2m_e[i]*EC3S2J2W_17[i]
+sch_EC4S2J2W_17[] <- m2neet_ec4_17[i]*EC4S1J2W_17[i] - neet2m_e[i]*EC4S2J2W_17[i]
+
+
+
+sch_EC1S1J3W_10[] <- -m2pru_ec1_10[i]*EC1S1J3W_10[i]
+sch_EC2S1J3W_10[] <- -m2pru_ec2_10[i]*EC2S1J3W_10[i]
+sch_EC3S1J3W_10[] <- -m2pru_ec3_10[i]*EC3S1J3W_10[i]
+sch_EC4S1J3W_10[] <- -m2pru_ec4_10[i]*EC4S1J3W_10[i]
+
+sch_EC1S1J3W_11[] <- -m2pru_ec1_11[i]*EC1S1J3W_11[i]
+sch_EC2S1J3W_11[] <- -m2pru_ec2_11[i]*EC2S1J3W_11[i]
+sch_EC3S1J3W_11[] <- -m2pru_ec3_11[i]*EC3S1J3W_11[i]
+sch_EC4S1J3W_11[] <- -m2pru_ec4_11[i]*EC4S1J3W_11[i]
+
+sch_EC1S1J3W_12[] <- -m2pru_ec1_12[i]*EC1S1J3W_12[i]
+sch_EC2S1J3W_12[] <- -m2pru_ec2_12[i]*EC2S1J3W_12[i]
+sch_EC3S1J3W_12[] <- -m2pru_ec3_12[i]*EC3S1J3W_12[i]
+sch_EC4S1J3W_12[] <- -m2pru_ec4_12[i]*EC4S1J3W_12[i]
+
+sch_EC1S1J3W_13[] <- -m2pru_ec1_13[i]*EC1S1J3W_13[i]
+sch_EC2S1J3W_13[] <- -m2pru_ec2_13[i]*EC2S1J3W_13[i]
+sch_EC3S1J3W_13[] <- -m2pru_ec3_13[i]*EC3S1J3W_13[i]
+sch_EC4S1J3W_13[] <- -m2pru_ec4_13[i]*EC4S1J3W_13[i]
+
+sch_EC1S1J3W_14[] <- -m2pru_ec1_14[i]*EC1S1J3W_14[i]
+sch_EC2S1J3W_14[] <- -m2pru_ec2_14[i]*EC2S1J3W_14[i]
+sch_EC3S1J3W_14[] <- -m2pru_ec3_14[i]*EC3S1J3W_14[i]
+sch_EC4S1J3W_14[] <- -m2pru_ec4_14[i]*EC4S1J3W_14[i]
+
+sch_EC1S1J3W_15[] <- -m2pru_ec1_15[i]*EC1S1J3W_15[i]
+sch_EC2S1J3W_15[] <- -m2pru_ec2_15[i]*EC2S1J3W_15[i]
+sch_EC3S1J3W_15[] <- -m2pru_ec3_15[i]*EC3S1J3W_15[i]
+sch_EC4S1J3W_15[] <- -m2pru_ec4_15[i]*EC4S1J3W_15[i]
+
+sch_EC1S1J3W_16[] <- neet2m_e[i]*EC1S2J3W_16[i] - m2neet_ec1_16[i]*EC1S1J3W_16[i]
+sch_EC2S1J3W_16[] <- neet2m_e[i]*EC2S2J3W_16[i] - m2neet_ec2_16[i]*EC2S1J3W_16[i]
+sch_EC3S1J3W_16[] <- neet2m_e[i]*EC3S2J3W_16[i] - m2neet_ec3_16[i]*EC3S1J3W_16[i]
+sch_EC4S1J3W_16[] <- neet2m_e[i]*EC4S2J3W_16[i] - m2neet_ec4_16[i]*EC4S1J3W_16[i]
+
+sch_EC1S1J3W_17[] <- neet2m_e[i]*EC1S2J3W_17[i] - m2neet_ec1_17[i]*EC1S1J3W_17[i]
+sch_EC2S1J3W_17[] <- neet2m_e[i]*EC2S2J3W_17[i] - m2neet_ec2_17[i]*EC2S1J3W_17[i]
+sch_EC3S1J3W_17[] <- neet2m_e[i]*EC3S2J3W_17[i] - m2neet_ec3_17[i]*EC3S1J3W_17[i]
+sch_EC4S1J3W_17[] <- neet2m_e[i]*EC4S2J3W_17[i] - m2neet_ec4_17[i]*EC4S1J3W_17[i]
+
+
+
+sch_EC1S2J3W_10[] <- m2pru_ec1_10[i]*EC1S1J3W_10[i]
+sch_EC2S2J3W_10[] <- m2pru_ec2_10[i]*EC2S1J3W_10[i]
+sch_EC3S2J3W_10[] <- m2pru_ec3_10[i]*EC3S1J3W_10[i]
+sch_EC4S2J3W_10[] <- m2pru_ec4_10[i]*EC4S1J3W_10[i]
+
+sch_EC1S2J3W_11[] <- m2pru_ec1_11[i]*EC1S1J3W_11[i]
+sch_EC2S2J3W_11[] <- m2pru_ec2_11[i]*EC2S1J3W_11[i]
+sch_EC3S2J3W_11[] <- m2pru_ec3_11[i]*EC3S1J3W_11[i]
+sch_EC4S2J3W_11[] <- m2pru_ec4_11[i]*EC4S1J3W_11[i]
+
+sch_EC1S2J3W_12[] <- m2pru_ec1_12[i]*EC1S1J3W_12[i]
+sch_EC2S2J3W_12[] <- m2pru_ec2_12[i]*EC2S1J3W_12[i]
+sch_EC3S2J3W_12[] <- m2pru_ec3_12[i]*EC3S1J3W_12[i]
+sch_EC4S2J3W_12[] <- m2pru_ec4_12[i]*EC4S1J3W_12[i]
+
+sch_EC1S2J3W_13[] <- m2pru_ec1_13[i]*EC1S1J3W_13[i]
+sch_EC2S2J3W_13[] <- m2pru_ec2_13[i]*EC2S1J3W_13[i]
+sch_EC3S2J3W_13[] <- m2pru_ec3_13[i]*EC3S1J3W_13[i]
+sch_EC4S2J3W_13[] <- m2pru_ec4_13[i]*EC4S1J3W_13[i]
+
+sch_EC1S2J3W_14[] <- m2pru_ec1_14[i]*EC1S1J3W_14[i]
+sch_EC2S2J3W_14[] <- m2pru_ec2_14[i]*EC2S1J3W_14[i]
+sch_EC3S2J3W_14[] <- m2pru_ec3_14[i]*EC3S1J3W_14[i]
+sch_EC4S2J3W_14[] <- m2pru_ec4_14[i]*EC4S1J3W_14[i]
+
+sch_EC1S2J3W_15[] <- m2pru_ec1_15[i]*EC1S1J3W_15[i]
+sch_EC2S2J3W_15[] <- m2pru_ec2_15[i]*EC2S1J3W_15[i]
+sch_EC3S2J3W_15[] <- m2pru_ec3_15[i]*EC3S1J3W_15[i]
+sch_EC4S2J3W_15[] <- m2pru_ec4_15[i]*EC4S1J3W_15[i]
+
+sch_EC1S2J3W_16[] <- m2neet_ec1_16[i]*EC1S1J3W_16[i] - neet2m_e[i]*EC1S2J3W_16[i]
+sch_EC2S2J3W_16[] <- m2neet_ec2_16[i]*EC2S1J3W_16[i] - neet2m_e[i]*EC2S2J3W_16[i]
+sch_EC3S2J3W_16[] <- m2neet_ec3_16[i]*EC3S1J3W_16[i] - neet2m_e[i]*EC3S2J3W_16[i]
+sch_EC4S2J3W_16[] <- m2neet_ec4_16[i]*EC4S1J3W_16[i] - neet2m_e[i]*EC4S2J3W_16[i]
+
+sch_EC1S2J3W_17[] <- m2neet_ec1_17[i]*EC1S1J3W_17[i] - neet2m_e[i]*EC1S2J3W_17[i]
+sch_EC2S2J3W_17[] <- m2neet_ec2_17[i]*EC2S1J3W_17[i] - neet2m_e[i]*EC2S2J3W_17[i]
+sch_EC3S2J3W_17[] <- m2neet_ec3_17[i]*EC3S1J3W_17[i] - neet2m_e[i]*EC3S2J3W_17[i]
+sch_EC4S2J3W_17[] <- m2neet_ec4_17[i]*EC4S1J3W_17[i] - neet2m_e[i]*EC4S2J3W_17[i]
 
 
 # justice system transitions
@@ -14741,4 +20563,1271 @@ jus_EC2S2J5W_17[] <- (1 - pc_rem)*(np2charge_ec2s2w_17[i]*(EC2S2J1W_17[i] + surv
 jus_EC3S2J5W_17[] <- (1 - pc_rem)*(np2charge_ec3s2w_17[i]*(EC3S2J1W_17[i] + surv*EC3S2J2W_17[i]) + p2charge_ec3s2w_17[i]*EC3S2J3W_17[i]) + r2c*end_rem*EC3S2J4W_17[i] - end_cust*EC3S2J5W_17[i]
 jus_EC4S2J5W_17[] <- (1 - pc_rem)*(np2charge_ec4s2w_17[i]*(EC4S2J1W_17[i] + surv*EC4S2J2W_17[i]) + p2charge_ec4s2w_17[i]*EC4S2J3W_17[i]) + r2c*end_rem*EC4S2J4W_17[i] - end_cust*EC4S2J5W_17[i]
 
+# changing county lines status
+cl_IC1S1J1U_10[] <- des*IC1S1J1W_10[i] - c*rec_i[i]*IC1S1J1U_10[i]*sum(cl_mix_i_10[,i])
+cl_IC2S1J1U_10[] <- des*IC2S1J1W_10[i] - c*rec_i[i]*IC2S1J1U_10[i]*sum(cl_mix_i_10[,i])
+cl_IC3S1J1U_10[] <- des*IC3S1J1W_10[i] - c*rec_p[i]*IC3S1J1U_10[i]*sum(cl_mix_p_10[,i])
+cl_IC4S1J1U_10[] <- des*IC4S1J1W_10[i] - c*rec_i[i]*IC4S1J1U_10[i]*sum(cl_mix_i_10[,i])
 
+cl_IC1S1J1U_11[] <- des*IC1S1J1W_11[i] - c*rec_i[i]*IC1S1J1U_11[i]*sum(cl_mix_i_11[,i])
+cl_IC2S1J1U_11[] <- des*IC2S1J1W_11[i] - c*rec_i[i]*IC2S1J1U_11[i]*sum(cl_mix_i_11[,i])
+cl_IC3S1J1U_11[] <- des*IC3S1J1W_11[i] - c*rec_p[i]*IC3S1J1U_11[i]*sum(cl_mix_p_11[,i])
+cl_IC4S1J1U_11[] <- des*IC4S1J1W_11[i] - c*rec_i[i]*IC4S1J1U_11[i]*sum(cl_mix_i_11[,i])
+
+cl_IC1S1J1U_12[] <- des*IC1S1J1W_12[i] - c*rec_i[i]*IC1S1J1U_12[i]*sum(cl_mix_i_12[,i])
+cl_IC2S1J1U_12[] <- des*IC2S1J1W_12[i] - c*rec_i[i]*IC2S1J1U_12[i]*sum(cl_mix_i_12[,i])
+cl_IC3S1J1U_12[] <- des*IC3S1J1W_12[i] - c*rec_p[i]*IC3S1J1U_12[i]*sum(cl_mix_p_12[,i])
+cl_IC4S1J1U_12[] <- des*IC4S1J1W_12[i] - c*rec_i[i]*IC4S1J1U_12[i]*sum(cl_mix_i_12[,i])
+
+cl_IC1S1J1U_13[] <- des*IC1S1J1W_13[i] - c*rec_i[i]*IC1S1J1U_13[i]*sum(cl_mix_i_13[,i])
+cl_IC2S1J1U_13[] <- des*IC2S1J1W_13[i] - c*rec_i[i]*IC2S1J1U_13[i]*sum(cl_mix_i_13[,i])
+cl_IC3S1J1U_13[] <- des*IC3S1J1W_13[i] - c*rec_p[i]*IC3S1J1U_13[i]*sum(cl_mix_p_13[,i])
+cl_IC4S1J1U_13[] <- des*IC4S1J1W_13[i] - c*rec_i[i]*IC4S1J1U_13[i]*sum(cl_mix_i_13[,i])
+
+cl_IC1S1J1U_14[] <- des*IC1S1J1W_14[i] - c*rec_i[i]*IC1S1J1U_14[i]*sum(cl_mix_i_14[,i])
+cl_IC2S1J1U_14[] <- des*IC2S1J1W_14[i] - c*rec_i[i]*IC2S1J1U_14[i]*sum(cl_mix_i_14[,i])
+cl_IC3S1J1U_14[] <- des*IC3S1J1W_14[i] - c*rec_p[i]*IC3S1J1U_14[i]*sum(cl_mix_p_14[,i])
+cl_IC4S1J1U_14[] <- des*IC4S1J1W_14[i] - c*rec_i[i]*IC4S1J1U_14[i]*sum(cl_mix_i_14[,i])
+
+cl_IC1S1J1U_15[] <- des*IC1S1J1W_15[i] - c*rec_i[i]*IC1S1J1U_15[i]*sum(cl_mix_i_15[,i])
+cl_IC2S1J1U_15[] <- des*IC2S1J1W_15[i] - c*rec_i[i]*IC2S1J1U_15[i]*sum(cl_mix_i_15[,i])
+cl_IC3S1J1U_15[] <- des*IC3S1J1W_15[i] - c*rec_p[i]*IC3S1J1U_15[i]*sum(cl_mix_p_15[,i])
+cl_IC4S1J1U_15[] <- des*IC4S1J1W_15[i] - c*rec_i[i]*IC4S1J1U_15[i]*sum(cl_mix_i_15[,i])
+
+cl_IC1S1J1U_16[] <- des*IC1S1J1W_16[i] - c*rec_i[i]*IC1S1J1U_16[i]*sum(cl_mix_i_16[,i])
+cl_IC2S1J1U_16[] <- des*IC2S1J1W_16[i] - c*rec_i[i]*IC2S1J1U_16[i]*sum(cl_mix_i_16[,i])
+cl_IC3S1J1U_16[] <- des*IC3S1J1W_16[i] - c*rec_p[i]*IC3S1J1U_16[i]*sum(cl_mix_p_16[,i])
+cl_IC4S1J1U_16[] <- des*IC4S1J1W_16[i] - c*rec_i[i]*IC4S1J1U_16[i]*sum(cl_mix_i_16[,i])
+
+cl_IC1S1J1U_17[] <- des*IC1S1J1W_17[i] - c*rec_i[i]*IC1S1J1U_17[i]*sum(cl_mix_i_17[,i])
+cl_IC2S1J1U_17[] <- des*IC2S1J1W_17[i] - c*rec_i[i]*IC2S1J1U_17[i]*sum(cl_mix_i_17[,i])
+cl_IC3S1J1U_17[] <- des*IC3S1J1W_17[i] - c*rec_p[i]*IC3S1J1U_17[i]*sum(cl_mix_p_17[,i])
+cl_IC4S1J1U_17[] <- des*IC4S1J1W_17[i] - c*rec_i[i]*IC4S1J1U_17[i]*sum(cl_mix_i_17[,i])
+
+
+
+cl_IC1S2J1U_10[] <- des*IC1S2J1W_10[i] - c*rec_p[i]*IC1S2J1U_10[i]*sum(cl_mix_p_10[,i])
+cl_IC2S2J1U_10[] <- des*IC2S2J1W_10[i] - c*rec_p[i]*IC2S2J1U_10[i]*sum(cl_mix_p_10[,i])
+cl_IC3S2J1U_10[] <- des*IC3S2J1W_10[i] - c*rec_p[i]*IC3S2J1U_10[i]*sum(cl_mix_p_10[,i])
+cl_IC4S2J1U_10[] <- des*IC4S2J1W_10[i] - c*rec_p[i]*IC4S2J1U_10[i]*sum(cl_mix_p_10[,i])
+
+cl_IC1S2J1U_11[] <- des*IC1S2J1W_11[i] - c*rec_p[i]*IC1S2J1U_11[i]*sum(cl_mix_p_11[,i])
+cl_IC2S2J1U_11[] <- des*IC2S2J1W_11[i] - c*rec_p[i]*IC2S2J1U_11[i]*sum(cl_mix_p_11[,i])
+cl_IC3S2J1U_11[] <- des*IC3S2J1W_11[i] - c*rec_p[i]*IC3S2J1U_11[i]*sum(cl_mix_p_11[,i])
+cl_IC4S2J1U_11[] <- des*IC4S2J1W_11[i] - c*rec_p[i]*IC4S2J1U_11[i]*sum(cl_mix_p_11[,i])
+
+cl_IC1S2J1U_12[] <- des*IC1S2J1W_12[i] - c*rec_p[i]*IC1S2J1U_12[i]*sum(cl_mix_p_12[,i])
+cl_IC2S2J1U_12[] <- des*IC2S2J1W_12[i] - c*rec_p[i]*IC2S2J1U_12[i]*sum(cl_mix_p_12[,i])
+cl_IC3S2J1U_12[] <- des*IC3S2J1W_12[i] - c*rec_p[i]*IC3S2J1U_12[i]*sum(cl_mix_p_12[,i])
+cl_IC4S2J1U_12[] <- des*IC4S2J1W_12[i] - c*rec_p[i]*IC4S2J1U_12[i]*sum(cl_mix_p_12[,i])
+
+cl_IC1S2J1U_13[] <- des*IC1S2J1W_13[i] - c*rec_p[i]*IC1S2J1U_13[i]*sum(cl_mix_p_13[,i])
+cl_IC2S2J1U_13[] <- des*IC2S2J1W_13[i] - c*rec_p[i]*IC2S2J1U_13[i]*sum(cl_mix_p_13[,i])
+cl_IC3S2J1U_13[] <- des*IC3S2J1W_13[i] - c*rec_p[i]*IC3S2J1U_13[i]*sum(cl_mix_p_13[,i])
+cl_IC4S2J1U_13[] <- des*IC4S2J1W_13[i] - c*rec_p[i]*IC4S2J1U_13[i]*sum(cl_mix_p_13[,i])
+
+cl_IC1S2J1U_14[] <- des*IC1S2J1W_14[i] - c*rec_p[i]*IC1S2J1U_14[i]*sum(cl_mix_p_14[,i])
+cl_IC2S2J1U_14[] <- des*IC2S2J1W_14[i] - c*rec_p[i]*IC2S2J1U_14[i]*sum(cl_mix_p_14[,i])
+cl_IC3S2J1U_14[] <- des*IC3S2J1W_14[i] - c*rec_p[i]*IC3S2J1U_14[i]*sum(cl_mix_p_14[,i])
+cl_IC4S2J1U_14[] <- des*IC4S2J1W_14[i] - c*rec_p[i]*IC4S2J1U_14[i]*sum(cl_mix_p_14[,i])
+
+cl_IC1S2J1U_15[] <- des*IC1S2J1W_15[i] - c*rec_p[i]*IC1S2J1U_15[i]*sum(cl_mix_p_15[,i])
+cl_IC2S2J1U_15[] <- des*IC2S2J1W_15[i] - c*rec_p[i]*IC2S2J1U_15[i]*sum(cl_mix_p_15[,i])
+cl_IC3S2J1U_15[] <- des*IC3S2J1W_15[i] - c*rec_p[i]*IC3S2J1U_15[i]*sum(cl_mix_p_15[,i])
+cl_IC4S2J1U_15[] <- des*IC4S2J1W_15[i] - c*rec_p[i]*IC4S2J1U_15[i]*sum(cl_mix_p_15[,i])
+
+cl_IC1S2J1U_16[] <- des*IC1S2J1W_16[i] - c*rec_i[i]*IC1S2J1U_16[i]*sum(cl_mix_i_16[,i])
+cl_IC2S2J1U_16[] <- des*IC2S2J1W_16[i] - c*rec_i[i]*IC2S2J1U_16[i]*sum(cl_mix_i_16[,i])
+cl_IC3S2J1U_16[] <- des*IC3S2J1W_16[i] - c*rec_p[i]*IC3S2J1U_16[i]*sum(cl_mix_p_16[,i])
+cl_IC4S2J1U_16[] <- des*IC4S2J1W_16[i] - c*rec_i[i]*IC4S2J1U_16[i]*sum(cl_mix_i_16[,i])
+
+cl_IC1S2J1U_17[] <- des*IC1S2J1W_17[i] - c*rec_i[i]*IC1S2J1U_17[i]*sum(cl_mix_i_17[,i])
+cl_IC2S2J1U_17[] <- des*IC2S2J1W_17[i] - c*rec_i[i]*IC2S2J1U_17[i]*sum(cl_mix_i_17[,i])
+cl_IC3S2J1U_17[] <- des*IC3S2J1W_17[i] - c*rec_p[i]*IC3S2J1U_17[i]*sum(cl_mix_p_17[,i])
+cl_IC4S2J1U_17[] <- des*IC4S2J1W_17[i] - c*rec_i[i]*IC4S2J1U_17[i]*sum(cl_mix_i_17[,i])
+
+
+
+cl_IC1S1J2U_10[] <- des*IC1S1J2W_10[i] - c*rec_i[i]*IC1S1J2U_10[i]*sum(cl_mix_i_10[,i])
+cl_IC2S1J2U_10[] <- des*IC2S1J2W_10[i] - c*rec_i[i]*IC2S1J2U_10[i]*sum(cl_mix_i_10[,i])
+cl_IC3S1J2U_10[] <- des*IC3S1J2W_10[i] - c*rec_p[i]*IC3S1J2U_10[i]*sum(cl_mix_p_10[,i])
+cl_IC4S1J2U_10[] <- des*IC4S1J2W_10[i] - c*rec_i[i]*IC4S1J2U_10[i]*sum(cl_mix_i_10[,i])
+
+cl_IC1S1J2U_11[] <- des*IC1S1J2W_11[i] - c*rec_i[i]*IC1S1J2U_11[i]*sum(cl_mix_i_11[,i])
+cl_IC2S1J2U_11[] <- des*IC2S1J2W_11[i] - c*rec_i[i]*IC2S1J2U_11[i]*sum(cl_mix_i_11[,i])
+cl_IC3S1J2U_11[] <- des*IC3S1J2W_11[i] - c*rec_p[i]*IC3S1J2U_11[i]*sum(cl_mix_p_11[,i])
+cl_IC4S1J2U_11[] <- des*IC4S1J2W_11[i] - c*rec_i[i]*IC4S1J2U_11[i]*sum(cl_mix_i_11[,i])
+
+cl_IC1S1J2U_12[] <- des*IC1S1J2W_12[i] - c*rec_i[i]*IC1S1J2U_12[i]*sum(cl_mix_i_12[,i])
+cl_IC2S1J2U_12[] <- des*IC2S1J2W_12[i] - c*rec_i[i]*IC2S1J2U_12[i]*sum(cl_mix_i_12[,i])
+cl_IC3S1J2U_12[] <- des*IC3S1J2W_12[i] - c*rec_p[i]*IC3S1J2U_12[i]*sum(cl_mix_p_12[,i])
+cl_IC4S1J2U_12[] <- des*IC4S1J2W_12[i] - c*rec_i[i]*IC4S1J2U_12[i]*sum(cl_mix_i_12[,i])
+
+cl_IC1S1J2U_13[] <- des*IC1S1J2W_13[i] - c*rec_i[i]*IC1S1J2U_13[i]*sum(cl_mix_i_13[,i])
+cl_IC2S1J2U_13[] <- des*IC2S1J2W_13[i] - c*rec_i[i]*IC2S1J2U_13[i]*sum(cl_mix_i_13[,i])
+cl_IC3S1J2U_13[] <- des*IC3S1J2W_13[i] - c*rec_p[i]*IC3S1J2U_13[i]*sum(cl_mix_p_13[,i])
+cl_IC4S1J2U_13[] <- des*IC4S1J2W_13[i] - c*rec_i[i]*IC4S1J2U_13[i]*sum(cl_mix_i_13[,i])
+
+cl_IC1S1J2U_14[] <- des*IC1S1J2W_14[i] - c*rec_i[i]*IC1S1J2U_14[i]*sum(cl_mix_i_14[,i])
+cl_IC2S1J2U_14[] <- des*IC2S1J2W_14[i] - c*rec_i[i]*IC2S1J2U_14[i]*sum(cl_mix_i_14[,i])
+cl_IC3S1J2U_14[] <- des*IC3S1J2W_14[i] - c*rec_p[i]*IC3S1J2U_14[i]*sum(cl_mix_p_14[,i])
+cl_IC4S1J2U_14[] <- des*IC4S1J2W_14[i] - c*rec_i[i]*IC4S1J2U_14[i]*sum(cl_mix_i_14[,i])
+
+cl_IC1S1J2U_15[] <- des*IC1S1J2W_15[i] - c*rec_i[i]*IC1S1J2U_15[i]*sum(cl_mix_i_15[,i])
+cl_IC2S1J2U_15[] <- des*IC2S1J2W_15[i] - c*rec_i[i]*IC2S1J2U_15[i]*sum(cl_mix_i_15[,i])
+cl_IC3S1J2U_15[] <- des*IC3S1J2W_15[i] - c*rec_p[i]*IC3S1J2U_15[i]*sum(cl_mix_p_15[,i])
+cl_IC4S1J2U_15[] <- des*IC4S1J2W_15[i] - c*rec_i[i]*IC4S1J2U_15[i]*sum(cl_mix_i_15[,i])
+
+cl_IC1S1J2U_16[] <- des*IC1S1J2W_16[i] - c*rec_i[i]*IC1S1J2U_16[i]*sum(cl_mix_i_16[,i])
+cl_IC2S1J2U_16[] <- des*IC2S1J2W_16[i] - c*rec_i[i]*IC2S1J2U_16[i]*sum(cl_mix_i_16[,i])
+cl_IC3S1J2U_16[] <- des*IC3S1J2W_16[i] - c*rec_p[i]*IC3S1J2U_16[i]*sum(cl_mix_p_16[,i])
+cl_IC4S1J2U_16[] <- des*IC4S1J2W_16[i] - c*rec_i[i]*IC4S1J2U_16[i]*sum(cl_mix_i_16[,i])
+
+cl_IC1S1J2U_17[] <- des*IC1S1J2W_17[i] - c*rec_i[i]*IC1S1J2U_17[i]*sum(cl_mix_i_17[,i])
+cl_IC2S1J2U_17[] <- des*IC2S1J2W_17[i] - c*rec_i[i]*IC2S1J2U_17[i]*sum(cl_mix_i_17[,i])
+cl_IC3S1J2U_17[] <- des*IC3S1J2W_17[i] - c*rec_p[i]*IC3S1J2U_17[i]*sum(cl_mix_p_17[,i])
+cl_IC4S1J2U_17[] <- des*IC4S1J2W_17[i] - c*rec_i[i]*IC4S1J2U_17[i]*sum(cl_mix_i_17[,i])
+
+
+
+cl_IC1S2J2U_10[] <- des*IC1S2J2W_10[i] - c*rec_p[i]*IC1S2J2U_10[i]*sum(cl_mix_p_10[,i])
+cl_IC2S2J2U_10[] <- des*IC2S2J2W_10[i] - c*rec_p[i]*IC2S2J2U_10[i]*sum(cl_mix_p_10[,i])
+cl_IC3S2J2U_10[] <- des*IC3S2J2W_10[i] - c*rec_p[i]*IC3S2J2U_10[i]*sum(cl_mix_p_10[,i])
+cl_IC4S2J2U_10[] <- des*IC4S2J2W_10[i] - c*rec_p[i]*IC4S2J2U_10[i]*sum(cl_mix_p_10[,i])
+
+cl_IC1S2J2U_11[] <- des*IC1S2J2W_11[i] - c*rec_p[i]*IC1S2J2U_11[i]*sum(cl_mix_p_11[,i])
+cl_IC2S2J2U_11[] <- des*IC2S2J2W_11[i] - c*rec_p[i]*IC2S2J2U_11[i]*sum(cl_mix_p_11[,i])
+cl_IC3S2J2U_11[] <- des*IC3S2J2W_11[i] - c*rec_p[i]*IC3S2J2U_11[i]*sum(cl_mix_p_11[,i])
+cl_IC4S2J2U_11[] <- des*IC4S2J2W_11[i] - c*rec_p[i]*IC4S2J2U_11[i]*sum(cl_mix_p_11[,i])
+
+cl_IC1S2J2U_12[] <- des*IC1S2J2W_12[i] - c*rec_p[i]*IC1S2J2U_12[i]*sum(cl_mix_p_12[,i])
+cl_IC2S2J2U_12[] <- des*IC2S2J2W_12[i] - c*rec_p[i]*IC2S2J2U_12[i]*sum(cl_mix_p_12[,i])
+cl_IC3S2J2U_12[] <- des*IC3S2J2W_12[i] - c*rec_p[i]*IC3S2J2U_12[i]*sum(cl_mix_p_12[,i])
+cl_IC4S2J2U_12[] <- des*IC4S2J2W_12[i] - c*rec_p[i]*IC4S2J2U_12[i]*sum(cl_mix_p_12[,i])
+
+cl_IC1S2J2U_13[] <- des*IC1S2J2W_13[i] - c*rec_p[i]*IC1S2J2U_13[i]*sum(cl_mix_p_13[,i])
+cl_IC2S2J2U_13[] <- des*IC2S2J2W_13[i] - c*rec_p[i]*IC2S2J2U_13[i]*sum(cl_mix_p_13[,i])
+cl_IC3S2J2U_13[] <- des*IC3S2J2W_13[i] - c*rec_p[i]*IC3S2J2U_13[i]*sum(cl_mix_p_13[,i])
+cl_IC4S2J2U_13[] <- des*IC4S2J2W_13[i] - c*rec_p[i]*IC4S2J2U_13[i]*sum(cl_mix_p_13[,i])
+
+cl_IC1S2J2U_14[] <- des*IC1S2J2W_14[i] - c*rec_p[i]*IC1S2J2U_14[i]*sum(cl_mix_p_14[,i])
+cl_IC2S2J2U_14[] <- des*IC2S2J2W_14[i] - c*rec_p[i]*IC2S2J2U_14[i]*sum(cl_mix_p_14[,i])
+cl_IC3S2J2U_14[] <- des*IC3S2J2W_14[i] - c*rec_p[i]*IC3S2J2U_14[i]*sum(cl_mix_p_14[,i])
+cl_IC4S2J2U_14[] <- des*IC4S2J2W_14[i] - c*rec_p[i]*IC4S2J2U_14[i]*sum(cl_mix_p_14[,i])
+
+cl_IC1S2J2U_15[] <- des*IC1S2J2W_15[i] - c*rec_p[i]*IC1S2J2U_15[i]*sum(cl_mix_p_15[,i])
+cl_IC2S2J2U_15[] <- des*IC2S2J2W_15[i] - c*rec_p[i]*IC2S2J2U_15[i]*sum(cl_mix_p_15[,i])
+cl_IC3S2J2U_15[] <- des*IC3S2J2W_15[i] - c*rec_p[i]*IC3S2J2U_15[i]*sum(cl_mix_p_15[,i])
+cl_IC4S2J2U_15[] <- des*IC4S2J2W_15[i] - c*rec_p[i]*IC4S2J2U_15[i]*sum(cl_mix_p_15[,i])
+
+cl_IC1S2J2U_16[] <- des*IC1S2J2W_16[i] - c*rec_i[i]*IC1S2J2U_16[i]*sum(cl_mix_i_16[,i])
+cl_IC2S2J2U_16[] <- des*IC2S2J2W_16[i] - c*rec_i[i]*IC2S2J2U_16[i]*sum(cl_mix_i_16[,i])
+cl_IC3S2J2U_16[] <- des*IC3S2J2W_16[i] - c*rec_p[i]*IC3S2J2U_16[i]*sum(cl_mix_p_16[,i])
+cl_IC4S2J2U_16[] <- des*IC4S2J2W_16[i] - c*rec_i[i]*IC4S2J2U_16[i]*sum(cl_mix_i_16[,i])
+
+cl_IC1S2J2U_17[] <- des*IC1S2J2W_17[i] - c*rec_i[i]*IC1S2J2U_17[i]*sum(cl_mix_i_17[,i])
+cl_IC2S2J2U_17[] <- des*IC2S2J2W_17[i] - c*rec_i[i]*IC2S2J2U_17[i]*sum(cl_mix_i_17[,i])
+cl_IC3S2J2U_17[] <- des*IC3S2J2W_17[i] - c*rec_p[i]*IC3S2J2U_17[i]*sum(cl_mix_p_17[,i])
+cl_IC4S2J2U_17[] <- des*IC4S2J2W_17[i] - c*rec_i[i]*IC4S2J2U_17[i]*sum(cl_mix_i_17[,i])
+
+
+
+cl_IC1S1J3U_10[] <- des*IC1S1J3W_10[i] - c*rec_i[i]*IC1S1J3U_10[i]*sum(cl_mix_i_10[,i])
+cl_IC2S1J3U_10[] <- des*IC2S1J3W_10[i] - c*rec_i[i]*IC2S1J3U_10[i]*sum(cl_mix_i_10[,i])
+cl_IC3S1J3U_10[] <- des*IC3S1J3W_10[i] - c*rec_p[i]*IC3S1J3U_10[i]*sum(cl_mix_p_10[,i])
+cl_IC4S1J3U_10[] <- des*IC4S1J3W_10[i] - c*rec_i[i]*IC4S1J3U_10[i]*sum(cl_mix_i_10[,i])
+
+cl_IC1S1J3U_11[] <- des*IC1S1J3W_11[i] - c*rec_i[i]*IC1S1J3U_11[i]*sum(cl_mix_i_11[,i])
+cl_IC2S1J3U_11[] <- des*IC2S1J3W_11[i] - c*rec_i[i]*IC2S1J3U_11[i]*sum(cl_mix_i_11[,i])
+cl_IC3S1J3U_11[] <- des*IC3S1J3W_11[i] - c*rec_p[i]*IC3S1J3U_11[i]*sum(cl_mix_p_11[,i])
+cl_IC4S1J3U_11[] <- des*IC4S1J3W_11[i] - c*rec_i[i]*IC4S1J3U_11[i]*sum(cl_mix_i_11[,i])
+
+cl_IC1S1J3U_12[] <- des*IC1S1J3W_12[i] - c*rec_i[i]*IC1S1J3U_12[i]*sum(cl_mix_i_12[,i])
+cl_IC2S1J3U_12[] <- des*IC2S1J3W_12[i] - c*rec_i[i]*IC2S1J3U_12[i]*sum(cl_mix_i_12[,i])
+cl_IC3S1J3U_12[] <- des*IC3S1J3W_12[i] - c*rec_p[i]*IC3S1J3U_12[i]*sum(cl_mix_p_12[,i])
+cl_IC4S1J3U_12[] <- des*IC4S1J3W_12[i] - c*rec_i[i]*IC4S1J3U_12[i]*sum(cl_mix_i_12[,i])
+
+cl_IC1S1J3U_13[] <- des*IC1S1J3W_13[i] - c*rec_i[i]*IC1S1J3U_13[i]*sum(cl_mix_i_13[,i])
+cl_IC2S1J3U_13[] <- des*IC2S1J3W_13[i] - c*rec_i[i]*IC2S1J3U_13[i]*sum(cl_mix_i_13[,i])
+cl_IC3S1J3U_13[] <- des*IC3S1J3W_13[i] - c*rec_p[i]*IC3S1J3U_13[i]*sum(cl_mix_p_13[,i])
+cl_IC4S1J3U_13[] <- des*IC4S1J3W_13[i] - c*rec_i[i]*IC4S1J3U_13[i]*sum(cl_mix_i_13[,i])
+
+cl_IC1S1J3U_14[] <- des*IC1S1J3W_14[i] - c*rec_i[i]*IC1S1J3U_14[i]*sum(cl_mix_i_14[,i])
+cl_IC2S1J3U_14[] <- des*IC2S1J3W_14[i] - c*rec_i[i]*IC2S1J3U_14[i]*sum(cl_mix_i_14[,i])
+cl_IC3S1J3U_14[] <- des*IC3S1J3W_14[i] - c*rec_p[i]*IC3S1J3U_14[i]*sum(cl_mix_p_14[,i])
+cl_IC4S1J3U_14[] <- des*IC4S1J3W_14[i] - c*rec_i[i]*IC4S1J3U_14[i]*sum(cl_mix_i_14[,i])
+
+cl_IC1S1J3U_15[] <- des*IC1S1J3W_15[i] - c*rec_i[i]*IC1S1J3U_15[i]*sum(cl_mix_i_15[,i])
+cl_IC2S1J3U_15[] <- des*IC2S1J3W_15[i] - c*rec_i[i]*IC2S1J3U_15[i]*sum(cl_mix_i_15[,i])
+cl_IC3S1J3U_15[] <- des*IC3S1J3W_15[i] - c*rec_p[i]*IC3S1J3U_15[i]*sum(cl_mix_p_15[,i])
+cl_IC4S1J3U_15[] <- des*IC4S1J3W_15[i] - c*rec_i[i]*IC4S1J3U_15[i]*sum(cl_mix_i_15[,i])
+
+cl_IC1S1J3U_16[] <- des*IC1S1J3W_16[i] - c*rec_i[i]*IC1S1J3U_16[i]*sum(cl_mix_i_16[,i])
+cl_IC2S1J3U_16[] <- des*IC2S1J3W_16[i] - c*rec_i[i]*IC2S1J3U_16[i]*sum(cl_mix_i_16[,i])
+cl_IC3S1J3U_16[] <- des*IC3S1J3W_16[i] - c*rec_p[i]*IC3S1J3U_16[i]*sum(cl_mix_p_16[,i])
+cl_IC4S1J3U_16[] <- des*IC4S1J3W_16[i] - c*rec_i[i]*IC4S1J3U_16[i]*sum(cl_mix_i_16[,i])
+
+cl_IC1S1J3U_17[] <- des*IC1S1J3W_17[i] - c*rec_i[i]*IC1S1J3U_17[i]*sum(cl_mix_i_17[,i])
+cl_IC2S1J3U_17[] <- des*IC2S1J3W_17[i] - c*rec_i[i]*IC2S1J3U_17[i]*sum(cl_mix_i_17[,i])
+cl_IC3S1J3U_17[] <- des*IC3S1J3W_17[i] - c*rec_p[i]*IC3S1J3U_17[i]*sum(cl_mix_p_17[,i])
+cl_IC4S1J3U_17[] <- des*IC4S1J3W_17[i] - c*rec_i[i]*IC4S1J3U_17[i]*sum(cl_mix_i_17[,i])
+
+
+
+cl_IC1S2J3U_10[] <- des*IC1S2J3W_10[i] - c*rec_p[i]*IC1S2J3U_10[i]*sum(cl_mix_p_10[,i])
+cl_IC2S2J3U_10[] <- des*IC2S2J3W_10[i] - c*rec_p[i]*IC2S2J3U_10[i]*sum(cl_mix_p_10[,i])
+cl_IC3S2J3U_10[] <- des*IC3S2J3W_10[i] - c*rec_p[i]*IC3S2J3U_10[i]*sum(cl_mix_p_10[,i])
+cl_IC4S2J3U_10[] <- des*IC4S2J3W_10[i] - c*rec_p[i]*IC4S2J3U_10[i]*sum(cl_mix_p_10[,i])
+
+cl_IC1S2J3U_11[] <- des*IC1S2J3W_11[i] - c*rec_p[i]*IC1S2J3U_11[i]*sum(cl_mix_p_11[,i])
+cl_IC2S2J3U_11[] <- des*IC2S2J3W_11[i] - c*rec_p[i]*IC2S2J3U_11[i]*sum(cl_mix_p_11[,i])
+cl_IC3S2J3U_11[] <- des*IC3S2J3W_11[i] - c*rec_p[i]*IC3S2J3U_11[i]*sum(cl_mix_p_11[,i])
+cl_IC4S2J3U_11[] <- des*IC4S2J3W_11[i] - c*rec_p[i]*IC4S2J3U_11[i]*sum(cl_mix_p_11[,i])
+
+cl_IC1S2J3U_12[] <- des*IC1S2J3W_12[i] - c*rec_p[i]*IC1S2J3U_12[i]*sum(cl_mix_p_12[,i])
+cl_IC2S2J3U_12[] <- des*IC2S2J3W_12[i] - c*rec_p[i]*IC2S2J3U_12[i]*sum(cl_mix_p_12[,i])
+cl_IC3S2J3U_12[] <- des*IC3S2J3W_12[i] - c*rec_p[i]*IC3S2J3U_12[i]*sum(cl_mix_p_12[,i])
+cl_IC4S2J3U_12[] <- des*IC4S2J3W_12[i] - c*rec_p[i]*IC4S2J3U_12[i]*sum(cl_mix_p_12[,i])
+
+cl_IC1S2J3U_13[] <- des*IC1S2J3W_13[i] - c*rec_p[i]*IC1S2J3U_13[i]*sum(cl_mix_p_13[,i])
+cl_IC2S2J3U_13[] <- des*IC2S2J3W_13[i] - c*rec_p[i]*IC2S2J3U_13[i]*sum(cl_mix_p_13[,i])
+cl_IC3S2J3U_13[] <- des*IC3S2J3W_13[i] - c*rec_p[i]*IC3S2J3U_13[i]*sum(cl_mix_p_13[,i])
+cl_IC4S2J3U_13[] <- des*IC4S2J3W_13[i] - c*rec_p[i]*IC4S2J3U_13[i]*sum(cl_mix_p_13[,i])
+
+cl_IC1S2J3U_14[] <- des*IC1S2J3W_14[i] - c*rec_p[i]*IC1S2J3U_14[i]*sum(cl_mix_p_14[,i])
+cl_IC2S2J3U_14[] <- des*IC2S2J3W_14[i] - c*rec_p[i]*IC2S2J3U_14[i]*sum(cl_mix_p_14[,i])
+cl_IC3S2J3U_14[] <- des*IC3S2J3W_14[i] - c*rec_p[i]*IC3S2J3U_14[i]*sum(cl_mix_p_14[,i])
+cl_IC4S2J3U_14[] <- des*IC4S2J3W_14[i] - c*rec_p[i]*IC4S2J3U_14[i]*sum(cl_mix_p_14[,i])
+
+cl_IC1S2J3U_15[] <- des*IC1S2J3W_15[i] - c*rec_p[i]*IC1S2J3U_15[i]*sum(cl_mix_p_15[,i])
+cl_IC2S2J3U_15[] <- des*IC2S2J3W_15[i] - c*rec_p[i]*IC2S2J3U_15[i]*sum(cl_mix_p_15[,i])
+cl_IC3S2J3U_15[] <- des*IC3S2J3W_15[i] - c*rec_p[i]*IC3S2J3U_15[i]*sum(cl_mix_p_15[,i])
+cl_IC4S2J3U_15[] <- des*IC4S2J3W_15[i] - c*rec_p[i]*IC4S2J3U_15[i]*sum(cl_mix_p_15[,i])
+
+cl_IC1S2J3U_16[] <- des*IC1S2J3W_16[i] - c*rec_i[i]*IC1S2J3U_16[i]*sum(cl_mix_i_16[,i])
+cl_IC2S2J3U_16[] <- des*IC2S2J3W_16[i] - c*rec_i[i]*IC2S2J3U_16[i]*sum(cl_mix_i_16[,i])
+cl_IC3S2J3U_16[] <- des*IC3S2J3W_16[i] - c*rec_p[i]*IC3S2J3U_16[i]*sum(cl_mix_p_16[,i])
+cl_IC4S2J3U_16[] <- des*IC4S2J3W_16[i] - c*rec_i[i]*IC4S2J3U_16[i]*sum(cl_mix_i_16[,i])
+
+cl_IC1S2J3U_17[] <- des*IC1S2J3W_17[i] - c*rec_i[i]*IC1S2J3U_17[i]*sum(cl_mix_i_17[,i])
+cl_IC2S2J3U_17[] <- des*IC2S2J3W_17[i] - c*rec_i[i]*IC2S2J3U_17[i]*sum(cl_mix_i_17[,i])
+cl_IC3S2J3U_17[] <- des*IC3S2J3W_17[i] - c*rec_p[i]*IC3S2J3U_17[i]*sum(cl_mix_p_17[,i])
+cl_IC4S2J3U_17[] <- des*IC4S2J3W_17[i] - c*rec_i[i]*IC4S2J3U_17[i]*sum(cl_mix_i_17[,i])
+
+
+
+cl_IC1S1J4U_10[] <- det*IC1S1J4W_10[i] - c*rec_cust*pc_cl[i]*IC1S1J4U_10[i]
+cl_IC2S1J4U_10[] <- det*IC2S1J4W_10[i] - c*rec_cust*pc_cl[i]*IC2S1J4U_10[i]
+cl_IC3S1J4U_10[] <- det*IC3S1J4W_10[i] - c*rec_cust*pc_cl[i]*IC3S1J4U_10[i]
+cl_IC4S1J4U_10[] <- det*IC4S1J4W_10[i] - c*rec_cust*pc_cl[i]*IC4S1J4U_10[i]
+
+
+cl_IC1S1J4W_10[] <- c*rec_cust*pc_cl[i]*IC1S1J4U_10[i] - det*IC1S1J4W_10[i]
+cl_IC2S1J4W_10[] <- c*rec_cust*pc_cl[i]*IC2S1J4U_10[i] - det*IC2S1J4W_10[i]
+cl_IC3S1J4W_10[] <- c*rec_cust*pc_cl[i]*IC3S1J4U_10[i] - det*IC3S1J4W_10[i]
+cl_IC4S1J4W_10[] <- c*rec_cust*pc_cl[i]*IC4S1J4U_10[i] - det*IC4S1J4W_10[i]
+
+cl_IC1S1J4W_11[] <- c*rec_cust*pc_cl[i]*IC1S1J4U_11[i] - det*IC1S1J4W_11[i]
+cl_IC2S1J4W_11[] <- c*rec_cust*pc_cl[i]*IC2S1J4U_11[i] - det*IC2S1J4W_11[i]
+cl_IC3S1J4W_11[] <- c*rec_cust*pc_cl[i]*IC3S1J4U_11[i] - det*IC3S1J4W_11[i]
+cl_IC4S1J4W_11[] <- c*rec_cust*pc_cl[i]*IC4S1J4U_11[i] - det*IC4S1J4W_11[i]
+
+cl_IC1S1J4W_12[] <- c*rec_cust*pc_cl[i]*IC1S1J4U_12[i] - det*IC1S1J4W_12[i]
+cl_IC2S1J4W_12[] <- c*rec_cust*pc_cl[i]*IC2S1J4U_12[i] - det*IC2S1J4W_12[i]
+cl_IC3S1J4W_12[] <- c*rec_cust*pc_cl[i]*IC3S1J4U_12[i] - det*IC3S1J4W_12[i]
+cl_IC4S1J4W_12[] <- c*rec_cust*pc_cl[i]*IC4S1J4U_12[i] - det*IC4S1J4W_12[i]
+
+cl_IC1S1J4W_13[] <- c*rec_cust*pc_cl[i]*IC1S1J4U_13[i] - det*IC1S1J4W_13[i]
+cl_IC2S1J4W_13[] <- c*rec_cust*pc_cl[i]*IC2S1J4U_13[i] - det*IC2S1J4W_13[i]
+cl_IC3S1J4W_13[] <- c*rec_cust*pc_cl[i]*IC3S1J4U_13[i] - det*IC3S1J4W_13[i]
+cl_IC4S1J4W_13[] <- c*rec_cust*pc_cl[i]*IC4S1J4U_13[i] - det*IC4S1J4W_13[i]
+
+cl_IC1S1J4W_14[] <- c*rec_cust*pc_cl[i]*IC1S1J4U_14[i] - det*IC1S1J4W_14[i]
+cl_IC2S1J4W_14[] <- c*rec_cust*pc_cl[i]*IC2S1J4U_14[i] - det*IC2S1J4W_14[i]
+cl_IC3S1J4W_14[] <- c*rec_cust*pc_cl[i]*IC3S1J4U_14[i] - det*IC3S1J4W_14[i]
+cl_IC4S1J4W_14[] <- c*rec_cust*pc_cl[i]*IC4S1J4U_14[i] - det*IC4S1J4W_14[i]
+
+cl_IC1S1J4W_15[] <- c*rec_cust*pc_cl[i]*IC1S1J4U_15[i] - det*IC1S1J4W_15[i]
+cl_IC2S1J4W_15[] <- c*rec_cust*pc_cl[i]*IC2S1J4U_15[i] - det*IC2S1J4W_15[i]
+cl_IC3S1J4W_15[] <- c*rec_cust*pc_cl[i]*IC3S1J4U_15[i] - det*IC3S1J4W_15[i]
+cl_IC4S1J4W_15[] <- c*rec_cust*pc_cl[i]*IC4S1J4U_15[i] - det*IC4S1J4W_15[i]
+
+cl_IC1S1J4W_16[] <- c*rec_cust*pc_cl[i]*IC1S1J4U_16[i] - det*IC1S1J4W_16[i]
+cl_IC2S1J4W_16[] <- c*rec_cust*pc_cl[i]*IC2S1J4U_16[i] - det*IC2S1J4W_16[i]
+cl_IC3S1J4W_16[] <- c*rec_cust*pc_cl[i]*IC3S1J4U_16[i] - det*IC3S1J4W_16[i]
+cl_IC4S1J4W_16[] <- c*rec_cust*pc_cl[i]*IC4S1J4U_16[i] - det*IC4S1J4W_16[i]
+
+cl_IC1S1J4W_17[] <- c*rec_cust*pc_cl[i]*IC1S1J4U_17[i] - det*IC1S1J4W_17[i]
+cl_IC2S1J4W_17[] <- c*rec_cust*pc_cl[i]*IC2S1J4U_17[i] - det*IC2S1J4W_17[i]
+cl_IC3S1J4W_17[] <- c*rec_cust*pc_cl[i]*IC3S1J4U_17[i] - det*IC3S1J4W_17[i]
+cl_IC4S1J4W_17[] <- c*rec_cust*pc_cl[i]*IC4S1J4U_17[i] - det*IC4S1J4W_17[i]
+
+
+
+cl_IC1S2J4W_10[] <- c*rec_cust*pc_cl[i]*IC1S2J4U_10[i] - det*IC1S2J4W_10[i]
+cl_IC2S2J4W_10[] <- c*rec_cust*pc_cl[i]*IC2S2J4U_10[i] - det*IC2S2J4W_10[i]
+cl_IC3S2J4W_10[] <- c*rec_cust*pc_cl[i]*IC3S2J4U_10[i] - det*IC3S2J4W_10[i]
+cl_IC4S2J4W_10[] <- c*rec_cust*pc_cl[i]*IC4S2J4U_10[i] - det*IC4S2J4W_10[i]
+
+cl_IC1S2J4W_11[] <- c*rec_cust*pc_cl[i]*IC1S2J4U_11[i] - det*IC1S2J4W_11[i]
+cl_IC2S2J4W_11[] <- c*rec_cust*pc_cl[i]*IC2S2J4U_11[i] - det*IC2S2J4W_11[i]
+cl_IC3S2J4W_11[] <- c*rec_cust*pc_cl[i]*IC3S2J4U_11[i] - det*IC3S2J4W_11[i]
+cl_IC4S2J4W_11[] <- c*rec_cust*pc_cl[i]*IC4S2J4U_11[i] - det*IC4S2J4W_11[i]
+
+cl_IC1S2J4W_12[] <- c*rec_cust*pc_cl[i]*IC1S2J4U_12[i] - det*IC1S2J4W_12[i]
+cl_IC2S2J4W_12[] <- c*rec_cust*pc_cl[i]*IC2S2J4U_12[i] - det*IC2S2J4W_12[i]
+cl_IC3S2J4W_12[] <- c*rec_cust*pc_cl[i]*IC3S2J4U_12[i] - det*IC3S2J4W_12[i]
+cl_IC4S2J4W_12[] <- c*rec_cust*pc_cl[i]*IC4S2J4U_12[i] - det*IC4S2J4W_12[i]
+
+cl_IC1S2J4W_13[] <- c*rec_cust*pc_cl[i]*IC1S2J4U_13[i] - det*IC1S2J4W_13[i]
+cl_IC2S2J4W_13[] <- c*rec_cust*pc_cl[i]*IC2S2J4U_13[i] - det*IC2S2J4W_13[i]
+cl_IC3S2J4W_13[] <- c*rec_cust*pc_cl[i]*IC3S2J4U_13[i] - det*IC3S2J4W_13[i]
+cl_IC4S2J4W_13[] <- c*rec_cust*pc_cl[i]*IC4S2J4U_13[i] - det*IC4S2J4W_13[i]
+
+cl_IC1S2J4W_14[] <- c*rec_cust*pc_cl[i]*IC1S2J4U_14[i] - det*IC1S2J4W_14[i]
+cl_IC2S2J4W_14[] <- c*rec_cust*pc_cl[i]*IC2S2J4U_14[i] - det*IC2S2J4W_14[i]
+cl_IC3S2J4W_14[] <- c*rec_cust*pc_cl[i]*IC3S2J4U_14[i] - det*IC3S2J4W_14[i]
+cl_IC4S2J4W_14[] <- c*rec_cust*pc_cl[i]*IC4S2J4U_14[i] - det*IC4S2J4W_14[i]
+
+cl_IC1S2J4W_15[] <- c*rec_cust*pc_cl[i]*IC1S2J4U_15[i] - det*IC1S2J4W_15[i]
+cl_IC2S2J4W_15[] <- c*rec_cust*pc_cl[i]*IC2S2J4U_15[i] - det*IC2S2J4W_15[i]
+cl_IC3S2J4W_15[] <- c*rec_cust*pc_cl[i]*IC3S2J4U_15[i] - det*IC3S2J4W_15[i]
+cl_IC4S2J4W_15[] <- c*rec_cust*pc_cl[i]*IC4S2J4U_15[i] - det*IC4S2J4W_15[i]
+
+cl_IC1S2J4W_16[] <- c*rec_cust*pc_cl[i]*IC1S2J4U_16[i] - det*IC1S2J4W_16[i]
+cl_IC2S2J4W_16[] <- c*rec_cust*pc_cl[i]*IC2S2J4U_16[i] - det*IC2S2J4W_16[i]
+cl_IC3S2J4W_16[] <- c*rec_cust*pc_cl[i]*IC3S2J4U_16[i] - det*IC3S2J4W_16[i]
+cl_IC4S2J4W_16[] <- c*rec_cust*pc_cl[i]*IC4S2J4U_16[i] - det*IC4S2J4W_16[i]
+
+cl_IC1S2J4W_17[] <- c*rec_cust*pc_cl[i]*IC1S2J4U_17[i] - det*IC1S2J4W_17[i]
+cl_IC2S2J4W_17[] <- c*rec_cust*pc_cl[i]*IC2S2J4U_17[i] - det*IC2S2J4W_17[i]
+cl_IC3S2J4W_17[] <- c*rec_cust*pc_cl[i]*IC3S2J4U_17[i] - det*IC3S2J4W_17[i]
+cl_IC4S2J4W_17[] <- c*rec_cust*pc_cl[i]*IC4S2J4U_17[i] - det*IC4S2J4W_17[i]
+
+
+
+cl_IC1S1J5W_10[] <- c*rec_cust*pc_cl[i]*IC1S1J5U_10[i] - det*IC1S1J5W_10[i]
+cl_IC2S1J5W_10[] <- c*rec_cust*pc_cl[i]*IC2S1J5U_10[i] - det*IC2S1J5W_10[i]
+cl_IC3S1J5W_10[] <- c*rec_cust*pc_cl[i]*IC3S1J5U_10[i] - det*IC3S1J5W_10[i]
+cl_IC4S1J5W_10[] <- c*rec_cust*pc_cl[i]*IC4S1J5U_10[i] - det*IC4S1J5W_10[i]
+
+cl_IC1S1J5W_11[] <- c*rec_cust*pc_cl[i]*IC1S1J5U_11[i] - det*IC1S1J5W_11[i]
+cl_IC2S1J5W_11[] <- c*rec_cust*pc_cl[i]*IC2S1J5U_11[i] - det*IC2S1J5W_11[i]
+cl_IC3S1J5W_11[] <- c*rec_cust*pc_cl[i]*IC3S1J5U_11[i] - det*IC3S1J5W_11[i]
+cl_IC4S1J5W_11[] <- c*rec_cust*pc_cl[i]*IC4S1J5U_11[i] - det*IC4S1J5W_11[i]
+
+cl_IC1S1J5W_12[] <- c*rec_cust*pc_cl[i]*IC1S1J5U_12[i] - det*IC1S1J5W_12[i]
+cl_IC2S1J5W_12[] <- c*rec_cust*pc_cl[i]*IC2S1J5U_12[i] - det*IC2S1J5W_12[i]
+cl_IC3S1J5W_12[] <- c*rec_cust*pc_cl[i]*IC3S1J5U_12[i] - det*IC3S1J5W_12[i]
+cl_IC4S1J5W_12[] <- c*rec_cust*pc_cl[i]*IC4S1J5U_12[i] - det*IC4S1J5W_12[i]
+
+cl_IC1S1J5W_13[] <- c*rec_cust*pc_cl[i]*IC1S1J5U_13[i] - det*IC1S1J5W_13[i]
+cl_IC2S1J5W_13[] <- c*rec_cust*pc_cl[i]*IC2S1J5U_13[i] - det*IC2S1J5W_13[i]
+cl_IC3S1J5W_13[] <- c*rec_cust*pc_cl[i]*IC3S1J5U_13[i] - det*IC3S1J5W_13[i]
+cl_IC4S1J5W_13[] <- c*rec_cust*pc_cl[i]*IC4S1J5U_13[i] - det*IC4S1J5W_13[i]
+
+cl_IC1S1J5W_14[] <- c*rec_cust*pc_cl[i]*IC1S1J5U_14[i] - det*IC1S1J5W_14[i]
+cl_IC2S1J5W_14[] <- c*rec_cust*pc_cl[i]*IC2S1J5U_14[i] - det*IC2S1J5W_14[i]
+cl_IC3S1J5W_14[] <- c*rec_cust*pc_cl[i]*IC3S1J5U_14[i] - det*IC3S1J5W_14[i]
+cl_IC4S1J5W_14[] <- c*rec_cust*pc_cl[i]*IC4S1J5U_14[i] - det*IC4S1J5W_14[i]
+
+cl_IC1S1J5W_15[] <- c*rec_cust*pc_cl[i]*IC1S1J5U_15[i] - det*IC1S1J5W_15[i]
+cl_IC2S1J5W_15[] <- c*rec_cust*pc_cl[i]*IC2S1J5U_15[i] - det*IC2S1J5W_15[i]
+cl_IC3S1J5W_15[] <- c*rec_cust*pc_cl[i]*IC3S1J5U_15[i] - det*IC3S1J5W_15[i]
+cl_IC4S1J5W_15[] <- c*rec_cust*pc_cl[i]*IC4S1J5U_15[i] - det*IC4S1J5W_15[i]
+
+cl_IC1S1J5W_16[] <- c*rec_cust*pc_cl[i]*IC1S1J5U_16[i] - det*IC1S1J5W_16[i]
+cl_IC2S1J5W_16[] <- c*rec_cust*pc_cl[i]*IC2S1J5U_16[i] - det*IC2S1J5W_16[i]
+cl_IC3S1J5W_16[] <- c*rec_cust*pc_cl[i]*IC3S1J5U_16[i] - det*IC3S1J5W_16[i]
+cl_IC4S1J5W_16[] <- c*rec_cust*pc_cl[i]*IC4S1J5U_16[i] - det*IC4S1J5W_16[i]
+
+cl_IC1S1J5W_17[] <- c*rec_cust*pc_cl[i]*IC1S1J5U_17[i] - det*IC1S1J5W_17[i]
+cl_IC2S1J5W_17[] <- c*rec_cust*pc_cl[i]*IC2S1J5U_17[i] - det*IC2S1J5W_17[i]
+cl_IC3S1J5W_17[] <- c*rec_cust*pc_cl[i]*IC3S1J5U_17[i] - det*IC3S1J5W_17[i]
+cl_IC4S1J5W_17[] <- c*rec_cust*pc_cl[i]*IC4S1J5U_17[i] - det*IC4S1J5W_17[i]
+
+
+
+cl_IC1S2J5W_10[] <- c*rec_cust*pc_cl[i]*IC1S2J5U_10[i] - det*IC1S2J5W_10[i]
+cl_IC2S2J5W_10[] <- c*rec_cust*pc_cl[i]*IC2S2J5U_10[i] - det*IC2S2J5W_10[i]
+cl_IC3S2J5W_10[] <- c*rec_cust*pc_cl[i]*IC3S2J5U_10[i] - det*IC3S2J5W_10[i]
+cl_IC4S2J5W_10[] <- c*rec_cust*pc_cl[i]*IC4S2J5U_10[i] - det*IC4S2J5W_10[i]
+
+cl_IC1S2J5W_11[] <- c*rec_cust*pc_cl[i]*IC1S2J5U_11[i] - det*IC1S2J5W_11[i]
+cl_IC2S2J5W_11[] <- c*rec_cust*pc_cl[i]*IC2S2J5U_11[i] - det*IC2S2J5W_11[i]
+cl_IC3S2J5W_11[] <- c*rec_cust*pc_cl[i]*IC3S2J5U_11[i] - det*IC3S2J5W_11[i]
+cl_IC4S2J5W_11[] <- c*rec_cust*pc_cl[i]*IC4S2J5U_11[i] - det*IC4S2J5W_11[i]
+
+cl_IC1S2J5W_12[] <- c*rec_cust*pc_cl[i]*IC1S2J5U_12[i] - det*IC1S2J5W_12[i]
+cl_IC2S2J5W_12[] <- c*rec_cust*pc_cl[i]*IC2S2J5U_12[i] - det*IC2S2J5W_12[i]
+cl_IC3S2J5W_12[] <- c*rec_cust*pc_cl[i]*IC3S2J5U_12[i] - det*IC3S2J5W_12[i]
+cl_IC4S2J5W_12[] <- c*rec_cust*pc_cl[i]*IC4S2J5U_12[i] - det*IC4S2J5W_12[i]
+
+cl_IC1S2J5W_13[] <- c*rec_cust*pc_cl[i]*IC1S2J5U_13[i] - det*IC1S2J5W_13[i]
+cl_IC2S2J5W_13[] <- c*rec_cust*pc_cl[i]*IC2S2J5U_13[i] - det*IC2S2J5W_13[i]
+cl_IC3S2J5W_13[] <- c*rec_cust*pc_cl[i]*IC3S2J5U_13[i] - det*IC3S2J5W_13[i]
+cl_IC4S2J5W_13[] <- c*rec_cust*pc_cl[i]*IC4S2J5U_13[i] - det*IC4S2J5W_13[i]
+
+cl_IC1S2J5W_14[] <- c*rec_cust*pc_cl[i]*IC1S2J5U_14[i] - det*IC1S2J5W_14[i]
+cl_IC2S2J5W_14[] <- c*rec_cust*pc_cl[i]*IC2S2J5U_14[i] - det*IC2S2J5W_14[i]
+cl_IC3S2J5W_14[] <- c*rec_cust*pc_cl[i]*IC3S2J5U_14[i] - det*IC3S2J5W_14[i]
+cl_IC4S2J5W_14[] <- c*rec_cust*pc_cl[i]*IC4S2J5U_14[i] - det*IC4S2J5W_14[i]
+
+cl_IC1S2J5W_15[] <- c*rec_cust*pc_cl[i]*IC1S2J5U_15[i] - det*IC1S2J5W_15[i]
+cl_IC2S2J5W_15[] <- c*rec_cust*pc_cl[i]*IC2S2J5U_15[i] - det*IC2S2J5W_15[i]
+cl_IC3S2J5W_15[] <- c*rec_cust*pc_cl[i]*IC3S2J5U_15[i] - det*IC3S2J5W_15[i]
+cl_IC4S2J5W_15[] <- c*rec_cust*pc_cl[i]*IC4S2J5U_15[i] - det*IC4S2J5W_15[i]
+
+cl_IC1S2J5W_16[] <- c*rec_cust*pc_cl[i]*IC1S2J5U_16[i] - det*IC1S2J5W_16[i]
+cl_IC2S2J5W_16[] <- c*rec_cust*pc_cl[i]*IC2S2J5U_16[i] - det*IC2S2J5W_16[i]
+cl_IC3S2J5W_16[] <- c*rec_cust*pc_cl[i]*IC3S2J5U_16[i] - det*IC3S2J5W_16[i]
+cl_IC4S2J5W_16[] <- c*rec_cust*pc_cl[i]*IC4S2J5U_16[i] - det*IC4S2J5W_16[i]
+
+cl_IC1S2J5W_17[] <- c*rec_cust*pc_cl[i]*IC1S2J5U_17[i] - det*IC1S2J5W_17[i]
+cl_IC2S2J5W_17[] <- c*rec_cust*pc_cl[i]*IC2S2J5U_17[i] - det*IC2S2J5W_17[i]
+cl_IC3S2J5W_17[] <- c*rec_cust*pc_cl[i]*IC3S2J5U_17[i] - det*IC3S2J5W_17[i]
+cl_IC4S2J5W_17[] <- c*rec_cust*pc_cl[i]*IC4S2J5U_17[i] - det*IC4S2J5W_17[i]
+
+
+
+cl_EC1S1J1U_10[] <- des*EC1S1J1W_10[i] - c*rec_e[i]*EC1S1J1U_10[i]*sum(cl_mix_e_10[,i])
+cl_EC2S1J1U_10[] <- des*EC2S1J1W_10[i] - c*rec_e[i]*EC2S1J1U_10[i]*sum(cl_mix_e_10[,i])
+cl_EC3S1J1U_10[] <- des*EC3S1J1W_10[i] - c*rec_p[i]*EC3S1J1U_10[i]*sum(cl_mix_p_10[,i])
+cl_EC4S1J1U_10[] <- des*EC4S1J1W_10[i] - c*rec_e[i]*EC4S1J1U_10[i]*sum(cl_mix_e_10[,i])
+
+cl_EC1S1J1U_11[] <- des*EC1S1J1W_11[i] - c*rec_e[i]*EC1S1J1U_11[i]*sum(cl_mix_e_11[,i])
+cl_EC2S1J1U_11[] <- des*EC2S1J1W_11[i] - c*rec_e[i]*EC2S1J1U_11[i]*sum(cl_mix_e_11[,i])
+cl_EC3S1J1U_11[] <- des*EC3S1J1W_11[i] - c*rec_p[i]*EC3S1J1U_11[i]*sum(cl_mix_p_11[,i])
+cl_EC4S1J1U_11[] <- des*EC4S1J1W_11[i] - c*rec_e[i]*EC4S1J1U_11[i]*sum(cl_mix_e_11[,i])
+
+cl_EC1S1J1U_12[] <- des*EC1S1J1W_12[i] - c*rec_e[i]*EC1S1J1U_12[i]*sum(cl_mix_e_12[,i])
+cl_EC2S1J1U_12[] <- des*EC2S1J1W_12[i] - c*rec_e[i]*EC2S1J1U_12[i]*sum(cl_mix_e_12[,i])
+cl_EC3S1J1U_12[] <- des*EC3S1J1W_12[i] - c*rec_p[i]*EC3S1J1U_12[i]*sum(cl_mix_p_12[,i])
+cl_EC4S1J1U_12[] <- des*EC4S1J1W_12[i] - c*rec_e[i]*EC4S1J1U_12[i]*sum(cl_mix_e_12[,i])
+
+cl_EC1S1J1U_13[] <- des*EC1S1J1W_13[i] - c*rec_e[i]*EC1S1J1U_13[i]*sum(cl_mix_e_13[,i])
+cl_EC2S1J1U_13[] <- des*EC2S1J1W_13[i] - c*rec_e[i]*EC2S1J1U_13[i]*sum(cl_mix_e_13[,i])
+cl_EC3S1J1U_13[] <- des*EC3S1J1W_13[i] - c*rec_p[i]*EC3S1J1U_13[i]*sum(cl_mix_p_13[,i])
+cl_EC4S1J1U_13[] <- des*EC4S1J1W_13[i] - c*rec_e[i]*EC4S1J1U_13[i]*sum(cl_mix_e_13[,i])
+
+cl_EC1S1J1U_14[] <- des*EC1S1J1W_14[i] - c*rec_e[i]*EC1S1J1U_14[i]*sum(cl_mix_e_14[,i])
+cl_EC2S1J1U_14[] <- des*EC2S1J1W_14[i] - c*rec_e[i]*EC2S1J1U_14[i]*sum(cl_mix_e_14[,i])
+cl_EC3S1J1U_14[] <- des*EC3S1J1W_14[i] - c*rec_p[i]*EC3S1J1U_14[i]*sum(cl_mix_p_14[,i])
+cl_EC4S1J1U_14[] <- des*EC4S1J1W_14[i] - c*rec_e[i]*EC4S1J1U_14[i]*sum(cl_mix_e_14[,i])
+
+cl_EC1S1J1U_15[] <- des*EC1S1J1W_15[i] - c*rec_e[i]*EC1S1J1U_15[i]*sum(cl_mix_e_15[,i])
+cl_EC2S1J1U_15[] <- des*EC2S1J1W_15[i] - c*rec_e[i]*EC2S1J1U_15[i]*sum(cl_mix_e_15[,i])
+cl_EC3S1J1U_15[] <- des*EC3S1J1W_15[i] - c*rec_p[i]*EC3S1J1U_15[i]*sum(cl_mix_p_15[,i])
+cl_EC4S1J1U_15[] <- des*EC4S1J1W_15[i] - c*rec_e[i]*EC4S1J1U_15[i]*sum(cl_mix_e_15[,i])
+
+cl_EC1S1J1U_16[] <- des*EC1S1J1W_16[i] - c*rec_e[i]*EC1S1J1U_16[i]*sum(cl_mix_e_16[,i])
+cl_EC2S1J1U_16[] <- des*EC2S1J1W_16[i] - c*rec_e[i]*EC2S1J1U_16[i]*sum(cl_mix_e_16[,i])
+cl_EC3S1J1U_16[] <- des*EC3S1J1W_16[i] - c*rec_p[i]*EC3S1J1U_16[i]*sum(cl_mix_p_16[,i])
+cl_EC4S1J1U_16[] <- des*EC4S1J1W_16[i] - c*rec_e[i]*EC4S1J1U_16[i]*sum(cl_mix_e_16[,i])
+
+cl_EC1S1J1U_17[] <- des*EC1S1J1W_17[i] - c*rec_e[i]*EC1S1J1U_17[i]*sum(cl_mix_e_17[,i])
+cl_EC2S1J1U_17[] <- des*EC2S1J1W_17[i] - c*rec_e[i]*EC2S1J1U_17[i]*sum(cl_mix_e_17[,i])
+cl_EC3S1J1U_17[] <- des*EC3S1J1W_17[i] - c*rec_p[i]*EC3S1J1U_17[i]*sum(cl_mix_p_17[,i])
+cl_EC4S1J1U_17[] <- des*EC4S1J1W_17[i] - c*rec_e[i]*EC4S1J1U_17[i]*sum(cl_mix_e_17[,i])
+
+
+
+cl_EC1S2J1U_10[] <- des*EC1S2J1W_10[i] - c*rec_p[i]*EC1S2J1U_10[i]*sum(cl_mix_p_10[,i])
+cl_EC2S2J1U_10[] <- des*EC2S2J1W_10[i] - c*rec_p[i]*EC2S2J1U_10[i]*sum(cl_mix_p_10[,i])
+cl_EC3S2J1U_10[] <- des*EC3S2J1W_10[i] - c*rec_p[i]*EC3S2J1U_10[i]*sum(cl_mix_p_10[,i])
+cl_EC4S2J1U_10[] <- des*EC4S2J1W_10[i] - c*rec_p[i]*EC4S2J1U_10[i]*sum(cl_mix_p_10[,i])
+
+cl_EC1S2J1U_11[] <- des*EC1S2J1W_11[i] - c*rec_p[i]*EC1S2J1U_11[i]*sum(cl_mix_p_11[,i])
+cl_EC2S2J1U_11[] <- des*EC2S2J1W_11[i] - c*rec_p[i]*EC2S2J1U_11[i]*sum(cl_mix_p_11[,i])
+cl_EC3S2J1U_11[] <- des*EC3S2J1W_11[i] - c*rec_p[i]*EC3S2J1U_11[i]*sum(cl_mix_p_11[,i])
+cl_EC4S2J1U_11[] <- des*EC4S2J1W_11[i] - c*rec_p[i]*EC4S2J1U_11[i]*sum(cl_mix_p_11[,i])
+
+cl_EC1S2J1U_12[] <- des*EC1S2J1W_12[i] - c*rec_p[i]*EC1S2J1U_12[i]*sum(cl_mix_p_12[,i])
+cl_EC2S2J1U_12[] <- des*EC2S2J1W_12[i] - c*rec_p[i]*EC2S2J1U_12[i]*sum(cl_mix_p_12[,i])
+cl_EC3S2J1U_12[] <- des*EC3S2J1W_12[i] - c*rec_p[i]*EC3S2J1U_12[i]*sum(cl_mix_p_12[,i])
+cl_EC4S2J1U_12[] <- des*EC4S2J1W_12[i] - c*rec_p[i]*EC4S2J1U_12[i]*sum(cl_mix_p_12[,i])
+
+cl_EC1S2J1U_13[] <- des*EC1S2J1W_13[i] - c*rec_p[i]*EC1S2J1U_13[i]*sum(cl_mix_p_13[,i])
+cl_EC2S2J1U_13[] <- des*EC2S2J1W_13[i] - c*rec_p[i]*EC2S2J1U_13[i]*sum(cl_mix_p_13[,i])
+cl_EC3S2J1U_13[] <- des*EC3S2J1W_13[i] - c*rec_p[i]*EC3S2J1U_13[i]*sum(cl_mix_p_13[,i])
+cl_EC4S2J1U_13[] <- des*EC4S2J1W_13[i] - c*rec_p[i]*EC4S2J1U_13[i]*sum(cl_mix_p_13[,i])
+
+cl_EC1S2J1U_14[] <- des*EC1S2J1W_14[i] - c*rec_p[i]*EC1S2J1U_14[i]*sum(cl_mix_p_14[,i])
+cl_EC2S2J1U_14[] <- des*EC2S2J1W_14[i] - c*rec_p[i]*EC2S2J1U_14[i]*sum(cl_mix_p_14[,i])
+cl_EC3S2J1U_14[] <- des*EC3S2J1W_14[i] - c*rec_p[i]*EC3S2J1U_14[i]*sum(cl_mix_p_14[,i])
+cl_EC4S2J1U_14[] <- des*EC4S2J1W_14[i] - c*rec_p[i]*EC4S2J1U_14[i]*sum(cl_mix_p_14[,i])
+
+cl_EC1S2J1U_15[] <- des*EC1S2J1W_15[i] - c*rec_p[i]*EC1S2J1U_15[i]*sum(cl_mix_p_15[,i])
+cl_EC2S2J1U_15[] <- des*EC2S2J1W_15[i] - c*rec_p[i]*EC2S2J1U_15[i]*sum(cl_mix_p_15[,i])
+cl_EC3S2J1U_15[] <- des*EC3S2J1W_15[i] - c*rec_p[i]*EC3S2J1U_15[i]*sum(cl_mix_p_15[,i])
+cl_EC4S2J1U_15[] <- des*EC4S2J1W_15[i] - c*rec_p[i]*EC4S2J1U_15[i]*sum(cl_mix_p_15[,i])
+
+cl_EC1S2J1U_16[] <- des*EC1S2J1W_16[i] - c*rec_e[i]*EC1S2J1U_16[i]*sum(cl_mix_e_16[,i])
+cl_EC2S2J1U_16[] <- des*EC2S2J1W_16[i] - c*rec_e[i]*EC2S2J1U_16[i]*sum(cl_mix_e_16[,i])
+cl_EC3S2J1U_16[] <- des*EC3S2J1W_16[i] - c*rec_p[i]*EC3S2J1U_16[i]*sum(cl_mix_p_16[,i])
+cl_EC4S2J1U_16[] <- des*EC4S2J1W_16[i] - c*rec_e[i]*EC4S2J1U_16[i]*sum(cl_mix_e_16[,i])
+
+cl_EC1S2J1U_17[] <- des*EC1S2J1W_17[i] - c*rec_e[i]*EC1S2J1U_17[i]*sum(cl_mix_e_17[,i])
+cl_EC2S2J1U_17[] <- des*EC2S2J1W_17[i] - c*rec_e[i]*EC2S2J1U_17[i]*sum(cl_mix_e_17[,i])
+cl_EC3S2J1U_17[] <- des*EC3S2J1W_17[i] - c*rec_p[i]*EC3S2J1U_17[i]*sum(cl_mix_p_17[,i])
+cl_EC4S2J1U_17[] <- des*EC4S2J1W_17[i] - c*rec_e[i]*EC4S2J1U_17[i]*sum(cl_mix_e_17[,i])
+
+
+
+cl_EC1S1J2U_10[] <- des*EC1S1J2W_10[i] - c*rec_e[i]*EC1S1J2U_10[i]*sum(cl_mix_e_10[,i])
+cl_EC2S1J2U_10[] <- des*EC2S1J2W_10[i] - c*rec_e[i]*EC2S1J2U_10[i]*sum(cl_mix_e_10[,i])
+cl_EC3S1J2U_10[] <- des*EC3S1J2W_10[i] - c*rec_p[i]*EC3S1J2U_10[i]*sum(cl_mix_p_10[,i])
+cl_EC4S1J2U_10[] <- des*EC4S1J2W_10[i] - c*rec_e[i]*EC4S1J2U_10[i]*sum(cl_mix_e_10[,i])
+
+cl_EC1S1J2U_11[] <- des*EC1S1J2W_11[i] - c*rec_e[i]*EC1S1J2U_11[i]*sum(cl_mix_e_11[,i])
+cl_EC2S1J2U_11[] <- des*EC2S1J2W_11[i] - c*rec_e[i]*EC2S1J2U_11[i]*sum(cl_mix_e_11[,i])
+cl_EC3S1J2U_11[] <- des*EC3S1J2W_11[i] - c*rec_p[i]*EC3S1J2U_11[i]*sum(cl_mix_p_11[,i])
+cl_EC4S1J2U_11[] <- des*EC4S1J2W_11[i] - c*rec_e[i]*EC4S1J2U_11[i]*sum(cl_mix_e_11[,i])
+
+cl_EC1S1J2U_12[] <- des*EC1S1J2W_12[i] - c*rec_e[i]*EC1S1J2U_12[i]*sum(cl_mix_e_12[,i])
+cl_EC2S1J2U_12[] <- des*EC2S1J2W_12[i] - c*rec_e[i]*EC2S1J2U_12[i]*sum(cl_mix_e_12[,i])
+cl_EC3S1J2U_12[] <- des*EC3S1J2W_12[i] - c*rec_p[i]*EC3S1J2U_12[i]*sum(cl_mix_p_12[,i])
+cl_EC4S1J2U_12[] <- des*EC4S1J2W_12[i] - c*rec_e[i]*EC4S1J2U_12[i]*sum(cl_mix_e_12[,i])
+
+cl_EC1S1J2U_13[] <- des*EC1S1J2W_13[i] - c*rec_e[i]*EC1S1J2U_13[i]*sum(cl_mix_e_13[,i])
+cl_EC2S1J2U_13[] <- des*EC2S1J2W_13[i] - c*rec_e[i]*EC2S1J2U_13[i]*sum(cl_mix_e_13[,i])
+cl_EC3S1J2U_13[] <- des*EC3S1J2W_13[i] - c*rec_p[i]*EC3S1J2U_13[i]*sum(cl_mix_p_13[,i])
+cl_EC4S1J2U_13[] <- des*EC4S1J2W_13[i] - c*rec_e[i]*EC4S1J2U_13[i]*sum(cl_mix_e_13[,i])
+
+cl_EC1S1J2U_14[] <- des*EC1S1J2W_14[i] - c*rec_e[i]*EC1S1J2U_14[i]*sum(cl_mix_e_14[,i])
+cl_EC2S1J2U_14[] <- des*EC2S1J2W_14[i] - c*rec_e[i]*EC2S1J2U_14[i]*sum(cl_mix_e_14[,i])
+cl_EC3S1J2U_14[] <- des*EC3S1J2W_14[i] - c*rec_p[i]*EC3S1J2U_14[i]*sum(cl_mix_p_14[,i])
+cl_EC4S1J2U_14[] <- des*EC4S1J2W_14[i] - c*rec_e[i]*EC4S1J2U_14[i]*sum(cl_mix_e_14[,i])
+
+cl_EC1S1J2U_15[] <- des*EC1S1J2W_15[i] - c*rec_e[i]*EC1S1J2U_15[i]*sum(cl_mix_e_15[,i])
+cl_EC2S1J2U_15[] <- des*EC2S1J2W_15[i] - c*rec_e[i]*EC2S1J2U_15[i]*sum(cl_mix_e_15[,i])
+cl_EC3S1J2U_15[] <- des*EC3S1J2W_15[i] - c*rec_p[i]*EC3S1J2U_15[i]*sum(cl_mix_p_15[,i])
+cl_EC4S1J2U_15[] <- des*EC4S1J2W_15[i] - c*rec_e[i]*EC4S1J2U_15[i]*sum(cl_mix_e_15[,i])
+
+cl_EC1S1J2U_16[] <- des*EC1S1J2W_16[i] - c*rec_e[i]*EC1S1J2U_16[i]*sum(cl_mix_e_16[,i])
+cl_EC2S1J2U_16[] <- des*EC2S1J2W_16[i] - c*rec_e[i]*EC2S1J2U_16[i]*sum(cl_mix_e_16[,i])
+cl_EC3S1J2U_16[] <- des*EC3S1J2W_16[i] - c*rec_p[i]*EC3S1J2U_16[i]*sum(cl_mix_p_16[,i])
+cl_EC4S1J2U_16[] <- des*EC4S1J2W_16[i] - c*rec_e[i]*EC4S1J2U_16[i]*sum(cl_mix_e_16[,i])
+
+cl_EC1S1J2U_17[] <- des*EC1S1J2W_17[i] - c*rec_e[i]*EC1S1J2U_17[i]*sum(cl_mix_e_17[,i])
+cl_EC2S1J2U_17[] <- des*EC2S1J2W_17[i] - c*rec_e[i]*EC2S1J2U_17[i]*sum(cl_mix_e_17[,i])
+cl_EC3S1J2U_17[] <- des*EC3S1J2W_17[i] - c*rec_p[i]*EC3S1J2U_17[i]*sum(cl_mix_p_17[,i])
+cl_EC4S1J2U_17[] <- des*EC4S1J2W_17[i] - c*rec_e[i]*EC4S1J2U_17[i]*sum(cl_mix_e_17[,i])
+
+
+
+cl_EC1S2J2U_10[] <- des*EC1S2J2W_10[i] - c*rec_p[i]*EC1S2J2U_10[i]*sum(cl_mix_p_10[,i])
+cl_EC2S2J2U_10[] <- des*EC2S2J2W_10[i] - c*rec_p[i]*EC2S2J2U_10[i]*sum(cl_mix_p_10[,i])
+cl_EC3S2J2U_10[] <- des*EC3S2J2W_10[i] - c*rec_p[i]*EC3S2J2U_10[i]*sum(cl_mix_p_10[,i])
+cl_EC4S2J2U_10[] <- des*EC4S2J2W_10[i] - c*rec_p[i]*EC4S2J2U_10[i]*sum(cl_mix_p_10[,i])
+
+cl_EC1S2J2U_11[] <- des*EC1S2J2W_11[i] - c*rec_p[i]*EC1S2J2U_11[i]*sum(cl_mix_p_11[,i])
+cl_EC2S2J2U_11[] <- des*EC2S2J2W_11[i] - c*rec_p[i]*EC2S2J2U_11[i]*sum(cl_mix_p_11[,i])
+cl_EC3S2J2U_11[] <- des*EC3S2J2W_11[i] - c*rec_p[i]*EC3S2J2U_11[i]*sum(cl_mix_p_11[,i])
+cl_EC4S2J2U_11[] <- des*EC4S2J2W_11[i] - c*rec_p[i]*EC4S2J2U_11[i]*sum(cl_mix_p_11[,i])
+
+cl_EC1S2J2U_12[] <- des*EC1S2J2W_12[i] - c*rec_p[i]*EC1S2J2U_12[i]*sum(cl_mix_p_12[,i])
+cl_EC2S2J2U_12[] <- des*EC2S2J2W_12[i] - c*rec_p[i]*EC2S2J2U_12[i]*sum(cl_mix_p_12[,i])
+cl_EC3S2J2U_12[] <- des*EC3S2J2W_12[i] - c*rec_p[i]*EC3S2J2U_12[i]*sum(cl_mix_p_12[,i])
+cl_EC4S2J2U_12[] <- des*EC4S2J2W_12[i] - c*rec_p[i]*EC4S2J2U_12[i]*sum(cl_mix_p_12[,i])
+
+cl_EC1S2J2U_13[] <- des*EC1S2J2W_13[i] - c*rec_p[i]*EC1S2J2U_13[i]*sum(cl_mix_p_13[,i])
+cl_EC2S2J2U_13[] <- des*EC2S2J2W_13[i] - c*rec_p[i]*EC2S2J2U_13[i]*sum(cl_mix_p_13[,i])
+cl_EC3S2J2U_13[] <- des*EC3S2J2W_13[i] - c*rec_p[i]*EC3S2J2U_13[i]*sum(cl_mix_p_13[,i])
+cl_EC4S2J2U_13[] <- des*EC4S2J2W_13[i] - c*rec_p[i]*EC4S2J2U_13[i]*sum(cl_mix_p_13[,i])
+
+cl_EC1S2J2U_14[] <- des*EC1S2J2W_14[i] - c*rec_p[i]*EC1S2J2U_14[i]*sum(cl_mix_p_14[,i])
+cl_EC2S2J2U_14[] <- des*EC2S2J2W_14[i] - c*rec_p[i]*EC2S2J2U_14[i]*sum(cl_mix_p_14[,i])
+cl_EC3S2J2U_14[] <- des*EC3S2J2W_14[i] - c*rec_p[i]*EC3S2J2U_14[i]*sum(cl_mix_p_14[,i])
+cl_EC4S2J2U_14[] <- des*EC4S2J2W_14[i] - c*rec_p[i]*EC4S2J2U_14[i]*sum(cl_mix_p_14[,i])
+
+cl_EC1S2J2U_15[] <- des*EC1S2J2W_15[i] - c*rec_p[i]*EC1S2J2U_15[i]*sum(cl_mix_p_15[,i])
+cl_EC2S2J2U_15[] <- des*EC2S2J2W_15[i] - c*rec_p[i]*EC2S2J2U_15[i]*sum(cl_mix_p_15[,i])
+cl_EC3S2J2U_15[] <- des*EC3S2J2W_15[i] - c*rec_p[i]*EC3S2J2U_15[i]*sum(cl_mix_p_15[,i])
+cl_EC4S2J2U_15[] <- des*EC4S2J2W_15[i] - c*rec_p[i]*EC4S2J2U_15[i]*sum(cl_mix_p_15[,i])
+
+cl_EC1S2J2U_16[] <- des*EC1S2J2W_16[i] - c*rec_e[i]*EC1S2J2U_16[i]*sum(cl_mix_e_16[,i])
+cl_EC2S2J2U_16[] <- des*EC2S2J2W_16[i] - c*rec_e[i]*EC2S2J2U_16[i]*sum(cl_mix_e_16[,i])
+cl_EC3S2J2U_16[] <- des*EC3S2J2W_16[i] - c*rec_p[i]*EC3S2J2U_16[i]*sum(cl_mix_p_16[,i])
+cl_EC4S2J2U_16[] <- des*EC4S2J2W_16[i] - c*rec_e[i]*EC4S2J2U_16[i]*sum(cl_mix_e_16[,i])
+
+cl_EC1S2J2U_17[] <- des*EC1S2J2W_17[i] - c*rec_e[i]*EC1S2J2U_17[i]*sum(cl_mix_e_17[,i])
+cl_EC2S2J2U_17[] <- des*EC2S2J2W_17[i] - c*rec_e[i]*EC2S2J2U_17[i]*sum(cl_mix_e_17[,i])
+cl_EC3S2J2U_17[] <- des*EC3S2J2W_17[i] - c*rec_p[i]*EC3S2J2U_17[i]*sum(cl_mix_p_17[,i])
+cl_EC4S2J2U_17[] <- des*EC4S2J2W_17[i] - c*rec_e[i]*EC4S2J2U_17[i]*sum(cl_mix_e_17[,i])
+
+
+
+cl_EC1S1J3U_10[] <- des*EC1S1J3W_10[i] - c*rec_e[i]*EC1S1J3U_10[i]*sum(cl_mix_e_10[,i])
+cl_EC2S1J3U_10[] <- des*EC2S1J3W_10[i] - c*rec_e[i]*EC2S1J3U_10[i]*sum(cl_mix_e_10[,i])
+cl_EC3S1J3U_10[] <- des*EC3S1J3W_10[i] - c*rec_p[i]*EC3S1J3U_10[i]*sum(cl_mix_p_10[,i])
+cl_EC4S1J3U_10[] <- des*EC4S1J3W_10[i] - c*rec_e[i]*EC4S1J3U_10[i]*sum(cl_mix_e_10[,i])
+
+cl_EC1S1J3U_11[] <- des*EC1S1J3W_11[i] - c*rec_e[i]*EC1S1J3U_11[i]*sum(cl_mix_e_11[,i])
+cl_EC2S1J3U_11[] <- des*EC2S1J3W_11[i] - c*rec_e[i]*EC2S1J3U_11[i]*sum(cl_mix_e_11[,i])
+cl_EC3S1J3U_11[] <- des*EC3S1J3W_11[i] - c*rec_p[i]*EC3S1J3U_11[i]*sum(cl_mix_p_11[,i])
+cl_EC4S1J3U_11[] <- des*EC4S1J3W_11[i] - c*rec_e[i]*EC4S1J3U_11[i]*sum(cl_mix_e_11[,i])
+
+cl_EC1S1J3U_12[] <- des*EC1S1J3W_12[i] - c*rec_e[i]*EC1S1J3U_12[i]*sum(cl_mix_e_12[,i])
+cl_EC2S1J3U_12[] <- des*EC2S1J3W_12[i] - c*rec_e[i]*EC2S1J3U_12[i]*sum(cl_mix_e_12[,i])
+cl_EC3S1J3U_12[] <- des*EC3S1J3W_12[i] - c*rec_p[i]*EC3S1J3U_12[i]*sum(cl_mix_p_12[,i])
+cl_EC4S1J3U_12[] <- des*EC4S1J3W_12[i] - c*rec_e[i]*EC4S1J3U_12[i]*sum(cl_mix_e_12[,i])
+
+cl_EC1S1J3U_13[] <- des*EC1S1J3W_13[i] - c*rec_e[i]*EC1S1J3U_13[i]*sum(cl_mix_e_13[,i])
+cl_EC2S1J3U_13[] <- des*EC2S1J3W_13[i] - c*rec_e[i]*EC2S1J3U_13[i]*sum(cl_mix_e_13[,i])
+cl_EC3S1J3U_13[] <- des*EC3S1J3W_13[i] - c*rec_p[i]*EC3S1J3U_13[i]*sum(cl_mix_p_13[,i])
+cl_EC4S1J3U_13[] <- des*EC4S1J3W_13[i] - c*rec_e[i]*EC4S1J3U_13[i]*sum(cl_mix_e_13[,i])
+
+cl_EC1S1J3U_14[] <- des*EC1S1J3W_14[i] - c*rec_e[i]*EC1S1J3U_14[i]*sum(cl_mix_e_14[,i])
+cl_EC2S1J3U_14[] <- des*EC2S1J3W_14[i] - c*rec_e[i]*EC2S1J3U_14[i]*sum(cl_mix_e_14[,i])
+cl_EC3S1J3U_14[] <- des*EC3S1J3W_14[i] - c*rec_p[i]*EC3S1J3U_14[i]*sum(cl_mix_p_14[,i])
+cl_EC4S1J3U_14[] <- des*EC4S1J3W_14[i] - c*rec_e[i]*EC4S1J3U_14[i]*sum(cl_mix_e_14[,i])
+
+cl_EC1S1J3U_15[] <- des*EC1S1J3W_15[i] - c*rec_e[i]*EC1S1J3U_15[i]*sum(cl_mix_e_15[,i])
+cl_EC2S1J3U_15[] <- des*EC2S1J3W_15[i] - c*rec_e[i]*EC2S1J3U_15[i]*sum(cl_mix_e_15[,i])
+cl_EC3S1J3U_15[] <- des*EC3S1J3W_15[i] - c*rec_p[i]*EC3S1J3U_15[i]*sum(cl_mix_p_15[,i])
+cl_EC4S1J3U_15[] <- des*EC4S1J3W_15[i] - c*rec_e[i]*EC4S1J3U_15[i]*sum(cl_mix_e_15[,i])
+
+cl_EC1S1J3U_16[] <- des*EC1S1J3W_16[i] - c*rec_e[i]*EC1S1J3U_16[i]*sum(cl_mix_e_16[,i])
+cl_EC2S1J3U_16[] <- des*EC2S1J3W_16[i] - c*rec_e[i]*EC2S1J3U_16[i]*sum(cl_mix_e_16[,i])
+cl_EC3S1J3U_16[] <- des*EC3S1J3W_16[i] - c*rec_p[i]*EC3S1J3U_16[i]*sum(cl_mix_p_16[,i])
+cl_EC4S1J3U_16[] <- des*EC4S1J3W_16[i] - c*rec_e[i]*EC4S1J3U_16[i]*sum(cl_mix_e_16[,i])
+
+cl_EC1S1J3U_17[] <- des*EC1S1J3W_17[i] - c*rec_e[i]*EC1S1J3U_17[i]*sum(cl_mix_e_17[,i])
+cl_EC2S1J3U_17[] <- des*EC2S1J3W_17[i] - c*rec_e[i]*EC2S1J3U_17[i]*sum(cl_mix_e_17[,i])
+cl_EC3S1J3U_17[] <- des*EC3S1J3W_17[i] - c*rec_p[i]*EC3S1J3U_17[i]*sum(cl_mix_p_17[,i])
+cl_EC4S1J3U_17[] <- des*EC4S1J3W_17[i] - c*rec_e[i]*EC4S1J3U_17[i]*sum(cl_mix_e_17[,i])
+
+
+
+cl_EC1S2J3U_10[] <- des*EC1S2J3W_10[i] - c*rec_p[i]*EC1S2J3U_10[i]*sum(cl_mix_p_10[,i])
+cl_EC2S2J3U_10[] <- des*EC2S2J3W_10[i] - c*rec_p[i]*EC2S2J3U_10[i]*sum(cl_mix_p_10[,i])
+cl_EC3S2J3U_10[] <- des*EC3S2J3W_10[i] - c*rec_p[i]*EC3S2J3U_10[i]*sum(cl_mix_p_10[,i])
+cl_EC4S2J3U_10[] <- des*EC4S2J3W_10[i] - c*rec_p[i]*EC4S2J3U_10[i]*sum(cl_mix_p_10[,i])
+
+cl_EC1S2J3U_11[] <- des*EC1S2J3W_11[i] - c*rec_p[i]*EC1S2J3U_11[i]*sum(cl_mix_p_11[,i])
+cl_EC2S2J3U_11[] <- des*EC2S2J3W_11[i] - c*rec_p[i]*EC2S2J3U_11[i]*sum(cl_mix_p_11[,i])
+cl_EC3S2J3U_11[] <- des*EC3S2J3W_11[i] - c*rec_p[i]*EC3S2J3U_11[i]*sum(cl_mix_p_11[,i])
+cl_EC4S2J3U_11[] <- des*EC4S2J3W_11[i] - c*rec_p[i]*EC4S2J3U_11[i]*sum(cl_mix_p_11[,i])
+
+cl_EC1S2J3U_12[] <- des*EC1S2J3W_12[i] - c*rec_p[i]*EC1S2J3U_12[i]*sum(cl_mix_p_12[,i])
+cl_EC2S2J3U_12[] <- des*EC2S2J3W_12[i] - c*rec_p[i]*EC2S2J3U_12[i]*sum(cl_mix_p_12[,i])
+cl_EC3S2J3U_12[] <- des*EC3S2J3W_12[i] - c*rec_p[i]*EC3S2J3U_12[i]*sum(cl_mix_p_12[,i])
+cl_EC4S2J3U_12[] <- des*EC4S2J3W_12[i] - c*rec_p[i]*EC4S2J3U_12[i]*sum(cl_mix_p_12[,i])
+
+cl_EC1S2J3U_13[] <- des*EC1S2J3W_13[i] - c*rec_p[i]*EC1S2J3U_13[i]*sum(cl_mix_p_13[,i])
+cl_EC2S2J3U_13[] <- des*EC2S2J3W_13[i] - c*rec_p[i]*EC2S2J3U_13[i]*sum(cl_mix_p_13[,i])
+cl_EC3S2J3U_13[] <- des*EC3S2J3W_13[i] - c*rec_p[i]*EC3S2J3U_13[i]*sum(cl_mix_p_13[,i])
+cl_EC4S2J3U_13[] <- des*EC4S2J3W_13[i] - c*rec_p[i]*EC4S2J3U_13[i]*sum(cl_mix_p_13[,i])
+
+cl_EC1S2J3U_14[] <- des*EC1S2J3W_14[i] - c*rec_p[i]*EC1S2J3U_14[i]*sum(cl_mix_p_14[,i])
+cl_EC2S2J3U_14[] <- des*EC2S2J3W_14[i] - c*rec_p[i]*EC2S2J3U_14[i]*sum(cl_mix_p_14[,i])
+cl_EC3S2J3U_14[] <- des*EC3S2J3W_14[i] - c*rec_p[i]*EC3S2J3U_14[i]*sum(cl_mix_p_14[,i])
+cl_EC4S2J3U_14[] <- des*EC4S2J3W_14[i] - c*rec_p[i]*EC4S2J3U_14[i]*sum(cl_mix_p_14[,i])
+
+cl_EC1S2J3U_15[] <- des*EC1S2J3W_15[i] - c*rec_p[i]*EC1S2J3U_15[i]*sum(cl_mix_p_15[,i])
+cl_EC2S2J3U_15[] <- des*EC2S2J3W_15[i] - c*rec_p[i]*EC2S2J3U_15[i]*sum(cl_mix_p_15[,i])
+cl_EC3S2J3U_15[] <- des*EC3S2J3W_15[i] - c*rec_p[i]*EC3S2J3U_15[i]*sum(cl_mix_p_15[,i])
+cl_EC4S2J3U_15[] <- des*EC4S2J3W_15[i] - c*rec_p[i]*EC4S2J3U_15[i]*sum(cl_mix_p_15[,i])
+
+cl_EC1S2J3U_16[] <- des*EC1S2J3W_16[i] - c*rec_e[i]*EC1S2J3U_16[i]*sum(cl_mix_e_16[,i])
+cl_EC2S2J3U_16[] <- des*EC2S2J3W_16[i] - c*rec_e[i]*EC2S2J3U_16[i]*sum(cl_mix_e_16[,i])
+cl_EC3S2J3U_16[] <- des*EC3S2J3W_16[i] - c*rec_p[i]*EC3S2J3U_16[i]*sum(cl_mix_p_16[,i])
+cl_EC4S2J3U_16[] <- des*EC4S2J3W_16[i] - c*rec_e[i]*EC4S2J3U_16[i]*sum(cl_mix_e_16[,i])
+
+cl_EC1S2J3U_17[] <- des*EC1S2J3W_17[i] - c*rec_e[i]*EC1S2J3U_17[i]*sum(cl_mix_e_17[,i])
+cl_EC2S2J3U_17[] <- des*EC2S2J3W_17[i] - c*rec_e[i]*EC2S2J3U_17[i]*sum(cl_mix_e_17[,i])
+cl_EC3S2J3U_17[] <- des*EC3S2J3W_17[i] - c*rec_p[i]*EC3S2J3U_17[i]*sum(cl_mix_p_17[,i])
+cl_EC4S2J3U_17[] <- des*EC4S2J3W_17[i] - c*rec_e[i]*EC4S2J3U_17[i]*sum(cl_mix_e_17[,i])
+
+
+
+cl_EC1S1J4U_10[] <- det*EC1S1J4W_10[i] - c*rec_cust*pc_cl[i]*EC1S1J4U_10[i]
+cl_EC2S1J4U_10[] <- det*EC2S1J4W_10[i] - c*rec_cust*pc_cl[i]*EC2S1J4U_10[i]
+cl_EC3S1J4U_10[] <- det*EC3S1J4W_10[i] - c*rec_cust*pc_cl[i]*EC3S1J4U_10[i]
+cl_EC4S1J4U_10[] <- det*EC4S1J4W_10[i] - c*rec_cust*pc_cl[i]*EC4S1J4U_10[i]
+
+cl_EC1S1J4U_11[] <- det*EC1S1J4W_11[i] - c*rec_cust*pc_cl[i]*EC1S1J4U_11[i]
+cl_EC2S1J4U_11[] <- det*EC2S1J4W_11[i] - c*rec_cust*pc_cl[i]*EC2S1J4U_11[i]
+cl_EC3S1J4U_11[] <- det*EC3S1J4W_11[i] - c*rec_cust*pc_cl[i]*EC3S1J4U_11[i]
+cl_EC4S1J4U_11[] <- det*EC4S1J4W_11[i] - c*rec_cust*pc_cl[i]*EC4S1J4U_11[i]
+
+cl_EC1S1J4U_12[] <- det*EC1S1J4W_12[i] - c*rec_cust*pc_cl[i]*EC1S1J4U_12[i]
+cl_EC2S1J4U_12[] <- det*EC2S1J4W_12[i] - c*rec_cust*pc_cl[i]*EC2S1J4U_12[i]
+cl_EC3S1J4U_12[] <- det*EC3S1J4W_12[i] - c*rec_cust*pc_cl[i]*EC3S1J4U_12[i]
+cl_EC4S1J4U_12[] <- det*EC4S1J4W_12[i] - c*rec_cust*pc_cl[i]*EC4S1J4U_12[i]
+
+cl_EC1S1J4U_13[] <- det*EC1S1J4W_13[i] - c*rec_cust*pc_cl[i]*EC1S1J4U_13[i]
+cl_EC2S1J4U_13[] <- det*EC2S1J4W_13[i] - c*rec_cust*pc_cl[i]*EC2S1J4U_13[i]
+cl_EC3S1J4U_13[] <- det*EC3S1J4W_13[i] - c*rec_cust*pc_cl[i]*EC3S1J4U_13[i]
+cl_EC4S1J4U_13[] <- det*EC4S1J4W_13[i] - c*rec_cust*pc_cl[i]*EC4S1J4U_13[i]
+
+cl_EC1S1J4U_14[] <- det*EC1S1J4W_14[i] - c*rec_cust*pc_cl[i]*EC1S1J4U_14[i]
+cl_EC2S1J4U_14[] <- det*EC2S1J4W_14[i] - c*rec_cust*pc_cl[i]*EC2S1J4U_14[i]
+cl_EC3S1J4U_14[] <- det*EC3S1J4W_14[i] - c*rec_cust*pc_cl[i]*EC3S1J4U_14[i]
+cl_EC4S1J4U_14[] <- det*EC4S1J4W_14[i] - c*rec_cust*pc_cl[i]*EC4S1J4U_14[i]
+
+cl_EC1S1J4U_15[] <- det*EC1S1J4W_15[i] - c*rec_cust*pc_cl[i]*EC1S1J4U_15[i]
+cl_EC2S1J4U_15[] <- det*EC2S1J4W_15[i] - c*rec_cust*pc_cl[i]*EC2S1J4U_15[i]
+cl_EC3S1J4U_15[] <- det*EC3S1J4W_15[i] - c*rec_cust*pc_cl[i]*EC3S1J4U_15[i]
+cl_EC4S1J4U_15[] <- det*EC4S1J4W_15[i] - c*rec_cust*pc_cl[i]*EC4S1J4U_15[i]
+
+cl_EC1S1J4U_16[] <- det*EC1S1J4W_16[i] - c*rec_cust*pc_cl[i]*EC1S1J4U_16[i]
+cl_EC2S1J4U_16[] <- det*EC2S1J4W_16[i] - c*rec_cust*pc_cl[i]*EC2S1J4U_16[i]
+cl_EC3S1J4U_16[] <- det*EC3S1J4W_16[i] - c*rec_cust*pc_cl[i]*EC3S1J4U_16[i]
+cl_EC4S1J4U_16[] <- det*EC4S1J4W_16[i] - c*rec_cust*pc_cl[i]*EC4S1J4U_16[i]
+
+cl_EC1S1J4U_17[] <- det*EC1S1J4W_17[i] - c*rec_cust*pc_cl[i]*EC1S1J4U_17[i]
+cl_EC2S1J4U_17[] <- det*EC2S1J4W_17[i] - c*rec_cust*pc_cl[i]*EC2S1J4U_17[i]
+cl_EC3S1J4U_17[] <- det*EC3S1J4W_17[i] - c*rec_cust*pc_cl[i]*EC3S1J4U_17[i]
+cl_EC4S1J4U_17[] <- det*EC4S1J4W_17[i] - c*rec_cust*pc_cl[i]*EC4S1J4U_17[i]
+
+
+
+cl_EC1S2J4U_10[] <- det*EC1S2J4W_10[i] - c*rec_cust*pc_cl[i]*EC1S2J4U_10[i]
+cl_EC2S2J4U_10[] <- det*EC2S2J4W_10[i] - c*rec_cust*pc_cl[i]*EC2S2J4U_10[i]
+cl_EC3S2J4U_10[] <- det*EC3S2J4W_10[i] - c*rec_cust*pc_cl[i]*EC3S2J4U_10[i]
+cl_EC4S2J4U_10[] <- det*EC4S2J4W_10[i] - c*rec_cust*pc_cl[i]*EC4S2J4U_10[i]
+
+cl_EC1S2J4U_11[] <- det*EC1S2J4W_11[i] - c*rec_cust*pc_cl[i]*EC1S2J4U_11[i]
+cl_EC2S2J4U_11[] <- det*EC2S2J4W_11[i] - c*rec_cust*pc_cl[i]*EC2S2J4U_11[i]
+cl_EC3S2J4U_11[] <- det*EC3S2J4W_11[i] - c*rec_cust*pc_cl[i]*EC3S2J4U_11[i]
+cl_EC4S2J4U_11[] <- det*EC4S2J4W_11[i] - c*rec_cust*pc_cl[i]*EC4S2J4U_11[i]
+
+cl_EC1S2J4U_12[] <- det*EC1S2J4W_12[i] - c*rec_cust*pc_cl[i]*EC1S2J4U_12[i]
+cl_EC2S2J4U_12[] <- det*EC2S2J4W_12[i] - c*rec_cust*pc_cl[i]*EC2S2J4U_12[i]
+cl_EC3S2J4U_12[] <- det*EC3S2J4W_12[i] - c*rec_cust*pc_cl[i]*EC3S2J4U_12[i]
+cl_EC4S2J4U_12[] <- det*EC4S2J4W_12[i] - c*rec_cust*pc_cl[i]*EC4S2J4U_12[i]
+
+cl_EC1S2J4U_13[] <- det*EC1S2J4W_13[i] - c*rec_cust*pc_cl[i]*EC1S2J4U_13[i]
+cl_EC2S2J4U_13[] <- det*EC2S2J4W_13[i] - c*rec_cust*pc_cl[i]*EC2S2J4U_13[i]
+cl_EC3S2J4U_13[] <- det*EC3S2J4W_13[i] - c*rec_cust*pc_cl[i]*EC3S2J4U_13[i]
+cl_EC4S2J4U_13[] <- det*EC4S2J4W_13[i] - c*rec_cust*pc_cl[i]*EC4S2J4U_13[i]
+
+cl_EC1S2J4U_14[] <- det*EC1S2J4W_14[i] - c*rec_cust*pc_cl[i]*EC1S2J4U_14[i]
+cl_EC2S2J4U_14[] <- det*EC2S2J4W_14[i] - c*rec_cust*pc_cl[i]*EC2S2J4U_14[i]
+cl_EC3S2J4U_14[] <- det*EC3S2J4W_14[i] - c*rec_cust*pc_cl[i]*EC3S2J4U_14[i]
+cl_EC4S2J4U_14[] <- det*EC4S2J4W_14[i] - c*rec_cust*pc_cl[i]*EC4S2J4U_14[i]
+
+cl_EC1S2J4U_15[] <- det*EC1S2J4W_15[i] - c*rec_cust*pc_cl[i]*EC1S2J4U_15[i]
+cl_EC2S2J4U_15[] <- det*EC2S2J4W_15[i] - c*rec_cust*pc_cl[i]*EC2S2J4U_15[i]
+cl_EC3S2J4U_15[] <- det*EC3S2J4W_15[i] - c*rec_cust*pc_cl[i]*EC3S2J4U_15[i]
+cl_EC4S2J4U_15[] <- det*EC4S2J4W_15[i] - c*rec_cust*pc_cl[i]*EC4S2J4U_15[i]
+
+cl_EC1S2J4U_16[] <- det*EC1S2J4W_16[i] - c*rec_cust*pc_cl[i]*EC1S2J4U_16[i]
+cl_EC2S2J4U_16[] <- det*EC2S2J4W_16[i] - c*rec_cust*pc_cl[i]*EC2S2J4U_16[i]
+cl_EC3S2J4U_16[] <- det*EC3S2J4W_16[i] - c*rec_cust*pc_cl[i]*EC3S2J4U_16[i]
+cl_EC4S2J4U_16[] <- det*EC4S2J4W_16[i] - c*rec_cust*pc_cl[i]*EC4S2J4U_16[i]
+
+cl_EC1S2J4U_17[] <- det*EC1S2J4W_17[i] - c*rec_cust*pc_cl[i]*EC1S2J4U_17[i]
+cl_EC2S2J4U_17[] <- det*EC2S2J4W_17[i] - c*rec_cust*pc_cl[i]*EC2S2J4U_17[i]
+cl_EC3S2J4U_17[] <- det*EC3S2J4W_17[i] - c*rec_cust*pc_cl[i]*EC3S2J4U_17[i]
+cl_EC4S2J4U_17[] <- det*EC4S2J4W_17[i] - c*rec_cust*pc_cl[i]*EC4S2J4U_17[i]
+
+
+
+cl_EC1S1J5U_10[] <- det*EC1S1J5W_10[i] - c*rec_cust*pc_cl[i]*EC1S1J5U_10[i]
+cl_EC2S1J5U_10[] <- det*EC2S1J5W_10[i] - c*rec_cust*pc_cl[i]*EC2S1J5U_10[i]
+cl_EC3S1J5U_10[] <- det*EC3S1J5W_10[i] - c*rec_cust*pc_cl[i]*EC3S1J5U_10[i]
+cl_EC4S1J5U_10[] <- det*EC4S1J5W_10[i] - c*rec_cust*pc_cl[i]*EC4S1J5U_10[i]
+
+cl_EC1S1J5U_11[] <- det*EC1S1J5W_11[i] - c*rec_cust*pc_cl[i]*EC1S1J5U_11[i]
+cl_EC2S1J5U_11[] <- det*EC2S1J5W_11[i] - c*rec_cust*pc_cl[i]*EC2S1J5U_11[i]
+cl_EC3S1J5U_11[] <- det*EC3S1J5W_11[i] - c*rec_cust*pc_cl[i]*EC3S1J5U_11[i]
+cl_EC4S1J5U_11[] <- det*EC4S1J5W_11[i] - c*rec_cust*pc_cl[i]*EC4S1J5U_11[i]
+
+cl_EC1S1J5U_12[] <- det*EC1S1J5W_12[i] - c*rec_cust*pc_cl[i]*EC1S1J5U_12[i]
+cl_EC2S1J5U_12[] <- det*EC2S1J5W_12[i] - c*rec_cust*pc_cl[i]*EC2S1J5U_12[i]
+cl_EC3S1J5U_12[] <- det*EC3S1J5W_12[i] - c*rec_cust*pc_cl[i]*EC3S1J5U_12[i]
+cl_EC4S1J5U_12[] <- det*EC4S1J5W_12[i] - c*rec_cust*pc_cl[i]*EC4S1J5U_12[i]
+
+cl_EC1S1J5U_13[] <- det*EC1S1J5W_13[i] - c*rec_cust*pc_cl[i]*EC1S1J5U_13[i]
+cl_EC2S1J5U_13[] <- det*EC2S1J5W_13[i] - c*rec_cust*pc_cl[i]*EC2S1J5U_13[i]
+cl_EC3S1J5U_13[] <- det*EC3S1J5W_13[i] - c*rec_cust*pc_cl[i]*EC3S1J5U_13[i]
+cl_EC4S1J5U_13[] <- det*EC4S1J5W_13[i] - c*rec_cust*pc_cl[i]*EC4S1J5U_13[i]
+
+cl_EC1S1J5U_14[] <- det*EC1S1J5W_14[i] - c*rec_cust*pc_cl[i]*EC1S1J5U_14[i]
+cl_EC2S1J5U_14[] <- det*EC2S1J5W_14[i] - c*rec_cust*pc_cl[i]*EC2S1J5U_14[i]
+cl_EC3S1J5U_14[] <- det*EC3S1J5W_14[i] - c*rec_cust*pc_cl[i]*EC3S1J5U_14[i]
+cl_EC4S1J5U_14[] <- det*EC4S1J5W_14[i] - c*rec_cust*pc_cl[i]*EC4S1J5U_14[i]
+
+cl_EC1S1J5U_15[] <- det*EC1S1J5W_15[i] - c*rec_cust*pc_cl[i]*EC1S1J5U_15[i]
+cl_EC2S1J5U_15[] <- det*EC2S1J5W_15[i] - c*rec_cust*pc_cl[i]*EC2S1J5U_15[i]
+cl_EC3S1J5U_15[] <- det*EC3S1J5W_15[i] - c*rec_cust*pc_cl[i]*EC3S1J5U_15[i]
+cl_EC4S1J5U_15[] <- det*EC4S1J5W_15[i] - c*rec_cust*pc_cl[i]*EC4S1J5U_15[i]
+
+cl_EC1S1J5U_16[] <- det*EC1S1J5W_16[i] - c*rec_cust*pc_cl[i]*EC1S1J5U_16[i]
+cl_EC2S1J5U_16[] <- det*EC2S1J5W_16[i] - c*rec_cust*pc_cl[i]*EC2S1J5U_16[i]
+cl_EC3S1J5U_16[] <- det*EC3S1J5W_16[i] - c*rec_cust*pc_cl[i]*EC3S1J5U_16[i]
+cl_EC4S1J5U_16[] <- det*EC4S1J5W_16[i] - c*rec_cust*pc_cl[i]*EC4S1J5U_16[i]
+
+cl_EC1S1J5U_17[] <- det*EC1S1J5W_17[i] - c*rec_cust*pc_cl[i]*EC1S1J5U_17[i]
+cl_EC2S1J5U_17[] <- det*EC2S1J5W_17[i] - c*rec_cust*pc_cl[i]*EC2S1J5U_17[i]
+cl_EC3S1J5U_17[] <- det*EC3S1J5W_17[i] - c*rec_cust*pc_cl[i]*EC3S1J5U_17[i]
+cl_EC4S1J5U_17[] <- det*EC4S1J5W_17[i] - c*rec_cust*pc_cl[i]*EC4S1J5U_17[i]
+
+
+
+cl_EC1S2J5U_10[] <- det*EC1S2J5W_10[i] - c*rec_cust*pc_cl[i]*EC1S2J5U_10[i]
+cl_EC2S2J5U_10[] <- det*EC2S2J5W_10[i] - c*rec_cust*pc_cl[i]*EC2S2J5U_10[i]
+cl_EC3S2J5U_10[] <- det*EC3S2J5W_10[i] - c*rec_cust*pc_cl[i]*EC3S2J5U_10[i]
+cl_EC4S2J5U_10[] <- det*EC4S2J5W_10[i] - c*rec_cust*pc_cl[i]*EC4S2J5U_10[i]
+
+cl_EC1S2J5U_11[] <- det*EC1S2J5W_11[i] - c*rec_cust*pc_cl[i]*EC1S2J5U_11[i]
+cl_EC2S2J5U_11[] <- det*EC2S2J5W_11[i] - c*rec_cust*pc_cl[i]*EC2S2J5U_11[i]
+cl_EC3S2J5U_11[] <- det*EC3S2J5W_11[i] - c*rec_cust*pc_cl[i]*EC3S2J5U_11[i]
+cl_EC4S2J5U_11[] <- det*EC4S2J5W_11[i] - c*rec_cust*pc_cl[i]*EC4S2J5U_11[i]
+
+cl_EC1S2J5U_12[] <- det*EC1S2J5W_12[i] - c*rec_cust*pc_cl[i]*EC1S2J5U_12[i]
+cl_EC2S2J5U_12[] <- det*EC2S2J5W_12[i] - c*rec_cust*pc_cl[i]*EC2S2J5U_12[i]
+cl_EC3S2J5U_12[] <- det*EC3S2J5W_12[i] - c*rec_cust*pc_cl[i]*EC3S2J5U_12[i]
+cl_EC4S2J5U_12[] <- det*EC4S2J5W_12[i] - c*rec_cust*pc_cl[i]*EC4S2J5U_12[i]
+
+cl_EC1S2J5U_13[] <- det*EC1S2J5W_13[i] - c*rec_cust*pc_cl[i]*EC1S2J5U_13[i]
+cl_EC2S2J5U_13[] <- det*EC2S2J5W_13[i] - c*rec_cust*pc_cl[i]*EC2S2J5U_13[i]
+cl_EC3S2J5U_13[] <- det*EC3S2J5W_13[i] - c*rec_cust*pc_cl[i]*EC3S2J5U_13[i]
+cl_EC4S2J5U_13[] <- det*EC4S2J5W_13[i] - c*rec_cust*pc_cl[i]*EC4S2J5U_13[i]
+
+cl_EC1S2J5U_14[] <- det*EC1S2J5W_14[i] - c*rec_cust*pc_cl[i]*EC1S2J5U_14[i]
+cl_EC2S2J5U_14[] <- det*EC2S2J5W_14[i] - c*rec_cust*pc_cl[i]*EC2S2J5U_14[i]
+cl_EC3S2J5U_14[] <- det*EC3S2J5W_14[i] - c*rec_cust*pc_cl[i]*EC3S2J5U_14[i]
+cl_EC4S2J5U_14[] <- det*EC4S2J5W_14[i] - c*rec_cust*pc_cl[i]*EC4S2J5U_14[i]
+
+cl_EC1S2J5U_15[] <- det*EC1S2J5W_15[i] - c*rec_cust*pc_cl[i]*EC1S2J5U_15[i]
+cl_EC2S2J5U_15[] <- det*EC2S2J5W_15[i] - c*rec_cust*pc_cl[i]*EC2S2J5U_15[i]
+cl_EC3S2J5U_15[] <- det*EC3S2J5W_15[i] - c*rec_cust*pc_cl[i]*EC3S2J5U_15[i]
+cl_EC4S2J5U_15[] <- det*EC4S2J5W_15[i] - c*rec_cust*pc_cl[i]*EC4S2J5U_15[i]
+
+cl_EC1S2J5U_16[] <- det*EC1S2J5W_16[i] - c*rec_cust*pc_cl[i]*EC1S2J5U_16[i]
+cl_EC2S2J5U_16[] <- det*EC2S2J5W_16[i] - c*rec_cust*pc_cl[i]*EC2S2J5U_16[i]
+cl_EC3S2J5U_16[] <- det*EC3S2J5W_16[i] - c*rec_cust*pc_cl[i]*EC3S2J5U_16[i]
+cl_EC4S2J5U_16[] <- det*EC4S2J5W_16[i] - c*rec_cust*pc_cl[i]*EC4S2J5U_16[i]
+
+cl_EC1S2J5U_17[] <- det*EC1S2J5W_17[i] - c*rec_cust*pc_cl[i]*EC1S2J5U_17[i]
+cl_EC2S2J5U_17[] <- det*EC2S2J5W_17[i] - c*rec_cust*pc_cl[i]*EC2S2J5U_17[i]
+cl_EC3S2J5U_17[] <- det*EC3S2J5W_17[i] - c*rec_cust*pc_cl[i]*EC3S2J5U_17[i]
+cl_EC4S2J5U_17[] <- det*EC4S2J5W_17[i] - c*rec_cust*pc_cl[i]*EC4S2J5U_17[i]
+
+
+
+cl_EC1S1J1W_10[] <- c*rec_e[i]*EC1S1J1U_10[i]*sum(cl_mix_e_10[,i]) - des*EC1S1J1W_10[i]
+cl_EC2S1J1W_10[] <- c*rec_e[i]*EC2S1J1U_10[i]*sum(cl_mix_e_10[,i]) - des*EC2S1J1W_10[i]
+cl_EC3S1J1W_10[] <- c*rec_p[i]*EC3S1J1U_10[i]*sum(cl_mix_p_10[,i]) - des*EC3S1J1W_10[i]
+cl_EC4S1J1W_10[] <- c*rec_e[i]*EC4S1J1U_10[i]*sum(cl_mix_e_10[,i]) - des*EC4S1J1W_10[i]
+
+cl_EC1S1J1W_11[] <- c*rec_e[i]*EC1S1J1U_11[i]*sum(cl_mix_e_11[,i]) - des*EC1S1J1W_11[i]
+cl_EC2S1J1W_11[] <- c*rec_e[i]*EC2S1J1U_11[i]*sum(cl_mix_e_11[,i]) - des*EC2S1J1W_11[i]
+cl_EC3S1J1W_11[] <- c*rec_p[i]*EC3S1J1U_11[i]*sum(cl_mix_p_11[,i]) - des*EC3S1J1W_11[i]
+cl_EC4S1J1W_11[] <- c*rec_e[i]*EC4S1J1U_11[i]*sum(cl_mix_e_11[,i]) - des*EC4S1J1W_11[i]
+
+cl_EC1S1J1W_12[] <- c*rec_e[i]*EC1S1J1U_12[i]*sum(cl_mix_e_12[,i]) - des*EC1S1J1W_12[i]
+cl_EC2S1J1W_12[] <- c*rec_e[i]*EC2S1J1U_12[i]*sum(cl_mix_e_12[,i]) - des*EC2S1J1W_12[i]
+cl_EC3S1J1W_12[] <- c*rec_p[i]*EC3S1J1U_12[i]*sum(cl_mix_p_12[,i]) - des*EC3S1J1W_12[i]
+cl_EC4S1J1W_12[] <- c*rec_e[i]*EC4S1J1U_12[i]*sum(cl_mix_e_12[,i]) - des*EC4S1J1W_12[i]
+
+cl_EC1S1J1W_13[] <- c*rec_e[i]*EC1S1J1U_13[i]*sum(cl_mix_e_13[,i]) - des*EC1S1J1W_13[i]
+cl_EC2S1J1W_13[] <- c*rec_e[i]*EC2S1J1U_13[i]*sum(cl_mix_e_13[,i]) - des*EC2S1J1W_13[i]
+cl_EC3S1J1W_13[] <- c*rec_p[i]*EC3S1J1U_13[i]*sum(cl_mix_p_13[,i]) - des*EC3S1J1W_13[i]
+cl_EC4S1J1W_13[] <- c*rec_e[i]*EC4S1J1U_13[i]*sum(cl_mix_e_13[,i]) - des*EC4S1J1W_13[i]
+
+cl_EC1S1J1W_14[] <- c*rec_e[i]*EC1S1J1U_14[i]*sum(cl_mix_e_14[,i]) - des*EC1S1J1W_14[i]
+cl_EC2S1J1W_14[] <- c*rec_e[i]*EC2S1J1U_14[i]*sum(cl_mix_e_14[,i]) - des*EC2S1J1W_14[i]
+cl_EC3S1J1W_14[] <- c*rec_p[i]*EC3S1J1U_14[i]*sum(cl_mix_p_14[,i]) - des*EC3S1J1W_14[i]
+cl_EC4S1J1W_14[] <- c*rec_e[i]*EC4S1J1U_14[i]*sum(cl_mix_e_14[,i]) - des*EC4S1J1W_14[i]
+
+cl_EC1S1J1W_15[] <- c*rec_e[i]*EC1S1J1U_15[i]*sum(cl_mix_e_15[,i]) - des*EC1S1J1W_15[i]
+cl_EC2S1J1W_15[] <- c*rec_e[i]*EC2S1J1U_15[i]*sum(cl_mix_e_15[,i]) - des*EC2S1J1W_15[i]
+cl_EC3S1J1W_15[] <- c*rec_p[i]*EC3S1J1U_15[i]*sum(cl_mix_p_15[,i]) - des*EC3S1J1W_15[i]
+cl_EC4S1J1W_15[] <- c*rec_e[i]*EC4S1J1U_15[i]*sum(cl_mix_e_15[,i]) - des*EC4S1J1W_15[i]
+
+cl_EC1S1J1W_16[] <- c*rec_e[i]*EC1S1J1U_16[i]*sum(cl_mix_e_16[,i]) - des*EC1S1J1W_16[i]
+cl_EC2S1J1W_16[] <- c*rec_e[i]*EC2S1J1U_16[i]*sum(cl_mix_e_16[,i]) - des*EC2S1J1W_16[i]
+cl_EC3S1J1W_16[] <- c*rec_p[i]*EC3S1J1U_16[i]*sum(cl_mix_p_16[,i]) - des*EC3S1J1W_16[i]
+cl_EC4S1J1W_16[] <- c*rec_e[i]*EC4S1J1U_16[i]*sum(cl_mix_e_16[,i]) - des*EC4S1J1W_16[i]
+
+cl_EC1S1J1W_17[] <- c*rec_e[i]*EC1S1J1U_17[i]*sum(cl_mix_e_17[,i]) - des*EC1S1J1W_17[i]
+cl_EC2S1J1W_17[] <- c*rec_e[i]*EC2S1J1U_17[i]*sum(cl_mix_e_17[,i]) - des*EC2S1J1W_17[i]
+cl_EC3S1J1W_17[] <- c*rec_p[i]*EC3S1J1U_17[i]*sum(cl_mix_p_17[,i]) - des*EC3S1J1W_17[i]
+cl_EC4S1J1W_17[] <- c*rec_e[i]*EC4S1J1U_17[i]*sum(cl_mix_e_17[,i]) - des*EC4S1J1W_17[i]
+
+
+
+cl_EC1S2J1W_10[] <- c*rec_p[i]*EC1S2J1U_10[i]*sum(cl_mix_p_10[,i]) - des*EC1S2J1W_10[i]
+cl_EC2S2J1W_10[] <- c*rec_p[i]*EC2S2J1U_10[i]*sum(cl_mix_p_10[,i]) - des*EC2S2J1W_10[i]
+cl_EC3S2J1W_10[] <- c*rec_p[i]*EC3S2J1U_10[i]*sum(cl_mix_p_10[,i]) - des*EC3S2J1W_10[i]
+cl_EC4S2J1W_10[] <- c*rec_p[i]*EC4S2J1U_10[i]*sum(cl_mix_p_10[,i]) - des*EC4S2J1W_10[i]
+
+cl_EC1S2J1W_11[] <- c*rec_p[i]*EC1S2J1U_11[i]*sum(cl_mix_p_11[,i]) - des*EC1S2J1W_11[i]
+cl_EC2S2J1W_11[] <- c*rec_p[i]*EC2S2J1U_11[i]*sum(cl_mix_p_11[,i]) - des*EC2S2J1W_11[i]
+cl_EC3S2J1W_11[] <- c*rec_p[i]*EC3S2J1U_11[i]*sum(cl_mix_p_11[,i]) - des*EC3S2J1W_11[i]
+cl_EC4S2J1W_11[] <- c*rec_p[i]*EC4S2J1U_11[i]*sum(cl_mix_p_11[,i]) - des*EC4S2J1W_11[i]
+
+cl_EC1S2J1W_12[] <- c*rec_p[i]*EC1S2J1U_12[i]*sum(cl_mix_p_12[,i]) - des*EC1S2J1W_12[i]
+cl_EC2S2J1W_12[] <- c*rec_p[i]*EC2S2J1U_12[i]*sum(cl_mix_p_12[,i]) - des*EC2S2J1W_12[i]
+cl_EC3S2J1W_12[] <- c*rec_p[i]*EC3S2J1U_12[i]*sum(cl_mix_p_12[,i]) - des*EC3S2J1W_12[i]
+cl_EC4S2J1W_12[] <- c*rec_p[i]*EC4S2J1U_12[i]*sum(cl_mix_p_12[,i]) - des*EC4S2J1W_12[i]
+
+cl_EC1S2J1W_13[] <- c*rec_p[i]*EC1S2J1U_13[i]*sum(cl_mix_p_13[,i]) - des*EC1S2J1W_13[i]
+cl_EC2S2J1W_13[] <- c*rec_p[i]*EC2S2J1U_13[i]*sum(cl_mix_p_13[,i]) - des*EC2S2J1W_13[i]
+cl_EC3S2J1W_13[] <- c*rec_p[i]*EC3S2J1U_13[i]*sum(cl_mix_p_13[,i]) - des*EC3S2J1W_13[i]
+cl_EC4S2J1W_13[] <- c*rec_p[i]*EC4S2J1U_13[i]*sum(cl_mix_p_13[,i]) - des*EC4S2J1W_13[i]
+
+cl_EC1S2J1W_14[] <- c*rec_p[i]*EC1S2J1U_14[i]*sum(cl_mix_p_14[,i]) - des*EC1S2J1W_14[i]
+cl_EC2S2J1W_14[] <- c*rec_p[i]*EC2S2J1U_14[i]*sum(cl_mix_p_14[,i]) - des*EC2S2J1W_14[i]
+cl_EC3S2J1W_14[] <- c*rec_p[i]*EC3S2J1U_14[i]*sum(cl_mix_p_14[,i]) - des*EC3S2J1W_14[i]
+cl_EC4S2J1W_14[] <- c*rec_p[i]*EC4S2J1U_14[i]*sum(cl_mix_p_14[,i]) - des*EC4S2J1W_14[i]
+
+cl_EC1S2J1W_15[] <- c*rec_p[i]*EC1S2J1U_15[i]*sum(cl_mix_p_15[,i]) - des*EC1S2J1W_15[i]
+cl_EC2S2J1W_15[] <- c*rec_p[i]*EC2S2J1U_15[i]*sum(cl_mix_p_15[,i]) - des*EC2S2J1W_15[i]
+cl_EC3S2J1W_15[] <- c*rec_p[i]*EC3S2J1U_15[i]*sum(cl_mix_p_15[,i]) - des*EC3S2J1W_15[i]
+cl_EC4S2J1W_15[] <- c*rec_p[i]*EC4S2J1U_15[i]*sum(cl_mix_p_15[,i]) - des*EC4S2J1W_15[i]
+
+cl_EC1S2J1W_16[] <- c*rec_e[i]*EC1S2J1U_16[i]*sum(cl_mix_e_16[,i]) - des*EC1S2J1W_16[i]
+cl_EC2S2J1W_16[] <- c*rec_e[i]*EC2S2J1U_16[i]*sum(cl_mix_e_16[,i]) - des*EC2S2J1W_16[i]
+cl_EC3S2J1W_16[] <- c*rec_p[i]*EC3S2J1U_16[i]*sum(cl_mix_p_16[,i]) - des*EC3S2J1W_16[i]
+cl_EC4S2J1W_16[] <- c*rec_e[i]*EC4S2J1U_16[i]*sum(cl_mix_e_16[,i]) - des*EC4S2J1W_16[i]
+
+cl_EC1S2J1W_17[] <- c*rec_e[i]*EC1S2J1U_17[i]*sum(cl_mix_e_17[,i]) - des*EC1S2J1W_17[i]
+cl_EC2S2J1W_17[] <- c*rec_e[i]*EC2S2J1U_17[i]*sum(cl_mix_e_17[,i]) - des*EC2S2J1W_17[i]
+cl_EC3S2J1W_17[] <- c*rec_p[i]*EC3S2J1U_17[i]*sum(cl_mix_p_17[,i]) - des*EC3S2J1W_17[i]
+cl_EC4S2J1W_17[] <- c*rec_e[i]*EC4S2J1U_17[i]*sum(cl_mix_e_17[,i]) - des*EC4S2J1W_17[i]
+
+
+
+cl_EC1S1J2W_10[] <- c*rec_e[i]*EC1S1J2U_10[i]*sum(cl_mix_e_10[,i]) - des*EC1S1J2W_10[i]
+cl_EC2S1J2W_10[] <- c*rec_e[i]*EC2S1J2U_10[i]*sum(cl_mix_e_10[,i]) - des*EC2S1J2W_10[i]
+cl_EC3S1J2W_10[] <- c*rec_p[i]*EC3S1J2U_10[i]*sum(cl_mix_p_10[,i]) - des*EC3S1J2W_10[i]
+cl_EC4S1J2W_10[] <- c*rec_e[i]*EC4S1J2U_10[i]*sum(cl_mix_e_10[,i]) - des*EC4S1J2W_10[i]
+
+cl_EC1S1J2W_11[] <- c*rec_e[i]*EC1S1J2U_11[i]*sum(cl_mix_e_11[,i]) - des*EC1S1J2W_11[i]
+cl_EC2S1J2W_11[] <- c*rec_e[i]*EC2S1J2U_11[i]*sum(cl_mix_e_11[,i]) - des*EC2S1J2W_11[i]
+cl_EC3S1J2W_11[] <- c*rec_p[i]*EC3S1J2U_11[i]*sum(cl_mix_p_11[,i]) - des*EC3S1J2W_11[i]
+cl_EC4S1J2W_11[] <- c*rec_e[i]*EC4S1J2U_11[i]*sum(cl_mix_e_11[,i]) - des*EC4S1J2W_11[i]
+
+cl_EC1S1J2W_12[] <- c*rec_e[i]*EC1S1J2U_12[i]*sum(cl_mix_e_12[,i]) - des*EC1S1J2W_12[i]
+cl_EC2S1J2W_12[] <- c*rec_e[i]*EC2S1J2U_12[i]*sum(cl_mix_e_12[,i]) - des*EC2S1J2W_12[i]
+cl_EC3S1J2W_12[] <- c*rec_p[i]*EC3S1J2U_12[i]*sum(cl_mix_p_12[,i]) - des*EC3S1J2W_12[i]
+cl_EC4S1J2W_12[] <- c*rec_e[i]*EC4S1J2U_12[i]*sum(cl_mix_e_12[,i]) - des*EC4S1J2W_12[i]
+
+cl_EC1S1J2W_13[] <- c*rec_e[i]*EC1S1J2U_13[i]*sum(cl_mix_e_13[,i]) - des*EC1S1J2W_13[i]
+cl_EC2S1J2W_13[] <- c*rec_e[i]*EC2S1J2U_13[i]*sum(cl_mix_e_13[,i]) - des*EC2S1J2W_13[i]
+cl_EC3S1J2W_13[] <- c*rec_p[i]*EC3S1J2U_13[i]*sum(cl_mix_p_13[,i]) - des*EC3S1J2W_13[i]
+cl_EC4S1J2W_13[] <- c*rec_e[i]*EC4S1J2U_13[i]*sum(cl_mix_e_13[,i]) - des*EC4S1J2W_13[i]
+
+cl_EC1S1J2W_14[] <- c*rec_e[i]*EC1S1J2U_14[i]*sum(cl_mix_e_14[,i]) - des*EC1S1J2W_14[i]
+cl_EC2S1J2W_14[] <- c*rec_e[i]*EC2S1J2U_14[i]*sum(cl_mix_e_14[,i]) - des*EC2S1J2W_14[i]
+cl_EC3S1J2W_14[] <- c*rec_p[i]*EC3S1J2U_14[i]*sum(cl_mix_p_14[,i]) - des*EC3S1J2W_14[i]
+cl_EC4S1J2W_14[] <- c*rec_e[i]*EC4S1J2U_14[i]*sum(cl_mix_e_14[,i]) - des*EC4S1J2W_14[i]
+
+cl_EC1S1J2W_15[] <- c*rec_e[i]*EC1S1J2U_15[i]*sum(cl_mix_e_15[,i]) - des*EC1S1J2W_15[i]
+cl_EC2S1J2W_15[] <- c*rec_e[i]*EC2S1J2U_15[i]*sum(cl_mix_e_15[,i]) - des*EC2S1J2W_15[i]
+cl_EC3S1J2W_15[] <- c*rec_p[i]*EC3S1J2U_15[i]*sum(cl_mix_p_15[,i]) - des*EC3S1J2W_15[i]
+cl_EC4S1J2W_15[] <- c*rec_e[i]*EC4S1J2U_15[i]*sum(cl_mix_e_15[,i]) - des*EC4S1J2W_15[i]
+
+cl_EC1S1J2W_16[] <- c*rec_e[i]*EC1S1J2U_16[i]*sum(cl_mix_e_16[,i]) - des*EC1S1J2W_16[i]
+cl_EC2S1J2W_16[] <- c*rec_e[i]*EC2S1J2U_16[i]*sum(cl_mix_e_16[,i]) - des*EC2S1J2W_16[i]
+cl_EC3S1J2W_16[] <- c*rec_p[i]*EC3S1J2U_16[i]*sum(cl_mix_p_16[,i]) - des*EC3S1J2W_16[i]
+cl_EC4S1J2W_16[] <- c*rec_e[i]*EC4S1J2U_16[i]*sum(cl_mix_e_16[,i]) - des*EC4S1J2W_16[i]
+
+cl_EC1S1J2W_17[] <- c*rec_e[i]*EC1S1J2U_17[i]*sum(cl_mix_e_17[,i]) - des*EC1S1J2W_17[i]
+cl_EC2S1J2W_17[] <- c*rec_e[i]*EC2S1J2U_17[i]*sum(cl_mix_e_17[,i]) - des*EC2S1J2W_17[i]
+cl_EC3S1J2W_17[] <- c*rec_p[i]*EC3S1J2U_17[i]*sum(cl_mix_p_17[,i]) - des*EC3S1J2W_17[i]
+cl_EC4S1J2W_17[] <- c*rec_e[i]*EC4S1J2U_17[i]*sum(cl_mix_e_17[,i]) - des*EC4S1J2W_17[i]
+
+
+
+cl_EC1S2J2W_10[] <- c*rec_p[i]*EC1S2J2U_10[i]*sum(cl_mix_p_10[,i]) - des*EC1S2J2W_10[i]
+cl_EC2S2J2W_10[] <- c*rec_p[i]*EC2S2J2U_10[i]*sum(cl_mix_p_10[,i]) - des*EC2S2J2W_10[i]
+cl_EC3S2J2W_10[] <- c*rec_p[i]*EC3S2J2U_10[i]*sum(cl_mix_p_10[,i]) - des*EC3S2J2W_10[i]
+cl_EC4S2J2W_10[] <- c*rec_p[i]*EC4S2J2U_10[i]*sum(cl_mix_p_10[,i]) - des*EC4S2J2W_10[i]
+
+cl_EC1S2J2W_11[] <- c*rec_p[i]*EC1S2J2U_11[i]*sum(cl_mix_p_11[,i]) - des*EC1S2J2W_11[i]
+cl_EC2S2J2W_11[] <- c*rec_p[i]*EC2S2J2U_11[i]*sum(cl_mix_p_11[,i]) - des*EC2S2J2W_11[i]
+cl_EC3S2J2W_11[] <- c*rec_p[i]*EC3S2J2U_11[i]*sum(cl_mix_p_11[,i]) - des*EC3S2J2W_11[i]
+cl_EC4S2J2W_11[] <- c*rec_p[i]*EC4S2J2U_11[i]*sum(cl_mix_p_11[,i]) - des*EC4S2J2W_11[i]
+
+cl_EC1S2J2W_12[] <- c*rec_p[i]*EC1S2J2U_12[i]*sum(cl_mix_p_12[,i]) - des*EC1S2J2W_12[i]
+cl_EC2S2J2W_12[] <- c*rec_p[i]*EC2S2J2U_12[i]*sum(cl_mix_p_12[,i]) - des*EC2S2J2W_12[i]
+cl_EC3S2J2W_12[] <- c*rec_p[i]*EC3S2J2U_12[i]*sum(cl_mix_p_12[,i]) - des*EC3S2J2W_12[i]
+cl_EC4S2J2W_12[] <- c*rec_p[i]*EC4S2J2U_12[i]*sum(cl_mix_p_12[,i]) - des*EC4S2J2W_12[i]
+
+cl_EC1S2J2W_13[] <- c*rec_p[i]*EC1S2J2U_13[i]*sum(cl_mix_p_13[,i]) - des*EC1S2J2W_13[i]
+cl_EC2S2J2W_13[] <- c*rec_p[i]*EC2S2J2U_13[i]*sum(cl_mix_p_13[,i]) - des*EC2S2J2W_13[i]
+cl_EC3S2J2W_13[] <- c*rec_p[i]*EC3S2J2U_13[i]*sum(cl_mix_p_13[,i]) - des*EC3S2J2W_13[i]
+cl_EC4S2J2W_13[] <- c*rec_p[i]*EC4S2J2U_13[i]*sum(cl_mix_p_13[,i]) - des*EC4S2J2W_13[i]
+
+cl_EC1S2J2W_14[] <- c*rec_p[i]*EC1S2J2U_14[i]*sum(cl_mix_p_14[,i]) - des*EC1S2J2W_14[i]
+cl_EC2S2J2W_14[] <- c*rec_p[i]*EC2S2J2U_14[i]*sum(cl_mix_p_14[,i]) - des*EC2S2J2W_14[i]
+cl_EC3S2J2W_14[] <- c*rec_p[i]*EC3S2J2U_14[i]*sum(cl_mix_p_14[,i]) - des*EC3S2J2W_14[i]
+cl_EC4S2J2W_14[] <- c*rec_p[i]*EC4S2J2U_14[i]*sum(cl_mix_p_14[,i]) - des*EC4S2J2W_14[i]
+
+cl_EC1S2J2W_15[] <- c*rec_p[i]*EC1S2J2U_15[i]*sum(cl_mix_p_15[,i]) - des*EC1S2J2W_15[i]
+cl_EC2S2J2W_15[] <- c*rec_p[i]*EC2S2J2U_15[i]*sum(cl_mix_p_15[,i]) - des*EC2S2J2W_15[i]
+cl_EC3S2J2W_15[] <- c*rec_p[i]*EC3S2J2U_15[i]*sum(cl_mix_p_15[,i]) - des*EC3S2J2W_15[i]
+cl_EC4S2J2W_15[] <- c*rec_p[i]*EC4S2J2U_15[i]*sum(cl_mix_p_15[,i]) - des*EC4S2J2W_15[i]
+
+cl_EC1S2J2W_16[] <- c*rec_e[i]*EC1S2J2U_16[i]*sum(cl_mix_e_16[,i]) - des*EC1S2J2W_16[i]
+cl_EC2S2J2W_16[] <- c*rec_e[i]*EC2S2J2U_16[i]*sum(cl_mix_e_16[,i]) - des*EC2S2J2W_16[i]
+cl_EC3S2J2W_16[] <- c*rec_p[i]*EC3S2J2U_16[i]*sum(cl_mix_p_16[,i]) - des*EC3S2J2W_16[i]
+cl_EC4S2J2W_16[] <- c*rec_e[i]*EC4S2J2U_16[i]*sum(cl_mix_e_16[,i]) - des*EC4S2J2W_16[i]
+
+cl_EC1S2J2W_17[] <- c*rec_e[i]*EC1S2J2U_17[i]*sum(cl_mix_e_17[,i]) - des*EC1S2J2W_17[i]
+cl_EC2S2J2W_17[] <- c*rec_e[i]*EC2S2J2U_17[i]*sum(cl_mix_e_17[,i]) - des*EC2S2J2W_17[i]
+cl_EC3S2J2W_17[] <- c*rec_p[i]*EC3S2J2U_17[i]*sum(cl_mix_p_17[,i]) - des*EC3S2J2W_17[i]
+cl_EC4S2J2W_17[] <- c*rec_e[i]*EC4S2J2U_17[i]*sum(cl_mix_e_17[,i]) - des*EC4S2J2W_17[i]
+
+
+
+cl_EC1S1J3W_10[] <- c*rec_e[i]*EC1S1J3U_10[i]*sum(cl_mix_e_10[,i]) - des*EC1S1J3W_10[i]
+cl_EC2S1J3W_10[] <- c*rec_e[i]*EC2S1J3U_10[i]*sum(cl_mix_e_10[,i]) - des*EC2S1J3W_10[i]
+cl_EC3S1J3W_10[] <- c*rec_p[i]*EC3S1J3U_10[i]*sum(cl_mix_p_10[,i]) - des*EC3S1J3W_10[i]
+cl_EC4S1J3W_10[] <- c*rec_e[i]*EC4S1J3U_10[i]*sum(cl_mix_e_10[,i]) - des*EC4S1J3W_10[i]
+
+cl_EC1S1J3W_11[] <- c*rec_e[i]*EC1S1J3U_11[i]*sum(cl_mix_e_11[,i]) - des*EC1S1J3W_11[i]
+cl_EC2S1J3W_11[] <- c*rec_e[i]*EC2S1J3U_11[i]*sum(cl_mix_e_11[,i]) - des*EC2S1J3W_11[i]
+cl_EC3S1J3W_11[] <- c*rec_p[i]*EC3S1J3U_11[i]*sum(cl_mix_p_11[,i]) - des*EC3S1J3W_11[i]
+cl_EC4S1J3W_11[] <- c*rec_e[i]*EC4S1J3U_11[i]*sum(cl_mix_e_11[,i]) - des*EC4S1J3W_11[i]
+
+cl_EC1S1J3W_12[] <- c*rec_e[i]*EC1S1J3U_12[i]*sum(cl_mix_e_12[,i]) - des*EC1S1J3W_12[i]
+cl_EC2S1J3W_12[] <- c*rec_e[i]*EC2S1J3U_12[i]*sum(cl_mix_e_12[,i]) - des*EC2S1J3W_12[i]
+cl_EC3S1J3W_12[] <- c*rec_p[i]*EC3S1J3U_12[i]*sum(cl_mix_p_12[,i]) - des*EC3S1J3W_12[i]
+cl_EC4S1J3W_12[] <- c*rec_e[i]*EC4S1J3U_12[i]*sum(cl_mix_e_12[,i]) - des*EC4S1J3W_12[i]
+
+cl_EC1S1J3W_13[] <- c*rec_e[i]*EC1S1J3U_13[i]*sum(cl_mix_e_13[,i]) - des*EC1S1J3W_13[i]
+cl_EC2S1J3W_13[] <- c*rec_e[i]*EC2S1J3U_13[i]*sum(cl_mix_e_13[,i]) - des*EC2S1J3W_13[i]
+cl_EC3S1J3W_13[] <- c*rec_p[i]*EC3S1J3U_13[i]*sum(cl_mix_p_13[,i]) - des*EC3S1J3W_13[i]
+cl_EC4S1J3W_13[] <- c*rec_e[i]*EC4S1J3U_13[i]*sum(cl_mix_e_13[,i]) - des*EC4S1J3W_13[i]
+
+cl_EC1S1J3W_14[] <- c*rec_e[i]*EC1S1J3U_14[i]*sum(cl_mix_e_14[,i]) - des*EC1S1J3W_14[i]
+cl_EC2S1J3W_14[] <- c*rec_e[i]*EC2S1J3U_14[i]*sum(cl_mix_e_14[,i]) - des*EC2S1J3W_14[i]
+cl_EC3S1J3W_14[] <- c*rec_p[i]*EC3S1J3U_14[i]*sum(cl_mix_p_14[,i]) - des*EC3S1J3W_14[i]
+cl_EC4S1J3W_14[] <- c*rec_e[i]*EC4S1J3U_14[i]*sum(cl_mix_e_14[,i]) - des*EC4S1J3W_14[i]
+
+cl_EC1S1J3W_15[] <- c*rec_e[i]*EC1S1J3U_15[i]*sum(cl_mix_e_15[,i]) - des*EC1S1J3W_15[i]
+cl_EC2S1J3W_15[] <- c*rec_e[i]*EC2S1J3U_15[i]*sum(cl_mix_e_15[,i]) - des*EC2S1J3W_15[i]
+cl_EC3S1J3W_15[] <- c*rec_p[i]*EC3S1J3U_15[i]*sum(cl_mix_p_15[,i]) - des*EC3S1J3W_15[i]
+cl_EC4S1J3W_15[] <- c*rec_e[i]*EC4S1J3U_15[i]*sum(cl_mix_e_15[,i]) - des*EC4S1J3W_15[i]
+
+cl_EC1S1J3W_16[] <- c*rec_e[i]*EC1S1J3U_16[i]*sum(cl_mix_e_16[,i]) - des*EC1S1J3W_16[i]
+cl_EC2S1J3W_16[] <- c*rec_e[i]*EC2S1J3U_16[i]*sum(cl_mix_e_16[,i]) - des*EC2S1J3W_16[i]
+cl_EC3S1J3W_16[] <- c*rec_p[i]*EC3S1J3U_16[i]*sum(cl_mix_p_16[,i]) - des*EC3S1J3W_16[i]
+cl_EC4S1J3W_16[] <- c*rec_e[i]*EC4S1J3U_16[i]*sum(cl_mix_e_16[,i]) - des*EC4S1J3W_16[i]
+
+cl_EC1S1J3W_17[] <- c*rec_e[i]*EC1S1J3U_17[i]*sum(cl_mix_e_17[,i]) - des*EC1S1J3W_17[i]
+cl_EC2S1J3W_17[] <- c*rec_e[i]*EC2S1J3U_17[i]*sum(cl_mix_e_17[,i]) - des*EC2S1J3W_17[i]
+cl_EC3S1J3W_17[] <- c*rec_p[i]*EC3S1J3U_17[i]*sum(cl_mix_p_17[,i]) - des*EC3S1J3W_17[i]
+cl_EC4S1J3W_17[] <- c*rec_e[i]*EC4S1J3U_17[i]*sum(cl_mix_e_17[,i]) - des*EC4S1J3W_17[i]
+
+
+
+cl_EC1S2J3W_10[] <- c*rec_p[i]*EC1S2J3U_10[i]*sum(cl_mix_p_10[,i]) - des*EC1S2J3W_10[i]
+cl_EC2S2J3W_10[] <- c*rec_p[i]*EC2S2J3U_10[i]*sum(cl_mix_p_10[,i]) - des*EC2S2J3W_10[i]
+cl_EC3S2J3W_10[] <- c*rec_p[i]*EC3S2J3U_10[i]*sum(cl_mix_p_10[,i]) - des*EC3S2J3W_10[i]
+cl_EC4S2J3W_10[] <- c*rec_p[i]*EC4S2J3U_10[i]*sum(cl_mix_p_10[,i]) - des*EC4S2J3W_10[i]
+
+cl_EC1S2J3W_11[] <- c*rec_p[i]*EC1S2J3U_11[i]*sum(cl_mix_p_11[,i]) - des*EC1S2J3W_11[i]
+cl_EC2S2J3W_11[] <- c*rec_p[i]*EC2S2J3U_11[i]*sum(cl_mix_p_11[,i]) - des*EC2S2J3W_11[i]
+cl_EC3S2J3W_11[] <- c*rec_p[i]*EC3S2J3U_11[i]*sum(cl_mix_p_11[,i]) - des*EC3S2J3W_11[i]
+cl_EC4S2J3W_11[] <- c*rec_p[i]*EC4S2J3U_11[i]*sum(cl_mix_p_11[,i]) - des*EC4S2J3W_11[i]
+
+cl_EC1S2J3W_12[] <- c*rec_p[i]*EC1S2J3U_12[i]*sum(cl_mix_p_12[,i]) - des*EC1S2J3W_12[i]
+cl_EC2S2J3W_12[] <- c*rec_p[i]*EC2S2J3U_12[i]*sum(cl_mix_p_12[,i]) - des*EC2S2J3W_12[i]
+cl_EC3S2J3W_12[] <- c*rec_p[i]*EC3S2J3U_12[i]*sum(cl_mix_p_12[,i]) - des*EC3S2J3W_12[i]
+cl_EC4S2J3W_12[] <- c*rec_p[i]*EC4S2J3U_12[i]*sum(cl_mix_p_12[,i]) - des*EC4S2J3W_12[i]
+
+cl_EC1S2J3W_13[] <- c*rec_p[i]*EC1S2J3U_13[i]*sum(cl_mix_p_13[,i]) - des*EC1S2J3W_13[i]
+cl_EC2S2J3W_13[] <- c*rec_p[i]*EC2S2J3U_13[i]*sum(cl_mix_p_13[,i]) - des*EC2S2J3W_13[i]
+cl_EC3S2J3W_13[] <- c*rec_p[i]*EC3S2J3U_13[i]*sum(cl_mix_p_13[,i]) - des*EC3S2J3W_13[i]
+cl_EC4S2J3W_13[] <- c*rec_p[i]*EC4S2J3U_13[i]*sum(cl_mix_p_13[,i]) - des*EC4S2J3W_13[i]
+
+cl_EC1S2J3W_14[] <- c*rec_p[i]*EC1S2J3U_14[i]*sum(cl_mix_p_14[,i]) - des*EC1S2J3W_14[i]
+cl_EC2S2J3W_14[] <- c*rec_p[i]*EC2S2J3U_14[i]*sum(cl_mix_p_14[,i]) - des*EC2S2J3W_14[i]
+cl_EC3S2J3W_14[] <- c*rec_p[i]*EC3S2J3U_14[i]*sum(cl_mix_p_14[,i]) - des*EC3S2J3W_14[i]
+cl_EC4S2J3W_14[] <- c*rec_p[i]*EC4S2J3U_14[i]*sum(cl_mix_p_14[,i]) - des*EC4S2J3W_14[i]
+
+cl_EC1S2J3W_15[] <- c*rec_p[i]*EC1S2J3U_15[i]*sum(cl_mix_p_15[,i]) - des*EC1S2J3W_15[i]
+cl_EC2S2J3W_15[] <- c*rec_p[i]*EC2S2J3U_15[i]*sum(cl_mix_p_15[,i]) - des*EC2S2J3W_15[i]
+cl_EC3S2J3W_15[] <- c*rec_p[i]*EC3S2J3U_15[i]*sum(cl_mix_p_15[,i]) - des*EC3S2J3W_15[i]
+cl_EC4S2J3W_15[] <- c*rec_p[i]*EC4S2J3U_15[i]*sum(cl_mix_p_15[,i]) - des*EC4S2J3W_15[i]
+
+cl_EC1S2J3W_16[] <- c*rec_e[i]*EC1S2J3U_16[i]*sum(cl_mix_e_16[,i]) - des*EC1S2J3W_16[i]
+cl_EC2S2J3W_16[] <- c*rec_e[i]*EC2S2J3U_16[i]*sum(cl_mix_e_16[,i]) - des*EC2S2J3W_16[i]
+cl_EC3S2J3W_16[] <- c*rec_p[i]*EC3S2J3U_16[i]*sum(cl_mix_p_16[,i]) - des*EC3S2J3W_16[i]
+cl_EC4S2J3W_16[] <- c*rec_e[i]*EC4S2J3U_16[i]*sum(cl_mix_e_16[,i]) - des*EC4S2J3W_16[i]
+
+cl_EC1S2J3W_17[] <- c*rec_e[i]*EC1S2J3U_17[i]*sum(cl_mix_e_17[,i]) - des*EC1S2J3W_17[i]
+cl_EC2S2J3W_17[] <- c*rec_e[i]*EC2S2J3U_17[i]*sum(cl_mix_e_17[,i]) - des*EC2S2J3W_17[i]
+cl_EC3S2J3W_17[] <- c*rec_p[i]*EC3S2J3U_17[i]*sum(cl_mix_p_17[,i]) - des*EC3S2J3W_17[i]
+cl_EC4S2J3W_17[] <- c*rec_e[i]*EC4S2J3U_17[i]*sum(cl_mix_e_17[,i]) - des*EC4S2J3W_17[i]
+
+
+
+cl_EC1S1J4W_10[] <- c*rec_cust*pc_cl[i]*EC1S1J4U_10[i] - det*EC1S1J4W_10[i]
+cl_EC2S1J4W_10[] <- c*rec_cust*pc_cl[i]*EC2S1J4U_10[i] - det*EC2S1J4W_10[i]
+cl_EC3S1J4W_10[] <- c*rec_cust*pc_cl[i]*EC3S1J4U_10[i] - det*EC3S1J4W_10[i]
+cl_EC4S1J4W_10[] <- c*rec_cust*pc_cl[i]*EC4S1J4U_10[i] - det*EC4S1J4W_10[i]
+
+cl_EC1S1J4W_11[] <- c*rec_cust*pc_cl[i]*EC1S1J4U_11[i] - det*EC1S1J4W_11[i]
+cl_EC2S1J4W_11[] <- c*rec_cust*pc_cl[i]*EC2S1J4U_11[i] - det*EC2S1J4W_11[i]
+cl_EC3S1J4W_11[] <- c*rec_cust*pc_cl[i]*EC3S1J4U_11[i] - det*EC3S1J4W_11[i]
+cl_EC4S1J4W_11[] <- c*rec_cust*pc_cl[i]*EC4S1J4U_11[i] - det*EC4S1J4W_11[i]
+
+cl_EC1S1J4W_12[] <- c*rec_cust*pc_cl[i]*EC1S1J4U_12[i] - det*EC1S1J4W_12[i]
+cl_EC2S1J4W_12[] <- c*rec_cust*pc_cl[i]*EC2S1J4U_12[i] - det*EC2S1J4W_12[i]
+cl_EC3S1J4W_12[] <- c*rec_cust*pc_cl[i]*EC3S1J4U_12[i] - det*EC3S1J4W_12[i]
+cl_EC4S1J4W_12[] <- c*rec_cust*pc_cl[i]*EC4S1J4U_12[i] - det*EC4S1J4W_12[i]
+
+cl_EC1S1J4W_13[] <- c*rec_cust*pc_cl[i]*EC1S1J4U_13[i] - det*EC1S1J4W_13[i]
+cl_EC2S1J4W_13[] <- c*rec_cust*pc_cl[i]*EC2S1J4U_13[i] - det*EC2S1J4W_13[i]
+cl_EC3S1J4W_13[] <- c*rec_cust*pc_cl[i]*EC3S1J4U_13[i] - det*EC3S1J4W_13[i]
+cl_EC4S1J4W_13[] <- c*rec_cust*pc_cl[i]*EC4S1J4U_13[i] - det*EC4S1J4W_13[i]
+
+cl_EC1S1J4W_14[] <- c*rec_cust*pc_cl[i]*EC1S1J4U_14[i] - det*EC1S1J4W_14[i]
+cl_EC2S1J4W_14[] <- c*rec_cust*pc_cl[i]*EC2S1J4U_14[i] - det*EC2S1J4W_14[i]
+cl_EC3S1J4W_14[] <- c*rec_cust*pc_cl[i]*EC3S1J4U_14[i] - det*EC3S1J4W_14[i]
+cl_EC4S1J4W_14[] <- c*rec_cust*pc_cl[i]*EC4S1J4U_14[i] - det*EC4S1J4W_14[i]
+
+cl_EC1S1J4W_15[] <- c*rec_cust*pc_cl[i]*EC1S1J4U_15[i] - det*EC1S1J4W_15[i]
+cl_EC2S1J4W_15[] <- c*rec_cust*pc_cl[i]*EC2S1J4U_15[i] - det*EC2S1J4W_15[i]
+cl_EC3S1J4W_15[] <- c*rec_cust*pc_cl[i]*EC3S1J4U_15[i] - det*EC3S1J4W_15[i]
+cl_EC4S1J4W_15[] <- c*rec_cust*pc_cl[i]*EC4S1J4U_15[i] - det*EC4S1J4W_15[i]
+
+cl_EC1S1J4W_16[] <- c*rec_cust*pc_cl[i]*EC1S1J4U_16[i] - det*EC1S1J4W_16[i]
+cl_EC2S1J4W_16[] <- c*rec_cust*pc_cl[i]*EC2S1J4U_16[i] - det*EC2S1J4W_16[i]
+cl_EC3S1J4W_16[] <- c*rec_cust*pc_cl[i]*EC3S1J4U_16[i] - det*EC3S1J4W_16[i]
+cl_EC4S1J4W_16[] <- c*rec_cust*pc_cl[i]*EC4S1J4U_16[i] - det*EC4S1J4W_16[i]
+
+cl_EC1S1J4W_17[] <- c*rec_cust*pc_cl[i]*EC1S1J4U_17[i] - det*EC1S1J4W_17[i]
+cl_EC2S1J4W_17[] <- c*rec_cust*pc_cl[i]*EC2S1J4U_17[i] - det*EC2S1J4W_17[i]
+cl_EC3S1J4W_17[] <- c*rec_cust*pc_cl[i]*EC3S1J4U_17[i] - det*EC3S1J4W_17[i]
+cl_EC4S1J4W_17[] <- c*rec_cust*pc_cl[i]*EC4S1J4U_17[i] - det*EC4S1J4W_17[i]
+
+
+
+cl_EC1S2J4W_10[] <- c*rec_cust*pc_cl[i]*EC1S2J4U_10[i] - det*EC1S2J4W_10[i]
+cl_EC2S2J4W_10[] <- c*rec_cust*pc_cl[i]*EC2S2J4U_10[i] - det*EC2S2J4W_10[i]
+cl_EC3S2J4W_10[] <- c*rec_cust*pc_cl[i]*EC3S2J4U_10[i] - det*EC3S2J4W_10[i]
+cl_EC4S2J4W_10[] <- c*rec_cust*pc_cl[i]*EC4S2J4U_10[i] - det*EC4S2J4W_10[i]
+
+cl_EC1S2J4W_11[] <- c*rec_cust*pc_cl[i]*EC1S2J4U_11[i] - det*EC1S2J4W_11[i]
+cl_EC2S2J4W_11[] <- c*rec_cust*pc_cl[i]*EC2S2J4U_11[i] - det*EC2S2J4W_11[i]
+cl_EC3S2J4W_11[] <- c*rec_cust*pc_cl[i]*EC3S2J4U_11[i] - det*EC3S2J4W_11[i]
+cl_EC4S2J4W_11[] <- c*rec_cust*pc_cl[i]*EC4S2J4U_11[i] - det*EC4S2J4W_11[i]
+
+cl_EC1S2J4W_12[] <- c*rec_cust*pc_cl[i]*EC1S2J4U_12[i] - det*EC1S2J4W_12[i]
+cl_EC2S2J4W_12[] <- c*rec_cust*pc_cl[i]*EC2S2J4U_12[i] - det*EC2S2J4W_12[i]
+cl_EC3S2J4W_12[] <- c*rec_cust*pc_cl[i]*EC3S2J4U_12[i] - det*EC3S2J4W_12[i]
+cl_EC4S2J4W_12[] <- c*rec_cust*pc_cl[i]*EC4S2J4U_12[i] - det*EC4S2J4W_12[i]
+
+cl_EC1S2J4W_13[] <- c*rec_cust*pc_cl[i]*EC1S2J4U_13[i] - det*EC1S2J4W_13[i]
+cl_EC2S2J4W_13[] <- c*rec_cust*pc_cl[i]*EC2S2J4U_13[i] - det*EC2S2J4W_13[i]
+cl_EC3S2J4W_13[] <- c*rec_cust*pc_cl[i]*EC3S2J4U_13[i] - det*EC3S2J4W_13[i]
+cl_EC4S2J4W_13[] <- c*rec_cust*pc_cl[i]*EC4S2J4U_13[i] - det*EC4S2J4W_13[i]
+
+cl_EC1S2J4W_14[] <- c*rec_cust*pc_cl[i]*EC1S2J4U_14[i] - det*EC1S2J4W_14[i]
+cl_EC2S2J4W_14[] <- c*rec_cust*pc_cl[i]*EC2S2J4U_14[i] - det*EC2S2J4W_14[i]
+cl_EC3S2J4W_14[] <- c*rec_cust*pc_cl[i]*EC3S2J4U_14[i] - det*EC3S2J4W_14[i]
+cl_EC4S2J4W_14[] <- c*rec_cust*pc_cl[i]*EC4S2J4U_14[i] - det*EC4S2J4W_14[i]
+
+cl_EC1S2J4W_15[] <- c*rec_cust*pc_cl[i]*EC1S2J4U_15[i] - det*EC1S2J4W_15[i]
+cl_EC2S2J4W_15[] <- c*rec_cust*pc_cl[i]*EC2S2J4U_15[i] - det*EC2S2J4W_15[i]
+cl_EC3S2J4W_15[] <- c*rec_cust*pc_cl[i]*EC3S2J4U_15[i] - det*EC3S2J4W_15[i]
+cl_EC4S2J4W_15[] <- c*rec_cust*pc_cl[i]*EC4S2J4U_15[i] - det*EC4S2J4W_15[i]
+
+cl_EC1S2J4W_16[] <- c*rec_cust*pc_cl[i]*EC1S2J4U_16[i] - det*EC1S2J4W_16[i]
+cl_EC2S2J4W_16[] <- c*rec_cust*pc_cl[i]*EC2S2J4U_16[i] - det*EC2S2J4W_16[i]
+cl_EC3S2J4W_16[] <- c*rec_cust*pc_cl[i]*EC3S2J4U_16[i] - det*EC3S2J4W_16[i]
+cl_EC4S2J4W_16[] <- c*rec_cust*pc_cl[i]*EC4S2J4U_16[i] - det*EC4S2J4W_16[i]
+
+cl_EC1S2J4W_17[] <- c*rec_cust*pc_cl[i]*EC1S2J4U_17[i] - det*EC1S2J4W_17[i]
+cl_EC2S2J4W_17[] <- c*rec_cust*pc_cl[i]*EC2S2J4U_17[i] - det*EC2S2J4W_17[i]
+cl_EC3S2J4W_17[] <- c*rec_cust*pc_cl[i]*EC3S2J4U_17[i] - det*EC3S2J4W_17[i]
+cl_EC4S2J4W_17[] <- c*rec_cust*pc_cl[i]*EC4S2J4U_17[i] - det*EC4S2J4W_17[i]
+
+
+
+cl_EC1S1J5W_10[] <- c*rec_cust*pc_cl[i]*EC1S1J5U_10[i] - det*EC1S1J5W_10[i]
+cl_EC2S1J5W_10[] <- c*rec_cust*pc_cl[i]*EC2S1J5U_10[i] - det*EC2S1J5W_10[i]
+cl_EC3S1J5W_10[] <- c*rec_cust*pc_cl[i]*EC3S1J5U_10[i] - det*EC3S1J5W_10[i]
+cl_EC4S1J5W_10[] <- c*rec_cust*pc_cl[i]*EC4S1J5U_10[i] - det*EC4S1J5W_10[i]
+
+cl_EC1S1J5W_11[] <- c*rec_cust*pc_cl[i]*EC1S1J5U_11[i] - det*EC1S1J5W_11[i]
+cl_EC2S1J5W_11[] <- c*rec_cust*pc_cl[i]*EC2S1J5U_11[i] - det*EC2S1J5W_11[i]
+cl_EC3S1J5W_11[] <- c*rec_cust*pc_cl[i]*EC3S1J5U_11[i] - det*EC3S1J5W_11[i]
+cl_EC4S1J5W_11[] <- c*rec_cust*pc_cl[i]*EC4S1J5U_11[i] - det*EC4S1J5W_11[i]
+
+cl_EC1S1J5W_12[] <- c*rec_cust*pc_cl[i]*EC1S1J5U_12[i] - det*EC1S1J5W_12[i]
+cl_EC2S1J5W_12[] <- c*rec_cust*pc_cl[i]*EC2S1J5U_12[i] - det*EC2S1J5W_12[i]
+cl_EC3S1J5W_12[] <- c*rec_cust*pc_cl[i]*EC3S1J5U_12[i] - det*EC3S1J5W_12[i]
+cl_EC4S1J5W_12[] <- c*rec_cust*pc_cl[i]*EC4S1J5U_12[i] - det*EC4S1J5W_12[i]
+
+cl_EC1S1J5W_13[] <- c*rec_cust*pc_cl[i]*EC1S1J5U_13[i] - det*EC1S1J5W_13[i]
+cl_EC2S1J5W_13[] <- c*rec_cust*pc_cl[i]*EC2S1J5U_13[i] - det*EC2S1J5W_13[i]
+cl_EC3S1J5W_13[] <- c*rec_cust*pc_cl[i]*EC3S1J5U_13[i] - det*EC3S1J5W_13[i]
+cl_EC4S1J5W_13[] <- c*rec_cust*pc_cl[i]*EC4S1J5U_13[i] - det*EC4S1J5W_13[i]
+
+cl_EC1S1J5W_14[] <- c*rec_cust*pc_cl[i]*EC1S1J5U_14[i] - det*EC1S1J5W_14[i]
+cl_EC2S1J5W_14[] <- c*rec_cust*pc_cl[i]*EC2S1J5U_14[i] - det*EC2S1J5W_14[i]
+cl_EC3S1J5W_14[] <- c*rec_cust*pc_cl[i]*EC3S1J5U_14[i] - det*EC3S1J5W_14[i]
+cl_EC4S1J5W_14[] <- c*rec_cust*pc_cl[i]*EC4S1J5U_14[i] - det*EC4S1J5W_14[i]
+
+cl_EC1S1J5W_15[] <- c*rec_cust*pc_cl[i]*EC1S1J5U_15[i] - det*EC1S1J5W_15[i]
+cl_EC2S1J5W_15[] <- c*rec_cust*pc_cl[i]*EC2S1J5U_15[i] - det*EC2S1J5W_15[i]
+cl_EC3S1J5W_15[] <- c*rec_cust*pc_cl[i]*EC3S1J5U_15[i] - det*EC3S1J5W_15[i]
+cl_EC4S1J5W_15[] <- c*rec_cust*pc_cl[i]*EC4S1J5U_15[i] - det*EC4S1J5W_15[i]
+
+cl_EC1S1J5W_16[] <- c*rec_cust*pc_cl[i]*EC1S1J5U_16[i] - det*EC1S1J5W_16[i]
+cl_EC2S1J5W_16[] <- c*rec_cust*pc_cl[i]*EC2S1J5U_16[i] - det*EC2S1J5W_16[i]
+cl_EC3S1J5W_16[] <- c*rec_cust*pc_cl[i]*EC3S1J5U_16[i] - det*EC3S1J5W_16[i]
+cl_EC4S1J5W_16[] <- c*rec_cust*pc_cl[i]*EC4S1J5U_16[i] - det*EC4S1J5W_16[i]
+
+cl_EC1S1J5W_17[] <- c*rec_cust*pc_cl[i]*EC1S1J5U_17[i] - det*EC1S1J5W_17[i]
+cl_EC2S1J5W_17[] <- c*rec_cust*pc_cl[i]*EC2S1J5U_17[i] - det*EC2S1J5W_17[i]
+cl_EC3S1J5W_17[] <- c*rec_cust*pc_cl[i]*EC3S1J5U_17[i] - det*EC3S1J5W_17[i]
+cl_EC4S1J5W_17[] <- c*rec_cust*pc_cl[i]*EC4S1J5U_17[i] - det*EC4S1J5W_17[i]
+
+
+
+cl_EC1S2J5W_10[] <- c*rec_cust*pc_cl[i]*EC1S2J5U_10[i] - det*EC1S2J5W_10[i]
+cl_EC2S2J5W_10[] <- c*rec_cust*pc_cl[i]*EC2S2J5U_10[i] - det*EC2S2J5W_10[i]
+cl_EC3S2J5W_10[] <- c*rec_cust*pc_cl[i]*EC3S2J5U_10[i] - det*EC3S2J5W_10[i]
+cl_EC4S2J5W_10[] <- c*rec_cust*pc_cl[i]*EC4S2J5U_10[i] - det*EC4S2J5W_10[i]
+
+cl_EC1S2J5W_11[] <- c*rec_cust*pc_cl[i]*EC1S2J5U_11[i] - det*EC1S2J5W_11[i]
+cl_EC2S2J5W_11[] <- c*rec_cust*pc_cl[i]*EC2S2J5U_11[i] - det*EC2S2J5W_11[i]
+cl_EC3S2J5W_11[] <- c*rec_cust*pc_cl[i]*EC3S2J5U_11[i] - det*EC3S2J5W_11[i]
+cl_EC4S2J5W_11[] <- c*rec_cust*pc_cl[i]*EC4S2J5U_11[i] - det*EC4S2J5W_11[i]
+
+cl_EC1S2J5W_12[] <- c*rec_cust*pc_cl[i]*EC1S2J5U_12[i] - det*EC1S2J5W_12[i]
+cl_EC2S2J5W_12[] <- c*rec_cust*pc_cl[i]*EC2S2J5U_12[i] - det*EC2S2J5W_12[i]
+cl_EC3S2J5W_12[] <- c*rec_cust*pc_cl[i]*EC3S2J5U_12[i] - det*EC3S2J5W_12[i]
+cl_EC4S2J5W_12[] <- c*rec_cust*pc_cl[i]*EC4S2J5U_12[i] - det*EC4S2J5W_12[i]
+
+cl_EC1S2J5W_13[] <- c*rec_cust*pc_cl[i]*EC1S2J5U_13[i] - det*EC1S2J5W_13[i]
+cl_EC2S2J5W_13[] <- c*rec_cust*pc_cl[i]*EC2S2J5U_13[i] - det*EC2S2J5W_13[i]
+cl_EC3S2J5W_13[] <- c*rec_cust*pc_cl[i]*EC3S2J5U_13[i] - det*EC3S2J5W_13[i]
+cl_EC4S2J5W_13[] <- c*rec_cust*pc_cl[i]*EC4S2J5U_13[i] - det*EC4S2J5W_13[i]
+
+cl_EC1S2J5W_14[] <- c*rec_cust*pc_cl[i]*EC1S2J5U_14[i] - det*EC1S2J5W_14[i]
+cl_EC2S2J5W_14[] <- c*rec_cust*pc_cl[i]*EC2S2J5U_14[i] - det*EC2S2J5W_14[i]
+cl_EC3S2J5W_14[] <- c*rec_cust*pc_cl[i]*EC3S2J5U_14[i] - det*EC3S2J5W_14[i]
+cl_EC4S2J5W_14[] <- c*rec_cust*pc_cl[i]*EC4S2J5U_14[i] - det*EC4S2J5W_14[i]
+
+cl_EC1S2J5W_15[] <- c*rec_cust*pc_cl[i]*EC1S2J5U_15[i] - det*EC1S2J5W_15[i]
+cl_EC2S2J5W_15[] <- c*rec_cust*pc_cl[i]*EC2S2J5U_15[i] - det*EC2S2J5W_15[i]
+cl_EC3S2J5W_15[] <- c*rec_cust*pc_cl[i]*EC3S2J5U_15[i] - det*EC3S2J5W_15[i]
+cl_EC4S2J5W_15[] <- c*rec_cust*pc_cl[i]*EC4S2J5U_15[i] - det*EC4S2J5W_15[i]
+
+cl_EC1S2J5W_16[] <- c*rec_cust*pc_cl[i]*EC1S2J5U_16[i] - det*EC1S2J5W_16[i]
+cl_EC2S2J5W_16[] <- c*rec_cust*pc_cl[i]*EC2S2J5U_16[i] - det*EC2S2J5W_16[i]
+cl_EC3S2J5W_16[] <- c*rec_cust*pc_cl[i]*EC3S2J5U_16[i] - det*EC3S2J5W_16[i]
+cl_EC4S2J5W_16[] <- c*rec_cust*pc_cl[i]*EC4S2J5U_16[i] - det*EC4S2J5W_16[i]
+
+cl_EC1S2J5W_17[] <- c*rec_cust*pc_cl[i]*EC1S2J5U_17[i] - det*EC1S2J5W_17[i]
+cl_EC2S2J5W_17[] <- c*rec_cust*pc_cl[i]*EC2S2J5U_17[i] - det*EC2S2J5W_17[i]
+cl_EC3S2J5W_17[] <- c*rec_cust*pc_cl[i]*EC3S2J5U_17[i] - det*EC3S2J5W_17[i]
+cl_EC4S2J5W_17[] <- c*rec_cust*pc_cl[i]*EC4S2J5U_17[i] - det*EC4S2J5W_17[i]
+
+
+},
+target = 'c')        #or c
