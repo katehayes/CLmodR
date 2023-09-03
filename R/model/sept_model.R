@@ -39,6 +39,4907 @@ cl_draft = odin::odin({
   
   
   #PARAMETERS THAT MIGHT BE DELETED LATER
+  r[] <- user(0) #leaving poverty
+  f[] <- user(0) #entering poverty
+  
+  
+  n2nr[] <- user(0) #
+  n2r[] <- user(0) #
+  p2care[] <- user(0) #
+  p2nr[] <- user(0) #
+  p2r[] <- user(0) #
+  
+  end_nr[] <- user(0)
+  end_res[] <- user(0)
+  
+  nr2r[] <- user(0)
+  nr2p[] <- user(0)
+  
+  r2nr[] <- user(0)
+  r2p[] <- user(0)
+  
+  
+  
+  pc_rem <- user(0)
+  end_rem <- user(0)
+  end_cust <- user(0)
+  r2c <- user(0)
+  
+  surv <- user(0)
+  
+  
+  t10_ic1s1j1u[] <- user(0)
+  t10_ic2s1j1u[] <- user(0)
+  t10_ic3s1j1u[] <- user(0)
+  t10_ic4s1j1u[] <- user(0)
+  
+  t10_ic1s2j1u[] <- user(0)
+  t10_ic2s2j1u[] <- user(0)
+  t10_ic3s2j1u[] <- user(0)
+  t10_ic4s2j1u[] <- user(0)
+  
+  t10_ic1s1j2u[] <- user(0)
+  t10_ic2s1j2u[] <- user(0)
+  t10_ic3s1j2u[] <- user(0)
+  t10_ic4s1j2u[] <- user(0)
+  
+  t10_ic1s2j2u[] <- user(0)
+  t10_ic2s2j2u[] <- user(0)
+  t10_ic3s2j2u[] <- user(0)
+  t10_ic4s2j2u[] <- user(0)
+  
+  t10_ic1s1j3u[] <- user(0)
+  t10_ic2s1j3u[] <- user(0)
+  t10_ic3s1j3u[] <- user(0)
+  t10_ic4s1j3u[] <- user(0)
+  
+  t10_ic1s2j3u[] <- user(0)
+  t10_ic2s2j3u[] <- user(0)
+  t10_ic3s2j3u[] <- user(0)
+  t10_ic4s2j3u[] <- user(0)
+  
+  t10_ic1s1j4u[] <- user(0)
+  t10_ic2s1j4u[] <- user(0)
+  t10_ic3s1j4u[] <- user(0)
+  t10_ic4s1j4u[] <- user(0)
+  
+  t10_ic1s2j4u[] <- user(0)
+  t10_ic2s2j4u[] <- user(0)
+  t10_ic3s2j4u[] <- user(0)
+  t10_ic4s2j4u[] <- user(0)
+  
+  t10_ic1s1j5u[] <- user(0)
+  t10_ic2s1j5u[] <- user(0)
+  t10_ic3s1j5u[] <- user(0)
+  t10_ic4s1j5u[] <- user(0)
+  
+  t10_ic1s2j5u[] <- user(0)
+  t10_ic2s2j5u[] <- user(0)
+  t10_ic3s2j5u[] <- user(0)
+  t10_ic4s2j5u[] <- user(0)
+  
+  t10_ic1s1j1w[] <- user(0)
+  t10_ic2s1j1w[] <- user(0)
+  t10_ic3s1j1w[] <- user(0)
+  t10_ic4s1j1w[] <- user(0)
+  
+  t10_ic1s2j1w[] <- user(0)
+  t10_ic2s2j1w[] <- user(0)
+  t10_ic3s2j1w[] <- user(0)
+  t10_ic4s2j1w[] <- user(0)
+  
+  t10_ic1s1j2w[] <- user(0)
+  t10_ic2s1j2w[] <- user(0)
+  t10_ic3s1j2w[] <- user(0)
+  t10_ic4s1j2w[] <- user(0)
+  
+  t10_ic1s2j2w[] <- user(0)
+  t10_ic2s2j2w[] <- user(0)
+  t10_ic3s2j2w[] <- user(0)
+  t10_ic4s2j2w[] <- user(0)
+  
+  t10_ic1s1j3w[] <- user(0)
+  t10_ic2s1j3w[] <- user(0)
+  t10_ic3s1j3w[] <- user(0)
+  t10_ic4s1j3w[] <- user(0)
+  
+  t10_ic1s2j3w[] <- user(0)
+  t10_ic2s2j3w[] <- user(0)
+  t10_ic3s2j3w[] <- user(0)
+  t10_ic4s2j3w[] <- user(0)
+  
+  t10_ic1s1j4w[] <- user(0)
+  t10_ic2s1j4w[] <- user(0)
+  t10_ic3s1j4w[] <- user(0)
+  t10_ic4s1j4w[] <- user(0)
+  
+  t10_ic1s2j4w[] <- user(0)
+  t10_ic2s2j4w[] <- user(0)
+  t10_ic3s2j4w[] <- user(0)
+  t10_ic4s2j4w[] <- user(0)
+  
+  t10_ic1s1j5w[] <- user(0)
+  t10_ic2s1j5w[] <- user(0)
+  t10_ic3s1j5w[] <- user(0)
+  t10_ic4s1j5w[] <- user(0)
+  
+  t10_ic1s2j5w[] <- user(0)
+  t10_ic2s2j5w[] <- user(0)
+  t10_ic3s2j5w[] <- user(0)
+  t10_ic4s2j5w[] <- user(0)
+  
+  t10_ec1s1j1u[] <- user(0)
+  t10_ec2s1j1u[] <- user(0)
+  t10_ec3s1j1u[] <- user(0)
+  t10_ec4s1j1u[] <- user(0)
+  
+  t10_ec1s2j1u[] <- user(0)
+  t10_ec2s2j1u[] <- user(0)
+  t10_ec3s2j1u[] <- user(0)
+  t10_ec4s2j1u[] <- user(0)
+  
+  t10_ec1s1j2u[] <- user(0)
+  t10_ec2s1j2u[] <- user(0)
+  t10_ec3s1j2u[] <- user(0)
+  t10_ec4s1j2u[] <- user(0)
+  
+  t10_ec1s2j2u[] <- user(0)
+  t10_ec2s2j2u[] <- user(0)
+  t10_ec3s2j2u[] <- user(0)
+  t10_ec4s2j2u[] <- user(0)
+  
+  t10_ec1s1j3u[] <- user(0)
+  t10_ec2s1j3u[] <- user(0)
+  t10_ec3s1j3u[] <- user(0)
+  t10_ec4s1j3u[] <- user(0)
+  
+  t10_ec1s2j3u[] <- user(0)
+  t10_ec2s2j3u[] <- user(0)
+  t10_ec3s2j3u[] <- user(0)
+  t10_ec4s2j3u[] <- user(0)
+  
+  t10_ec1s1j4u[] <- user(0)
+  t10_ec2s1j4u[] <- user(0)
+  t10_ec3s1j4u[] <- user(0)
+  t10_ec4s1j4u[] <- user(0)
+  
+  t10_ec1s2j4u[] <- user(0)
+  t10_ec2s2j4u[] <- user(0)
+  t10_ec3s2j4u[] <- user(0)
+  t10_ec4s2j4u[] <- user(0)
+  
+  t10_ec1s1j5u[] <- user(0)
+  t10_ec2s1j5u[] <- user(0)
+  t10_ec3s1j5u[] <- user(0)
+  t10_ec4s1j5u[] <- user(0)
+  
+  t10_ec1s2j5u[] <- user(0)
+  t10_ec2s2j5u[] <- user(0)
+  t10_ec3s2j5u[] <- user(0)
+  t10_ec4s2j5u[] <- user(0)
+  
+  t10_ec1s1j1w[] <- user(0)
+  t10_ec2s1j1w[] <- user(0)
+  t10_ec3s1j1w[] <- user(0)
+  t10_ec4s1j1w[] <- user(0)
+  
+  t10_ec1s2j1w[] <- user(0)
+  t10_ec2s2j1w[] <- user(0)
+  t10_ec3s2j1w[] <- user(0)
+  t10_ec4s2j1w[] <- user(0)
+  
+  t10_ec1s1j2w[] <- user(0)
+  t10_ec2s1j2w[] <- user(0)
+  t10_ec3s1j2w[] <- user(0)
+  t10_ec4s1j2w[] <- user(0)
+  
+  t10_ec1s2j2w[] <- user(0)
+  t10_ec2s2j2w[] <- user(0)
+  t10_ec3s2j2w[] <- user(0)
+  t10_ec4s2j2w[] <- user(0)
+  
+  t10_ec1s1j3w[] <- user(0)
+  t10_ec2s1j3w[] <- user(0)
+  t10_ec3s1j3w[] <- user(0)
+  t10_ec4s1j3w[] <- user(0)
+  
+  t10_ec1s2j3w[] <- user(0)
+  t10_ec2s2j3w[] <- user(0)
+  t10_ec3s2j3w[] <- user(0)
+  t10_ec4s2j3w[] <- user(0)
+  
+  t10_ec1s1j4w[] <- user(0)
+  t10_ec2s1j4w[] <- user(0)
+  t10_ec3s1j4w[] <- user(0)
+  t10_ec4s1j4w[] <- user(0)
+  
+  t10_ec1s2j4w[] <- user(0)
+  t10_ec2s2j4w[] <- user(0)
+  t10_ec3s2j4w[] <- user(0)
+  t10_ec4s2j4w[] <- user(0)
+  
+  t10_ec1s1j5w[] <- user(0)
+  t10_ec2s1j5w[] <- user(0)
+  t10_ec3s1j5w[] <- user(0)
+  t10_ec4s1j5w[] <- user(0)
+  
+  t10_ec1s2j5w[] <- user(0)
+  t10_ec2s2j5w[] <- user(0)
+  t10_ec3s2j5w[] <- user(0)
+  t10_ec4s2j5w[] <- user(0)
+  
+  
+  neet16_ic1s1j1u[] <- user(0)
+  neet16_ic2s1j1u[] <- user(0)
+  neet16_ic3s1j1u[] <- user(0)
+  neet16_ic4s1j1u[] <- user(0)
+  
+  neet16_ic1s2j1u[] <- user(0)
+  neet16_ic2s2j1u[] <- user(0)
+  neet16_ic3s2j1u[] <- user(0)
+  neet16_ic4s2j1u[] <- user(0)
+  
+  neet16_ic1s1j2u[] <- user(0)
+  neet16_ic2s1j2u[] <- user(0)
+  neet16_ic3s1j2u[] <- user(0)
+  neet16_ic4s1j2u[] <- user(0)
+  
+  neet16_ic1s2j2u[] <- user(0)
+  neet16_ic2s2j2u[] <- user(0)
+  neet16_ic3s2j2u[] <- user(0)
+  neet16_ic4s2j2u[] <- user(0)
+  
+  neet16_ic1s1j3u[] <- user(0)
+  neet16_ic2s1j3u[] <- user(0)
+  neet16_ic3s1j3u[] <- user(0)
+  neet16_ic4s1j3u[] <- user(0)
+  
+  neet16_ic1s2j3u[] <- user(0)
+  neet16_ic2s2j3u[] <- user(0)
+  neet16_ic3s2j3u[] <- user(0)
+  neet16_ic4s2j3u[] <- user(0)
+  
+  neet16_ic1s1j4u[] <- user(0)
+  neet16_ic2s1j4u[] <- user(0)
+  neet16_ic3s1j4u[] <- user(0)
+  neet16_ic4s1j4u[] <- user(0)
+  
+  neet16_ic1s2j4u[] <- user(0)
+  neet16_ic2s2j4u[] <- user(0)
+  neet16_ic3s2j4u[] <- user(0)
+  neet16_ic4s2j4u[] <- user(0)
+  
+  neet16_ic1s1j5u[] <- user(0)
+  neet16_ic2s1j5u[] <- user(0)
+  neet16_ic3s1j5u[] <- user(0)
+  neet16_ic4s1j5u[] <- user(0)
+  
+  neet16_ic1s2j5u[] <- user(0)
+  neet16_ic2s2j5u[] <- user(0)
+  neet16_ic3s2j5u[] <- user(0)
+  neet16_ic4s2j5u[] <- user(0)
+  
+  neet16_ic1s1j1w[] <- user(0)
+  neet16_ic2s1j1w[] <- user(0)
+  neet16_ic3s1j1w[] <- user(0)
+  neet16_ic4s1j1w[] <- user(0)
+  
+  neet16_ic1s2j1w[] <- user(0)
+  neet16_ic2s2j1w[] <- user(0)
+  neet16_ic3s2j1w[] <- user(0)
+  neet16_ic4s2j1w[] <- user(0)
+  
+  neet16_ic1s1j2w[] <- user(0)
+  neet16_ic2s1j2w[] <- user(0)
+  neet16_ic3s1j2w[] <- user(0)
+  neet16_ic4s1j2w[] <- user(0)
+  
+  neet16_ic1s2j2w[] <- user(0)
+  neet16_ic2s2j2w[] <- user(0)
+  neet16_ic3s2j2w[] <- user(0)
+  neet16_ic4s2j2w[] <- user(0)
+  
+  neet16_ic1s1j3w[] <- user(0)
+  neet16_ic2s1j3w[] <- user(0)
+  neet16_ic3s1j3w[] <- user(0)
+  neet16_ic4s1j3w[] <- user(0)
+  
+  neet16_ic1s2j3w[] <- user(0)
+  neet16_ic2s2j3w[] <- user(0)
+  neet16_ic3s2j3w[] <- user(0)
+  neet16_ic4s2j3w[] <- user(0)
+  
+  neet16_ic1s1j4w[] <- user(0)
+  neet16_ic2s1j4w[] <- user(0)
+  neet16_ic3s1j4w[] <- user(0)
+  neet16_ic4s1j4w[] <- user(0)
+  
+  neet16_ic1s2j4w[] <- user(0)
+  neet16_ic2s2j4w[] <- user(0)
+  neet16_ic3s2j4w[] <- user(0)
+  neet16_ic4s2j4w[] <- user(0)
+  
+  neet16_ic1s1j5w[] <- user(0)
+  neet16_ic2s1j5w[] <- user(0)
+  neet16_ic3s1j5w[] <- user(0)
+  neet16_ic4s1j5w[] <- user(0)
+  
+  neet16_ic1s2j5w[] <- user(0)
+  neet16_ic2s2j5w[] <- user(0)
+  neet16_ic3s2j5w[] <- user(0)
+  neet16_ic4s2j5w[] <- user(0)
+  
+  neet16_ec1s1j1u[] <- user(0)
+  neet16_ec2s1j1u[] <- user(0)
+  neet16_ec3s1j1u[] <- user(0)
+  neet16_ec4s1j1u[] <- user(0)
+  
+  neet16_ec1s2j1u[] <- user(0)
+  neet16_ec2s2j1u[] <- user(0)
+  neet16_ec3s2j1u[] <- user(0)
+  neet16_ec4s2j1u[] <- user(0)
+  
+  neet16_ec1s1j2u[] <- user(0)
+  neet16_ec2s1j2u[] <- user(0)
+  neet16_ec3s1j2u[] <- user(0)
+  neet16_ec4s1j2u[] <- user(0)
+  
+  neet16_ec1s2j2u[] <- user(0)
+  neet16_ec2s2j2u[] <- user(0)
+  neet16_ec3s2j2u[] <- user(0)
+  neet16_ec4s2j2u[] <- user(0)
+  
+  neet16_ec1s1j3u[] <- user(0)
+  neet16_ec2s1j3u[] <- user(0)
+  neet16_ec3s1j3u[] <- user(0)
+  neet16_ec4s1j3u[] <- user(0)
+  
+  neet16_ec1s2j3u[] <- user(0)
+  neet16_ec2s2j3u[] <- user(0)
+  neet16_ec3s2j3u[] <- user(0)
+  neet16_ec4s2j3u[] <- user(0)
+  
+  neet16_ec1s1j4u[] <- user(0)
+  neet16_ec2s1j4u[] <- user(0)
+  neet16_ec3s1j4u[] <- user(0)
+  neet16_ec4s1j4u[] <- user(0)
+  
+  neet16_ec1s2j4u[] <- user(0)
+  neet16_ec2s2j4u[] <- user(0)
+  neet16_ec3s2j4u[] <- user(0)
+  neet16_ec4s2j4u[] <- user(0)
+  
+  neet16_ec1s1j5u[] <- user(0)
+  neet16_ec2s1j5u[] <- user(0)
+  neet16_ec3s1j5u[] <- user(0)
+  neet16_ec4s1j5u[] <- user(0)
+  
+  neet16_ec1s2j5u[] <- user(0)
+  neet16_ec2s2j5u[] <- user(0)
+  neet16_ec3s2j5u[] <- user(0)
+  neet16_ec4s2j5u[] <- user(0)
+  
+  neet16_ec1s1j1w[] <- user(0)
+  neet16_ec2s1j1w[] <- user(0)
+  neet16_ec3s1j1w[] <- user(0)
+  neet16_ec4s1j1w[] <- user(0)
+  
+  neet16_ec1s2j1w[] <- user(0)
+  neet16_ec2s2j1w[] <- user(0)
+  neet16_ec3s2j1w[] <- user(0)
+  neet16_ec4s2j1w[] <- user(0)
+  
+  neet16_ec1s1j2w[] <- user(0)
+  neet16_ec2s1j2w[] <- user(0)
+  neet16_ec3s1j2w[] <- user(0)
+  neet16_ec4s1j2w[] <- user(0)
+  
+  neet16_ec1s2j2w[] <- user(0)
+  neet16_ec2s2j2w[] <- user(0)
+  neet16_ec3s2j2w[] <- user(0)
+  neet16_ec4s2j2w[] <- user(0)
+  
+  neet16_ec1s1j3w[] <- user(0)
+  neet16_ec2s1j3w[] <- user(0)
+  neet16_ec3s1j3w[] <- user(0)
+  neet16_ec4s1j3w[] <- user(0)
+  
+  neet16_ec1s2j3w[] <- user(0)
+  neet16_ec2s2j3w[] <- user(0)
+  neet16_ec3s2j3w[] <- user(0)
+  neet16_ec4s2j3w[] <- user(0)
+  
+  neet16_ec1s1j4w[] <- user(0)
+  neet16_ec2s1j4w[] <- user(0)
+  neet16_ec3s1j4w[] <- user(0)
+  neet16_ec4s1j4w[] <- user(0)
+  
+  neet16_ec1s2j4w[] <- user(0)
+  neet16_ec2s2j4w[] <- user(0)
+  neet16_ec3s2j4w[] <- user(0)
+  neet16_ec4s2j4w[] <- user(0)
+  
+  neet16_ec1s1j5w[] <- user(0)
+  neet16_ec2s1j5w[] <- user(0)
+  neet16_ec3s1j5w[] <- user(0)
+  neet16_ec4s1j5w[] <- user(0)
+  
+  neet16_ec1s2j5w[] <- user(0)
+  neet16_ec2s2j5w[] <- user(0)
+  neet16_ec3s2j5w[] <- user(0)
+  neet16_ec4s2j5w[] <- user(0)
+  
+  
+  n2care_i_10[] <- user(0)
+  n2care_i_11[] <- user(0)
+  n2care_i_12[] <- user(0)
+  n2care_i_13[] <- user(0)
+  n2care_i_14[] <- user(0)
+  n2care_i_15[] <- user(0)
+  n2care_i_16[] <- user(0)
+  n2care_i_17[] <- user(0)
+  
+  n2care_e_10[] <- user(0)
+  n2care_e_11[] <- user(0)
+  n2care_e_12[] <- user(0)
+  n2care_e_13[] <- user(0)
+  n2care_e_14[] <- user(0)
+  n2care_e_15[] <- user(0)
+  n2care_e_16[] <- user(0)
+  n2care_e_17[] <- user(0)
+  
+  neet2m_i[] <- user(0)
+  neet2m_e[] <- user(0)
+  
+  
+  m2pru_ic1_10[] <- user(0)
+  m2pru_ic2_10[] <- user(0)
+  m2pru_ic3_10[] <- user(0)
+  m2pru_ic4_10[] <- user(0)
+  
+  m2pru_ic1_11[] <- user(0)
+  m2pru_ic2_11[] <- user(0)
+  m2pru_ic3_11[] <- user(0)
+  m2pru_ic4_11[] <- user(0)
+  
+  m2pru_ic1_12[] <- user(0)
+  m2pru_ic2_12[] <- user(0)
+  m2pru_ic3_12[] <- user(0)
+  m2pru_ic4_12[] <- user(0)
+  
+  m2pru_ic1_13[] <- user(0)
+  m2pru_ic2_13[] <- user(0)
+  m2pru_ic3_13[] <- user(0)
+  m2pru_ic4_13[] <- user(0)
+  
+  m2pru_ic1_14[] <- user(0)
+  m2pru_ic2_14[] <- user(0)
+  m2pru_ic3_14[] <- user(0)
+  m2pru_ic4_14[] <- user(0)
+  
+  m2pru_ic1_15[] <- user(0)
+  m2pru_ic2_15[] <- user(0)
+  m2pru_ic3_15[] <- user(0)
+  m2pru_ic4_15[] <- user(0)
+  
+  m2neet_ic1_16[] <- user(0)
+  m2neet_ic2_16[] <- user(0)
+  m2neet_ic3_16[] <- user(0)
+  m2neet_ic4_16[] <- user(0)
+  
+  m2neet_ic1_17[] <- user(0)
+  m2neet_ic2_17[] <- user(0)
+  m2neet_ic3_17[] <- user(0)
+  m2neet_ic4_17[] <- user(0)
+  
+  
+  m2pru_ec1_10[] <- user(0)
+  m2pru_ec2_10[] <- user(0)
+  m2pru_ec3_10[] <- user(0)
+  m2pru_ec4_10[] <- user(0)
+  
+  m2pru_ec1_11[] <- user(0)
+  m2pru_ec2_11[] <- user(0)
+  m2pru_ec3_11[] <- user(0)
+  m2pru_ec4_11[] <- user(0)
+  
+  m2pru_ec1_12[] <- user(0)
+  m2pru_ec2_12[] <- user(0)
+  m2pru_ec3_12[] <- user(0)
+  m2pru_ec4_12[] <- user(0)
+  
+  m2pru_ec1_13[] <- user(0)
+  m2pru_ec2_13[] <- user(0)
+  m2pru_ec3_13[] <- user(0)
+  m2pru_ec4_13[] <- user(0)
+  
+  m2pru_ec1_14[] <- user(0)
+  m2pru_ec2_14[] <- user(0)
+  m2pru_ec3_14[] <- user(0)
+  m2pru_ec4_14[] <- user(0)
+  
+  m2pru_ec1_15[] <- user(0)
+  m2pru_ec2_15[] <- user(0)
+  m2pru_ec3_15[] <- user(0)
+  m2pru_ec4_15[] <- user(0)
+  
+  m2neet_ec1_16[] <- user(0)
+  m2neet_ec2_16[] <- user(0)
+  m2neet_ec3_16[] <- user(0)
+  m2neet_ec4_16[] <- user(0)
+  
+  m2neet_ec1_17[] <- user(0)
+  m2neet_ec2_17[] <- user(0)
+  m2neet_ec3_17[] <- user(0)
+  m2neet_ec4_17[] <- user(0)
+  
+  
+  np2nc_ic1s1u_10[] <- user(0)
+  np2nc_ic2s1u_10[] <- user(0)
+  np2nc_ic3s1u_10[] <- user(0)
+  np2nc_ic4s1u_10[] <- user(0)
+  
+  np2nc_ic1s1u_11[] <- user(0)
+  np2nc_ic2s1u_11[] <- user(0)
+  np2nc_ic3s1u_11[] <- user(0)
+  np2nc_ic4s1u_11[] <- user(0)
+  
+  np2nc_ic1s1u_12[] <- user(0)
+  np2nc_ic2s1u_12[] <- user(0)
+  np2nc_ic3s1u_12[] <- user(0)
+  np2nc_ic4s1u_12[] <- user(0)
+  
+  np2nc_ic1s1u_13[] <- user(0)
+  np2nc_ic2s1u_13[] <- user(0)
+  np2nc_ic3s1u_13[] <- user(0)
+  np2nc_ic4s1u_13[] <- user(0)
+  
+  np2nc_ic1s1u_14[] <- user(0)
+  np2nc_ic2s1u_14[] <- user(0)
+  np2nc_ic3s1u_14[] <- user(0)
+  np2nc_ic4s1u_14[] <- user(0)
+  
+  np2nc_ic1s1u_15[] <- user(0)
+  np2nc_ic2s1u_15[] <- user(0)
+  np2nc_ic3s1u_15[] <- user(0)
+  np2nc_ic4s1u_15[] <- user(0)
+  
+  np2nc_ic1s1u_16[] <- user(0)
+  np2nc_ic2s1u_16[] <- user(0)
+  np2nc_ic3s1u_16[] <- user(0)
+  np2nc_ic4s1u_16[] <- user(0)
+  
+  np2nc_ic1s1u_17[] <- user(0)
+  np2nc_ic2s1u_17[] <- user(0)
+  np2nc_ic3s1u_17[] <- user(0)
+  np2nc_ic4s1u_17[] <- user(0)
+  
+  
+  
+  np2nc_ic1s2u_10[] <- user(0)
+  np2nc_ic2s2u_10[] <- user(0)
+  np2nc_ic3s2u_10[] <- user(0)
+  np2nc_ic4s2u_10[] <- user(0)
+  
+  np2nc_ic1s2u_11[] <- user(0)
+  np2nc_ic2s2u_11[] <- user(0)
+  np2nc_ic3s2u_11[] <- user(0)
+  np2nc_ic4s2u_11[] <- user(0)
+  
+  np2nc_ic1s2u_12[] <- user(0)
+  np2nc_ic2s2u_12[] <- user(0)
+  np2nc_ic3s2u_12[] <- user(0)
+  np2nc_ic4s2u_12[] <- user(0)
+  
+  np2nc_ic1s2u_13[] <- user(0)
+  np2nc_ic2s2u_13[] <- user(0)
+  np2nc_ic3s2u_13[] <- user(0)
+  np2nc_ic4s2u_13[] <- user(0)
+  
+  np2nc_ic1s2u_14[] <- user(0)
+  np2nc_ic2s2u_14[] <- user(0)
+  np2nc_ic3s2u_14[] <- user(0)
+  np2nc_ic4s2u_14[] <- user(0)
+  
+  np2nc_ic1s2u_15[] <- user(0)
+  np2nc_ic2s2u_15[] <- user(0)
+  np2nc_ic3s2u_15[] <- user(0)
+  np2nc_ic4s2u_15[] <- user(0)
+  
+  np2nc_ic1s2u_16[] <- user(0)
+  np2nc_ic2s2u_16[] <- user(0)
+  np2nc_ic3s2u_16[] <- user(0)
+  np2nc_ic4s2u_16[] <- user(0)
+  
+  np2nc_ic1s2u_17[] <- user(0)
+  np2nc_ic2s2u_17[] <- user(0)
+  np2nc_ic3s2u_17[] <- user(0)
+  np2nc_ic4s2u_17[] <- user(0)
+  
+  
+  
+  np2nc_ic1s1w_10[] <- user(0)
+  np2nc_ic2s1w_10[] <- user(0)
+  np2nc_ic3s1w_10[] <- user(0)
+  np2nc_ic4s1w_10[] <- user(0)
+  
+  np2nc_ic1s1w_11[] <- user(0)
+  np2nc_ic2s1w_11[] <- user(0)
+  np2nc_ic3s1w_11[] <- user(0)
+  np2nc_ic4s1w_11[] <- user(0)
+  
+  np2nc_ic1s1w_12[] <- user(0)
+  np2nc_ic2s1w_12[] <- user(0)
+  np2nc_ic3s1w_12[] <- user(0)
+  np2nc_ic4s1w_12[] <- user(0)
+  
+  np2nc_ic1s1w_13[] <- user(0)
+  np2nc_ic2s1w_13[] <- user(0)
+  np2nc_ic3s1w_13[] <- user(0)
+  np2nc_ic4s1w_13[] <- user(0)
+  
+  np2nc_ic1s1w_14[] <- user(0)
+  np2nc_ic2s1w_14[] <- user(0)
+  np2nc_ic3s1w_14[] <- user(0)
+  np2nc_ic4s1w_14[] <- user(0)
+  
+  np2nc_ic1s1w_15[] <- user(0)
+  np2nc_ic2s1w_15[] <- user(0)
+  np2nc_ic3s1w_15[] <- user(0)
+  np2nc_ic4s1w_15[] <- user(0)
+  
+  np2nc_ic1s1w_16[] <- user(0)
+  np2nc_ic2s1w_16[] <- user(0)
+  np2nc_ic3s1w_16[] <- user(0)
+  np2nc_ic4s1w_16[] <- user(0)
+  
+  np2nc_ic1s1w_17[] <- user(0)
+  np2nc_ic2s1w_17[] <- user(0)
+  np2nc_ic3s1w_17[] <- user(0)
+  np2nc_ic4s1w_17[] <- user(0)
+  
+  
+  
+  np2nc_ic1s2w_10[] <- user(0)
+  np2nc_ic2s2w_10[] <- user(0)
+  np2nc_ic3s2w_10[] <- user(0)
+  np2nc_ic4s2w_10[] <- user(0)
+  
+  np2nc_ic1s2w_11[] <- user(0)
+  np2nc_ic2s2w_11[] <- user(0)
+  np2nc_ic3s2w_11[] <- user(0)
+  np2nc_ic4s2w_11[] <- user(0)
+  
+  np2nc_ic1s2w_12[] <- user(0)
+  np2nc_ic2s2w_12[] <- user(0)
+  np2nc_ic3s2w_12[] <- user(0)
+  np2nc_ic4s2w_12[] <- user(0)
+  
+  np2nc_ic1s2w_13[] <- user(0)
+  np2nc_ic2s2w_13[] <- user(0)
+  np2nc_ic3s2w_13[] <- user(0)
+  np2nc_ic4s2w_13[] <- user(0)
+  
+  np2nc_ic1s2w_14[] <- user(0)
+  np2nc_ic2s2w_14[] <- user(0)
+  np2nc_ic3s2w_14[] <- user(0)
+  np2nc_ic4s2w_14[] <- user(0)
+  
+  np2nc_ic1s2w_15[] <- user(0)
+  np2nc_ic2s2w_15[] <- user(0)
+  np2nc_ic3s2w_15[] <- user(0)
+  np2nc_ic4s2w_15[] <- user(0)
+  
+  np2nc_ic1s2w_16[] <- user(0)
+  np2nc_ic2s2w_16[] <- user(0)
+  np2nc_ic3s2w_16[] <- user(0)
+  np2nc_ic4s2w_16[] <- user(0)
+  
+  np2nc_ic1s2w_17[] <- user(0)
+  np2nc_ic2s2w_17[] <- user(0)
+  np2nc_ic3s2w_17[] <- user(0)
+  np2nc_ic4s2w_17[] <- user(0)
+  
+  
+  
+  np2nc_ec1s1u_10[] <- user(0)
+  np2nc_ec2s1u_10[] <- user(0)
+  np2nc_ec3s1u_10[] <- user(0)
+  np2nc_ec4s1u_10[] <- user(0)
+  
+  np2nc_ec1s1u_11[] <- user(0)
+  np2nc_ec2s1u_11[] <- user(0)
+  np2nc_ec3s1u_11[] <- user(0)
+  np2nc_ec4s1u_11[] <- user(0)
+  
+  np2nc_ec1s1u_12[] <- user(0)
+  np2nc_ec2s1u_12[] <- user(0)
+  np2nc_ec3s1u_12[] <- user(0)
+  np2nc_ec4s1u_12[] <- user(0)
+  
+  np2nc_ec1s1u_13[] <- user(0)
+  np2nc_ec2s1u_13[] <- user(0)
+  np2nc_ec3s1u_13[] <- user(0)
+  np2nc_ec4s1u_13[] <- user(0)
+  
+  np2nc_ec1s1u_14[] <- user(0)
+  np2nc_ec2s1u_14[] <- user(0)
+  np2nc_ec3s1u_14[] <- user(0)
+  np2nc_ec4s1u_14[] <- user(0)
+  
+  np2nc_ec1s1u_15[] <- user(0)
+  np2nc_ec2s1u_15[] <- user(0)
+  np2nc_ec3s1u_15[] <- user(0)
+  np2nc_ec4s1u_15[] <- user(0)
+  
+  np2nc_ec1s1u_16[] <- user(0)
+  np2nc_ec2s1u_16[] <- user(0)
+  np2nc_ec3s1u_16[] <- user(0)
+  np2nc_ec4s1u_16[] <- user(0)
+  
+  np2nc_ec1s1u_17[] <- user(0)
+  np2nc_ec2s1u_17[] <- user(0)
+  np2nc_ec3s1u_17[] <- user(0)
+  np2nc_ec4s1u_17[] <- user(0)
+  
+  
+  
+  np2nc_ec1s2u_10[] <- user(0)
+  np2nc_ec2s2u_10[] <- user(0)
+  np2nc_ec3s2u_10[] <- user(0)
+  np2nc_ec4s2u_10[] <- user(0)
+  
+  np2nc_ec1s2u_11[] <- user(0)
+  np2nc_ec2s2u_11[] <- user(0)
+  np2nc_ec3s2u_11[] <- user(0)
+  np2nc_ec4s2u_11[] <- user(0)
+  
+  np2nc_ec1s2u_12[] <- user(0)
+  np2nc_ec2s2u_12[] <- user(0)
+  np2nc_ec3s2u_12[] <- user(0)
+  np2nc_ec4s2u_12[] <- user(0)
+  
+  np2nc_ec1s2u_13[] <- user(0)
+  np2nc_ec2s2u_13[] <- user(0)
+  np2nc_ec3s2u_13[] <- user(0)
+  np2nc_ec4s2u_13[] <- user(0)
+  
+  np2nc_ec1s2u_14[] <- user(0)
+  np2nc_ec2s2u_14[] <- user(0)
+  np2nc_ec3s2u_14[] <- user(0)
+  np2nc_ec4s2u_14[] <- user(0)
+  
+  np2nc_ec1s2u_15[] <- user(0)
+  np2nc_ec2s2u_15[] <- user(0)
+  np2nc_ec3s2u_15[] <- user(0)
+  np2nc_ec4s2u_15[] <- user(0)
+  
+  np2nc_ec1s2u_16[] <- user(0)
+  np2nc_ec2s2u_16[] <- user(0)
+  np2nc_ec3s2u_16[] <- user(0)
+  np2nc_ec4s2u_16[] <- user(0)
+  
+  np2nc_ec1s2u_17[] <- user(0)
+  np2nc_ec2s2u_17[] <- user(0)
+  np2nc_ec3s2u_17[] <- user(0)
+  np2nc_ec4s2u_17[] <- user(0)
+  
+  
+  
+  np2nc_ec1s1w_10[] <- user(0)
+  np2nc_ec2s1w_10[] <- user(0)
+  np2nc_ec3s1w_10[] <- user(0)
+  np2nc_ec4s1w_10[] <- user(0)
+  
+  np2nc_ec1s1w_11[] <- user(0)
+  np2nc_ec2s1w_11[] <- user(0)
+  np2nc_ec3s1w_11[] <- user(0)
+  np2nc_ec4s1w_11[] <- user(0)
+  
+  np2nc_ec1s1w_12[] <- user(0)
+  np2nc_ec2s1w_12[] <- user(0)
+  np2nc_ec3s1w_12[] <- user(0)
+  np2nc_ec4s1w_12[] <- user(0)
+  
+  np2nc_ec1s1w_13[] <- user(0)
+  np2nc_ec2s1w_13[] <- user(0)
+  np2nc_ec3s1w_13[] <- user(0)
+  np2nc_ec4s1w_13[] <- user(0)
+  
+  np2nc_ec1s1w_14[] <- user(0)
+  np2nc_ec2s1w_14[] <- user(0)
+  np2nc_ec3s1w_14[] <- user(0)
+  np2nc_ec4s1w_14[] <- user(0)
+  
+  np2nc_ec1s1w_15[] <- user(0)
+  np2nc_ec2s1w_15[] <- user(0)
+  np2nc_ec3s1w_15[] <- user(0)
+  np2nc_ec4s1w_15[] <- user(0)
+  
+  np2nc_ec1s1w_16[] <- user(0)
+  np2nc_ec2s1w_16[] <- user(0)
+  np2nc_ec3s1w_16[] <- user(0)
+  np2nc_ec4s1w_16[] <- user(0)
+  
+  np2nc_ec1s1w_17[] <- user(0)
+  np2nc_ec2s1w_17[] <- user(0)
+  np2nc_ec3s1w_17[] <- user(0)
+  np2nc_ec4s1w_17[] <- user(0)
+  
+  
+  
+  np2nc_ec1s2w_10[] <- user(0)
+  np2nc_ec2s2w_10[] <- user(0)
+  np2nc_ec3s2w_10[] <- user(0)
+  np2nc_ec4s2w_10[] <- user(0)
+  
+  np2nc_ec1s2w_11[] <- user(0)
+  np2nc_ec2s2w_11[] <- user(0)
+  np2nc_ec3s2w_11[] <- user(0)
+  np2nc_ec4s2w_11[] <- user(0)
+  
+  np2nc_ec1s2w_12[] <- user(0)
+  np2nc_ec2s2w_12[] <- user(0)
+  np2nc_ec3s2w_12[] <- user(0)
+  np2nc_ec4s2w_12[] <- user(0)
+  
+  np2nc_ec1s2w_13[] <- user(0)
+  np2nc_ec2s2w_13[] <- user(0)
+  np2nc_ec3s2w_13[] <- user(0)
+  np2nc_ec4s2w_13[] <- user(0)
+  
+  np2nc_ec1s2w_14[] <- user(0)
+  np2nc_ec2s2w_14[] <- user(0)
+  np2nc_ec3s2w_14[] <- user(0)
+  np2nc_ec4s2w_14[] <- user(0)
+  
+  np2nc_ec1s2w_15[] <- user(0)
+  np2nc_ec2s2w_15[] <- user(0)
+  np2nc_ec3s2w_15[] <- user(0)
+  np2nc_ec4s2w_15[] <- user(0)
+  
+  np2nc_ec1s2w_16[] <- user(0)
+  np2nc_ec2s2w_16[] <- user(0)
+  np2nc_ec3s2w_16[] <- user(0)
+  np2nc_ec4s2w_16[] <- user(0)
+  
+  np2nc_ec1s2w_17[] <- user(0)
+  np2nc_ec2s2w_17[] <- user(0)
+  np2nc_ec3s2w_17[] <- user(0)
+  np2nc_ec4s2w_17[] <- user(0)
+  
+  
+  np2charge_ic1s1u_10[] <- user(0)
+  np2charge_ic2s1u_10[] <- user(0)
+  np2charge_ic3s1u_10[] <- user(0)
+  np2charge_ic4s1u_10[] <- user(0)
+  
+  np2charge_ic1s1u_11[] <- user(0)
+  np2charge_ic2s1u_11[] <- user(0)
+  np2charge_ic3s1u_11[] <- user(0)
+  np2charge_ic4s1u_11[] <- user(0)
+  
+  np2charge_ic1s1u_12[] <- user(0)
+  np2charge_ic2s1u_12[] <- user(0)
+  np2charge_ic3s1u_12[] <- user(0)
+  np2charge_ic4s1u_12[] <- user(0)
+  
+  np2charge_ic1s1u_13[] <- user(0)
+  np2charge_ic2s1u_13[] <- user(0)
+  np2charge_ic3s1u_13[] <- user(0)
+  np2charge_ic4s1u_13[] <- user(0)
+  
+  np2charge_ic1s1u_14[] <- user(0)
+  np2charge_ic2s1u_14[] <- user(0)
+  np2charge_ic3s1u_14[] <- user(0)
+  np2charge_ic4s1u_14[] <- user(0)
+  
+  np2charge_ic1s1u_15[] <- user(0)
+  np2charge_ic2s1u_15[] <- user(0)
+  np2charge_ic3s1u_15[] <- user(0)
+  np2charge_ic4s1u_15[] <- user(0)
+  
+  np2charge_ic1s1u_16[] <- user(0)
+  np2charge_ic2s1u_16[] <- user(0)
+  np2charge_ic3s1u_16[] <- user(0)
+  np2charge_ic4s1u_16[] <- user(0)
+  
+  np2charge_ic1s1u_17[] <- user(0)
+  np2charge_ic2s1u_17[] <- user(0)
+  np2charge_ic3s1u_17[] <- user(0)
+  np2charge_ic4s1u_17[] <- user(0)
+  
+  
+  
+  np2charge_ic1s2u_10[] <- user(0)
+  np2charge_ic2s2u_10[] <- user(0)
+  np2charge_ic3s2u_10[] <- user(0)
+  np2charge_ic4s2u_10[] <- user(0)
+  
+  np2charge_ic1s2u_11[] <- user(0)
+  np2charge_ic2s2u_11[] <- user(0)
+  np2charge_ic3s2u_11[] <- user(0)
+  np2charge_ic4s2u_11[] <- user(0)
+  
+  np2charge_ic1s2u_12[] <- user(0)
+  np2charge_ic2s2u_12[] <- user(0)
+  np2charge_ic3s2u_12[] <- user(0)
+  np2charge_ic4s2u_12[] <- user(0)
+  
+  np2charge_ic1s2u_13[] <- user(0)
+  np2charge_ic2s2u_13[] <- user(0)
+  np2charge_ic3s2u_13[] <- user(0)
+  np2charge_ic4s2u_13[] <- user(0)
+  
+  np2charge_ic1s2u_14[] <- user(0)
+  np2charge_ic2s2u_14[] <- user(0)
+  np2charge_ic3s2u_14[] <- user(0)
+  np2charge_ic4s2u_14[] <- user(0)
+  
+  np2charge_ic1s2u_15[] <- user(0)
+  np2charge_ic2s2u_15[] <- user(0)
+  np2charge_ic3s2u_15[] <- user(0)
+  np2charge_ic4s2u_15[] <- user(0)
+  
+  np2charge_ic1s2u_16[] <- user(0)
+  np2charge_ic2s2u_16[] <- user(0)
+  np2charge_ic3s2u_16[] <- user(0)
+  np2charge_ic4s2u_16[] <- user(0)
+  
+  np2charge_ic1s2u_17[] <- user(0)
+  np2charge_ic2s2u_17[] <- user(0)
+  np2charge_ic3s2u_17[] <- user(0)
+  np2charge_ic4s2u_17[] <- user(0)
+  
+  
+  
+  np2charge_ic1s1w_10[] <- user(0)
+  np2charge_ic2s1w_10[] <- user(0)
+  np2charge_ic3s1w_10[] <- user(0)
+  np2charge_ic4s1w_10[] <- user(0)
+  
+  np2charge_ic1s1w_11[] <- user(0)
+  np2charge_ic2s1w_11[] <- user(0)
+  np2charge_ic3s1w_11[] <- user(0)
+  np2charge_ic4s1w_11[] <- user(0)
+  
+  np2charge_ic1s1w_12[] <- user(0)
+  np2charge_ic2s1w_12[] <- user(0)
+  np2charge_ic3s1w_12[] <- user(0)
+  np2charge_ic4s1w_12[] <- user(0)
+  
+  np2charge_ic1s1w_13[] <- user(0)
+  np2charge_ic2s1w_13[] <- user(0)
+  np2charge_ic3s1w_13[] <- user(0)
+  np2charge_ic4s1w_13[] <- user(0)
+  
+  np2charge_ic1s1w_14[] <- user(0)
+  np2charge_ic2s1w_14[] <- user(0)
+  np2charge_ic3s1w_14[] <- user(0)
+  np2charge_ic4s1w_14[] <- user(0)
+  
+  np2charge_ic1s1w_15[] <- user(0)
+  np2charge_ic2s1w_15[] <- user(0)
+  np2charge_ic3s1w_15[] <- user(0)
+  np2charge_ic4s1w_15[] <- user(0)
+  
+  np2charge_ic1s1w_16[] <- user(0)
+  np2charge_ic2s1w_16[] <- user(0)
+  np2charge_ic3s1w_16[] <- user(0)
+  np2charge_ic4s1w_16[] <- user(0)
+  
+  np2charge_ic1s1w_17[] <- user(0)
+  np2charge_ic2s1w_17[] <- user(0)
+  np2charge_ic3s1w_17[] <- user(0)
+  np2charge_ic4s1w_17[] <- user(0)
+  
+  
+  
+  np2charge_ic1s2w_10[] <- user(0)
+  np2charge_ic2s2w_10[] <- user(0)
+  np2charge_ic3s2w_10[] <- user(0)
+  np2charge_ic4s2w_10[] <- user(0)
+  
+  np2charge_ic1s2w_11[] <- user(0)
+  np2charge_ic2s2w_11[] <- user(0)
+  np2charge_ic3s2w_11[] <- user(0)
+  np2charge_ic4s2w_11[] <- user(0)
+  
+  np2charge_ic1s2w_12[] <- user(0)
+  np2charge_ic2s2w_12[] <- user(0)
+  np2charge_ic3s2w_12[] <- user(0)
+  np2charge_ic4s2w_12[] <- user(0)
+  
+  np2charge_ic1s2w_13[] <- user(0)
+  np2charge_ic2s2w_13[] <- user(0)
+  np2charge_ic3s2w_13[] <- user(0)
+  np2charge_ic4s2w_13[] <- user(0)
+  
+  np2charge_ic1s2w_14[] <- user(0)
+  np2charge_ic2s2w_14[] <- user(0)
+  np2charge_ic3s2w_14[] <- user(0)
+  np2charge_ic4s2w_14[] <- user(0)
+  
+  np2charge_ic1s2w_15[] <- user(0)
+  np2charge_ic2s2w_15[] <- user(0)
+  np2charge_ic3s2w_15[] <- user(0)
+  np2charge_ic4s2w_15[] <- user(0)
+  
+  np2charge_ic1s2w_16[] <- user(0)
+  np2charge_ic2s2w_16[] <- user(0)
+  np2charge_ic3s2w_16[] <- user(0)
+  np2charge_ic4s2w_16[] <- user(0)
+  
+  np2charge_ic1s2w_17[] <- user(0)
+  np2charge_ic2s2w_17[] <- user(0)
+  np2charge_ic3s2w_17[] <- user(0)
+  np2charge_ic4s2w_17[] <- user(0)
+  
+  
+  
+  np2charge_ec1s1u_10[] <- user(0)
+  np2charge_ec2s1u_10[] <- user(0)
+  np2charge_ec3s1u_10[] <- user(0)
+  np2charge_ec4s1u_10[] <- user(0)
+  
+  np2charge_ec1s1u_11[] <- user(0)
+  np2charge_ec2s1u_11[] <- user(0)
+  np2charge_ec3s1u_11[] <- user(0)
+  np2charge_ec4s1u_11[] <- user(0)
+  
+  np2charge_ec1s1u_12[] <- user(0)
+  np2charge_ec2s1u_12[] <- user(0)
+  np2charge_ec3s1u_12[] <- user(0)
+  np2charge_ec4s1u_12[] <- user(0)
+  
+  np2charge_ec1s1u_13[] <- user(0)
+  np2charge_ec2s1u_13[] <- user(0)
+  np2charge_ec3s1u_13[] <- user(0)
+  np2charge_ec4s1u_13[] <- user(0)
+  
+  np2charge_ec1s1u_14[] <- user(0)
+  np2charge_ec2s1u_14[] <- user(0)
+  np2charge_ec3s1u_14[] <- user(0)
+  np2charge_ec4s1u_14[] <- user(0)
+  
+  np2charge_ec1s1u_15[] <- user(0)
+  np2charge_ec2s1u_15[] <- user(0)
+  np2charge_ec3s1u_15[] <- user(0)
+  np2charge_ec4s1u_15[] <- user(0)
+  
+  np2charge_ec1s1u_16[] <- user(0)
+  np2charge_ec2s1u_16[] <- user(0)
+  np2charge_ec3s1u_16[] <- user(0)
+  np2charge_ec4s1u_16[] <- user(0)
+  
+  np2charge_ec1s1u_17[] <- user(0)
+  np2charge_ec2s1u_17[] <- user(0)
+  np2charge_ec3s1u_17[] <- user(0)
+  np2charge_ec4s1u_17[] <- user(0)
+  
+  
+  
+  np2charge_ec1s2u_10[] <- user(0)
+  np2charge_ec2s2u_10[] <- user(0)
+  np2charge_ec3s2u_10[] <- user(0)
+  np2charge_ec4s2u_10[] <- user(0)
+  
+  np2charge_ec1s2u_11[] <- user(0)
+  np2charge_ec2s2u_11[] <- user(0)
+  np2charge_ec3s2u_11[] <- user(0)
+  np2charge_ec4s2u_11[] <- user(0)
+  
+  np2charge_ec1s2u_12[] <- user(0)
+  np2charge_ec2s2u_12[] <- user(0)
+  np2charge_ec3s2u_12[] <- user(0)
+  np2charge_ec4s2u_12[] <- user(0)
+  
+  np2charge_ec1s2u_13[] <- user(0)
+  np2charge_ec2s2u_13[] <- user(0)
+  np2charge_ec3s2u_13[] <- user(0)
+  np2charge_ec4s2u_13[] <- user(0)
+  
+  np2charge_ec1s2u_14[] <- user(0)
+  np2charge_ec2s2u_14[] <- user(0)
+  np2charge_ec3s2u_14[] <- user(0)
+  np2charge_ec4s2u_14[] <- user(0)
+  
+  np2charge_ec1s2u_15[] <- user(0)
+  np2charge_ec2s2u_15[] <- user(0)
+  np2charge_ec3s2u_15[] <- user(0)
+  np2charge_ec4s2u_15[] <- user(0)
+  
+  np2charge_ec1s2u_16[] <- user(0)
+  np2charge_ec2s2u_16[] <- user(0)
+  np2charge_ec3s2u_16[] <- user(0)
+  np2charge_ec4s2u_16[] <- user(0)
+  
+  np2charge_ec1s2u_17[] <- user(0)
+  np2charge_ec2s2u_17[] <- user(0)
+  np2charge_ec3s2u_17[] <- user(0)
+  np2charge_ec4s2u_17[] <- user(0)
+  
+  
+  
+  np2charge_ec1s1w_10[] <- user(0)
+  np2charge_ec2s1w_10[] <- user(0)
+  np2charge_ec3s1w_10[] <- user(0)
+  np2charge_ec4s1w_10[] <- user(0)
+  
+  np2charge_ec1s1w_11[] <- user(0)
+  np2charge_ec2s1w_11[] <- user(0)
+  np2charge_ec3s1w_11[] <- user(0)
+  np2charge_ec4s1w_11[] <- user(0)
+  
+  np2charge_ec1s1w_12[] <- user(0)
+  np2charge_ec2s1w_12[] <- user(0)
+  np2charge_ec3s1w_12[] <- user(0)
+  np2charge_ec4s1w_12[] <- user(0)
+  
+  np2charge_ec1s1w_13[] <- user(0)
+  np2charge_ec2s1w_13[] <- user(0)
+  np2charge_ec3s1w_13[] <- user(0)
+  np2charge_ec4s1w_13[] <- user(0)
+  
+  np2charge_ec1s1w_14[] <- user(0)
+  np2charge_ec2s1w_14[] <- user(0)
+  np2charge_ec3s1w_14[] <- user(0)
+  np2charge_ec4s1w_14[] <- user(0)
+  
+  np2charge_ec1s1w_15[] <- user(0)
+  np2charge_ec2s1w_15[] <- user(0)
+  np2charge_ec3s1w_15[] <- user(0)
+  np2charge_ec4s1w_15[] <- user(0)
+  
+  np2charge_ec1s1w_16[] <- user(0)
+  np2charge_ec2s1w_16[] <- user(0)
+  np2charge_ec3s1w_16[] <- user(0)
+  np2charge_ec4s1w_16[] <- user(0)
+  
+  np2charge_ec1s1w_17[] <- user(0)
+  np2charge_ec2s1w_17[] <- user(0)
+  np2charge_ec3s1w_17[] <- user(0)
+  np2charge_ec4s1w_17[] <- user(0)
+  
+  
+  
+  np2charge_ec1s2w_10[] <- user(0)
+  np2charge_ec2s2w_10[] <- user(0)
+  np2charge_ec3s2w_10[] <- user(0)
+  np2charge_ec4s2w_10[] <- user(0)
+  
+  np2charge_ec1s2w_11[] <- user(0)
+  np2charge_ec2s2w_11[] <- user(0)
+  np2charge_ec3s2w_11[] <- user(0)
+  np2charge_ec4s2w_11[] <- user(0)
+  
+  np2charge_ec1s2w_12[] <- user(0)
+  np2charge_ec2s2w_12[] <- user(0)
+  np2charge_ec3s2w_12[] <- user(0)
+  np2charge_ec4s2w_12[] <- user(0)
+  
+  np2charge_ec1s2w_13[] <- user(0)
+  np2charge_ec2s2w_13[] <- user(0)
+  np2charge_ec3s2w_13[] <- user(0)
+  np2charge_ec4s2w_13[] <- user(0)
+  
+  np2charge_ec1s2w_14[] <- user(0)
+  np2charge_ec2s2w_14[] <- user(0)
+  np2charge_ec3s2w_14[] <- user(0)
+  np2charge_ec4s2w_14[] <- user(0)
+  
+  np2charge_ec1s2w_15[] <- user(0)
+  np2charge_ec2s2w_15[] <- user(0)
+  np2charge_ec3s2w_15[] <- user(0)
+  np2charge_ec4s2w_15[] <- user(0)
+  
+  np2charge_ec1s2w_16[] <- user(0)
+  np2charge_ec2s2w_16[] <- user(0)
+  np2charge_ec3s2w_16[] <- user(0)
+  np2charge_ec4s2w_16[] <- user(0)
+  
+  np2charge_ec1s2w_17[] <- user(0)
+  np2charge_ec2s2w_17[] <- user(0)
+  np2charge_ec3s2w_17[] <- user(0)
+  np2charge_ec4s2w_17[] <- user(0)
+  
+  
+  
+  p2charge_ic1s1u_10[] <- user(0)
+  p2charge_ic2s1u_10[] <- user(0)
+  p2charge_ic3s1u_10[] <- user(0)
+  p2charge_ic4s1u_10[] <- user(0)
+  
+  p2charge_ic1s1u_11[] <- user(0)
+  p2charge_ic2s1u_11[] <- user(0)
+  p2charge_ic3s1u_11[] <- user(0)
+  p2charge_ic4s1u_11[] <- user(0)
+  
+  p2charge_ic1s1u_12[] <- user(0)
+  p2charge_ic2s1u_12[] <- user(0)
+  p2charge_ic3s1u_12[] <- user(0)
+  p2charge_ic4s1u_12[] <- user(0)
+  
+  p2charge_ic1s1u_13[] <- user(0)
+  p2charge_ic2s1u_13[] <- user(0)
+  p2charge_ic3s1u_13[] <- user(0)
+  p2charge_ic4s1u_13[] <- user(0)
+  
+  p2charge_ic1s1u_14[] <- user(0)
+  p2charge_ic2s1u_14[] <- user(0)
+  p2charge_ic3s1u_14[] <- user(0)
+  p2charge_ic4s1u_14[] <- user(0)
+  
+  p2charge_ic1s1u_15[] <- user(0)
+  p2charge_ic2s1u_15[] <- user(0)
+  p2charge_ic3s1u_15[] <- user(0)
+  p2charge_ic4s1u_15[] <- user(0)
+  
+  p2charge_ic1s1u_16[] <- user(0)
+  p2charge_ic2s1u_16[] <- user(0)
+  p2charge_ic3s1u_16[] <- user(0)
+  p2charge_ic4s1u_16[] <- user(0)
+  
+  p2charge_ic1s1u_17[] <- user(0)
+  p2charge_ic2s1u_17[] <- user(0)
+  p2charge_ic3s1u_17[] <- user(0)
+  p2charge_ic4s1u_17[] <- user(0)
+  
+  
+  
+  p2charge_ic1s2u_10[] <- user(0)
+  p2charge_ic2s2u_10[] <- user(0)
+  p2charge_ic3s2u_10[] <- user(0)
+  p2charge_ic4s2u_10[] <- user(0)
+  
+  p2charge_ic1s2u_11[] <- user(0)
+  p2charge_ic2s2u_11[] <- user(0)
+  p2charge_ic3s2u_11[] <- user(0)
+  p2charge_ic4s2u_11[] <- user(0)
+  
+  p2charge_ic1s2u_12[] <- user(0)
+  p2charge_ic2s2u_12[] <- user(0)
+  p2charge_ic3s2u_12[] <- user(0)
+  p2charge_ic4s2u_12[] <- user(0)
+  
+  p2charge_ic1s2u_13[] <- user(0)
+  p2charge_ic2s2u_13[] <- user(0)
+  p2charge_ic3s2u_13[] <- user(0)
+  p2charge_ic4s2u_13[] <- user(0)
+  
+  p2charge_ic1s2u_14[] <- user(0)
+  p2charge_ic2s2u_14[] <- user(0)
+  p2charge_ic3s2u_14[] <- user(0)
+  p2charge_ic4s2u_14[] <- user(0)
+  
+  p2charge_ic1s2u_15[] <- user(0)
+  p2charge_ic2s2u_15[] <- user(0)
+  p2charge_ic3s2u_15[] <- user(0)
+  p2charge_ic4s2u_15[] <- user(0)
+  
+  p2charge_ic1s2u_16[] <- user(0)
+  p2charge_ic2s2u_16[] <- user(0)
+  p2charge_ic3s2u_16[] <- user(0)
+  p2charge_ic4s2u_16[] <- user(0)
+  
+  p2charge_ic1s2u_17[] <- user(0)
+  p2charge_ic2s2u_17[] <- user(0)
+  p2charge_ic3s2u_17[] <- user(0)
+  p2charge_ic4s2u_17[] <- user(0)
+  
+  
+  
+  p2charge_ic1s1w_10[] <- user(0)
+  p2charge_ic2s1w_10[] <- user(0)
+  p2charge_ic3s1w_10[] <- user(0)
+  p2charge_ic4s1w_10[] <- user(0)
+  
+  p2charge_ic1s1w_11[] <- user(0)
+  p2charge_ic2s1w_11[] <- user(0)
+  p2charge_ic3s1w_11[] <- user(0)
+  p2charge_ic4s1w_11[] <- user(0)
+  
+  p2charge_ic1s1w_12[] <- user(0)
+  p2charge_ic2s1w_12[] <- user(0)
+  p2charge_ic3s1w_12[] <- user(0)
+  p2charge_ic4s1w_12[] <- user(0)
+  
+  p2charge_ic1s1w_13[] <- user(0)
+  p2charge_ic2s1w_13[] <- user(0)
+  p2charge_ic3s1w_13[] <- user(0)
+  p2charge_ic4s1w_13[] <- user(0)
+  
+  p2charge_ic1s1w_14[] <- user(0)
+  p2charge_ic2s1w_14[] <- user(0)
+  p2charge_ic3s1w_14[] <- user(0)
+  p2charge_ic4s1w_14[] <- user(0)
+  
+  p2charge_ic1s1w_15[] <- user(0)
+  p2charge_ic2s1w_15[] <- user(0)
+  p2charge_ic3s1w_15[] <- user(0)
+  p2charge_ic4s1w_15[] <- user(0)
+  
+  p2charge_ic1s1w_16[] <- user(0)
+  p2charge_ic2s1w_16[] <- user(0)
+  p2charge_ic3s1w_16[] <- user(0)
+  p2charge_ic4s1w_16[] <- user(0)
+  
+  p2charge_ic1s1w_17[] <- user(0)
+  p2charge_ic2s1w_17[] <- user(0)
+  p2charge_ic3s1w_17[] <- user(0)
+  p2charge_ic4s1w_17[] <- user(0)
+  
+  
+  
+  p2charge_ic1s2w_10[] <- user(0)
+  p2charge_ic2s2w_10[] <- user(0)
+  p2charge_ic3s2w_10[] <- user(0)
+  p2charge_ic4s2w_10[] <- user(0)
+  
+  p2charge_ic1s2w_11[] <- user(0)
+  p2charge_ic2s2w_11[] <- user(0)
+  p2charge_ic3s2w_11[] <- user(0)
+  p2charge_ic4s2w_11[] <- user(0)
+  
+  p2charge_ic1s2w_12[] <- user(0)
+  p2charge_ic2s2w_12[] <- user(0)
+  p2charge_ic3s2w_12[] <- user(0)
+  p2charge_ic4s2w_12[] <- user(0)
+  
+  p2charge_ic1s2w_13[] <- user(0)
+  p2charge_ic2s2w_13[] <- user(0)
+  p2charge_ic3s2w_13[] <- user(0)
+  p2charge_ic4s2w_13[] <- user(0)
+  
+  p2charge_ic1s2w_14[] <- user(0)
+  p2charge_ic2s2w_14[] <- user(0)
+  p2charge_ic3s2w_14[] <- user(0)
+  p2charge_ic4s2w_14[] <- user(0)
+  
+  p2charge_ic1s2w_15[] <- user(0)
+  p2charge_ic2s2w_15[] <- user(0)
+  p2charge_ic3s2w_15[] <- user(0)
+  p2charge_ic4s2w_15[] <- user(0)
+  
+  p2charge_ic1s2w_16[] <- user(0)
+  p2charge_ic2s2w_16[] <- user(0)
+  p2charge_ic3s2w_16[] <- user(0)
+  p2charge_ic4s2w_16[] <- user(0)
+  
+  p2charge_ic1s2w_17[] <- user(0)
+  p2charge_ic2s2w_17[] <- user(0)
+  p2charge_ic3s2w_17[] <- user(0)
+  p2charge_ic4s2w_17[] <- user(0)
+  
+  
+  
+  p2charge_ec1s1u_10[] <- user(0)
+  p2charge_ec2s1u_10[] <- user(0)
+  p2charge_ec3s1u_10[] <- user(0)
+  p2charge_ec4s1u_10[] <- user(0)
+  
+  p2charge_ec1s1u_11[] <- user(0)
+  p2charge_ec2s1u_11[] <- user(0)
+  p2charge_ec3s1u_11[] <- user(0)
+  p2charge_ec4s1u_11[] <- user(0)
+  
+  p2charge_ec1s1u_12[] <- user(0)
+  p2charge_ec2s1u_12[] <- user(0)
+  p2charge_ec3s1u_12[] <- user(0)
+  p2charge_ec4s1u_12[] <- user(0)
+  
+  p2charge_ec1s1u_13[] <- user(0)
+  p2charge_ec2s1u_13[] <- user(0)
+  p2charge_ec3s1u_13[] <- user(0)
+  p2charge_ec4s1u_13[] <- user(0)
+  
+  p2charge_ec1s1u_14[] <- user(0)
+  p2charge_ec2s1u_14[] <- user(0)
+  p2charge_ec3s1u_14[] <- user(0)
+  p2charge_ec4s1u_14[] <- user(0)
+  
+  p2charge_ec1s1u_15[] <- user(0)
+  p2charge_ec2s1u_15[] <- user(0)
+  p2charge_ec3s1u_15[] <- user(0)
+  p2charge_ec4s1u_15[] <- user(0)
+  
+  p2charge_ec1s1u_16[] <- user(0)
+  p2charge_ec2s1u_16[] <- user(0)
+  p2charge_ec3s1u_16[] <- user(0)
+  p2charge_ec4s1u_16[] <- user(0)
+  
+  p2charge_ec1s1u_17[] <- user(0)
+  p2charge_ec2s1u_17[] <- user(0)
+  p2charge_ec3s1u_17[] <- user(0)
+  p2charge_ec4s1u_17[] <- user(0)
+  
+  
+  
+  p2charge_ec1s2u_10[] <- user(0)
+  p2charge_ec2s2u_10[] <- user(0)
+  p2charge_ec3s2u_10[] <- user(0)
+  p2charge_ec4s2u_10[] <- user(0)
+  
+  p2charge_ec1s2u_11[] <- user(0)
+  p2charge_ec2s2u_11[] <- user(0)
+  p2charge_ec3s2u_11[] <- user(0)
+  p2charge_ec4s2u_11[] <- user(0)
+  
+  p2charge_ec1s2u_12[] <- user(0)
+  p2charge_ec2s2u_12[] <- user(0)
+  p2charge_ec3s2u_12[] <- user(0)
+  p2charge_ec4s2u_12[] <- user(0)
+  
+  p2charge_ec1s2u_13[] <- user(0)
+  p2charge_ec2s2u_13[] <- user(0)
+  p2charge_ec3s2u_13[] <- user(0)
+  p2charge_ec4s2u_13[] <- user(0)
+  
+  p2charge_ec1s2u_14[] <- user(0)
+  p2charge_ec2s2u_14[] <- user(0)
+  p2charge_ec3s2u_14[] <- user(0)
+  p2charge_ec4s2u_14[] <- user(0)
+  
+  p2charge_ec1s2u_15[] <- user(0)
+  p2charge_ec2s2u_15[] <- user(0)
+  p2charge_ec3s2u_15[] <- user(0)
+  p2charge_ec4s2u_15[] <- user(0)
+  
+  p2charge_ec1s2u_16[] <- user(0)
+  p2charge_ec2s2u_16[] <- user(0)
+  p2charge_ec3s2u_16[] <- user(0)
+  p2charge_ec4s2u_16[] <- user(0)
+  
+  p2charge_ec1s2u_17[] <- user(0)
+  p2charge_ec2s2u_17[] <- user(0)
+  p2charge_ec3s2u_17[] <- user(0)
+  p2charge_ec4s2u_17[] <- user(0)
+  
+  
+  
+  p2charge_ec1s1w_10[] <- user(0)
+  p2charge_ec2s1w_10[] <- user(0)
+  p2charge_ec3s1w_10[] <- user(0)
+  p2charge_ec4s1w_10[] <- user(0)
+  
+  p2charge_ec1s1w_11[] <- user(0)
+  p2charge_ec2s1w_11[] <- user(0)
+  p2charge_ec3s1w_11[] <- user(0)
+  p2charge_ec4s1w_11[] <- user(0)
+  
+  p2charge_ec1s1w_12[] <- user(0)
+  p2charge_ec2s1w_12[] <- user(0)
+  p2charge_ec3s1w_12[] <- user(0)
+  p2charge_ec4s1w_12[] <- user(0)
+  
+  p2charge_ec1s1w_13[] <- user(0)
+  p2charge_ec2s1w_13[] <- user(0)
+  p2charge_ec3s1w_13[] <- user(0)
+  p2charge_ec4s1w_13[] <- user(0)
+  
+  p2charge_ec1s1w_14[] <- user(0)
+  p2charge_ec2s1w_14[] <- user(0)
+  p2charge_ec3s1w_14[] <- user(0)
+  p2charge_ec4s1w_14[] <- user(0)
+  
+  p2charge_ec1s1w_15[] <- user(0)
+  p2charge_ec2s1w_15[] <- user(0)
+  p2charge_ec3s1w_15[] <- user(0)
+  p2charge_ec4s1w_15[] <- user(0)
+  
+  p2charge_ec1s1w_16[] <- user(0)
+  p2charge_ec2s1w_16[] <- user(0)
+  p2charge_ec3s1w_16[] <- user(0)
+  p2charge_ec4s1w_16[] <- user(0)
+  
+  p2charge_ec1s1w_17[] <- user(0)
+  p2charge_ec2s1w_17[] <- user(0)
+  p2charge_ec3s1w_17[] <- user(0)
+  p2charge_ec4s1w_17[] <- user(0)
+  
+  
+  
+  p2charge_ec1s2w_10[] <- user(0)
+  p2charge_ec2s2w_10[] <- user(0)
+  p2charge_ec3s2w_10[] <- user(0)
+  p2charge_ec4s2w_10[] <- user(0)
+  
+  p2charge_ec1s2w_11[] <- user(0)
+  p2charge_ec2s2w_11[] <- user(0)
+  p2charge_ec3s2w_11[] <- user(0)
+  p2charge_ec4s2w_11[] <- user(0)
+  
+  p2charge_ec1s2w_12[] <- user(0)
+  p2charge_ec2s2w_12[] <- user(0)
+  p2charge_ec3s2w_12[] <- user(0)
+  p2charge_ec4s2w_12[] <- user(0)
+  
+  p2charge_ec1s2w_13[] <- user(0)
+  p2charge_ec2s2w_13[] <- user(0)
+  p2charge_ec3s2w_13[] <- user(0)
+  p2charge_ec4s2w_13[] <- user(0)
+  
+  p2charge_ec1s2w_14[] <- user(0)
+  p2charge_ec2s2w_14[] <- user(0)
+  p2charge_ec3s2w_14[] <- user(0)
+  p2charge_ec4s2w_14[] <- user(0)
+  
+  p2charge_ec1s2w_15[] <- user(0)
+  p2charge_ec2s2w_15[] <- user(0)
+  p2charge_ec3s2w_15[] <- user(0)
+  p2charge_ec4s2w_15[] <- user(0)
+  
+  p2charge_ec1s2w_16[] <- user(0)
+  p2charge_ec2s2w_16[] <- user(0)
+  p2charge_ec3s2w_16[] <- user(0)
+  p2charge_ec4s2w_16[] <- user(0)
+  
+  p2charge_ec1s2w_17[] <- user(0)
+  p2charge_ec2s2w_17[] <- user(0)
+  p2charge_ec3s2w_17[] <- user(0)
+  p2charge_ec4s2w_17[] <- user(0)
+  
+##############################################################################################################################
+## INITIAL CONDITIONS ####################################################################
+##############################################################################################################################
+  IC1S1J1U_10_ini[] <- user(0)
+  IC2S1J1U_10_ini[] <- user(0)
+  IC3S1J1U_10_ini[] <- user(0)
+  IC4S1J1U_10_ini[] <- user(0)
+  
+  IC1S1J1U_11_ini[] <- user(0)
+  IC2S1J1U_11_ini[] <- user(0)
+  IC3S1J1U_11_ini[] <- user(0)
+  IC4S1J1U_11_ini[] <- user(0)
+  
+  IC1S1J1U_12_ini[] <- user(0)
+  IC2S1J1U_12_ini[] <- user(0)
+  IC3S1J1U_12_ini[] <- user(0)
+  IC4S1J1U_12_ini[] <- user(0)
+  
+  IC1S1J1U_13_ini[] <- user(0)
+  IC2S1J1U_13_ini[] <- user(0)
+  IC3S1J1U_13_ini[] <- user(0)
+  IC4S1J1U_13_ini[] <- user(0)
+  
+  IC1S1J1U_14_ini[] <- user(0)
+  IC2S1J1U_14_ini[] <- user(0)
+  IC3S1J1U_14_ini[] <- user(0)
+  IC4S1J1U_14_ini[] <- user(0)
+  
+  IC1S1J1U_15_ini[] <- user(0)
+  IC2S1J1U_15_ini[] <- user(0)
+  IC3S1J1U_15_ini[] <- user(0)
+  IC4S1J1U_15_ini[] <- user(0)
+  
+  IC1S1J1U_16_ini[] <- user(0)
+  IC2S1J1U_16_ini[] <- user(0)
+  IC3S1J1U_16_ini[] <- user(0)
+  IC4S1J1U_16_ini[] <- user(0)
+  
+  IC1S1J1U_17_ini[] <- user(0)
+  IC2S1J1U_17_ini[] <- user(0)
+  IC3S1J1U_17_ini[] <- user(0)
+  IC4S1J1U_17_ini[] <- user(0)
+  
+  
+  
+  IC1S2J1U_10_ini[] <- user(0)
+  IC2S2J1U_10_ini[] <- user(0)
+  IC3S2J1U_10_ini[] <- user(0)
+  IC4S2J1U_10_ini[] <- user(0)
+  
+  IC1S2J1U_11_ini[] <- user(0)
+  IC2S2J1U_11_ini[] <- user(0)
+  IC3S2J1U_11_ini[] <- user(0)
+  IC4S2J1U_11_ini[] <- user(0)
+  
+  IC1S2J1U_12_ini[] <- user(0)
+  IC2S2J1U_12_ini[] <- user(0)
+  IC3S2J1U_12_ini[] <- user(0)
+  IC4S2J1U_12_ini[] <- user(0)
+  
+  IC1S2J1U_13_ini[] <- user(0)
+  IC2S2J1U_13_ini[] <- user(0)
+  IC3S2J1U_13_ini[] <- user(0)
+  IC4S2J1U_13_ini[] <- user(0)
+  
+  IC1S2J1U_14_ini[] <- user(0)
+  IC2S2J1U_14_ini[] <- user(0)
+  IC3S2J1U_14_ini[] <- user(0)
+  IC4S2J1U_14_ini[] <- user(0)
+  
+  IC1S2J1U_15_ini[] <- user(0)
+  IC2S2J1U_15_ini[] <- user(0)
+  IC3S2J1U_15_ini[] <- user(0)
+  IC4S2J1U_15_ini[] <- user(0)
+  
+  IC1S2J1U_16_ini[] <- user(0)
+  IC2S2J1U_16_ini[] <- user(0)
+  IC3S2J1U_16_ini[] <- user(0)
+  IC4S2J1U_16_ini[] <- user(0)
+  
+  IC1S2J1U_17_ini[] <- user(0)
+  IC2S2J1U_17_ini[] <- user(0)
+  IC3S2J1U_17_ini[] <- user(0)
+  IC4S2J1U_17_ini[] <- user(0)
+  
+  
+  
+  IC1S1J2U_10_ini[] <- user(0)
+  IC2S1J2U_10_ini[] <- user(0)
+  IC3S1J2U_10_ini[] <- user(0)
+  IC4S1J2U_10_ini[] <- user(0)
+  
+  IC1S1J2U_11_ini[] <- user(0)
+  IC2S1J2U_11_ini[] <- user(0)
+  IC3S1J2U_11_ini[] <- user(0)
+  IC4S1J2U_11_ini[] <- user(0)
+  
+  IC1S1J2U_12_ini[] <- user(0)
+  IC2S1J2U_12_ini[] <- user(0)
+  IC3S1J2U_12_ini[] <- user(0)
+  IC4S1J2U_12_ini[] <- user(0)
+  
+  IC1S1J2U_13_ini[] <- user(0)
+  IC2S1J2U_13_ini[] <- user(0)
+  IC3S1J2U_13_ini[] <- user(0)
+  IC4S1J2U_13_ini[] <- user(0)
+  
+  IC1S1J2U_14_ini[] <- user(0)
+  IC2S1J2U_14_ini[] <- user(0)
+  IC3S1J2U_14_ini[] <- user(0)
+  IC4S1J2U_14_ini[] <- user(0)
+  
+  IC1S1J2U_15_ini[] <- user(0)
+  IC2S1J2U_15_ini[] <- user(0)
+  IC3S1J2U_15_ini[] <- user(0)
+  IC4S1J2U_15_ini[] <- user(0)
+  
+  IC1S1J2U_16_ini[] <- user(0)
+  IC2S1J2U_16_ini[] <- user(0)
+  IC3S1J2U_16_ini[] <- user(0)
+  IC4S1J2U_16_ini[] <- user(0)
+  
+  IC1S1J2U_17_ini[] <- user(0)
+  IC2S1J2U_17_ini[] <- user(0)
+  IC3S1J2U_17_ini[] <- user(0)
+  IC4S1J2U_17_ini[] <- user(0)
+  
+  
+  
+  IC1S2J2U_10_ini[] <- user(0)
+  IC2S2J2U_10_ini[] <- user(0)
+  IC3S2J2U_10_ini[] <- user(0)
+  IC4S2J2U_10_ini[] <- user(0)
+  
+  IC1S2J2U_11_ini[] <- user(0)
+  IC2S2J2U_11_ini[] <- user(0)
+  IC3S2J2U_11_ini[] <- user(0)
+  IC4S2J2U_11_ini[] <- user(0)
+  
+  IC1S2J2U_12_ini[] <- user(0)
+  IC2S2J2U_12_ini[] <- user(0)
+  IC3S2J2U_12_ini[] <- user(0)
+  IC4S2J2U_12_ini[] <- user(0)
+  
+  IC1S2J2U_13_ini[] <- user(0)
+  IC2S2J2U_13_ini[] <- user(0)
+  IC3S2J2U_13_ini[] <- user(0)
+  IC4S2J2U_13_ini[] <- user(0)
+  
+  IC1S2J2U_14_ini[] <- user(0)
+  IC2S2J2U_14_ini[] <- user(0)
+  IC3S2J2U_14_ini[] <- user(0)
+  IC4S2J2U_14_ini[] <- user(0)
+  
+  IC1S2J2U_15_ini[] <- user(0)
+  IC2S2J2U_15_ini[] <- user(0)
+  IC3S2J2U_15_ini[] <- user(0)
+  IC4S2J2U_15_ini[] <- user(0)
+  
+  IC1S2J2U_16_ini[] <- user(0)
+  IC2S2J2U_16_ini[] <- user(0)
+  IC3S2J2U_16_ini[] <- user(0)
+  IC4S2J2U_16_ini[] <- user(0)
+  
+  IC1S2J2U_17_ini[] <- user(0)
+  IC2S2J2U_17_ini[] <- user(0)
+  IC3S2J2U_17_ini[] <- user(0)
+  IC4S2J2U_17_ini[] <- user(0)
+  
+  
+  
+  IC1S1J3U_10_ini[] <- user(0)
+  IC2S1J3U_10_ini[] <- user(0)
+  IC3S1J3U_10_ini[] <- user(0)
+  IC4S1J3U_10_ini[] <- user(0)
+  
+  IC1S1J3U_11_ini[] <- user(0)
+  IC2S1J3U_11_ini[] <- user(0)
+  IC3S1J3U_11_ini[] <- user(0)
+  IC4S1J3U_11_ini[] <- user(0)
+  
+  IC1S1J3U_12_ini[] <- user(0)
+  IC2S1J3U_12_ini[] <- user(0)
+  IC3S1J3U_12_ini[] <- user(0)
+  IC4S1J3U_12_ini[] <- user(0)
+  
+  IC1S1J3U_13_ini[] <- user(0)
+  IC2S1J3U_13_ini[] <- user(0)
+  IC3S1J3U_13_ini[] <- user(0)
+  IC4S1J3U_13_ini[] <- user(0)
+  
+  IC1S1J3U_14_ini[] <- user(0)
+  IC2S1J3U_14_ini[] <- user(0)
+  IC3S1J3U_14_ini[] <- user(0)
+  IC4S1J3U_14_ini[] <- user(0)
+  
+  IC1S1J3U_15_ini[] <- user(0)
+  IC2S1J3U_15_ini[] <- user(0)
+  IC3S1J3U_15_ini[] <- user(0)
+  IC4S1J3U_15_ini[] <- user(0)
+  
+  IC1S1J3U_16_ini[] <- user(0)
+  IC2S1J3U_16_ini[] <- user(0)
+  IC3S1J3U_16_ini[] <- user(0)
+  IC4S1J3U_16_ini[] <- user(0)
+  
+  IC1S1J3U_17_ini[] <- user(0)
+  IC2S1J3U_17_ini[] <- user(0)
+  IC3S1J3U_17_ini[] <- user(0)
+  IC4S1J3U_17_ini[] <- user(0)
+  
+  
+  
+  IC1S2J3U_10_ini[] <- user(0)
+  IC2S2J3U_10_ini[] <- user(0)
+  IC3S2J3U_10_ini[] <- user(0)
+  IC4S2J3U_10_ini[] <- user(0)
+  
+  IC1S2J3U_11_ini[] <- user(0)
+  IC2S2J3U_11_ini[] <- user(0)
+  IC3S2J3U_11_ini[] <- user(0)
+  IC4S2J3U_11_ini[] <- user(0)
+  
+  IC1S2J3U_12_ini[] <- user(0)
+  IC2S2J3U_12_ini[] <- user(0)
+  IC3S2J3U_12_ini[] <- user(0)
+  IC4S2J3U_12_ini[] <- user(0)
+  
+  IC1S2J3U_13_ini[] <- user(0)
+  IC2S2J3U_13_ini[] <- user(0)
+  IC3S2J3U_13_ini[] <- user(0)
+  IC4S2J3U_13_ini[] <- user(0)
+  
+  IC1S2J3U_14_ini[] <- user(0)
+  IC2S2J3U_14_ini[] <- user(0)
+  IC3S2J3U_14_ini[] <- user(0)
+  IC4S2J3U_14_ini[] <- user(0)
+  
+  IC1S2J3U_15_ini[] <- user(0)
+  IC2S2J3U_15_ini[] <- user(0)
+  IC3S2J3U_15_ini[] <- user(0)
+  IC4S2J3U_15_ini[] <- user(0)
+  
+  IC1S2J3U_16_ini[] <- user(0)
+  IC2S2J3U_16_ini[] <- user(0)
+  IC3S2J3U_16_ini[] <- user(0)
+  IC4S2J3U_16_ini[] <- user(0)
+  
+  IC1S2J3U_17_ini[] <- user(0)
+  IC2S2J3U_17_ini[] <- user(0)
+  IC3S2J3U_17_ini[] <- user(0)
+  IC4S2J3U_17_ini[] <- user(0)
+  
+  
+  
+  IC1S1J4U_10_ini[] <- user(0)
+  IC2S1J4U_10_ini[] <- user(0)
+  IC3S1J4U_10_ini[] <- user(0)
+  IC4S1J4U_10_ini[] <- user(0)
+  
+  IC1S1J4U_11_ini[] <- user(0)
+  IC2S1J4U_11_ini[] <- user(0)
+  IC3S1J4U_11_ini[] <- user(0)
+  IC4S1J4U_11_ini[] <- user(0)
+  
+  IC1S1J4U_12_ini[] <- user(0)
+  IC2S1J4U_12_ini[] <- user(0)
+  IC3S1J4U_12_ini[] <- user(0)
+  IC4S1J4U_12_ini[] <- user(0)
+  
+  IC1S1J4U_13_ini[] <- user(0)
+  IC2S1J4U_13_ini[] <- user(0)
+  IC3S1J4U_13_ini[] <- user(0)
+  IC4S1J4U_13_ini[] <- user(0)
+  
+  IC1S1J4U_14_ini[] <- user(0)
+  IC2S1J4U_14_ini[] <- user(0)
+  IC3S1J4U_14_ini[] <- user(0)
+  IC4S1J4U_14_ini[] <- user(0)
+  
+  IC1S1J4U_15_ini[] <- user(0)
+  IC2S1J4U_15_ini[] <- user(0)
+  IC3S1J4U_15_ini[] <- user(0)
+  IC4S1J4U_15_ini[] <- user(0)
+  
+  IC1S1J4U_16_ini[] <- user(0)
+  IC2S1J4U_16_ini[] <- user(0)
+  IC3S1J4U_16_ini[] <- user(0)
+  IC4S1J4U_16_ini[] <- user(0)
+  
+  IC1S1J4U_17_ini[] <- user(0)
+  IC2S1J4U_17_ini[] <- user(0)
+  IC3S1J4U_17_ini[] <- user(0)
+  IC4S1J4U_17_ini[] <- user(0)
+  
+  
+  
+  IC1S2J4U_10_ini[] <- user(0)
+  IC2S2J4U_10_ini[] <- user(0)
+  IC3S2J4U_10_ini[] <- user(0)
+  IC4S2J4U_10_ini[] <- user(0)
+  
+  IC1S2J4U_11_ini[] <- user(0)
+  IC2S2J4U_11_ini[] <- user(0)
+  IC3S2J4U_11_ini[] <- user(0)
+  IC4S2J4U_11_ini[] <- user(0)
+  
+  IC1S2J4U_12_ini[] <- user(0)
+  IC2S2J4U_12_ini[] <- user(0)
+  IC3S2J4U_12_ini[] <- user(0)
+  IC4S2J4U_12_ini[] <- user(0)
+  
+  IC1S2J4U_13_ini[] <- user(0)
+  IC2S2J4U_13_ini[] <- user(0)
+  IC3S2J4U_13_ini[] <- user(0)
+  IC4S2J4U_13_ini[] <- user(0)
+  
+  IC1S2J4U_14_ini[] <- user(0)
+  IC2S2J4U_14_ini[] <- user(0)
+  IC3S2J4U_14_ini[] <- user(0)
+  IC4S2J4U_14_ini[] <- user(0)
+  
+  IC1S2J4U_15_ini[] <- user(0)
+  IC2S2J4U_15_ini[] <- user(0)
+  IC3S2J4U_15_ini[] <- user(0)
+  IC4S2J4U_15_ini[] <- user(0)
+  
+  IC1S2J4U_16_ini[] <- user(0)
+  IC2S2J4U_16_ini[] <- user(0)
+  IC3S2J4U_16_ini[] <- user(0)
+  IC4S2J4U_16_ini[] <- user(0)
+  
+  IC1S2J4U_17_ini[] <- user(0)
+  IC2S2J4U_17_ini[] <- user(0)
+  IC3S2J4U_17_ini[] <- user(0)
+  IC4S2J4U_17_ini[] <- user(0)
+  
+  
+  
+  IC1S1J5U_10_ini[] <- user(0)
+  IC2S1J5U_10_ini[] <- user(0)
+  IC3S1J5U_10_ini[] <- user(0)
+  IC4S1J5U_10_ini[] <- user(0)
+  
+  IC1S1J5U_11_ini[] <- user(0)
+  IC2S1J5U_11_ini[] <- user(0)
+  IC3S1J5U_11_ini[] <- user(0)
+  IC4S1J5U_11_ini[] <- user(0)
+  
+  IC1S1J5U_12_ini[] <- user(0)
+  IC2S1J5U_12_ini[] <- user(0)
+  IC3S1J5U_12_ini[] <- user(0)
+  IC4S1J5U_12_ini[] <- user(0)
+  
+  IC1S1J5U_13_ini[] <- user(0)
+  IC2S1J5U_13_ini[] <- user(0)
+  IC3S1J5U_13_ini[] <- user(0)
+  IC4S1J5U_13_ini[] <- user(0)
+  
+  IC1S1J5U_14_ini[] <- user(0)
+  IC2S1J5U_14_ini[] <- user(0)
+  IC3S1J5U_14_ini[] <- user(0)
+  IC4S1J5U_14_ini[] <- user(0)
+  
+  IC1S1J5U_15_ini[] <- user(0)
+  IC2S1J5U_15_ini[] <- user(0)
+  IC3S1J5U_15_ini[] <- user(0)
+  IC4S1J5U_15_ini[] <- user(0)
+  
+  IC1S1J5U_16_ini[] <- user(0)
+  IC2S1J5U_16_ini[] <- user(0)
+  IC3S1J5U_16_ini[] <- user(0)
+  IC4S1J5U_16_ini[] <- user(0)
+  
+  IC1S1J5U_17_ini[] <- user(0)
+  IC2S1J5U_17_ini[] <- user(0)
+  IC3S1J5U_17_ini[] <- user(0)
+  IC4S1J5U_17_ini[] <- user(0)
+  
+  
+  
+  IC1S2J5U_10_ini[] <- user(0)
+  IC2S2J5U_10_ini[] <- user(0)
+  IC3S2J5U_10_ini[] <- user(0)
+  IC4S2J5U_10_ini[] <- user(0)
+  
+  IC1S2J5U_11_ini[] <- user(0)
+  IC2S2J5U_11_ini[] <- user(0)
+  IC3S2J5U_11_ini[] <- user(0)
+  IC4S2J5U_11_ini[] <- user(0)
+  
+  IC1S2J5U_12_ini[] <- user(0)
+  IC2S2J5U_12_ini[] <- user(0)
+  IC3S2J5U_12_ini[] <- user(0)
+  IC4S2J5U_12_ini[] <- user(0)
+  
+  IC1S2J5U_13_ini[] <- user(0)
+  IC2S2J5U_13_ini[] <- user(0)
+  IC3S2J5U_13_ini[] <- user(0)
+  IC4S2J5U_13_ini[] <- user(0)
+  
+  IC1S2J5U_14_ini[] <- user(0)
+  IC2S2J5U_14_ini[] <- user(0)
+  IC3S2J5U_14_ini[] <- user(0)
+  IC4S2J5U_14_ini[] <- user(0)
+  
+  IC1S2J5U_15_ini[] <- user(0)
+  IC2S2J5U_15_ini[] <- user(0)
+  IC3S2J5U_15_ini[] <- user(0)
+  IC4S2J5U_15_ini[] <- user(0)
+  
+  IC1S2J5U_16_ini[] <- user(0)
+  IC2S2J5U_16_ini[] <- user(0)
+  IC3S2J5U_16_ini[] <- user(0)
+  IC4S2J5U_16_ini[] <- user(0)
+  
+  IC1S2J5U_17_ini[] <- user(0)
+  IC2S2J5U_17_ini[] <- user(0)
+  IC3S2J5U_17_ini[] <- user(0)
+  IC4S2J5U_17_ini[] <- user(0)
+  
+  
+  
+  IC1S1J1W_10_ini[] <- user(0)
+  IC2S1J1W_10_ini[] <- user(0)
+  IC3S1J1W_10_ini[] <- user(0)
+  IC4S1J1W_10_ini[] <- user(0)
+  
+  IC1S1J1W_11_ini[] <- user(0)
+  IC2S1J1W_11_ini[] <- user(0)
+  IC3S1J1W_11_ini[] <- user(0)
+  IC4S1J1W_11_ini[] <- user(0)
+  
+  IC1S1J1W_12_ini[] <- user(0)
+  IC2S1J1W_12_ini[] <- user(0)
+  IC3S1J1W_12_ini[] <- user(0)
+  IC4S1J1W_12_ini[] <- user(0)
+  
+  IC1S1J1W_13_ini[] <- user(0)
+  IC2S1J1W_13_ini[] <- user(0)
+  IC3S1J1W_13_ini[] <- user(0)
+  IC4S1J1W_13_ini[] <- user(0)
+  
+  IC1S1J1W_14_ini[] <- user(0)
+  IC2S1J1W_14_ini[] <- user(0)
+  IC3S1J1W_14_ini[] <- user(0)
+  IC4S1J1W_14_ini[] <- user(0)
+  
+  IC1S1J1W_15_ini[] <- user(0)
+  IC2S1J1W_15_ini[] <- user(0)
+  IC3S1J1W_15_ini[] <- user(0)
+  IC4S1J1W_15_ini[] <- user(0)
+  
+  IC1S1J1W_16_ini[] <- user(0)
+  IC2S1J1W_16_ini[] <- user(0)
+  IC3S1J1W_16_ini[] <- user(0)
+  IC4S1J1W_16_ini[] <- user(0)
+  
+  IC1S1J1W_17_ini[] <- user(0)
+  IC2S1J1W_17_ini[] <- user(0)
+  IC3S1J1W_17_ini[] <- user(0)
+  IC4S1J1W_17_ini[] <- user(0)
+  
+  
+  
+  IC1S2J1W_10_ini[] <- user(0)
+  IC2S2J1W_10_ini[] <- user(0)
+  IC3S2J1W_10_ini[] <- user(0)
+  IC4S2J1W_10_ini[] <- user(0)
+  
+  IC1S2J1W_11_ini[] <- user(0)
+  IC2S2J1W_11_ini[] <- user(0)
+  IC3S2J1W_11_ini[] <- user(0)
+  IC4S2J1W_11_ini[] <- user(0)
+  
+  IC1S2J1W_12_ini[] <- user(0)
+  IC2S2J1W_12_ini[] <- user(0)
+  IC3S2J1W_12_ini[] <- user(0)
+  IC4S2J1W_12_ini[] <- user(0)
+  
+  IC1S2J1W_13_ini[] <- user(0)
+  IC2S2J1W_13_ini[] <- user(0)
+  IC3S2J1W_13_ini[] <- user(0)
+  IC4S2J1W_13_ini[] <- user(0)
+  
+  IC1S2J1W_14_ini[] <- user(0)
+  IC2S2J1W_14_ini[] <- user(0)
+  IC3S2J1W_14_ini[] <- user(0)
+  IC4S2J1W_14_ini[] <- user(0)
+  
+  IC1S2J1W_15_ini[] <- user(0)
+  IC2S2J1W_15_ini[] <- user(0)
+  IC3S2J1W_15_ini[] <- user(0)
+  IC4S2J1W_15_ini[] <- user(0)
+  
+  IC1S2J1W_16_ini[] <- user(0)
+  IC2S2J1W_16_ini[] <- user(0)
+  IC3S2J1W_16_ini[] <- user(0)
+  IC4S2J1W_16_ini[] <- user(0)
+  
+  IC1S2J1W_17_ini[] <- user(0)
+  IC2S2J1W_17_ini[] <- user(0)
+  IC3S2J1W_17_ini[] <- user(0)
+  IC4S2J1W_17_ini[] <- user(0)
+  
+  
+  
+  IC1S1J2W_10_ini[] <- user(0)
+  IC2S1J2W_10_ini[] <- user(0)
+  IC3S1J2W_10_ini[] <- user(0)
+  IC4S1J2W_10_ini[] <- user(0)
+  
+  IC1S1J2W_11_ini[] <- user(0)
+  IC2S1J2W_11_ini[] <- user(0)
+  IC3S1J2W_11_ini[] <- user(0)
+  IC4S1J2W_11_ini[] <- user(0)
+  
+  IC1S1J2W_12_ini[] <- user(0)
+  IC2S1J2W_12_ini[] <- user(0)
+  IC3S1J2W_12_ini[] <- user(0)
+  IC4S1J2W_12_ini[] <- user(0)
+  
+  IC1S1J2W_13_ini[] <- user(0)
+  IC2S1J2W_13_ini[] <- user(0)
+  IC3S1J2W_13_ini[] <- user(0)
+  IC4S1J2W_13_ini[] <- user(0)
+  
+  IC1S1J2W_14_ini[] <- user(0)
+  IC2S1J2W_14_ini[] <- user(0)
+  IC3S1J2W_14_ini[] <- user(0)
+  IC4S1J2W_14_ini[] <- user(0)
+  
+  IC1S1J2W_15_ini[] <- user(0)
+  IC2S1J2W_15_ini[] <- user(0)
+  IC3S1J2W_15_ini[] <- user(0)
+  IC4S1J2W_15_ini[] <- user(0)
+  
+  IC1S1J2W_16_ini[] <- user(0)
+  IC2S1J2W_16_ini[] <- user(0)
+  IC3S1J2W_16_ini[] <- user(0)
+  IC4S1J2W_16_ini[] <- user(0)
+  
+  IC1S1J2W_17_ini[] <- user(0)
+  IC2S1J2W_17_ini[] <- user(0)
+  IC3S1J2W_17_ini[] <- user(0)
+  IC4S1J2W_17_ini[] <- user(0)
+  
+  
+  
+  IC1S2J2W_10_ini[] <- user(0)
+  IC2S2J2W_10_ini[] <- user(0)
+  IC3S2J2W_10_ini[] <- user(0)
+  IC4S2J2W_10_ini[] <- user(0)
+  
+  IC1S2J2W_11_ini[] <- user(0)
+  IC2S2J2W_11_ini[] <- user(0)
+  IC3S2J2W_11_ini[] <- user(0)
+  IC4S2J2W_11_ini[] <- user(0)
+  
+  IC1S2J2W_12_ini[] <- user(0)
+  IC2S2J2W_12_ini[] <- user(0)
+  IC3S2J2W_12_ini[] <- user(0)
+  IC4S2J2W_12_ini[] <- user(0)
+  
+  IC1S2J2W_13_ini[] <- user(0)
+  IC2S2J2W_13_ini[] <- user(0)
+  IC3S2J2W_13_ini[] <- user(0)
+  IC4S2J2W_13_ini[] <- user(0)
+  
+  IC1S2J2W_14_ini[] <- user(0)
+  IC2S2J2W_14_ini[] <- user(0)
+  IC3S2J2W_14_ini[] <- user(0)
+  IC4S2J2W_14_ini[] <- user(0)
+  
+  IC1S2J2W_15_ini[] <- user(0)
+  IC2S2J2W_15_ini[] <- user(0)
+  IC3S2J2W_15_ini[] <- user(0)
+  IC4S2J2W_15_ini[] <- user(0)
+  
+  IC1S2J2W_16_ini[] <- user(0)
+  IC2S2J2W_16_ini[] <- user(0)
+  IC3S2J2W_16_ini[] <- user(0)
+  IC4S2J2W_16_ini[] <- user(0)
+  
+  IC1S2J2W_17_ini[] <- user(0)
+  IC2S2J2W_17_ini[] <- user(0)
+  IC3S2J2W_17_ini[] <- user(0)
+  IC4S2J2W_17_ini[] <- user(0)
+  
+  
+  
+  IC1S1J3W_10_ini[] <- user(0)
+  IC2S1J3W_10_ini[] <- user(0)
+  IC3S1J3W_10_ini[] <- user(0)
+  IC4S1J3W_10_ini[] <- user(0)
+  
+  IC1S1J3W_11_ini[] <- user(0)
+  IC2S1J3W_11_ini[] <- user(0)
+  IC3S1J3W_11_ini[] <- user(0)
+  IC4S1J3W_11_ini[] <- user(0)
+  
+  IC1S1J3W_12_ini[] <- user(0)
+  IC2S1J3W_12_ini[] <- user(0)
+  IC3S1J3W_12_ini[] <- user(0)
+  IC4S1J3W_12_ini[] <- user(0)
+  
+  IC1S1J3W_13_ini[] <- user(0)
+  IC2S1J3W_13_ini[] <- user(0)
+  IC3S1J3W_13_ini[] <- user(0)
+  IC4S1J3W_13_ini[] <- user(0)
+  
+  IC1S1J3W_14_ini[] <- user(0)
+  IC2S1J3W_14_ini[] <- user(0)
+  IC3S1J3W_14_ini[] <- user(0)
+  IC4S1J3W_14_ini[] <- user(0)
+  
+  IC1S1J3W_15_ini[] <- user(0)
+  IC2S1J3W_15_ini[] <- user(0)
+  IC3S1J3W_15_ini[] <- user(0)
+  IC4S1J3W_15_ini[] <- user(0)
+  
+  IC1S1J3W_16_ini[] <- user(0)
+  IC2S1J3W_16_ini[] <- user(0)
+  IC3S1J3W_16_ini[] <- user(0)
+  IC4S1J3W_16_ini[] <- user(0)
+  
+  IC1S1J3W_17_ini[] <- user(0)
+  IC2S1J3W_17_ini[] <- user(0)
+  IC3S1J3W_17_ini[] <- user(0)
+  IC4S1J3W_17_ini[] <- user(0)
+  
+  
+  
+  IC1S2J3W_10_ini[] <- user(0)
+  IC2S2J3W_10_ini[] <- user(0)
+  IC3S2J3W_10_ini[] <- user(0)
+  IC4S2J3W_10_ini[] <- user(0)
+  
+  IC1S2J3W_11_ini[] <- user(0)
+  IC2S2J3W_11_ini[] <- user(0)
+  IC3S2J3W_11_ini[] <- user(0)
+  IC4S2J3W_11_ini[] <- user(0)
+  
+  IC1S2J3W_12_ini[] <- user(0)
+  IC2S2J3W_12_ini[] <- user(0)
+  IC3S2J3W_12_ini[] <- user(0)
+  IC4S2J3W_12_ini[] <- user(0)
+  
+  IC1S2J3W_13_ini[] <- user(0)
+  IC2S2J3W_13_ini[] <- user(0)
+  IC3S2J3W_13_ini[] <- user(0)
+  IC4S2J3W_13_ini[] <- user(0)
+  
+  IC1S2J3W_14_ini[] <- user(0)
+  IC2S2J3W_14_ini[] <- user(0)
+  IC3S2J3W_14_ini[] <- user(0)
+  IC4S2J3W_14_ini[] <- user(0)
+  
+  IC1S2J3W_15_ini[] <- user(0)
+  IC2S2J3W_15_ini[] <- user(0)
+  IC3S2J3W_15_ini[] <- user(0)
+  IC4S2J3W_15_ini[] <- user(0)
+  
+  IC1S2J3W_16_ini[] <- user(0)
+  IC2S2J3W_16_ini[] <- user(0)
+  IC3S2J3W_16_ini[] <- user(0)
+  IC4S2J3W_16_ini[] <- user(0)
+  
+  IC1S2J3W_17_ini[] <- user(0)
+  IC2S2J3W_17_ini[] <- user(0)
+  IC3S2J3W_17_ini[] <- user(0)
+  IC4S2J3W_17_ini[] <- user(0)
+  
+  
+  
+  IC1S1J4W_10_ini[] <- user(0)
+  IC2S1J4W_10_ini[] <- user(0)
+  IC3S1J4W_10_ini[] <- user(0)
+  IC4S1J4W_10_ini[] <- user(0)
+  
+  IC1S1J4W_11_ini[] <- user(0)
+  IC2S1J4W_11_ini[] <- user(0)
+  IC3S1J4W_11_ini[] <- user(0)
+  IC4S1J4W_11_ini[] <- user(0)
+  
+  IC1S1J4W_12_ini[] <- user(0)
+  IC2S1J4W_12_ini[] <- user(0)
+  IC3S1J4W_12_ini[] <- user(0)
+  IC4S1J4W_12_ini[] <- user(0)
+  
+  IC1S1J4W_13_ini[] <- user(0)
+  IC2S1J4W_13_ini[] <- user(0)
+  IC3S1J4W_13_ini[] <- user(0)
+  IC4S1J4W_13_ini[] <- user(0)
+  
+  IC1S1J4W_14_ini[] <- user(0)
+  IC2S1J4W_14_ini[] <- user(0)
+  IC3S1J4W_14_ini[] <- user(0)
+  IC4S1J4W_14_ini[] <- user(0)
+  
+  IC1S1J4W_15_ini[] <- user(0)
+  IC2S1J4W_15_ini[] <- user(0)
+  IC3S1J4W_15_ini[] <- user(0)
+  IC4S1J4W_15_ini[] <- user(0)
+  
+  IC1S1J4W_16_ini[] <- user(0)
+  IC2S1J4W_16_ini[] <- user(0)
+  IC3S1J4W_16_ini[] <- user(0)
+  IC4S1J4W_16_ini[] <- user(0)
+  
+  IC1S1J4W_17_ini[] <- user(0)
+  IC2S1J4W_17_ini[] <- user(0)
+  IC3S1J4W_17_ini[] <- user(0)
+  IC4S1J4W_17_ini[] <- user(0)
+  
+  
+  
+  IC1S2J4W_10_ini[] <- user(0)
+  IC2S2J4W_10_ini[] <- user(0)
+  IC3S2J4W_10_ini[] <- user(0)
+  IC4S2J4W_10_ini[] <- user(0)
+  
+  IC1S2J4W_11_ini[] <- user(0)
+  IC2S2J4W_11_ini[] <- user(0)
+  IC3S2J4W_11_ini[] <- user(0)
+  IC4S2J4W_11_ini[] <- user(0)
+  
+  IC1S2J4W_12_ini[] <- user(0)
+  IC2S2J4W_12_ini[] <- user(0)
+  IC3S2J4W_12_ini[] <- user(0)
+  IC4S2J4W_12_ini[] <- user(0)
+  
+  IC1S2J4W_13_ini[] <- user(0)
+  IC2S2J4W_13_ini[] <- user(0)
+  IC3S2J4W_13_ini[] <- user(0)
+  IC4S2J4W_13_ini[] <- user(0)
+  
+  IC1S2J4W_14_ini[] <- user(0)
+  IC2S2J4W_14_ini[] <- user(0)
+  IC3S2J4W_14_ini[] <- user(0)
+  IC4S2J4W_14_ini[] <- user(0)
+  
+  IC1S2J4W_15_ini[] <- user(0)
+  IC2S2J4W_15_ini[] <- user(0)
+  IC3S2J4W_15_ini[] <- user(0)
+  IC4S2J4W_15_ini[] <- user(0)
+  
+  IC1S2J4W_16_ini[] <- user(0)
+  IC2S2J4W_16_ini[] <- user(0)
+  IC3S2J4W_16_ini[] <- user(0)
+  IC4S2J4W_16_ini[] <- user(0)
+  
+  IC1S2J4W_17_ini[] <- user(0)
+  IC2S2J4W_17_ini[] <- user(0)
+  IC3S2J4W_17_ini[] <- user(0)
+  IC4S2J4W_17_ini[] <- user(0)
+  
+  
+  
+  IC1S1J5W_10_ini[] <- user(0)
+  IC2S1J5W_10_ini[] <- user(0)
+  IC3S1J5W_10_ini[] <- user(0)
+  IC4S1J5W_10_ini[] <- user(0)
+  
+  IC1S1J5W_11_ini[] <- user(0)
+  IC2S1J5W_11_ini[] <- user(0)
+  IC3S1J5W_11_ini[] <- user(0)
+  IC4S1J5W_11_ini[] <- user(0)
+  
+  IC1S1J5W_12_ini[] <- user(0)
+  IC2S1J5W_12_ini[] <- user(0)
+  IC3S1J5W_12_ini[] <- user(0)
+  IC4S1J5W_12_ini[] <- user(0)
+  
+  IC1S1J5W_13_ini[] <- user(0)
+  IC2S1J5W_13_ini[] <- user(0)
+  IC3S1J5W_13_ini[] <- user(0)
+  IC4S1J5W_13_ini[] <- user(0)
+  
+  IC1S1J5W_14_ini[] <- user(0)
+  IC2S1J5W_14_ini[] <- user(0)
+  IC3S1J5W_14_ini[] <- user(0)
+  IC4S1J5W_14_ini[] <- user(0)
+  
+  IC1S1J5W_15_ini[] <- user(0)
+  IC2S1J5W_15_ini[] <- user(0)
+  IC3S1J5W_15_ini[] <- user(0)
+  IC4S1J5W_15_ini[] <- user(0)
+  
+  IC1S1J5W_16_ini[] <- user(0)
+  IC2S1J5W_16_ini[] <- user(0)
+  IC3S1J5W_16_ini[] <- user(0)
+  IC4S1J5W_16_ini[] <- user(0)
+  
+  IC1S1J5W_17_ini[] <- user(0)
+  IC2S1J5W_17_ini[] <- user(0)
+  IC3S1J5W_17_ini[] <- user(0)
+  IC4S1J5W_17_ini[] <- user(0)
+  
+  
+  
+  IC1S2J5W_10_ini[] <- user(0)
+  IC2S2J5W_10_ini[] <- user(0)
+  IC3S2J5W_10_ini[] <- user(0)
+  IC4S2J5W_10_ini[] <- user(0)
+  
+  IC1S2J5W_11_ini[] <- user(0)
+  IC2S2J5W_11_ini[] <- user(0)
+  IC3S2J5W_11_ini[] <- user(0)
+  IC4S2J5W_11_ini[] <- user(0)
+  
+  IC1S2J5W_12_ini[] <- user(0)
+  IC2S2J5W_12_ini[] <- user(0)
+  IC3S2J5W_12_ini[] <- user(0)
+  IC4S2J5W_12_ini[] <- user(0)
+  
+  IC1S2J5W_13_ini[] <- user(0)
+  IC2S2J5W_13_ini[] <- user(0)
+  IC3S2J5W_13_ini[] <- user(0)
+  IC4S2J5W_13_ini[] <- user(0)
+  
+  IC1S2J5W_14_ini[] <- user(0)
+  IC2S2J5W_14_ini[] <- user(0)
+  IC3S2J5W_14_ini[] <- user(0)
+  IC4S2J5W_14_ini[] <- user(0)
+  
+  IC1S2J5W_15_ini[] <- user(0)
+  IC2S2J5W_15_ini[] <- user(0)
+  IC3S2J5W_15_ini[] <- user(0)
+  IC4S2J5W_15_ini[] <- user(0)
+  
+  IC1S2J5W_16_ini[] <- user(0)
+  IC2S2J5W_16_ini[] <- user(0)
+  IC3S2J5W_16_ini[] <- user(0)
+  IC4S2J5W_16_ini[] <- user(0)
+  
+  IC1S2J5W_17_ini[] <- user(0)
+  IC2S2J5W_17_ini[] <- user(0)
+  IC3S2J5W_17_ini[] <- user(0)
+  IC4S2J5W_17_ini[] <- user(0)
+  
+  
+  
+  EC1S1J1U_10_ini[] <- user(0)
+  EC2S1J1U_10_ini[] <- user(0)
+  EC3S1J1U_10_ini[] <- user(0)
+  EC4S1J1U_10_ini[] <- user(0)
+  
+  EC1S1J1U_11_ini[] <- user(0)
+  EC2S1J1U_11_ini[] <- user(0)
+  EC3S1J1U_11_ini[] <- user(0)
+  EC4S1J1U_11_ini[] <- user(0)
+  
+  EC1S1J1U_12_ini[] <- user(0)
+  EC2S1J1U_12_ini[] <- user(0)
+  EC3S1J1U_12_ini[] <- user(0)
+  EC4S1J1U_12_ini[] <- user(0)
+  
+  EC1S1J1U_13_ini[] <- user(0)
+  EC2S1J1U_13_ini[] <- user(0)
+  EC3S1J1U_13_ini[] <- user(0)
+  EC4S1J1U_13_ini[] <- user(0)
+  
+  EC1S1J1U_14_ini[] <- user(0)
+  EC2S1J1U_14_ini[] <- user(0)
+  EC3S1J1U_14_ini[] <- user(0)
+  EC4S1J1U_14_ini[] <- user(0)
+  
+  EC1S1J1U_15_ini[] <- user(0)
+  EC2S1J1U_15_ini[] <- user(0)
+  EC3S1J1U_15_ini[] <- user(0)
+  EC4S1J1U_15_ini[] <- user(0)
+  
+  EC1S1J1U_16_ini[] <- user(0)
+  EC2S1J1U_16_ini[] <- user(0)
+  EC3S1J1U_16_ini[] <- user(0)
+  EC4S1J1U_16_ini[] <- user(0)
+  
+  EC1S1J1U_17_ini[] <- user(0)
+  EC2S1J1U_17_ini[] <- user(0)
+  EC3S1J1U_17_ini[] <- user(0)
+  EC4S1J1U_17_ini[] <- user(0)
+  
+  
+  
+  EC1S2J1U_10_ini[] <- user(0)
+  EC2S2J1U_10_ini[] <- user(0)
+  EC3S2J1U_10_ini[] <- user(0)
+  EC4S2J1U_10_ini[] <- user(0)
+  
+  EC1S2J1U_11_ini[] <- user(0)
+  EC2S2J1U_11_ini[] <- user(0)
+  EC3S2J1U_11_ini[] <- user(0)
+  EC4S2J1U_11_ini[] <- user(0)
+  
+  EC1S2J1U_12_ini[] <- user(0)
+  EC2S2J1U_12_ini[] <- user(0)
+  EC3S2J1U_12_ini[] <- user(0)
+  EC4S2J1U_12_ini[] <- user(0)
+  
+  EC1S2J1U_13_ini[] <- user(0)
+  EC2S2J1U_13_ini[] <- user(0)
+  EC3S2J1U_13_ini[] <- user(0)
+  EC4S2J1U_13_ini[] <- user(0)
+  
+  EC1S2J1U_14_ini[] <- user(0)
+  EC2S2J1U_14_ini[] <- user(0)
+  EC3S2J1U_14_ini[] <- user(0)
+  EC4S2J1U_14_ini[] <- user(0)
+  
+  EC1S2J1U_15_ini[] <- user(0)
+  EC2S2J1U_15_ini[] <- user(0)
+  EC3S2J1U_15_ini[] <- user(0)
+  EC4S2J1U_15_ini[] <- user(0)
+  
+  EC1S2J1U_16_ini[] <- user(0)
+  EC2S2J1U_16_ini[] <- user(0)
+  EC3S2J1U_16_ini[] <- user(0)
+  EC4S2J1U_16_ini[] <- user(0)
+  
+  EC1S2J1U_17_ini[] <- user(0)
+  EC2S2J1U_17_ini[] <- user(0)
+  EC3S2J1U_17_ini[] <- user(0)
+  EC4S2J1U_17_ini[] <- user(0)
+  
+  
+  
+  EC1S1J2U_10_ini[] <- user(0)
+  EC2S1J2U_10_ini[] <- user(0)
+  EC3S1J2U_10_ini[] <- user(0)
+  EC4S1J2U_10_ini[] <- user(0)
+  
+  EC1S1J2U_11_ini[] <- user(0)
+  EC2S1J2U_11_ini[] <- user(0)
+  EC3S1J2U_11_ini[] <- user(0)
+  EC4S1J2U_11_ini[] <- user(0)
+  
+  EC1S1J2U_12_ini[] <- user(0)
+  EC2S1J2U_12_ini[] <- user(0)
+  EC3S1J2U_12_ini[] <- user(0)
+  EC4S1J2U_12_ini[] <- user(0)
+  
+  EC1S1J2U_13_ini[] <- user(0)
+  EC2S1J2U_13_ini[] <- user(0)
+  EC3S1J2U_13_ini[] <- user(0)
+  EC4S1J2U_13_ini[] <- user(0)
+  
+  EC1S1J2U_14_ini[] <- user(0)
+  EC2S1J2U_14_ini[] <- user(0)
+  EC3S1J2U_14_ini[] <- user(0)
+  EC4S1J2U_14_ini[] <- user(0)
+  
+  EC1S1J2U_15_ini[] <- user(0)
+  EC2S1J2U_15_ini[] <- user(0)
+  EC3S1J2U_15_ini[] <- user(0)
+  EC4S1J2U_15_ini[] <- user(0)
+  
+  EC1S1J2U_16_ini[] <- user(0)
+  EC2S1J2U_16_ini[] <- user(0)
+  EC3S1J2U_16_ini[] <- user(0)
+  EC4S1J2U_16_ini[] <- user(0)
+  
+  EC1S1J2U_17_ini[] <- user(0)
+  EC2S1J2U_17_ini[] <- user(0)
+  EC3S1J2U_17_ini[] <- user(0)
+  EC4S1J2U_17_ini[] <- user(0)
+  
+  
+  
+  EC1S2J2U_10_ini[] <- user(0)
+  EC2S2J2U_10_ini[] <- user(0)
+  EC3S2J2U_10_ini[] <- user(0)
+  EC4S2J2U_10_ini[] <- user(0)
+  
+  EC1S2J2U_11_ini[] <- user(0)
+  EC2S2J2U_11_ini[] <- user(0)
+  EC3S2J2U_11_ini[] <- user(0)
+  EC4S2J2U_11_ini[] <- user(0)
+  
+  EC1S2J2U_12_ini[] <- user(0)
+  EC2S2J2U_12_ini[] <- user(0)
+  EC3S2J2U_12_ini[] <- user(0)
+  EC4S2J2U_12_ini[] <- user(0)
+  
+  EC1S2J2U_13_ini[] <- user(0)
+  EC2S2J2U_13_ini[] <- user(0)
+  EC3S2J2U_13_ini[] <- user(0)
+  EC4S2J2U_13_ini[] <- user(0)
+  
+  EC1S2J2U_14_ini[] <- user(0)
+  EC2S2J2U_14_ini[] <- user(0)
+  EC3S2J2U_14_ini[] <- user(0)
+  EC4S2J2U_14_ini[] <- user(0)
+  
+  EC1S2J2U_15_ini[] <- user(0)
+  EC2S2J2U_15_ini[] <- user(0)
+  EC3S2J2U_15_ini[] <- user(0)
+  EC4S2J2U_15_ini[] <- user(0)
+  
+  EC1S2J2U_16_ini[] <- user(0)
+  EC2S2J2U_16_ini[] <- user(0)
+  EC3S2J2U_16_ini[] <- user(0)
+  EC4S2J2U_16_ini[] <- user(0)
+  
+  EC1S2J2U_17_ini[] <- user(0)
+  EC2S2J2U_17_ini[] <- user(0)
+  EC3S2J2U_17_ini[] <- user(0)
+  EC4S2J2U_17_ini[] <- user(0)
+  
+  
+  
+  EC1S1J3U_10_ini[] <- user(0)
+  EC2S1J3U_10_ini[] <- user(0)
+  EC3S1J3U_10_ini[] <- user(0)
+  EC4S1J3U_10_ini[] <- user(0)
+  
+  EC1S1J3U_11_ini[] <- user(0)
+  EC2S1J3U_11_ini[] <- user(0)
+  EC3S1J3U_11_ini[] <- user(0)
+  EC4S1J3U_11_ini[] <- user(0)
+  
+  EC1S1J3U_12_ini[] <- user(0)
+  EC2S1J3U_12_ini[] <- user(0)
+  EC3S1J3U_12_ini[] <- user(0)
+  EC4S1J3U_12_ini[] <- user(0)
+  
+  EC1S1J3U_13_ini[] <- user(0)
+  EC2S1J3U_13_ini[] <- user(0)
+  EC3S1J3U_13_ini[] <- user(0)
+  EC4S1J3U_13_ini[] <- user(0)
+  
+  EC1S1J3U_14_ini[] <- user(0)
+  EC2S1J3U_14_ini[] <- user(0)
+  EC3S1J3U_14_ini[] <- user(0)
+  EC4S1J3U_14_ini[] <- user(0)
+  
+  EC1S1J3U_15_ini[] <- user(0)
+  EC2S1J3U_15_ini[] <- user(0)
+  EC3S1J3U_15_ini[] <- user(0)
+  EC4S1J3U_15_ini[] <- user(0)
+  
+  EC1S1J3U_16_ini[] <- user(0)
+  EC2S1J3U_16_ini[] <- user(0)
+  EC3S1J3U_16_ini[] <- user(0)
+  EC4S1J3U_16_ini[] <- user(0)
+  
+  EC1S1J3U_17_ini[] <- user(0)
+  EC2S1J3U_17_ini[] <- user(0)
+  EC3S1J3U_17_ini[] <- user(0)
+  EC4S1J3U_17_ini[] <- user(0)
+  
+  
+  
+  EC1S2J3U_10_ini[] <- user(0)
+  EC2S2J3U_10_ini[] <- user(0)
+  EC3S2J3U_10_ini[] <- user(0)
+  EC4S2J3U_10_ini[] <- user(0)
+  
+  EC1S2J3U_11_ini[] <- user(0)
+  EC2S2J3U_11_ini[] <- user(0)
+  EC3S2J3U_11_ini[] <- user(0)
+  EC4S2J3U_11_ini[] <- user(0)
+  
+  EC1S2J3U_12_ini[] <- user(0)
+  EC2S2J3U_12_ini[] <- user(0)
+  EC3S2J3U_12_ini[] <- user(0)
+  EC4S2J3U_12_ini[] <- user(0)
+  
+  EC1S2J3U_13_ini[] <- user(0)
+  EC2S2J3U_13_ini[] <- user(0)
+  EC3S2J3U_13_ini[] <- user(0)
+  EC4S2J3U_13_ini[] <- user(0)
+  
+  EC1S2J3U_14_ini[] <- user(0)
+  EC2S2J3U_14_ini[] <- user(0)
+  EC3S2J3U_14_ini[] <- user(0)
+  EC4S2J3U_14_ini[] <- user(0)
+  
+  EC1S2J3U_15_ini[] <- user(0)
+  EC2S2J3U_15_ini[] <- user(0)
+  EC3S2J3U_15_ini[] <- user(0)
+  EC4S2J3U_15_ini[] <- user(0)
+  
+  EC1S2J3U_16_ini[] <- user(0)
+  EC2S2J3U_16_ini[] <- user(0)
+  EC3S2J3U_16_ini[] <- user(0)
+  EC4S2J3U_16_ini[] <- user(0)
+  
+  EC1S2J3U_17_ini[] <- user(0)
+  EC2S2J3U_17_ini[] <- user(0)
+  EC3S2J3U_17_ini[] <- user(0)
+  EC4S2J3U_17_ini[] <- user(0)
+  
+  
+  
+  EC1S1J4U_10_ini[] <- user(0)
+  EC2S1J4U_10_ini[] <- user(0)
+  EC3S1J4U_10_ini[] <- user(0)
+  EC4S1J4U_10_ini[] <- user(0)
+  
+  EC1S1J4U_11_ini[] <- user(0)
+  EC2S1J4U_11_ini[] <- user(0)
+  EC3S1J4U_11_ini[] <- user(0)
+  EC4S1J4U_11_ini[] <- user(0)
+  
+  EC1S1J4U_12_ini[] <- user(0)
+  EC2S1J4U_12_ini[] <- user(0)
+  EC3S1J4U_12_ini[] <- user(0)
+  EC4S1J4U_12_ini[] <- user(0)
+  
+  EC1S1J4U_13_ini[] <- user(0)
+  EC2S1J4U_13_ini[] <- user(0)
+  EC3S1J4U_13_ini[] <- user(0)
+  EC4S1J4U_13_ini[] <- user(0)
+  
+  EC1S1J4U_14_ini[] <- user(0)
+  EC2S1J4U_14_ini[] <- user(0)
+  EC3S1J4U_14_ini[] <- user(0)
+  EC4S1J4U_14_ini[] <- user(0)
+  
+  EC1S1J4U_15_ini[] <- user(0)
+  EC2S1J4U_15_ini[] <- user(0)
+  EC3S1J4U_15_ini[] <- user(0)
+  EC4S1J4U_15_ini[] <- user(0)
+  
+  EC1S1J4U_16_ini[] <- user(0)
+  EC2S1J4U_16_ini[] <- user(0)
+  EC3S1J4U_16_ini[] <- user(0)
+  EC4S1J4U_16_ini[] <- user(0)
+  
+  EC1S1J4U_17_ini[] <- user(0)
+  EC2S1J4U_17_ini[] <- user(0)
+  EC3S1J4U_17_ini[] <- user(0)
+  EC4S1J4U_17_ini[] <- user(0)
+  
+  
+  
+  EC1S2J4U_10_ini[] <- user(0)
+  EC2S2J4U_10_ini[] <- user(0)
+  EC3S2J4U_10_ini[] <- user(0)
+  EC4S2J4U_10_ini[] <- user(0)
+  
+  EC1S2J4U_11_ini[] <- user(0)
+  EC2S2J4U_11_ini[] <- user(0)
+  EC3S2J4U_11_ini[] <- user(0)
+  EC4S2J4U_11_ini[] <- user(0)
+  
+  EC1S2J4U_12_ini[] <- user(0)
+  EC2S2J4U_12_ini[] <- user(0)
+  EC3S2J4U_12_ini[] <- user(0)
+  EC4S2J4U_12_ini[] <- user(0)
+  
+  EC1S2J4U_13_ini[] <- user(0)
+  EC2S2J4U_13_ini[] <- user(0)
+  EC3S2J4U_13_ini[] <- user(0)
+  EC4S2J4U_13_ini[] <- user(0)
+  
+  EC1S2J4U_14_ini[] <- user(0)
+  EC2S2J4U_14_ini[] <- user(0)
+  EC3S2J4U_14_ini[] <- user(0)
+  EC4S2J4U_14_ini[] <- user(0)
+  
+  EC1S2J4U_15_ini[] <- user(0)
+  EC2S2J4U_15_ini[] <- user(0)
+  EC3S2J4U_15_ini[] <- user(0)
+  EC4S2J4U_15_ini[] <- user(0)
+  
+  EC1S2J4U_16_ini[] <- user(0)
+  EC2S2J4U_16_ini[] <- user(0)
+  EC3S2J4U_16_ini[] <- user(0)
+  EC4S2J4U_16_ini[] <- user(0)
+  
+  EC1S2J4U_17_ini[] <- user(0)
+  EC2S2J4U_17_ini[] <- user(0)
+  EC3S2J4U_17_ini[] <- user(0)
+  EC4S2J4U_17_ini[] <- user(0)
+  
+  
+  
+  EC1S1J5U_10_ini[] <- user(0)
+  EC2S1J5U_10_ini[] <- user(0)
+  EC3S1J5U_10_ini[] <- user(0)
+  EC4S1J5U_10_ini[] <- user(0)
+  
+  EC1S1J5U_11_ini[] <- user(0)
+  EC2S1J5U_11_ini[] <- user(0)
+  EC3S1J5U_11_ini[] <- user(0)
+  EC4S1J5U_11_ini[] <- user(0)
+  
+  EC1S1J5U_12_ini[] <- user(0)
+  EC2S1J5U_12_ini[] <- user(0)
+  EC3S1J5U_12_ini[] <- user(0)
+  EC4S1J5U_12_ini[] <- user(0)
+  
+  EC1S1J5U_13_ini[] <- user(0)
+  EC2S1J5U_13_ini[] <- user(0)
+  EC3S1J5U_13_ini[] <- user(0)
+  EC4S1J5U_13_ini[] <- user(0)
+  
+  EC1S1J5U_14_ini[] <- user(0)
+  EC2S1J5U_14_ini[] <- user(0)
+  EC3S1J5U_14_ini[] <- user(0)
+  EC4S1J5U_14_ini[] <- user(0)
+  
+  EC1S1J5U_15_ini[] <- user(0)
+  EC2S1J5U_15_ini[] <- user(0)
+  EC3S1J5U_15_ini[] <- user(0)
+  EC4S1J5U_15_ini[] <- user(0)
+  
+  EC1S1J5U_16_ini[] <- user(0)
+  EC2S1J5U_16_ini[] <- user(0)
+  EC3S1J5U_16_ini[] <- user(0)
+  EC4S1J5U_16_ini[] <- user(0)
+  
+  EC1S1J5U_17_ini[] <- user(0)
+  EC2S1J5U_17_ini[] <- user(0)
+  EC3S1J5U_17_ini[] <- user(0)
+  EC4S1J5U_17_ini[] <- user(0)
+  
+  
+  
+  EC1S2J5U_10_ini[] <- user(0)
+  EC2S2J5U_10_ini[] <- user(0)
+  EC3S2J5U_10_ini[] <- user(0)
+  EC4S2J5U_10_ini[] <- user(0)
+  
+  EC1S2J5U_11_ini[] <- user(0)
+  EC2S2J5U_11_ini[] <- user(0)
+  EC3S2J5U_11_ini[] <- user(0)
+  EC4S2J5U_11_ini[] <- user(0)
+  
+  EC1S2J5U_12_ini[] <- user(0)
+  EC2S2J5U_12_ini[] <- user(0)
+  EC3S2J5U_12_ini[] <- user(0)
+  EC4S2J5U_12_ini[] <- user(0)
+  
+  EC1S2J5U_13_ini[] <- user(0)
+  EC2S2J5U_13_ini[] <- user(0)
+  EC3S2J5U_13_ini[] <- user(0)
+  EC4S2J5U_13_ini[] <- user(0)
+  
+  EC1S2J5U_14_ini[] <- user(0)
+  EC2S2J5U_14_ini[] <- user(0)
+  EC3S2J5U_14_ini[] <- user(0)
+  EC4S2J5U_14_ini[] <- user(0)
+  
+  EC1S2J5U_15_ini[] <- user(0)
+  EC2S2J5U_15_ini[] <- user(0)
+  EC3S2J5U_15_ini[] <- user(0)
+  EC4S2J5U_15_ini[] <- user(0)
+  
+  EC1S2J5U_16_ini[] <- user(0)
+  EC2S2J5U_16_ini[] <- user(0)
+  EC3S2J5U_16_ini[] <- user(0)
+  EC4S2J5U_16_ini[] <- user(0)
+  
+  EC1S2J5U_17_ini[] <- user(0)
+  EC2S2J5U_17_ini[] <- user(0)
+  EC3S2J5U_17_ini[] <- user(0)
+  EC4S2J5U_17_ini[] <- user(0)
+  
+  
+  
+  EC1S1J1W_10_ini[] <- user(0)
+  EC2S1J1W_10_ini[] <- user(0)
+  EC3S1J1W_10_ini[] <- user(0)
+  EC4S1J1W_10_ini[] <- user(0)
+  
+  EC1S1J1W_11_ini[] <- user(0)
+  EC2S1J1W_11_ini[] <- user(0)
+  EC3S1J1W_11_ini[] <- user(0)
+  EC4S1J1W_11_ini[] <- user(0)
+  
+  EC1S1J1W_12_ini[] <- user(0)
+  EC2S1J1W_12_ini[] <- user(0)
+  EC3S1J1W_12_ini[] <- user(0)
+  EC4S1J1W_12_ini[] <- user(0)
+  
+  EC1S1J1W_13_ini[] <- user(0)
+  EC2S1J1W_13_ini[] <- user(0)
+  EC3S1J1W_13_ini[] <- user(0)
+  EC4S1J1W_13_ini[] <- user(0)
+  
+  EC1S1J1W_14_ini[] <- user(0)
+  EC2S1J1W_14_ini[] <- user(0)
+  EC3S1J1W_14_ini[] <- user(0)
+  EC4S1J1W_14_ini[] <- user(0)
+  
+  EC1S1J1W_15_ini[] <- user(0)
+  EC2S1J1W_15_ini[] <- user(0)
+  EC3S1J1W_15_ini[] <- user(0)
+  EC4S1J1W_15_ini[] <- user(0)
+  
+  EC1S1J1W_16_ini[] <- user(0)
+  EC2S1J1W_16_ini[] <- user(0)
+  EC3S1J1W_16_ini[] <- user(0)
+  EC4S1J1W_16_ini[] <- user(0)
+  
+  EC1S1J1W_17_ini[] <- user(0)
+  EC2S1J1W_17_ini[] <- user(0)
+  EC3S1J1W_17_ini[] <- user(0)
+  EC4S1J1W_17_ini[] <- user(0)
+  
+  
+  
+  EC1S2J1W_10_ini[] <- user(0)
+  EC2S2J1W_10_ini[] <- user(0)
+  EC3S2J1W_10_ini[] <- user(0)
+  EC4S2J1W_10_ini[] <- user(0)
+  
+  EC1S2J1W_11_ini[] <- user(0)
+  EC2S2J1W_11_ini[] <- user(0)
+  EC3S2J1W_11_ini[] <- user(0)
+  EC4S2J1W_11_ini[] <- user(0)
+  
+  EC1S2J1W_12_ini[] <- user(0)
+  EC2S2J1W_12_ini[] <- user(0)
+  EC3S2J1W_12_ini[] <- user(0)
+  EC4S2J1W_12_ini[] <- user(0)
+  
+  EC1S2J1W_13_ini[] <- user(0)
+  EC2S2J1W_13_ini[] <- user(0)
+  EC3S2J1W_13_ini[] <- user(0)
+  EC4S2J1W_13_ini[] <- user(0)
+  
+  EC1S2J1W_14_ini[] <- user(0)
+  EC2S2J1W_14_ini[] <- user(0)
+  EC3S2J1W_14_ini[] <- user(0)
+  EC4S2J1W_14_ini[] <- user(0)
+  
+  EC1S2J1W_15_ini[] <- user(0)
+  EC2S2J1W_15_ini[] <- user(0)
+  EC3S2J1W_15_ini[] <- user(0)
+  EC4S2J1W_15_ini[] <- user(0)
+  
+  EC1S2J1W_16_ini[] <- user(0)
+  EC2S2J1W_16_ini[] <- user(0)
+  EC3S2J1W_16_ini[] <- user(0)
+  EC4S2J1W_16_ini[] <- user(0)
+  
+  EC1S2J1W_17_ini[] <- user(0)
+  EC2S2J1W_17_ini[] <- user(0)
+  EC3S2J1W_17_ini[] <- user(0)
+  EC4S2J1W_17_ini[] <- user(0)
+  
+  
+  
+  EC1S1J2W_10_ini[] <- user(0)
+  EC2S1J2W_10_ini[] <- user(0)
+  EC3S1J2W_10_ini[] <- user(0)
+  EC4S1J2W_10_ini[] <- user(0)
+  
+  EC1S1J2W_11_ini[] <- user(0)
+  EC2S1J2W_11_ini[] <- user(0)
+  EC3S1J2W_11_ini[] <- user(0)
+  EC4S1J2W_11_ini[] <- user(0)
+  
+  EC1S1J2W_12_ini[] <- user(0)
+  EC2S1J2W_12_ini[] <- user(0)
+  EC3S1J2W_12_ini[] <- user(0)
+  EC4S1J2W_12_ini[] <- user(0)
+  
+  EC1S1J2W_13_ini[] <- user(0)
+  EC2S1J2W_13_ini[] <- user(0)
+  EC3S1J2W_13_ini[] <- user(0)
+  EC4S1J2W_13_ini[] <- user(0)
+  
+  EC1S1J2W_14_ini[] <- user(0)
+  EC2S1J2W_14_ini[] <- user(0)
+  EC3S1J2W_14_ini[] <- user(0)
+  EC4S1J2W_14_ini[] <- user(0)
+  
+  EC1S1J2W_15_ini[] <- user(0)
+  EC2S1J2W_15_ini[] <- user(0)
+  EC3S1J2W_15_ini[] <- user(0)
+  EC4S1J2W_15_ini[] <- user(0)
+  
+  EC1S1J2W_16_ini[] <- user(0)
+  EC2S1J2W_16_ini[] <- user(0)
+  EC3S1J2W_16_ini[] <- user(0)
+  EC4S1J2W_16_ini[] <- user(0)
+  
+  EC1S1J2W_17_ini[] <- user(0)
+  EC2S1J2W_17_ini[] <- user(0)
+  EC3S1J2W_17_ini[] <- user(0)
+  EC4S1J2W_17_ini[] <- user(0)
+  
+  
+  
+  EC1S2J2W_10_ini[] <- user(0)
+  EC2S2J2W_10_ini[] <- user(0)
+  EC3S2J2W_10_ini[] <- user(0)
+  EC4S2J2W_10_ini[] <- user(0)
+  
+  EC1S2J2W_11_ini[] <- user(0)
+  EC2S2J2W_11_ini[] <- user(0)
+  EC3S2J2W_11_ini[] <- user(0)
+  EC4S2J2W_11_ini[] <- user(0)
+  
+  EC1S2J2W_12_ini[] <- user(0)
+  EC2S2J2W_12_ini[] <- user(0)
+  EC3S2J2W_12_ini[] <- user(0)
+  EC4S2J2W_12_ini[] <- user(0)
+  
+  EC1S2J2W_13_ini[] <- user(0)
+  EC2S2J2W_13_ini[] <- user(0)
+  EC3S2J2W_13_ini[] <- user(0)
+  EC4S2J2W_13_ini[] <- user(0)
+  
+  EC1S2J2W_14_ini[] <- user(0)
+  EC2S2J2W_14_ini[] <- user(0)
+  EC3S2J2W_14_ini[] <- user(0)
+  EC4S2J2W_14_ini[] <- user(0)
+  
+  EC1S2J2W_15_ini[] <- user(0)
+  EC2S2J2W_15_ini[] <- user(0)
+  EC3S2J2W_15_ini[] <- user(0)
+  EC4S2J2W_15_ini[] <- user(0)
+  
+  EC1S2J2W_16_ini[] <- user(0)
+  EC2S2J2W_16_ini[] <- user(0)
+  EC3S2J2W_16_ini[] <- user(0)
+  EC4S2J2W_16_ini[] <- user(0)
+  
+  EC1S2J2W_17_ini[] <- user(0)
+  EC2S2J2W_17_ini[] <- user(0)
+  EC3S2J2W_17_ini[] <- user(0)
+  EC4S2J2W_17_ini[] <- user(0)
+  
+  
+  
+  EC1S1J3W_10_ini[] <- user(0)
+  EC2S1J3W_10_ini[] <- user(0)
+  EC3S1J3W_10_ini[] <- user(0)
+  EC4S1J3W_10_ini[] <- user(0)
+  
+  EC1S1J3W_11_ini[] <- user(0)
+  EC2S1J3W_11_ini[] <- user(0)
+  EC3S1J3W_11_ini[] <- user(0)
+  EC4S1J3W_11_ini[] <- user(0)
+  
+  EC1S1J3W_12_ini[] <- user(0)
+  EC2S1J3W_12_ini[] <- user(0)
+  EC3S1J3W_12_ini[] <- user(0)
+  EC4S1J3W_12_ini[] <- user(0)
+  
+  EC1S1J3W_13_ini[] <- user(0)
+  EC2S1J3W_13_ini[] <- user(0)
+  EC3S1J3W_13_ini[] <- user(0)
+  EC4S1J3W_13_ini[] <- user(0)
+  
+  EC1S1J3W_14_ini[] <- user(0)
+  EC2S1J3W_14_ini[] <- user(0)
+  EC3S1J3W_14_ini[] <- user(0)
+  EC4S1J3W_14_ini[] <- user(0)
+  
+  EC1S1J3W_15_ini[] <- user(0)
+  EC2S1J3W_15_ini[] <- user(0)
+  EC3S1J3W_15_ini[] <- user(0)
+  EC4S1J3W_15_ini[] <- user(0)
+  
+  EC1S1J3W_16_ini[] <- user(0)
+  EC2S1J3W_16_ini[] <- user(0)
+  EC3S1J3W_16_ini[] <- user(0)
+  EC4S1J3W_16_ini[] <- user(0)
+  
+  EC1S1J3W_17_ini[] <- user(0)
+  EC2S1J3W_17_ini[] <- user(0)
+  EC3S1J3W_17_ini[] <- user(0)
+  EC4S1J3W_17_ini[] <- user(0)
+  
+  
+  
+  EC1S2J3W_10_ini[] <- user(0)
+  EC2S2J3W_10_ini[] <- user(0)
+  EC3S2J3W_10_ini[] <- user(0)
+  EC4S2J3W_10_ini[] <- user(0)
+  
+  EC1S2J3W_11_ini[] <- user(0)
+  EC2S2J3W_11_ini[] <- user(0)
+  EC3S2J3W_11_ini[] <- user(0)
+  EC4S2J3W_11_ini[] <- user(0)
+  
+  EC1S2J3W_12_ini[] <- user(0)
+  EC2S2J3W_12_ini[] <- user(0)
+  EC3S2J3W_12_ini[] <- user(0)
+  EC4S2J3W_12_ini[] <- user(0)
+  
+  EC1S2J3W_13_ini[] <- user(0)
+  EC2S2J3W_13_ini[] <- user(0)
+  EC3S2J3W_13_ini[] <- user(0)
+  EC4S2J3W_13_ini[] <- user(0)
+  
+  EC1S2J3W_14_ini[] <- user(0)
+  EC2S2J3W_14_ini[] <- user(0)
+  EC3S2J3W_14_ini[] <- user(0)
+  EC4S2J3W_14_ini[] <- user(0)
+  
+  EC1S2J3W_15_ini[] <- user(0)
+  EC2S2J3W_15_ini[] <- user(0)
+  EC3S2J3W_15_ini[] <- user(0)
+  EC4S2J3W_15_ini[] <- user(0)
+  
+  EC1S2J3W_16_ini[] <- user(0)
+  EC2S2J3W_16_ini[] <- user(0)
+  EC3S2J3W_16_ini[] <- user(0)
+  EC4S2J3W_16_ini[] <- user(0)
+  
+  EC1S2J3W_17_ini[] <- user(0)
+  EC2S2J3W_17_ini[] <- user(0)
+  EC3S2J3W_17_ini[] <- user(0)
+  EC4S2J3W_17_ini[] <- user(0)
+  
+  
+  
+  EC1S1J4W_10_ini[] <- user(0)
+  EC2S1J4W_10_ini[] <- user(0)
+  EC3S1J4W_10_ini[] <- user(0)
+  EC4S1J4W_10_ini[] <- user(0)
+  
+  EC1S1J4W_11_ini[] <- user(0)
+  EC2S1J4W_11_ini[] <- user(0)
+  EC3S1J4W_11_ini[] <- user(0)
+  EC4S1J4W_11_ini[] <- user(0)
+  
+  EC1S1J4W_12_ini[] <- user(0)
+  EC2S1J4W_12_ini[] <- user(0)
+  EC3S1J4W_12_ini[] <- user(0)
+  EC4S1J4W_12_ini[] <- user(0)
+  
+  EC1S1J4W_13_ini[] <- user(0)
+  EC2S1J4W_13_ini[] <- user(0)
+  EC3S1J4W_13_ini[] <- user(0)
+  EC4S1J4W_13_ini[] <- user(0)
+  
+  EC1S1J4W_14_ini[] <- user(0)
+  EC2S1J4W_14_ini[] <- user(0)
+  EC3S1J4W_14_ini[] <- user(0)
+  EC4S1J4W_14_ini[] <- user(0)
+  
+  EC1S1J4W_15_ini[] <- user(0)
+  EC2S1J4W_15_ini[] <- user(0)
+  EC3S1J4W_15_ini[] <- user(0)
+  EC4S1J4W_15_ini[] <- user(0)
+  
+  EC1S1J4W_16_ini[] <- user(0)
+  EC2S1J4W_16_ini[] <- user(0)
+  EC3S1J4W_16_ini[] <- user(0)
+  EC4S1J4W_16_ini[] <- user(0)
+  
+  EC1S1J4W_17_ini[] <- user(0)
+  EC2S1J4W_17_ini[] <- user(0)
+  EC3S1J4W_17_ini[] <- user(0)
+  EC4S1J4W_17_ini[] <- user(0)
+  
+  
+  
+  EC1S2J4W_10_ini[] <- user(0)
+  EC2S2J4W_10_ini[] <- user(0)
+  EC3S2J4W_10_ini[] <- user(0)
+  EC4S2J4W_10_ini[] <- user(0)
+  
+  EC1S2J4W_11_ini[] <- user(0)
+  EC2S2J4W_11_ini[] <- user(0)
+  EC3S2J4W_11_ini[] <- user(0)
+  EC4S2J4W_11_ini[] <- user(0)
+  
+  EC1S2J4W_12_ini[] <- user(0)
+  EC2S2J4W_12_ini[] <- user(0)
+  EC3S2J4W_12_ini[] <- user(0)
+  EC4S2J4W_12_ini[] <- user(0)
+  
+  EC1S2J4W_13_ini[] <- user(0)
+  EC2S2J4W_13_ini[] <- user(0)
+  EC3S2J4W_13_ini[] <- user(0)
+  EC4S2J4W_13_ini[] <- user(0)
+  
+  EC1S2J4W_14_ini[] <- user(0)
+  EC2S2J4W_14_ini[] <- user(0)
+  EC3S2J4W_14_ini[] <- user(0)
+  EC4S2J4W_14_ini[] <- user(0)
+  
+  EC1S2J4W_15_ini[] <- user(0)
+  EC2S2J4W_15_ini[] <- user(0)
+  EC3S2J4W_15_ini[] <- user(0)
+  EC4S2J4W_15_ini[] <- user(0)
+  
+  EC1S2J4W_16_ini[] <- user(0)
+  EC2S2J4W_16_ini[] <- user(0)
+  EC3S2J4W_16_ini[] <- user(0)
+  EC4S2J4W_16_ini[] <- user(0)
+  
+  EC1S2J4W_17_ini[] <- user(0)
+  EC2S2J4W_17_ini[] <- user(0)
+  EC3S2J4W_17_ini[] <- user(0)
+  EC4S2J4W_17_ini[] <- user(0)
+  
+  
+  
+  EC1S1J5W_10_ini[] <- user(0)
+  EC2S1J5W_10_ini[] <- user(0)
+  EC3S1J5W_10_ini[] <- user(0)
+  EC4S1J5W_10_ini[] <- user(0)
+  
+  EC1S1J5W_11_ini[] <- user(0)
+  EC2S1J5W_11_ini[] <- user(0)
+  EC3S1J5W_11_ini[] <- user(0)
+  EC4S1J5W_11_ini[] <- user(0)
+  
+  EC1S1J5W_12_ini[] <- user(0)
+  EC2S1J5W_12_ini[] <- user(0)
+  EC3S1J5W_12_ini[] <- user(0)
+  EC4S1J5W_12_ini[] <- user(0)
+  
+  EC1S1J5W_13_ini[] <- user(0)
+  EC2S1J5W_13_ini[] <- user(0)
+  EC3S1J5W_13_ini[] <- user(0)
+  EC4S1J5W_13_ini[] <- user(0)
+  
+  EC1S1J5W_14_ini[] <- user(0)
+  EC2S1J5W_14_ini[] <- user(0)
+  EC3S1J5W_14_ini[] <- user(0)
+  EC4S1J5W_14_ini[] <- user(0)
+  
+  EC1S1J5W_15_ini[] <- user(0)
+  EC2S1J5W_15_ini[] <- user(0)
+  EC3S1J5W_15_ini[] <- user(0)
+  EC4S1J5W_15_ini[] <- user(0)
+  
+  EC1S1J5W_16_ini[] <- user(0)
+  EC2S1J5W_16_ini[] <- user(0)
+  EC3S1J5W_16_ini[] <- user(0)
+  EC4S1J5W_16_ini[] <- user(0)
+  
+  EC1S1J5W_17_ini[] <- user(0)
+  EC2S1J5W_17_ini[] <- user(0)
+  EC3S1J5W_17_ini[] <- user(0)
+  EC4S1J5W_17_ini[] <- user(0)
+  
+  
+  
+  EC1S2J5W_10_ini[] <- user(0)
+  EC2S2J5W_10_ini[] <- user(0)
+  EC3S2J5W_10_ini[] <- user(0)
+  EC4S2J5W_10_ini[] <- user(0)
+  
+  EC1S2J5W_11_ini[] <- user(0)
+  EC2S2J5W_11_ini[] <- user(0)
+  EC3S2J5W_11_ini[] <- user(0)
+  EC4S2J5W_11_ini[] <- user(0)
+  
+  EC1S2J5W_12_ini[] <- user(0)
+  EC2S2J5W_12_ini[] <- user(0)
+  EC3S2J5W_12_ini[] <- user(0)
+  EC4S2J5W_12_ini[] <- user(0)
+  
+  EC1S2J5W_13_ini[] <- user(0)
+  EC2S2J5W_13_ini[] <- user(0)
+  EC3S2J5W_13_ini[] <- user(0)
+  EC4S2J5W_13_ini[] <- user(0)
+  
+  EC1S2J5W_14_ini[] <- user(0)
+  EC2S2J5W_14_ini[] <- user(0)
+  EC3S2J5W_14_ini[] <- user(0)
+  EC4S2J5W_14_ini[] <- user(0)
+  
+  EC1S2J5W_15_ini[] <- user(0)
+  EC2S2J5W_15_ini[] <- user(0)
+  EC3S2J5W_15_ini[] <- user(0)
+  EC4S2J5W_15_ini[] <- user(0)
+  
+  EC1S2J5W_16_ini[] <- user(0)
+  EC2S2J5W_16_ini[] <- user(0)
+  EC3S2J5W_16_ini[] <- user(0)
+  EC4S2J5W_16_ini[] <- user(0)
+  
+  EC1S2J5W_17_ini[] <- user(0)
+  EC2S2J5W_17_ini[] <- user(0)
+  EC3S2J5W_17_ini[] <- user(0)
+  EC4S2J5W_17_ini[] <- user(0)
+  
+  
+  
+  initial(IC1S1J1U_10[]) <- IC1S1J1U_10_ini[i]
+  initial(IC2S1J1U_10[]) <- IC2S1J1U_10_ini[i]
+  initial(IC3S1J1U_10[]) <- IC3S1J1U_10_ini[i]
+  initial(IC4S1J1U_10[]) <- IC4S1J1U_10_ini[i]
+  
+  initial(IC1S1J1U_11[]) <- IC1S1J1U_11_ini[i]
+  initial(IC2S1J1U_11[]) <- IC2S1J1U_11_ini[i]
+  initial(IC3S1J1U_11[]) <- IC3S1J1U_11_ini[i]
+  initial(IC4S1J1U_11[]) <- IC4S1J1U_11_ini[i]
+  
+  initial(IC1S1J1U_12[]) <- IC1S1J1U_12_ini[i]
+  initial(IC2S1J1U_12[]) <- IC2S1J1U_12_ini[i]
+  initial(IC3S1J1U_12[]) <- IC3S1J1U_12_ini[i]
+  initial(IC4S1J1U_12[]) <- IC4S1J1U_12_ini[i]
+  
+  initial(IC1S1J1U_13[]) <- IC1S1J1U_13_ini[i]
+  initial(IC2S1J1U_13[]) <- IC2S1J1U_13_ini[i]
+  initial(IC3S1J1U_13[]) <- IC3S1J1U_13_ini[i]
+  initial(IC4S1J1U_13[]) <- IC4S1J1U_13_ini[i]
+  
+  initial(IC1S1J1U_14[]) <- IC1S1J1U_14_ini[i]
+  initial(IC2S1J1U_14[]) <- IC2S1J1U_14_ini[i]
+  initial(IC3S1J1U_14[]) <- IC3S1J1U_14_ini[i]
+  initial(IC4S1J1U_14[]) <- IC4S1J1U_14_ini[i]
+  
+  initial(IC1S1J1U_15[]) <- IC1S1J1U_15_ini[i]
+  initial(IC2S1J1U_15[]) <- IC2S1J1U_15_ini[i]
+  initial(IC3S1J1U_15[]) <- IC3S1J1U_15_ini[i]
+  initial(IC4S1J1U_15[]) <- IC4S1J1U_15_ini[i]
+  
+  initial(IC1S1J1U_16[]) <- IC1S1J1U_16_ini[i]
+  initial(IC2S1J1U_16[]) <- IC2S1J1U_16_ini[i]
+  initial(IC3S1J1U_16[]) <- IC3S1J1U_16_ini[i]
+  initial(IC4S1J1U_16[]) <- IC4S1J1U_16_ini[i]
+  
+  initial(IC1S1J1U_17[]) <- IC1S1J1U_17_ini[i]
+  initial(IC2S1J1U_17[]) <- IC2S1J1U_17_ini[i]
+  initial(IC3S1J1U_17[]) <- IC3S1J1U_17_ini[i]
+  initial(IC4S1J1U_17[]) <- IC4S1J1U_17_ini[i]
+  
+  
+  
+  initial(IC1S2J1U_10[]) <- IC1S2J1U_10_ini[i]
+  initial(IC2S2J1U_10[]) <- IC2S2J1U_10_ini[i]
+  initial(IC3S2J1U_10[]) <- IC3S2J1U_10_ini[i]
+  initial(IC4S2J1U_10[]) <- IC4S2J1U_10_ini[i]
+  
+  initial(IC1S2J1U_11[]) <- IC1S2J1U_11_ini[i]
+  initial(IC2S2J1U_11[]) <- IC2S2J1U_11_ini[i]
+  initial(IC3S2J1U_11[]) <- IC3S2J1U_11_ini[i]
+  initial(IC4S2J1U_11[]) <- IC4S2J1U_11_ini[i]
+  
+  initial(IC1S2J1U_12[]) <- IC1S2J1U_12_ini[i]
+  initial(IC2S2J1U_12[]) <- IC2S2J1U_12_ini[i]
+  initial(IC3S2J1U_12[]) <- IC3S2J1U_12_ini[i]
+  initial(IC4S2J1U_12[]) <- IC4S2J1U_12_ini[i]
+  
+  initial(IC1S2J1U_13[]) <- IC1S2J1U_13_ini[i]
+  initial(IC2S2J1U_13[]) <- IC2S2J1U_13_ini[i]
+  initial(IC3S2J1U_13[]) <- IC3S2J1U_13_ini[i]
+  initial(IC4S2J1U_13[]) <- IC4S2J1U_13_ini[i]
+  
+  initial(IC1S2J1U_14[]) <- IC1S2J1U_14_ini[i]
+  initial(IC2S2J1U_14[]) <- IC2S2J1U_14_ini[i]
+  initial(IC3S2J1U_14[]) <- IC3S2J1U_14_ini[i]
+  initial(IC4S2J1U_14[]) <- IC4S2J1U_14_ini[i]
+  
+  initial(IC1S2J1U_15[]) <- IC1S2J1U_15_ini[i]
+  initial(IC2S2J1U_15[]) <- IC2S2J1U_15_ini[i]
+  initial(IC3S2J1U_15[]) <- IC3S2J1U_15_ini[i]
+  initial(IC4S2J1U_15[]) <- IC4S2J1U_15_ini[i]
+  
+  initial(IC1S2J1U_16[]) <- IC1S2J1U_16_ini[i]
+  initial(IC2S2J1U_16[]) <- IC2S2J1U_16_ini[i]
+  initial(IC3S2J1U_16[]) <- IC3S2J1U_16_ini[i]
+  initial(IC4S2J1U_16[]) <- IC4S2J1U_16_ini[i]
+  
+  initial(IC1S2J1U_17[]) <- IC1S2J1U_17_ini[i]
+  initial(IC2S2J1U_17[]) <- IC2S2J1U_17_ini[i]
+  initial(IC3S2J1U_17[]) <- IC3S2J1U_17_ini[i]
+  initial(IC4S2J1U_17[]) <- IC4S2J1U_17_ini[i]
+  
+  
+  
+  initial(IC1S1J2U_10[]) <- IC1S1J2U_10_ini[i]
+  initial(IC2S1J2U_10[]) <- IC2S1J2U_10_ini[i]
+  initial(IC3S1J2U_10[]) <- IC3S1J2U_10_ini[i]
+  initial(IC4S1J2U_10[]) <- IC4S1J2U_10_ini[i]
+  
+  initial(IC1S1J2U_11[]) <- IC1S1J2U_11_ini[i]
+  initial(IC2S1J2U_11[]) <- IC2S1J2U_11_ini[i]
+  initial(IC3S1J2U_11[]) <- IC3S1J2U_11_ini[i]
+  initial(IC4S1J2U_11[]) <- IC4S1J2U_11_ini[i]
+  
+  initial(IC1S1J2U_12[]) <- IC1S1J2U_12_ini[i]
+  initial(IC2S1J2U_12[]) <- IC2S1J2U_12_ini[i]
+  initial(IC3S1J2U_12[]) <- IC3S1J2U_12_ini[i]
+  initial(IC4S1J2U_12[]) <- IC4S1J2U_12_ini[i]
+  
+  initial(IC1S1J2U_13[]) <- IC1S1J2U_13_ini[i]
+  initial(IC2S1J2U_13[]) <- IC2S1J2U_13_ini[i]
+  initial(IC3S1J2U_13[]) <- IC3S1J2U_13_ini[i]
+  initial(IC4S1J2U_13[]) <- IC4S1J2U_13_ini[i]
+  
+  initial(IC1S1J2U_14[]) <- IC1S1J2U_14_ini[i]
+  initial(IC2S1J2U_14[]) <- IC2S1J2U_14_ini[i]
+  initial(IC3S1J2U_14[]) <- IC3S1J2U_14_ini[i]
+  initial(IC4S1J2U_14[]) <- IC4S1J2U_14_ini[i]
+  
+  initial(IC1S1J2U_15[]) <- IC1S1J2U_15_ini[i]
+  initial(IC2S1J2U_15[]) <- IC2S1J2U_15_ini[i]
+  initial(IC3S1J2U_15[]) <- IC3S1J2U_15_ini[i]
+  initial(IC4S1J2U_15[]) <- IC4S1J2U_15_ini[i]
+  
+  initial(IC1S1J2U_16[]) <- IC1S1J2U_16_ini[i]
+  initial(IC2S1J2U_16[]) <- IC2S1J2U_16_ini[i]
+  initial(IC3S1J2U_16[]) <- IC3S1J2U_16_ini[i]
+  initial(IC4S1J2U_16[]) <- IC4S1J2U_16_ini[i]
+  
+  initial(IC1S1J2U_17[]) <- IC1S1J2U_17_ini[i]
+  initial(IC2S1J2U_17[]) <- IC2S1J2U_17_ini[i]
+  initial(IC3S1J2U_17[]) <- IC3S1J2U_17_ini[i]
+  initial(IC4S1J2U_17[]) <- IC4S1J2U_17_ini[i]
+  
+  
+  
+  initial(IC1S2J2U_10[]) <- IC1S2J2U_10_ini[i]
+  initial(IC2S2J2U_10[]) <- IC2S2J2U_10_ini[i]
+  initial(IC3S2J2U_10[]) <- IC3S2J2U_10_ini[i]
+  initial(IC4S2J2U_10[]) <- IC4S2J2U_10_ini[i]
+  
+  initial(IC1S2J2U_11[]) <- IC1S2J2U_11_ini[i]
+  initial(IC2S2J2U_11[]) <- IC2S2J2U_11_ini[i]
+  initial(IC3S2J2U_11[]) <- IC3S2J2U_11_ini[i]
+  initial(IC4S2J2U_11[]) <- IC4S2J2U_11_ini[i]
+  
+  initial(IC1S2J2U_12[]) <- IC1S2J2U_12_ini[i]
+  initial(IC2S2J2U_12[]) <- IC2S2J2U_12_ini[i]
+  initial(IC3S2J2U_12[]) <- IC3S2J2U_12_ini[i]
+  initial(IC4S2J2U_12[]) <- IC4S2J2U_12_ini[i]
+  
+  initial(IC1S2J2U_13[]) <- IC1S2J2U_13_ini[i]
+  initial(IC2S2J2U_13[]) <- IC2S2J2U_13_ini[i]
+  initial(IC3S2J2U_13[]) <- IC3S2J2U_13_ini[i]
+  initial(IC4S2J2U_13[]) <- IC4S2J2U_13_ini[i]
+  
+  initial(IC1S2J2U_14[]) <- IC1S2J2U_14_ini[i]
+  initial(IC2S2J2U_14[]) <- IC2S2J2U_14_ini[i]
+  initial(IC3S2J2U_14[]) <- IC3S2J2U_14_ini[i]
+  initial(IC4S2J2U_14[]) <- IC4S2J2U_14_ini[i]
+  
+  initial(IC1S2J2U_15[]) <- IC1S2J2U_15_ini[i]
+  initial(IC2S2J2U_15[]) <- IC2S2J2U_15_ini[i]
+  initial(IC3S2J2U_15[]) <- IC3S2J2U_15_ini[i]
+  initial(IC4S2J2U_15[]) <- IC4S2J2U_15_ini[i]
+  
+  initial(IC1S2J2U_16[]) <- IC1S2J2U_16_ini[i]
+  initial(IC2S2J2U_16[]) <- IC2S2J2U_16_ini[i]
+  initial(IC3S2J2U_16[]) <- IC3S2J2U_16_ini[i]
+  initial(IC4S2J2U_16[]) <- IC4S2J2U_16_ini[i]
+  
+  initial(IC1S2J2U_17[]) <- IC1S2J2U_17_ini[i]
+  initial(IC2S2J2U_17[]) <- IC2S2J2U_17_ini[i]
+  initial(IC3S2J2U_17[]) <- IC3S2J2U_17_ini[i]
+  initial(IC4S2J2U_17[]) <- IC4S2J2U_17_ini[i]
+  
+  
+  
+  initial(IC1S1J3U_10[]) <- IC1S1J3U_10_ini[i]
+  initial(IC2S1J3U_10[]) <- IC2S1J3U_10_ini[i]
+  initial(IC3S1J3U_10[]) <- IC3S1J3U_10_ini[i]
+  initial(IC4S1J3U_10[]) <- IC4S1J3U_10_ini[i]
+  
+  initial(IC1S1J3U_11[]) <- IC1S1J3U_11_ini[i]
+  initial(IC2S1J3U_11[]) <- IC2S1J3U_11_ini[i]
+  initial(IC3S1J3U_11[]) <- IC3S1J3U_11_ini[i]
+  initial(IC4S1J3U_11[]) <- IC4S1J3U_11_ini[i]
+  
+  initial(IC1S1J3U_12[]) <- IC1S1J3U_12_ini[i]
+  initial(IC2S1J3U_12[]) <- IC2S1J3U_12_ini[i]
+  initial(IC3S1J3U_12[]) <- IC3S1J3U_12_ini[i]
+  initial(IC4S1J3U_12[]) <- IC4S1J3U_12_ini[i]
+  
+  initial(IC1S1J3U_13[]) <- IC1S1J3U_13_ini[i]
+  initial(IC2S1J3U_13[]) <- IC2S1J3U_13_ini[i]
+  initial(IC3S1J3U_13[]) <- IC3S1J3U_13_ini[i]
+  initial(IC4S1J3U_13[]) <- IC4S1J3U_13_ini[i]
+  
+  initial(IC1S1J3U_14[]) <- IC1S1J3U_14_ini[i]
+  initial(IC2S1J3U_14[]) <- IC2S1J3U_14_ini[i]
+  initial(IC3S1J3U_14[]) <- IC3S1J3U_14_ini[i]
+  initial(IC4S1J3U_14[]) <- IC4S1J3U_14_ini[i]
+  
+  initial(IC1S1J3U_15[]) <- IC1S1J3U_15_ini[i]
+  initial(IC2S1J3U_15[]) <- IC2S1J3U_15_ini[i]
+  initial(IC3S1J3U_15[]) <- IC3S1J3U_15_ini[i]
+  initial(IC4S1J3U_15[]) <- IC4S1J3U_15_ini[i]
+  
+  initial(IC1S1J3U_16[]) <- IC1S1J3U_16_ini[i]
+  initial(IC2S1J3U_16[]) <- IC2S1J3U_16_ini[i]
+  initial(IC3S1J3U_16[]) <- IC3S1J3U_16_ini[i]
+  initial(IC4S1J3U_16[]) <- IC4S1J3U_16_ini[i]
+  
+  initial(IC1S1J3U_17[]) <- IC1S1J3U_17_ini[i]
+  initial(IC2S1J3U_17[]) <- IC2S1J3U_17_ini[i]
+  initial(IC3S1J3U_17[]) <- IC3S1J3U_17_ini[i]
+  initial(IC4S1J3U_17[]) <- IC4S1J3U_17_ini[i]
+  
+  
+  
+  initial(IC1S2J3U_10[]) <- IC1S2J3U_10_ini[i]
+  initial(IC2S2J3U_10[]) <- IC2S2J3U_10_ini[i]
+  initial(IC3S2J3U_10[]) <- IC3S2J3U_10_ini[i]
+  initial(IC4S2J3U_10[]) <- IC4S2J3U_10_ini[i]
+  
+  initial(IC1S2J3U_11[]) <- IC1S2J3U_11_ini[i]
+  initial(IC2S2J3U_11[]) <- IC2S2J3U_11_ini[i]
+  initial(IC3S2J3U_11[]) <- IC3S2J3U_11_ini[i]
+  initial(IC4S2J3U_11[]) <- IC4S2J3U_11_ini[i]
+  
+  initial(IC1S2J3U_12[]) <- IC1S2J3U_12_ini[i]
+  initial(IC2S2J3U_12[]) <- IC2S2J3U_12_ini[i]
+  initial(IC3S2J3U_12[]) <- IC3S2J3U_12_ini[i]
+  initial(IC4S2J3U_12[]) <- IC4S2J3U_12_ini[i]
+  
+  initial(IC1S2J3U_13[]) <- IC1S2J3U_13_ini[i]
+  initial(IC2S2J3U_13[]) <- IC2S2J3U_13_ini[i]
+  initial(IC3S2J3U_13[]) <- IC3S2J3U_13_ini[i]
+  initial(IC4S2J3U_13[]) <- IC4S2J3U_13_ini[i]
+  
+  initial(IC1S2J3U_14[]) <- IC1S2J3U_14_ini[i]
+  initial(IC2S2J3U_14[]) <- IC2S2J3U_14_ini[i]
+  initial(IC3S2J3U_14[]) <- IC3S2J3U_14_ini[i]
+  initial(IC4S2J3U_14[]) <- IC4S2J3U_14_ini[i]
+  
+  initial(IC1S2J3U_15[]) <- IC1S2J3U_15_ini[i]
+  initial(IC2S2J3U_15[]) <- IC2S2J3U_15_ini[i]
+  initial(IC3S2J3U_15[]) <- IC3S2J3U_15_ini[i]
+  initial(IC4S2J3U_15[]) <- IC4S2J3U_15_ini[i]
+  
+  initial(IC1S2J3U_16[]) <- IC1S2J3U_16_ini[i]
+  initial(IC2S2J3U_16[]) <- IC2S2J3U_16_ini[i]
+  initial(IC3S2J3U_16[]) <- IC3S2J3U_16_ini[i]
+  initial(IC4S2J3U_16[]) <- IC4S2J3U_16_ini[i]
+  
+  initial(IC1S2J3U_17[]) <- IC1S2J3U_17_ini[i]
+  initial(IC2S2J3U_17[]) <- IC2S2J3U_17_ini[i]
+  initial(IC3S2J3U_17[]) <- IC3S2J3U_17_ini[i]
+  initial(IC4S2J3U_17[]) <- IC4S2J3U_17_ini[i]
+  
+  
+  
+  initial(IC1S1J4U_10[]) <- IC1S1J4U_10_ini[i]
+  initial(IC2S1J4U_10[]) <- IC2S1J4U_10_ini[i]
+  initial(IC3S1J4U_10[]) <- IC3S1J4U_10_ini[i]
+  initial(IC4S1J4U_10[]) <- IC4S1J4U_10_ini[i]
+  
+  initial(IC1S1J4U_11[]) <- IC1S1J4U_11_ini[i]
+  initial(IC2S1J4U_11[]) <- IC2S1J4U_11_ini[i]
+  initial(IC3S1J4U_11[]) <- IC3S1J4U_11_ini[i]
+  initial(IC4S1J4U_11[]) <- IC4S1J4U_11_ini[i]
+  
+  initial(IC1S1J4U_12[]) <- IC1S1J4U_12_ini[i]
+  initial(IC2S1J4U_12[]) <- IC2S1J4U_12_ini[i]
+  initial(IC3S1J4U_12[]) <- IC3S1J4U_12_ini[i]
+  initial(IC4S1J4U_12[]) <- IC4S1J4U_12_ini[i]
+  
+  initial(IC1S1J4U_13[]) <- IC1S1J4U_13_ini[i]
+  initial(IC2S1J4U_13[]) <- IC2S1J4U_13_ini[i]
+  initial(IC3S1J4U_13[]) <- IC3S1J4U_13_ini[i]
+  initial(IC4S1J4U_13[]) <- IC4S1J4U_13_ini[i]
+  
+  initial(IC1S1J4U_14[]) <- IC1S1J4U_14_ini[i]
+  initial(IC2S1J4U_14[]) <- IC2S1J4U_14_ini[i]
+  initial(IC3S1J4U_14[]) <- IC3S1J4U_14_ini[i]
+  initial(IC4S1J4U_14[]) <- IC4S1J4U_14_ini[i]
+  
+  initial(IC1S1J4U_15[]) <- IC1S1J4U_15_ini[i]
+  initial(IC2S1J4U_15[]) <- IC2S1J4U_15_ini[i]
+  initial(IC3S1J4U_15[]) <- IC3S1J4U_15_ini[i]
+  initial(IC4S1J4U_15[]) <- IC4S1J4U_15_ini[i]
+  
+  initial(IC1S1J4U_16[]) <- IC1S1J4U_16_ini[i]
+  initial(IC2S1J4U_16[]) <- IC2S1J4U_16_ini[i]
+  initial(IC3S1J4U_16[]) <- IC3S1J4U_16_ini[i]
+  initial(IC4S1J4U_16[]) <- IC4S1J4U_16_ini[i]
+  
+  initial(IC1S1J4U_17[]) <- IC1S1J4U_17_ini[i]
+  initial(IC2S1J4U_17[]) <- IC2S1J4U_17_ini[i]
+  initial(IC3S1J4U_17[]) <- IC3S1J4U_17_ini[i]
+  initial(IC4S1J4U_17[]) <- IC4S1J4U_17_ini[i]
+  
+  
+  
+  initial(IC1S2J4U_10[]) <- IC1S2J4U_10_ini[i]
+  initial(IC2S2J4U_10[]) <- IC2S2J4U_10_ini[i]
+  initial(IC3S2J4U_10[]) <- IC3S2J4U_10_ini[i]
+  initial(IC4S2J4U_10[]) <- IC4S2J4U_10_ini[i]
+  
+  initial(IC1S2J4U_11[]) <- IC1S2J4U_11_ini[i]
+  initial(IC2S2J4U_11[]) <- IC2S2J4U_11_ini[i]
+  initial(IC3S2J4U_11[]) <- IC3S2J4U_11_ini[i]
+  initial(IC4S2J4U_11[]) <- IC4S2J4U_11_ini[i]
+  
+  initial(IC1S2J4U_12[]) <- IC1S2J4U_12_ini[i]
+  initial(IC2S2J4U_12[]) <- IC2S2J4U_12_ini[i]
+  initial(IC3S2J4U_12[]) <- IC3S2J4U_12_ini[i]
+  initial(IC4S2J4U_12[]) <- IC4S2J4U_12_ini[i]
+  
+  initial(IC1S2J4U_13[]) <- IC1S2J4U_13_ini[i]
+  initial(IC2S2J4U_13[]) <- IC2S2J4U_13_ini[i]
+  initial(IC3S2J4U_13[]) <- IC3S2J4U_13_ini[i]
+  initial(IC4S2J4U_13[]) <- IC4S2J4U_13_ini[i]
+  
+  initial(IC1S2J4U_14[]) <- IC1S2J4U_14_ini[i]
+  initial(IC2S2J4U_14[]) <- IC2S2J4U_14_ini[i]
+  initial(IC3S2J4U_14[]) <- IC3S2J4U_14_ini[i]
+  initial(IC4S2J4U_14[]) <- IC4S2J4U_14_ini[i]
+  
+  initial(IC1S2J4U_15[]) <- IC1S2J4U_15_ini[i]
+  initial(IC2S2J4U_15[]) <- IC2S2J4U_15_ini[i]
+  initial(IC3S2J4U_15[]) <- IC3S2J4U_15_ini[i]
+  initial(IC4S2J4U_15[]) <- IC4S2J4U_15_ini[i]
+  
+  initial(IC1S2J4U_16[]) <- IC1S2J4U_16_ini[i]
+  initial(IC2S2J4U_16[]) <- IC2S2J4U_16_ini[i]
+  initial(IC3S2J4U_16[]) <- IC3S2J4U_16_ini[i]
+  initial(IC4S2J4U_16[]) <- IC4S2J4U_16_ini[i]
+  
+  initial(IC1S2J4U_17[]) <- IC1S2J4U_17_ini[i]
+  initial(IC2S2J4U_17[]) <- IC2S2J4U_17_ini[i]
+  initial(IC3S2J4U_17[]) <- IC3S2J4U_17_ini[i]
+  initial(IC4S2J4U_17[]) <- IC4S2J4U_17_ini[i]
+  
+  
+  
+  initial(IC1S1J5U_10[]) <- IC1S1J5U_10_ini[i]
+  initial(IC2S1J5U_10[]) <- IC2S1J5U_10_ini[i]
+  initial(IC3S1J5U_10[]) <- IC3S1J5U_10_ini[i]
+  initial(IC4S1J5U_10[]) <- IC4S1J5U_10_ini[i]
+  
+  initial(IC1S1J5U_11[]) <- IC1S1J5U_11_ini[i]
+  initial(IC2S1J5U_11[]) <- IC2S1J5U_11_ini[i]
+  initial(IC3S1J5U_11[]) <- IC3S1J5U_11_ini[i]
+  initial(IC4S1J5U_11[]) <- IC4S1J5U_11_ini[i]
+  
+  initial(IC1S1J5U_12[]) <- IC1S1J5U_12_ini[i]
+  initial(IC2S1J5U_12[]) <- IC2S1J5U_12_ini[i]
+  initial(IC3S1J5U_12[]) <- IC3S1J5U_12_ini[i]
+  initial(IC4S1J5U_12[]) <- IC4S1J5U_12_ini[i]
+  
+  initial(IC1S1J5U_13[]) <- IC1S1J5U_13_ini[i]
+  initial(IC2S1J5U_13[]) <- IC2S1J5U_13_ini[i]
+  initial(IC3S1J5U_13[]) <- IC3S1J5U_13_ini[i]
+  initial(IC4S1J5U_13[]) <- IC4S1J5U_13_ini[i]
+  
+  initial(IC1S1J5U_14[]) <- IC1S1J5U_14_ini[i]
+  initial(IC2S1J5U_14[]) <- IC2S1J5U_14_ini[i]
+  initial(IC3S1J5U_14[]) <- IC3S1J5U_14_ini[i]
+  initial(IC4S1J5U_14[]) <- IC4S1J5U_14_ini[i]
+  
+  initial(IC1S1J5U_15[]) <- IC1S1J5U_15_ini[i]
+  initial(IC2S1J5U_15[]) <- IC2S1J5U_15_ini[i]
+  initial(IC3S1J5U_15[]) <- IC3S1J5U_15_ini[i]
+  initial(IC4S1J5U_15[]) <- IC4S1J5U_15_ini[i]
+  
+  initial(IC1S1J5U_16[]) <- IC1S1J5U_16_ini[i]
+  initial(IC2S1J5U_16[]) <- IC2S1J5U_16_ini[i]
+  initial(IC3S1J5U_16[]) <- IC3S1J5U_16_ini[i]
+  initial(IC4S1J5U_16[]) <- IC4S1J5U_16_ini[i]
+  
+  initial(IC1S1J5U_17[]) <- IC1S1J5U_17_ini[i]
+  initial(IC2S1J5U_17[]) <- IC2S1J5U_17_ini[i]
+  initial(IC3S1J5U_17[]) <- IC3S1J5U_17_ini[i]
+  initial(IC4S1J5U_17[]) <- IC4S1J5U_17_ini[i]
+  
+  
+  
+  initial(IC1S2J5U_10[]) <- IC1S2J5U_10_ini[i]
+  initial(IC2S2J5U_10[]) <- IC2S2J5U_10_ini[i]
+  initial(IC3S2J5U_10[]) <- IC3S2J5U_10_ini[i]
+  initial(IC4S2J5U_10[]) <- IC4S2J5U_10_ini[i]
+  
+  initial(IC1S2J5U_11[]) <- IC1S2J5U_11_ini[i]
+  initial(IC2S2J5U_11[]) <- IC2S2J5U_11_ini[i]
+  initial(IC3S2J5U_11[]) <- IC3S2J5U_11_ini[i]
+  initial(IC4S2J5U_11[]) <- IC4S2J5U_11_ini[i]
+  
+  initial(IC1S2J5U_12[]) <- IC1S2J5U_12_ini[i]
+  initial(IC2S2J5U_12[]) <- IC2S2J5U_12_ini[i]
+  initial(IC3S2J5U_12[]) <- IC3S2J5U_12_ini[i]
+  initial(IC4S2J5U_12[]) <- IC4S2J5U_12_ini[i]
+  
+  initial(IC1S2J5U_13[]) <- IC1S2J5U_13_ini[i]
+  initial(IC2S2J5U_13[]) <- IC2S2J5U_13_ini[i]
+  initial(IC3S2J5U_13[]) <- IC3S2J5U_13_ini[i]
+  initial(IC4S2J5U_13[]) <- IC4S2J5U_13_ini[i]
+  
+  initial(IC1S2J5U_14[]) <- IC1S2J5U_14_ini[i]
+  initial(IC2S2J5U_14[]) <- IC2S2J5U_14_ini[i]
+  initial(IC3S2J5U_14[]) <- IC3S2J5U_14_ini[i]
+  initial(IC4S2J5U_14[]) <- IC4S2J5U_14_ini[i]
+  
+  initial(IC1S2J5U_15[]) <- IC1S2J5U_15_ini[i]
+  initial(IC2S2J5U_15[]) <- IC2S2J5U_15_ini[i]
+  initial(IC3S2J5U_15[]) <- IC3S2J5U_15_ini[i]
+  initial(IC4S2J5U_15[]) <- IC4S2J5U_15_ini[i]
+  
+  initial(IC1S2J5U_16[]) <- IC1S2J5U_16_ini[i]
+  initial(IC2S2J5U_16[]) <- IC2S2J5U_16_ini[i]
+  initial(IC3S2J5U_16[]) <- IC3S2J5U_16_ini[i]
+  initial(IC4S2J5U_16[]) <- IC4S2J5U_16_ini[i]
+  
+  initial(IC1S2J5U_17[]) <- IC1S2J5U_17_ini[i]
+  initial(IC2S2J5U_17[]) <- IC2S2J5U_17_ini[i]
+  initial(IC3S2J5U_17[]) <- IC3S2J5U_17_ini[i]
+  initial(IC4S2J5U_17[]) <- IC4S2J5U_17_ini[i]
+  
+  
+  
+  initial(IC1S1J1W_10[]) <- IC1S1J1W_10_ini[i]
+  initial(IC2S1J1W_10[]) <- IC2S1J1W_10_ini[i]
+  initial(IC3S1J1W_10[]) <- IC3S1J1W_10_ini[i]
+  initial(IC4S1J1W_10[]) <- IC4S1J1W_10_ini[i]
+  
+  initial(IC1S1J1W_11[]) <- IC1S1J1W_11_ini[i]
+  initial(IC2S1J1W_11[]) <- IC2S1J1W_11_ini[i]
+  initial(IC3S1J1W_11[]) <- IC3S1J1W_11_ini[i]
+  initial(IC4S1J1W_11[]) <- IC4S1J1W_11_ini[i]
+  
+  initial(IC1S1J1W_12[]) <- IC1S1J1W_12_ini[i]
+  initial(IC2S1J1W_12[]) <- IC2S1J1W_12_ini[i]
+  initial(IC3S1J1W_12[]) <- IC3S1J1W_12_ini[i]
+  initial(IC4S1J1W_12[]) <- IC4S1J1W_12_ini[i]
+  
+  initial(IC1S1J1W_13[]) <- IC1S1J1W_13_ini[i]
+  initial(IC2S1J1W_13[]) <- IC2S1J1W_13_ini[i]
+  initial(IC3S1J1W_13[]) <- IC3S1J1W_13_ini[i]
+  initial(IC4S1J1W_13[]) <- IC4S1J1W_13_ini[i]
+  
+  initial(IC1S1J1W_14[]) <- IC1S1J1W_14_ini[i]
+  initial(IC2S1J1W_14[]) <- IC2S1J1W_14_ini[i]
+  initial(IC3S1J1W_14[]) <- IC3S1J1W_14_ini[i]
+  initial(IC4S1J1W_14[]) <- IC4S1J1W_14_ini[i]
+  
+  initial(IC1S1J1W_15[]) <- IC1S1J1W_15_ini[i]
+  initial(IC2S1J1W_15[]) <- IC2S1J1W_15_ini[i]
+  initial(IC3S1J1W_15[]) <- IC3S1J1W_15_ini[i]
+  initial(IC4S1J1W_15[]) <- IC4S1J1W_15_ini[i]
+  
+  initial(IC1S1J1W_16[]) <- IC1S1J1W_16_ini[i]
+  initial(IC2S1J1W_16[]) <- IC2S1J1W_16_ini[i]
+  initial(IC3S1J1W_16[]) <- IC3S1J1W_16_ini[i]
+  initial(IC4S1J1W_16[]) <- IC4S1J1W_16_ini[i]
+  
+  initial(IC1S1J1W_17[]) <- IC1S1J1W_17_ini[i]
+  initial(IC2S1J1W_17[]) <- IC2S1J1W_17_ini[i]
+  initial(IC3S1J1W_17[]) <- IC3S1J1W_17_ini[i]
+  initial(IC4S1J1W_17[]) <- IC4S1J1W_17_ini[i]
+  
+  
+  
+  initial(IC1S2J1W_10[]) <- IC1S2J1W_10_ini[i]
+  initial(IC2S2J1W_10[]) <- IC2S2J1W_10_ini[i]
+  initial(IC3S2J1W_10[]) <- IC3S2J1W_10_ini[i]
+  initial(IC4S2J1W_10[]) <- IC4S2J1W_10_ini[i]
+  
+  initial(IC1S2J1W_11[]) <- IC1S2J1W_11_ini[i]
+  initial(IC2S2J1W_11[]) <- IC2S2J1W_11_ini[i]
+  initial(IC3S2J1W_11[]) <- IC3S2J1W_11_ini[i]
+  initial(IC4S2J1W_11[]) <- IC4S2J1W_11_ini[i]
+  
+  initial(IC1S2J1W_12[]) <- IC1S2J1W_12_ini[i]
+  initial(IC2S2J1W_12[]) <- IC2S2J1W_12_ini[i]
+  initial(IC3S2J1W_12[]) <- IC3S2J1W_12_ini[i]
+  initial(IC4S2J1W_12[]) <- IC4S2J1W_12_ini[i]
+  
+  initial(IC1S2J1W_13[]) <- IC1S2J1W_13_ini[i]
+  initial(IC2S2J1W_13[]) <- IC2S2J1W_13_ini[i]
+  initial(IC3S2J1W_13[]) <- IC3S2J1W_13_ini[i]
+  initial(IC4S2J1W_13[]) <- IC4S2J1W_13_ini[i]
+  
+  initial(IC1S2J1W_14[]) <- IC1S2J1W_14_ini[i]
+  initial(IC2S2J1W_14[]) <- IC2S2J1W_14_ini[i]
+  initial(IC3S2J1W_14[]) <- IC3S2J1W_14_ini[i]
+  initial(IC4S2J1W_14[]) <- IC4S2J1W_14_ini[i]
+  
+  initial(IC1S2J1W_15[]) <- IC1S2J1W_15_ini[i]
+  initial(IC2S2J1W_15[]) <- IC2S2J1W_15_ini[i]
+  initial(IC3S2J1W_15[]) <- IC3S2J1W_15_ini[i]
+  initial(IC4S2J1W_15[]) <- IC4S2J1W_15_ini[i]
+  
+  initial(IC1S2J1W_16[]) <- IC1S2J1W_16_ini[i]
+  initial(IC2S2J1W_16[]) <- IC2S2J1W_16_ini[i]
+  initial(IC3S2J1W_16[]) <- IC3S2J1W_16_ini[i]
+  initial(IC4S2J1W_16[]) <- IC4S2J1W_16_ini[i]
+  
+  initial(IC1S2J1W_17[]) <- IC1S2J1W_17_ini[i]
+  initial(IC2S2J1W_17[]) <- IC2S2J1W_17_ini[i]
+  initial(IC3S2J1W_17[]) <- IC3S2J1W_17_ini[i]
+  initial(IC4S2J1W_17[]) <- IC4S2J1W_17_ini[i]
+  
+  
+  
+  initial(IC1S1J2W_10[]) <- IC1S1J2W_10_ini[i]
+  initial(IC2S1J2W_10[]) <- IC2S1J2W_10_ini[i]
+  initial(IC3S1J2W_10[]) <- IC3S1J2W_10_ini[i]
+  initial(IC4S1J2W_10[]) <- IC4S1J2W_10_ini[i]
+  
+  initial(IC1S1J2W_11[]) <- IC1S1J2W_11_ini[i]
+  initial(IC2S1J2W_11[]) <- IC2S1J2W_11_ini[i]
+  initial(IC3S1J2W_11[]) <- IC3S1J2W_11_ini[i]
+  initial(IC4S1J2W_11[]) <- IC4S1J2W_11_ini[i]
+  
+  initial(IC1S1J2W_12[]) <- IC1S1J2W_12_ini[i]
+  initial(IC2S1J2W_12[]) <- IC2S1J2W_12_ini[i]
+  initial(IC3S1J2W_12[]) <- IC3S1J2W_12_ini[i]
+  initial(IC4S1J2W_12[]) <- IC4S1J2W_12_ini[i]
+  
+  initial(IC1S1J2W_13[]) <- IC1S1J2W_13_ini[i]
+  initial(IC2S1J2W_13[]) <- IC2S1J2W_13_ini[i]
+  initial(IC3S1J2W_13[]) <- IC3S1J2W_13_ini[i]
+  initial(IC4S1J2W_13[]) <- IC4S1J2W_13_ini[i]
+  
+  initial(IC1S1J2W_14[]) <- IC1S1J2W_14_ini[i]
+  initial(IC2S1J2W_14[]) <- IC2S1J2W_14_ini[i]
+  initial(IC3S1J2W_14[]) <- IC3S1J2W_14_ini[i]
+  initial(IC4S1J2W_14[]) <- IC4S1J2W_14_ini[i]
+  
+  initial(IC1S1J2W_15[]) <- IC1S1J2W_15_ini[i]
+  initial(IC2S1J2W_15[]) <- IC2S1J2W_15_ini[i]
+  initial(IC3S1J2W_15[]) <- IC3S1J2W_15_ini[i]
+  initial(IC4S1J2W_15[]) <- IC4S1J2W_15_ini[i]
+  
+  initial(IC1S1J2W_16[]) <- IC1S1J2W_16_ini[i]
+  initial(IC2S1J2W_16[]) <- IC2S1J2W_16_ini[i]
+  initial(IC3S1J2W_16[]) <- IC3S1J2W_16_ini[i]
+  initial(IC4S1J2W_16[]) <- IC4S1J2W_16_ini[i]
+  
+  initial(IC1S1J2W_17[]) <- IC1S1J2W_17_ini[i]
+  initial(IC2S1J2W_17[]) <- IC2S1J2W_17_ini[i]
+  initial(IC3S1J2W_17[]) <- IC3S1J2W_17_ini[i]
+  initial(IC4S1J2W_17[]) <- IC4S1J2W_17_ini[i]
+  
+  
+  
+  initial(IC1S2J2W_10[]) <- IC1S2J2W_10_ini[i]
+  initial(IC2S2J2W_10[]) <- IC2S2J2W_10_ini[i]
+  initial(IC3S2J2W_10[]) <- IC3S2J2W_10_ini[i]
+  initial(IC4S2J2W_10[]) <- IC4S2J2W_10_ini[i]
+  
+  initial(IC1S2J2W_11[]) <- IC1S2J2W_11_ini[i]
+  initial(IC2S2J2W_11[]) <- IC2S2J2W_11_ini[i]
+  initial(IC3S2J2W_11[]) <- IC3S2J2W_11_ini[i]
+  initial(IC4S2J2W_11[]) <- IC4S2J2W_11_ini[i]
+  
+  initial(IC1S2J2W_12[]) <- IC1S2J2W_12_ini[i]
+  initial(IC2S2J2W_12[]) <- IC2S2J2W_12_ini[i]
+  initial(IC3S2J2W_12[]) <- IC3S2J2W_12_ini[i]
+  initial(IC4S2J2W_12[]) <- IC4S2J2W_12_ini[i]
+  
+  initial(IC1S2J2W_13[]) <- IC1S2J2W_13_ini[i]
+  initial(IC2S2J2W_13[]) <- IC2S2J2W_13_ini[i]
+  initial(IC3S2J2W_13[]) <- IC3S2J2W_13_ini[i]
+  initial(IC4S2J2W_13[]) <- IC4S2J2W_13_ini[i]
+  
+  initial(IC1S2J2W_14[]) <- IC1S2J2W_14_ini[i]
+  initial(IC2S2J2W_14[]) <- IC2S2J2W_14_ini[i]
+  initial(IC3S2J2W_14[]) <- IC3S2J2W_14_ini[i]
+  initial(IC4S2J2W_14[]) <- IC4S2J2W_14_ini[i]
+  
+  initial(IC1S2J2W_15[]) <- IC1S2J2W_15_ini[i]
+  initial(IC2S2J2W_15[]) <- IC2S2J2W_15_ini[i]
+  initial(IC3S2J2W_15[]) <- IC3S2J2W_15_ini[i]
+  initial(IC4S2J2W_15[]) <- IC4S2J2W_15_ini[i]
+  
+  initial(IC1S2J2W_16[]) <- IC1S2J2W_16_ini[i]
+  initial(IC2S2J2W_16[]) <- IC2S2J2W_16_ini[i]
+  initial(IC3S2J2W_16[]) <- IC3S2J2W_16_ini[i]
+  initial(IC4S2J2W_16[]) <- IC4S2J2W_16_ini[i]
+  
+  initial(IC1S2J2W_17[]) <- IC1S2J2W_17_ini[i]
+  initial(IC2S2J2W_17[]) <- IC2S2J2W_17_ini[i]
+  initial(IC3S2J2W_17[]) <- IC3S2J2W_17_ini[i]
+  initial(IC4S2J2W_17[]) <- IC4S2J2W_17_ini[i]
+  
+  
+  
+  initial(IC1S1J3W_10[]) <- IC1S1J3W_10_ini[i]
+  initial(IC2S1J3W_10[]) <- IC2S1J3W_10_ini[i]
+  initial(IC3S1J3W_10[]) <- IC3S1J3W_10_ini[i]
+  initial(IC4S1J3W_10[]) <- IC4S1J3W_10_ini[i]
+  
+  initial(IC1S1J3W_11[]) <- IC1S1J3W_11_ini[i]
+  initial(IC2S1J3W_11[]) <- IC2S1J3W_11_ini[i]
+  initial(IC3S1J3W_11[]) <- IC3S1J3W_11_ini[i]
+  initial(IC4S1J3W_11[]) <- IC4S1J3W_11_ini[i]
+  
+  initial(IC1S1J3W_12[]) <- IC1S1J3W_12_ini[i]
+  initial(IC2S1J3W_12[]) <- IC2S1J3W_12_ini[i]
+  initial(IC3S1J3W_12[]) <- IC3S1J3W_12_ini[i]
+  initial(IC4S1J3W_12[]) <- IC4S1J3W_12_ini[i]
+  
+  initial(IC1S1J3W_13[]) <- IC1S1J3W_13_ini[i]
+  initial(IC2S1J3W_13[]) <- IC2S1J3W_13_ini[i]
+  initial(IC3S1J3W_13[]) <- IC3S1J3W_13_ini[i]
+  initial(IC4S1J3W_13[]) <- IC4S1J3W_13_ini[i]
+  
+  initial(IC1S1J3W_14[]) <- IC1S1J3W_14_ini[i]
+  initial(IC2S1J3W_14[]) <- IC2S1J3W_14_ini[i]
+  initial(IC3S1J3W_14[]) <- IC3S1J3W_14_ini[i]
+  initial(IC4S1J3W_14[]) <- IC4S1J3W_14_ini[i]
+  
+  initial(IC1S1J3W_15[]) <- IC1S1J3W_15_ini[i]
+  initial(IC2S1J3W_15[]) <- IC2S1J3W_15_ini[i]
+  initial(IC3S1J3W_15[]) <- IC3S1J3W_15_ini[i]
+  initial(IC4S1J3W_15[]) <- IC4S1J3W_15_ini[i]
+  
+  initial(IC1S1J3W_16[]) <- IC1S1J3W_16_ini[i]
+  initial(IC2S1J3W_16[]) <- IC2S1J3W_16_ini[i]
+  initial(IC3S1J3W_16[]) <- IC3S1J3W_16_ini[i]
+  initial(IC4S1J3W_16[]) <- IC4S1J3W_16_ini[i]
+  
+  initial(IC1S1J3W_17[]) <- IC1S1J3W_17_ini[i]
+  initial(IC2S1J3W_17[]) <- IC2S1J3W_17_ini[i]
+  initial(IC3S1J3W_17[]) <- IC3S1J3W_17_ini[i]
+  initial(IC4S1J3W_17[]) <- IC4S1J3W_17_ini[i]
+  
+  
+  
+  initial(IC1S2J3W_10[]) <- IC1S2J3W_10_ini[i]
+  initial(IC2S2J3W_10[]) <- IC2S2J3W_10_ini[i]
+  initial(IC3S2J3W_10[]) <- IC3S2J3W_10_ini[i]
+  initial(IC4S2J3W_10[]) <- IC4S2J3W_10_ini[i]
+  
+  initial(IC1S2J3W_11[]) <- IC1S2J3W_11_ini[i]
+  initial(IC2S2J3W_11[]) <- IC2S2J3W_11_ini[i]
+  initial(IC3S2J3W_11[]) <- IC3S2J3W_11_ini[i]
+  initial(IC4S2J3W_11[]) <- IC4S2J3W_11_ini[i]
+  
+  initial(IC1S2J3W_12[]) <- IC1S2J3W_12_ini[i]
+  initial(IC2S2J3W_12[]) <- IC2S2J3W_12_ini[i]
+  initial(IC3S2J3W_12[]) <- IC3S2J3W_12_ini[i]
+  initial(IC4S2J3W_12[]) <- IC4S2J3W_12_ini[i]
+  
+  initial(IC1S2J3W_13[]) <- IC1S2J3W_13_ini[i]
+  initial(IC2S2J3W_13[]) <- IC2S2J3W_13_ini[i]
+  initial(IC3S2J3W_13[]) <- IC3S2J3W_13_ini[i]
+  initial(IC4S2J3W_13[]) <- IC4S2J3W_13_ini[i]
+  
+  initial(IC1S2J3W_14[]) <- IC1S2J3W_14_ini[i]
+  initial(IC2S2J3W_14[]) <- IC2S2J3W_14_ini[i]
+  initial(IC3S2J3W_14[]) <- IC3S2J3W_14_ini[i]
+  initial(IC4S2J3W_14[]) <- IC4S2J3W_14_ini[i]
+  
+  initial(IC1S2J3W_15[]) <- IC1S2J3W_15_ini[i]
+  initial(IC2S2J3W_15[]) <- IC2S2J3W_15_ini[i]
+  initial(IC3S2J3W_15[]) <- IC3S2J3W_15_ini[i]
+  initial(IC4S2J3W_15[]) <- IC4S2J3W_15_ini[i]
+  
+  initial(IC1S2J3W_16[]) <- IC1S2J3W_16_ini[i]
+  initial(IC2S2J3W_16[]) <- IC2S2J3W_16_ini[i]
+  initial(IC3S2J3W_16[]) <- IC3S2J3W_16_ini[i]
+  initial(IC4S2J3W_16[]) <- IC4S2J3W_16_ini[i]
+  
+  initial(IC1S2J3W_17[]) <- IC1S2J3W_17_ini[i]
+  initial(IC2S2J3W_17[]) <- IC2S2J3W_17_ini[i]
+  initial(IC3S2J3W_17[]) <- IC3S2J3W_17_ini[i]
+  initial(IC4S2J3W_17[]) <- IC4S2J3W_17_ini[i]
+  
+  
+  
+  initial(IC1S1J4W_10[]) <- IC1S1J4W_10_ini[i]
+  initial(IC2S1J4W_10[]) <- IC2S1J4W_10_ini[i]
+  initial(IC3S1J4W_10[]) <- IC3S1J4W_10_ini[i]
+  initial(IC4S1J4W_10[]) <- IC4S1J4W_10_ini[i]
+  
+  initial(IC1S1J4W_11[]) <- IC1S1J4W_11_ini[i]
+  initial(IC2S1J4W_11[]) <- IC2S1J4W_11_ini[i]
+  initial(IC3S1J4W_11[]) <- IC3S1J4W_11_ini[i]
+  initial(IC4S1J4W_11[]) <- IC4S1J4W_11_ini[i]
+  
+  initial(IC1S1J4W_12[]) <- IC1S1J4W_12_ini[i]
+  initial(IC2S1J4W_12[]) <- IC2S1J4W_12_ini[i]
+  initial(IC3S1J4W_12[]) <- IC3S1J4W_12_ini[i]
+  initial(IC4S1J4W_12[]) <- IC4S1J4W_12_ini[i]
+  
+  initial(IC1S1J4W_13[]) <- IC1S1J4W_13_ini[i]
+  initial(IC2S1J4W_13[]) <- IC2S1J4W_13_ini[i]
+  initial(IC3S1J4W_13[]) <- IC3S1J4W_13_ini[i]
+  initial(IC4S1J4W_13[]) <- IC4S1J4W_13_ini[i]
+  
+  initial(IC1S1J4W_14[]) <- IC1S1J4W_14_ini[i]
+  initial(IC2S1J4W_14[]) <- IC2S1J4W_14_ini[i]
+  initial(IC3S1J4W_14[]) <- IC3S1J4W_14_ini[i]
+  initial(IC4S1J4W_14[]) <- IC4S1J4W_14_ini[i]
+  
+  initial(IC1S1J4W_15[]) <- IC1S1J4W_15_ini[i]
+  initial(IC2S1J4W_15[]) <- IC2S1J4W_15_ini[i]
+  initial(IC3S1J4W_15[]) <- IC3S1J4W_15_ini[i]
+  initial(IC4S1J4W_15[]) <- IC4S1J4W_15_ini[i]
+  
+  initial(IC1S1J4W_16[]) <- IC1S1J4W_16_ini[i]
+  initial(IC2S1J4W_16[]) <- IC2S1J4W_16_ini[i]
+  initial(IC3S1J4W_16[]) <- IC3S1J4W_16_ini[i]
+  initial(IC4S1J4W_16[]) <- IC4S1J4W_16_ini[i]
+  
+  initial(IC1S1J4W_17[]) <- IC1S1J4W_17_ini[i]
+  initial(IC2S1J4W_17[]) <- IC2S1J4W_17_ini[i]
+  initial(IC3S1J4W_17[]) <- IC3S1J4W_17_ini[i]
+  initial(IC4S1J4W_17[]) <- IC4S1J4W_17_ini[i]
+  
+  
+  
+  initial(IC1S2J4W_10[]) <- IC1S2J4W_10_ini[i]
+  initial(IC2S2J4W_10[]) <- IC2S2J4W_10_ini[i]
+  initial(IC3S2J4W_10[]) <- IC3S2J4W_10_ini[i]
+  initial(IC4S2J4W_10[]) <- IC4S2J4W_10_ini[i]
+  
+  initial(IC1S2J4W_11[]) <- IC1S2J4W_11_ini[i]
+  initial(IC2S2J4W_11[]) <- IC2S2J4W_11_ini[i]
+  initial(IC3S2J4W_11[]) <- IC3S2J4W_11_ini[i]
+  initial(IC4S2J4W_11[]) <- IC4S2J4W_11_ini[i]
+  
+  initial(IC1S2J4W_12[]) <- IC1S2J4W_12_ini[i]
+  initial(IC2S2J4W_12[]) <- IC2S2J4W_12_ini[i]
+  initial(IC3S2J4W_12[]) <- IC3S2J4W_12_ini[i]
+  initial(IC4S2J4W_12[]) <- IC4S2J4W_12_ini[i]
+  
+  initial(IC1S2J4W_13[]) <- IC1S2J4W_13_ini[i]
+  initial(IC2S2J4W_13[]) <- IC2S2J4W_13_ini[i]
+  initial(IC3S2J4W_13[]) <- IC3S2J4W_13_ini[i]
+  initial(IC4S2J4W_13[]) <- IC4S2J4W_13_ini[i]
+  
+  initial(IC1S2J4W_14[]) <- IC1S2J4W_14_ini[i]
+  initial(IC2S2J4W_14[]) <- IC2S2J4W_14_ini[i]
+  initial(IC3S2J4W_14[]) <- IC3S2J4W_14_ini[i]
+  initial(IC4S2J4W_14[]) <- IC4S2J4W_14_ini[i]
+  
+  initial(IC1S2J4W_15[]) <- IC1S2J4W_15_ini[i]
+  initial(IC2S2J4W_15[]) <- IC2S2J4W_15_ini[i]
+  initial(IC3S2J4W_15[]) <- IC3S2J4W_15_ini[i]
+  initial(IC4S2J4W_15[]) <- IC4S2J4W_15_ini[i]
+  
+  initial(IC1S2J4W_16[]) <- IC1S2J4W_16_ini[i]
+  initial(IC2S2J4W_16[]) <- IC2S2J4W_16_ini[i]
+  initial(IC3S2J4W_16[]) <- IC3S2J4W_16_ini[i]
+  initial(IC4S2J4W_16[]) <- IC4S2J4W_16_ini[i]
+  
+  initial(IC1S2J4W_17[]) <- IC1S2J4W_17_ini[i]
+  initial(IC2S2J4W_17[]) <- IC2S2J4W_17_ini[i]
+  initial(IC3S2J4W_17[]) <- IC3S2J4W_17_ini[i]
+  initial(IC4S2J4W_17[]) <- IC4S2J4W_17_ini[i]
+  
+  
+  
+  initial(IC1S1J5W_10[]) <- IC1S1J5W_10_ini[i]
+  initial(IC2S1J5W_10[]) <- IC2S1J5W_10_ini[i]
+  initial(IC3S1J5W_10[]) <- IC3S1J5W_10_ini[i]
+  initial(IC4S1J5W_10[]) <- IC4S1J5W_10_ini[i]
+  
+  initial(IC1S1J5W_11[]) <- IC1S1J5W_11_ini[i]
+  initial(IC2S1J5W_11[]) <- IC2S1J5W_11_ini[i]
+  initial(IC3S1J5W_11[]) <- IC3S1J5W_11_ini[i]
+  initial(IC4S1J5W_11[]) <- IC4S1J5W_11_ini[i]
+  
+  initial(IC1S1J5W_12[]) <- IC1S1J5W_12_ini[i]
+  initial(IC2S1J5W_12[]) <- IC2S1J5W_12_ini[i]
+  initial(IC3S1J5W_12[]) <- IC3S1J5W_12_ini[i]
+  initial(IC4S1J5W_12[]) <- IC4S1J5W_12_ini[i]
+  
+  initial(IC1S1J5W_13[]) <- IC1S1J5W_13_ini[i]
+  initial(IC2S1J5W_13[]) <- IC2S1J5W_13_ini[i]
+  initial(IC3S1J5W_13[]) <- IC3S1J5W_13_ini[i]
+  initial(IC4S1J5W_13[]) <- IC4S1J5W_13_ini[i]
+  
+  initial(IC1S1J5W_14[]) <- IC1S1J5W_14_ini[i]
+  initial(IC2S1J5W_14[]) <- IC2S1J5W_14_ini[i]
+  initial(IC3S1J5W_14[]) <- IC3S1J5W_14_ini[i]
+  initial(IC4S1J5W_14[]) <- IC4S1J5W_14_ini[i]
+  
+  initial(IC1S1J5W_15[]) <- IC1S1J5W_15_ini[i]
+  initial(IC2S1J5W_15[]) <- IC2S1J5W_15_ini[i]
+  initial(IC3S1J5W_15[]) <- IC3S1J5W_15_ini[i]
+  initial(IC4S1J5W_15[]) <- IC4S1J5W_15_ini[i]
+  
+  initial(IC1S1J5W_16[]) <- IC1S1J5W_16_ini[i]
+  initial(IC2S1J5W_16[]) <- IC2S1J5W_16_ini[i]
+  initial(IC3S1J5W_16[]) <- IC3S1J5W_16_ini[i]
+  initial(IC4S1J5W_16[]) <- IC4S1J5W_16_ini[i]
+  
+  initial(IC1S1J5W_17[]) <- IC1S1J5W_17_ini[i]
+  initial(IC2S1J5W_17[]) <- IC2S1J5W_17_ini[i]
+  initial(IC3S1J5W_17[]) <- IC3S1J5W_17_ini[i]
+  initial(IC4S1J5W_17[]) <- IC4S1J5W_17_ini[i]
+  
+  
+  
+  initial(IC1S2J5W_10[]) <- IC1S2J5W_10_ini[i]
+  initial(IC2S2J5W_10[]) <- IC2S2J5W_10_ini[i]
+  initial(IC3S2J5W_10[]) <- IC3S2J5W_10_ini[i]
+  initial(IC4S2J5W_10[]) <- IC4S2J5W_10_ini[i]
+  
+  initial(IC1S2J5W_11[]) <- IC1S2J5W_11_ini[i]
+  initial(IC2S2J5W_11[]) <- IC2S2J5W_11_ini[i]
+  initial(IC3S2J5W_11[]) <- IC3S2J5W_11_ini[i]
+  initial(IC4S2J5W_11[]) <- IC4S2J5W_11_ini[i]
+  
+  initial(IC1S2J5W_12[]) <- IC1S2J5W_12_ini[i]
+  initial(IC2S2J5W_12[]) <- IC2S2J5W_12_ini[i]
+  initial(IC3S2J5W_12[]) <- IC3S2J5W_12_ini[i]
+  initial(IC4S2J5W_12[]) <- IC4S2J5W_12_ini[i]
+  
+  initial(IC1S2J5W_13[]) <- IC1S2J5W_13_ini[i]
+  initial(IC2S2J5W_13[]) <- IC2S2J5W_13_ini[i]
+  initial(IC3S2J5W_13[]) <- IC3S2J5W_13_ini[i]
+  initial(IC4S2J5W_13[]) <- IC4S2J5W_13_ini[i]
+  
+  initial(IC1S2J5W_14[]) <- IC1S2J5W_14_ini[i]
+  initial(IC2S2J5W_14[]) <- IC2S2J5W_14_ini[i]
+  initial(IC3S2J5W_14[]) <- IC3S2J5W_14_ini[i]
+  initial(IC4S2J5W_14[]) <- IC4S2J5W_14_ini[i]
+  
+  initial(IC1S2J5W_15[]) <- IC1S2J5W_15_ini[i]
+  initial(IC2S2J5W_15[]) <- IC2S2J5W_15_ini[i]
+  initial(IC3S2J5W_15[]) <- IC3S2J5W_15_ini[i]
+  initial(IC4S2J5W_15[]) <- IC4S2J5W_15_ini[i]
+  
+  initial(IC1S2J5W_16[]) <- IC1S2J5W_16_ini[i]
+  initial(IC2S2J5W_16[]) <- IC2S2J5W_16_ini[i]
+  initial(IC3S2J5W_16[]) <- IC3S2J5W_16_ini[i]
+  initial(IC4S2J5W_16[]) <- IC4S2J5W_16_ini[i]
+  
+  initial(IC1S2J5W_17[]) <- IC1S2J5W_17_ini[i]
+  initial(IC2S2J5W_17[]) <- IC2S2J5W_17_ini[i]
+  initial(IC3S2J5W_17[]) <- IC3S2J5W_17_ini[i]
+  initial(IC4S2J5W_17[]) <- IC4S2J5W_17_ini[i]
+  
+  
+  
+  initial(EC1S1J1U_10[]) <- EC1S1J1U_10_ini[i]
+  initial(EC2S1J1U_10[]) <- EC2S1J1U_10_ini[i]
+  initial(EC3S1J1U_10[]) <- EC3S1J1U_10_ini[i]
+  initial(EC4S1J1U_10[]) <- EC4S1J1U_10_ini[i]
+  
+  initial(EC1S1J1U_11[]) <- EC1S1J1U_11_ini[i]
+  initial(EC2S1J1U_11[]) <- EC2S1J1U_11_ini[i]
+  initial(EC3S1J1U_11[]) <- EC3S1J1U_11_ini[i]
+  initial(EC4S1J1U_11[]) <- EC4S1J1U_11_ini[i]
+  
+  initial(EC1S1J1U_12[]) <- EC1S1J1U_12_ini[i]
+  initial(EC2S1J1U_12[]) <- EC2S1J1U_12_ini[i]
+  initial(EC3S1J1U_12[]) <- EC3S1J1U_12_ini[i]
+  initial(EC4S1J1U_12[]) <- EC4S1J1U_12_ini[i]
+  
+  initial(EC1S1J1U_13[]) <- EC1S1J1U_13_ini[i]
+  initial(EC2S1J1U_13[]) <- EC2S1J1U_13_ini[i]
+  initial(EC3S1J1U_13[]) <- EC3S1J1U_13_ini[i]
+  initial(EC4S1J1U_13[]) <- EC4S1J1U_13_ini[i]
+  
+  initial(EC1S1J1U_14[]) <- EC1S1J1U_14_ini[i]
+  initial(EC2S1J1U_14[]) <- EC2S1J1U_14_ini[i]
+  initial(EC3S1J1U_14[]) <- EC3S1J1U_14_ini[i]
+  initial(EC4S1J1U_14[]) <- EC4S1J1U_14_ini[i]
+  
+  initial(EC1S1J1U_15[]) <- EC1S1J1U_15_ini[i]
+  initial(EC2S1J1U_15[]) <- EC2S1J1U_15_ini[i]
+  initial(EC3S1J1U_15[]) <- EC3S1J1U_15_ini[i]
+  initial(EC4S1J1U_15[]) <- EC4S1J1U_15_ini[i]
+  
+  initial(EC1S1J1U_16[]) <- EC1S1J1U_16_ini[i]
+  initial(EC2S1J1U_16[]) <- EC2S1J1U_16_ini[i]
+  initial(EC3S1J1U_16[]) <- EC3S1J1U_16_ini[i]
+  initial(EC4S1J1U_16[]) <- EC4S1J1U_16_ini[i]
+  
+  initial(EC1S1J1U_17[]) <- EC1S1J1U_17_ini[i]
+  initial(EC2S1J1U_17[]) <- EC2S1J1U_17_ini[i]
+  initial(EC3S1J1U_17[]) <- EC3S1J1U_17_ini[i]
+  initial(EC4S1J1U_17[]) <- EC4S1J1U_17_ini[i]
+  
+  
+  
+  initial(EC1S2J1U_10[]) <- EC1S2J1U_10_ini[i]
+  initial(EC2S2J1U_10[]) <- EC2S2J1U_10_ini[i]
+  initial(EC3S2J1U_10[]) <- EC3S2J1U_10_ini[i]
+  initial(EC4S2J1U_10[]) <- EC4S2J1U_10_ini[i]
+  
+  initial(EC1S2J1U_11[]) <- EC1S2J1U_11_ini[i]
+  initial(EC2S2J1U_11[]) <- EC2S2J1U_11_ini[i]
+  initial(EC3S2J1U_11[]) <- EC3S2J1U_11_ini[i]
+  initial(EC4S2J1U_11[]) <- EC4S2J1U_11_ini[i]
+  
+  initial(EC1S2J1U_12[]) <- EC1S2J1U_12_ini[i]
+  initial(EC2S2J1U_12[]) <- EC2S2J1U_12_ini[i]
+  initial(EC3S2J1U_12[]) <- EC3S2J1U_12_ini[i]
+  initial(EC4S2J1U_12[]) <- EC4S2J1U_12_ini[i]
+  
+  initial(EC1S2J1U_13[]) <- EC1S2J1U_13_ini[i]
+  initial(EC2S2J1U_13[]) <- EC2S2J1U_13_ini[i]
+  initial(EC3S2J1U_13[]) <- EC3S2J1U_13_ini[i]
+  initial(EC4S2J1U_13[]) <- EC4S2J1U_13_ini[i]
+  
+  initial(EC1S2J1U_14[]) <- EC1S2J1U_14_ini[i]
+  initial(EC2S2J1U_14[]) <- EC2S2J1U_14_ini[i]
+  initial(EC3S2J1U_14[]) <- EC3S2J1U_14_ini[i]
+  initial(EC4S2J1U_14[]) <- EC4S2J1U_14_ini[i]
+  
+  initial(EC1S2J1U_15[]) <- EC1S2J1U_15_ini[i]
+  initial(EC2S2J1U_15[]) <- EC2S2J1U_15_ini[i]
+  initial(EC3S2J1U_15[]) <- EC3S2J1U_15_ini[i]
+  initial(EC4S2J1U_15[]) <- EC4S2J1U_15_ini[i]
+  
+  initial(EC1S2J1U_16[]) <- EC1S2J1U_16_ini[i]
+  initial(EC2S2J1U_16[]) <- EC2S2J1U_16_ini[i]
+  initial(EC3S2J1U_16[]) <- EC3S2J1U_16_ini[i]
+  initial(EC4S2J1U_16[]) <- EC4S2J1U_16_ini[i]
+  
+  initial(EC1S2J1U_17[]) <- EC1S2J1U_17_ini[i]
+  initial(EC2S2J1U_17[]) <- EC2S2J1U_17_ini[i]
+  initial(EC3S2J1U_17[]) <- EC3S2J1U_17_ini[i]
+  initial(EC4S2J1U_17[]) <- EC4S2J1U_17_ini[i]
+  
+  
+  
+  initial(EC1S1J2U_10[]) <- EC1S1J2U_10_ini[i]
+  initial(EC2S1J2U_10[]) <- EC2S1J2U_10_ini[i]
+  initial(EC3S1J2U_10[]) <- EC3S1J2U_10_ini[i]
+  initial(EC4S1J2U_10[]) <- EC4S1J2U_10_ini[i]
+  
+  initial(EC1S1J2U_11[]) <- EC1S1J2U_11_ini[i]
+  initial(EC2S1J2U_11[]) <- EC2S1J2U_11_ini[i]
+  initial(EC3S1J2U_11[]) <- EC3S1J2U_11_ini[i]
+  initial(EC4S1J2U_11[]) <- EC4S1J2U_11_ini[i]
+  
+  initial(EC1S1J2U_12[]) <- EC1S1J2U_12_ini[i]
+  initial(EC2S1J2U_12[]) <- EC2S1J2U_12_ini[i]
+  initial(EC3S1J2U_12[]) <- EC3S1J2U_12_ini[i]
+  initial(EC4S1J2U_12[]) <- EC4S1J2U_12_ini[i]
+  
+  initial(EC1S1J2U_13[]) <- EC1S1J2U_13_ini[i]
+  initial(EC2S1J2U_13[]) <- EC2S1J2U_13_ini[i]
+  initial(EC3S1J2U_13[]) <- EC3S1J2U_13_ini[i]
+  initial(EC4S1J2U_13[]) <- EC4S1J2U_13_ini[i]
+  
+  initial(EC1S1J2U_14[]) <- EC1S1J2U_14_ini[i]
+  initial(EC2S1J2U_14[]) <- EC2S1J2U_14_ini[i]
+  initial(EC3S1J2U_14[]) <- EC3S1J2U_14_ini[i]
+  initial(EC4S1J2U_14[]) <- EC4S1J2U_14_ini[i]
+  
+  initial(EC1S1J2U_15[]) <- EC1S1J2U_15_ini[i]
+  initial(EC2S1J2U_15[]) <- EC2S1J2U_15_ini[i]
+  initial(EC3S1J2U_15[]) <- EC3S1J2U_15_ini[i]
+  initial(EC4S1J2U_15[]) <- EC4S1J2U_15_ini[i]
+  
+  initial(EC1S1J2U_16[]) <- EC1S1J2U_16_ini[i]
+  initial(EC2S1J2U_16[]) <- EC2S1J2U_16_ini[i]
+  initial(EC3S1J2U_16[]) <- EC3S1J2U_16_ini[i]
+  initial(EC4S1J2U_16[]) <- EC4S1J2U_16_ini[i]
+  
+  initial(EC1S1J2U_17[]) <- EC1S1J2U_17_ini[i]
+  initial(EC2S1J2U_17[]) <- EC2S1J2U_17_ini[i]
+  initial(EC3S1J2U_17[]) <- EC3S1J2U_17_ini[i]
+  initial(EC4S1J2U_17[]) <- EC4S1J2U_17_ini[i]
+  
+  
+  
+  initial(EC1S2J2U_10[]) <- EC1S2J2U_10_ini[i]
+  initial(EC2S2J2U_10[]) <- EC2S2J2U_10_ini[i]
+  initial(EC3S2J2U_10[]) <- EC3S2J2U_10_ini[i]
+  initial(EC4S2J2U_10[]) <- EC4S2J2U_10_ini[i]
+  
+  initial(EC1S2J2U_11[]) <- EC1S2J2U_11_ini[i]
+  initial(EC2S2J2U_11[]) <- EC2S2J2U_11_ini[i]
+  initial(EC3S2J2U_11[]) <- EC3S2J2U_11_ini[i]
+  initial(EC4S2J2U_11[]) <- EC4S2J2U_11_ini[i]
+  
+  initial(EC1S2J2U_12[]) <- EC1S2J2U_12_ini[i]
+  initial(EC2S2J2U_12[]) <- EC2S2J2U_12_ini[i]
+  initial(EC3S2J2U_12[]) <- EC3S2J2U_12_ini[i]
+  initial(EC4S2J2U_12[]) <- EC4S2J2U_12_ini[i]
+  
+  initial(EC1S2J2U_13[]) <- EC1S2J2U_13_ini[i]
+  initial(EC2S2J2U_13[]) <- EC2S2J2U_13_ini[i]
+  initial(EC3S2J2U_13[]) <- EC3S2J2U_13_ini[i]
+  initial(EC4S2J2U_13[]) <- EC4S2J2U_13_ini[i]
+  
+  initial(EC1S2J2U_14[]) <- EC1S2J2U_14_ini[i]
+  initial(EC2S2J2U_14[]) <- EC2S2J2U_14_ini[i]
+  initial(EC3S2J2U_14[]) <- EC3S2J2U_14_ini[i]
+  initial(EC4S2J2U_14[]) <- EC4S2J2U_14_ini[i]
+  
+  initial(EC1S2J2U_15[]) <- EC1S2J2U_15_ini[i]
+  initial(EC2S2J2U_15[]) <- EC2S2J2U_15_ini[i]
+  initial(EC3S2J2U_15[]) <- EC3S2J2U_15_ini[i]
+  initial(EC4S2J2U_15[]) <- EC4S2J2U_15_ini[i]
+  
+  initial(EC1S2J2U_16[]) <- EC1S2J2U_16_ini[i]
+  initial(EC2S2J2U_16[]) <- EC2S2J2U_16_ini[i]
+  initial(EC3S2J2U_16[]) <- EC3S2J2U_16_ini[i]
+  initial(EC4S2J2U_16[]) <- EC4S2J2U_16_ini[i]
+  
+  initial(EC1S2J2U_17[]) <- EC1S2J2U_17_ini[i]
+  initial(EC2S2J2U_17[]) <- EC2S2J2U_17_ini[i]
+  initial(EC3S2J2U_17[]) <- EC3S2J2U_17_ini[i]
+  initial(EC4S2J2U_17[]) <- EC4S2J2U_17_ini[i]
+  
+  
+  
+  initial(EC1S1J3U_10[]) <- EC1S1J3U_10_ini[i]
+  initial(EC2S1J3U_10[]) <- EC2S1J3U_10_ini[i]
+  initial(EC3S1J3U_10[]) <- EC3S1J3U_10_ini[i]
+  initial(EC4S1J3U_10[]) <- EC4S1J3U_10_ini[i]
+  
+  initial(EC1S1J3U_11[]) <- EC1S1J3U_11_ini[i]
+  initial(EC2S1J3U_11[]) <- EC2S1J3U_11_ini[i]
+  initial(EC3S1J3U_11[]) <- EC3S1J3U_11_ini[i]
+  initial(EC4S1J3U_11[]) <- EC4S1J3U_11_ini[i]
+  
+  initial(EC1S1J3U_12[]) <- EC1S1J3U_12_ini[i]
+  initial(EC2S1J3U_12[]) <- EC2S1J3U_12_ini[i]
+  initial(EC3S1J3U_12[]) <- EC3S1J3U_12_ini[i]
+  initial(EC4S1J3U_12[]) <- EC4S1J3U_12_ini[i]
+  
+  initial(EC1S1J3U_13[]) <- EC1S1J3U_13_ini[i]
+  initial(EC2S1J3U_13[]) <- EC2S1J3U_13_ini[i]
+  initial(EC3S1J3U_13[]) <- EC3S1J3U_13_ini[i]
+  initial(EC4S1J3U_13[]) <- EC4S1J3U_13_ini[i]
+  
+  initial(EC1S1J3U_14[]) <- EC1S1J3U_14_ini[i]
+  initial(EC2S1J3U_14[]) <- EC2S1J3U_14_ini[i]
+  initial(EC3S1J3U_14[]) <- EC3S1J3U_14_ini[i]
+  initial(EC4S1J3U_14[]) <- EC4S1J3U_14_ini[i]
+  
+  initial(EC1S1J3U_15[]) <- EC1S1J3U_15_ini[i]
+  initial(EC2S1J3U_15[]) <- EC2S1J3U_15_ini[i]
+  initial(EC3S1J3U_15[]) <- EC3S1J3U_15_ini[i]
+  initial(EC4S1J3U_15[]) <- EC4S1J3U_15_ini[i]
+  
+  initial(EC1S1J3U_16[]) <- EC1S1J3U_16_ini[i]
+  initial(EC2S1J3U_16[]) <- EC2S1J3U_16_ini[i]
+  initial(EC3S1J3U_16[]) <- EC3S1J3U_16_ini[i]
+  initial(EC4S1J3U_16[]) <- EC4S1J3U_16_ini[i]
+  
+  initial(EC1S1J3U_17[]) <- EC1S1J3U_17_ini[i]
+  initial(EC2S1J3U_17[]) <- EC2S1J3U_17_ini[i]
+  initial(EC3S1J3U_17[]) <- EC3S1J3U_17_ini[i]
+  initial(EC4S1J3U_17[]) <- EC4S1J3U_17_ini[i]
+  
+  
+  
+  initial(EC1S2J3U_10[]) <- EC1S2J3U_10_ini[i]
+  initial(EC2S2J3U_10[]) <- EC2S2J3U_10_ini[i]
+  initial(EC3S2J3U_10[]) <- EC3S2J3U_10_ini[i]
+  initial(EC4S2J3U_10[]) <- EC4S2J3U_10_ini[i]
+  
+  initial(EC1S2J3U_11[]) <- EC1S2J3U_11_ini[i]
+  initial(EC2S2J3U_11[]) <- EC2S2J3U_11_ini[i]
+  initial(EC3S2J3U_11[]) <- EC3S2J3U_11_ini[i]
+  initial(EC4S2J3U_11[]) <- EC4S2J3U_11_ini[i]
+  
+  initial(EC1S2J3U_12[]) <- EC1S2J3U_12_ini[i]
+  initial(EC2S2J3U_12[]) <- EC2S2J3U_12_ini[i]
+  initial(EC3S2J3U_12[]) <- EC3S2J3U_12_ini[i]
+  initial(EC4S2J3U_12[]) <- EC4S2J3U_12_ini[i]
+  
+  initial(EC1S2J3U_13[]) <- EC1S2J3U_13_ini[i]
+  initial(EC2S2J3U_13[]) <- EC2S2J3U_13_ini[i]
+  initial(EC3S2J3U_13[]) <- EC3S2J3U_13_ini[i]
+  initial(EC4S2J3U_13[]) <- EC4S2J3U_13_ini[i]
+  
+  initial(EC1S2J3U_14[]) <- EC1S2J3U_14_ini[i]
+  initial(EC2S2J3U_14[]) <- EC2S2J3U_14_ini[i]
+  initial(EC3S2J3U_14[]) <- EC3S2J3U_14_ini[i]
+  initial(EC4S2J3U_14[]) <- EC4S2J3U_14_ini[i]
+  
+  initial(EC1S2J3U_15[]) <- EC1S2J3U_15_ini[i]
+  initial(EC2S2J3U_15[]) <- EC2S2J3U_15_ini[i]
+  initial(EC3S2J3U_15[]) <- EC3S2J3U_15_ini[i]
+  initial(EC4S2J3U_15[]) <- EC4S2J3U_15_ini[i]
+  
+  initial(EC1S2J3U_16[]) <- EC1S2J3U_16_ini[i]
+  initial(EC2S2J3U_16[]) <- EC2S2J3U_16_ini[i]
+  initial(EC3S2J3U_16[]) <- EC3S2J3U_16_ini[i]
+  initial(EC4S2J3U_16[]) <- EC4S2J3U_16_ini[i]
+  
+  initial(EC1S2J3U_17[]) <- EC1S2J3U_17_ini[i]
+  initial(EC2S2J3U_17[]) <- EC2S2J3U_17_ini[i]
+  initial(EC3S2J3U_17[]) <- EC3S2J3U_17_ini[i]
+  initial(EC4S2J3U_17[]) <- EC4S2J3U_17_ini[i]
+  
+  
+  
+  initial(EC1S1J4U_10[]) <- EC1S1J4U_10_ini[i]
+  initial(EC2S1J4U_10[]) <- EC2S1J4U_10_ini[i]
+  initial(EC3S1J4U_10[]) <- EC3S1J4U_10_ini[i]
+  initial(EC4S1J4U_10[]) <- EC4S1J4U_10_ini[i]
+  
+  initial(EC1S1J4U_11[]) <- EC1S1J4U_11_ini[i]
+  initial(EC2S1J4U_11[]) <- EC2S1J4U_11_ini[i]
+  initial(EC3S1J4U_11[]) <- EC3S1J4U_11_ini[i]
+  initial(EC4S1J4U_11[]) <- EC4S1J4U_11_ini[i]
+  
+  initial(EC1S1J4U_12[]) <- EC1S1J4U_12_ini[i]
+  initial(EC2S1J4U_12[]) <- EC2S1J4U_12_ini[i]
+  initial(EC3S1J4U_12[]) <- EC3S1J4U_12_ini[i]
+  initial(EC4S1J4U_12[]) <- EC4S1J4U_12_ini[i]
+  
+  initial(EC1S1J4U_13[]) <- EC1S1J4U_13_ini[i]
+  initial(EC2S1J4U_13[]) <- EC2S1J4U_13_ini[i]
+  initial(EC3S1J4U_13[]) <- EC3S1J4U_13_ini[i]
+  initial(EC4S1J4U_13[]) <- EC4S1J4U_13_ini[i]
+  
+  initial(EC1S1J4U_14[]) <- EC1S1J4U_14_ini[i]
+  initial(EC2S1J4U_14[]) <- EC2S1J4U_14_ini[i]
+  initial(EC3S1J4U_14[]) <- EC3S1J4U_14_ini[i]
+  initial(EC4S1J4U_14[]) <- EC4S1J4U_14_ini[i]
+  
+  initial(EC1S1J4U_15[]) <- EC1S1J4U_15_ini[i]
+  initial(EC2S1J4U_15[]) <- EC2S1J4U_15_ini[i]
+  initial(EC3S1J4U_15[]) <- EC3S1J4U_15_ini[i]
+  initial(EC4S1J4U_15[]) <- EC4S1J4U_15_ini[i]
+  
+  initial(EC1S1J4U_16[]) <- EC1S1J4U_16_ini[i]
+  initial(EC2S1J4U_16[]) <- EC2S1J4U_16_ini[i]
+  initial(EC3S1J4U_16[]) <- EC3S1J4U_16_ini[i]
+  initial(EC4S1J4U_16[]) <- EC4S1J4U_16_ini[i]
+  
+  initial(EC1S1J4U_17[]) <- EC1S1J4U_17_ini[i]
+  initial(EC2S1J4U_17[]) <- EC2S1J4U_17_ini[i]
+  initial(EC3S1J4U_17[]) <- EC3S1J4U_17_ini[i]
+  initial(EC4S1J4U_17[]) <- EC4S1J4U_17_ini[i]
+  
+  
+  
+  initial(EC1S2J4U_10[]) <- EC1S2J4U_10_ini[i]
+  initial(EC2S2J4U_10[]) <- EC2S2J4U_10_ini[i]
+  initial(EC3S2J4U_10[]) <- EC3S2J4U_10_ini[i]
+  initial(EC4S2J4U_10[]) <- EC4S2J4U_10_ini[i]
+  
+  initial(EC1S2J4U_11[]) <- EC1S2J4U_11_ini[i]
+  initial(EC2S2J4U_11[]) <- EC2S2J4U_11_ini[i]
+  initial(EC3S2J4U_11[]) <- EC3S2J4U_11_ini[i]
+  initial(EC4S2J4U_11[]) <- EC4S2J4U_11_ini[i]
+  
+  initial(EC1S2J4U_12[]) <- EC1S2J4U_12_ini[i]
+  initial(EC2S2J4U_12[]) <- EC2S2J4U_12_ini[i]
+  initial(EC3S2J4U_12[]) <- EC3S2J4U_12_ini[i]
+  initial(EC4S2J4U_12[]) <- EC4S2J4U_12_ini[i]
+  
+  initial(EC1S2J4U_13[]) <- EC1S2J4U_13_ini[i]
+  initial(EC2S2J4U_13[]) <- EC2S2J4U_13_ini[i]
+  initial(EC3S2J4U_13[]) <- EC3S2J4U_13_ini[i]
+  initial(EC4S2J4U_13[]) <- EC4S2J4U_13_ini[i]
+  
+  initial(EC1S2J4U_14[]) <- EC1S2J4U_14_ini[i]
+  initial(EC2S2J4U_14[]) <- EC2S2J4U_14_ini[i]
+  initial(EC3S2J4U_14[]) <- EC3S2J4U_14_ini[i]
+  initial(EC4S2J4U_14[]) <- EC4S2J4U_14_ini[i]
+  
+  initial(EC1S2J4U_15[]) <- EC1S2J4U_15_ini[i]
+  initial(EC2S2J4U_15[]) <- EC2S2J4U_15_ini[i]
+  initial(EC3S2J4U_15[]) <- EC3S2J4U_15_ini[i]
+  initial(EC4S2J4U_15[]) <- EC4S2J4U_15_ini[i]
+  
+  initial(EC1S2J4U_16[]) <- EC1S2J4U_16_ini[i]
+  initial(EC2S2J4U_16[]) <- EC2S2J4U_16_ini[i]
+  initial(EC3S2J4U_16[]) <- EC3S2J4U_16_ini[i]
+  initial(EC4S2J4U_16[]) <- EC4S2J4U_16_ini[i]
+  
+  initial(EC1S2J4U_17[]) <- EC1S2J4U_17_ini[i]
+  initial(EC2S2J4U_17[]) <- EC2S2J4U_17_ini[i]
+  initial(EC3S2J4U_17[]) <- EC3S2J4U_17_ini[i]
+  initial(EC4S2J4U_17[]) <- EC4S2J4U_17_ini[i]
+  
+  
+  
+  initial(EC1S1J5U_10[]) <- EC1S1J5U_10_ini[i]
+  initial(EC2S1J5U_10[]) <- EC2S1J5U_10_ini[i]
+  initial(EC3S1J5U_10[]) <- EC3S1J5U_10_ini[i]
+  initial(EC4S1J5U_10[]) <- EC4S1J5U_10_ini[i]
+  
+  initial(EC1S1J5U_11[]) <- EC1S1J5U_11_ini[i]
+  initial(EC2S1J5U_11[]) <- EC2S1J5U_11_ini[i]
+  initial(EC3S1J5U_11[]) <- EC3S1J5U_11_ini[i]
+  initial(EC4S1J5U_11[]) <- EC4S1J5U_11_ini[i]
+  
+  initial(EC1S1J5U_12[]) <- EC1S1J5U_12_ini[i]
+  initial(EC2S1J5U_12[]) <- EC2S1J5U_12_ini[i]
+  initial(EC3S1J5U_12[]) <- EC3S1J5U_12_ini[i]
+  initial(EC4S1J5U_12[]) <- EC4S1J5U_12_ini[i]
+  
+  initial(EC1S1J5U_13[]) <- EC1S1J5U_13_ini[i]
+  initial(EC2S1J5U_13[]) <- EC2S1J5U_13_ini[i]
+  initial(EC3S1J5U_13[]) <- EC3S1J5U_13_ini[i]
+  initial(EC4S1J5U_13[]) <- EC4S1J5U_13_ini[i]
+  
+  initial(EC1S1J5U_14[]) <- EC1S1J5U_14_ini[i]
+  initial(EC2S1J5U_14[]) <- EC2S1J5U_14_ini[i]
+  initial(EC3S1J5U_14[]) <- EC3S1J5U_14_ini[i]
+  initial(EC4S1J5U_14[]) <- EC4S1J5U_14_ini[i]
+  
+  initial(EC1S1J5U_15[]) <- EC1S1J5U_15_ini[i]
+  initial(EC2S1J5U_15[]) <- EC2S1J5U_15_ini[i]
+  initial(EC3S1J5U_15[]) <- EC3S1J5U_15_ini[i]
+  initial(EC4S1J5U_15[]) <- EC4S1J5U_15_ini[i]
+  
+  initial(EC1S1J5U_16[]) <- EC1S1J5U_16_ini[i]
+  initial(EC2S1J5U_16[]) <- EC2S1J5U_16_ini[i]
+  initial(EC3S1J5U_16[]) <- EC3S1J5U_16_ini[i]
+  initial(EC4S1J5U_16[]) <- EC4S1J5U_16_ini[i]
+  
+  initial(EC1S1J5U_17[]) <- EC1S1J5U_17_ini[i]
+  initial(EC2S1J5U_17[]) <- EC2S1J5U_17_ini[i]
+  initial(EC3S1J5U_17[]) <- EC3S1J5U_17_ini[i]
+  initial(EC4S1J5U_17[]) <- EC4S1J5U_17_ini[i]
+  
+  
+  
+  initial(EC1S2J5U_10[]) <- EC1S2J5U_10_ini[i]
+  initial(EC2S2J5U_10[]) <- EC2S2J5U_10_ini[i]
+  initial(EC3S2J5U_10[]) <- EC3S2J5U_10_ini[i]
+  initial(EC4S2J5U_10[]) <- EC4S2J5U_10_ini[i]
+  
+  initial(EC1S2J5U_11[]) <- EC1S2J5U_11_ini[i]
+  initial(EC2S2J5U_11[]) <- EC2S2J5U_11_ini[i]
+  initial(EC3S2J5U_11[]) <- EC3S2J5U_11_ini[i]
+  initial(EC4S2J5U_11[]) <- EC4S2J5U_11_ini[i]
+  
+  initial(EC1S2J5U_12[]) <- EC1S2J5U_12_ini[i]
+  initial(EC2S2J5U_12[]) <- EC2S2J5U_12_ini[i]
+  initial(EC3S2J5U_12[]) <- EC3S2J5U_12_ini[i]
+  initial(EC4S2J5U_12[]) <- EC4S2J5U_12_ini[i]
+  
+  initial(EC1S2J5U_13[]) <- EC1S2J5U_13_ini[i]
+  initial(EC2S2J5U_13[]) <- EC2S2J5U_13_ini[i]
+  initial(EC3S2J5U_13[]) <- EC3S2J5U_13_ini[i]
+  initial(EC4S2J5U_13[]) <- EC4S2J5U_13_ini[i]
+  
+  initial(EC1S2J5U_14[]) <- EC1S2J5U_14_ini[i]
+  initial(EC2S2J5U_14[]) <- EC2S2J5U_14_ini[i]
+  initial(EC3S2J5U_14[]) <- EC3S2J5U_14_ini[i]
+  initial(EC4S2J5U_14[]) <- EC4S2J5U_14_ini[i]
+  
+  initial(EC1S2J5U_15[]) <- EC1S2J5U_15_ini[i]
+  initial(EC2S2J5U_15[]) <- EC2S2J5U_15_ini[i]
+  initial(EC3S2J5U_15[]) <- EC3S2J5U_15_ini[i]
+  initial(EC4S2J5U_15[]) <- EC4S2J5U_15_ini[i]
+  
+  initial(EC1S2J5U_16[]) <- EC1S2J5U_16_ini[i]
+  initial(EC2S2J5U_16[]) <- EC2S2J5U_16_ini[i]
+  initial(EC3S2J5U_16[]) <- EC3S2J5U_16_ini[i]
+  initial(EC4S2J5U_16[]) <- EC4S2J5U_16_ini[i]
+  
+  initial(EC1S2J5U_17[]) <- EC1S2J5U_17_ini[i]
+  initial(EC2S2J5U_17[]) <- EC2S2J5U_17_ini[i]
+  initial(EC3S2J5U_17[]) <- EC3S2J5U_17_ini[i]
+  initial(EC4S2J5U_17[]) <- EC4S2J5U_17_ini[i]
+  
+  
+  
+  initial(EC1S1J1W_10[]) <- EC1S1J1W_10_ini[i]
+  initial(EC2S1J1W_10[]) <- EC2S1J1W_10_ini[i]
+  initial(EC3S1J1W_10[]) <- EC3S1J1W_10_ini[i]
+  initial(EC4S1J1W_10[]) <- EC4S1J1W_10_ini[i]
+  
+  initial(EC1S1J1W_11[]) <- EC1S1J1W_11_ini[i]
+  initial(EC2S1J1W_11[]) <- EC2S1J1W_11_ini[i]
+  initial(EC3S1J1W_11[]) <- EC3S1J1W_11_ini[i]
+  initial(EC4S1J1W_11[]) <- EC4S1J1W_11_ini[i]
+  
+  initial(EC1S1J1W_12[]) <- EC1S1J1W_12_ini[i]
+  initial(EC2S1J1W_12[]) <- EC2S1J1W_12_ini[i]
+  initial(EC3S1J1W_12[]) <- EC3S1J1W_12_ini[i]
+  initial(EC4S1J1W_12[]) <- EC4S1J1W_12_ini[i]
+  
+  initial(EC1S1J1W_13[]) <- EC1S1J1W_13_ini[i]
+  initial(EC2S1J1W_13[]) <- EC2S1J1W_13_ini[i]
+  initial(EC3S1J1W_13[]) <- EC3S1J1W_13_ini[i]
+  initial(EC4S1J1W_13[]) <- EC4S1J1W_13_ini[i]
+  
+  initial(EC1S1J1W_14[]) <- EC1S1J1W_14_ini[i]
+  initial(EC2S1J1W_14[]) <- EC2S1J1W_14_ini[i]
+  initial(EC3S1J1W_14[]) <- EC3S1J1W_14_ini[i]
+  initial(EC4S1J1W_14[]) <- EC4S1J1W_14_ini[i]
+  
+  initial(EC1S1J1W_15[]) <- EC1S1J1W_15_ini[i]
+  initial(EC2S1J1W_15[]) <- EC2S1J1W_15_ini[i]
+  initial(EC3S1J1W_15[]) <- EC3S1J1W_15_ini[i]
+  initial(EC4S1J1W_15[]) <- EC4S1J1W_15_ini[i]
+  
+  initial(EC1S1J1W_16[]) <- EC1S1J1W_16_ini[i]
+  initial(EC2S1J1W_16[]) <- EC2S1J1W_16_ini[i]
+  initial(EC3S1J1W_16[]) <- EC3S1J1W_16_ini[i]
+  initial(EC4S1J1W_16[]) <- EC4S1J1W_16_ini[i]
+  
+  initial(EC1S1J1W_17[]) <- EC1S1J1W_17_ini[i]
+  initial(EC2S1J1W_17[]) <- EC2S1J1W_17_ini[i]
+  initial(EC3S1J1W_17[]) <- EC3S1J1W_17_ini[i]
+  initial(EC4S1J1W_17[]) <- EC4S1J1W_17_ini[i]
+  
+  
+  
+  initial(EC1S2J1W_10[]) <- EC1S2J1W_10_ini[i]
+  initial(EC2S2J1W_10[]) <- EC2S2J1W_10_ini[i]
+  initial(EC3S2J1W_10[]) <- EC3S2J1W_10_ini[i]
+  initial(EC4S2J1W_10[]) <- EC4S2J1W_10_ini[i]
+  
+  initial(EC1S2J1W_11[]) <- EC1S2J1W_11_ini[i]
+  initial(EC2S2J1W_11[]) <- EC2S2J1W_11_ini[i]
+  initial(EC3S2J1W_11[]) <- EC3S2J1W_11_ini[i]
+  initial(EC4S2J1W_11[]) <- EC4S2J1W_11_ini[i]
+  
+  initial(EC1S2J1W_12[]) <- EC1S2J1W_12_ini[i]
+  initial(EC2S2J1W_12[]) <- EC2S2J1W_12_ini[i]
+  initial(EC3S2J1W_12[]) <- EC3S2J1W_12_ini[i]
+  initial(EC4S2J1W_12[]) <- EC4S2J1W_12_ini[i]
+  
+  initial(EC1S2J1W_13[]) <- EC1S2J1W_13_ini[i]
+  initial(EC2S2J1W_13[]) <- EC2S2J1W_13_ini[i]
+  initial(EC3S2J1W_13[]) <- EC3S2J1W_13_ini[i]
+  initial(EC4S2J1W_13[]) <- EC4S2J1W_13_ini[i]
+  
+  initial(EC1S2J1W_14[]) <- EC1S2J1W_14_ini[i]
+  initial(EC2S2J1W_14[]) <- EC2S2J1W_14_ini[i]
+  initial(EC3S2J1W_14[]) <- EC3S2J1W_14_ini[i]
+  initial(EC4S2J1W_14[]) <- EC4S2J1W_14_ini[i]
+  
+  initial(EC1S2J1W_15[]) <- EC1S2J1W_15_ini[i]
+  initial(EC2S2J1W_15[]) <- EC2S2J1W_15_ini[i]
+  initial(EC3S2J1W_15[]) <- EC3S2J1W_15_ini[i]
+  initial(EC4S2J1W_15[]) <- EC4S2J1W_15_ini[i]
+  
+  initial(EC1S2J1W_16[]) <- EC1S2J1W_16_ini[i]
+  initial(EC2S2J1W_16[]) <- EC2S2J1W_16_ini[i]
+  initial(EC3S2J1W_16[]) <- EC3S2J1W_16_ini[i]
+  initial(EC4S2J1W_16[]) <- EC4S2J1W_16_ini[i]
+  
+  initial(EC1S2J1W_17[]) <- EC1S2J1W_17_ini[i]
+  initial(EC2S2J1W_17[]) <- EC2S2J1W_17_ini[i]
+  initial(EC3S2J1W_17[]) <- EC3S2J1W_17_ini[i]
+  initial(EC4S2J1W_17[]) <- EC4S2J1W_17_ini[i]
+  
+  
+  
+  initial(EC1S1J2W_10[]) <- EC1S1J2W_10_ini[i]
+  initial(EC2S1J2W_10[]) <- EC2S1J2W_10_ini[i]
+  initial(EC3S1J2W_10[]) <- EC3S1J2W_10_ini[i]
+  initial(EC4S1J2W_10[]) <- EC4S1J2W_10_ini[i]
+  
+  initial(EC1S1J2W_11[]) <- EC1S1J2W_11_ini[i]
+  initial(EC2S1J2W_11[]) <- EC2S1J2W_11_ini[i]
+  initial(EC3S1J2W_11[]) <- EC3S1J2W_11_ini[i]
+  initial(EC4S1J2W_11[]) <- EC4S1J2W_11_ini[i]
+  
+  initial(EC1S1J2W_12[]) <- EC1S1J2W_12_ini[i]
+  initial(EC2S1J2W_12[]) <- EC2S1J2W_12_ini[i]
+  initial(EC3S1J2W_12[]) <- EC3S1J2W_12_ini[i]
+  initial(EC4S1J2W_12[]) <- EC4S1J2W_12_ini[i]
+  
+  initial(EC1S1J2W_13[]) <- EC1S1J2W_13_ini[i]
+  initial(EC2S1J2W_13[]) <- EC2S1J2W_13_ini[i]
+  initial(EC3S1J2W_13[]) <- EC3S1J2W_13_ini[i]
+  initial(EC4S1J2W_13[]) <- EC4S1J2W_13_ini[i]
+  
+  initial(EC1S1J2W_14[]) <- EC1S1J2W_14_ini[i]
+  initial(EC2S1J2W_14[]) <- EC2S1J2W_14_ini[i]
+  initial(EC3S1J2W_14[]) <- EC3S1J2W_14_ini[i]
+  initial(EC4S1J2W_14[]) <- EC4S1J2W_14_ini[i]
+  
+  initial(EC1S1J2W_15[]) <- EC1S1J2W_15_ini[i]
+  initial(EC2S1J2W_15[]) <- EC2S1J2W_15_ini[i]
+  initial(EC3S1J2W_15[]) <- EC3S1J2W_15_ini[i]
+  initial(EC4S1J2W_15[]) <- EC4S1J2W_15_ini[i]
+  
+  initial(EC1S1J2W_16[]) <- EC1S1J2W_16_ini[i]
+  initial(EC2S1J2W_16[]) <- EC2S1J2W_16_ini[i]
+  initial(EC3S1J2W_16[]) <- EC3S1J2W_16_ini[i]
+  initial(EC4S1J2W_16[]) <- EC4S1J2W_16_ini[i]
+  
+  initial(EC1S1J2W_17[]) <- EC1S1J2W_17_ini[i]
+  initial(EC2S1J2W_17[]) <- EC2S1J2W_17_ini[i]
+  initial(EC3S1J2W_17[]) <- EC3S1J2W_17_ini[i]
+  initial(EC4S1J2W_17[]) <- EC4S1J2W_17_ini[i]
+  
+  
+  
+  initial(EC1S2J2W_10[]) <- EC1S2J2W_10_ini[i]
+  initial(EC2S2J2W_10[]) <- EC2S2J2W_10_ini[i]
+  initial(EC3S2J2W_10[]) <- EC3S2J2W_10_ini[i]
+  initial(EC4S2J2W_10[]) <- EC4S2J2W_10_ini[i]
+  
+  initial(EC1S2J2W_11[]) <- EC1S2J2W_11_ini[i]
+  initial(EC2S2J2W_11[]) <- EC2S2J2W_11_ini[i]
+  initial(EC3S2J2W_11[]) <- EC3S2J2W_11_ini[i]
+  initial(EC4S2J2W_11[]) <- EC4S2J2W_11_ini[i]
+  
+  initial(EC1S2J2W_12[]) <- EC1S2J2W_12_ini[i]
+  initial(EC2S2J2W_12[]) <- EC2S2J2W_12_ini[i]
+  initial(EC3S2J2W_12[]) <- EC3S2J2W_12_ini[i]
+  initial(EC4S2J2W_12[]) <- EC4S2J2W_12_ini[i]
+  
+  initial(EC1S2J2W_13[]) <- EC1S2J2W_13_ini[i]
+  initial(EC2S2J2W_13[]) <- EC2S2J2W_13_ini[i]
+  initial(EC3S2J2W_13[]) <- EC3S2J2W_13_ini[i]
+  initial(EC4S2J2W_13[]) <- EC4S2J2W_13_ini[i]
+  
+  initial(EC1S2J2W_14[]) <- EC1S2J2W_14_ini[i]
+  initial(EC2S2J2W_14[]) <- EC2S2J2W_14_ini[i]
+  initial(EC3S2J2W_14[]) <- EC3S2J2W_14_ini[i]
+  initial(EC4S2J2W_14[]) <- EC4S2J2W_14_ini[i]
+  
+  initial(EC1S2J2W_15[]) <- EC1S2J2W_15_ini[i]
+  initial(EC2S2J2W_15[]) <- EC2S2J2W_15_ini[i]
+  initial(EC3S2J2W_15[]) <- EC3S2J2W_15_ini[i]
+  initial(EC4S2J2W_15[]) <- EC4S2J2W_15_ini[i]
+  
+  initial(EC1S2J2W_16[]) <- EC1S2J2W_16_ini[i]
+  initial(EC2S2J2W_16[]) <- EC2S2J2W_16_ini[i]
+  initial(EC3S2J2W_16[]) <- EC3S2J2W_16_ini[i]
+  initial(EC4S2J2W_16[]) <- EC4S2J2W_16_ini[i]
+  
+  initial(EC1S2J2W_17[]) <- EC1S2J2W_17_ini[i]
+  initial(EC2S2J2W_17[]) <- EC2S2J2W_17_ini[i]
+  initial(EC3S2J2W_17[]) <- EC3S2J2W_17_ini[i]
+  initial(EC4S2J2W_17[]) <- EC4S2J2W_17_ini[i]
+  
+  
+  
+  initial(EC1S1J3W_10[]) <- EC1S1J3W_10_ini[i]
+  initial(EC2S1J3W_10[]) <- EC2S1J3W_10_ini[i]
+  initial(EC3S1J3W_10[]) <- EC3S1J3W_10_ini[i]
+  initial(EC4S1J3W_10[]) <- EC4S1J3W_10_ini[i]
+  
+  initial(EC1S1J3W_11[]) <- EC1S1J3W_11_ini[i]
+  initial(EC2S1J3W_11[]) <- EC2S1J3W_11_ini[i]
+  initial(EC3S1J3W_11[]) <- EC3S1J3W_11_ini[i]
+  initial(EC4S1J3W_11[]) <- EC4S1J3W_11_ini[i]
+  
+  initial(EC1S1J3W_12[]) <- EC1S1J3W_12_ini[i]
+  initial(EC2S1J3W_12[]) <- EC2S1J3W_12_ini[i]
+  initial(EC3S1J3W_12[]) <- EC3S1J3W_12_ini[i]
+  initial(EC4S1J3W_12[]) <- EC4S1J3W_12_ini[i]
+  
+  initial(EC1S1J3W_13[]) <- EC1S1J3W_13_ini[i]
+  initial(EC2S1J3W_13[]) <- EC2S1J3W_13_ini[i]
+  initial(EC3S1J3W_13[]) <- EC3S1J3W_13_ini[i]
+  initial(EC4S1J3W_13[]) <- EC4S1J3W_13_ini[i]
+  
+  initial(EC1S1J3W_14[]) <- EC1S1J3W_14_ini[i]
+  initial(EC2S1J3W_14[]) <- EC2S1J3W_14_ini[i]
+  initial(EC3S1J3W_14[]) <- EC3S1J3W_14_ini[i]
+  initial(EC4S1J3W_14[]) <- EC4S1J3W_14_ini[i]
+  
+  initial(EC1S1J3W_15[]) <- EC1S1J3W_15_ini[i]
+  initial(EC2S1J3W_15[]) <- EC2S1J3W_15_ini[i]
+  initial(EC3S1J3W_15[]) <- EC3S1J3W_15_ini[i]
+  initial(EC4S1J3W_15[]) <- EC4S1J3W_15_ini[i]
+  
+  initial(EC1S1J3W_16[]) <- EC1S1J3W_16_ini[i]
+  initial(EC2S1J3W_16[]) <- EC2S1J3W_16_ini[i]
+  initial(EC3S1J3W_16[]) <- EC3S1J3W_16_ini[i]
+  initial(EC4S1J3W_16[]) <- EC4S1J3W_16_ini[i]
+  
+  initial(EC1S1J3W_17[]) <- EC1S1J3W_17_ini[i]
+  initial(EC2S1J3W_17[]) <- EC2S1J3W_17_ini[i]
+  initial(EC3S1J3W_17[]) <- EC3S1J3W_17_ini[i]
+  initial(EC4S1J3W_17[]) <- EC4S1J3W_17_ini[i]
+  
+  
+  
+  initial(EC1S2J3W_10[]) <- EC1S2J3W_10_ini[i]
+  initial(EC2S2J3W_10[]) <- EC2S2J3W_10_ini[i]
+  initial(EC3S2J3W_10[]) <- EC3S2J3W_10_ini[i]
+  initial(EC4S2J3W_10[]) <- EC4S2J3W_10_ini[i]
+  
+  initial(EC1S2J3W_11[]) <- EC1S2J3W_11_ini[i]
+  initial(EC2S2J3W_11[]) <- EC2S2J3W_11_ini[i]
+  initial(EC3S2J3W_11[]) <- EC3S2J3W_11_ini[i]
+  initial(EC4S2J3W_11[]) <- EC4S2J3W_11_ini[i]
+  
+  initial(EC1S2J3W_12[]) <- EC1S2J3W_12_ini[i]
+  initial(EC2S2J3W_12[]) <- EC2S2J3W_12_ini[i]
+  initial(EC3S2J3W_12[]) <- EC3S2J3W_12_ini[i]
+  initial(EC4S2J3W_12[]) <- EC4S2J3W_12_ini[i]
+  
+  initial(EC1S2J3W_13[]) <- EC1S2J3W_13_ini[i]
+  initial(EC2S2J3W_13[]) <- EC2S2J3W_13_ini[i]
+  initial(EC3S2J3W_13[]) <- EC3S2J3W_13_ini[i]
+  initial(EC4S2J3W_13[]) <- EC4S2J3W_13_ini[i]
+  
+  initial(EC1S2J3W_14[]) <- EC1S2J3W_14_ini[i]
+  initial(EC2S2J3W_14[]) <- EC2S2J3W_14_ini[i]
+  initial(EC3S2J3W_14[]) <- EC3S2J3W_14_ini[i]
+  initial(EC4S2J3W_14[]) <- EC4S2J3W_14_ini[i]
+  
+  initial(EC1S2J3W_15[]) <- EC1S2J3W_15_ini[i]
+  initial(EC2S2J3W_15[]) <- EC2S2J3W_15_ini[i]
+  initial(EC3S2J3W_15[]) <- EC3S2J3W_15_ini[i]
+  initial(EC4S2J3W_15[]) <- EC4S2J3W_15_ini[i]
+  
+  initial(EC1S2J3W_16[]) <- EC1S2J3W_16_ini[i]
+  initial(EC2S2J3W_16[]) <- EC2S2J3W_16_ini[i]
+  initial(EC3S2J3W_16[]) <- EC3S2J3W_16_ini[i]
+  initial(EC4S2J3W_16[]) <- EC4S2J3W_16_ini[i]
+  
+  initial(EC1S2J3W_17[]) <- EC1S2J3W_17_ini[i]
+  initial(EC2S2J3W_17[]) <- EC2S2J3W_17_ini[i]
+  initial(EC3S2J3W_17[]) <- EC3S2J3W_17_ini[i]
+  initial(EC4S2J3W_17[]) <- EC4S2J3W_17_ini[i]
+  
+  
+  
+  initial(EC1S1J4W_10[]) <- EC1S1J4W_10_ini[i]
+  initial(EC2S1J4W_10[]) <- EC2S1J4W_10_ini[i]
+  initial(EC3S1J4W_10[]) <- EC3S1J4W_10_ini[i]
+  initial(EC4S1J4W_10[]) <- EC4S1J4W_10_ini[i]
+  
+  initial(EC1S1J4W_11[]) <- EC1S1J4W_11_ini[i]
+  initial(EC2S1J4W_11[]) <- EC2S1J4W_11_ini[i]
+  initial(EC3S1J4W_11[]) <- EC3S1J4W_11_ini[i]
+  initial(EC4S1J4W_11[]) <- EC4S1J4W_11_ini[i]
+  
+  initial(EC1S1J4W_12[]) <- EC1S1J4W_12_ini[i]
+  initial(EC2S1J4W_12[]) <- EC2S1J4W_12_ini[i]
+  initial(EC3S1J4W_12[]) <- EC3S1J4W_12_ini[i]
+  initial(EC4S1J4W_12[]) <- EC4S1J4W_12_ini[i]
+  
+  initial(EC1S1J4W_13[]) <- EC1S1J4W_13_ini[i]
+  initial(EC2S1J4W_13[]) <- EC2S1J4W_13_ini[i]
+  initial(EC3S1J4W_13[]) <- EC3S1J4W_13_ini[i]
+  initial(EC4S1J4W_13[]) <- EC4S1J4W_13_ini[i]
+  
+  initial(EC1S1J4W_14[]) <- EC1S1J4W_14_ini[i]
+  initial(EC2S1J4W_14[]) <- EC2S1J4W_14_ini[i]
+  initial(EC3S1J4W_14[]) <- EC3S1J4W_14_ini[i]
+  initial(EC4S1J4W_14[]) <- EC4S1J4W_14_ini[i]
+  
+  initial(EC1S1J4W_15[]) <- EC1S1J4W_15_ini[i]
+  initial(EC2S1J4W_15[]) <- EC2S1J4W_15_ini[i]
+  initial(EC3S1J4W_15[]) <- EC3S1J4W_15_ini[i]
+  initial(EC4S1J4W_15[]) <- EC4S1J4W_15_ini[i]
+  
+  initial(EC1S1J4W_16[]) <- EC1S1J4W_16_ini[i]
+  initial(EC2S1J4W_16[]) <- EC2S1J4W_16_ini[i]
+  initial(EC3S1J4W_16[]) <- EC3S1J4W_16_ini[i]
+  initial(EC4S1J4W_16[]) <- EC4S1J4W_16_ini[i]
+  
+  initial(EC1S1J4W_17[]) <- EC1S1J4W_17_ini[i]
+  initial(EC2S1J4W_17[]) <- EC2S1J4W_17_ini[i]
+  initial(EC3S1J4W_17[]) <- EC3S1J4W_17_ini[i]
+  initial(EC4S1J4W_17[]) <- EC4S1J4W_17_ini[i]
+  
+  
+  
+  initial(EC1S2J4W_10[]) <- EC1S2J4W_10_ini[i]
+  initial(EC2S2J4W_10[]) <- EC2S2J4W_10_ini[i]
+  initial(EC3S2J4W_10[]) <- EC3S2J4W_10_ini[i]
+  initial(EC4S2J4W_10[]) <- EC4S2J4W_10_ini[i]
+  
+  initial(EC1S2J4W_11[]) <- EC1S2J4W_11_ini[i]
+  initial(EC2S2J4W_11[]) <- EC2S2J4W_11_ini[i]
+  initial(EC3S2J4W_11[]) <- EC3S2J4W_11_ini[i]
+  initial(EC4S2J4W_11[]) <- EC4S2J4W_11_ini[i]
+  
+  initial(EC1S2J4W_12[]) <- EC1S2J4W_12_ini[i]
+  initial(EC2S2J4W_12[]) <- EC2S2J4W_12_ini[i]
+  initial(EC3S2J4W_12[]) <- EC3S2J4W_12_ini[i]
+  initial(EC4S2J4W_12[]) <- EC4S2J4W_12_ini[i]
+  
+  initial(EC1S2J4W_13[]) <- EC1S2J4W_13_ini[i]
+  initial(EC2S2J4W_13[]) <- EC2S2J4W_13_ini[i]
+  initial(EC3S2J4W_13[]) <- EC3S2J4W_13_ini[i]
+  initial(EC4S2J4W_13[]) <- EC4S2J4W_13_ini[i]
+  
+  initial(EC1S2J4W_14[]) <- EC1S2J4W_14_ini[i]
+  initial(EC2S2J4W_14[]) <- EC2S2J4W_14_ini[i]
+  initial(EC3S2J4W_14[]) <- EC3S2J4W_14_ini[i]
+  initial(EC4S2J4W_14[]) <- EC4S2J4W_14_ini[i]
+  
+  initial(EC1S2J4W_15[]) <- EC1S2J4W_15_ini[i]
+  initial(EC2S2J4W_15[]) <- EC2S2J4W_15_ini[i]
+  initial(EC3S2J4W_15[]) <- EC3S2J4W_15_ini[i]
+  initial(EC4S2J4W_15[]) <- EC4S2J4W_15_ini[i]
+  
+  initial(EC1S2J4W_16[]) <- EC1S2J4W_16_ini[i]
+  initial(EC2S2J4W_16[]) <- EC2S2J4W_16_ini[i]
+  initial(EC3S2J4W_16[]) <- EC3S2J4W_16_ini[i]
+  initial(EC4S2J4W_16[]) <- EC4S2J4W_16_ini[i]
+  
+  initial(EC1S2J4W_17[]) <- EC1S2J4W_17_ini[i]
+  initial(EC2S2J4W_17[]) <- EC2S2J4W_17_ini[i]
+  initial(EC3S2J4W_17[]) <- EC3S2J4W_17_ini[i]
+  initial(EC4S2J4W_17[]) <- EC4S2J4W_17_ini[i]
+  
+  
+  
+  initial(EC1S1J5W_10[]) <- EC1S1J5W_10_ini[i]
+  initial(EC2S1J5W_10[]) <- EC2S1J5W_10_ini[i]
+  initial(EC3S1J5W_10[]) <- EC3S1J5W_10_ini[i]
+  initial(EC4S1J5W_10[]) <- EC4S1J5W_10_ini[i]
+  
+  initial(EC1S1J5W_11[]) <- EC1S1J5W_11_ini[i]
+  initial(EC2S1J5W_11[]) <- EC2S1J5W_11_ini[i]
+  initial(EC3S1J5W_11[]) <- EC3S1J5W_11_ini[i]
+  initial(EC4S1J5W_11[]) <- EC4S1J5W_11_ini[i]
+  
+  initial(EC1S1J5W_12[]) <- EC1S1J5W_12_ini[i]
+  initial(EC2S1J5W_12[]) <- EC2S1J5W_12_ini[i]
+  initial(EC3S1J5W_12[]) <- EC3S1J5W_12_ini[i]
+  initial(EC4S1J5W_12[]) <- EC4S1J5W_12_ini[i]
+  
+  initial(EC1S1J5W_13[]) <- EC1S1J5W_13_ini[i]
+  initial(EC2S1J5W_13[]) <- EC2S1J5W_13_ini[i]
+  initial(EC3S1J5W_13[]) <- EC3S1J5W_13_ini[i]
+  initial(EC4S1J5W_13[]) <- EC4S1J5W_13_ini[i]
+  
+  initial(EC1S1J5W_14[]) <- EC1S1J5W_14_ini[i]
+  initial(EC2S1J5W_14[]) <- EC2S1J5W_14_ini[i]
+  initial(EC3S1J5W_14[]) <- EC3S1J5W_14_ini[i]
+  initial(EC4S1J5W_14[]) <- EC4S1J5W_14_ini[i]
+  
+  initial(EC1S1J5W_15[]) <- EC1S1J5W_15_ini[i]
+  initial(EC2S1J5W_15[]) <- EC2S1J5W_15_ini[i]
+  initial(EC3S1J5W_15[]) <- EC3S1J5W_15_ini[i]
+  initial(EC4S1J5W_15[]) <- EC4S1J5W_15_ini[i]
+  
+  initial(EC1S1J5W_16[]) <- EC1S1J5W_16_ini[i]
+  initial(EC2S1J5W_16[]) <- EC2S1J5W_16_ini[i]
+  initial(EC3S1J5W_16[]) <- EC3S1J5W_16_ini[i]
+  initial(EC4S1J5W_16[]) <- EC4S1J5W_16_ini[i]
+  
+  initial(EC1S1J5W_17[]) <- EC1S1J5W_17_ini[i]
+  initial(EC2S1J5W_17[]) <- EC2S1J5W_17_ini[i]
+  initial(EC3S1J5W_17[]) <- EC3S1J5W_17_ini[i]
+  initial(EC4S1J5W_17[]) <- EC4S1J5W_17_ini[i]
+  
+  
+  
+  initial(EC1S2J5W_10[]) <- EC1S2J5W_10_ini[i]
+  initial(EC2S2J5W_10[]) <- EC2S2J5W_10_ini[i]
+  initial(EC3S2J5W_10[]) <- EC3S2J5W_10_ini[i]
+  initial(EC4S2J5W_10[]) <- EC4S2J5W_10_ini[i]
+  
+  initial(EC1S2J5W_11[]) <- EC1S2J5W_11_ini[i]
+  initial(EC2S2J5W_11[]) <- EC2S2J5W_11_ini[i]
+  initial(EC3S2J5W_11[]) <- EC3S2J5W_11_ini[i]
+  initial(EC4S2J5W_11[]) <- EC4S2J5W_11_ini[i]
+  
+  initial(EC1S2J5W_12[]) <- EC1S2J5W_12_ini[i]
+  initial(EC2S2J5W_12[]) <- EC2S2J5W_12_ini[i]
+  initial(EC3S2J5W_12[]) <- EC3S2J5W_12_ini[i]
+  initial(EC4S2J5W_12[]) <- EC4S2J5W_12_ini[i]
+  
+  initial(EC1S2J5W_13[]) <- EC1S2J5W_13_ini[i]
+  initial(EC2S2J5W_13[]) <- EC2S2J5W_13_ini[i]
+  initial(EC3S2J5W_13[]) <- EC3S2J5W_13_ini[i]
+  initial(EC4S2J5W_13[]) <- EC4S2J5W_13_ini[i]
+  
+  initial(EC1S2J5W_14[]) <- EC1S2J5W_14_ini[i]
+  initial(EC2S2J5W_14[]) <- EC2S2J5W_14_ini[i]
+  initial(EC3S2J5W_14[]) <- EC3S2J5W_14_ini[i]
+  initial(EC4S2J5W_14[]) <- EC4S2J5W_14_ini[i]
+  
+  initial(EC1S2J5W_15[]) <- EC1S2J5W_15_ini[i]
+  initial(EC2S2J5W_15[]) <- EC2S2J5W_15_ini[i]
+  initial(EC3S2J5W_15[]) <- EC3S2J5W_15_ini[i]
+  initial(EC4S2J5W_15[]) <- EC4S2J5W_15_ini[i]
+  
+  initial(EC1S2J5W_16[]) <- EC1S2J5W_16_ini[i]
+  initial(EC2S2J5W_16[]) <- EC2S2J5W_16_ini[i]
+  initial(EC3S2J5W_16[]) <- EC3S2J5W_16_ini[i]
+  initial(EC4S2J5W_16[]) <- EC4S2J5W_16_ini[i]
+  
+  initial(EC1S2J5W_17[]) <- EC1S2J5W_17_ini[i]
+  initial(EC2S2J5W_17[]) <- EC2S2J5W_17_ini[i]
+  initial(EC3S2J5W_17[]) <- EC3S2J5W_17_ini[i]
+  initial(EC4S2J5W_17[]) <- EC4S2J5W_17_ini[i]
+  
   
 ##############################################################################################################################
 ## SETTING DIMENSIONS ####################################################################
@@ -1726,6 +6627,1688 @@ dim(EC2S2J5W_17) <- N_gender
 dim(EC3S2J5W_17) <- N_gender
 dim(EC4S2J5W_17) <- N_gender
 
+##############################################################################################################################
+##initial conditions####################################################################
+##############################################################################################################################
+dim(IC1S1J1U_10_ini) <- N_gender
+dim(IC2S1J1U_10_ini) <- N_gender
+dim(IC3S1J1U_10_ini) <- N_gender
+dim(IC4S1J1U_10_ini) <- N_gender
+
+dim(IC1S1J1U_11_ini) <- N_gender
+dim(IC2S1J1U_11_ini) <- N_gender
+dim(IC3S1J1U_11_ini) <- N_gender
+dim(IC4S1J1U_11_ini) <- N_gender
+
+dim(IC1S1J1U_12_ini) <- N_gender
+dim(IC2S1J1U_12_ini) <- N_gender
+dim(IC3S1J1U_12_ini) <- N_gender
+dim(IC4S1J1U_12_ini) <- N_gender
+
+dim(IC1S1J1U_13_ini) <- N_gender
+dim(IC2S1J1U_13_ini) <- N_gender
+dim(IC3S1J1U_13_ini) <- N_gender
+dim(IC4S1J1U_13_ini) <- N_gender
+
+dim(IC1S1J1U_14_ini) <- N_gender
+dim(IC2S1J1U_14_ini) <- N_gender
+dim(IC3S1J1U_14_ini) <- N_gender
+dim(IC4S1J1U_14_ini) <- N_gender
+
+dim(IC1S1J1U_15_ini) <- N_gender
+dim(IC2S1J1U_15_ini) <- N_gender
+dim(IC3S1J1U_15_ini) <- N_gender
+dim(IC4S1J1U_15_ini) <- N_gender
+
+dim(IC1S1J1U_16_ini) <- N_gender
+dim(IC2S1J1U_16_ini) <- N_gender
+dim(IC3S1J1U_16_ini) <- N_gender
+dim(IC4S1J1U_16_ini) <- N_gender
+
+dim(IC1S1J1U_17_ini) <- N_gender
+dim(IC2S1J1U_17_ini) <- N_gender
+dim(IC3S1J1U_17_ini) <- N_gender
+dim(IC4S1J1U_17_ini) <- N_gender
+
+
+
+dim(IC1S2J1U_10_ini) <- N_gender
+dim(IC2S2J1U_10_ini) <- N_gender
+dim(IC3S2J1U_10_ini) <- N_gender
+dim(IC4S2J1U_10_ini) <- N_gender
+
+dim(IC1S2J1U_11_ini) <- N_gender
+dim(IC2S2J1U_11_ini) <- N_gender
+dim(IC3S2J1U_11_ini) <- N_gender
+dim(IC4S2J1U_11_ini) <- N_gender
+
+dim(IC1S2J1U_12_ini) <- N_gender
+dim(IC2S2J1U_12_ini) <- N_gender
+dim(IC3S2J1U_12_ini) <- N_gender
+dim(IC4S2J1U_12_ini) <- N_gender
+
+dim(IC1S2J1U_13_ini) <- N_gender
+dim(IC2S2J1U_13_ini) <- N_gender
+dim(IC3S2J1U_13_ini) <- N_gender
+dim(IC4S2J1U_13_ini) <- N_gender
+
+dim(IC1S2J1U_14_ini) <- N_gender
+dim(IC2S2J1U_14_ini) <- N_gender
+dim(IC3S2J1U_14_ini) <- N_gender
+dim(IC4S2J1U_14_ini) <- N_gender
+
+dim(IC1S2J1U_15_ini) <- N_gender
+dim(IC2S2J1U_15_ini) <- N_gender
+dim(IC3S2J1U_15_ini) <- N_gender
+dim(IC4S2J1U_15_ini) <- N_gender
+
+dim(IC1S2J1U_16_ini) <- N_gender
+dim(IC2S2J1U_16_ini) <- N_gender
+dim(IC3S2J1U_16_ini) <- N_gender
+dim(IC4S2J1U_16_ini) <- N_gender
+
+dim(IC1S2J1U_17_ini) <- N_gender
+dim(IC2S2J1U_17_ini) <- N_gender
+dim(IC3S2J1U_17_ini) <- N_gender
+dim(IC4S2J1U_17_ini) <- N_gender
+
+
+
+dim(IC1S1J2U_10_ini) <- N_gender
+dim(IC2S1J2U_10_ini) <- N_gender
+dim(IC3S1J2U_10_ini) <- N_gender
+dim(IC4S1J2U_10_ini) <- N_gender
+
+dim(IC1S1J2U_11_ini) <- N_gender
+dim(IC2S1J2U_11_ini) <- N_gender
+dim(IC3S1J2U_11_ini) <- N_gender
+dim(IC4S1J2U_11_ini) <- N_gender
+
+dim(IC1S1J2U_12_ini) <- N_gender
+dim(IC2S1J2U_12_ini) <- N_gender
+dim(IC3S1J2U_12_ini) <- N_gender
+dim(IC4S1J2U_12_ini) <- N_gender
+
+dim(IC1S1J2U_13_ini) <- N_gender
+dim(IC2S1J2U_13_ini) <- N_gender
+dim(IC3S1J2U_13_ini) <- N_gender
+dim(IC4S1J2U_13_ini) <- N_gender
+
+dim(IC1S1J2U_14_ini) <- N_gender
+dim(IC2S1J2U_14_ini) <- N_gender
+dim(IC3S1J2U_14_ini) <- N_gender
+dim(IC4S1J2U_14_ini) <- N_gender
+
+dim(IC1S1J2U_15_ini) <- N_gender
+dim(IC2S1J2U_15_ini) <- N_gender
+dim(IC3S1J2U_15_ini) <- N_gender
+dim(IC4S1J2U_15_ini) <- N_gender
+
+dim(IC1S1J2U_16_ini) <- N_gender
+dim(IC2S1J2U_16_ini) <- N_gender
+dim(IC3S1J2U_16_ini) <- N_gender
+dim(IC4S1J2U_16_ini) <- N_gender
+
+dim(IC1S1J2U_17_ini) <- N_gender
+dim(IC2S1J2U_17_ini) <- N_gender
+dim(IC3S1J2U_17_ini) <- N_gender
+dim(IC4S1J2U_17_ini) <- N_gender
+
+
+
+dim(IC1S2J2U_10_ini) <- N_gender
+dim(IC2S2J2U_10_ini) <- N_gender
+dim(IC3S2J2U_10_ini) <- N_gender
+dim(IC4S2J2U_10_ini) <- N_gender
+
+dim(IC1S2J2U_11_ini) <- N_gender
+dim(IC2S2J2U_11_ini) <- N_gender
+dim(IC3S2J2U_11_ini) <- N_gender
+dim(IC4S2J2U_11_ini) <- N_gender
+
+dim(IC1S2J2U_12_ini) <- N_gender
+dim(IC2S2J2U_12_ini) <- N_gender
+dim(IC3S2J2U_12_ini) <- N_gender
+dim(IC4S2J2U_12_ini) <- N_gender
+
+dim(IC1S2J2U_13_ini) <- N_gender
+dim(IC2S2J2U_13_ini) <- N_gender
+dim(IC3S2J2U_13_ini) <- N_gender
+dim(IC4S2J2U_13_ini) <- N_gender
+
+dim(IC1S2J2U_14_ini) <- N_gender
+dim(IC2S2J2U_14_ini) <- N_gender
+dim(IC3S2J2U_14_ini) <- N_gender
+dim(IC4S2J2U_14_ini) <- N_gender
+
+dim(IC1S2J2U_15_ini) <- N_gender
+dim(IC2S2J2U_15_ini) <- N_gender
+dim(IC3S2J2U_15_ini) <- N_gender
+dim(IC4S2J2U_15_ini) <- N_gender
+
+dim(IC1S2J2U_16_ini) <- N_gender
+dim(IC2S2J2U_16_ini) <- N_gender
+dim(IC3S2J2U_16_ini) <- N_gender
+dim(IC4S2J2U_16_ini) <- N_gender
+
+dim(IC1S2J2U_17_ini) <- N_gender
+dim(IC2S2J2U_17_ini) <- N_gender
+dim(IC3S2J2U_17_ini) <- N_gender
+dim(IC4S2J2U_17_ini) <- N_gender
+
+
+
+dim(IC1S1J3U_10_ini) <- N_gender
+dim(IC2S1J3U_10_ini) <- N_gender
+dim(IC3S1J3U_10_ini) <- N_gender
+dim(IC4S1J3U_10_ini) <- N_gender
+
+dim(IC1S1J3U_11_ini) <- N_gender
+dim(IC2S1J3U_11_ini) <- N_gender
+dim(IC3S1J3U_11_ini) <- N_gender
+dim(IC4S1J3U_11_ini) <- N_gender
+
+dim(IC1S1J3U_12_ini) <- N_gender
+dim(IC2S1J3U_12_ini) <- N_gender
+dim(IC3S1J3U_12_ini) <- N_gender
+dim(IC4S1J3U_12_ini) <- N_gender
+
+dim(IC1S1J3U_13_ini) <- N_gender
+dim(IC2S1J3U_13_ini) <- N_gender
+dim(IC3S1J3U_13_ini) <- N_gender
+dim(IC4S1J3U_13_ini) <- N_gender
+
+dim(IC1S1J3U_14_ini) <- N_gender
+dim(IC2S1J3U_14_ini) <- N_gender
+dim(IC3S1J3U_14_ini) <- N_gender
+dim(IC4S1J3U_14_ini) <- N_gender
+
+dim(IC1S1J3U_15_ini) <- N_gender
+dim(IC2S1J3U_15_ini) <- N_gender
+dim(IC3S1J3U_15_ini) <- N_gender
+dim(IC4S1J3U_15_ini) <- N_gender
+
+dim(IC1S1J3U_16_ini) <- N_gender
+dim(IC2S1J3U_16_ini) <- N_gender
+dim(IC3S1J3U_16_ini) <- N_gender
+dim(IC4S1J3U_16_ini) <- N_gender
+
+dim(IC1S1J3U_17_ini) <- N_gender
+dim(IC2S1J3U_17_ini) <- N_gender
+dim(IC3S1J3U_17_ini) <- N_gender
+dim(IC4S1J3U_17_ini) <- N_gender
+
+
+
+dim(IC1S2J3U_10_ini) <- N_gender
+dim(IC2S2J3U_10_ini) <- N_gender
+dim(IC3S2J3U_10_ini) <- N_gender
+dim(IC4S2J3U_10_ini) <- N_gender
+
+dim(IC1S2J3U_11_ini) <- N_gender
+dim(IC2S2J3U_11_ini) <- N_gender
+dim(IC3S2J3U_11_ini) <- N_gender
+dim(IC4S2J3U_11_ini) <- N_gender
+
+dim(IC1S2J3U_12_ini) <- N_gender
+dim(IC2S2J3U_12_ini) <- N_gender
+dim(IC3S2J3U_12_ini) <- N_gender
+dim(IC4S2J3U_12_ini) <- N_gender
+
+dim(IC1S2J3U_13_ini) <- N_gender
+dim(IC2S2J3U_13_ini) <- N_gender
+dim(IC3S2J3U_13_ini) <- N_gender
+dim(IC4S2J3U_13_ini) <- N_gender
+
+dim(IC1S2J3U_14_ini) <- N_gender
+dim(IC2S2J3U_14_ini) <- N_gender
+dim(IC3S2J3U_14_ini) <- N_gender
+dim(IC4S2J3U_14_ini) <- N_gender
+
+dim(IC1S2J3U_15_ini) <- N_gender
+dim(IC2S2J3U_15_ini) <- N_gender
+dim(IC3S2J3U_15_ini) <- N_gender
+dim(IC4S2J3U_15_ini) <- N_gender
+
+dim(IC1S2J3U_16_ini) <- N_gender
+dim(IC2S2J3U_16_ini) <- N_gender
+dim(IC3S2J3U_16_ini) <- N_gender
+dim(IC4S2J3U_16_ini) <- N_gender
+
+dim(IC1S2J3U_17_ini) <- N_gender
+dim(IC2S2J3U_17_ini) <- N_gender
+dim(IC3S2J3U_17_ini) <- N_gender
+dim(IC4S2J3U_17_ini) <- N_gender
+
+
+
+dim(IC1S1J4U_10_ini) <- N_gender
+dim(IC2S1J4U_10_ini) <- N_gender
+dim(IC3S1J4U_10_ini) <- N_gender
+dim(IC4S1J4U_10_ini) <- N_gender
+
+dim(IC1S1J4U_11_ini) <- N_gender
+dim(IC2S1J4U_11_ini) <- N_gender
+dim(IC3S1J4U_11_ini) <- N_gender
+dim(IC4S1J4U_11_ini) <- N_gender
+
+dim(IC1S1J4U_12_ini) <- N_gender
+dim(IC2S1J4U_12_ini) <- N_gender
+dim(IC3S1J4U_12_ini) <- N_gender
+dim(IC4S1J4U_12_ini) <- N_gender
+
+dim(IC1S1J4U_13_ini) <- N_gender
+dim(IC2S1J4U_13_ini) <- N_gender
+dim(IC3S1J4U_13_ini) <- N_gender
+dim(IC4S1J4U_13_ini) <- N_gender
+
+dim(IC1S1J4U_14_ini) <- N_gender
+dim(IC2S1J4U_14_ini) <- N_gender
+dim(IC3S1J4U_14_ini) <- N_gender
+dim(IC4S1J4U_14_ini) <- N_gender
+
+dim(IC1S1J4U_15_ini) <- N_gender
+dim(IC2S1J4U_15_ini) <- N_gender
+dim(IC3S1J4U_15_ini) <- N_gender
+dim(IC4S1J4U_15_ini) <- N_gender
+
+dim(IC1S1J4U_16_ini) <- N_gender
+dim(IC2S1J4U_16_ini) <- N_gender
+dim(IC3S1J4U_16_ini) <- N_gender
+dim(IC4S1J4U_16_ini) <- N_gender
+
+dim(IC1S1J4U_17_ini) <- N_gender
+dim(IC2S1J4U_17_ini) <- N_gender
+dim(IC3S1J4U_17_ini) <- N_gender
+dim(IC4S1J4U_17_ini) <- N_gender
+
+
+
+dim(IC1S2J4U_10_ini) <- N_gender
+dim(IC2S2J4U_10_ini) <- N_gender
+dim(IC3S2J4U_10_ini) <- N_gender
+dim(IC4S2J4U_10_ini) <- N_gender
+
+dim(IC1S2J4U_11_ini) <- N_gender
+dim(IC2S2J4U_11_ini) <- N_gender
+dim(IC3S2J4U_11_ini) <- N_gender
+dim(IC4S2J4U_11_ini) <- N_gender
+
+dim(IC1S2J4U_12_ini) <- N_gender
+dim(IC2S2J4U_12_ini) <- N_gender
+dim(IC3S2J4U_12_ini) <- N_gender
+dim(IC4S2J4U_12_ini) <- N_gender
+
+dim(IC1S2J4U_13_ini) <- N_gender
+dim(IC2S2J4U_13_ini) <- N_gender
+dim(IC3S2J4U_13_ini) <- N_gender
+dim(IC4S2J4U_13_ini) <- N_gender
+
+dim(IC1S2J4U_14_ini) <- N_gender
+dim(IC2S2J4U_14_ini) <- N_gender
+dim(IC3S2J4U_14_ini) <- N_gender
+dim(IC4S2J4U_14_ini) <- N_gender
+
+dim(IC1S2J4U_15_ini) <- N_gender
+dim(IC2S2J4U_15_ini) <- N_gender
+dim(IC3S2J4U_15_ini) <- N_gender
+dim(IC4S2J4U_15_ini) <- N_gender
+
+dim(IC1S2J4U_16_ini) <- N_gender
+dim(IC2S2J4U_16_ini) <- N_gender
+dim(IC3S2J4U_16_ini) <- N_gender
+dim(IC4S2J4U_16_ini) <- N_gender
+
+dim(IC1S2J4U_17_ini) <- N_gender
+dim(IC2S2J4U_17_ini) <- N_gender
+dim(IC3S2J4U_17_ini) <- N_gender
+dim(IC4S2J4U_17_ini) <- N_gender
+
+
+
+dim(IC1S1J5U_10_ini) <- N_gender
+dim(IC2S1J5U_10_ini) <- N_gender
+dim(IC3S1J5U_10_ini) <- N_gender
+dim(IC4S1J5U_10_ini) <- N_gender
+
+dim(IC1S1J5U_11_ini) <- N_gender
+dim(IC2S1J5U_11_ini) <- N_gender
+dim(IC3S1J5U_11_ini) <- N_gender
+dim(IC4S1J5U_11_ini) <- N_gender
+
+dim(IC1S1J5U_12_ini) <- N_gender
+dim(IC2S1J5U_12_ini) <- N_gender
+dim(IC3S1J5U_12_ini) <- N_gender
+dim(IC4S1J5U_12_ini) <- N_gender
+
+dim(IC1S1J5U_13_ini) <- N_gender
+dim(IC2S1J5U_13_ini) <- N_gender
+dim(IC3S1J5U_13_ini) <- N_gender
+dim(IC4S1J5U_13_ini) <- N_gender
+
+dim(IC1S1J5U_14_ini) <- N_gender
+dim(IC2S1J5U_14_ini) <- N_gender
+dim(IC3S1J5U_14_ini) <- N_gender
+dim(IC4S1J5U_14_ini) <- N_gender
+
+dim(IC1S1J5U_15_ini) <- N_gender
+dim(IC2S1J5U_15_ini) <- N_gender
+dim(IC3S1J5U_15_ini) <- N_gender
+dim(IC4S1J5U_15_ini) <- N_gender
+
+dim(IC1S1J5U_16_ini) <- N_gender
+dim(IC2S1J5U_16_ini) <- N_gender
+dim(IC3S1J5U_16_ini) <- N_gender
+dim(IC4S1J5U_16_ini) <- N_gender
+
+dim(IC1S1J5U_17_ini) <- N_gender
+dim(IC2S1J5U_17_ini) <- N_gender
+dim(IC3S1J5U_17_ini) <- N_gender
+dim(IC4S1J5U_17_ini) <- N_gender
+
+
+
+dim(IC1S2J5U_10_ini) <- N_gender
+dim(IC2S2J5U_10_ini) <- N_gender
+dim(IC3S2J5U_10_ini) <- N_gender
+dim(IC4S2J5U_10_ini) <- N_gender
+
+dim(IC1S2J5U_11_ini) <- N_gender
+dim(IC2S2J5U_11_ini) <- N_gender
+dim(IC3S2J5U_11_ini) <- N_gender
+dim(IC4S2J5U_11_ini) <- N_gender
+
+dim(IC1S2J5U_12_ini) <- N_gender
+dim(IC2S2J5U_12_ini) <- N_gender
+dim(IC3S2J5U_12_ini) <- N_gender
+dim(IC4S2J5U_12_ini) <- N_gender
+
+dim(IC1S2J5U_13_ini) <- N_gender
+dim(IC2S2J5U_13_ini) <- N_gender
+dim(IC3S2J5U_13_ini) <- N_gender
+dim(IC4S2J5U_13_ini) <- N_gender
+
+dim(IC1S2J5U_14_ini) <- N_gender
+dim(IC2S2J5U_14_ini) <- N_gender
+dim(IC3S2J5U_14_ini) <- N_gender
+dim(IC4S2J5U_14_ini) <- N_gender
+
+dim(IC1S2J5U_15_ini) <- N_gender
+dim(IC2S2J5U_15_ini) <- N_gender
+dim(IC3S2J5U_15_ini) <- N_gender
+dim(IC4S2J5U_15_ini) <- N_gender
+
+dim(IC1S2J5U_16_ini) <- N_gender
+dim(IC2S2J5U_16_ini) <- N_gender
+dim(IC3S2J5U_16_ini) <- N_gender
+dim(IC4S2J5U_16_ini) <- N_gender
+
+dim(IC1S2J5U_17_ini) <- N_gender
+dim(IC2S2J5U_17_ini) <- N_gender
+dim(IC3S2J5U_17_ini) <- N_gender
+dim(IC4S2J5U_17_ini) <- N_gender
+
+
+
+dim(IC1S1J1W_10_ini) <- N_gender
+dim(IC2S1J1W_10_ini) <- N_gender
+dim(IC3S1J1W_10_ini) <- N_gender
+dim(IC4S1J1W_10_ini) <- N_gender
+
+dim(IC1S1J1W_11_ini) <- N_gender
+dim(IC2S1J1W_11_ini) <- N_gender
+dim(IC3S1J1W_11_ini) <- N_gender
+dim(IC4S1J1W_11_ini) <- N_gender
+
+dim(IC1S1J1W_12_ini) <- N_gender
+dim(IC2S1J1W_12_ini) <- N_gender
+dim(IC3S1J1W_12_ini) <- N_gender
+dim(IC4S1J1W_12_ini) <- N_gender
+
+dim(IC1S1J1W_13_ini) <- N_gender
+dim(IC2S1J1W_13_ini) <- N_gender
+dim(IC3S1J1W_13_ini) <- N_gender
+dim(IC4S1J1W_13_ini) <- N_gender
+
+dim(IC1S1J1W_14_ini) <- N_gender
+dim(IC2S1J1W_14_ini) <- N_gender
+dim(IC3S1J1W_14_ini) <- N_gender
+dim(IC4S1J1W_14_ini) <- N_gender
+
+dim(IC1S1J1W_15_ini) <- N_gender
+dim(IC2S1J1W_15_ini) <- N_gender
+dim(IC3S1J1W_15_ini) <- N_gender
+dim(IC4S1J1W_15_ini) <- N_gender
+
+dim(IC1S1J1W_16_ini) <- N_gender
+dim(IC2S1J1W_16_ini) <- N_gender
+dim(IC3S1J1W_16_ini) <- N_gender
+dim(IC4S1J1W_16_ini) <- N_gender
+
+dim(IC1S1J1W_17_ini) <- N_gender
+dim(IC2S1J1W_17_ini) <- N_gender
+dim(IC3S1J1W_17_ini) <- N_gender
+dim(IC4S1J1W_17_ini) <- N_gender
+
+
+
+dim(IC1S2J1W_10_ini) <- N_gender
+dim(IC2S2J1W_10_ini) <- N_gender
+dim(IC3S2J1W_10_ini) <- N_gender
+dim(IC4S2J1W_10_ini) <- N_gender
+
+dim(IC1S2J1W_11_ini) <- N_gender
+dim(IC2S2J1W_11_ini) <- N_gender
+dim(IC3S2J1W_11_ini) <- N_gender
+dim(IC4S2J1W_11_ini) <- N_gender
+
+dim(IC1S2J1W_12_ini) <- N_gender
+dim(IC2S2J1W_12_ini) <- N_gender
+dim(IC3S2J1W_12_ini) <- N_gender
+dim(IC4S2J1W_12_ini) <- N_gender
+
+dim(IC1S2J1W_13_ini) <- N_gender
+dim(IC2S2J1W_13_ini) <- N_gender
+dim(IC3S2J1W_13_ini) <- N_gender
+dim(IC4S2J1W_13_ini) <- N_gender
+
+dim(IC1S2J1W_14_ini) <- N_gender
+dim(IC2S2J1W_14_ini) <- N_gender
+dim(IC3S2J1W_14_ini) <- N_gender
+dim(IC4S2J1W_14_ini) <- N_gender
+
+dim(IC1S2J1W_15_ini) <- N_gender
+dim(IC2S2J1W_15_ini) <- N_gender
+dim(IC3S2J1W_15_ini) <- N_gender
+dim(IC4S2J1W_15_ini) <- N_gender
+
+dim(IC1S2J1W_16_ini) <- N_gender
+dim(IC2S2J1W_16_ini) <- N_gender
+dim(IC3S2J1W_16_ini) <- N_gender
+dim(IC4S2J1W_16_ini) <- N_gender
+
+dim(IC1S2J1W_17_ini) <- N_gender
+dim(IC2S2J1W_17_ini) <- N_gender
+dim(IC3S2J1W_17_ini) <- N_gender
+dim(IC4S2J1W_17_ini) <- N_gender
+
+
+
+dim(IC1S1J2W_10_ini) <- N_gender
+dim(IC2S1J2W_10_ini) <- N_gender
+dim(IC3S1J2W_10_ini) <- N_gender
+dim(IC4S1J2W_10_ini) <- N_gender
+
+dim(IC1S1J2W_11_ini) <- N_gender
+dim(IC2S1J2W_11_ini) <- N_gender
+dim(IC3S1J2W_11_ini) <- N_gender
+dim(IC4S1J2W_11_ini) <- N_gender
+
+dim(IC1S1J2W_12_ini) <- N_gender
+dim(IC2S1J2W_12_ini) <- N_gender
+dim(IC3S1J2W_12_ini) <- N_gender
+dim(IC4S1J2W_12_ini) <- N_gender
+
+dim(IC1S1J2W_13_ini) <- N_gender
+dim(IC2S1J2W_13_ini) <- N_gender
+dim(IC3S1J2W_13_ini) <- N_gender
+dim(IC4S1J2W_13_ini) <- N_gender
+
+dim(IC1S1J2W_14_ini) <- N_gender
+dim(IC2S1J2W_14_ini) <- N_gender
+dim(IC3S1J2W_14_ini) <- N_gender
+dim(IC4S1J2W_14_ini) <- N_gender
+
+dim(IC1S1J2W_15_ini) <- N_gender
+dim(IC2S1J2W_15_ini) <- N_gender
+dim(IC3S1J2W_15_ini) <- N_gender
+dim(IC4S1J2W_15_ini) <- N_gender
+
+dim(IC1S1J2W_16_ini) <- N_gender
+dim(IC2S1J2W_16_ini) <- N_gender
+dim(IC3S1J2W_16_ini) <- N_gender
+dim(IC4S1J2W_16_ini) <- N_gender
+
+dim(IC1S1J2W_17_ini) <- N_gender
+dim(IC2S1J2W_17_ini) <- N_gender
+dim(IC3S1J2W_17_ini) <- N_gender
+dim(IC4S1J2W_17_ini) <- N_gender
+
+
+
+dim(IC1S2J2W_10_ini) <- N_gender
+dim(IC2S2J2W_10_ini) <- N_gender
+dim(IC3S2J2W_10_ini) <- N_gender
+dim(IC4S2J2W_10_ini) <- N_gender
+
+dim(IC1S2J2W_11_ini) <- N_gender
+dim(IC2S2J2W_11_ini) <- N_gender
+dim(IC3S2J2W_11_ini) <- N_gender
+dim(IC4S2J2W_11_ini) <- N_gender
+
+dim(IC1S2J2W_12_ini) <- N_gender
+dim(IC2S2J2W_12_ini) <- N_gender
+dim(IC3S2J2W_12_ini) <- N_gender
+dim(IC4S2J2W_12_ini) <- N_gender
+
+dim(IC1S2J2W_13_ini) <- N_gender
+dim(IC2S2J2W_13_ini) <- N_gender
+dim(IC3S2J2W_13_ini) <- N_gender
+dim(IC4S2J2W_13_ini) <- N_gender
+
+dim(IC1S2J2W_14_ini) <- N_gender
+dim(IC2S2J2W_14_ini) <- N_gender
+dim(IC3S2J2W_14_ini) <- N_gender
+dim(IC4S2J2W_14_ini) <- N_gender
+
+dim(IC1S2J2W_15_ini) <- N_gender
+dim(IC2S2J2W_15_ini) <- N_gender
+dim(IC3S2J2W_15_ini) <- N_gender
+dim(IC4S2J2W_15_ini) <- N_gender
+
+dim(IC1S2J2W_16_ini) <- N_gender
+dim(IC2S2J2W_16_ini) <- N_gender
+dim(IC3S2J2W_16_ini) <- N_gender
+dim(IC4S2J2W_16_ini) <- N_gender
+
+dim(IC1S2J2W_17_ini) <- N_gender
+dim(IC2S2J2W_17_ini) <- N_gender
+dim(IC3S2J2W_17_ini) <- N_gender
+dim(IC4S2J2W_17_ini) <- N_gender
+
+
+
+dim(IC1S1J3W_10_ini) <- N_gender
+dim(IC2S1J3W_10_ini) <- N_gender
+dim(IC3S1J3W_10_ini) <- N_gender
+dim(IC4S1J3W_10_ini) <- N_gender
+
+dim(IC1S1J3W_11_ini) <- N_gender
+dim(IC2S1J3W_11_ini) <- N_gender
+dim(IC3S1J3W_11_ini) <- N_gender
+dim(IC4S1J3W_11_ini) <- N_gender
+
+dim(IC1S1J3W_12_ini) <- N_gender
+dim(IC2S1J3W_12_ini) <- N_gender
+dim(IC3S1J3W_12_ini) <- N_gender
+dim(IC4S1J3W_12_ini) <- N_gender
+
+dim(IC1S1J3W_13_ini) <- N_gender
+dim(IC2S1J3W_13_ini) <- N_gender
+dim(IC3S1J3W_13_ini) <- N_gender
+dim(IC4S1J3W_13_ini) <- N_gender
+
+dim(IC1S1J3W_14_ini) <- N_gender
+dim(IC2S1J3W_14_ini) <- N_gender
+dim(IC3S1J3W_14_ini) <- N_gender
+dim(IC4S1J3W_14_ini) <- N_gender
+
+dim(IC1S1J3W_15_ini) <- N_gender
+dim(IC2S1J3W_15_ini) <- N_gender
+dim(IC3S1J3W_15_ini) <- N_gender
+dim(IC4S1J3W_15_ini) <- N_gender
+
+dim(IC1S1J3W_16_ini) <- N_gender
+dim(IC2S1J3W_16_ini) <- N_gender
+dim(IC3S1J3W_16_ini) <- N_gender
+dim(IC4S1J3W_16_ini) <- N_gender
+
+dim(IC1S1J3W_17_ini) <- N_gender
+dim(IC2S1J3W_17_ini) <- N_gender
+dim(IC3S1J3W_17_ini) <- N_gender
+dim(IC4S1J3W_17_ini) <- N_gender
+
+
+
+dim(IC1S2J3W_10_ini) <- N_gender
+dim(IC2S2J3W_10_ini) <- N_gender
+dim(IC3S2J3W_10_ini) <- N_gender
+dim(IC4S2J3W_10_ini) <- N_gender
+
+dim(IC1S2J3W_11_ini) <- N_gender
+dim(IC2S2J3W_11_ini) <- N_gender
+dim(IC3S2J3W_11_ini) <- N_gender
+dim(IC4S2J3W_11_ini) <- N_gender
+
+dim(IC1S2J3W_12_ini) <- N_gender
+dim(IC2S2J3W_12_ini) <- N_gender
+dim(IC3S2J3W_12_ini) <- N_gender
+dim(IC4S2J3W_12_ini) <- N_gender
+
+dim(IC1S2J3W_13_ini) <- N_gender
+dim(IC2S2J3W_13_ini) <- N_gender
+dim(IC3S2J3W_13_ini) <- N_gender
+dim(IC4S2J3W_13_ini) <- N_gender
+
+dim(IC1S2J3W_14_ini) <- N_gender
+dim(IC2S2J3W_14_ini) <- N_gender
+dim(IC3S2J3W_14_ini) <- N_gender
+dim(IC4S2J3W_14_ini) <- N_gender
+
+dim(IC1S2J3W_15_ini) <- N_gender
+dim(IC2S2J3W_15_ini) <- N_gender
+dim(IC3S2J3W_15_ini) <- N_gender
+dim(IC4S2J3W_15_ini) <- N_gender
+
+dim(IC1S2J3W_16_ini) <- N_gender
+dim(IC2S2J3W_16_ini) <- N_gender
+dim(IC3S2J3W_16_ini) <- N_gender
+dim(IC4S2J3W_16_ini) <- N_gender
+
+dim(IC1S2J3W_17_ini) <- N_gender
+dim(IC2S2J3W_17_ini) <- N_gender
+dim(IC3S2J3W_17_ini) <- N_gender
+dim(IC4S2J3W_17_ini) <- N_gender
+
+
+
+dim(IC1S1J4W_10_ini) <- N_gender
+dim(IC2S1J4W_10_ini) <- N_gender
+dim(IC3S1J4W_10_ini) <- N_gender
+dim(IC4S1J4W_10_ini) <- N_gender
+
+dim(IC1S1J4W_11_ini) <- N_gender
+dim(IC2S1J4W_11_ini) <- N_gender
+dim(IC3S1J4W_11_ini) <- N_gender
+dim(IC4S1J4W_11_ini) <- N_gender
+
+dim(IC1S1J4W_12_ini) <- N_gender
+dim(IC2S1J4W_12_ini) <- N_gender
+dim(IC3S1J4W_12_ini) <- N_gender
+dim(IC4S1J4W_12_ini) <- N_gender
+
+dim(IC1S1J4W_13_ini) <- N_gender
+dim(IC2S1J4W_13_ini) <- N_gender
+dim(IC3S1J4W_13_ini) <- N_gender
+dim(IC4S1J4W_13_ini) <- N_gender
+
+dim(IC1S1J4W_14_ini) <- N_gender
+dim(IC2S1J4W_14_ini) <- N_gender
+dim(IC3S1J4W_14_ini) <- N_gender
+dim(IC4S1J4W_14_ini) <- N_gender
+
+dim(IC1S1J4W_15_ini) <- N_gender
+dim(IC2S1J4W_15_ini) <- N_gender
+dim(IC3S1J4W_15_ini) <- N_gender
+dim(IC4S1J4W_15_ini) <- N_gender
+
+dim(IC1S1J4W_16_ini) <- N_gender
+dim(IC2S1J4W_16_ini) <- N_gender
+dim(IC3S1J4W_16_ini) <- N_gender
+dim(IC4S1J4W_16_ini) <- N_gender
+
+dim(IC1S1J4W_17_ini) <- N_gender
+dim(IC2S1J4W_17_ini) <- N_gender
+dim(IC3S1J4W_17_ini) <- N_gender
+dim(IC4S1J4W_17_ini) <- N_gender
+
+
+
+dim(IC1S2J4W_10_ini) <- N_gender
+dim(IC2S2J4W_10_ini) <- N_gender
+dim(IC3S2J4W_10_ini) <- N_gender
+dim(IC4S2J4W_10_ini) <- N_gender
+
+dim(IC1S2J4W_11_ini) <- N_gender
+dim(IC2S2J4W_11_ini) <- N_gender
+dim(IC3S2J4W_11_ini) <- N_gender
+dim(IC4S2J4W_11_ini) <- N_gender
+
+dim(IC1S2J4W_12_ini) <- N_gender
+dim(IC2S2J4W_12_ini) <- N_gender
+dim(IC3S2J4W_12_ini) <- N_gender
+dim(IC4S2J4W_12_ini) <- N_gender
+
+dim(IC1S2J4W_13_ini) <- N_gender
+dim(IC2S2J4W_13_ini) <- N_gender
+dim(IC3S2J4W_13_ini) <- N_gender
+dim(IC4S2J4W_13_ini) <- N_gender
+
+dim(IC1S2J4W_14_ini) <- N_gender
+dim(IC2S2J4W_14_ini) <- N_gender
+dim(IC3S2J4W_14_ini) <- N_gender
+dim(IC4S2J4W_14_ini) <- N_gender
+
+dim(IC1S2J4W_15_ini) <- N_gender
+dim(IC2S2J4W_15_ini) <- N_gender
+dim(IC3S2J4W_15_ini) <- N_gender
+dim(IC4S2J4W_15_ini) <- N_gender
+
+dim(IC1S2J4W_16_ini) <- N_gender
+dim(IC2S2J4W_16_ini) <- N_gender
+dim(IC3S2J4W_16_ini) <- N_gender
+dim(IC4S2J4W_16_ini) <- N_gender
+
+dim(IC1S2J4W_17_ini) <- N_gender
+dim(IC2S2J4W_17_ini) <- N_gender
+dim(IC3S2J4W_17_ini) <- N_gender
+dim(IC4S2J4W_17_ini) <- N_gender
+
+
+
+dim(IC1S1J5W_10_ini) <- N_gender
+dim(IC2S1J5W_10_ini) <- N_gender
+dim(IC3S1J5W_10_ini) <- N_gender
+dim(IC4S1J5W_10_ini) <- N_gender
+
+dim(IC1S1J5W_11_ini) <- N_gender
+dim(IC2S1J5W_11_ini) <- N_gender
+dim(IC3S1J5W_11_ini) <- N_gender
+dim(IC4S1J5W_11_ini) <- N_gender
+
+dim(IC1S1J5W_12_ini) <- N_gender
+dim(IC2S1J5W_12_ini) <- N_gender
+dim(IC3S1J5W_12_ini) <- N_gender
+dim(IC4S1J5W_12_ini) <- N_gender
+
+dim(IC1S1J5W_13_ini) <- N_gender
+dim(IC2S1J5W_13_ini) <- N_gender
+dim(IC3S1J5W_13_ini) <- N_gender
+dim(IC4S1J5W_13_ini) <- N_gender
+
+dim(IC1S1J5W_14_ini) <- N_gender
+dim(IC2S1J5W_14_ini) <- N_gender
+dim(IC3S1J5W_14_ini) <- N_gender
+dim(IC4S1J5W_14_ini) <- N_gender
+
+dim(IC1S1J5W_15_ini) <- N_gender
+dim(IC2S1J5W_15_ini) <- N_gender
+dim(IC3S1J5W_15_ini) <- N_gender
+dim(IC4S1J5W_15_ini) <- N_gender
+
+dim(IC1S1J5W_16_ini) <- N_gender
+dim(IC2S1J5W_16_ini) <- N_gender
+dim(IC3S1J5W_16_ini) <- N_gender
+dim(IC4S1J5W_16_ini) <- N_gender
+
+dim(IC1S1J5W_17_ini) <- N_gender
+dim(IC2S1J5W_17_ini) <- N_gender
+dim(IC3S1J5W_17_ini) <- N_gender
+dim(IC4S1J5W_17_ini) <- N_gender
+
+
+
+dim(IC1S2J5W_10_ini) <- N_gender
+dim(IC2S2J5W_10_ini) <- N_gender
+dim(IC3S2J5W_10_ini) <- N_gender
+dim(IC4S2J5W_10_ini) <- N_gender
+
+dim(IC1S2J5W_11_ini) <- N_gender
+dim(IC2S2J5W_11_ini) <- N_gender
+dim(IC3S2J5W_11_ini) <- N_gender
+dim(IC4S2J5W_11_ini) <- N_gender
+
+dim(IC1S2J5W_12_ini) <- N_gender
+dim(IC2S2J5W_12_ini) <- N_gender
+dim(IC3S2J5W_12_ini) <- N_gender
+dim(IC4S2J5W_12_ini) <- N_gender
+
+dim(IC1S2J5W_13_ini) <- N_gender
+dim(IC2S2J5W_13_ini) <- N_gender
+dim(IC3S2J5W_13_ini) <- N_gender
+dim(IC4S2J5W_13_ini) <- N_gender
+
+dim(IC1S2J5W_14_ini) <- N_gender
+dim(IC2S2J5W_14_ini) <- N_gender
+dim(IC3S2J5W_14_ini) <- N_gender
+dim(IC4S2J5W_14_ini) <- N_gender
+
+dim(IC1S2J5W_15_ini) <- N_gender
+dim(IC2S2J5W_15_ini) <- N_gender
+dim(IC3S2J5W_15_ini) <- N_gender
+dim(IC4S2J5W_15_ini) <- N_gender
+
+dim(IC1S2J5W_16_ini) <- N_gender
+dim(IC2S2J5W_16_ini) <- N_gender
+dim(IC3S2J5W_16_ini) <- N_gender
+dim(IC4S2J5W_16_ini) <- N_gender
+
+dim(IC1S2J5W_17_ini) <- N_gender
+dim(IC2S2J5W_17_ini) <- N_gender
+dim(IC3S2J5W_17_ini) <- N_gender
+dim(IC4S2J5W_17_ini) <- N_gender
+
+
+
+dim(EC1S1J1U_10_ini) <- N_gender
+dim(EC2S1J1U_10_ini) <- N_gender
+dim(EC3S1J1U_10_ini) <- N_gender
+dim(EC4S1J1U_10_ini) <- N_gender
+
+dim(EC1S1J1U_11_ini) <- N_gender
+dim(EC2S1J1U_11_ini) <- N_gender
+dim(EC3S1J1U_11_ini) <- N_gender
+dim(EC4S1J1U_11_ini) <- N_gender
+
+dim(EC1S1J1U_12_ini) <- N_gender
+dim(EC2S1J1U_12_ini) <- N_gender
+dim(EC3S1J1U_12_ini) <- N_gender
+dim(EC4S1J1U_12_ini) <- N_gender
+
+dim(EC1S1J1U_13_ini) <- N_gender
+dim(EC2S1J1U_13_ini) <- N_gender
+dim(EC3S1J1U_13_ini) <- N_gender
+dim(EC4S1J1U_13_ini) <- N_gender
+
+dim(EC1S1J1U_14_ini) <- N_gender
+dim(EC2S1J1U_14_ini) <- N_gender
+dim(EC3S1J1U_14_ini) <- N_gender
+dim(EC4S1J1U_14_ini) <- N_gender
+
+dim(EC1S1J1U_15_ini) <- N_gender
+dim(EC2S1J1U_15_ini) <- N_gender
+dim(EC3S1J1U_15_ini) <- N_gender
+dim(EC4S1J1U_15_ini) <- N_gender
+
+dim(EC1S1J1U_16_ini) <- N_gender
+dim(EC2S1J1U_16_ini) <- N_gender
+dim(EC3S1J1U_16_ini) <- N_gender
+dim(EC4S1J1U_16_ini) <- N_gender
+
+dim(EC1S1J1U_17_ini) <- N_gender
+dim(EC2S1J1U_17_ini) <- N_gender
+dim(EC3S1J1U_17_ini) <- N_gender
+dim(EC4S1J1U_17_ini) <- N_gender
+
+
+
+dim(EC1S2J1U_10_ini) <- N_gender
+dim(EC2S2J1U_10_ini) <- N_gender
+dim(EC3S2J1U_10_ini) <- N_gender
+dim(EC4S2J1U_10_ini) <- N_gender
+
+dim(EC1S2J1U_11_ini) <- N_gender
+dim(EC2S2J1U_11_ini) <- N_gender
+dim(EC3S2J1U_11_ini) <- N_gender
+dim(EC4S2J1U_11_ini) <- N_gender
+
+dim(EC1S2J1U_12_ini) <- N_gender
+dim(EC2S2J1U_12_ini) <- N_gender
+dim(EC3S2J1U_12_ini) <- N_gender
+dim(EC4S2J1U_12_ini) <- N_gender
+
+dim(EC1S2J1U_13_ini) <- N_gender
+dim(EC2S2J1U_13_ini) <- N_gender
+dim(EC3S2J1U_13_ini) <- N_gender
+dim(EC4S2J1U_13_ini) <- N_gender
+
+dim(EC1S2J1U_14_ini) <- N_gender
+dim(EC2S2J1U_14_ini) <- N_gender
+dim(EC3S2J1U_14_ini) <- N_gender
+dim(EC4S2J1U_14_ini) <- N_gender
+
+dim(EC1S2J1U_15_ini) <- N_gender
+dim(EC2S2J1U_15_ini) <- N_gender
+dim(EC3S2J1U_15_ini) <- N_gender
+dim(EC4S2J1U_15_ini) <- N_gender
+
+dim(EC1S2J1U_16_ini) <- N_gender
+dim(EC2S2J1U_16_ini) <- N_gender
+dim(EC3S2J1U_16_ini) <- N_gender
+dim(EC4S2J1U_16_ini) <- N_gender
+
+dim(EC1S2J1U_17_ini) <- N_gender
+dim(EC2S2J1U_17_ini) <- N_gender
+dim(EC3S2J1U_17_ini) <- N_gender
+dim(EC4S2J1U_17_ini) <- N_gender
+
+
+
+dim(EC1S1J2U_10_ini) <- N_gender
+dim(EC2S1J2U_10_ini) <- N_gender
+dim(EC3S1J2U_10_ini) <- N_gender
+dim(EC4S1J2U_10_ini) <- N_gender
+
+dim(EC1S1J2U_11_ini) <- N_gender
+dim(EC2S1J2U_11_ini) <- N_gender
+dim(EC3S1J2U_11_ini) <- N_gender
+dim(EC4S1J2U_11_ini) <- N_gender
+
+dim(EC1S1J2U_12_ini) <- N_gender
+dim(EC2S1J2U_12_ini) <- N_gender
+dim(EC3S1J2U_12_ini) <- N_gender
+dim(EC4S1J2U_12_ini) <- N_gender
+
+dim(EC1S1J2U_13_ini) <- N_gender
+dim(EC2S1J2U_13_ini) <- N_gender
+dim(EC3S1J2U_13_ini) <- N_gender
+dim(EC4S1J2U_13_ini) <- N_gender
+
+dim(EC1S1J2U_14_ini) <- N_gender
+dim(EC2S1J2U_14_ini) <- N_gender
+dim(EC3S1J2U_14_ini) <- N_gender
+dim(EC4S1J2U_14_ini) <- N_gender
+
+dim(EC1S1J2U_15_ini) <- N_gender
+dim(EC2S1J2U_15_ini) <- N_gender
+dim(EC3S1J2U_15_ini) <- N_gender
+dim(EC4S1J2U_15_ini) <- N_gender
+
+dim(EC1S1J2U_16_ini) <- N_gender
+dim(EC2S1J2U_16_ini) <- N_gender
+dim(EC3S1J2U_16_ini) <- N_gender
+dim(EC4S1J2U_16_ini) <- N_gender
+
+dim(EC1S1J2U_17_ini) <- N_gender
+dim(EC2S1J2U_17_ini) <- N_gender
+dim(EC3S1J2U_17_ini) <- N_gender
+dim(EC4S1J2U_17_ini) <- N_gender
+
+
+
+dim(EC1S2J2U_10_ini) <- N_gender
+dim(EC2S2J2U_10_ini) <- N_gender
+dim(EC3S2J2U_10_ini) <- N_gender
+dim(EC4S2J2U_10_ini) <- N_gender
+
+dim(EC1S2J2U_11_ini) <- N_gender
+dim(EC2S2J2U_11_ini) <- N_gender
+dim(EC3S2J2U_11_ini) <- N_gender
+dim(EC4S2J2U_11_ini) <- N_gender
+
+dim(EC1S2J2U_12_ini) <- N_gender
+dim(EC2S2J2U_12_ini) <- N_gender
+dim(EC3S2J2U_12_ini) <- N_gender
+dim(EC4S2J2U_12_ini) <- N_gender
+
+dim(EC1S2J2U_13_ini) <- N_gender
+dim(EC2S2J2U_13_ini) <- N_gender
+dim(EC3S2J2U_13_ini) <- N_gender
+dim(EC4S2J2U_13_ini) <- N_gender
+
+dim(EC1S2J2U_14_ini) <- N_gender
+dim(EC2S2J2U_14_ini) <- N_gender
+dim(EC3S2J2U_14_ini) <- N_gender
+dim(EC4S2J2U_14_ini) <- N_gender
+
+dim(EC1S2J2U_15_ini) <- N_gender
+dim(EC2S2J2U_15_ini) <- N_gender
+dim(EC3S2J2U_15_ini) <- N_gender
+dim(EC4S2J2U_15_ini) <- N_gender
+
+dim(EC1S2J2U_16_ini) <- N_gender
+dim(EC2S2J2U_16_ini) <- N_gender
+dim(EC3S2J2U_16_ini) <- N_gender
+dim(EC4S2J2U_16_ini) <- N_gender
+
+dim(EC1S2J2U_17_ini) <- N_gender
+dim(EC2S2J2U_17_ini) <- N_gender
+dim(EC3S2J2U_17_ini) <- N_gender
+dim(EC4S2J2U_17_ini) <- N_gender
+
+
+
+dim(EC1S1J3U_10_ini) <- N_gender
+dim(EC2S1J3U_10_ini) <- N_gender
+dim(EC3S1J3U_10_ini) <- N_gender
+dim(EC4S1J3U_10_ini) <- N_gender
+
+dim(EC1S1J3U_11_ini) <- N_gender
+dim(EC2S1J3U_11_ini) <- N_gender
+dim(EC3S1J3U_11_ini) <- N_gender
+dim(EC4S1J3U_11_ini) <- N_gender
+
+dim(EC1S1J3U_12_ini) <- N_gender
+dim(EC2S1J3U_12_ini) <- N_gender
+dim(EC3S1J3U_12_ini) <- N_gender
+dim(EC4S1J3U_12_ini) <- N_gender
+
+dim(EC1S1J3U_13_ini) <- N_gender
+dim(EC2S1J3U_13_ini) <- N_gender
+dim(EC3S1J3U_13_ini) <- N_gender
+dim(EC4S1J3U_13_ini) <- N_gender
+
+dim(EC1S1J3U_14_ini) <- N_gender
+dim(EC2S1J3U_14_ini) <- N_gender
+dim(EC3S1J3U_14_ini) <- N_gender
+dim(EC4S1J3U_14_ini) <- N_gender
+
+dim(EC1S1J3U_15_ini) <- N_gender
+dim(EC2S1J3U_15_ini) <- N_gender
+dim(EC3S1J3U_15_ini) <- N_gender
+dim(EC4S1J3U_15_ini) <- N_gender
+
+dim(EC1S1J3U_16_ini) <- N_gender
+dim(EC2S1J3U_16_ini) <- N_gender
+dim(EC3S1J3U_16_ini) <- N_gender
+dim(EC4S1J3U_16_ini) <- N_gender
+
+dim(EC1S1J3U_17_ini) <- N_gender
+dim(EC2S1J3U_17_ini) <- N_gender
+dim(EC3S1J3U_17_ini) <- N_gender
+dim(EC4S1J3U_17_ini) <- N_gender
+
+
+
+dim(EC1S2J3U_10_ini) <- N_gender
+dim(EC2S2J3U_10_ini) <- N_gender
+dim(EC3S2J3U_10_ini) <- N_gender
+dim(EC4S2J3U_10_ini) <- N_gender
+
+dim(EC1S2J3U_11_ini) <- N_gender
+dim(EC2S2J3U_11_ini) <- N_gender
+dim(EC3S2J3U_11_ini) <- N_gender
+dim(EC4S2J3U_11_ini) <- N_gender
+
+dim(EC1S2J3U_12_ini) <- N_gender
+dim(EC2S2J3U_12_ini) <- N_gender
+dim(EC3S2J3U_12_ini) <- N_gender
+dim(EC4S2J3U_12_ini) <- N_gender
+
+dim(EC1S2J3U_13_ini) <- N_gender
+dim(EC2S2J3U_13_ini) <- N_gender
+dim(EC3S2J3U_13_ini) <- N_gender
+dim(EC4S2J3U_13_ini) <- N_gender
+
+dim(EC1S2J3U_14_ini) <- N_gender
+dim(EC2S2J3U_14_ini) <- N_gender
+dim(EC3S2J3U_14_ini) <- N_gender
+dim(EC4S2J3U_14_ini) <- N_gender
+
+dim(EC1S2J3U_15_ini) <- N_gender
+dim(EC2S2J3U_15_ini) <- N_gender
+dim(EC3S2J3U_15_ini) <- N_gender
+dim(EC4S2J3U_15_ini) <- N_gender
+
+dim(EC1S2J3U_16_ini) <- N_gender
+dim(EC2S2J3U_16_ini) <- N_gender
+dim(EC3S2J3U_16_ini) <- N_gender
+dim(EC4S2J3U_16_ini) <- N_gender
+
+dim(EC1S2J3U_17_ini) <- N_gender
+dim(EC2S2J3U_17_ini) <- N_gender
+dim(EC3S2J3U_17_ini) <- N_gender
+dim(EC4S2J3U_17_ini) <- N_gender
+
+
+
+dim(EC1S1J4U_10_ini) <- N_gender
+dim(EC2S1J4U_10_ini) <- N_gender
+dim(EC3S1J4U_10_ini) <- N_gender
+dim(EC4S1J4U_10_ini) <- N_gender
+
+dim(EC1S1J4U_11_ini) <- N_gender
+dim(EC2S1J4U_11_ini) <- N_gender
+dim(EC3S1J4U_11_ini) <- N_gender
+dim(EC4S1J4U_11_ini) <- N_gender
+
+dim(EC1S1J4U_12_ini) <- N_gender
+dim(EC2S1J4U_12_ini) <- N_gender
+dim(EC3S1J4U_12_ini) <- N_gender
+dim(EC4S1J4U_12_ini) <- N_gender
+
+dim(EC1S1J4U_13_ini) <- N_gender
+dim(EC2S1J4U_13_ini) <- N_gender
+dim(EC3S1J4U_13_ini) <- N_gender
+dim(EC4S1J4U_13_ini) <- N_gender
+
+dim(EC1S1J4U_14_ini) <- N_gender
+dim(EC2S1J4U_14_ini) <- N_gender
+dim(EC3S1J4U_14_ini) <- N_gender
+dim(EC4S1J4U_14_ini) <- N_gender
+
+dim(EC1S1J4U_15_ini) <- N_gender
+dim(EC2S1J4U_15_ini) <- N_gender
+dim(EC3S1J4U_15_ini) <- N_gender
+dim(EC4S1J4U_15_ini) <- N_gender
+
+dim(EC1S1J4U_16_ini) <- N_gender
+dim(EC2S1J4U_16_ini) <- N_gender
+dim(EC3S1J4U_16_ini) <- N_gender
+dim(EC4S1J4U_16_ini) <- N_gender
+
+dim(EC1S1J4U_17_ini) <- N_gender
+dim(EC2S1J4U_17_ini) <- N_gender
+dim(EC3S1J4U_17_ini) <- N_gender
+dim(EC4S1J4U_17_ini) <- N_gender
+
+
+
+dim(EC1S2J4U_10_ini) <- N_gender
+dim(EC2S2J4U_10_ini) <- N_gender
+dim(EC3S2J4U_10_ini) <- N_gender
+dim(EC4S2J4U_10_ini) <- N_gender
+
+dim(EC1S2J4U_11_ini) <- N_gender
+dim(EC2S2J4U_11_ini) <- N_gender
+dim(EC3S2J4U_11_ini) <- N_gender
+dim(EC4S2J4U_11_ini) <- N_gender
+
+dim(EC1S2J4U_12_ini) <- N_gender
+dim(EC2S2J4U_12_ini) <- N_gender
+dim(EC3S2J4U_12_ini) <- N_gender
+dim(EC4S2J4U_12_ini) <- N_gender
+
+dim(EC1S2J4U_13_ini) <- N_gender
+dim(EC2S2J4U_13_ini) <- N_gender
+dim(EC3S2J4U_13_ini) <- N_gender
+dim(EC4S2J4U_13_ini) <- N_gender
+
+dim(EC1S2J4U_14_ini) <- N_gender
+dim(EC2S2J4U_14_ini) <- N_gender
+dim(EC3S2J4U_14_ini) <- N_gender
+dim(EC4S2J4U_14_ini) <- N_gender
+
+dim(EC1S2J4U_15_ini) <- N_gender
+dim(EC2S2J4U_15_ini) <- N_gender
+dim(EC3S2J4U_15_ini) <- N_gender
+dim(EC4S2J4U_15_ini) <- N_gender
+
+dim(EC1S2J4U_16_ini) <- N_gender
+dim(EC2S2J4U_16_ini) <- N_gender
+dim(EC3S2J4U_16_ini) <- N_gender
+dim(EC4S2J4U_16_ini) <- N_gender
+
+dim(EC1S2J4U_17_ini) <- N_gender
+dim(EC2S2J4U_17_ini) <- N_gender
+dim(EC3S2J4U_17_ini) <- N_gender
+dim(EC4S2J4U_17_ini) <- N_gender
+
+
+
+dim(EC1S1J5U_10_ini) <- N_gender
+dim(EC2S1J5U_10_ini) <- N_gender
+dim(EC3S1J5U_10_ini) <- N_gender
+dim(EC4S1J5U_10_ini) <- N_gender
+
+dim(EC1S1J5U_11_ini) <- N_gender
+dim(EC2S1J5U_11_ini) <- N_gender
+dim(EC3S1J5U_11_ini) <- N_gender
+dim(EC4S1J5U_11_ini) <- N_gender
+
+dim(EC1S1J5U_12_ini) <- N_gender
+dim(EC2S1J5U_12_ini) <- N_gender
+dim(EC3S1J5U_12_ini) <- N_gender
+dim(EC4S1J5U_12_ini) <- N_gender
+
+dim(EC1S1J5U_13_ini) <- N_gender
+dim(EC2S1J5U_13_ini) <- N_gender
+dim(EC3S1J5U_13_ini) <- N_gender
+dim(EC4S1J5U_13_ini) <- N_gender
+
+dim(EC1S1J5U_14_ini) <- N_gender
+dim(EC2S1J5U_14_ini) <- N_gender
+dim(EC3S1J5U_14_ini) <- N_gender
+dim(EC4S1J5U_14_ini) <- N_gender
+
+dim(EC1S1J5U_15_ini) <- N_gender
+dim(EC2S1J5U_15_ini) <- N_gender
+dim(EC3S1J5U_15_ini) <- N_gender
+dim(EC4S1J5U_15_ini) <- N_gender
+
+dim(EC1S1J5U_16_ini) <- N_gender
+dim(EC2S1J5U_16_ini) <- N_gender
+dim(EC3S1J5U_16_ini) <- N_gender
+dim(EC4S1J5U_16_ini) <- N_gender
+
+dim(EC1S1J5U_17_ini) <- N_gender
+dim(EC2S1J5U_17_ini) <- N_gender
+dim(EC3S1J5U_17_ini) <- N_gender
+dim(EC4S1J5U_17_ini) <- N_gender
+
+
+
+dim(EC1S2J5U_10_ini) <- N_gender
+dim(EC2S2J5U_10_ini) <- N_gender
+dim(EC3S2J5U_10_ini) <- N_gender
+dim(EC4S2J5U_10_ini) <- N_gender
+
+dim(EC1S2J5U_11_ini) <- N_gender
+dim(EC2S2J5U_11_ini) <- N_gender
+dim(EC3S2J5U_11_ini) <- N_gender
+dim(EC4S2J5U_11_ini) <- N_gender
+
+dim(EC1S2J5U_12_ini) <- N_gender
+dim(EC2S2J5U_12_ini) <- N_gender
+dim(EC3S2J5U_12_ini) <- N_gender
+dim(EC4S2J5U_12_ini) <- N_gender
+
+dim(EC1S2J5U_13_ini) <- N_gender
+dim(EC2S2J5U_13_ini) <- N_gender
+dim(EC3S2J5U_13_ini) <- N_gender
+dim(EC4S2J5U_13_ini) <- N_gender
+
+dim(EC1S2J5U_14_ini) <- N_gender
+dim(EC2S2J5U_14_ini) <- N_gender
+dim(EC3S2J5U_14_ini) <- N_gender
+dim(EC4S2J5U_14_ini) <- N_gender
+
+dim(EC1S2J5U_15_ini) <- N_gender
+dim(EC2S2J5U_15_ini) <- N_gender
+dim(EC3S2J5U_15_ini) <- N_gender
+dim(EC4S2J5U_15_ini) <- N_gender
+
+dim(EC1S2J5U_16_ini) <- N_gender
+dim(EC2S2J5U_16_ini) <- N_gender
+dim(EC3S2J5U_16_ini) <- N_gender
+dim(EC4S2J5U_16_ini) <- N_gender
+
+dim(EC1S2J5U_17_ini) <- N_gender
+dim(EC2S2J5U_17_ini) <- N_gender
+dim(EC3S2J5U_17_ini) <- N_gender
+dim(EC4S2J5U_17_ini) <- N_gender
+
+
+
+dim(EC1S1J1W_10_ini) <- N_gender
+dim(EC2S1J1W_10_ini) <- N_gender
+dim(EC3S1J1W_10_ini) <- N_gender
+dim(EC4S1J1W_10_ini) <- N_gender
+
+dim(EC1S1J1W_11_ini) <- N_gender
+dim(EC2S1J1W_11_ini) <- N_gender
+dim(EC3S1J1W_11_ini) <- N_gender
+dim(EC4S1J1W_11_ini) <- N_gender
+
+dim(EC1S1J1W_12_ini) <- N_gender
+dim(EC2S1J1W_12_ini) <- N_gender
+dim(EC3S1J1W_12_ini) <- N_gender
+dim(EC4S1J1W_12_ini) <- N_gender
+
+dim(EC1S1J1W_13_ini) <- N_gender
+dim(EC2S1J1W_13_ini) <- N_gender
+dim(EC3S1J1W_13_ini) <- N_gender
+dim(EC4S1J1W_13_ini) <- N_gender
+
+dim(EC1S1J1W_14_ini) <- N_gender
+dim(EC2S1J1W_14_ini) <- N_gender
+dim(EC3S1J1W_14_ini) <- N_gender
+dim(EC4S1J1W_14_ini) <- N_gender
+
+dim(EC1S1J1W_15_ini) <- N_gender
+dim(EC2S1J1W_15_ini) <- N_gender
+dim(EC3S1J1W_15_ini) <- N_gender
+dim(EC4S1J1W_15_ini) <- N_gender
+
+dim(EC1S1J1W_16_ini) <- N_gender
+dim(EC2S1J1W_16_ini) <- N_gender
+dim(EC3S1J1W_16_ini) <- N_gender
+dim(EC4S1J1W_16_ini) <- N_gender
+
+dim(EC1S1J1W_17_ini) <- N_gender
+dim(EC2S1J1W_17_ini) <- N_gender
+dim(EC3S1J1W_17_ini) <- N_gender
+dim(EC4S1J1W_17_ini) <- N_gender
+
+
+
+dim(EC1S2J1W_10_ini) <- N_gender
+dim(EC2S2J1W_10_ini) <- N_gender
+dim(EC3S2J1W_10_ini) <- N_gender
+dim(EC4S2J1W_10_ini) <- N_gender
+
+dim(EC1S2J1W_11_ini) <- N_gender
+dim(EC2S2J1W_11_ini) <- N_gender
+dim(EC3S2J1W_11_ini) <- N_gender
+dim(EC4S2J1W_11_ini) <- N_gender
+
+dim(EC1S2J1W_12_ini) <- N_gender
+dim(EC2S2J1W_12_ini) <- N_gender
+dim(EC3S2J1W_12_ini) <- N_gender
+dim(EC4S2J1W_12_ini) <- N_gender
+
+dim(EC1S2J1W_13_ini) <- N_gender
+dim(EC2S2J1W_13_ini) <- N_gender
+dim(EC3S2J1W_13_ini) <- N_gender
+dim(EC4S2J1W_13_ini) <- N_gender
+
+dim(EC1S2J1W_14_ini) <- N_gender
+dim(EC2S2J1W_14_ini) <- N_gender
+dim(EC3S2J1W_14_ini) <- N_gender
+dim(EC4S2J1W_14_ini) <- N_gender
+
+dim(EC1S2J1W_15_ini) <- N_gender
+dim(EC2S2J1W_15_ini) <- N_gender
+dim(EC3S2J1W_15_ini) <- N_gender
+dim(EC4S2J1W_15_ini) <- N_gender
+
+dim(EC1S2J1W_16_ini) <- N_gender
+dim(EC2S2J1W_16_ini) <- N_gender
+dim(EC3S2J1W_16_ini) <- N_gender
+dim(EC4S2J1W_16_ini) <- N_gender
+
+dim(EC1S2J1W_17_ini) <- N_gender
+dim(EC2S2J1W_17_ini) <- N_gender
+dim(EC3S2J1W_17_ini) <- N_gender
+dim(EC4S2J1W_17_ini) <- N_gender
+
+
+
+dim(EC1S1J2W_10_ini) <- N_gender
+dim(EC2S1J2W_10_ini) <- N_gender
+dim(EC3S1J2W_10_ini) <- N_gender
+dim(EC4S1J2W_10_ini) <- N_gender
+
+dim(EC1S1J2W_11_ini) <- N_gender
+dim(EC2S1J2W_11_ini) <- N_gender
+dim(EC3S1J2W_11_ini) <- N_gender
+dim(EC4S1J2W_11_ini) <- N_gender
+
+dim(EC1S1J2W_12_ini) <- N_gender
+dim(EC2S1J2W_12_ini) <- N_gender
+dim(EC3S1J2W_12_ini) <- N_gender
+dim(EC4S1J2W_12_ini) <- N_gender
+
+dim(EC1S1J2W_13_ini) <- N_gender
+dim(EC2S1J2W_13_ini) <- N_gender
+dim(EC3S1J2W_13_ini) <- N_gender
+dim(EC4S1J2W_13_ini) <- N_gender
+
+dim(EC1S1J2W_14_ini) <- N_gender
+dim(EC2S1J2W_14_ini) <- N_gender
+dim(EC3S1J2W_14_ini) <- N_gender
+dim(EC4S1J2W_14_ini) <- N_gender
+
+dim(EC1S1J2W_15_ini) <- N_gender
+dim(EC2S1J2W_15_ini) <- N_gender
+dim(EC3S1J2W_15_ini) <- N_gender
+dim(EC4S1J2W_15_ini) <- N_gender
+
+dim(EC1S1J2W_16_ini) <- N_gender
+dim(EC2S1J2W_16_ini) <- N_gender
+dim(EC3S1J2W_16_ini) <- N_gender
+dim(EC4S1J2W_16_ini) <- N_gender
+
+dim(EC1S1J2W_17_ini) <- N_gender
+dim(EC2S1J2W_17_ini) <- N_gender
+dim(EC3S1J2W_17_ini) <- N_gender
+dim(EC4S1J2W_17_ini) <- N_gender
+
+
+
+dim(EC1S2J2W_10_ini) <- N_gender
+dim(EC2S2J2W_10_ini) <- N_gender
+dim(EC3S2J2W_10_ini) <- N_gender
+dim(EC4S2J2W_10_ini) <- N_gender
+
+dim(EC1S2J2W_11_ini) <- N_gender
+dim(EC2S2J2W_11_ini) <- N_gender
+dim(EC3S2J2W_11_ini) <- N_gender
+dim(EC4S2J2W_11_ini) <- N_gender
+
+dim(EC1S2J2W_12_ini) <- N_gender
+dim(EC2S2J2W_12_ini) <- N_gender
+dim(EC3S2J2W_12_ini) <- N_gender
+dim(EC4S2J2W_12_ini) <- N_gender
+
+dim(EC1S2J2W_13_ini) <- N_gender
+dim(EC2S2J2W_13_ini) <- N_gender
+dim(EC3S2J2W_13_ini) <- N_gender
+dim(EC4S2J2W_13_ini) <- N_gender
+
+dim(EC1S2J2W_14_ini) <- N_gender
+dim(EC2S2J2W_14_ini) <- N_gender
+dim(EC3S2J2W_14_ini) <- N_gender
+dim(EC4S2J2W_14_ini) <- N_gender
+
+dim(EC1S2J2W_15_ini) <- N_gender
+dim(EC2S2J2W_15_ini) <- N_gender
+dim(EC3S2J2W_15_ini) <- N_gender
+dim(EC4S2J2W_15_ini) <- N_gender
+
+dim(EC1S2J2W_16_ini) <- N_gender
+dim(EC2S2J2W_16_ini) <- N_gender
+dim(EC3S2J2W_16_ini) <- N_gender
+dim(EC4S2J2W_16_ini) <- N_gender
+
+dim(EC1S2J2W_17_ini) <- N_gender
+dim(EC2S2J2W_17_ini) <- N_gender
+dim(EC3S2J2W_17_ini) <- N_gender
+dim(EC4S2J2W_17_ini) <- N_gender
+
+
+
+dim(EC1S1J3W_10_ini) <- N_gender
+dim(EC2S1J3W_10_ini) <- N_gender
+dim(EC3S1J3W_10_ini) <- N_gender
+dim(EC4S1J3W_10_ini) <- N_gender
+
+dim(EC1S1J3W_11_ini) <- N_gender
+dim(EC2S1J3W_11_ini) <- N_gender
+dim(EC3S1J3W_11_ini) <- N_gender
+dim(EC4S1J3W_11_ini) <- N_gender
+
+dim(EC1S1J3W_12_ini) <- N_gender
+dim(EC2S1J3W_12_ini) <- N_gender
+dim(EC3S1J3W_12_ini) <- N_gender
+dim(EC4S1J3W_12_ini) <- N_gender
+
+dim(EC1S1J3W_13_ini) <- N_gender
+dim(EC2S1J3W_13_ini) <- N_gender
+dim(EC3S1J3W_13_ini) <- N_gender
+dim(EC4S1J3W_13_ini) <- N_gender
+
+dim(EC1S1J3W_14_ini) <- N_gender
+dim(EC2S1J3W_14_ini) <- N_gender
+dim(EC3S1J3W_14_ini) <- N_gender
+dim(EC4S1J3W_14_ini) <- N_gender
+
+dim(EC1S1J3W_15_ini) <- N_gender
+dim(EC2S1J3W_15_ini) <- N_gender
+dim(EC3S1J3W_15_ini) <- N_gender
+dim(EC4S1J3W_15_ini) <- N_gender
+
+dim(EC1S1J3W_16_ini) <- N_gender
+dim(EC2S1J3W_16_ini) <- N_gender
+dim(EC3S1J3W_16_ini) <- N_gender
+dim(EC4S1J3W_16_ini) <- N_gender
+
+dim(EC1S1J3W_17_ini) <- N_gender
+dim(EC2S1J3W_17_ini) <- N_gender
+dim(EC3S1J3W_17_ini) <- N_gender
+dim(EC4S1J3W_17_ini) <- N_gender
+
+
+
+dim(EC1S2J3W_10_ini) <- N_gender
+dim(EC2S2J3W_10_ini) <- N_gender
+dim(EC3S2J3W_10_ini) <- N_gender
+dim(EC4S2J3W_10_ini) <- N_gender
+
+dim(EC1S2J3W_11_ini) <- N_gender
+dim(EC2S2J3W_11_ini) <- N_gender
+dim(EC3S2J3W_11_ini) <- N_gender
+dim(EC4S2J3W_11_ini) <- N_gender
+
+dim(EC1S2J3W_12_ini) <- N_gender
+dim(EC2S2J3W_12_ini) <- N_gender
+dim(EC3S2J3W_12_ini) <- N_gender
+dim(EC4S2J3W_12_ini) <- N_gender
+
+dim(EC1S2J3W_13_ini) <- N_gender
+dim(EC2S2J3W_13_ini) <- N_gender
+dim(EC3S2J3W_13_ini) <- N_gender
+dim(EC4S2J3W_13_ini) <- N_gender
+
+dim(EC1S2J3W_14_ini) <- N_gender
+dim(EC2S2J3W_14_ini) <- N_gender
+dim(EC3S2J3W_14_ini) <- N_gender
+dim(EC4S2J3W_14_ini) <- N_gender
+
+dim(EC1S2J3W_15_ini) <- N_gender
+dim(EC2S2J3W_15_ini) <- N_gender
+dim(EC3S2J3W_15_ini) <- N_gender
+dim(EC4S2J3W_15_ini) <- N_gender
+
+dim(EC1S2J3W_16_ini) <- N_gender
+dim(EC2S2J3W_16_ini) <- N_gender
+dim(EC3S2J3W_16_ini) <- N_gender
+dim(EC4S2J3W_16_ini) <- N_gender
+
+dim(EC1S2J3W_17_ini) <- N_gender
+dim(EC2S2J3W_17_ini) <- N_gender
+dim(EC3S2J3W_17_ini) <- N_gender
+dim(EC4S2J3W_17_ini) <- N_gender
+
+
+
+dim(EC1S1J4W_10_ini) <- N_gender
+dim(EC2S1J4W_10_ini) <- N_gender
+dim(EC3S1J4W_10_ini) <- N_gender
+dim(EC4S1J4W_10_ini) <- N_gender
+
+dim(EC1S1J4W_11_ini) <- N_gender
+dim(EC2S1J4W_11_ini) <- N_gender
+dim(EC3S1J4W_11_ini) <- N_gender
+dim(EC4S1J4W_11_ini) <- N_gender
+
+dim(EC1S1J4W_12_ini) <- N_gender
+dim(EC2S1J4W_12_ini) <- N_gender
+dim(EC3S1J4W_12_ini) <- N_gender
+dim(EC4S1J4W_12_ini) <- N_gender
+
+dim(EC1S1J4W_13_ini) <- N_gender
+dim(EC2S1J4W_13_ini) <- N_gender
+dim(EC3S1J4W_13_ini) <- N_gender
+dim(EC4S1J4W_13_ini) <- N_gender
+
+dim(EC1S1J4W_14_ini) <- N_gender
+dim(EC2S1J4W_14_ini) <- N_gender
+dim(EC3S1J4W_14_ini) <- N_gender
+dim(EC4S1J4W_14_ini) <- N_gender
+
+dim(EC1S1J4W_15_ini) <- N_gender
+dim(EC2S1J4W_15_ini) <- N_gender
+dim(EC3S1J4W_15_ini) <- N_gender
+dim(EC4S1J4W_15_ini) <- N_gender
+
+dim(EC1S1J4W_16_ini) <- N_gender
+dim(EC2S1J4W_16_ini) <- N_gender
+dim(EC3S1J4W_16_ini) <- N_gender
+dim(EC4S1J4W_16_ini) <- N_gender
+
+dim(EC1S1J4W_17_ini) <- N_gender
+dim(EC2S1J4W_17_ini) <- N_gender
+dim(EC3S1J4W_17_ini) <- N_gender
+dim(EC4S1J4W_17_ini) <- N_gender
+
+
+
+dim(EC1S2J4W_10_ini) <- N_gender
+dim(EC2S2J4W_10_ini) <- N_gender
+dim(EC3S2J4W_10_ini) <- N_gender
+dim(EC4S2J4W_10_ini) <- N_gender
+
+dim(EC1S2J4W_11_ini) <- N_gender
+dim(EC2S2J4W_11_ini) <- N_gender
+dim(EC3S2J4W_11_ini) <- N_gender
+dim(EC4S2J4W_11_ini) <- N_gender
+
+dim(EC1S2J4W_12_ini) <- N_gender
+dim(EC2S2J4W_12_ini) <- N_gender
+dim(EC3S2J4W_12_ini) <- N_gender
+dim(EC4S2J4W_12_ini) <- N_gender
+
+dim(EC1S2J4W_13_ini) <- N_gender
+dim(EC2S2J4W_13_ini) <- N_gender
+dim(EC3S2J4W_13_ini) <- N_gender
+dim(EC4S2J4W_13_ini) <- N_gender
+
+dim(EC1S2J4W_14_ini) <- N_gender
+dim(EC2S2J4W_14_ini) <- N_gender
+dim(EC3S2J4W_14_ini) <- N_gender
+dim(EC4S2J4W_14_ini) <- N_gender
+
+dim(EC1S2J4W_15_ini) <- N_gender
+dim(EC2S2J4W_15_ini) <- N_gender
+dim(EC3S2J4W_15_ini) <- N_gender
+dim(EC4S2J4W_15_ini) <- N_gender
+
+dim(EC1S2J4W_16_ini) <- N_gender
+dim(EC2S2J4W_16_ini) <- N_gender
+dim(EC3S2J4W_16_ini) <- N_gender
+dim(EC4S2J4W_16_ini) <- N_gender
+
+dim(EC1S2J4W_17_ini) <- N_gender
+dim(EC2S2J4W_17_ini) <- N_gender
+dim(EC3S2J4W_17_ini) <- N_gender
+dim(EC4S2J4W_17_ini) <- N_gender
+
+
+
+dim(EC1S1J5W_10_ini) <- N_gender
+dim(EC2S1J5W_10_ini) <- N_gender
+dim(EC3S1J5W_10_ini) <- N_gender
+dim(EC4S1J5W_10_ini) <- N_gender
+
+dim(EC1S1J5W_11_ini) <- N_gender
+dim(EC2S1J5W_11_ini) <- N_gender
+dim(EC3S1J5W_11_ini) <- N_gender
+dim(EC4S1J5W_11_ini) <- N_gender
+
+dim(EC1S1J5W_12_ini) <- N_gender
+dim(EC2S1J5W_12_ini) <- N_gender
+dim(EC3S1J5W_12_ini) <- N_gender
+dim(EC4S1J5W_12_ini) <- N_gender
+
+dim(EC1S1J5W_13_ini) <- N_gender
+dim(EC2S1J5W_13_ini) <- N_gender
+dim(EC3S1J5W_13_ini) <- N_gender
+dim(EC4S1J5W_13_ini) <- N_gender
+
+dim(EC1S1J5W_14_ini) <- N_gender
+dim(EC2S1J5W_14_ini) <- N_gender
+dim(EC3S1J5W_14_ini) <- N_gender
+dim(EC4S1J5W_14_ini) <- N_gender
+
+dim(EC1S1J5W_15_ini) <- N_gender
+dim(EC2S1J5W_15_ini) <- N_gender
+dim(EC3S1J5W_15_ini) <- N_gender
+dim(EC4S1J5W_15_ini) <- N_gender
+
+dim(EC1S1J5W_16_ini) <- N_gender
+dim(EC2S1J5W_16_ini) <- N_gender
+dim(EC3S1J5W_16_ini) <- N_gender
+dim(EC4S1J5W_16_ini) <- N_gender
+
+dim(EC1S1J5W_17_ini) <- N_gender
+dim(EC2S1J5W_17_ini) <- N_gender
+dim(EC3S1J5W_17_ini) <- N_gender
+dim(EC4S1J5W_17_ini) <- N_gender
+
+
+
+dim(EC1S2J5W_10_ini) <- N_gender
+dim(EC2S2J5W_10_ini) <- N_gender
+dim(EC3S2J5W_10_ini) <- N_gender
+dim(EC4S2J5W_10_ini) <- N_gender
+
+dim(EC1S2J5W_11_ini) <- N_gender
+dim(EC2S2J5W_11_ini) <- N_gender
+dim(EC3S2J5W_11_ini) <- N_gender
+dim(EC4S2J5W_11_ini) <- N_gender
+
+dim(EC1S2J5W_12_ini) <- N_gender
+dim(EC2S2J5W_12_ini) <- N_gender
+dim(EC3S2J5W_12_ini) <- N_gender
+dim(EC4S2J5W_12_ini) <- N_gender
+
+dim(EC1S2J5W_13_ini) <- N_gender
+dim(EC2S2J5W_13_ini) <- N_gender
+dim(EC3S2J5W_13_ini) <- N_gender
+dim(EC4S2J5W_13_ini) <- N_gender
+
+dim(EC1S2J5W_14_ini) <- N_gender
+dim(EC2S2J5W_14_ini) <- N_gender
+dim(EC3S2J5W_14_ini) <- N_gender
+dim(EC4S2J5W_14_ini) <- N_gender
+
+dim(EC1S2J5W_15_ini) <- N_gender
+dim(EC2S2J5W_15_ini) <- N_gender
+dim(EC3S2J5W_15_ini) <- N_gender
+dim(EC4S2J5W_15_ini) <- N_gender
+
+dim(EC1S2J5W_16_ini) <- N_gender
+dim(EC2S2J5W_16_ini) <- N_gender
+dim(EC3S2J5W_16_ini) <- N_gender
+dim(EC4S2J5W_16_ini) <- N_gender
+
+dim(EC1S2J5W_17_ini) <- N_gender
+dim(EC2S2J5W_17_ini) <- N_gender
+dim(EC3S2J5W_17_ini) <- N_gender
+dim(EC4S2J5W_17_ini) <- N_gender
+
+
 
 ##############################################################################################################################
 ## groups of states ####################################################################
@@ -1929,6 +8512,8 @@ dim(cust_P_16) <- N_gender
 dim(cust_I_17) <- N_gender
 dim(cust_E_17) <- N_gender
 dim(cust_P_17) <- N_gender
+
+dim(cust_W) <- N_gender
 
 dim(cust) <- N_gender
 
@@ -10735,7 +17320,25 @@ dim(cl_mix_p_17) <- c(N_gender, N_gender)
 ##############################################################################################################################
 ## parameters ####################################################################
 ##############################################################################################################################
+dim(r) <- N_gender
+dim(f) <- N_gender
 
+dim(n2nr) <- N_gender
+dim(n2r) <- N_gender
+dim(p2care) <- N_gender
+dim(p2nr) <- N_gender
+dim(p2r) <- N_gender
+
+dim(end_nr) <- N_gender
+dim(end_res) <- N_gender
+
+dim(nr2r) <- N_gender
+dim(nr2p) <- N_gender
+
+dim(r2nr) <- N_gender
+dim(r2p) <- N_gender
+
+dim(pc_cl) <- N_gender
 
 dim(t10_ic1s1j1u) <- N_gender
 dim(t10_ic2s1j1u) <- N_gender
@@ -10936,6 +17539,1319 @@ dim(t10_ec1s2j5w) <- N_gender
 dim(t10_ec2s2j5w) <- N_gender
 dim(t10_ec3s2j5w) <- N_gender
 dim(t10_ec4s2j5w) <- N_gender
+
+
+
+dim(neet16_ic1s1j1u) <- N_gender
+dim(neet16_ic2s1j1u) <- N_gender
+dim(neet16_ic3s1j1u) <- N_gender
+dim(neet16_ic4s1j1u) <- N_gender
+
+dim(neet16_ic1s2j1u) <- N_gender
+dim(neet16_ic2s2j1u) <- N_gender
+dim(neet16_ic3s2j1u) <- N_gender
+dim(neet16_ic4s2j1u) <- N_gender
+
+dim(neet16_ic1s1j2u) <- N_gender
+dim(neet16_ic2s1j2u) <- N_gender
+dim(neet16_ic3s1j2u) <- N_gender
+dim(neet16_ic4s1j2u) <- N_gender
+
+dim(neet16_ic1s2j2u) <- N_gender
+dim(neet16_ic2s2j2u) <- N_gender
+dim(neet16_ic3s2j2u) <- N_gender
+dim(neet16_ic4s2j2u) <- N_gender
+
+dim(neet16_ic1s1j3u) <- N_gender
+dim(neet16_ic2s1j3u) <- N_gender
+dim(neet16_ic3s1j3u) <- N_gender
+dim(neet16_ic4s1j3u) <- N_gender
+
+dim(neet16_ic1s2j3u) <- N_gender
+dim(neet16_ic2s2j3u) <- N_gender
+dim(neet16_ic3s2j3u) <- N_gender
+dim(neet16_ic4s2j3u) <- N_gender
+
+dim(neet16_ic1s1j4u) <- N_gender
+dim(neet16_ic2s1j4u) <- N_gender
+dim(neet16_ic3s1j4u) <- N_gender
+dim(neet16_ic4s1j4u) <- N_gender
+
+dim(neet16_ic1s2j4u) <- N_gender
+dim(neet16_ic2s2j4u) <- N_gender
+dim(neet16_ic3s2j4u) <- N_gender
+dim(neet16_ic4s2j4u) <- N_gender
+
+dim(neet16_ic1s1j5u) <- N_gender
+dim(neet16_ic2s1j5u) <- N_gender
+dim(neet16_ic3s1j5u) <- N_gender
+dim(neet16_ic4s1j5u) <- N_gender
+
+dim(neet16_ic1s2j5u) <- N_gender
+dim(neet16_ic2s2j5u) <- N_gender
+dim(neet16_ic3s2j5u) <- N_gender
+dim(neet16_ic4s2j5u) <- N_gender
+
+dim(neet16_ic1s1j1w) <- N_gender
+dim(neet16_ic2s1j1w) <- N_gender
+dim(neet16_ic3s1j1w) <- N_gender
+dim(neet16_ic4s1j1w) <- N_gender
+
+dim(neet16_ic1s2j1w) <- N_gender
+dim(neet16_ic2s2j1w) <- N_gender
+dim(neet16_ic3s2j1w) <- N_gender
+dim(neet16_ic4s2j1w) <- N_gender
+
+dim(neet16_ic1s1j2w) <- N_gender
+dim(neet16_ic2s1j2w) <- N_gender
+dim(neet16_ic3s1j2w) <- N_gender
+dim(neet16_ic4s1j2w) <- N_gender
+
+dim(neet16_ic1s2j2w) <- N_gender
+dim(neet16_ic2s2j2w) <- N_gender
+dim(neet16_ic3s2j2w) <- N_gender
+dim(neet16_ic4s2j2w) <- N_gender
+
+dim(neet16_ic1s1j3w) <- N_gender
+dim(neet16_ic2s1j3w) <- N_gender
+dim(neet16_ic3s1j3w) <- N_gender
+dim(neet16_ic4s1j3w) <- N_gender
+
+dim(neet16_ic1s2j3w) <- N_gender
+dim(neet16_ic2s2j3w) <- N_gender
+dim(neet16_ic3s2j3w) <- N_gender
+dim(neet16_ic4s2j3w) <- N_gender
+
+dim(neet16_ic1s1j4w) <- N_gender
+dim(neet16_ic2s1j4w) <- N_gender
+dim(neet16_ic3s1j4w) <- N_gender
+dim(neet16_ic4s1j4w) <- N_gender
+
+dim(neet16_ic1s2j4w) <- N_gender
+dim(neet16_ic2s2j4w) <- N_gender
+dim(neet16_ic3s2j4w) <- N_gender
+dim(neet16_ic4s2j4w) <- N_gender
+
+dim(neet16_ic1s1j5w) <- N_gender
+dim(neet16_ic2s1j5w) <- N_gender
+dim(neet16_ic3s1j5w) <- N_gender
+dim(neet16_ic4s1j5w) <- N_gender
+
+dim(neet16_ic1s2j5w) <- N_gender
+dim(neet16_ic2s2j5w) <- N_gender
+dim(neet16_ic3s2j5w) <- N_gender
+dim(neet16_ic4s2j5w) <- N_gender
+
+dim(neet16_ec1s1j1u) <- N_gender
+dim(neet16_ec2s1j1u) <- N_gender
+dim(neet16_ec3s1j1u) <- N_gender
+dim(neet16_ec4s1j1u) <- N_gender
+
+dim(neet16_ec1s2j1u) <- N_gender
+dim(neet16_ec2s2j1u) <- N_gender
+dim(neet16_ec3s2j1u) <- N_gender
+dim(neet16_ec4s2j1u) <- N_gender
+
+dim(neet16_ec1s1j2u) <- N_gender
+dim(neet16_ec2s1j2u) <- N_gender
+dim(neet16_ec3s1j2u) <- N_gender
+dim(neet16_ec4s1j2u) <- N_gender
+
+dim(neet16_ec1s2j2u) <- N_gender
+dim(neet16_ec2s2j2u) <- N_gender
+dim(neet16_ec3s2j2u) <- N_gender
+dim(neet16_ec4s2j2u) <- N_gender
+
+dim(neet16_ec1s1j3u) <- N_gender
+dim(neet16_ec2s1j3u) <- N_gender
+dim(neet16_ec3s1j3u) <- N_gender
+dim(neet16_ec4s1j3u) <- N_gender
+
+dim(neet16_ec1s2j3u) <- N_gender
+dim(neet16_ec2s2j3u) <- N_gender
+dim(neet16_ec3s2j3u) <- N_gender
+dim(neet16_ec4s2j3u) <- N_gender
+
+dim(neet16_ec1s1j4u) <- N_gender
+dim(neet16_ec2s1j4u) <- N_gender
+dim(neet16_ec3s1j4u) <- N_gender
+dim(neet16_ec4s1j4u) <- N_gender
+
+dim(neet16_ec1s2j4u) <- N_gender
+dim(neet16_ec2s2j4u) <- N_gender
+dim(neet16_ec3s2j4u) <- N_gender
+dim(neet16_ec4s2j4u) <- N_gender
+
+dim(neet16_ec1s1j5u) <- N_gender
+dim(neet16_ec2s1j5u) <- N_gender
+dim(neet16_ec3s1j5u) <- N_gender
+dim(neet16_ec4s1j5u) <- N_gender
+
+dim(neet16_ec1s2j5u) <- N_gender
+dim(neet16_ec2s2j5u) <- N_gender
+dim(neet16_ec3s2j5u) <- N_gender
+dim(neet16_ec4s2j5u) <- N_gender
+
+dim(neet16_ec1s1j1w) <- N_gender
+dim(neet16_ec2s1j1w) <- N_gender
+dim(neet16_ec3s1j1w) <- N_gender
+dim(neet16_ec4s1j1w) <- N_gender
+
+dim(neet16_ec1s2j1w) <- N_gender
+dim(neet16_ec2s2j1w) <- N_gender
+dim(neet16_ec3s2j1w) <- N_gender
+dim(neet16_ec4s2j1w) <- N_gender
+
+dim(neet16_ec1s1j2w) <- N_gender
+dim(neet16_ec2s1j2w) <- N_gender
+dim(neet16_ec3s1j2w) <- N_gender
+dim(neet16_ec4s1j2w) <- N_gender
+
+dim(neet16_ec1s2j2w) <- N_gender
+dim(neet16_ec2s2j2w) <- N_gender
+dim(neet16_ec3s2j2w) <- N_gender
+dim(neet16_ec4s2j2w) <- N_gender
+
+dim(neet16_ec1s1j3w) <- N_gender
+dim(neet16_ec2s1j3w) <- N_gender
+dim(neet16_ec3s1j3w) <- N_gender
+dim(neet16_ec4s1j3w) <- N_gender
+
+dim(neet16_ec1s2j3w) <- N_gender
+dim(neet16_ec2s2j3w) <- N_gender
+dim(neet16_ec3s2j3w) <- N_gender
+dim(neet16_ec4s2j3w) <- N_gender
+
+dim(neet16_ec1s1j4w) <- N_gender
+dim(neet16_ec2s1j4w) <- N_gender
+dim(neet16_ec3s1j4w) <- N_gender
+dim(neet16_ec4s1j4w) <- N_gender
+
+dim(neet16_ec1s2j4w) <- N_gender
+dim(neet16_ec2s2j4w) <- N_gender
+dim(neet16_ec3s2j4w) <- N_gender
+dim(neet16_ec4s2j4w) <- N_gender
+
+dim(neet16_ec1s1j5w) <- N_gender
+dim(neet16_ec2s1j5w) <- N_gender
+dim(neet16_ec3s1j5w) <- N_gender
+dim(neet16_ec4s1j5w) <- N_gender
+
+dim(neet16_ec1s2j5w) <- N_gender
+dim(neet16_ec2s2j5w) <- N_gender
+dim(neet16_ec3s2j5w) <- N_gender
+dim(neet16_ec4s2j5w) <- N_gender
+
+
+dim(n2care_i_10) <- N_gender
+dim(n2care_i_11) <- N_gender
+dim(n2care_i_12) <- N_gender
+dim(n2care_i_13) <- N_gender
+dim(n2care_i_14) <- N_gender
+dim(n2care_i_15) <- N_gender
+dim(n2care_i_16) <- N_gender
+dim(n2care_i_17) <- N_gender
+
+dim(n2care_e_10) <- N_gender
+dim(n2care_e_11) <- N_gender
+dim(n2care_e_12) <- N_gender
+dim(n2care_e_13) <- N_gender
+dim(n2care_e_14) <- N_gender
+dim(n2care_e_15) <- N_gender
+dim(n2care_e_16) <- N_gender
+dim(n2care_e_17) <- N_gender
+
+
+dim(neet2m_i) <- N_gender
+dim(neet2m_e) <- N_gender
+
+
+dim(m2pru_ic1_10) <- N_gender
+dim(m2pru_ic2_10) <- N_gender
+dim(m2pru_ic3_10) <- N_gender
+dim(m2pru_ic4_10) <- N_gender
+
+dim(m2pru_ic1_11) <- N_gender
+dim(m2pru_ic2_11) <- N_gender
+dim(m2pru_ic3_11) <- N_gender
+dim(m2pru_ic4_11) <- N_gender
+
+dim(m2pru_ic1_12) <- N_gender
+dim(m2pru_ic2_12) <- N_gender
+dim(m2pru_ic3_12) <- N_gender
+dim(m2pru_ic4_12) <- N_gender
+
+dim(m2pru_ic1_13) <- N_gender
+dim(m2pru_ic2_13) <- N_gender
+dim(m2pru_ic3_13) <- N_gender
+dim(m2pru_ic4_13) <- N_gender
+
+dim(m2pru_ic1_14) <- N_gender
+dim(m2pru_ic2_14) <- N_gender
+dim(m2pru_ic3_14) <- N_gender
+dim(m2pru_ic4_14) <- N_gender
+
+dim(m2pru_ic1_15) <- N_gender
+dim(m2pru_ic2_15) <- N_gender
+dim(m2pru_ic3_15) <- N_gender
+dim(m2pru_ic4_15) <- N_gender
+
+dim(m2neet_ic1_16) <- N_gender
+dim(m2neet_ic2_16) <- N_gender
+dim(m2neet_ic3_16) <- N_gender
+dim(m2neet_ic4_16) <- N_gender
+
+dim(m2neet_ic1_17) <- N_gender
+dim(m2neet_ic2_17) <- N_gender
+dim(m2neet_ic3_17) <- N_gender
+dim(m2neet_ic4_17) <- N_gender
+
+
+dim(m2pru_ec1_10) <- N_gender
+dim(m2pru_ec2_10) <- N_gender
+dim(m2pru_ec3_10) <- N_gender
+dim(m2pru_ec4_10) <- N_gender
+
+dim(m2pru_ec1_11) <- N_gender
+dim(m2pru_ec2_11) <- N_gender
+dim(m2pru_ec3_11) <- N_gender
+dim(m2pru_ec4_11) <- N_gender
+
+dim(m2pru_ec1_12) <- N_gender
+dim(m2pru_ec2_12) <- N_gender
+dim(m2pru_ec3_12) <- N_gender
+dim(m2pru_ec4_12) <- N_gender
+
+dim(m2pru_ec1_13) <- N_gender
+dim(m2pru_ec2_13) <- N_gender
+dim(m2pru_ec3_13) <- N_gender
+dim(m2pru_ec4_13) <- N_gender
+
+dim(m2pru_ec1_14) <- N_gender
+dim(m2pru_ec2_14) <- N_gender
+dim(m2pru_ec3_14) <- N_gender
+dim(m2pru_ec4_14) <- N_gender
+
+dim(m2pru_ec1_15) <- N_gender
+dim(m2pru_ec2_15) <- N_gender
+dim(m2pru_ec3_15) <- N_gender
+dim(m2pru_ec4_15) <- N_gender
+
+dim(m2neet_ec1_16) <- N_gender
+dim(m2neet_ec2_16) <- N_gender
+dim(m2neet_ec3_16) <- N_gender
+dim(m2neet_ec4_16) <- N_gender
+
+dim(m2neet_ec1_17) <- N_gender
+dim(m2neet_ec2_17) <- N_gender
+dim(m2neet_ec3_17) <- N_gender
+dim(m2neet_ec4_17) <- N_gender
+
+
+dim(np2nc_ic1s1u_10) <- N_gender
+dim(np2nc_ic2s1u_10) <- N_gender
+dim(np2nc_ic3s1u_10) <- N_gender
+dim(np2nc_ic4s1u_10) <- N_gender
+
+dim(np2nc_ic1s1u_11) <- N_gender
+dim(np2nc_ic2s1u_11) <- N_gender
+dim(np2nc_ic3s1u_11) <- N_gender
+dim(np2nc_ic4s1u_11) <- N_gender
+
+dim(np2nc_ic1s1u_12) <- N_gender
+dim(np2nc_ic2s1u_12) <- N_gender
+dim(np2nc_ic3s1u_12) <- N_gender
+dim(np2nc_ic4s1u_12) <- N_gender
+
+dim(np2nc_ic1s1u_13) <- N_gender
+dim(np2nc_ic2s1u_13) <- N_gender
+dim(np2nc_ic3s1u_13) <- N_gender
+dim(np2nc_ic4s1u_13) <- N_gender
+
+dim(np2nc_ic1s1u_14) <- N_gender
+dim(np2nc_ic2s1u_14) <- N_gender
+dim(np2nc_ic3s1u_14) <- N_gender
+dim(np2nc_ic4s1u_14) <- N_gender
+
+dim(np2nc_ic1s1u_15) <- N_gender
+dim(np2nc_ic2s1u_15) <- N_gender
+dim(np2nc_ic3s1u_15) <- N_gender
+dim(np2nc_ic4s1u_15) <- N_gender
+
+dim(np2nc_ic1s1u_16) <- N_gender
+dim(np2nc_ic2s1u_16) <- N_gender
+dim(np2nc_ic3s1u_16) <- N_gender
+dim(np2nc_ic4s1u_16) <- N_gender
+
+dim(np2nc_ic1s1u_17) <- N_gender
+dim(np2nc_ic2s1u_17) <- N_gender
+dim(np2nc_ic3s1u_17) <- N_gender
+dim(np2nc_ic4s1u_17) <- N_gender
+
+
+
+dim(np2nc_ic1s2u_10) <- N_gender
+dim(np2nc_ic2s2u_10) <- N_gender
+dim(np2nc_ic3s2u_10) <- N_gender
+dim(np2nc_ic4s2u_10) <- N_gender
+
+dim(np2nc_ic1s2u_11) <- N_gender
+dim(np2nc_ic2s2u_11) <- N_gender
+dim(np2nc_ic3s2u_11) <- N_gender
+dim(np2nc_ic4s2u_11) <- N_gender
+
+dim(np2nc_ic1s2u_12) <- N_gender
+dim(np2nc_ic2s2u_12) <- N_gender
+dim(np2nc_ic3s2u_12) <- N_gender
+dim(np2nc_ic4s2u_12) <- N_gender
+
+dim(np2nc_ic1s2u_13) <- N_gender
+dim(np2nc_ic2s2u_13) <- N_gender
+dim(np2nc_ic3s2u_13) <- N_gender
+dim(np2nc_ic4s2u_13) <- N_gender
+
+dim(np2nc_ic1s2u_14) <- N_gender
+dim(np2nc_ic2s2u_14) <- N_gender
+dim(np2nc_ic3s2u_14) <- N_gender
+dim(np2nc_ic4s2u_14) <- N_gender
+
+dim(np2nc_ic1s2u_15) <- N_gender
+dim(np2nc_ic2s2u_15) <- N_gender
+dim(np2nc_ic3s2u_15) <- N_gender
+dim(np2nc_ic4s2u_15) <- N_gender
+
+dim(np2nc_ic1s2u_16) <- N_gender
+dim(np2nc_ic2s2u_16) <- N_gender
+dim(np2nc_ic3s2u_16) <- N_gender
+dim(np2nc_ic4s2u_16) <- N_gender
+
+dim(np2nc_ic1s2u_17) <- N_gender
+dim(np2nc_ic2s2u_17) <- N_gender
+dim(np2nc_ic3s2u_17) <- N_gender
+dim(np2nc_ic4s2u_17) <- N_gender
+
+
+
+dim(np2nc_ic1s1w_10) <- N_gender
+dim(np2nc_ic2s1w_10) <- N_gender
+dim(np2nc_ic3s1w_10) <- N_gender
+dim(np2nc_ic4s1w_10) <- N_gender
+
+dim(np2nc_ic1s1w_11) <- N_gender
+dim(np2nc_ic2s1w_11) <- N_gender
+dim(np2nc_ic3s1w_11) <- N_gender
+dim(np2nc_ic4s1w_11) <- N_gender
+
+dim(np2nc_ic1s1w_12) <- N_gender
+dim(np2nc_ic2s1w_12) <- N_gender
+dim(np2nc_ic3s1w_12) <- N_gender
+dim(np2nc_ic4s1w_12) <- N_gender
+
+dim(np2nc_ic1s1w_13) <- N_gender
+dim(np2nc_ic2s1w_13) <- N_gender
+dim(np2nc_ic3s1w_13) <- N_gender
+dim(np2nc_ic4s1w_13) <- N_gender
+
+dim(np2nc_ic1s1w_14) <- N_gender
+dim(np2nc_ic2s1w_14) <- N_gender
+dim(np2nc_ic3s1w_14) <- N_gender
+dim(np2nc_ic4s1w_14) <- N_gender
+
+dim(np2nc_ic1s1w_15) <- N_gender
+dim(np2nc_ic2s1w_15) <- N_gender
+dim(np2nc_ic3s1w_15) <- N_gender
+dim(np2nc_ic4s1w_15) <- N_gender
+
+dim(np2nc_ic1s1w_16) <- N_gender
+dim(np2nc_ic2s1w_16) <- N_gender
+dim(np2nc_ic3s1w_16) <- N_gender
+dim(np2nc_ic4s1w_16) <- N_gender
+
+dim(np2nc_ic1s1w_17) <- N_gender
+dim(np2nc_ic2s1w_17) <- N_gender
+dim(np2nc_ic3s1w_17) <- N_gender
+dim(np2nc_ic4s1w_17) <- N_gender
+
+
+
+dim(np2nc_ic1s2w_10) <- N_gender
+dim(np2nc_ic2s2w_10) <- N_gender
+dim(np2nc_ic3s2w_10) <- N_gender
+dim(np2nc_ic4s2w_10) <- N_gender
+
+dim(np2nc_ic1s2w_11) <- N_gender
+dim(np2nc_ic2s2w_11) <- N_gender
+dim(np2nc_ic3s2w_11) <- N_gender
+dim(np2nc_ic4s2w_11) <- N_gender
+
+dim(np2nc_ic1s2w_12) <- N_gender
+dim(np2nc_ic2s2w_12) <- N_gender
+dim(np2nc_ic3s2w_12) <- N_gender
+dim(np2nc_ic4s2w_12) <- N_gender
+
+dim(np2nc_ic1s2w_13) <- N_gender
+dim(np2nc_ic2s2w_13) <- N_gender
+dim(np2nc_ic3s2w_13) <- N_gender
+dim(np2nc_ic4s2w_13) <- N_gender
+
+dim(np2nc_ic1s2w_14) <- N_gender
+dim(np2nc_ic2s2w_14) <- N_gender
+dim(np2nc_ic3s2w_14) <- N_gender
+dim(np2nc_ic4s2w_14) <- N_gender
+
+dim(np2nc_ic1s2w_15) <- N_gender
+dim(np2nc_ic2s2w_15) <- N_gender
+dim(np2nc_ic3s2w_15) <- N_gender
+dim(np2nc_ic4s2w_15) <- N_gender
+
+dim(np2nc_ic1s2w_16) <- N_gender
+dim(np2nc_ic2s2w_16) <- N_gender
+dim(np2nc_ic3s2w_16) <- N_gender
+dim(np2nc_ic4s2w_16) <- N_gender
+
+dim(np2nc_ic1s2w_17) <- N_gender
+dim(np2nc_ic2s2w_17) <- N_gender
+dim(np2nc_ic3s2w_17) <- N_gender
+dim(np2nc_ic4s2w_17) <- N_gender
+
+
+
+dim(np2nc_ec1s1u_10) <- N_gender
+dim(np2nc_ec2s1u_10) <- N_gender
+dim(np2nc_ec3s1u_10) <- N_gender
+dim(np2nc_ec4s1u_10) <- N_gender
+
+dim(np2nc_ec1s1u_11) <- N_gender
+dim(np2nc_ec2s1u_11) <- N_gender
+dim(np2nc_ec3s1u_11) <- N_gender
+dim(np2nc_ec4s1u_11) <- N_gender
+
+dim(np2nc_ec1s1u_12) <- N_gender
+dim(np2nc_ec2s1u_12) <- N_gender
+dim(np2nc_ec3s1u_12) <- N_gender
+dim(np2nc_ec4s1u_12) <- N_gender
+
+dim(np2nc_ec1s1u_13) <- N_gender
+dim(np2nc_ec2s1u_13) <- N_gender
+dim(np2nc_ec3s1u_13) <- N_gender
+dim(np2nc_ec4s1u_13) <- N_gender
+
+dim(np2nc_ec1s1u_14) <- N_gender
+dim(np2nc_ec2s1u_14) <- N_gender
+dim(np2nc_ec3s1u_14) <- N_gender
+dim(np2nc_ec4s1u_14) <- N_gender
+
+dim(np2nc_ec1s1u_15) <- N_gender
+dim(np2nc_ec2s1u_15) <- N_gender
+dim(np2nc_ec3s1u_15) <- N_gender
+dim(np2nc_ec4s1u_15) <- N_gender
+
+dim(np2nc_ec1s1u_16) <- N_gender
+dim(np2nc_ec2s1u_16) <- N_gender
+dim(np2nc_ec3s1u_16) <- N_gender
+dim(np2nc_ec4s1u_16) <- N_gender
+
+dim(np2nc_ec1s1u_17) <- N_gender
+dim(np2nc_ec2s1u_17) <- N_gender
+dim(np2nc_ec3s1u_17) <- N_gender
+dim(np2nc_ec4s1u_17) <- N_gender
+
+
+
+dim(np2nc_ec1s2u_10) <- N_gender
+dim(np2nc_ec2s2u_10) <- N_gender
+dim(np2nc_ec3s2u_10) <- N_gender
+dim(np2nc_ec4s2u_10) <- N_gender
+
+dim(np2nc_ec1s2u_11) <- N_gender
+dim(np2nc_ec2s2u_11) <- N_gender
+dim(np2nc_ec3s2u_11) <- N_gender
+dim(np2nc_ec4s2u_11) <- N_gender
+
+dim(np2nc_ec1s2u_12) <- N_gender
+dim(np2nc_ec2s2u_12) <- N_gender
+dim(np2nc_ec3s2u_12) <- N_gender
+dim(np2nc_ec4s2u_12) <- N_gender
+
+dim(np2nc_ec1s2u_13) <- N_gender
+dim(np2nc_ec2s2u_13) <- N_gender
+dim(np2nc_ec3s2u_13) <- N_gender
+dim(np2nc_ec4s2u_13) <- N_gender
+
+dim(np2nc_ec1s2u_14) <- N_gender
+dim(np2nc_ec2s2u_14) <- N_gender
+dim(np2nc_ec3s2u_14) <- N_gender
+dim(np2nc_ec4s2u_14) <- N_gender
+
+dim(np2nc_ec1s2u_15) <- N_gender
+dim(np2nc_ec2s2u_15) <- N_gender
+dim(np2nc_ec3s2u_15) <- N_gender
+dim(np2nc_ec4s2u_15) <- N_gender
+
+dim(np2nc_ec1s2u_16) <- N_gender
+dim(np2nc_ec2s2u_16) <- N_gender
+dim(np2nc_ec3s2u_16) <- N_gender
+dim(np2nc_ec4s2u_16) <- N_gender
+
+dim(np2nc_ec1s2u_17) <- N_gender
+dim(np2nc_ec2s2u_17) <- N_gender
+dim(np2nc_ec3s2u_17) <- N_gender
+dim(np2nc_ec4s2u_17) <- N_gender
+
+
+
+dim(np2nc_ec1s1w_10) <- N_gender
+dim(np2nc_ec2s1w_10) <- N_gender
+dim(np2nc_ec3s1w_10) <- N_gender
+dim(np2nc_ec4s1w_10) <- N_gender
+
+dim(np2nc_ec1s1w_11) <- N_gender
+dim(np2nc_ec2s1w_11) <- N_gender
+dim(np2nc_ec3s1w_11) <- N_gender
+dim(np2nc_ec4s1w_11) <- N_gender
+
+dim(np2nc_ec1s1w_12) <- N_gender
+dim(np2nc_ec2s1w_12) <- N_gender
+dim(np2nc_ec3s1w_12) <- N_gender
+dim(np2nc_ec4s1w_12) <- N_gender
+
+dim(np2nc_ec1s1w_13) <- N_gender
+dim(np2nc_ec2s1w_13) <- N_gender
+dim(np2nc_ec3s1w_13) <- N_gender
+dim(np2nc_ec4s1w_13) <- N_gender
+
+dim(np2nc_ec1s1w_14) <- N_gender
+dim(np2nc_ec2s1w_14) <- N_gender
+dim(np2nc_ec3s1w_14) <- N_gender
+dim(np2nc_ec4s1w_14) <- N_gender
+
+dim(np2nc_ec1s1w_15) <- N_gender
+dim(np2nc_ec2s1w_15) <- N_gender
+dim(np2nc_ec3s1w_15) <- N_gender
+dim(np2nc_ec4s1w_15) <- N_gender
+
+dim(np2nc_ec1s1w_16) <- N_gender
+dim(np2nc_ec2s1w_16) <- N_gender
+dim(np2nc_ec3s1w_16) <- N_gender
+dim(np2nc_ec4s1w_16) <- N_gender
+
+dim(np2nc_ec1s1w_17) <- N_gender
+dim(np2nc_ec2s1w_17) <- N_gender
+dim(np2nc_ec3s1w_17) <- N_gender
+dim(np2nc_ec4s1w_17) <- N_gender
+
+
+
+dim(np2nc_ec1s2w_10) <- N_gender
+dim(np2nc_ec2s2w_10) <- N_gender
+dim(np2nc_ec3s2w_10) <- N_gender
+dim(np2nc_ec4s2w_10) <- N_gender
+
+dim(np2nc_ec1s2w_11) <- N_gender
+dim(np2nc_ec2s2w_11) <- N_gender
+dim(np2nc_ec3s2w_11) <- N_gender
+dim(np2nc_ec4s2w_11) <- N_gender
+
+dim(np2nc_ec1s2w_12) <- N_gender
+dim(np2nc_ec2s2w_12) <- N_gender
+dim(np2nc_ec3s2w_12) <- N_gender
+dim(np2nc_ec4s2w_12) <- N_gender
+
+dim(np2nc_ec1s2w_13) <- N_gender
+dim(np2nc_ec2s2w_13) <- N_gender
+dim(np2nc_ec3s2w_13) <- N_gender
+dim(np2nc_ec4s2w_13) <- N_gender
+
+dim(np2nc_ec1s2w_14) <- N_gender
+dim(np2nc_ec2s2w_14) <- N_gender
+dim(np2nc_ec3s2w_14) <- N_gender
+dim(np2nc_ec4s2w_14) <- N_gender
+
+dim(np2nc_ec1s2w_15) <- N_gender
+dim(np2nc_ec2s2w_15) <- N_gender
+dim(np2nc_ec3s2w_15) <- N_gender
+dim(np2nc_ec4s2w_15) <- N_gender
+
+dim(np2nc_ec1s2w_16) <- N_gender
+dim(np2nc_ec2s2w_16) <- N_gender
+dim(np2nc_ec3s2w_16) <- N_gender
+dim(np2nc_ec4s2w_16) <- N_gender
+
+dim(np2nc_ec1s2w_17) <- N_gender
+dim(np2nc_ec2s2w_17) <- N_gender
+dim(np2nc_ec3s2w_17) <- N_gender
+dim(np2nc_ec4s2w_17) <- N_gender
+
+
+dim(np2charge_ic1s1u_10) <- N_gender
+dim(np2charge_ic2s1u_10) <- N_gender
+dim(np2charge_ic3s1u_10) <- N_gender
+dim(np2charge_ic4s1u_10) <- N_gender
+
+dim(np2charge_ic1s1u_11) <- N_gender
+dim(np2charge_ic2s1u_11) <- N_gender
+dim(np2charge_ic3s1u_11) <- N_gender
+dim(np2charge_ic4s1u_11) <- N_gender
+
+dim(np2charge_ic1s1u_12) <- N_gender
+dim(np2charge_ic2s1u_12) <- N_gender
+dim(np2charge_ic3s1u_12) <- N_gender
+dim(np2charge_ic4s1u_12) <- N_gender
+
+dim(np2charge_ic1s1u_13) <- N_gender
+dim(np2charge_ic2s1u_13) <- N_gender
+dim(np2charge_ic3s1u_13) <- N_gender
+dim(np2charge_ic4s1u_13) <- N_gender
+
+dim(np2charge_ic1s1u_14) <- N_gender
+dim(np2charge_ic2s1u_14) <- N_gender
+dim(np2charge_ic3s1u_14) <- N_gender
+dim(np2charge_ic4s1u_14) <- N_gender
+
+dim(np2charge_ic1s1u_15) <- N_gender
+dim(np2charge_ic2s1u_15) <- N_gender
+dim(np2charge_ic3s1u_15) <- N_gender
+dim(np2charge_ic4s1u_15) <- N_gender
+
+dim(np2charge_ic1s1u_16) <- N_gender
+dim(np2charge_ic2s1u_16) <- N_gender
+dim(np2charge_ic3s1u_16) <- N_gender
+dim(np2charge_ic4s1u_16) <- N_gender
+
+dim(np2charge_ic1s1u_17) <- N_gender
+dim(np2charge_ic2s1u_17) <- N_gender
+dim(np2charge_ic3s1u_17) <- N_gender
+dim(np2charge_ic4s1u_17) <- N_gender
+
+
+
+dim(np2charge_ic1s2u_10) <- N_gender
+dim(np2charge_ic2s2u_10) <- N_gender
+dim(np2charge_ic3s2u_10) <- N_gender
+dim(np2charge_ic4s2u_10) <- N_gender
+
+dim(np2charge_ic1s2u_11) <- N_gender
+dim(np2charge_ic2s2u_11) <- N_gender
+dim(np2charge_ic3s2u_11) <- N_gender
+dim(np2charge_ic4s2u_11) <- N_gender
+
+dim(np2charge_ic1s2u_12) <- N_gender
+dim(np2charge_ic2s2u_12) <- N_gender
+dim(np2charge_ic3s2u_12) <- N_gender
+dim(np2charge_ic4s2u_12) <- N_gender
+
+dim(np2charge_ic1s2u_13) <- N_gender
+dim(np2charge_ic2s2u_13) <- N_gender
+dim(np2charge_ic3s2u_13) <- N_gender
+dim(np2charge_ic4s2u_13) <- N_gender
+
+dim(np2charge_ic1s2u_14) <- N_gender
+dim(np2charge_ic2s2u_14) <- N_gender
+dim(np2charge_ic3s2u_14) <- N_gender
+dim(np2charge_ic4s2u_14) <- N_gender
+
+dim(np2charge_ic1s2u_15) <- N_gender
+dim(np2charge_ic2s2u_15) <- N_gender
+dim(np2charge_ic3s2u_15) <- N_gender
+dim(np2charge_ic4s2u_15) <- N_gender
+
+dim(np2charge_ic1s2u_16) <- N_gender
+dim(np2charge_ic2s2u_16) <- N_gender
+dim(np2charge_ic3s2u_16) <- N_gender
+dim(np2charge_ic4s2u_16) <- N_gender
+
+dim(np2charge_ic1s2u_17) <- N_gender
+dim(np2charge_ic2s2u_17) <- N_gender
+dim(np2charge_ic3s2u_17) <- N_gender
+dim(np2charge_ic4s2u_17) <- N_gender
+
+
+
+dim(np2charge_ic1s1w_10) <- N_gender
+dim(np2charge_ic2s1w_10) <- N_gender
+dim(np2charge_ic3s1w_10) <- N_gender
+dim(np2charge_ic4s1w_10) <- N_gender
+
+dim(np2charge_ic1s1w_11) <- N_gender
+dim(np2charge_ic2s1w_11) <- N_gender
+dim(np2charge_ic3s1w_11) <- N_gender
+dim(np2charge_ic4s1w_11) <- N_gender
+
+dim(np2charge_ic1s1w_12) <- N_gender
+dim(np2charge_ic2s1w_12) <- N_gender
+dim(np2charge_ic3s1w_12) <- N_gender
+dim(np2charge_ic4s1w_12) <- N_gender
+
+dim(np2charge_ic1s1w_13) <- N_gender
+dim(np2charge_ic2s1w_13) <- N_gender
+dim(np2charge_ic3s1w_13) <- N_gender
+dim(np2charge_ic4s1w_13) <- N_gender
+
+dim(np2charge_ic1s1w_14) <- N_gender
+dim(np2charge_ic2s1w_14) <- N_gender
+dim(np2charge_ic3s1w_14) <- N_gender
+dim(np2charge_ic4s1w_14) <- N_gender
+
+dim(np2charge_ic1s1w_15) <- N_gender
+dim(np2charge_ic2s1w_15) <- N_gender
+dim(np2charge_ic3s1w_15) <- N_gender
+dim(np2charge_ic4s1w_15) <- N_gender
+
+dim(np2charge_ic1s1w_16) <- N_gender
+dim(np2charge_ic2s1w_16) <- N_gender
+dim(np2charge_ic3s1w_16) <- N_gender
+dim(np2charge_ic4s1w_16) <- N_gender
+
+dim(np2charge_ic1s1w_17) <- N_gender
+dim(np2charge_ic2s1w_17) <- N_gender
+dim(np2charge_ic3s1w_17) <- N_gender
+dim(np2charge_ic4s1w_17) <- N_gender
+
+
+
+dim(np2charge_ic1s2w_10) <- N_gender
+dim(np2charge_ic2s2w_10) <- N_gender
+dim(np2charge_ic3s2w_10) <- N_gender
+dim(np2charge_ic4s2w_10) <- N_gender
+
+dim(np2charge_ic1s2w_11) <- N_gender
+dim(np2charge_ic2s2w_11) <- N_gender
+dim(np2charge_ic3s2w_11) <- N_gender
+dim(np2charge_ic4s2w_11) <- N_gender
+
+dim(np2charge_ic1s2w_12) <- N_gender
+dim(np2charge_ic2s2w_12) <- N_gender
+dim(np2charge_ic3s2w_12) <- N_gender
+dim(np2charge_ic4s2w_12) <- N_gender
+
+dim(np2charge_ic1s2w_13) <- N_gender
+dim(np2charge_ic2s2w_13) <- N_gender
+dim(np2charge_ic3s2w_13) <- N_gender
+dim(np2charge_ic4s2w_13) <- N_gender
+
+dim(np2charge_ic1s2w_14) <- N_gender
+dim(np2charge_ic2s2w_14) <- N_gender
+dim(np2charge_ic3s2w_14) <- N_gender
+dim(np2charge_ic4s2w_14) <- N_gender
+
+dim(np2charge_ic1s2w_15) <- N_gender
+dim(np2charge_ic2s2w_15) <- N_gender
+dim(np2charge_ic3s2w_15) <- N_gender
+dim(np2charge_ic4s2w_15) <- N_gender
+
+dim(np2charge_ic1s2w_16) <- N_gender
+dim(np2charge_ic2s2w_16) <- N_gender
+dim(np2charge_ic3s2w_16) <- N_gender
+dim(np2charge_ic4s2w_16) <- N_gender
+
+dim(np2charge_ic1s2w_17) <- N_gender
+dim(np2charge_ic2s2w_17) <- N_gender
+dim(np2charge_ic3s2w_17) <- N_gender
+dim(np2charge_ic4s2w_17) <- N_gender
+
+
+
+dim(np2charge_ec1s1u_10) <- N_gender
+dim(np2charge_ec2s1u_10) <- N_gender
+dim(np2charge_ec3s1u_10) <- N_gender
+dim(np2charge_ec4s1u_10) <- N_gender
+
+dim(np2charge_ec1s1u_11) <- N_gender
+dim(np2charge_ec2s1u_11) <- N_gender
+dim(np2charge_ec3s1u_11) <- N_gender
+dim(np2charge_ec4s1u_11) <- N_gender
+
+dim(np2charge_ec1s1u_12) <- N_gender
+dim(np2charge_ec2s1u_12) <- N_gender
+dim(np2charge_ec3s1u_12) <- N_gender
+dim(np2charge_ec4s1u_12) <- N_gender
+
+dim(np2charge_ec1s1u_13) <- N_gender
+dim(np2charge_ec2s1u_13) <- N_gender
+dim(np2charge_ec3s1u_13) <- N_gender
+dim(np2charge_ec4s1u_13) <- N_gender
+
+dim(np2charge_ec1s1u_14) <- N_gender
+dim(np2charge_ec2s1u_14) <- N_gender
+dim(np2charge_ec3s1u_14) <- N_gender
+dim(np2charge_ec4s1u_14) <- N_gender
+
+dim(np2charge_ec1s1u_15) <- N_gender
+dim(np2charge_ec2s1u_15) <- N_gender
+dim(np2charge_ec3s1u_15) <- N_gender
+dim(np2charge_ec4s1u_15) <- N_gender
+
+dim(np2charge_ec1s1u_16) <- N_gender
+dim(np2charge_ec2s1u_16) <- N_gender
+dim(np2charge_ec3s1u_16) <- N_gender
+dim(np2charge_ec4s1u_16) <- N_gender
+
+dim(np2charge_ec1s1u_17) <- N_gender
+dim(np2charge_ec2s1u_17) <- N_gender
+dim(np2charge_ec3s1u_17) <- N_gender
+dim(np2charge_ec4s1u_17) <- N_gender
+
+
+
+dim(np2charge_ec1s2u_10) <- N_gender
+dim(np2charge_ec2s2u_10) <- N_gender
+dim(np2charge_ec3s2u_10) <- N_gender
+dim(np2charge_ec4s2u_10) <- N_gender
+
+dim(np2charge_ec1s2u_11) <- N_gender
+dim(np2charge_ec2s2u_11) <- N_gender
+dim(np2charge_ec3s2u_11) <- N_gender
+dim(np2charge_ec4s2u_11) <- N_gender
+
+dim(np2charge_ec1s2u_12) <- N_gender
+dim(np2charge_ec2s2u_12) <- N_gender
+dim(np2charge_ec3s2u_12) <- N_gender
+dim(np2charge_ec4s2u_12) <- N_gender
+
+dim(np2charge_ec1s2u_13) <- N_gender
+dim(np2charge_ec2s2u_13) <- N_gender
+dim(np2charge_ec3s2u_13) <- N_gender
+dim(np2charge_ec4s2u_13) <- N_gender
+
+dim(np2charge_ec1s2u_14) <- N_gender
+dim(np2charge_ec2s2u_14) <- N_gender
+dim(np2charge_ec3s2u_14) <- N_gender
+dim(np2charge_ec4s2u_14) <- N_gender
+
+dim(np2charge_ec1s2u_15) <- N_gender
+dim(np2charge_ec2s2u_15) <- N_gender
+dim(np2charge_ec3s2u_15) <- N_gender
+dim(np2charge_ec4s2u_15) <- N_gender
+
+dim(np2charge_ec1s2u_16) <- N_gender
+dim(np2charge_ec2s2u_16) <- N_gender
+dim(np2charge_ec3s2u_16) <- N_gender
+dim(np2charge_ec4s2u_16) <- N_gender
+
+dim(np2charge_ec1s2u_17) <- N_gender
+dim(np2charge_ec2s2u_17) <- N_gender
+dim(np2charge_ec3s2u_17) <- N_gender
+dim(np2charge_ec4s2u_17) <- N_gender
+
+
+
+dim(np2charge_ec1s1w_10) <- N_gender
+dim(np2charge_ec2s1w_10) <- N_gender
+dim(np2charge_ec3s1w_10) <- N_gender
+dim(np2charge_ec4s1w_10) <- N_gender
+
+dim(np2charge_ec1s1w_11) <- N_gender
+dim(np2charge_ec2s1w_11) <- N_gender
+dim(np2charge_ec3s1w_11) <- N_gender
+dim(np2charge_ec4s1w_11) <- N_gender
+
+dim(np2charge_ec1s1w_12) <- N_gender
+dim(np2charge_ec2s1w_12) <- N_gender
+dim(np2charge_ec3s1w_12) <- N_gender
+dim(np2charge_ec4s1w_12) <- N_gender
+
+dim(np2charge_ec1s1w_13) <- N_gender
+dim(np2charge_ec2s1w_13) <- N_gender
+dim(np2charge_ec3s1w_13) <- N_gender
+dim(np2charge_ec4s1w_13) <- N_gender
+
+dim(np2charge_ec1s1w_14) <- N_gender
+dim(np2charge_ec2s1w_14) <- N_gender
+dim(np2charge_ec3s1w_14) <- N_gender
+dim(np2charge_ec4s1w_14) <- N_gender
+
+dim(np2charge_ec1s1w_15) <- N_gender
+dim(np2charge_ec2s1w_15) <- N_gender
+dim(np2charge_ec3s1w_15) <- N_gender
+dim(np2charge_ec4s1w_15) <- N_gender
+
+dim(np2charge_ec1s1w_16) <- N_gender
+dim(np2charge_ec2s1w_16) <- N_gender
+dim(np2charge_ec3s1w_16) <- N_gender
+dim(np2charge_ec4s1w_16) <- N_gender
+
+dim(np2charge_ec1s1w_17) <- N_gender
+dim(np2charge_ec2s1w_17) <- N_gender
+dim(np2charge_ec3s1w_17) <- N_gender
+dim(np2charge_ec4s1w_17) <- N_gender
+
+
+
+dim(np2charge_ec1s2w_10) <- N_gender
+dim(np2charge_ec2s2w_10) <- N_gender
+dim(np2charge_ec3s2w_10) <- N_gender
+dim(np2charge_ec4s2w_10) <- N_gender
+
+dim(np2charge_ec1s2w_11) <- N_gender
+dim(np2charge_ec2s2w_11) <- N_gender
+dim(np2charge_ec3s2w_11) <- N_gender
+dim(np2charge_ec4s2w_11) <- N_gender
+
+dim(np2charge_ec1s2w_12) <- N_gender
+dim(np2charge_ec2s2w_12) <- N_gender
+dim(np2charge_ec3s2w_12) <- N_gender
+dim(np2charge_ec4s2w_12) <- N_gender
+
+dim(np2charge_ec1s2w_13) <- N_gender
+dim(np2charge_ec2s2w_13) <- N_gender
+dim(np2charge_ec3s2w_13) <- N_gender
+dim(np2charge_ec4s2w_13) <- N_gender
+
+dim(np2charge_ec1s2w_14) <- N_gender
+dim(np2charge_ec2s2w_14) <- N_gender
+dim(np2charge_ec3s2w_14) <- N_gender
+dim(np2charge_ec4s2w_14) <- N_gender
+
+dim(np2charge_ec1s2w_15) <- N_gender
+dim(np2charge_ec2s2w_15) <- N_gender
+dim(np2charge_ec3s2w_15) <- N_gender
+dim(np2charge_ec4s2w_15) <- N_gender
+
+dim(np2charge_ec1s2w_16) <- N_gender
+dim(np2charge_ec2s2w_16) <- N_gender
+dim(np2charge_ec3s2w_16) <- N_gender
+dim(np2charge_ec4s2w_16) <- N_gender
+
+dim(np2charge_ec1s2w_17) <- N_gender
+dim(np2charge_ec2s2w_17) <- N_gender
+dim(np2charge_ec3s2w_17) <- N_gender
+dim(np2charge_ec4s2w_17) <- N_gender
+
+
+dim(p2charge_ic1s1u_10) <- N_gender
+dim(p2charge_ic2s1u_10) <- N_gender
+dim(p2charge_ic3s1u_10) <- N_gender
+dim(p2charge_ic4s1u_10) <- N_gender
+
+dim(p2charge_ic1s1u_11) <- N_gender
+dim(p2charge_ic2s1u_11) <- N_gender
+dim(p2charge_ic3s1u_11) <- N_gender
+dim(p2charge_ic4s1u_11) <- N_gender
+
+dim(p2charge_ic1s1u_12) <- N_gender
+dim(p2charge_ic2s1u_12) <- N_gender
+dim(p2charge_ic3s1u_12) <- N_gender
+dim(p2charge_ic4s1u_12) <- N_gender
+
+dim(p2charge_ic1s1u_13) <- N_gender
+dim(p2charge_ic2s1u_13) <- N_gender
+dim(p2charge_ic3s1u_13) <- N_gender
+dim(p2charge_ic4s1u_13) <- N_gender
+
+dim(p2charge_ic1s1u_14) <- N_gender
+dim(p2charge_ic2s1u_14) <- N_gender
+dim(p2charge_ic3s1u_14) <- N_gender
+dim(p2charge_ic4s1u_14) <- N_gender
+
+dim(p2charge_ic1s1u_15) <- N_gender
+dim(p2charge_ic2s1u_15) <- N_gender
+dim(p2charge_ic3s1u_15) <- N_gender
+dim(p2charge_ic4s1u_15) <- N_gender
+
+dim(p2charge_ic1s1u_16) <- N_gender
+dim(p2charge_ic2s1u_16) <- N_gender
+dim(p2charge_ic3s1u_16) <- N_gender
+dim(p2charge_ic4s1u_16) <- N_gender
+
+dim(p2charge_ic1s1u_17) <- N_gender
+dim(p2charge_ic2s1u_17) <- N_gender
+dim(p2charge_ic3s1u_17) <- N_gender
+dim(p2charge_ic4s1u_17) <- N_gender
+
+
+
+dim(p2charge_ic1s2u_10) <- N_gender
+dim(p2charge_ic2s2u_10) <- N_gender
+dim(p2charge_ic3s2u_10) <- N_gender
+dim(p2charge_ic4s2u_10) <- N_gender
+
+dim(p2charge_ic1s2u_11) <- N_gender
+dim(p2charge_ic2s2u_11) <- N_gender
+dim(p2charge_ic3s2u_11) <- N_gender
+dim(p2charge_ic4s2u_11) <- N_gender
+
+dim(p2charge_ic1s2u_12) <- N_gender
+dim(p2charge_ic2s2u_12) <- N_gender
+dim(p2charge_ic3s2u_12) <- N_gender
+dim(p2charge_ic4s2u_12) <- N_gender
+
+dim(p2charge_ic1s2u_13) <- N_gender
+dim(p2charge_ic2s2u_13) <- N_gender
+dim(p2charge_ic3s2u_13) <- N_gender
+dim(p2charge_ic4s2u_13) <- N_gender
+
+dim(p2charge_ic1s2u_14) <- N_gender
+dim(p2charge_ic2s2u_14) <- N_gender
+dim(p2charge_ic3s2u_14) <- N_gender
+dim(p2charge_ic4s2u_14) <- N_gender
+
+dim(p2charge_ic1s2u_15) <- N_gender
+dim(p2charge_ic2s2u_15) <- N_gender
+dim(p2charge_ic3s2u_15) <- N_gender
+dim(p2charge_ic4s2u_15) <- N_gender
+
+dim(p2charge_ic1s2u_16) <- N_gender
+dim(p2charge_ic2s2u_16) <- N_gender
+dim(p2charge_ic3s2u_16) <- N_gender
+dim(p2charge_ic4s2u_16) <- N_gender
+
+dim(p2charge_ic1s2u_17) <- N_gender
+dim(p2charge_ic2s2u_17) <- N_gender
+dim(p2charge_ic3s2u_17) <- N_gender
+dim(p2charge_ic4s2u_17) <- N_gender
+
+
+
+dim(p2charge_ic1s1w_10) <- N_gender
+dim(p2charge_ic2s1w_10) <- N_gender
+dim(p2charge_ic3s1w_10) <- N_gender
+dim(p2charge_ic4s1w_10) <- N_gender
+
+dim(p2charge_ic1s1w_11) <- N_gender
+dim(p2charge_ic2s1w_11) <- N_gender
+dim(p2charge_ic3s1w_11) <- N_gender
+dim(p2charge_ic4s1w_11) <- N_gender
+
+dim(p2charge_ic1s1w_12) <- N_gender
+dim(p2charge_ic2s1w_12) <- N_gender
+dim(p2charge_ic3s1w_12) <- N_gender
+dim(p2charge_ic4s1w_12) <- N_gender
+
+dim(p2charge_ic1s1w_13) <- N_gender
+dim(p2charge_ic2s1w_13) <- N_gender
+dim(p2charge_ic3s1w_13) <- N_gender
+dim(p2charge_ic4s1w_13) <- N_gender
+
+dim(p2charge_ic1s1w_14) <- N_gender
+dim(p2charge_ic2s1w_14) <- N_gender
+dim(p2charge_ic3s1w_14) <- N_gender
+dim(p2charge_ic4s1w_14) <- N_gender
+
+dim(p2charge_ic1s1w_15) <- N_gender
+dim(p2charge_ic2s1w_15) <- N_gender
+dim(p2charge_ic3s1w_15) <- N_gender
+dim(p2charge_ic4s1w_15) <- N_gender
+
+dim(p2charge_ic1s1w_16) <- N_gender
+dim(p2charge_ic2s1w_16) <- N_gender
+dim(p2charge_ic3s1w_16) <- N_gender
+dim(p2charge_ic4s1w_16) <- N_gender
+
+dim(p2charge_ic1s1w_17) <- N_gender
+dim(p2charge_ic2s1w_17) <- N_gender
+dim(p2charge_ic3s1w_17) <- N_gender
+dim(p2charge_ic4s1w_17) <- N_gender
+
+
+
+dim(p2charge_ic1s2w_10) <- N_gender
+dim(p2charge_ic2s2w_10) <- N_gender
+dim(p2charge_ic3s2w_10) <- N_gender
+dim(p2charge_ic4s2w_10) <- N_gender
+
+dim(p2charge_ic1s2w_11) <- N_gender
+dim(p2charge_ic2s2w_11) <- N_gender
+dim(p2charge_ic3s2w_11) <- N_gender
+dim(p2charge_ic4s2w_11) <- N_gender
+
+dim(p2charge_ic1s2w_12) <- N_gender
+dim(p2charge_ic2s2w_12) <- N_gender
+dim(p2charge_ic3s2w_12) <- N_gender
+dim(p2charge_ic4s2w_12) <- N_gender
+
+dim(p2charge_ic1s2w_13) <- N_gender
+dim(p2charge_ic2s2w_13) <- N_gender
+dim(p2charge_ic3s2w_13) <- N_gender
+dim(p2charge_ic4s2w_13) <- N_gender
+
+dim(p2charge_ic1s2w_14) <- N_gender
+dim(p2charge_ic2s2w_14) <- N_gender
+dim(p2charge_ic3s2w_14) <- N_gender
+dim(p2charge_ic4s2w_14) <- N_gender
+
+dim(p2charge_ic1s2w_15) <- N_gender
+dim(p2charge_ic2s2w_15) <- N_gender
+dim(p2charge_ic3s2w_15) <- N_gender
+dim(p2charge_ic4s2w_15) <- N_gender
+
+dim(p2charge_ic1s2w_16) <- N_gender
+dim(p2charge_ic2s2w_16) <- N_gender
+dim(p2charge_ic3s2w_16) <- N_gender
+dim(p2charge_ic4s2w_16) <- N_gender
+
+dim(p2charge_ic1s2w_17) <- N_gender
+dim(p2charge_ic2s2w_17) <- N_gender
+dim(p2charge_ic3s2w_17) <- N_gender
+dim(p2charge_ic4s2w_17) <- N_gender
+
+
+
+dim(p2charge_ec1s1u_10) <- N_gender
+dim(p2charge_ec2s1u_10) <- N_gender
+dim(p2charge_ec3s1u_10) <- N_gender
+dim(p2charge_ec4s1u_10) <- N_gender
+
+dim(p2charge_ec1s1u_11) <- N_gender
+dim(p2charge_ec2s1u_11) <- N_gender
+dim(p2charge_ec3s1u_11) <- N_gender
+dim(p2charge_ec4s1u_11) <- N_gender
+
+dim(p2charge_ec1s1u_12) <- N_gender
+dim(p2charge_ec2s1u_12) <- N_gender
+dim(p2charge_ec3s1u_12) <- N_gender
+dim(p2charge_ec4s1u_12) <- N_gender
+
+dim(p2charge_ec1s1u_13) <- N_gender
+dim(p2charge_ec2s1u_13) <- N_gender
+dim(p2charge_ec3s1u_13) <- N_gender
+dim(p2charge_ec4s1u_13) <- N_gender
+
+dim(p2charge_ec1s1u_14) <- N_gender
+dim(p2charge_ec2s1u_14) <- N_gender
+dim(p2charge_ec3s1u_14) <- N_gender
+dim(p2charge_ec4s1u_14) <- N_gender
+
+dim(p2charge_ec1s1u_15) <- N_gender
+dim(p2charge_ec2s1u_15) <- N_gender
+dim(p2charge_ec3s1u_15) <- N_gender
+dim(p2charge_ec4s1u_15) <- N_gender
+
+dim(p2charge_ec1s1u_16) <- N_gender
+dim(p2charge_ec2s1u_16) <- N_gender
+dim(p2charge_ec3s1u_16) <- N_gender
+dim(p2charge_ec4s1u_16) <- N_gender
+
+dim(p2charge_ec1s1u_17) <- N_gender
+dim(p2charge_ec2s1u_17) <- N_gender
+dim(p2charge_ec3s1u_17) <- N_gender
+dim(p2charge_ec4s1u_17) <- N_gender
+
+
+
+dim(p2charge_ec1s2u_10) <- N_gender
+dim(p2charge_ec2s2u_10) <- N_gender
+dim(p2charge_ec3s2u_10) <- N_gender
+dim(p2charge_ec4s2u_10) <- N_gender
+
+dim(p2charge_ec1s2u_11) <- N_gender
+dim(p2charge_ec2s2u_11) <- N_gender
+dim(p2charge_ec3s2u_11) <- N_gender
+dim(p2charge_ec4s2u_11) <- N_gender
+
+dim(p2charge_ec1s2u_12) <- N_gender
+dim(p2charge_ec2s2u_12) <- N_gender
+dim(p2charge_ec3s2u_12) <- N_gender
+dim(p2charge_ec4s2u_12) <- N_gender
+
+dim(p2charge_ec1s2u_13) <- N_gender
+dim(p2charge_ec2s2u_13) <- N_gender
+dim(p2charge_ec3s2u_13) <- N_gender
+dim(p2charge_ec4s2u_13) <- N_gender
+
+dim(p2charge_ec1s2u_14) <- N_gender
+dim(p2charge_ec2s2u_14) <- N_gender
+dim(p2charge_ec3s2u_14) <- N_gender
+dim(p2charge_ec4s2u_14) <- N_gender
+
+dim(p2charge_ec1s2u_15) <- N_gender
+dim(p2charge_ec2s2u_15) <- N_gender
+dim(p2charge_ec3s2u_15) <- N_gender
+dim(p2charge_ec4s2u_15) <- N_gender
+
+dim(p2charge_ec1s2u_16) <- N_gender
+dim(p2charge_ec2s2u_16) <- N_gender
+dim(p2charge_ec3s2u_16) <- N_gender
+dim(p2charge_ec4s2u_16) <- N_gender
+
+dim(p2charge_ec1s2u_17) <- N_gender
+dim(p2charge_ec2s2u_17) <- N_gender
+dim(p2charge_ec3s2u_17) <- N_gender
+dim(p2charge_ec4s2u_17) <- N_gender
+
+
+
+dim(p2charge_ec1s1w_10) <- N_gender
+dim(p2charge_ec2s1w_10) <- N_gender
+dim(p2charge_ec3s1w_10) <- N_gender
+dim(p2charge_ec4s1w_10) <- N_gender
+
+dim(p2charge_ec1s1w_11) <- N_gender
+dim(p2charge_ec2s1w_11) <- N_gender
+dim(p2charge_ec3s1w_11) <- N_gender
+dim(p2charge_ec4s1w_11) <- N_gender
+
+dim(p2charge_ec1s1w_12) <- N_gender
+dim(p2charge_ec2s1w_12) <- N_gender
+dim(p2charge_ec3s1w_12) <- N_gender
+dim(p2charge_ec4s1w_12) <- N_gender
+
+dim(p2charge_ec1s1w_13) <- N_gender
+dim(p2charge_ec2s1w_13) <- N_gender
+dim(p2charge_ec3s1w_13) <- N_gender
+dim(p2charge_ec4s1w_13) <- N_gender
+
+dim(p2charge_ec1s1w_14) <- N_gender
+dim(p2charge_ec2s1w_14) <- N_gender
+dim(p2charge_ec3s1w_14) <- N_gender
+dim(p2charge_ec4s1w_14) <- N_gender
+
+dim(p2charge_ec1s1w_15) <- N_gender
+dim(p2charge_ec2s1w_15) <- N_gender
+dim(p2charge_ec3s1w_15) <- N_gender
+dim(p2charge_ec4s1w_15) <- N_gender
+
+dim(p2charge_ec1s1w_16) <- N_gender
+dim(p2charge_ec2s1w_16) <- N_gender
+dim(p2charge_ec3s1w_16) <- N_gender
+dim(p2charge_ec4s1w_16) <- N_gender
+
+dim(p2charge_ec1s1w_17) <- N_gender
+dim(p2charge_ec2s1w_17) <- N_gender
+dim(p2charge_ec3s1w_17) <- N_gender
+dim(p2charge_ec4s1w_17) <- N_gender
+
+
+
+dim(p2charge_ec1s2w_10) <- N_gender
+dim(p2charge_ec2s2w_10) <- N_gender
+dim(p2charge_ec3s2w_10) <- N_gender
+dim(p2charge_ec4s2w_10) <- N_gender
+
+dim(p2charge_ec1s2w_11) <- N_gender
+dim(p2charge_ec2s2w_11) <- N_gender
+dim(p2charge_ec3s2w_11) <- N_gender
+dim(p2charge_ec4s2w_11) <- N_gender
+
+dim(p2charge_ec1s2w_12) <- N_gender
+dim(p2charge_ec2s2w_12) <- N_gender
+dim(p2charge_ec3s2w_12) <- N_gender
+dim(p2charge_ec4s2w_12) <- N_gender
+
+dim(p2charge_ec1s2w_13) <- N_gender
+dim(p2charge_ec2s2w_13) <- N_gender
+dim(p2charge_ec3s2w_13) <- N_gender
+dim(p2charge_ec4s2w_13) <- N_gender
+
+dim(p2charge_ec1s2w_14) <- N_gender
+dim(p2charge_ec2s2w_14) <- N_gender
+dim(p2charge_ec3s2w_14) <- N_gender
+dim(p2charge_ec4s2w_14) <- N_gender
+
+dim(p2charge_ec1s2w_15) <- N_gender
+dim(p2charge_ec2s2w_15) <- N_gender
+dim(p2charge_ec3s2w_15) <- N_gender
+dim(p2charge_ec4s2w_15) <- N_gender
+
+dim(p2charge_ec1s2w_16) <- N_gender
+dim(p2charge_ec2s2w_16) <- N_gender
+dim(p2charge_ec3s2w_16) <- N_gender
+dim(p2charge_ec4s2w_16) <- N_gender
+
+dim(p2charge_ec1s2w_17) <- N_gender
+dim(p2charge_ec2s2w_17) <- N_gender
+dim(p2charge_ec3s2w_17) <- N_gender
+dim(p2charge_ec4s2w_17) <- N_gender
+
 
 
 ##############################################################################################################################
@@ -12621,12 +20537,9 @@ deriv(EC4S2J5W_17[]) <- age_EC4S2J5W_17[i] + pov_EC4S2J5W_17[i] + jus_EC4S2J5W_1
 
 
 ##############################################################################################################################
-# COMMUNITY MIXING - note that no one outside of jail mixes with those inside # # #  # # #
+# MIXING - note that no one outside of jail mixes with those inside # # #  # # #
 ###############################################################################################################################
-
-
-
-
+pc_cl[] <- cust_W[i] / cust[i]
 
 ##############################################################################################################################
 # preferences across class and age
@@ -13502,6 +21415,8 @@ cust_P_16[]  <- cust_PU_16[i]  + cust_PW_16[i]
 cust_I_17[]  <- cust_IU_17[i]  + cust_IW_17[i] 
 cust_E_17[]  <- cust_EU_17[i]  + cust_EW_17[i] 
 cust_P_17[]  <- cust_PU_17[i]  + cust_PW_17[i] 
+
+cust_W[] <- cust_IW_10[i] + cust_EW_10[i] + cust_PW_10[i] + cust_IW_11[i] + cust_EW_11[i] + cust_PW_11[i] + cust_IW_12[i] + cust_EW_12[i] + cust_PW_12[i] + cust_IW_13[i] + cust_EW_13[i] + cust_PW_13[i] + cust_IW_14[i] + cust_EW_14[i] + cust_PW_14[i] + cust_IW_15[i] + cust_EW_15[i] + cust_PW_15[i] + cust_IW_16[i] + cust_EW_16[i] + cust_PW_16[i] + cust_IW_17[i] + cust_EW_17[i] + cust_PW_17[i] 
 
 cust[] <- cust_I_10[i] + cust_E_10[i] + cust_P_10[i] + cust_I_11[i] + cust_E_11[i] + cust_P_11[i] + cust_I_12[i] + cust_E_12[i] + cust_P_12[i] + cust_I_13[i] + cust_E_13[i] + cust_P_13[i] + cust_I_14[i] + cust_E_14[i] + cust_P_14[i] + cust_I_15[i] + cust_E_15[i] + cust_P_15[i] + cust_I_16[i] + cust_E_16[i] + cust_P_16[i] + cust_I_17[i] + cust_E_17[i] + cust_P_17[i] 
 
