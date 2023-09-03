@@ -34,45 +34,40 @@ est_nr$mean_dur = predict(mod2, newdata = est_nr)
 
 care_duration <- care_duration_14to22 %>% 
   bind_rows(est_r, est_nr) %>% 
-  arrange(end_period_year)
-
-save(care_duration, file = "output/data/processed/care_duration.Rdata")
+  ungroup() %>% 
+  group_by(residential) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_mean_dur = smooth.spline(end_period_year, mean_dur, lambda = 0.0005)$y)
 
 care_duration %>% 
   ggplot() +
-  geom_bar(aes(x = end_period_year, y = mean_dur, fill = residential),
-           stat = "identity", position = "dodge")
+  geom_line(aes(x = end_period_year, y = mean_dur, group = residential, colour = residential)) + 
+  geom_line(aes(x = end_period_year, y = smooth_mean_dur, group = residential, colour = residential)) + 
 
-smooth_care_duration <- care_duration %>% 
-  group_by(residential) %>% 
-  mutate(mean_dur = smooth.spline(end_period_year, mean_dur)$y)
+save(care_duration, file = "output/data/processed/care_duration.Rdata")
 
 
-smooth_care_duration %>% 
-  ggplot() +
-  geom_bar(aes(x = end_period_year, y = mean_dur, fill = residential),
-           stat = "identity", position = "dodge")
 
 # changed this to the smoothed version but could as easily go back
-endnr <- smooth_care_duration %>% 
+endnr <- care_duration %>% 
   ungroup() %>% 
   filter(residential == "Not residential",
          end_period_year <= 2020) %>% 
   arrange(end_period_year) %>% 
-  select(mean_dur) %>% 
-  mutate(mean_dur = 1/(mean_dur/7)) %>% 
-  rename(Boys = mean_dur) %>% 
+  select(smooth_mean_dur) %>% 
+  mutate(smooth_mean_dur = 1/(smooth_mean_dur/7)) %>% 
+  rename(Boys = smooth_mean_dur) %>% 
   mutate(Girls = Boys) %>% 
   as.matrix()
 
-endres <- smooth_care_duration %>% 
+endres <- care_duration %>% 
   ungroup() %>% 
   filter(residential == "Residential",
          end_period_year <= 2020) %>% 
   arrange(end_period_year) %>% 
-  select(mean_dur) %>% 
-  mutate(mean_dur = 1/(mean_dur/7)) %>% 
-  rename(Boys = mean_dur) %>% 
+  select(smooth_mean_dur) %>% 
+  mutate(smooth_mean_dur = 1/(smooth_mean_dur/7)) %>% 
+  rename(Boys = smooth_mean_dur) %>% 
   mutate(Girls = Boys) %>% 
   as.matrix()
 
@@ -83,17 +78,26 @@ save(endres, file = "output/data/input/endres.Rdata")
 
 # p = i x d
 # duration = prevalence(day count)/ incidence(per day - so years total div by 365)
-# check <- care_10to22 %>% 
-#   pivot_wider(names_from = period_length,
-#               values_from = count) %>% 
-#   mutate(duration = Day / (Year / 365))
-# 
-# check %>% 
-#   ggplot() +
-#   geom_bar(aes(x = end_period_year, y = duration, fill = level),
-#            stat = "identity", position = "dodge")
+birm_dur_adj <- care_10to22 %>%
+  pivot_wider(names_from = period_length,
+              values_from = count) %>%
+  mutate(duration = Day / (Year / 365)) %>% 
+  filter(!is.na(duration)) %>% 
+  select(end_period_year, level, duration) %>% 
+  pivot_wider(names_from = level,
+              values_from = duration) %>% 
+  summarise(adj = mean(Birmingham/England))
+
+
 # looked at diff between duration in birm/wm/eng by doing the p=id calculation
-# looks fine, birm higher by like 10 days usually, not too bad
+# looks fine, birm higher by like 10 days at most, not too bad
+# 
+# could multiply by 1.02 to bump birm dur by like 2 pc...
+# 
+# the one thing is that not residential tends to be shorter than res
+# but birm is much more likely to be residential than eng in general, yes?
+# 
+#   so does that mean that the birm durations are actually a good bit longer?
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

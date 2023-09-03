@@ -821,6 +821,8 @@ pc_res_first <- c_data %>%
   select(`% of children in homes 31/03/2019`) %>% 
   unlist()
 
+pc_res_first
+
 c_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/entering_res_care.xls", sheet = 3)
 
 
