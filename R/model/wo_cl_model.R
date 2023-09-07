@@ -1,6 +1,14 @@
 # install.packages("odin")
 # library(odin)
 
+
+
+# object: gender, age, poverty, care, school
+# get the IC's perfect
+# get the aging working
+# calibrate TO what FOR what
+
+
 sep_model = odin::odin({
   
   ##############################################################################################################################
@@ -44,212 +52,56 @@ sep_model = odin::odin({
   
   
   
-  pc_rem <- user(0.05)
-  end_rem <- user(0.25)
-  end_cust <- user(0.05)
   
   surv <- user(0.1)
   
   
-  t10_ic1s1j1u[] <- user(0)
-  t10_ic2s1j1u[] <- user(0)
-  t10_ic3s1j1u[] <- user(0)
-  t10_ic4s1j1u[] <- user(0)
+  t10_ic1s1[] <- user(0)
+  t10_ic2s1[] <- user(0)
+  t10_ic3s1[] <- user(0)
+  t10_ic4s1[] <- user(0)
   
-  t10_ic1s2j1u[] <- user(0)
-  t10_ic2s2j1u[] <- user(0)
-  t10_ic3s2j1u[] <- user(0)
-  t10_ic4s2j1u[] <- user(0)
+  t10_ic1s2[] <- user(0)
+  t10_ic2s2[] <- user(0)
+  t10_ic3s2[] <- user(0)
+  t10_ic4s2[] <- user(0)
   
-  t10_ic1s1j2u[] <- user(0)
-  t10_ic2s1j2u[] <- user(0)
-  t10_ic3s1j2u[] <- user(0)
-  t10_ic4s1j2u[] <- user(0)
   
-  t10_ic1s2j2u[] <- user(0)
-  t10_ic2s2j2u[] <- user(0)
-  t10_ic3s2j2u[] <- user(0)
-  t10_ic4s2j2u[] <- user(0)
   
-  t10_ic1s1j3u[] <- user(0)
-  t10_ic2s1j3u[] <- user(0)
-  t10_ic3s1j3u[] <- user(0)
-  t10_ic4s1j3u[] <- user(0)
+  t10_ec1s1[] <- user(0)
+  t10_ec2s1[] <- user(0)
+  t10_ec3s1[] <- user(0)
+  t10_ec4s1[] <- user(0)
   
-  t10_ic1s2j3u[] <- user(0)
-  t10_ic2s2j3u[] <- user(0)
-  t10_ic3s2j3u[] <- user(0)
-  t10_ic4s2j3u[] <- user(0)
+  t10_ec1s2[] <- user(0)
+  t10_ec2s2[] <- user(0)
+  t10_ec3s2[] <- user(0)
+  t10_ec4s2[] <- user(0)
   
-  t10_ic1s1j4u[] <- user(0)
-  t10_ic2s1j4u[] <- user(0)
-  t10_ic3s1j4u[] <- user(0)
-  t10_ic4s1j4u[] <- user(0)
   
-  t10_ic1s2j4u[] <- user(0)
-  t10_ic2s2j4u[] <- user(0)
-  t10_ic3s2j4u[] <- user(0)
-  t10_ic4s2j4u[] <- user(0)
   
-  t10_ic1s1j5u[] <- user(0)
-  t10_ic2s1j5u[] <- user(0)
-  t10_ic3s1j5u[] <- user(0)
-  t10_ic4s1j5u[] <- user(0)
+  neet16_ic1s1[] <- user(0)
+  neet16_ic2s1[] <- user(0)
+  neet16_ic3s1[] <- user(0)
+  neet16_ic4s1[] <- user(0)
   
-  t10_ic1s2j5u[] <- user(0)
-  t10_ic2s2j5u[] <- user(0)
-  t10_ic3s2j5u[] <- user(0)
-  t10_ic4s2j5u[] <- user(0)
+  neet16_ic1s2[] <- user(0)
+  neet16_ic2s2[] <- user(0)
+  neet16_ic3s2[] <- user(0)
+  neet16_ic4s2[] <- user(0)
   
-  t10_ec1s1j1u[] <- user(0)
-  t10_ec2s1j1u[] <- user(0)
-  t10_ec3s1j1u[] <- user(0)
-  t10_ec4s1j1u[] <- user(0)
   
-  t10_ec1s2j1u[] <- user(0)
-  t10_ec2s2j1u[] <- user(0)
-  t10_ec3s2j1u[] <- user(0)
-  t10_ec4s2j1u[] <- user(0)
+  neet16_ec1s1[] <- user(0)
+  neet16_ec2s1[] <- user(0)
+  neet16_ec3s1[] <- user(0)
+  neet16_ec4s1[] <- user(0)
   
-  t10_ec1s1j2u[] <- user(0)
-  t10_ec2s1j2u[] <- user(0)
-  t10_ec3s1j2u[] <- user(0)
-  t10_ec4s1j2u[] <- user(0)
+  neet16_ec1s2[] <- user(0)
+  neet16_ec2s2[] <- user(0)
+  neet16_ec3s2[] <- user(0)
+  neet16_ec4s2[] <- user(0)
   
-  t10_ec1s2j2u[] <- user(0)
-  t10_ec2s2j2u[] <- user(0)
-  t10_ec3s2j2u[] <- user(0)
-  t10_ec4s2j2u[] <- user(0)
   
-  t10_ec1s1j3u[] <- user(0)
-  t10_ec2s1j3u[] <- user(0)
-  t10_ec3s1j3u[] <- user(0)
-  t10_ec4s1j3u[] <- user(0)
-  
-  t10_ec1s2j3u[] <- user(0)
-  t10_ec2s2j3u[] <- user(0)
-  t10_ec3s2j3u[] <- user(0)
-  t10_ec4s2j3u[] <- user(0)
-  
-  t10_ec1s1j4u[] <- user(0)
-  t10_ec2s1j4u[] <- user(0)
-  t10_ec3s1j4u[] <- user(0)
-  t10_ec4s1j4u[] <- user(0)
-  
-  t10_ec1s2j4u[] <- user(0)
-  t10_ec2s2j4u[] <- user(0)
-  t10_ec3s2j4u[] <- user(0)
-  t10_ec4s2j4u[] <- user(0)
-  
-  t10_ec1s1j5u[] <- user(0)
-  t10_ec2s1j5u[] <- user(0)
-  t10_ec3s1j5u[] <- user(0)
-  t10_ec4s1j5u[] <- user(0)
-  
-  t10_ec1s2j5u[] <- user(0)
-  t10_ec2s2j5u[] <- user(0)
-  t10_ec3s2j5u[] <- user(0)
-  t10_ec4s2j5u[] <- user(0)
-  
-  neet16_ic1s1j1u[] <- user(0)
-  neet16_ic2s1j1u[] <- user(0)
-  neet16_ic3s1j1u[] <- user(0)
-  neet16_ic4s1j1u[] <- user(0)
-  
-  neet16_ic1s2j1u[] <- user(0)
-  neet16_ic2s2j1u[] <- user(0)
-  neet16_ic3s2j1u[] <- user(0)
-  neet16_ic4s2j1u[] <- user(0)
-  
-  neet16_ic1s1j2u[] <- user(0)
-  neet16_ic2s1j2u[] <- user(0)
-  neet16_ic3s1j2u[] <- user(0)
-  neet16_ic4s1j2u[] <- user(0)
-  
-  neet16_ic1s2j2u[] <- user(0)
-  neet16_ic2s2j2u[] <- user(0)
-  neet16_ic3s2j2u[] <- user(0)
-  neet16_ic4s2j2u[] <- user(0)
-  
-  neet16_ic1s1j3u[] <- user(0)
-  neet16_ic2s1j3u[] <- user(0)
-  neet16_ic3s1j3u[] <- user(0)
-  neet16_ic4s1j3u[] <- user(0)
-  
-  neet16_ic1s2j3u[] <- user(0)
-  neet16_ic2s2j3u[] <- user(0)
-  neet16_ic3s2j3u[] <- user(0)
-  neet16_ic4s2j3u[] <- user(0)
-  
-  neet16_ic1s1j4u[] <- user(0)
-  neet16_ic2s1j4u[] <- user(0)
-  neet16_ic3s1j4u[] <- user(0)
-  neet16_ic4s1j4u[] <- user(0)
-  
-  neet16_ic1s2j4u[] <- user(0)
-  neet16_ic2s2j4u[] <- user(0)
-  neet16_ic3s2j4u[] <- user(0)
-  neet16_ic4s2j4u[] <- user(0)
-  
-  neet16_ic1s1j5u[] <- user(0)
-  neet16_ic2s1j5u[] <- user(0)
-  neet16_ic3s1j5u[] <- user(0)
-  neet16_ic4s1j5u[] <- user(0)
-  
-  neet16_ic1s2j5u[] <- user(0)
-  neet16_ic2s2j5u[] <- user(0)
-  neet16_ic3s2j5u[] <- user(0)
-  neet16_ic4s2j5u[] <- user(0)
-  
-  neet16_ec1s1j1u[] <- user(0)
-  neet16_ec2s1j1u[] <- user(0)
-  neet16_ec3s1j1u[] <- user(0)
-  neet16_ec4s1j1u[] <- user(0)
-  
-  neet16_ec1s2j1u[] <- user(0)
-  neet16_ec2s2j1u[] <- user(0)
-  neet16_ec3s2j1u[] <- user(0)
-  neet16_ec4s2j1u[] <- user(0)
-  
-  neet16_ec1s1j2u[] <- user(0)
-  neet16_ec2s1j2u[] <- user(0)
-  neet16_ec3s1j2u[] <- user(0)
-  neet16_ec4s1j2u[] <- user(0)
-  
-  neet16_ec1s2j2u[] <- user(0)
-  neet16_ec2s2j2u[] <- user(0)
-  neet16_ec3s2j2u[] <- user(0)
-  neet16_ec4s2j2u[] <- user(0)
-  
-  neet16_ec1s1j3u[] <- user(0)
-  neet16_ec2s1j3u[] <- user(0)
-  neet16_ec3s1j3u[] <- user(0)
-  neet16_ec4s1j3u[] <- user(0)
-  
-  neet16_ec1s2j3u[] <- user(0)
-  neet16_ec2s2j3u[] <- user(0)
-  neet16_ec3s2j3u[] <- user(0)
-  neet16_ec4s2j3u[] <- user(0)
-  
-  neet16_ec1s1j4u[] <- user(0)
-  neet16_ec2s1j4u[] <- user(0)
-  neet16_ec3s1j4u[] <- user(0)
-  neet16_ec4s1j4u[] <- user(0)
-  
-  neet16_ec1s2j4u[] <- user(0)
-  neet16_ec2s2j4u[] <- user(0)
-  neet16_ec3s2j4u[] <- user(0)
-  neet16_ec4s2j4u[] <- user(0)
-  
-  neet16_ec1s1j5u[] <- user(0)
-  neet16_ec2s1j5u[] <- user(0)
-  neet16_ec3s1j5u[] <- user(0)
-  neet16_ec4s1j5u[] <- user(0)
-  
-  neet16_ec1s2j5u[] <- user(0)
-  neet16_ec2s2j5u[] <- user(0)
-  neet16_ec3s2j5u[] <- user(0)
-  neet16_ec4s2j5u[] <- user(0)
   
   n2care_i_10[] <- user(0)
   n2care_i_11[] <- user(0)
@@ -434,1761 +286,349 @@ sep_model = odin::odin({
   miss_ec3u_17[] <- user(0)
   miss_ec4u_17[] <- user(0)
   
-  np2nc_ic1s1u_10[] <- user(0)
-  np2nc_ic2s1u_10[] <- user(0)
-  np2nc_ic3s1u_10[] <- user(0)
-  np2nc_ic4s1u_10[] <- user(0)
-  
-  np2nc_ic1s1u_11[] <- user(0)
-  np2nc_ic2s1u_11[] <- user(0)
-  np2nc_ic3s1u_11[] <- user(0)
-  np2nc_ic4s1u_11[] <- user(0)
-  
-  np2nc_ic1s1u_12[] <- user(0)
-  np2nc_ic2s1u_12[] <- user(0)
-  np2nc_ic3s1u_12[] <- user(0)
-  np2nc_ic4s1u_12[] <- user(0)
-  
-  np2nc_ic1s1u_13[] <- user(0)
-  np2nc_ic2s1u_13[] <- user(0)
-  np2nc_ic3s1u_13[] <- user(0)
-  np2nc_ic4s1u_13[] <- user(0)
-  
-  np2nc_ic1s1u_14[] <- user(0)
-  np2nc_ic2s1u_14[] <- user(0)
-  np2nc_ic3s1u_14[] <- user(0)
-  np2nc_ic4s1u_14[] <- user(0)
-  
-  np2nc_ic1s1u_15[] <- user(0)
-  np2nc_ic2s1u_15[] <- user(0)
-  np2nc_ic3s1u_15[] <- user(0)
-  np2nc_ic4s1u_15[] <- user(0)
-  
-  np2nc_ic1s1u_16[] <- user(0)
-  np2nc_ic2s1u_16[] <- user(0)
-  np2nc_ic3s1u_16[] <- user(0)
-  np2nc_ic4s1u_16[] <- user(0)
-  
-  np2nc_ic1s1u_17[] <- user(0)
-  np2nc_ic2s1u_17[] <- user(0)
-  np2nc_ic3s1u_17[] <- user(0)
-  np2nc_ic4s1u_17[] <- user(0)
-  
-  
-  
-  np2nc_ic1s2u_10[] <- user(0)
-  np2nc_ic2s2u_10[] <- user(0)
-  np2nc_ic3s2u_10[] <- user(0)
-  np2nc_ic4s2u_10[] <- user(0)
-  
-  np2nc_ic1s2u_11[] <- user(0)
-  np2nc_ic2s2u_11[] <- user(0)
-  np2nc_ic3s2u_11[] <- user(0)
-  np2nc_ic4s2u_11[] <- user(0)
-  
-  np2nc_ic1s2u_12[] <- user(0)
-  np2nc_ic2s2u_12[] <- user(0)
-  np2nc_ic3s2u_12[] <- user(0)
-  np2nc_ic4s2u_12[] <- user(0)
-  
-  np2nc_ic1s2u_13[] <- user(0)
-  np2nc_ic2s2u_13[] <- user(0)
-  np2nc_ic3s2u_13[] <- user(0)
-  np2nc_ic4s2u_13[] <- user(0)
-  
-  np2nc_ic1s2u_14[] <- user(0)
-  np2nc_ic2s2u_14[] <- user(0)
-  np2nc_ic3s2u_14[] <- user(0)
-  np2nc_ic4s2u_14[] <- user(0)
-  
-  np2nc_ic1s2u_15[] <- user(0)
-  np2nc_ic2s2u_15[] <- user(0)
-  np2nc_ic3s2u_15[] <- user(0)
-  np2nc_ic4s2u_15[] <- user(0)
-  
-  np2nc_ic1s2u_16[] <- user(0)
-  np2nc_ic2s2u_16[] <- user(0)
-  np2nc_ic3s2u_16[] <- user(0)
-  np2nc_ic4s2u_16[] <- user(0)
-  
-  np2nc_ic1s2u_17[] <- user(0)
-  np2nc_ic2s2u_17[] <- user(0)
-  np2nc_ic3s2u_17[] <- user(0)
-  np2nc_ic4s2u_17[] <- user(0)
-  
-  np2nc_ec1s1u_10[] <- user(0)
-  np2nc_ec2s1u_10[] <- user(0)
-  np2nc_ec3s1u_10[] <- user(0)
-  np2nc_ec4s1u_10[] <- user(0)
-  
-  np2nc_ec1s1u_11[] <- user(0)
-  np2nc_ec2s1u_11[] <- user(0)
-  np2nc_ec3s1u_11[] <- user(0)
-  np2nc_ec4s1u_11[] <- user(0)
-  
-  np2nc_ec1s1u_12[] <- user(0)
-  np2nc_ec2s1u_12[] <- user(0)
-  np2nc_ec3s1u_12[] <- user(0)
-  np2nc_ec4s1u_12[] <- user(0)
-  
-  np2nc_ec1s1u_13[] <- user(0)
-  np2nc_ec2s1u_13[] <- user(0)
-  np2nc_ec3s1u_13[] <- user(0)
-  np2nc_ec4s1u_13[] <- user(0)
-  
-  np2nc_ec1s1u_14[] <- user(0)
-  np2nc_ec2s1u_14[] <- user(0)
-  np2nc_ec3s1u_14[] <- user(0)
-  np2nc_ec4s1u_14[] <- user(0)
-  
-  np2nc_ec1s1u_15[] <- user(0)
-  np2nc_ec2s1u_15[] <- user(0)
-  np2nc_ec3s1u_15[] <- user(0)
-  np2nc_ec4s1u_15[] <- user(0)
-  
-  np2nc_ec1s1u_16[] <- user(0)
-  np2nc_ec2s1u_16[] <- user(0)
-  np2nc_ec3s1u_16[] <- user(0)
-  np2nc_ec4s1u_16[] <- user(0)
-  
-  np2nc_ec1s1u_17[] <- user(0)
-  np2nc_ec2s1u_17[] <- user(0)
-  np2nc_ec3s1u_17[] <- user(0)
-  np2nc_ec4s1u_17[] <- user(0)
-  
-  
-  
-  np2nc_ec1s2u_10[] <- user(0)
-  np2nc_ec2s2u_10[] <- user(0)
-  np2nc_ec3s2u_10[] <- user(0)
-  np2nc_ec4s2u_10[] <- user(0)
-  
-  np2nc_ec1s2u_11[] <- user(0)
-  np2nc_ec2s2u_11[] <- user(0)
-  np2nc_ec3s2u_11[] <- user(0)
-  np2nc_ec4s2u_11[] <- user(0)
-  
-  np2nc_ec1s2u_12[] <- user(0)
-  np2nc_ec2s2u_12[] <- user(0)
-  np2nc_ec3s2u_12[] <- user(0)
-  np2nc_ec4s2u_12[] <- user(0)
-  
-  np2nc_ec1s2u_13[] <- user(0)
-  np2nc_ec2s2u_13[] <- user(0)
-  np2nc_ec3s2u_13[] <- user(0)
-  np2nc_ec4s2u_13[] <- user(0)
-  
-  np2nc_ec1s2u_14[] <- user(0)
-  np2nc_ec2s2u_14[] <- user(0)
-  np2nc_ec3s2u_14[] <- user(0)
-  np2nc_ec4s2u_14[] <- user(0)
-  
-  np2nc_ec1s2u_15[] <- user(0)
-  np2nc_ec2s2u_15[] <- user(0)
-  np2nc_ec3s2u_15[] <- user(0)
-  np2nc_ec4s2u_15[] <- user(0)
-  
-  np2nc_ec1s2u_16[] <- user(0)
-  np2nc_ec2s2u_16[] <- user(0)
-  np2nc_ec3s2u_16[] <- user(0)
-  np2nc_ec4s2u_16[] <- user(0)
-  
-  np2nc_ec1s2u_17[] <- user(0)
-  np2nc_ec2s2u_17[] <- user(0)
-  np2nc_ec3s2u_17[] <- user(0)
-  np2nc_ec4s2u_17[] <- user(0)
-  
-  
-  np2charge_ic1s1u_10[] <- user(0)
-  np2charge_ic2s1u_10[] <- user(0)
-  np2charge_ic3s1u_10[] <- user(0)
-  np2charge_ic4s1u_10[] <- user(0)
-  
-  np2charge_ic1s1u_11[] <- user(0)
-  np2charge_ic2s1u_11[] <- user(0)
-  np2charge_ic3s1u_11[] <- user(0)
-  np2charge_ic4s1u_11[] <- user(0)
-  
-  np2charge_ic1s1u_12[] <- user(0)
-  np2charge_ic2s1u_12[] <- user(0)
-  np2charge_ic3s1u_12[] <- user(0)
-  np2charge_ic4s1u_12[] <- user(0)
-  
-  np2charge_ic1s1u_13[] <- user(0)
-  np2charge_ic2s1u_13[] <- user(0)
-  np2charge_ic3s1u_13[] <- user(0)
-  np2charge_ic4s1u_13[] <- user(0)
-  
-  np2charge_ic1s1u_14[] <- user(0)
-  np2charge_ic2s1u_14[] <- user(0)
-  np2charge_ic3s1u_14[] <- user(0)
-  np2charge_ic4s1u_14[] <- user(0)
-  
-  np2charge_ic1s1u_15[] <- user(0)
-  np2charge_ic2s1u_15[] <- user(0)
-  np2charge_ic3s1u_15[] <- user(0)
-  np2charge_ic4s1u_15[] <- user(0)
-  
-  np2charge_ic1s1u_16[] <- user(0)
-  np2charge_ic2s1u_16[] <- user(0)
-  np2charge_ic3s1u_16[] <- user(0)
-  np2charge_ic4s1u_16[] <- user(0)
-  
-  np2charge_ic1s1u_17[] <- user(0)
-  np2charge_ic2s1u_17[] <- user(0)
-  np2charge_ic3s1u_17[] <- user(0)
-  np2charge_ic4s1u_17[] <- user(0)
-  
-  
-  
-  np2charge_ic1s2u_10[] <- user(0)
-  np2charge_ic2s2u_10[] <- user(0)
-  np2charge_ic3s2u_10[] <- user(0)
-  np2charge_ic4s2u_10[] <- user(0)
-  
-  np2charge_ic1s2u_11[] <- user(0)
-  np2charge_ic2s2u_11[] <- user(0)
-  np2charge_ic3s2u_11[] <- user(0)
-  np2charge_ic4s2u_11[] <- user(0)
-  
-  np2charge_ic1s2u_12[] <- user(0)
-  np2charge_ic2s2u_12[] <- user(0)
-  np2charge_ic3s2u_12[] <- user(0)
-  np2charge_ic4s2u_12[] <- user(0)
-  
-  np2charge_ic1s2u_13[] <- user(0)
-  np2charge_ic2s2u_13[] <- user(0)
-  np2charge_ic3s2u_13[] <- user(0)
-  np2charge_ic4s2u_13[] <- user(0)
-  
-  np2charge_ic1s2u_14[] <- user(0)
-  np2charge_ic2s2u_14[] <- user(0)
-  np2charge_ic3s2u_14[] <- user(0)
-  np2charge_ic4s2u_14[] <- user(0)
-  
-  np2charge_ic1s2u_15[] <- user(0)
-  np2charge_ic2s2u_15[] <- user(0)
-  np2charge_ic3s2u_15[] <- user(0)
-  np2charge_ic4s2u_15[] <- user(0)
-  
-  np2charge_ic1s2u_16[] <- user(0)
-  np2charge_ic2s2u_16[] <- user(0)
-  np2charge_ic3s2u_16[] <- user(0)
-  np2charge_ic4s2u_16[] <- user(0)
-  
-  np2charge_ic1s2u_17[] <- user(0)
-  np2charge_ic2s2u_17[] <- user(0)
-  np2charge_ic3s2u_17[] <- user(0)
-  np2charge_ic4s2u_17[] <- user(0)
-  
-  np2charge_ec1s1u_10[] <- user(0)
-  np2charge_ec2s1u_10[] <- user(0)
-  np2charge_ec3s1u_10[] <- user(0)
-  np2charge_ec4s1u_10[] <- user(0)
-  
-  np2charge_ec1s1u_11[] <- user(0)
-  np2charge_ec2s1u_11[] <- user(0)
-  np2charge_ec3s1u_11[] <- user(0)
-  np2charge_ec4s1u_11[] <- user(0)
-  
-  np2charge_ec1s1u_12[] <- user(0)
-  np2charge_ec2s1u_12[] <- user(0)
-  np2charge_ec3s1u_12[] <- user(0)
-  np2charge_ec4s1u_12[] <- user(0)
-  
-  np2charge_ec1s1u_13[] <- user(0)
-  np2charge_ec2s1u_13[] <- user(0)
-  np2charge_ec3s1u_13[] <- user(0)
-  np2charge_ec4s1u_13[] <- user(0)
-  
-  np2charge_ec1s1u_14[] <- user(0)
-  np2charge_ec2s1u_14[] <- user(0)
-  np2charge_ec3s1u_14[] <- user(0)
-  np2charge_ec4s1u_14[] <- user(0)
-  
-  np2charge_ec1s1u_15[] <- user(0)
-  np2charge_ec2s1u_15[] <- user(0)
-  np2charge_ec3s1u_15[] <- user(0)
-  np2charge_ec4s1u_15[] <- user(0)
-  
-  np2charge_ec1s1u_16[] <- user(0)
-  np2charge_ec2s1u_16[] <- user(0)
-  np2charge_ec3s1u_16[] <- user(0)
-  np2charge_ec4s1u_16[] <- user(0)
-  
-  np2charge_ec1s1u_17[] <- user(0)
-  np2charge_ec2s1u_17[] <- user(0)
-  np2charge_ec3s1u_17[] <- user(0)
-  np2charge_ec4s1u_17[] <- user(0)
-  
-  
-  
-  np2charge_ec1s2u_10[] <- user(0)
-  np2charge_ec2s2u_10[] <- user(0)
-  np2charge_ec3s2u_10[] <- user(0)
-  np2charge_ec4s2u_10[] <- user(0)
-  
-  np2charge_ec1s2u_11[] <- user(0)
-  np2charge_ec2s2u_11[] <- user(0)
-  np2charge_ec3s2u_11[] <- user(0)
-  np2charge_ec4s2u_11[] <- user(0)
-  
-  np2charge_ec1s2u_12[] <- user(0)
-  np2charge_ec2s2u_12[] <- user(0)
-  np2charge_ec3s2u_12[] <- user(0)
-  np2charge_ec4s2u_12[] <- user(0)
-  
-  np2charge_ec1s2u_13[] <- user(0)
-  np2charge_ec2s2u_13[] <- user(0)
-  np2charge_ec3s2u_13[] <- user(0)
-  np2charge_ec4s2u_13[] <- user(0)
-  
-  np2charge_ec1s2u_14[] <- user(0)
-  np2charge_ec2s2u_14[] <- user(0)
-  np2charge_ec3s2u_14[] <- user(0)
-  np2charge_ec4s2u_14[] <- user(0)
-  
-  np2charge_ec1s2u_15[] <- user(0)
-  np2charge_ec2s2u_15[] <- user(0)
-  np2charge_ec3s2u_15[] <- user(0)
-  np2charge_ec4s2u_15[] <- user(0)
-  
-  np2charge_ec1s2u_16[] <- user(0)
-  np2charge_ec2s2u_16[] <- user(0)
-  np2charge_ec3s2u_16[] <- user(0)
-  np2charge_ec4s2u_16[] <- user(0)
-  
-  np2charge_ec1s2u_17[] <- user(0)
-  np2charge_ec2s2u_17[] <- user(0)
-  np2charge_ec3s2u_17[] <- user(0)
-  np2charge_ec4s2u_17[] <- user(0)
-  
-  
-  
-  p2charge_ic1s1u_10[] <- user(0)
-  p2charge_ic2s1u_10[] <- user(0)
-  p2charge_ic3s1u_10[] <- user(0)
-  p2charge_ic4s1u_10[] <- user(0)
-  
-  p2charge_ic1s1u_11[] <- user(0)
-  p2charge_ic2s1u_11[] <- user(0)
-  p2charge_ic3s1u_11[] <- user(0)
-  p2charge_ic4s1u_11[] <- user(0)
-  
-  p2charge_ic1s1u_12[] <- user(0)
-  p2charge_ic2s1u_12[] <- user(0)
-  p2charge_ic3s1u_12[] <- user(0)
-  p2charge_ic4s1u_12[] <- user(0)
-  
-  p2charge_ic1s1u_13[] <- user(0)
-  p2charge_ic2s1u_13[] <- user(0)
-  p2charge_ic3s1u_13[] <- user(0)
-  p2charge_ic4s1u_13[] <- user(0)
-  
-  p2charge_ic1s1u_14[] <- user(0)
-  p2charge_ic2s1u_14[] <- user(0)
-  p2charge_ic3s1u_14[] <- user(0)
-  p2charge_ic4s1u_14[] <- user(0)
-  
-  p2charge_ic1s1u_15[] <- user(0)
-  p2charge_ic2s1u_15[] <- user(0)
-  p2charge_ic3s1u_15[] <- user(0)
-  p2charge_ic4s1u_15[] <- user(0)
-  
-  p2charge_ic1s1u_16[] <- user(0)
-  p2charge_ic2s1u_16[] <- user(0)
-  p2charge_ic3s1u_16[] <- user(0)
-  p2charge_ic4s1u_16[] <- user(0)
-  
-  p2charge_ic1s1u_17[] <- user(0)
-  p2charge_ic2s1u_17[] <- user(0)
-  p2charge_ic3s1u_17[] <- user(0)
-  p2charge_ic4s1u_17[] <- user(0)
-  
-  
-  
-  p2charge_ic1s2u_10[] <- user(0)
-  p2charge_ic2s2u_10[] <- user(0)
-  p2charge_ic3s2u_10[] <- user(0)
-  p2charge_ic4s2u_10[] <- user(0)
-  
-  p2charge_ic1s2u_11[] <- user(0)
-  p2charge_ic2s2u_11[] <- user(0)
-  p2charge_ic3s2u_11[] <- user(0)
-  p2charge_ic4s2u_11[] <- user(0)
-  
-  p2charge_ic1s2u_12[] <- user(0)
-  p2charge_ic2s2u_12[] <- user(0)
-  p2charge_ic3s2u_12[] <- user(0)
-  p2charge_ic4s2u_12[] <- user(0)
-  
-  p2charge_ic1s2u_13[] <- user(0)
-  p2charge_ic2s2u_13[] <- user(0)
-  p2charge_ic3s2u_13[] <- user(0)
-  p2charge_ic4s2u_13[] <- user(0)
-  
-  p2charge_ic1s2u_14[] <- user(0)
-  p2charge_ic2s2u_14[] <- user(0)
-  p2charge_ic3s2u_14[] <- user(0)
-  p2charge_ic4s2u_14[] <- user(0)
-  
-  p2charge_ic1s2u_15[] <- user(0)
-  p2charge_ic2s2u_15[] <- user(0)
-  p2charge_ic3s2u_15[] <- user(0)
-  p2charge_ic4s2u_15[] <- user(0)
-  
-  p2charge_ic1s2u_16[] <- user(0)
-  p2charge_ic2s2u_16[] <- user(0)
-  p2charge_ic3s2u_16[] <- user(0)
-  p2charge_ic4s2u_16[] <- user(0)
-  
-  p2charge_ic1s2u_17[] <- user(0)
-  p2charge_ic2s2u_17[] <- user(0)
-  p2charge_ic3s2u_17[] <- user(0)
-  p2charge_ic4s2u_17[] <- user(0)
-  
-  p2charge_ec1s1u_10[] <- user(0)
-  p2charge_ec2s1u_10[] <- user(0)
-  p2charge_ec3s1u_10[] <- user(0)
-  p2charge_ec4s1u_10[] <- user(0)
-  
-  p2charge_ec1s1u_11[] <- user(0)
-  p2charge_ec2s1u_11[] <- user(0)
-  p2charge_ec3s1u_11[] <- user(0)
-  p2charge_ec4s1u_11[] <- user(0)
-  
-  p2charge_ec1s1u_12[] <- user(0)
-  p2charge_ec2s1u_12[] <- user(0)
-  p2charge_ec3s1u_12[] <- user(0)
-  p2charge_ec4s1u_12[] <- user(0)
-  
-  p2charge_ec1s1u_13[] <- user(0)
-  p2charge_ec2s1u_13[] <- user(0)
-  p2charge_ec3s1u_13[] <- user(0)
-  p2charge_ec4s1u_13[] <- user(0)
-  
-  p2charge_ec1s1u_14[] <- user(0)
-  p2charge_ec2s1u_14[] <- user(0)
-  p2charge_ec3s1u_14[] <- user(0)
-  p2charge_ec4s1u_14[] <- user(0)
-  
-  p2charge_ec1s1u_15[] <- user(0)
-  p2charge_ec2s1u_15[] <- user(0)
-  p2charge_ec3s1u_15[] <- user(0)
-  p2charge_ec4s1u_15[] <- user(0)
-  
-  p2charge_ec1s1u_16[] <- user(0)
-  p2charge_ec2s1u_16[] <- user(0)
-  p2charge_ec3s1u_16[] <- user(0)
-  p2charge_ec4s1u_16[] <- user(0)
-  
-  p2charge_ec1s1u_17[] <- user(0)
-  p2charge_ec2s1u_17[] <- user(0)
-  p2charge_ec3s1u_17[] <- user(0)
-  p2charge_ec4s1u_17[] <- user(0)
-  
-  
-  
-  p2charge_ec1s2u_10[] <- user(0)
-  p2charge_ec2s2u_10[] <- user(0)
-  p2charge_ec3s2u_10[] <- user(0)
-  p2charge_ec4s2u_10[] <- user(0)
-  
-  p2charge_ec1s2u_11[] <- user(0)
-  p2charge_ec2s2u_11[] <- user(0)
-  p2charge_ec3s2u_11[] <- user(0)
-  p2charge_ec4s2u_11[] <- user(0)
-  
-  p2charge_ec1s2u_12[] <- user(0)
-  p2charge_ec2s2u_12[] <- user(0)
-  p2charge_ec3s2u_12[] <- user(0)
-  p2charge_ec4s2u_12[] <- user(0)
-  
-  p2charge_ec1s2u_13[] <- user(0)
-  p2charge_ec2s2u_13[] <- user(0)
-  p2charge_ec3s2u_13[] <- user(0)
-  p2charge_ec4s2u_13[] <- user(0)
-  
-  p2charge_ec1s2u_14[] <- user(0)
-  p2charge_ec2s2u_14[] <- user(0)
-  p2charge_ec3s2u_14[] <- user(0)
-  p2charge_ec4s2u_14[] <- user(0)
-  
-  p2charge_ec1s2u_15[] <- user(0)
-  p2charge_ec2s2u_15[] <- user(0)
-  p2charge_ec3s2u_15[] <- user(0)
-  p2charge_ec4s2u_15[] <- user(0)
-  
-  p2charge_ec1s2u_16[] <- user(0)
-  p2charge_ec2s2u_16[] <- user(0)
-  p2charge_ec3s2u_16[] <- user(0)
-  p2charge_ec4s2u_16[] <- user(0)
-  
-  p2charge_ec1s2u_17[] <- user(0)
-  p2charge_ec2s2u_17[] <- user(0)
-  p2charge_ec3s2u_17[] <- user(0)
-  p2charge_ec4s2u_17[] <- user(0)
   
   
   ##############################################################################################################################
   ## INITIAL CONDITIONS ####################################################################
   ##############################################################################################################################
-  IC1S1J1U_10_ini[] <- user(0)
-  IC2S1J1U_10_ini[] <- user(0)
-  IC3S1J1U_10_ini[] <- user(0)
-  IC4S1J1U_10_ini[] <- user(0)
-  
-  IC1S1J1U_11_ini[] <- user(0)
-  IC2S1J1U_11_ini[] <- user(0)
-  IC3S1J1U_11_ini[] <- user(0)
-  IC4S1J1U_11_ini[] <- user(0)
-  
-  IC1S1J1U_12_ini[] <- user(0)
-  IC2S1J1U_12_ini[] <- user(0)
-  IC3S1J1U_12_ini[] <- user(0)
-  IC4S1J1U_12_ini[] <- user(0)
-  
-  IC1S1J1U_13_ini[] <- user(0)
-  IC2S1J1U_13_ini[] <- user(0)
-  IC3S1J1U_13_ini[] <- user(0)
-  IC4S1J1U_13_ini[] <- user(0)
-  
-  IC1S1J1U_14_ini[] <- user(0)
-  IC2S1J1U_14_ini[] <- user(0)
-  IC3S1J1U_14_ini[] <- user(0)
-  IC4S1J1U_14_ini[] <- user(0)
-  
-  IC1S1J1U_15_ini[] <- user(0)
-  IC2S1J1U_15_ini[] <- user(0)
-  IC3S1J1U_15_ini[] <- user(0)
-  IC4S1J1U_15_ini[] <- user(0)
-  
-  IC1S1J1U_16_ini[] <- user(0)
-  IC2S1J1U_16_ini[] <- user(0)
-  IC3S1J1U_16_ini[] <- user(0)
-  IC4S1J1U_16_ini[] <- user(0)
-  
-  IC1S1J1U_17_ini[] <- user(0)
-  IC2S1J1U_17_ini[] <- user(0)
-  IC3S1J1U_17_ini[] <- user(0)
-  IC4S1J1U_17_ini[] <- user(0)
-  
-  
-  
-  IC1S2J1U_10_ini[] <- user(0)
-  IC2S2J1U_10_ini[] <- user(0)
-  IC3S2J1U_10_ini[] <- user(0)
-  IC4S2J1U_10_ini[] <- user(0)
-  
-  IC1S2J1U_11_ini[] <- user(0)
-  IC2S2J1U_11_ini[] <- user(0)
-  IC3S2J1U_11_ini[] <- user(0)
-  IC4S2J1U_11_ini[] <- user(0)
-  
-  IC1S2J1U_12_ini[] <- user(0)
-  IC2S2J1U_12_ini[] <- user(0)
-  IC3S2J1U_12_ini[] <- user(0)
-  IC4S2J1U_12_ini[] <- user(0)
-  
-  IC1S2J1U_13_ini[] <- user(0)
-  IC2S2J1U_13_ini[] <- user(0)
-  IC3S2J1U_13_ini[] <- user(0)
-  IC4S2J1U_13_ini[] <- user(0)
-  
-  IC1S2J1U_14_ini[] <- user(0)
-  IC2S2J1U_14_ini[] <- user(0)
-  IC3S2J1U_14_ini[] <- user(0)
-  IC4S2J1U_14_ini[] <- user(0)
-  
-  IC1S2J1U_15_ini[] <- user(0)
-  IC2S2J1U_15_ini[] <- user(0)
-  IC3S2J1U_15_ini[] <- user(0)
-  IC4S2J1U_15_ini[] <- user(0)
-  
-  IC1S2J1U_16_ini[] <- user(0)
-  IC2S2J1U_16_ini[] <- user(0)
-  IC3S2J1U_16_ini[] <- user(0)
-  IC4S2J1U_16_ini[] <- user(0)
-  
-  IC1S2J1U_17_ini[] <- user(0)
-  IC2S2J1U_17_ini[] <- user(0)
-  IC3S2J1U_17_ini[] <- user(0)
-  IC4S2J1U_17_ini[] <- user(0)
-  
-  
-  
-  IC1S1J2U_10_ini[] <- user(0)
-  IC2S1J2U_10_ini[] <- user(0)
-  IC3S1J2U_10_ini[] <- user(0)
-  IC4S1J2U_10_ini[] <- user(0)
-  
-  IC1S1J2U_11_ini[] <- user(0)
-  IC2S1J2U_11_ini[] <- user(0)
-  IC3S1J2U_11_ini[] <- user(0)
-  IC4S1J2U_11_ini[] <- user(0)
-  
-  IC1S1J2U_12_ini[] <- user(0)
-  IC2S1J2U_12_ini[] <- user(0)
-  IC3S1J2U_12_ini[] <- user(0)
-  IC4S1J2U_12_ini[] <- user(0)
-  
-  IC1S1J2U_13_ini[] <- user(0)
-  IC2S1J2U_13_ini[] <- user(0)
-  IC3S1J2U_13_ini[] <- user(0)
-  IC4S1J2U_13_ini[] <- user(0)
-  
-  IC1S1J2U_14_ini[] <- user(0)
-  IC2S1J2U_14_ini[] <- user(0)
-  IC3S1J2U_14_ini[] <- user(0)
-  IC4S1J2U_14_ini[] <- user(0)
-  
-  IC1S1J2U_15_ini[] <- user(0)
-  IC2S1J2U_15_ini[] <- user(0)
-  IC3S1J2U_15_ini[] <- user(0)
-  IC4S1J2U_15_ini[] <- user(0)
-  
-  IC1S1J2U_16_ini[] <- user(0)
-  IC2S1J2U_16_ini[] <- user(0)
-  IC3S1J2U_16_ini[] <- user(0)
-  IC4S1J2U_16_ini[] <- user(0)
-  
-  IC1S1J2U_17_ini[] <- user(0)
-  IC2S1J2U_17_ini[] <- user(0)
-  IC3S1J2U_17_ini[] <- user(0)
-  IC4S1J2U_17_ini[] <- user(0)
-  
-  
-  
-  IC1S2J2U_10_ini[] <- user(0)
-  IC2S2J2U_10_ini[] <- user(0)
-  IC3S2J2U_10_ini[] <- user(0)
-  IC4S2J2U_10_ini[] <- user(0)
-  
-  IC1S2J2U_11_ini[] <- user(0)
-  IC2S2J2U_11_ini[] <- user(0)
-  IC3S2J2U_11_ini[] <- user(0)
-  IC4S2J2U_11_ini[] <- user(0)
-  
-  IC1S2J2U_12_ini[] <- user(0)
-  IC2S2J2U_12_ini[] <- user(0)
-  IC3S2J2U_12_ini[] <- user(0)
-  IC4S2J2U_12_ini[] <- user(0)
-  
-  IC1S2J2U_13_ini[] <- user(0)
-  IC2S2J2U_13_ini[] <- user(0)
-  IC3S2J2U_13_ini[] <- user(0)
-  IC4S2J2U_13_ini[] <- user(0)
-  
-  IC1S2J2U_14_ini[] <- user(0)
-  IC2S2J2U_14_ini[] <- user(0)
-  IC3S2J2U_14_ini[] <- user(0)
-  IC4S2J2U_14_ini[] <- user(0)
-  
-  IC1S2J2U_15_ini[] <- user(0)
-  IC2S2J2U_15_ini[] <- user(0)
-  IC3S2J2U_15_ini[] <- user(0)
-  IC4S2J2U_15_ini[] <- user(0)
-  
-  IC1S2J2U_16_ini[] <- user(0)
-  IC2S2J2U_16_ini[] <- user(0)
-  IC3S2J2U_16_ini[] <- user(0)
-  IC4S2J2U_16_ini[] <- user(0)
-  
-  IC1S2J2U_17_ini[] <- user(0)
-  IC2S2J2U_17_ini[] <- user(0)
-  IC3S2J2U_17_ini[] <- user(0)
-  IC4S2J2U_17_ini[] <- user(0)
-  
-  
-  
-  IC1S1J3U_10_ini[] <- user(0)
-  IC2S1J3U_10_ini[] <- user(0)
-  IC3S1J3U_10_ini[] <- user(0)
-  IC4S1J3U_10_ini[] <- user(0)
-  
-  IC1S1J3U_11_ini[] <- user(0)
-  IC2S1J3U_11_ini[] <- user(0)
-  IC3S1J3U_11_ini[] <- user(0)
-  IC4S1J3U_11_ini[] <- user(0)
-  
-  IC1S1J3U_12_ini[] <- user(0)
-  IC2S1J3U_12_ini[] <- user(0)
-  IC3S1J3U_12_ini[] <- user(0)
-  IC4S1J3U_12_ini[] <- user(0)
-  
-  IC1S1J3U_13_ini[] <- user(0)
-  IC2S1J3U_13_ini[] <- user(0)
-  IC3S1J3U_13_ini[] <- user(0)
-  IC4S1J3U_13_ini[] <- user(0)
-  
-  IC1S1J3U_14_ini[] <- user(0)
-  IC2S1J3U_14_ini[] <- user(0)
-  IC3S1J3U_14_ini[] <- user(0)
-  IC4S1J3U_14_ini[] <- user(0)
-  
-  IC1S1J3U_15_ini[] <- user(0)
-  IC2S1J3U_15_ini[] <- user(0)
-  IC3S1J3U_15_ini[] <- user(0)
-  IC4S1J3U_15_ini[] <- user(0)
-  
-  IC1S1J3U_16_ini[] <- user(0)
-  IC2S1J3U_16_ini[] <- user(0)
-  IC3S1J3U_16_ini[] <- user(0)
-  IC4S1J3U_16_ini[] <- user(0)
-  
-  IC1S1J3U_17_ini[] <- user(0)
-  IC2S1J3U_17_ini[] <- user(0)
-  IC3S1J3U_17_ini[] <- user(0)
-  IC4S1J3U_17_ini[] <- user(0)
-  
-  
-  
-  IC1S2J3U_10_ini[] <- user(0)
-  IC2S2J3U_10_ini[] <- user(0)
-  IC3S2J3U_10_ini[] <- user(0)
-  IC4S2J3U_10_ini[] <- user(0)
-  
-  IC1S2J3U_11_ini[] <- user(0)
-  IC2S2J3U_11_ini[] <- user(0)
-  IC3S2J3U_11_ini[] <- user(0)
-  IC4S2J3U_11_ini[] <- user(0)
-  
-  IC1S2J3U_12_ini[] <- user(0)
-  IC2S2J3U_12_ini[] <- user(0)
-  IC3S2J3U_12_ini[] <- user(0)
-  IC4S2J3U_12_ini[] <- user(0)
-  
-  IC1S2J3U_13_ini[] <- user(0)
-  IC2S2J3U_13_ini[] <- user(0)
-  IC3S2J3U_13_ini[] <- user(0)
-  IC4S2J3U_13_ini[] <- user(0)
-  
-  IC1S2J3U_14_ini[] <- user(0)
-  IC2S2J3U_14_ini[] <- user(0)
-  IC3S2J3U_14_ini[] <- user(0)
-  IC4S2J3U_14_ini[] <- user(0)
-  
-  IC1S2J3U_15_ini[] <- user(0)
-  IC2S2J3U_15_ini[] <- user(0)
-  IC3S2J3U_15_ini[] <- user(0)
-  IC4S2J3U_15_ini[] <- user(0)
-  
-  IC1S2J3U_16_ini[] <- user(0)
-  IC2S2J3U_16_ini[] <- user(0)
-  IC3S2J3U_16_ini[] <- user(0)
-  IC4S2J3U_16_ini[] <- user(0)
-  
-  IC1S2J3U_17_ini[] <- user(0)
-  IC2S2J3U_17_ini[] <- user(0)
-  IC3S2J3U_17_ini[] <- user(0)
-  IC4S2J3U_17_ini[] <- user(0)
-  
-  
-  
-  IC1S1J4U_10_ini[] <- user(0)
-  IC2S1J4U_10_ini[] <- user(0)
-  IC3S1J4U_10_ini[] <- user(0)
-  IC4S1J4U_10_ini[] <- user(0)
-  
-  IC1S1J4U_11_ini[] <- user(0)
-  IC2S1J4U_11_ini[] <- user(0)
-  IC3S1J4U_11_ini[] <- user(0)
-  IC4S1J4U_11_ini[] <- user(0)
-  
-  IC1S1J4U_12_ini[] <- user(0)
-  IC2S1J4U_12_ini[] <- user(0)
-  IC3S1J4U_12_ini[] <- user(0)
-  IC4S1J4U_12_ini[] <- user(0)
-  
-  IC1S1J4U_13_ini[] <- user(0)
-  IC2S1J4U_13_ini[] <- user(0)
-  IC3S1J4U_13_ini[] <- user(0)
-  IC4S1J4U_13_ini[] <- user(0)
-  
-  IC1S1J4U_14_ini[] <- user(0)
-  IC2S1J4U_14_ini[] <- user(0)
-  IC3S1J4U_14_ini[] <- user(0)
-  IC4S1J4U_14_ini[] <- user(0)
-  
-  IC1S1J4U_15_ini[] <- user(0)
-  IC2S1J4U_15_ini[] <- user(0)
-  IC3S1J4U_15_ini[] <- user(0)
-  IC4S1J4U_15_ini[] <- user(0)
-  
-  IC1S1J4U_16_ini[] <- user(0)
-  IC2S1J4U_16_ini[] <- user(0)
-  IC3S1J4U_16_ini[] <- user(0)
-  IC4S1J4U_16_ini[] <- user(0)
-  
-  IC1S1J4U_17_ini[] <- user(0)
-  IC2S1J4U_17_ini[] <- user(0)
-  IC3S1J4U_17_ini[] <- user(0)
-  IC4S1J4U_17_ini[] <- user(0)
-  
-  
-  
-  IC1S2J4U_10_ini[] <- user(0)
-  IC2S2J4U_10_ini[] <- user(0)
-  IC3S2J4U_10_ini[] <- user(0)
-  IC4S2J4U_10_ini[] <- user(0)
-  
-  IC1S2J4U_11_ini[] <- user(0)
-  IC2S2J4U_11_ini[] <- user(0)
-  IC3S2J4U_11_ini[] <- user(0)
-  IC4S2J4U_11_ini[] <- user(0)
-  
-  IC1S2J4U_12_ini[] <- user(0)
-  IC2S2J4U_12_ini[] <- user(0)
-  IC3S2J4U_12_ini[] <- user(0)
-  IC4S2J4U_12_ini[] <- user(0)
-  
-  IC1S2J4U_13_ini[] <- user(0)
-  IC2S2J4U_13_ini[] <- user(0)
-  IC3S2J4U_13_ini[] <- user(0)
-  IC4S2J4U_13_ini[] <- user(0)
-  
-  IC1S2J4U_14_ini[] <- user(0)
-  IC2S2J4U_14_ini[] <- user(0)
-  IC3S2J4U_14_ini[] <- user(0)
-  IC4S2J4U_14_ini[] <- user(0)
-  
-  IC1S2J4U_15_ini[] <- user(0)
-  IC2S2J4U_15_ini[] <- user(0)
-  IC3S2J4U_15_ini[] <- user(0)
-  IC4S2J4U_15_ini[] <- user(0)
-  
-  IC1S2J4U_16_ini[] <- user(0)
-  IC2S2J4U_16_ini[] <- user(0)
-  IC3S2J4U_16_ini[] <- user(0)
-  IC4S2J4U_16_ini[] <- user(0)
-  
-  IC1S2J4U_17_ini[] <- user(0)
-  IC2S2J4U_17_ini[] <- user(0)
-  IC3S2J4U_17_ini[] <- user(0)
-  IC4S2J4U_17_ini[] <- user(0)
-  
-  
-  
-  IC1S1J5U_10_ini[] <- user(0)
-  IC2S1J5U_10_ini[] <- user(0)
-  IC3S1J5U_10_ini[] <- user(0)
-  IC4S1J5U_10_ini[] <- user(0)
-  
-  IC1S1J5U_11_ini[] <- user(0)
-  IC2S1J5U_11_ini[] <- user(0)
-  IC3S1J5U_11_ini[] <- user(0)
-  IC4S1J5U_11_ini[] <- user(0)
-  
-  IC1S1J5U_12_ini[] <- user(0)
-  IC2S1J5U_12_ini[] <- user(0)
-  IC3S1J5U_12_ini[] <- user(0)
-  IC4S1J5U_12_ini[] <- user(0)
-  
-  IC1S1J5U_13_ini[] <- user(0)
-  IC2S1J5U_13_ini[] <- user(0)
-  IC3S1J5U_13_ini[] <- user(0)
-  IC4S1J5U_13_ini[] <- user(0)
-  
-  IC1S1J5U_14_ini[] <- user(0)
-  IC2S1J5U_14_ini[] <- user(0)
-  IC3S1J5U_14_ini[] <- user(0)
-  IC4S1J5U_14_ini[] <- user(0)
-  
-  IC1S1J5U_15_ini[] <- user(0)
-  IC2S1J5U_15_ini[] <- user(0)
-  IC3S1J5U_15_ini[] <- user(0)
-  IC4S1J5U_15_ini[] <- user(0)
-  
-  IC1S1J5U_16_ini[] <- user(0)
-  IC2S1J5U_16_ini[] <- user(0)
-  IC3S1J5U_16_ini[] <- user(0)
-  IC4S1J5U_16_ini[] <- user(0)
-  
-  IC1S1J5U_17_ini[] <- user(0)
-  IC2S1J5U_17_ini[] <- user(0)
-  IC3S1J5U_17_ini[] <- user(0)
-  IC4S1J5U_17_ini[] <- user(0)
-  
-  
-  
-  IC1S2J5U_10_ini[] <- user(0)
-  IC2S2J5U_10_ini[] <- user(0)
-  IC3S2J5U_10_ini[] <- user(0)
-  IC4S2J5U_10_ini[] <- user(0)
-  
-  IC1S2J5U_11_ini[] <- user(0)
-  IC2S2J5U_11_ini[] <- user(0)
-  IC3S2J5U_11_ini[] <- user(0)
-  IC4S2J5U_11_ini[] <- user(0)
-  
-  IC1S2J5U_12_ini[] <- user(0)
-  IC2S2J5U_12_ini[] <- user(0)
-  IC3S2J5U_12_ini[] <- user(0)
-  IC4S2J5U_12_ini[] <- user(0)
-  
-  IC1S2J5U_13_ini[] <- user(0)
-  IC2S2J5U_13_ini[] <- user(0)
-  IC3S2J5U_13_ini[] <- user(0)
-  IC4S2J5U_13_ini[] <- user(0)
-  
-  IC1S2J5U_14_ini[] <- user(0)
-  IC2S2J5U_14_ini[] <- user(0)
-  IC3S2J5U_14_ini[] <- user(0)
-  IC4S2J5U_14_ini[] <- user(0)
-  
-  IC1S2J5U_15_ini[] <- user(0)
-  IC2S2J5U_15_ini[] <- user(0)
-  IC3S2J5U_15_ini[] <- user(0)
-  IC4S2J5U_15_ini[] <- user(0)
-  
-  IC1S2J5U_16_ini[] <- user(0)
-  IC2S2J5U_16_ini[] <- user(0)
-  IC3S2J5U_16_ini[] <- user(0)
-  IC4S2J5U_16_ini[] <- user(0)
-  
-  IC1S2J5U_17_ini[] <- user(0)
-  IC2S2J5U_17_ini[] <- user(0)
-  IC3S2J5U_17_ini[] <- user(0)
-  IC4S2J5U_17_ini[] <- user(0)
-  
-  EC1S1J1U_10_ini[] <- user(0)
-  EC2S1J1U_10_ini[] <- user(0)
-  EC3S1J1U_10_ini[] <- user(0)
-  EC4S1J1U_10_ini[] <- user(0)
-  
-  EC1S1J1U_11_ini[] <- user(0)
-  EC2S1J1U_11_ini[] <- user(0)
-  EC3S1J1U_11_ini[] <- user(0)
-  EC4S1J1U_11_ini[] <- user(0)
-  
-  EC1S1J1U_12_ini[] <- user(0)
-  EC2S1J1U_12_ini[] <- user(0)
-  EC3S1J1U_12_ini[] <- user(0)
-  EC4S1J1U_12_ini[] <- user(0)
-  
-  EC1S1J1U_13_ini[] <- user(0)
-  EC2S1J1U_13_ini[] <- user(0)
-  EC3S1J1U_13_ini[] <- user(0)
-  EC4S1J1U_13_ini[] <- user(0)
-  
-  EC1S1J1U_14_ini[] <- user(0)
-  EC2S1J1U_14_ini[] <- user(0)
-  EC3S1J1U_14_ini[] <- user(0)
-  EC4S1J1U_14_ini[] <- user(0)
-  
-  EC1S1J1U_15_ini[] <- user(0)
-  EC2S1J1U_15_ini[] <- user(0)
-  EC3S1J1U_15_ini[] <- user(0)
-  EC4S1J1U_15_ini[] <- user(0)
-  
-  EC1S1J1U_16_ini[] <- user(0)
-  EC2S1J1U_16_ini[] <- user(0)
-  EC3S1J1U_16_ini[] <- user(0)
-  EC4S1J1U_16_ini[] <- user(0)
-  
-  EC1S1J1U_17_ini[] <- user(0)
-  EC2S1J1U_17_ini[] <- user(0)
-  EC3S1J1U_17_ini[] <- user(0)
-  EC4S1J1U_17_ini[] <- user(0)
-  
-  
-  
-  EC1S2J1U_10_ini[] <- user(0)
-  EC2S2J1U_10_ini[] <- user(0)
-  EC3S2J1U_10_ini[] <- user(0)
-  EC4S2J1U_10_ini[] <- user(0)
-  
-  EC1S2J1U_11_ini[] <- user(0)
-  EC2S2J1U_11_ini[] <- user(0)
-  EC3S2J1U_11_ini[] <- user(0)
-  EC4S2J1U_11_ini[] <- user(0)
-  
-  EC1S2J1U_12_ini[] <- user(0)
-  EC2S2J1U_12_ini[] <- user(0)
-  EC3S2J1U_12_ini[] <- user(0)
-  EC4S2J1U_12_ini[] <- user(0)
-  
-  EC1S2J1U_13_ini[] <- user(0)
-  EC2S2J1U_13_ini[] <- user(0)
-  EC3S2J1U_13_ini[] <- user(0)
-  EC4S2J1U_13_ini[] <- user(0)
-  
-  EC1S2J1U_14_ini[] <- user(0)
-  EC2S2J1U_14_ini[] <- user(0)
-  EC3S2J1U_14_ini[] <- user(0)
-  EC4S2J1U_14_ini[] <- user(0)
-  
-  EC1S2J1U_15_ini[] <- user(0)
-  EC2S2J1U_15_ini[] <- user(0)
-  EC3S2J1U_15_ini[] <- user(0)
-  EC4S2J1U_15_ini[] <- user(0)
-  
-  EC1S2J1U_16_ini[] <- user(0)
-  EC2S2J1U_16_ini[] <- user(0)
-  EC3S2J1U_16_ini[] <- user(0)
-  EC4S2J1U_16_ini[] <- user(0)
-  
-  EC1S2J1U_17_ini[] <- user(0)
-  EC2S2J1U_17_ini[] <- user(0)
-  EC3S2J1U_17_ini[] <- user(0)
-  EC4S2J1U_17_ini[] <- user(0)
-  
-  
-  
-  EC1S1J2U_10_ini[] <- user(0)
-  EC2S1J2U_10_ini[] <- user(0)
-  EC3S1J2U_10_ini[] <- user(0)
-  EC4S1J2U_10_ini[] <- user(0)
-  
-  EC1S1J2U_11_ini[] <- user(0)
-  EC2S1J2U_11_ini[] <- user(0)
-  EC3S1J2U_11_ini[] <- user(0)
-  EC4S1J2U_11_ini[] <- user(0)
-  
-  EC1S1J2U_12_ini[] <- user(0)
-  EC2S1J2U_12_ini[] <- user(0)
-  EC3S1J2U_12_ini[] <- user(0)
-  EC4S1J2U_12_ini[] <- user(0)
-  
-  EC1S1J2U_13_ini[] <- user(0)
-  EC2S1J2U_13_ini[] <- user(0)
-  EC3S1J2U_13_ini[] <- user(0)
-  EC4S1J2U_13_ini[] <- user(0)
-  
-  EC1S1J2U_14_ini[] <- user(0)
-  EC2S1J2U_14_ini[] <- user(0)
-  EC3S1J2U_14_ini[] <- user(0)
-  EC4S1J2U_14_ini[] <- user(0)
-  
-  EC1S1J2U_15_ini[] <- user(0)
-  EC2S1J2U_15_ini[] <- user(0)
-  EC3S1J2U_15_ini[] <- user(0)
-  EC4S1J2U_15_ini[] <- user(0)
-  
-  EC1S1J2U_16_ini[] <- user(0)
-  EC2S1J2U_16_ini[] <- user(0)
-  EC3S1J2U_16_ini[] <- user(0)
-  EC4S1J2U_16_ini[] <- user(0)
-  
-  EC1S1J2U_17_ini[] <- user(0)
-  EC2S1J2U_17_ini[] <- user(0)
-  EC3S1J2U_17_ini[] <- user(0)
-  EC4S1J2U_17_ini[] <- user(0)
-  
-  
-  
-  EC1S2J2U_10_ini[] <- user(0)
-  EC2S2J2U_10_ini[] <- user(0)
-  EC3S2J2U_10_ini[] <- user(0)
-  EC4S2J2U_10_ini[] <- user(0)
-  
-  EC1S2J2U_11_ini[] <- user(0)
-  EC2S2J2U_11_ini[] <- user(0)
-  EC3S2J2U_11_ini[] <- user(0)
-  EC4S2J2U_11_ini[] <- user(0)
-  
-  EC1S2J2U_12_ini[] <- user(0)
-  EC2S2J2U_12_ini[] <- user(0)
-  EC3S2J2U_12_ini[] <- user(0)
-  EC4S2J2U_12_ini[] <- user(0)
-  
-  EC1S2J2U_13_ini[] <- user(0)
-  EC2S2J2U_13_ini[] <- user(0)
-  EC3S2J2U_13_ini[] <- user(0)
-  EC4S2J2U_13_ini[] <- user(0)
-  
-  EC1S2J2U_14_ini[] <- user(0)
-  EC2S2J2U_14_ini[] <- user(0)
-  EC3S2J2U_14_ini[] <- user(0)
-  EC4S2J2U_14_ini[] <- user(0)
-  
-  EC1S2J2U_15_ini[] <- user(0)
-  EC2S2J2U_15_ini[] <- user(0)
-  EC3S2J2U_15_ini[] <- user(0)
-  EC4S2J2U_15_ini[] <- user(0)
-  
-  EC1S2J2U_16_ini[] <- user(0)
-  EC2S2J2U_16_ini[] <- user(0)
-  EC3S2J2U_16_ini[] <- user(0)
-  EC4S2J2U_16_ini[] <- user(0)
-  
-  EC1S2J2U_17_ini[] <- user(0)
-  EC2S2J2U_17_ini[] <- user(0)
-  EC3S2J2U_17_ini[] <- user(0)
-  EC4S2J2U_17_ini[] <- user(0)
-  
-  
-  
-  EC1S1J3U_10_ini[] <- user(0)
-  EC2S1J3U_10_ini[] <- user(0)
-  EC3S1J3U_10_ini[] <- user(0)
-  EC4S1J3U_10_ini[] <- user(0)
-  
-  EC1S1J3U_11_ini[] <- user(0)
-  EC2S1J3U_11_ini[] <- user(0)
-  EC3S1J3U_11_ini[] <- user(0)
-  EC4S1J3U_11_ini[] <- user(0)
-  
-  EC1S1J3U_12_ini[] <- user(0)
-  EC2S1J3U_12_ini[] <- user(0)
-  EC3S1J3U_12_ini[] <- user(0)
-  EC4S1J3U_12_ini[] <- user(0)
-  
-  EC1S1J3U_13_ini[] <- user(0)
-  EC2S1J3U_13_ini[] <- user(0)
-  EC3S1J3U_13_ini[] <- user(0)
-  EC4S1J3U_13_ini[] <- user(0)
-  
-  EC1S1J3U_14_ini[] <- user(0)
-  EC2S1J3U_14_ini[] <- user(0)
-  EC3S1J3U_14_ini[] <- user(0)
-  EC4S1J3U_14_ini[] <- user(0)
-  
-  EC1S1J3U_15_ini[] <- user(0)
-  EC2S1J3U_15_ini[] <- user(0)
-  EC3S1J3U_15_ini[] <- user(0)
-  EC4S1J3U_15_ini[] <- user(0)
-  
-  EC1S1J3U_16_ini[] <- user(0)
-  EC2S1J3U_16_ini[] <- user(0)
-  EC3S1J3U_16_ini[] <- user(0)
-  EC4S1J3U_16_ini[] <- user(0)
-  
-  EC1S1J3U_17_ini[] <- user(0)
-  EC2S1J3U_17_ini[] <- user(0)
-  EC3S1J3U_17_ini[] <- user(0)
-  EC4S1J3U_17_ini[] <- user(0)
-  
-  
-  
-  EC1S2J3U_10_ini[] <- user(0)
-  EC2S2J3U_10_ini[] <- user(0)
-  EC3S2J3U_10_ini[] <- user(0)
-  EC4S2J3U_10_ini[] <- user(0)
-  
-  EC1S2J3U_11_ini[] <- user(0)
-  EC2S2J3U_11_ini[] <- user(0)
-  EC3S2J3U_11_ini[] <- user(0)
-  EC4S2J3U_11_ini[] <- user(0)
-  
-  EC1S2J3U_12_ini[] <- user(0)
-  EC2S2J3U_12_ini[] <- user(0)
-  EC3S2J3U_12_ini[] <- user(0)
-  EC4S2J3U_12_ini[] <- user(0)
-  
-  EC1S2J3U_13_ini[] <- user(0)
-  EC2S2J3U_13_ini[] <- user(0)
-  EC3S2J3U_13_ini[] <- user(0)
-  EC4S2J3U_13_ini[] <- user(0)
-  
-  EC1S2J3U_14_ini[] <- user(0)
-  EC2S2J3U_14_ini[] <- user(0)
-  EC3S2J3U_14_ini[] <- user(0)
-  EC4S2J3U_14_ini[] <- user(0)
-  
-  EC1S2J3U_15_ini[] <- user(0)
-  EC2S2J3U_15_ini[] <- user(0)
-  EC3S2J3U_15_ini[] <- user(0)
-  EC4S2J3U_15_ini[] <- user(0)
-  
-  EC1S2J3U_16_ini[] <- user(0)
-  EC2S2J3U_16_ini[] <- user(0)
-  EC3S2J3U_16_ini[] <- user(0)
-  EC4S2J3U_16_ini[] <- user(0)
-  
-  EC1S2J3U_17_ini[] <- user(0)
-  EC2S2J3U_17_ini[] <- user(0)
-  EC3S2J3U_17_ini[] <- user(0)
-  EC4S2J3U_17_ini[] <- user(0)
-  
-  
-  
-  EC1S1J4U_10_ini[] <- user(0)
-  EC2S1J4U_10_ini[] <- user(0)
-  EC3S1J4U_10_ini[] <- user(0)
-  EC4S1J4U_10_ini[] <- user(0)
-  
-  EC1S1J4U_11_ini[] <- user(0)
-  EC2S1J4U_11_ini[] <- user(0)
-  EC3S1J4U_11_ini[] <- user(0)
-  EC4S1J4U_11_ini[] <- user(0)
-  
-  EC1S1J4U_12_ini[] <- user(0)
-  EC2S1J4U_12_ini[] <- user(0)
-  EC3S1J4U_12_ini[] <- user(0)
-  EC4S1J4U_12_ini[] <- user(0)
-  
-  EC1S1J4U_13_ini[] <- user(0)
-  EC2S1J4U_13_ini[] <- user(0)
-  EC3S1J4U_13_ini[] <- user(0)
-  EC4S1J4U_13_ini[] <- user(0)
-  
-  EC1S1J4U_14_ini[] <- user(0)
-  EC2S1J4U_14_ini[] <- user(0)
-  EC3S1J4U_14_ini[] <- user(0)
-  EC4S1J4U_14_ini[] <- user(0)
-  
-  EC1S1J4U_15_ini[] <- user(0)
-  EC2S1J4U_15_ini[] <- user(0)
-  EC3S1J4U_15_ini[] <- user(0)
-  EC4S1J4U_15_ini[] <- user(0)
-  
-  EC1S1J4U_16_ini[] <- user(0)
-  EC2S1J4U_16_ini[] <- user(0)
-  EC3S1J4U_16_ini[] <- user(0)
-  EC4S1J4U_16_ini[] <- user(0)
-  
-  EC1S1J4U_17_ini[] <- user(0)
-  EC2S1J4U_17_ini[] <- user(0)
-  EC3S1J4U_17_ini[] <- user(0)
-  EC4S1J4U_17_ini[] <- user(0)
-  
-  
-  
-  EC1S2J4U_10_ini[] <- user(0)
-  EC2S2J4U_10_ini[] <- user(0)
-  EC3S2J4U_10_ini[] <- user(0)
-  EC4S2J4U_10_ini[] <- user(0)
-  
-  EC1S2J4U_11_ini[] <- user(0)
-  EC2S2J4U_11_ini[] <- user(0)
-  EC3S2J4U_11_ini[] <- user(0)
-  EC4S2J4U_11_ini[] <- user(0)
-  
-  EC1S2J4U_12_ini[] <- user(0)
-  EC2S2J4U_12_ini[] <- user(0)
-  EC3S2J4U_12_ini[] <- user(0)
-  EC4S2J4U_12_ini[] <- user(0)
-  
-  EC1S2J4U_13_ini[] <- user(0)
-  EC2S2J4U_13_ini[] <- user(0)
-  EC3S2J4U_13_ini[] <- user(0)
-  EC4S2J4U_13_ini[] <- user(0)
-  
-  EC1S2J4U_14_ini[] <- user(0)
-  EC2S2J4U_14_ini[] <- user(0)
-  EC3S2J4U_14_ini[] <- user(0)
-  EC4S2J4U_14_ini[] <- user(0)
-  
-  EC1S2J4U_15_ini[] <- user(0)
-  EC2S2J4U_15_ini[] <- user(0)
-  EC3S2J4U_15_ini[] <- user(0)
-  EC4S2J4U_15_ini[] <- user(0)
-  
-  EC1S2J4U_16_ini[] <- user(0)
-  EC2S2J4U_16_ini[] <- user(0)
-  EC3S2J4U_16_ini[] <- user(0)
-  EC4S2J4U_16_ini[] <- user(0)
-  
-  EC1S2J4U_17_ini[] <- user(0)
-  EC2S2J4U_17_ini[] <- user(0)
-  EC3S2J4U_17_ini[] <- user(0)
-  EC4S2J4U_17_ini[] <- user(0)
-  
-  
-  
-  EC1S1J5U_10_ini[] <- user(0)
-  EC2S1J5U_10_ini[] <- user(0)
-  EC3S1J5U_10_ini[] <- user(0)
-  EC4S1J5U_10_ini[] <- user(0)
-  
-  EC1S1J5U_11_ini[] <- user(0)
-  EC2S1J5U_11_ini[] <- user(0)
-  EC3S1J5U_11_ini[] <- user(0)
-  EC4S1J5U_11_ini[] <- user(0)
-  
-  EC1S1J5U_12_ini[] <- user(0)
-  EC2S1J5U_12_ini[] <- user(0)
-  EC3S1J5U_12_ini[] <- user(0)
-  EC4S1J5U_12_ini[] <- user(0)
-  
-  EC1S1J5U_13_ini[] <- user(0)
-  EC2S1J5U_13_ini[] <- user(0)
-  EC3S1J5U_13_ini[] <- user(0)
-  EC4S1J5U_13_ini[] <- user(0)
-  
-  EC1S1J5U_14_ini[] <- user(0)
-  EC2S1J5U_14_ini[] <- user(0)
-  EC3S1J5U_14_ini[] <- user(0)
-  EC4S1J5U_14_ini[] <- user(0)
-  
-  EC1S1J5U_15_ini[] <- user(0)
-  EC2S1J5U_15_ini[] <- user(0)
-  EC3S1J5U_15_ini[] <- user(0)
-  EC4S1J5U_15_ini[] <- user(0)
-  
-  EC1S1J5U_16_ini[] <- user(0)
-  EC2S1J5U_16_ini[] <- user(0)
-  EC3S1J5U_16_ini[] <- user(0)
-  EC4S1J5U_16_ini[] <- user(0)
-  
-  EC1S1J5U_17_ini[] <- user(0)
-  EC2S1J5U_17_ini[] <- user(0)
-  EC3S1J5U_17_ini[] <- user(0)
-  EC4S1J5U_17_ini[] <- user(0)
-  
-  
-  
-  EC1S2J5U_10_ini[] <- user(0)
-  EC2S2J5U_10_ini[] <- user(0)
-  EC3S2J5U_10_ini[] <- user(0)
-  EC4S2J5U_10_ini[] <- user(0)
-  
-  EC1S2J5U_11_ini[] <- user(0)
-  EC2S2J5U_11_ini[] <- user(0)
-  EC3S2J5U_11_ini[] <- user(0)
-  EC4S2J5U_11_ini[] <- user(0)
-  
-  EC1S2J5U_12_ini[] <- user(0)
-  EC2S2J5U_12_ini[] <- user(0)
-  EC3S2J5U_12_ini[] <- user(0)
-  EC4S2J5U_12_ini[] <- user(0)
-  
-  EC1S2J5U_13_ini[] <- user(0)
-  EC2S2J5U_13_ini[] <- user(0)
-  EC3S2J5U_13_ini[] <- user(0)
-  EC4S2J5U_13_ini[] <- user(0)
-  
-  EC1S2J5U_14_ini[] <- user(0)
-  EC2S2J5U_14_ini[] <- user(0)
-  EC3S2J5U_14_ini[] <- user(0)
-  EC4S2J5U_14_ini[] <- user(0)
-  
-  EC1S2J5U_15_ini[] <- user(0)
-  EC2S2J5U_15_ini[] <- user(0)
-  EC3S2J5U_15_ini[] <- user(0)
-  EC4S2J5U_15_ini[] <- user(0)
-  
-  EC1S2J5U_16_ini[] <- user(0)
-  EC2S2J5U_16_ini[] <- user(0)
-  EC3S2J5U_16_ini[] <- user(0)
-  EC4S2J5U_16_ini[] <- user(0)
-  
-  EC1S2J5U_17_ini[] <- user(0)
-  EC2S2J5U_17_ini[] <- user(0)
-  EC3S2J5U_17_ini[] <- user(0)
-  EC4S2J5U_17_ini[] <- user(0)
-  
-  
-  initial(IC1S1J1U_10[]) <- IC1S1J1U_10_ini[i]
-  initial(IC2S1J1U_10[]) <- IC2S1J1U_10_ini[i]
-  initial(IC3S1J1U_10[]) <- IC3S1J1U_10_ini[i]
-  initial(IC4S1J1U_10[]) <- IC4S1J1U_10_ini[i]
-  
-  initial(IC1S1J1U_11[]) <- IC1S1J1U_11_ini[i]
-  initial(IC2S1J1U_11[]) <- IC2S1J1U_11_ini[i]
-  initial(IC3S1J1U_11[]) <- IC3S1J1U_11_ini[i]
-  initial(IC4S1J1U_11[]) <- IC4S1J1U_11_ini[i]
-  
-  initial(IC1S1J1U_12[]) <- IC1S1J1U_12_ini[i]
-  initial(IC2S1J1U_12[]) <- IC2S1J1U_12_ini[i]
-  initial(IC3S1J1U_12[]) <- IC3S1J1U_12_ini[i]
-  initial(IC4S1J1U_12[]) <- IC4S1J1U_12_ini[i]
-  
-  initial(IC1S1J1U_13[]) <- IC1S1J1U_13_ini[i]
-  initial(IC2S1J1U_13[]) <- IC2S1J1U_13_ini[i]
-  initial(IC3S1J1U_13[]) <- IC3S1J1U_13_ini[i]
-  initial(IC4S1J1U_13[]) <- IC4S1J1U_13_ini[i]
-  
-  initial(IC1S1J1U_14[]) <- IC1S1J1U_14_ini[i]
-  initial(IC2S1J1U_14[]) <- IC2S1J1U_14_ini[i]
-  initial(IC3S1J1U_14[]) <- IC3S1J1U_14_ini[i]
-  initial(IC4S1J1U_14[]) <- IC4S1J1U_14_ini[i]
-  
-  initial(IC1S1J1U_15[]) <- IC1S1J1U_15_ini[i]
-  initial(IC2S1J1U_15[]) <- IC2S1J1U_15_ini[i]
-  initial(IC3S1J1U_15[]) <- IC3S1J1U_15_ini[i]
-  initial(IC4S1J1U_15[]) <- IC4S1J1U_15_ini[i]
-  
-  initial(IC1S1J1U_16[]) <- IC1S1J1U_16_ini[i]
-  initial(IC2S1J1U_16[]) <- IC2S1J1U_16_ini[i]
-  initial(IC3S1J1U_16[]) <- IC3S1J1U_16_ini[i]
-  initial(IC4S1J1U_16[]) <- IC4S1J1U_16_ini[i]
-  
-  initial(IC1S1J1U_17[]) <- IC1S1J1U_17_ini[i]
-  initial(IC2S1J1U_17[]) <- IC2S1J1U_17_ini[i]
-  initial(IC3S1J1U_17[]) <- IC3S1J1U_17_ini[i]
-  initial(IC4S1J1U_17[]) <- IC4S1J1U_17_ini[i]
-  
-  
-  
-  initial(IC1S2J1U_10[]) <- IC1S2J1U_10_ini[i]
-  initial(IC2S2J1U_10[]) <- IC2S2J1U_10_ini[i]
-  initial(IC3S2J1U_10[]) <- IC3S2J1U_10_ini[i]
-  initial(IC4S2J1U_10[]) <- IC4S2J1U_10_ini[i]
-  
-  initial(IC1S2J1U_11[]) <- IC1S2J1U_11_ini[i]
-  initial(IC2S2J1U_11[]) <- IC2S2J1U_11_ini[i]
-  initial(IC3S2J1U_11[]) <- IC3S2J1U_11_ini[i]
-  initial(IC4S2J1U_11[]) <- IC4S2J1U_11_ini[i]
-  
-  initial(IC1S2J1U_12[]) <- IC1S2J1U_12_ini[i]
-  initial(IC2S2J1U_12[]) <- IC2S2J1U_12_ini[i]
-  initial(IC3S2J1U_12[]) <- IC3S2J1U_12_ini[i]
-  initial(IC4S2J1U_12[]) <- IC4S2J1U_12_ini[i]
-  
-  initial(IC1S2J1U_13[]) <- IC1S2J1U_13_ini[i]
-  initial(IC2S2J1U_13[]) <- IC2S2J1U_13_ini[i]
-  initial(IC3S2J1U_13[]) <- IC3S2J1U_13_ini[i]
-  initial(IC4S2J1U_13[]) <- IC4S2J1U_13_ini[i]
-  
-  initial(IC1S2J1U_14[]) <- IC1S2J1U_14_ini[i]
-  initial(IC2S2J1U_14[]) <- IC2S2J1U_14_ini[i]
-  initial(IC3S2J1U_14[]) <- IC3S2J1U_14_ini[i]
-  initial(IC4S2J1U_14[]) <- IC4S2J1U_14_ini[i]
-  
-  initial(IC1S2J1U_15[]) <- IC1S2J1U_15_ini[i]
-  initial(IC2S2J1U_15[]) <- IC2S2J1U_15_ini[i]
-  initial(IC3S2J1U_15[]) <- IC3S2J1U_15_ini[i]
-  initial(IC4S2J1U_15[]) <- IC4S2J1U_15_ini[i]
-  
-  initial(IC1S2J1U_16[]) <- IC1S2J1U_16_ini[i]
-  initial(IC2S2J1U_16[]) <- IC2S2J1U_16_ini[i]
-  initial(IC3S2J1U_16[]) <- IC3S2J1U_16_ini[i]
-  initial(IC4S2J1U_16[]) <- IC4S2J1U_16_ini[i]
-  
-  initial(IC1S2J1U_17[]) <- IC1S2J1U_17_ini[i]
-  initial(IC2S2J1U_17[]) <- IC2S2J1U_17_ini[i]
-  initial(IC3S2J1U_17[]) <- IC3S2J1U_17_ini[i]
-  initial(IC4S2J1U_17[]) <- IC4S2J1U_17_ini[i]
-  
-  
-  
-  initial(IC1S1J2U_10[]) <- IC1S1J2U_10_ini[i]
-  initial(IC2S1J2U_10[]) <- IC2S1J2U_10_ini[i]
-  initial(IC3S1J2U_10[]) <- IC3S1J2U_10_ini[i]
-  initial(IC4S1J2U_10[]) <- IC4S1J2U_10_ini[i]
-  
-  initial(IC1S1J2U_11[]) <- IC1S1J2U_11_ini[i]
-  initial(IC2S1J2U_11[]) <- IC2S1J2U_11_ini[i]
-  initial(IC3S1J2U_11[]) <- IC3S1J2U_11_ini[i]
-  initial(IC4S1J2U_11[]) <- IC4S1J2U_11_ini[i]
-  
-  initial(IC1S1J2U_12[]) <- IC1S1J2U_12_ini[i]
-  initial(IC2S1J2U_12[]) <- IC2S1J2U_12_ini[i]
-  initial(IC3S1J2U_12[]) <- IC3S1J2U_12_ini[i]
-  initial(IC4S1J2U_12[]) <- IC4S1J2U_12_ini[i]
-  
-  initial(IC1S1J2U_13[]) <- IC1S1J2U_13_ini[i]
-  initial(IC2S1J2U_13[]) <- IC2S1J2U_13_ini[i]
-  initial(IC3S1J2U_13[]) <- IC3S1J2U_13_ini[i]
-  initial(IC4S1J2U_13[]) <- IC4S1J2U_13_ini[i]
-  
-  initial(IC1S1J2U_14[]) <- IC1S1J2U_14_ini[i]
-  initial(IC2S1J2U_14[]) <- IC2S1J2U_14_ini[i]
-  initial(IC3S1J2U_14[]) <- IC3S1J2U_14_ini[i]
-  initial(IC4S1J2U_14[]) <- IC4S1J2U_14_ini[i]
-  
-  initial(IC1S1J2U_15[]) <- IC1S1J2U_15_ini[i]
-  initial(IC2S1J2U_15[]) <- IC2S1J2U_15_ini[i]
-  initial(IC3S1J2U_15[]) <- IC3S1J2U_15_ini[i]
-  initial(IC4S1J2U_15[]) <- IC4S1J2U_15_ini[i]
-  
-  initial(IC1S1J2U_16[]) <- IC1S1J2U_16_ini[i]
-  initial(IC2S1J2U_16[]) <- IC2S1J2U_16_ini[i]
-  initial(IC3S1J2U_16[]) <- IC3S1J2U_16_ini[i]
-  initial(IC4S1J2U_16[]) <- IC4S1J2U_16_ini[i]
-  
-  initial(IC1S1J2U_17[]) <- IC1S1J2U_17_ini[i]
-  initial(IC2S1J2U_17[]) <- IC2S1J2U_17_ini[i]
-  initial(IC3S1J2U_17[]) <- IC3S1J2U_17_ini[i]
-  initial(IC4S1J2U_17[]) <- IC4S1J2U_17_ini[i]
-  
-  
-  
-  initial(IC1S2J2U_10[]) <- IC1S2J2U_10_ini[i]
-  initial(IC2S2J2U_10[]) <- IC2S2J2U_10_ini[i]
-  initial(IC3S2J2U_10[]) <- IC3S2J2U_10_ini[i]
-  initial(IC4S2J2U_10[]) <- IC4S2J2U_10_ini[i]
-  
-  initial(IC1S2J2U_11[]) <- IC1S2J2U_11_ini[i]
-  initial(IC2S2J2U_11[]) <- IC2S2J2U_11_ini[i]
-  initial(IC3S2J2U_11[]) <- IC3S2J2U_11_ini[i]
-  initial(IC4S2J2U_11[]) <- IC4S2J2U_11_ini[i]
-  
-  initial(IC1S2J2U_12[]) <- IC1S2J2U_12_ini[i]
-  initial(IC2S2J2U_12[]) <- IC2S2J2U_12_ini[i]
-  initial(IC3S2J2U_12[]) <- IC3S2J2U_12_ini[i]
-  initial(IC4S2J2U_12[]) <- IC4S2J2U_12_ini[i]
-  
-  initial(IC1S2J2U_13[]) <- IC1S2J2U_13_ini[i]
-  initial(IC2S2J2U_13[]) <- IC2S2J2U_13_ini[i]
-  initial(IC3S2J2U_13[]) <- IC3S2J2U_13_ini[i]
-  initial(IC4S2J2U_13[]) <- IC4S2J2U_13_ini[i]
-  
-  initial(IC1S2J2U_14[]) <- IC1S2J2U_14_ini[i]
-  initial(IC2S2J2U_14[]) <- IC2S2J2U_14_ini[i]
-  initial(IC3S2J2U_14[]) <- IC3S2J2U_14_ini[i]
-  initial(IC4S2J2U_14[]) <- IC4S2J2U_14_ini[i]
-  
-  initial(IC1S2J2U_15[]) <- IC1S2J2U_15_ini[i]
-  initial(IC2S2J2U_15[]) <- IC2S2J2U_15_ini[i]
-  initial(IC3S2J2U_15[]) <- IC3S2J2U_15_ini[i]
-  initial(IC4S2J2U_15[]) <- IC4S2J2U_15_ini[i]
-  
-  initial(IC1S2J2U_16[]) <- IC1S2J2U_16_ini[i]
-  initial(IC2S2J2U_16[]) <- IC2S2J2U_16_ini[i]
-  initial(IC3S2J2U_16[]) <- IC3S2J2U_16_ini[i]
-  initial(IC4S2J2U_16[]) <- IC4S2J2U_16_ini[i]
-  
-  initial(IC1S2J2U_17[]) <- IC1S2J2U_17_ini[i]
-  initial(IC2S2J2U_17[]) <- IC2S2J2U_17_ini[i]
-  initial(IC3S2J2U_17[]) <- IC3S2J2U_17_ini[i]
-  initial(IC4S2J2U_17[]) <- IC4S2J2U_17_ini[i]
-  
-  
-  
-  initial(IC1S1J3U_10[]) <- IC1S1J3U_10_ini[i]
-  initial(IC2S1J3U_10[]) <- IC2S1J3U_10_ini[i]
-  initial(IC3S1J3U_10[]) <- IC3S1J3U_10_ini[i]
-  initial(IC4S1J3U_10[]) <- IC4S1J3U_10_ini[i]
-  
-  initial(IC1S1J3U_11[]) <- IC1S1J3U_11_ini[i]
-  initial(IC2S1J3U_11[]) <- IC2S1J3U_11_ini[i]
-  initial(IC3S1J3U_11[]) <- IC3S1J3U_11_ini[i]
-  initial(IC4S1J3U_11[]) <- IC4S1J3U_11_ini[i]
-  
-  initial(IC1S1J3U_12[]) <- IC1S1J3U_12_ini[i]
-  initial(IC2S1J3U_12[]) <- IC2S1J3U_12_ini[i]
-  initial(IC3S1J3U_12[]) <- IC3S1J3U_12_ini[i]
-  initial(IC4S1J3U_12[]) <- IC4S1J3U_12_ini[i]
-  
-  initial(IC1S1J3U_13[]) <- IC1S1J3U_13_ini[i]
-  initial(IC2S1J3U_13[]) <- IC2S1J3U_13_ini[i]
-  initial(IC3S1J3U_13[]) <- IC3S1J3U_13_ini[i]
-  initial(IC4S1J3U_13[]) <- IC4S1J3U_13_ini[i]
-  
-  initial(IC1S1J3U_14[]) <- IC1S1J3U_14_ini[i]
-  initial(IC2S1J3U_14[]) <- IC2S1J3U_14_ini[i]
-  initial(IC3S1J3U_14[]) <- IC3S1J3U_14_ini[i]
-  initial(IC4S1J3U_14[]) <- IC4S1J3U_14_ini[i]
-  
-  initial(IC1S1J3U_15[]) <- IC1S1J3U_15_ini[i]
-  initial(IC2S1J3U_15[]) <- IC2S1J3U_15_ini[i]
-  initial(IC3S1J3U_15[]) <- IC3S1J3U_15_ini[i]
-  initial(IC4S1J3U_15[]) <- IC4S1J3U_15_ini[i]
-  
-  initial(IC1S1J3U_16[]) <- IC1S1J3U_16_ini[i]
-  initial(IC2S1J3U_16[]) <- IC2S1J3U_16_ini[i]
-  initial(IC3S1J3U_16[]) <- IC3S1J3U_16_ini[i]
-  initial(IC4S1J3U_16[]) <- IC4S1J3U_16_ini[i]
-  
-  initial(IC1S1J3U_17[]) <- IC1S1J3U_17_ini[i]
-  initial(IC2S1J3U_17[]) <- IC2S1J3U_17_ini[i]
-  initial(IC3S1J3U_17[]) <- IC3S1J3U_17_ini[i]
-  initial(IC4S1J3U_17[]) <- IC4S1J3U_17_ini[i]
-  
-  
-  
-  initial(IC1S2J3U_10[]) <- IC1S2J3U_10_ini[i]
-  initial(IC2S2J3U_10[]) <- IC2S2J3U_10_ini[i]
-  initial(IC3S2J3U_10[]) <- IC3S2J3U_10_ini[i]
-  initial(IC4S2J3U_10[]) <- IC4S2J3U_10_ini[i]
-  
-  initial(IC1S2J3U_11[]) <- IC1S2J3U_11_ini[i]
-  initial(IC2S2J3U_11[]) <- IC2S2J3U_11_ini[i]
-  initial(IC3S2J3U_11[]) <- IC3S2J3U_11_ini[i]
-  initial(IC4S2J3U_11[]) <- IC4S2J3U_11_ini[i]
-  
-  initial(IC1S2J3U_12[]) <- IC1S2J3U_12_ini[i]
-  initial(IC2S2J3U_12[]) <- IC2S2J3U_12_ini[i]
-  initial(IC3S2J3U_12[]) <- IC3S2J3U_12_ini[i]
-  initial(IC4S2J3U_12[]) <- IC4S2J3U_12_ini[i]
-  
-  initial(IC1S2J3U_13[]) <- IC1S2J3U_13_ini[i]
-  initial(IC2S2J3U_13[]) <- IC2S2J3U_13_ini[i]
-  initial(IC3S2J3U_13[]) <- IC3S2J3U_13_ini[i]
-  initial(IC4S2J3U_13[]) <- IC4S2J3U_13_ini[i]
-  
-  initial(IC1S2J3U_14[]) <- IC1S2J3U_14_ini[i]
-  initial(IC2S2J3U_14[]) <- IC2S2J3U_14_ini[i]
-  initial(IC3S2J3U_14[]) <- IC3S2J3U_14_ini[i]
-  initial(IC4S2J3U_14[]) <- IC4S2J3U_14_ini[i]
-  
-  initial(IC1S2J3U_15[]) <- IC1S2J3U_15_ini[i]
-  initial(IC2S2J3U_15[]) <- IC2S2J3U_15_ini[i]
-  initial(IC3S2J3U_15[]) <- IC3S2J3U_15_ini[i]
-  initial(IC4S2J3U_15[]) <- IC4S2J3U_15_ini[i]
-  
-  initial(IC1S2J3U_16[]) <- IC1S2J3U_16_ini[i]
-  initial(IC2S2J3U_16[]) <- IC2S2J3U_16_ini[i]
-  initial(IC3S2J3U_16[]) <- IC3S2J3U_16_ini[i]
-  initial(IC4S2J3U_16[]) <- IC4S2J3U_16_ini[i]
-  
-  initial(IC1S2J3U_17[]) <- IC1S2J3U_17_ini[i]
-  initial(IC2S2J3U_17[]) <- IC2S2J3U_17_ini[i]
-  initial(IC3S2J3U_17[]) <- IC3S2J3U_17_ini[i]
-  initial(IC4S2J3U_17[]) <- IC4S2J3U_17_ini[i]
-  
-  
-  
-  initial(IC1S1J4U_10[]) <- IC1S1J4U_10_ini[i]
-  initial(IC2S1J4U_10[]) <- IC2S1J4U_10_ini[i]
-  initial(IC3S1J4U_10[]) <- IC3S1J4U_10_ini[i]
-  initial(IC4S1J4U_10[]) <- IC4S1J4U_10_ini[i]
-  
-  initial(IC1S1J4U_11[]) <- IC1S1J4U_11_ini[i]
-  initial(IC2S1J4U_11[]) <- IC2S1J4U_11_ini[i]
-  initial(IC3S1J4U_11[]) <- IC3S1J4U_11_ini[i]
-  initial(IC4S1J4U_11[]) <- IC4S1J4U_11_ini[i]
-  
-  initial(IC1S1J4U_12[]) <- IC1S1J4U_12_ini[i]
-  initial(IC2S1J4U_12[]) <- IC2S1J4U_12_ini[i]
-  initial(IC3S1J4U_12[]) <- IC3S1J4U_12_ini[i]
-  initial(IC4S1J4U_12[]) <- IC4S1J4U_12_ini[i]
-  
-  initial(IC1S1J4U_13[]) <- IC1S1J4U_13_ini[i]
-  initial(IC2S1J4U_13[]) <- IC2S1J4U_13_ini[i]
-  initial(IC3S1J4U_13[]) <- IC3S1J4U_13_ini[i]
-  initial(IC4S1J4U_13[]) <- IC4S1J4U_13_ini[i]
-  
-  initial(IC1S1J4U_14[]) <- IC1S1J4U_14_ini[i]
-  initial(IC2S1J4U_14[]) <- IC2S1J4U_14_ini[i]
-  initial(IC3S1J4U_14[]) <- IC3S1J4U_14_ini[i]
-  initial(IC4S1J4U_14[]) <- IC4S1J4U_14_ini[i]
-  
-  initial(IC1S1J4U_15[]) <- IC1S1J4U_15_ini[i]
-  initial(IC2S1J4U_15[]) <- IC2S1J4U_15_ini[i]
-  initial(IC3S1J4U_15[]) <- IC3S1J4U_15_ini[i]
-  initial(IC4S1J4U_15[]) <- IC4S1J4U_15_ini[i]
-  
-  initial(IC1S1J4U_16[]) <- IC1S1J4U_16_ini[i]
-  initial(IC2S1J4U_16[]) <- IC2S1J4U_16_ini[i]
-  initial(IC3S1J4U_16[]) <- IC3S1J4U_16_ini[i]
-  initial(IC4S1J4U_16[]) <- IC4S1J4U_16_ini[i]
-  
-  initial(IC1S1J4U_17[]) <- IC1S1J4U_17_ini[i]
-  initial(IC2S1J4U_17[]) <- IC2S1J4U_17_ini[i]
-  initial(IC3S1J4U_17[]) <- IC3S1J4U_17_ini[i]
-  initial(IC4S1J4U_17[]) <- IC4S1J4U_17_ini[i]
-  
-  
-  
-  initial(IC1S2J4U_10[]) <- IC1S2J4U_10_ini[i]
-  initial(IC2S2J4U_10[]) <- IC2S2J4U_10_ini[i]
-  initial(IC3S2J4U_10[]) <- IC3S2J4U_10_ini[i]
-  initial(IC4S2J4U_10[]) <- IC4S2J4U_10_ini[i]
-  
-  initial(IC1S2J4U_11[]) <- IC1S2J4U_11_ini[i]
-  initial(IC2S2J4U_11[]) <- IC2S2J4U_11_ini[i]
-  initial(IC3S2J4U_11[]) <- IC3S2J4U_11_ini[i]
-  initial(IC4S2J4U_11[]) <- IC4S2J4U_11_ini[i]
-  
-  initial(IC1S2J4U_12[]) <- IC1S2J4U_12_ini[i]
-  initial(IC2S2J4U_12[]) <- IC2S2J4U_12_ini[i]
-  initial(IC3S2J4U_12[]) <- IC3S2J4U_12_ini[i]
-  initial(IC4S2J4U_12[]) <- IC4S2J4U_12_ini[i]
-  
-  initial(IC1S2J4U_13[]) <- IC1S2J4U_13_ini[i]
-  initial(IC2S2J4U_13[]) <- IC2S2J4U_13_ini[i]
-  initial(IC3S2J4U_13[]) <- IC3S2J4U_13_ini[i]
-  initial(IC4S2J4U_13[]) <- IC4S2J4U_13_ini[i]
-  
-  initial(IC1S2J4U_14[]) <- IC1S2J4U_14_ini[i]
-  initial(IC2S2J4U_14[]) <- IC2S2J4U_14_ini[i]
-  initial(IC3S2J4U_14[]) <- IC3S2J4U_14_ini[i]
-  initial(IC4S2J4U_14[]) <- IC4S2J4U_14_ini[i]
-  
-  initial(IC1S2J4U_15[]) <- IC1S2J4U_15_ini[i]
-  initial(IC2S2J4U_15[]) <- IC2S2J4U_15_ini[i]
-  initial(IC3S2J4U_15[]) <- IC3S2J4U_15_ini[i]
-  initial(IC4S2J4U_15[]) <- IC4S2J4U_15_ini[i]
-  
-  initial(IC1S2J4U_16[]) <- IC1S2J4U_16_ini[i]
-  initial(IC2S2J4U_16[]) <- IC2S2J4U_16_ini[i]
-  initial(IC3S2J4U_16[]) <- IC3S2J4U_16_ini[i]
-  initial(IC4S2J4U_16[]) <- IC4S2J4U_16_ini[i]
-  
-  initial(IC1S2J4U_17[]) <- IC1S2J4U_17_ini[i]
-  initial(IC2S2J4U_17[]) <- IC2S2J4U_17_ini[i]
-  initial(IC3S2J4U_17[]) <- IC3S2J4U_17_ini[i]
-  initial(IC4S2J4U_17[]) <- IC4S2J4U_17_ini[i]
-  
-  
-  
-  initial(IC1S1J5U_10[]) <- IC1S1J5U_10_ini[i]
-  initial(IC2S1J5U_10[]) <- IC2S1J5U_10_ini[i]
-  initial(IC3S1J5U_10[]) <- IC3S1J5U_10_ini[i]
-  initial(IC4S1J5U_10[]) <- IC4S1J5U_10_ini[i]
-  
-  initial(IC1S1J5U_11[]) <- IC1S1J5U_11_ini[i]
-  initial(IC2S1J5U_11[]) <- IC2S1J5U_11_ini[i]
-  initial(IC3S1J5U_11[]) <- IC3S1J5U_11_ini[i]
-  initial(IC4S1J5U_11[]) <- IC4S1J5U_11_ini[i]
-  
-  initial(IC1S1J5U_12[]) <- IC1S1J5U_12_ini[i]
-  initial(IC2S1J5U_12[]) <- IC2S1J5U_12_ini[i]
-  initial(IC3S1J5U_12[]) <- IC3S1J5U_12_ini[i]
-  initial(IC4S1J5U_12[]) <- IC4S1J5U_12_ini[i]
-  
-  initial(IC1S1J5U_13[]) <- IC1S1J5U_13_ini[i]
-  initial(IC2S1J5U_13[]) <- IC2S1J5U_13_ini[i]
-  initial(IC3S1J5U_13[]) <- IC3S1J5U_13_ini[i]
-  initial(IC4S1J5U_13[]) <- IC4S1J5U_13_ini[i]
-  
-  initial(IC1S1J5U_14[]) <- IC1S1J5U_14_ini[i]
-  initial(IC2S1J5U_14[]) <- IC2S1J5U_14_ini[i]
-  initial(IC3S1J5U_14[]) <- IC3S1J5U_14_ini[i]
-  initial(IC4S1J5U_14[]) <- IC4S1J5U_14_ini[i]
-  
-  initial(IC1S1J5U_15[]) <- IC1S1J5U_15_ini[i]
-  initial(IC2S1J5U_15[]) <- IC2S1J5U_15_ini[i]
-  initial(IC3S1J5U_15[]) <- IC3S1J5U_15_ini[i]
-  initial(IC4S1J5U_15[]) <- IC4S1J5U_15_ini[i]
-  
-  initial(IC1S1J5U_16[]) <- IC1S1J5U_16_ini[i]
-  initial(IC2S1J5U_16[]) <- IC2S1J5U_16_ini[i]
-  initial(IC3S1J5U_16[]) <- IC3S1J5U_16_ini[i]
-  initial(IC4S1J5U_16[]) <- IC4S1J5U_16_ini[i]
-  
-  initial(IC1S1J5U_17[]) <- IC1S1J5U_17_ini[i]
-  initial(IC2S1J5U_17[]) <- IC2S1J5U_17_ini[i]
-  initial(IC3S1J5U_17[]) <- IC3S1J5U_17_ini[i]
-  initial(IC4S1J5U_17[]) <- IC4S1J5U_17_ini[i]
-  
-  
-  
-  initial(IC1S2J5U_10[]) <- IC1S2J5U_10_ini[i]
-  initial(IC2S2J5U_10[]) <- IC2S2J5U_10_ini[i]
-  initial(IC3S2J5U_10[]) <- IC3S2J5U_10_ini[i]
-  initial(IC4S2J5U_10[]) <- IC4S2J5U_10_ini[i]
-  
-  initial(IC1S2J5U_11[]) <- IC1S2J5U_11_ini[i]
-  initial(IC2S2J5U_11[]) <- IC2S2J5U_11_ini[i]
-  initial(IC3S2J5U_11[]) <- IC3S2J5U_11_ini[i]
-  initial(IC4S2J5U_11[]) <- IC4S2J5U_11_ini[i]
-  
-  initial(IC1S2J5U_12[]) <- IC1S2J5U_12_ini[i]
-  initial(IC2S2J5U_12[]) <- IC2S2J5U_12_ini[i]
-  initial(IC3S2J5U_12[]) <- IC3S2J5U_12_ini[i]
-  initial(IC4S2J5U_12[]) <- IC4S2J5U_12_ini[i]
-  
-  initial(IC1S2J5U_13[]) <- IC1S2J5U_13_ini[i]
-  initial(IC2S2J5U_13[]) <- IC2S2J5U_13_ini[i]
-  initial(IC3S2J5U_13[]) <- IC3S2J5U_13_ini[i]
-  initial(IC4S2J5U_13[]) <- IC4S2J5U_13_ini[i]
-  
-  initial(IC1S2J5U_14[]) <- IC1S2J5U_14_ini[i]
-  initial(IC2S2J5U_14[]) <- IC2S2J5U_14_ini[i]
-  initial(IC3S2J5U_14[]) <- IC3S2J5U_14_ini[i]
-  initial(IC4S2J5U_14[]) <- IC4S2J5U_14_ini[i]
-  
-  initial(IC1S2J5U_15[]) <- IC1S2J5U_15_ini[i]
-  initial(IC2S2J5U_15[]) <- IC2S2J5U_15_ini[i]
-  initial(IC3S2J5U_15[]) <- IC3S2J5U_15_ini[i]
-  initial(IC4S2J5U_15[]) <- IC4S2J5U_15_ini[i]
-  
-  initial(IC1S2J5U_16[]) <- IC1S2J5U_16_ini[i]
-  initial(IC2S2J5U_16[]) <- IC2S2J5U_16_ini[i]
-  initial(IC3S2J5U_16[]) <- IC3S2J5U_16_ini[i]
-  initial(IC4S2J5U_16[]) <- IC4S2J5U_16_ini[i]
-  
-  initial(IC1S2J5U_17[]) <- IC1S2J5U_17_ini[i]
-  initial(IC2S2J5U_17[]) <- IC2S2J5U_17_ini[i]
-  initial(IC3S2J5U_17[]) <- IC3S2J5U_17_ini[i]
-  initial(IC4S2J5U_17[]) <- IC4S2J5U_17_ini[i]
-  
-
+  IC1S1_10_ini[] <- user(0)
+  IC2S1_10_ini[] <- user(0)
+  IC3S1_10_ini[] <- user(0)
+  IC4S1_10_ini[] <- user(0)
+  
+  IC1S1_11_ini[] <- user(0)
+  IC2S1_11_ini[] <- user(0)
+  IC3S1_11_ini[] <- user(0)
+  IC4S1_11_ini[] <- user(0)
+  
+  IC1S1_12_ini[] <- user(0)
+  IC2S1_12_ini[] <- user(0)
+  IC3S1_12_ini[] <- user(0)
+  IC4S1_12_ini[] <- user(0)
+  
+  IC1S1_13_ini[] <- user(0)
+  IC2S1_13_ini[] <- user(0)
+  IC3S1_13_ini[] <- user(0)
+  IC4S1_13_ini[] <- user(0)
+  
+  IC1S1_14_ini[] <- user(0)
+  IC2S1_14_ini[] <- user(0)
+  IC3S1_14_ini[] <- user(0)
+  IC4S1_14_ini[] <- user(0)
+  
+  IC1S1_15_ini[] <- user(0)
+  IC2S1_15_ini[] <- user(0)
+  IC3S1_15_ini[] <- user(0)
+  IC4S1_15_ini[] <- user(0)
+  
+  IC1S1_16_ini[] <- user(0)
+  IC2S1_16_ini[] <- user(0)
+  IC3S1_16_ini[] <- user(0)
+  IC4S1_16_ini[] <- user(0)
+  
+  IC1S1_17_ini[] <- user(0)
+  IC2S1_17_ini[] <- user(0)
+  IC3S1_17_ini[] <- user(0)
+  IC4S1_17_ini[] <- user(0)
+  
+  
+  
+  IC1S2_10_ini[] <- user(0)
+  IC2S2_10_ini[] <- user(0)
+  IC3S2_10_ini[] <- user(0)
+  IC4S2_10_ini[] <- user(0)
+  
+  IC1S2_11_ini[] <- user(0)
+  IC2S2_11_ini[] <- user(0)
+  IC3S2_11_ini[] <- user(0)
+  IC4S2_11_ini[] <- user(0)
+  
+  IC1S2_12_ini[] <- user(0)
+  IC2S2_12_ini[] <- user(0)
+  IC3S2_12_ini[] <- user(0)
+  IC4S2_12_ini[] <- user(0)
+  
+  IC1S2_13_ini[] <- user(0)
+  IC2S2_13_ini[] <- user(0)
+  IC3S2_13_ini[] <- user(0)
+  IC4S2_13_ini[] <- user(0)
+  
+  IC1S2_14_ini[] <- user(0)
+  IC2S2_14_ini[] <- user(0)
+  IC3S2_14_ini[] <- user(0)
+  IC4S2_14_ini[] <- user(0)
+  
+  IC1S2_15_ini[] <- user(0)
+  IC2S2_15_ini[] <- user(0)
+  IC3S2_15_ini[] <- user(0)
+  IC4S2_15_ini[] <- user(0)
+  
+  IC1S2_16_ini[] <- user(0)
+  IC2S2_16_ini[] <- user(0)
+  IC3S2_16_ini[] <- user(0)
+  IC4S2_16_ini[] <- user(0)
+  
+  IC1S2_17_ini[] <- user(0)
+  IC2S2_17_ini[] <- user(0)
+  IC3S2_17_ini[] <- user(0)
+  IC4S2_17_ini[] <- user(0)
+  
+  
+  
+  
+  
+  EC1S1_10_ini[] <- user(0)
+  EC2S1_10_ini[] <- user(0)
+  EC3S1_10_ini[] <- user(0)
+  EC4S1_10_ini[] <- user(0)
+  
+  EC1S1_11_ini[] <- user(0)
+  EC2S1_11_ini[] <- user(0)
+  EC3S1_11_ini[] <- user(0)
+  EC4S1_11_ini[] <- user(0)
+  
+  EC1S1_12_ini[] <- user(0)
+  EC2S1_12_ini[] <- user(0)
+  EC3S1_12_ini[] <- user(0)
+  EC4S1_12_ini[] <- user(0)
+  
+  EC1S1_13_ini[] <- user(0)
+  EC2S1_13_ini[] <- user(0)
+  EC3S1_13_ini[] <- user(0)
+  EC4S1_13_ini[] <- user(0)
+  
+  EC1S1_14_ini[] <- user(0)
+  EC2S1_14_ini[] <- user(0)
+  EC3S1_14_ini[] <- user(0)
+  EC4S1_14_ini[] <- user(0)
+  
+  EC1S1_15_ini[] <- user(0)
+  EC2S1_15_ini[] <- user(0)
+  EC3S1_15_ini[] <- user(0)
+  EC4S1_15_ini[] <- user(0)
+  
+  EC1S1_16_ini[] <- user(0)
+  EC2S1_16_ini[] <- user(0)
+  EC3S1_16_ini[] <- user(0)
+  EC4S1_16_ini[] <- user(0)
+  
+  EC1S1_17_ini[] <- user(0)
+  EC2S1_17_ini[] <- user(0)
+  EC3S1_17_ini[] <- user(0)
+  EC4S1_17_ini[] <- user(0)
+  
+  
+  
+  EC1S2_10_ini[] <- user(0)
+  EC2S2_10_ini[] <- user(0)
+  EC3S2_10_ini[] <- user(0)
+  EC4S2_10_ini[] <- user(0)
+  
+  EC1S2_11_ini[] <- user(0)
+  EC2S2_11_ini[] <- user(0)
+  EC3S2_11_ini[] <- user(0)
+  EC4S2_11_ini[] <- user(0)
+  
+  EC1S2_12_ini[] <- user(0)
+  EC2S2_12_ini[] <- user(0)
+  EC3S2_12_ini[] <- user(0)
+  EC4S2_12_ini[] <- user(0)
+  
+  EC1S2_13_ini[] <- user(0)
+  EC2S2_13_ini[] <- user(0)
+  EC3S2_13_ini[] <- user(0)
+  EC4S2_13_ini[] <- user(0)
+  
+  EC1S2_14_ini[] <- user(0)
+  EC2S2_14_ini[] <- user(0)
+  EC3S2_14_ini[] <- user(0)
+  EC4S2_14_ini[] <- user(0)
+  
+  EC1S2_15_ini[] <- user(0)
+  EC2S2_15_ini[] <- user(0)
+  EC3S2_15_ini[] <- user(0)
+  EC4S2_15_ini[] <- user(0)
+  
+  EC1S2_16_ini[] <- user(0)
+  EC2S2_16_ini[] <- user(0)
+  EC3S2_16_ini[] <- user(0)
+  EC4S2_16_ini[] <- user(0)
+  
+  EC1S2_17_ini[] <- user(0)
+  EC2S2_17_ini[] <- user(0)
+  EC3S2_17_ini[] <- user(0)
+  EC4S2_17_ini[] <- user(0)
+  
+  
+  
+  initial(IC1S1_10[]) <- IC1S1_10_ini[i]
+  initial(IC2S1_10[]) <- IC2S1_10_ini[i]
+  initial(IC3S1_10[]) <- IC3S1_10_ini[i]
+  initial(IC4S1_10[]) <- IC4S1_10_ini[i]
+  
+  initial(IC1S1_11[]) <- IC1S1_11_ini[i]
+  initial(IC2S1_11[]) <- IC2S1_11_ini[i]
+  initial(IC3S1_11[]) <- IC3S1_11_ini[i]
+  initial(IC4S1_11[]) <- IC4S1_11_ini[i]
+  
+  initial(IC1S1_12[]) <- IC1S1_12_ini[i]
+  initial(IC2S1_12[]) <- IC2S1_12_ini[i]
+  initial(IC3S1_12[]) <- IC3S1_12_ini[i]
+  initial(IC4S1_12[]) <- IC4S1_12_ini[i]
+  
+  initial(IC1S1_13[]) <- IC1S1_13_ini[i]
+  initial(IC2S1_13[]) <- IC2S1_13_ini[i]
+  initial(IC3S1_13[]) <- IC3S1_13_ini[i]
+  initial(IC4S1_13[]) <- IC4S1_13_ini[i]
+  
+  initial(IC1S1_14[]) <- IC1S1_14_ini[i]
+  initial(IC2S1_14[]) <- IC2S1_14_ini[i]
+  initial(IC3S1_14[]) <- IC3S1_14_ini[i]
+  initial(IC4S1_14[]) <- IC4S1_14_ini[i]
+  
+  initial(IC1S1_15[]) <- IC1S1_15_ini[i]
+  initial(IC2S1_15[]) <- IC2S1_15_ini[i]
+  initial(IC3S1_15[]) <- IC3S1_15_ini[i]
+  initial(IC4S1_15[]) <- IC4S1_15_ini[i]
+  
+  initial(IC1S1_16[]) <- IC1S1_16_ini[i]
+  initial(IC2S1_16[]) <- IC2S1_16_ini[i]
+  initial(IC3S1_16[]) <- IC3S1_16_ini[i]
+  initial(IC4S1_16[]) <- IC4S1_16_ini[i]
+  
+  initial(IC1S1_17[]) <- IC1S1_17_ini[i]
+  initial(IC2S1_17[]) <- IC2S1_17_ini[i]
+  initial(IC3S1_17[]) <- IC3S1_17_ini[i]
+  initial(IC4S1_17[]) <- IC4S1_17_ini[i]
+  
+  
+  
+  initial(IC1S2_10[]) <- IC1S2_10_ini[i]
+  initial(IC2S2_10[]) <- IC2S2_10_ini[i]
+  initial(IC3S2_10[]) <- IC3S2_10_ini[i]
+  initial(IC4S2_10[]) <- IC4S2_10_ini[i]
+  
+  initial(IC1S2_11[]) <- IC1S2_11_ini[i]
+  initial(IC2S2_11[]) <- IC2S2_11_ini[i]
+  initial(IC3S2_11[]) <- IC3S2_11_ini[i]
+  initial(IC4S2_11[]) <- IC4S2_11_ini[i]
+  
+  initial(IC1S2_12[]) <- IC1S2_12_ini[i]
+  initial(IC2S2_12[]) <- IC2S2_12_ini[i]
+  initial(IC3S2_12[]) <- IC3S2_12_ini[i]
+  initial(IC4S2_12[]) <- IC4S2_12_ini[i]
+  
+  initial(IC1S2_13[]) <- IC1S2_13_ini[i]
+  initial(IC2S2_13[]) <- IC2S2_13_ini[i]
+  initial(IC3S2_13[]) <- IC3S2_13_ini[i]
+  initial(IC4S2_13[]) <- IC4S2_13_ini[i]
+  
+  initial(IC1S2_14[]) <- IC1S2_14_ini[i]
+  initial(IC2S2_14[]) <- IC2S2_14_ini[i]
+  initial(IC3S2_14[]) <- IC3S2_14_ini[i]
+  initial(IC4S2_14[]) <- IC4S2_14_ini[i]
+  
+  initial(IC1S2_15[]) <- IC1S2_15_ini[i]
+  initial(IC2S2_15[]) <- IC2S2_15_ini[i]
+  initial(IC3S2_15[]) <- IC3S2_15_ini[i]
+  initial(IC4S2_15[]) <- IC4S2_15_ini[i]
+  
+  initial(IC1S2_16[]) <- IC1S2_16_ini[i]
+  initial(IC2S2_16[]) <- IC2S2_16_ini[i]
+  initial(IC3S2_16[]) <- IC3S2_16_ini[i]
+  initial(IC4S2_16[]) <- IC4S2_16_ini[i]
+  
+  initial(IC1S2_17[]) <- IC1S2_17_ini[i]
+  initial(IC2S2_17[]) <- IC2S2_17_ini[i]
+  initial(IC3S2_17[]) <- IC3S2_17_ini[i]
+  initial(IC4S2_17[]) <- IC4S2_17_ini[i]
+  
+  
+  initial(EC1S1_10[]) <- EC1S1_10_ini[i]
+  initial(EC2S1_10[]) <- EC2S1_10_ini[i]
+  initial(EC3S1_10[]) <- EC3S1_10_ini[i]
+  initial(EC4S1_10[]) <- EC4S1_10_ini[i]
+  
+  initial(EC1S1_11[]) <- EC1S1_11_ini[i]
+  initial(EC2S1_11[]) <- EC2S1_11_ini[i]
+  initial(EC3S1_11[]) <- EC3S1_11_ini[i]
+  initial(EC4S1_11[]) <- EC4S1_11_ini[i]
+  
+  initial(EC1S1_12[]) <- EC1S1_12_ini[i]
+  initial(EC2S1_12[]) <- EC2S1_12_ini[i]
+  initial(EC3S1_12[]) <- EC3S1_12_ini[i]
+  initial(EC4S1_12[]) <- EC4S1_12_ini[i]
+  
+  initial(EC1S1_13[]) <- EC1S1_13_ini[i]
+  initial(EC2S1_13[]) <- EC2S1_13_ini[i]
+  initial(EC3S1_13[]) <- EC3S1_13_ini[i]
+  initial(EC4S1_13[]) <- EC4S1_13_ini[i]
+  
+  initial(EC1S1_14[]) <- EC1S1_14_ini[i]
+  initial(EC2S1_14[]) <- EC2S1_14_ini[i]
+  initial(EC3S1_14[]) <- EC3S1_14_ini[i]
+  initial(EC4S1_14[]) <- EC4S1_14_ini[i]
+  
+  initial(EC1S1_15[]) <- EC1S1_15_ini[i]
+  initial(EC2S1_15[]) <- EC2S1_15_ini[i]
+  initial(EC3S1_15[]) <- EC3S1_15_ini[i]
+  initial(EC4S1_15[]) <- EC4S1_15_ini[i]
+  
+  initial(EC1S1_16[]) <- EC1S1_16_ini[i]
+  initial(EC2S1_16[]) <- EC2S1_16_ini[i]
+  initial(EC3S1_16[]) <- EC3S1_16_ini[i]
+  initial(EC4S1_16[]) <- EC4S1_16_ini[i]
+  
+  initial(EC1S1_17[]) <- EC1S1_17_ini[i]
+  initial(EC2S1_17[]) <- EC2S1_17_ini[i]
+  initial(EC3S1_17[]) <- EC3S1_17_ini[i]
+  initial(EC4S1_17[]) <- EC4S1_17_ini[i]
+  
+  
+  
+  initial(EC1S2_10[]) <- EC1S2_10_ini[i]
+  initial(EC2S2_10[]) <- EC2S2_10_ini[i]
+  initial(EC3S2_10[]) <- EC3S2_10_ini[i]
+  initial(EC4S2_10[]) <- EC4S2_10_ini[i]
+  
+  initial(EC1S2_11[]) <- EC1S2_11_ini[i]
+  initial(EC2S2_11[]) <- EC2S2_11_ini[i]
+  initial(EC3S2_11[]) <- EC3S2_11_ini[i]
+  initial(EC4S2_11[]) <- EC4S2_11_ini[i]
+  
+  initial(EC1S2_12[]) <- EC1S2_12_ini[i]
+  initial(EC2S2_12[]) <- EC2S2_12_ini[i]
+  initial(EC3S2_12[]) <- EC3S2_12_ini[i]
+  initial(EC4S2_12[]) <- EC4S2_12_ini[i]
+  
+  initial(EC1S2_13[]) <- EC1S2_13_ini[i]
+  initial(EC2S2_13[]) <- EC2S2_13_ini[i]
+  initial(EC3S2_13[]) <- EC3S2_13_ini[i]
+  initial(EC4S2_13[]) <- EC4S2_13_ini[i]
+  
+  initial(EC1S2_14[]) <- EC1S2_14_ini[i]
+  initial(EC2S2_14[]) <- EC2S2_14_ini[i]
+  initial(EC3S2_14[]) <- EC3S2_14_ini[i]
+  initial(EC4S2_14[]) <- EC4S2_14_ini[i]
+  
+  initial(EC1S2_15[]) <- EC1S2_15_ini[i]
+  initial(EC2S2_15[]) <- EC2S2_15_ini[i]
+  initial(EC3S2_15[]) <- EC3S2_15_ini[i]
+  initial(EC4S2_15[]) <- EC4S2_15_ini[i]
+  
+  initial(EC1S2_16[]) <- EC1S2_16_ini[i]
+  initial(EC2S2_16[]) <- EC2S2_16_ini[i]
+  initial(EC3S2_16[]) <- EC3S2_16_ini[i]
+  initial(EC4S2_16[]) <- EC4S2_16_ini[i]
+  
+  initial(EC1S2_17[]) <- EC1S2_17_ini[i]
+  initial(EC2S2_17[]) <- EC2S2_17_ini[i]
+  initial(EC3S2_17[]) <- EC3S2_17_ini[i]
+  initial(EC4S2_17[]) <- EC4S2_17_ini[i]
+  
+  
+  
+  
   
   ##############################################################################################################################
   ## SETTING DIMENSIONS ####################################################################
@@ -2198,846 +638,341 @@ sep_model = odin::odin({
   ## model states ####################################################################
   ##############################################################################################################################
   
-  dim(IC1S1J1U_10) <- N_gender
-  dim(IC2S1J1U_10) <- N_gender
-  dim(IC3S1J1U_10) <- N_gender
-  dim(IC4S1J1U_10) <- N_gender
-  
-  dim(IC1S1J1U_11) <- N_gender
-  dim(IC2S1J1U_11) <- N_gender
-  dim(IC3S1J1U_11) <- N_gender
-  dim(IC4S1J1U_11) <- N_gender
-  
-  dim(IC1S1J1U_12) <- N_gender
-  dim(IC2S1J1U_12) <- N_gender
-  dim(IC3S1J1U_12) <- N_gender
-  dim(IC4S1J1U_12) <- N_gender
-  
-  dim(IC1S1J1U_13) <- N_gender
-  dim(IC2S1J1U_13) <- N_gender
-  dim(IC3S1J1U_13) <- N_gender
-  dim(IC4S1J1U_13) <- N_gender
-  
-  dim(IC1S1J1U_14) <- N_gender
-  dim(IC2S1J1U_14) <- N_gender
-  dim(IC3S1J1U_14) <- N_gender
-  dim(IC4S1J1U_14) <- N_gender
-  
-  dim(IC1S1J1U_15) <- N_gender
-  dim(IC2S1J1U_15) <- N_gender
-  dim(IC3S1J1U_15) <- N_gender
-  dim(IC4S1J1U_15) <- N_gender
-  
-  dim(IC1S1J1U_16) <- N_gender
-  dim(IC2S1J1U_16) <- N_gender
-  dim(IC3S1J1U_16) <- N_gender
-  dim(IC4S1J1U_16) <- N_gender
-  
-  dim(IC1S1J1U_17) <- N_gender
-  dim(IC2S1J1U_17) <- N_gender
-  dim(IC3S1J1U_17) <- N_gender
-  dim(IC4S1J1U_17) <- N_gender
-  
-  
-  
-  dim(IC1S2J1U_10) <- N_gender
-  dim(IC2S2J1U_10) <- N_gender
-  dim(IC3S2J1U_10) <- N_gender
-  dim(IC4S2J1U_10) <- N_gender
-  
-  dim(IC1S2J1U_11) <- N_gender
-  dim(IC2S2J1U_11) <- N_gender
-  dim(IC3S2J1U_11) <- N_gender
-  dim(IC4S2J1U_11) <- N_gender
-  
-  dim(IC1S2J1U_12) <- N_gender
-  dim(IC2S2J1U_12) <- N_gender
-  dim(IC3S2J1U_12) <- N_gender
-  dim(IC4S2J1U_12) <- N_gender
-  
-  dim(IC1S2J1U_13) <- N_gender
-  dim(IC2S2J1U_13) <- N_gender
-  dim(IC3S2J1U_13) <- N_gender
-  dim(IC4S2J1U_13) <- N_gender
-  
-  dim(IC1S2J1U_14) <- N_gender
-  dim(IC2S2J1U_14) <- N_gender
-  dim(IC3S2J1U_14) <- N_gender
-  dim(IC4S2J1U_14) <- N_gender
-  
-  dim(IC1S2J1U_15) <- N_gender
-  dim(IC2S2J1U_15) <- N_gender
-  dim(IC3S2J1U_15) <- N_gender
-  dim(IC4S2J1U_15) <- N_gender
-  
-  dim(IC1S2J1U_16) <- N_gender
-  dim(IC2S2J1U_16) <- N_gender
-  dim(IC3S2J1U_16) <- N_gender
-  dim(IC4S2J1U_16) <- N_gender
-  
-  dim(IC1S2J1U_17) <- N_gender
-  dim(IC2S2J1U_17) <- N_gender
-  dim(IC3S2J1U_17) <- N_gender
-  dim(IC4S2J1U_17) <- N_gender
-  
-  
-  
-  dim(IC1S1J2U_10) <- N_gender
-  dim(IC2S1J2U_10) <- N_gender
-  dim(IC3S1J2U_10) <- N_gender
-  dim(IC4S1J2U_10) <- N_gender
-  
-  dim(IC1S1J2U_11) <- N_gender
-  dim(IC2S1J2U_11) <- N_gender
-  dim(IC3S1J2U_11) <- N_gender
-  dim(IC4S1J2U_11) <- N_gender
-  
-  dim(IC1S1J2U_12) <- N_gender
-  dim(IC2S1J2U_12) <- N_gender
-  dim(IC3S1J2U_12) <- N_gender
-  dim(IC4S1J2U_12) <- N_gender
-  
-  dim(IC1S1J2U_13) <- N_gender
-  dim(IC2S1J2U_13) <- N_gender
-  dim(IC3S1J2U_13) <- N_gender
-  dim(IC4S1J2U_13) <- N_gender
-  
-  dim(IC1S1J2U_14) <- N_gender
-  dim(IC2S1J2U_14) <- N_gender
-  dim(IC3S1J2U_14) <- N_gender
-  dim(IC4S1J2U_14) <- N_gender
-  
-  dim(IC1S1J2U_15) <- N_gender
-  dim(IC2S1J2U_15) <- N_gender
-  dim(IC3S1J2U_15) <- N_gender
-  dim(IC4S1J2U_15) <- N_gender
-  
-  dim(IC1S1J2U_16) <- N_gender
-  dim(IC2S1J2U_16) <- N_gender
-  dim(IC3S1J2U_16) <- N_gender
-  dim(IC4S1J2U_16) <- N_gender
-  
-  dim(IC1S1J2U_17) <- N_gender
-  dim(IC2S1J2U_17) <- N_gender
-  dim(IC3S1J2U_17) <- N_gender
-  dim(IC4S1J2U_17) <- N_gender
-  
-  
-  
-  dim(IC1S2J2U_10) <- N_gender
-  dim(IC2S2J2U_10) <- N_gender
-  dim(IC3S2J2U_10) <- N_gender
-  dim(IC4S2J2U_10) <- N_gender
-  
-  dim(IC1S2J2U_11) <- N_gender
-  dim(IC2S2J2U_11) <- N_gender
-  dim(IC3S2J2U_11) <- N_gender
-  dim(IC4S2J2U_11) <- N_gender
-  
-  dim(IC1S2J2U_12) <- N_gender
-  dim(IC2S2J2U_12) <- N_gender
-  dim(IC3S2J2U_12) <- N_gender
-  dim(IC4S2J2U_12) <- N_gender
-  
-  dim(IC1S2J2U_13) <- N_gender
-  dim(IC2S2J2U_13) <- N_gender
-  dim(IC3S2J2U_13) <- N_gender
-  dim(IC4S2J2U_13) <- N_gender
-  
-  dim(IC1S2J2U_14) <- N_gender
-  dim(IC2S2J2U_14) <- N_gender
-  dim(IC3S2J2U_14) <- N_gender
-  dim(IC4S2J2U_14) <- N_gender
-  
-  dim(IC1S2J2U_15) <- N_gender
-  dim(IC2S2J2U_15) <- N_gender
-  dim(IC3S2J2U_15) <- N_gender
-  dim(IC4S2J2U_15) <- N_gender
-  
-  dim(IC1S2J2U_16) <- N_gender
-  dim(IC2S2J2U_16) <- N_gender
-  dim(IC3S2J2U_16) <- N_gender
-  dim(IC4S2J2U_16) <- N_gender
-  
-  dim(IC1S2J2U_17) <- N_gender
-  dim(IC2S2J2U_17) <- N_gender
-  dim(IC3S2J2U_17) <- N_gender
-  dim(IC4S2J2U_17) <- N_gender
-  
-  
-  
-  dim(IC1S1J3U_10) <- N_gender
-  dim(IC2S1J3U_10) <- N_gender
-  dim(IC3S1J3U_10) <- N_gender
-  dim(IC4S1J3U_10) <- N_gender
-  
-  dim(IC1S1J3U_11) <- N_gender
-  dim(IC2S1J3U_11) <- N_gender
-  dim(IC3S1J3U_11) <- N_gender
-  dim(IC4S1J3U_11) <- N_gender
-  
-  dim(IC1S1J3U_12) <- N_gender
-  dim(IC2S1J3U_12) <- N_gender
-  dim(IC3S1J3U_12) <- N_gender
-  dim(IC4S1J3U_12) <- N_gender
-  
-  dim(IC1S1J3U_13) <- N_gender
-  dim(IC2S1J3U_13) <- N_gender
-  dim(IC3S1J3U_13) <- N_gender
-  dim(IC4S1J3U_13) <- N_gender
-  
-  dim(IC1S1J3U_14) <- N_gender
-  dim(IC2S1J3U_14) <- N_gender
-  dim(IC3S1J3U_14) <- N_gender
-  dim(IC4S1J3U_14) <- N_gender
-  
-  dim(IC1S1J3U_15) <- N_gender
-  dim(IC2S1J3U_15) <- N_gender
-  dim(IC3S1J3U_15) <- N_gender
-  dim(IC4S1J3U_15) <- N_gender
-  
-  dim(IC1S1J3U_16) <- N_gender
-  dim(IC2S1J3U_16) <- N_gender
-  dim(IC3S1J3U_16) <- N_gender
-  dim(IC4S1J3U_16) <- N_gender
-  
-  dim(IC1S1J3U_17) <- N_gender
-  dim(IC2S1J3U_17) <- N_gender
-  dim(IC3S1J3U_17) <- N_gender
-  dim(IC4S1J3U_17) <- N_gender
-  
-  
-  
-  dim(IC1S2J3U_10) <- N_gender
-  dim(IC2S2J3U_10) <- N_gender
-  dim(IC3S2J3U_10) <- N_gender
-  dim(IC4S2J3U_10) <- N_gender
-  
-  dim(IC1S2J3U_11) <- N_gender
-  dim(IC2S2J3U_11) <- N_gender
-  dim(IC3S2J3U_11) <- N_gender
-  dim(IC4S2J3U_11) <- N_gender
-  
-  dim(IC1S2J3U_12) <- N_gender
-  dim(IC2S2J3U_12) <- N_gender
-  dim(IC3S2J3U_12) <- N_gender
-  dim(IC4S2J3U_12) <- N_gender
-  
-  dim(IC1S2J3U_13) <- N_gender
-  dim(IC2S2J3U_13) <- N_gender
-  dim(IC3S2J3U_13) <- N_gender
-  dim(IC4S2J3U_13) <- N_gender
-  
-  dim(IC1S2J3U_14) <- N_gender
-  dim(IC2S2J3U_14) <- N_gender
-  dim(IC3S2J3U_14) <- N_gender
-  dim(IC4S2J3U_14) <- N_gender
-  
-  dim(IC1S2J3U_15) <- N_gender
-  dim(IC2S2J3U_15) <- N_gender
-  dim(IC3S2J3U_15) <- N_gender
-  dim(IC4S2J3U_15) <- N_gender
-  
-  dim(IC1S2J3U_16) <- N_gender
-  dim(IC2S2J3U_16) <- N_gender
-  dim(IC3S2J3U_16) <- N_gender
-  dim(IC4S2J3U_16) <- N_gender
-  
-  dim(IC1S2J3U_17) <- N_gender
-  dim(IC2S2J3U_17) <- N_gender
-  dim(IC3S2J3U_17) <- N_gender
-  dim(IC4S2J3U_17) <- N_gender
-  
-  
-  
-  dim(IC1S1J4U_10) <- N_gender
-  dim(IC2S1J4U_10) <- N_gender
-  dim(IC3S1J4U_10) <- N_gender
-  dim(IC4S1J4U_10) <- N_gender
-  
-  dim(IC1S1J4U_11) <- N_gender
-  dim(IC2S1J4U_11) <- N_gender
-  dim(IC3S1J4U_11) <- N_gender
-  dim(IC4S1J4U_11) <- N_gender
-  
-  dim(IC1S1J4U_12) <- N_gender
-  dim(IC2S1J4U_12) <- N_gender
-  dim(IC3S1J4U_12) <- N_gender
-  dim(IC4S1J4U_12) <- N_gender
-  
-  dim(IC1S1J4U_13) <- N_gender
-  dim(IC2S1J4U_13) <- N_gender
-  dim(IC3S1J4U_13) <- N_gender
-  dim(IC4S1J4U_13) <- N_gender
-  
-  dim(IC1S1J4U_14) <- N_gender
-  dim(IC2S1J4U_14) <- N_gender
-  dim(IC3S1J4U_14) <- N_gender
-  dim(IC4S1J4U_14) <- N_gender
-  
-  dim(IC1S1J4U_15) <- N_gender
-  dim(IC2S1J4U_15) <- N_gender
-  dim(IC3S1J4U_15) <- N_gender
-  dim(IC4S1J4U_15) <- N_gender
-  
-  dim(IC1S1J4U_16) <- N_gender
-  dim(IC2S1J4U_16) <- N_gender
-  dim(IC3S1J4U_16) <- N_gender
-  dim(IC4S1J4U_16) <- N_gender
-  
-  dim(IC1S1J4U_17) <- N_gender
-  dim(IC2S1J4U_17) <- N_gender
-  dim(IC3S1J4U_17) <- N_gender
-  dim(IC4S1J4U_17) <- N_gender
-  
-  
-  
-  dim(IC1S2J4U_10) <- N_gender
-  dim(IC2S2J4U_10) <- N_gender
-  dim(IC3S2J4U_10) <- N_gender
-  dim(IC4S2J4U_10) <- N_gender
-  
-  dim(IC1S2J4U_11) <- N_gender
-  dim(IC2S2J4U_11) <- N_gender
-  dim(IC3S2J4U_11) <- N_gender
-  dim(IC4S2J4U_11) <- N_gender
-  
-  dim(IC1S2J4U_12) <- N_gender
-  dim(IC2S2J4U_12) <- N_gender
-  dim(IC3S2J4U_12) <- N_gender
-  dim(IC4S2J4U_12) <- N_gender
-  
-  dim(IC1S2J4U_13) <- N_gender
-  dim(IC2S2J4U_13) <- N_gender
-  dim(IC3S2J4U_13) <- N_gender
-  dim(IC4S2J4U_13) <- N_gender
-  
-  dim(IC1S2J4U_14) <- N_gender
-  dim(IC2S2J4U_14) <- N_gender
-  dim(IC3S2J4U_14) <- N_gender
-  dim(IC4S2J4U_14) <- N_gender
-  
-  dim(IC1S2J4U_15) <- N_gender
-  dim(IC2S2J4U_15) <- N_gender
-  dim(IC3S2J4U_15) <- N_gender
-  dim(IC4S2J4U_15) <- N_gender
-  
-  dim(IC1S2J4U_16) <- N_gender
-  dim(IC2S2J4U_16) <- N_gender
-  dim(IC3S2J4U_16) <- N_gender
-  dim(IC4S2J4U_16) <- N_gender
-  
-  dim(IC1S2J4U_17) <- N_gender
-  dim(IC2S2J4U_17) <- N_gender
-  dim(IC3S2J4U_17) <- N_gender
-  dim(IC4S2J4U_17) <- N_gender
-  
-  
-  
-  dim(IC1S1J5U_10) <- N_gender
-  dim(IC2S1J5U_10) <- N_gender
-  dim(IC3S1J5U_10) <- N_gender
-  dim(IC4S1J5U_10) <- N_gender
-  
-  dim(IC1S1J5U_11) <- N_gender
-  dim(IC2S1J5U_11) <- N_gender
-  dim(IC3S1J5U_11) <- N_gender
-  dim(IC4S1J5U_11) <- N_gender
-  
-  dim(IC1S1J5U_12) <- N_gender
-  dim(IC2S1J5U_12) <- N_gender
-  dim(IC3S1J5U_12) <- N_gender
-  dim(IC4S1J5U_12) <- N_gender
-  
-  dim(IC1S1J5U_13) <- N_gender
-  dim(IC2S1J5U_13) <- N_gender
-  dim(IC3S1J5U_13) <- N_gender
-  dim(IC4S1J5U_13) <- N_gender
-  
-  dim(IC1S1J5U_14) <- N_gender
-  dim(IC2S1J5U_14) <- N_gender
-  dim(IC3S1J5U_14) <- N_gender
-  dim(IC4S1J5U_14) <- N_gender
-  
-  dim(IC1S1J5U_15) <- N_gender
-  dim(IC2S1J5U_15) <- N_gender
-  dim(IC3S1J5U_15) <- N_gender
-  dim(IC4S1J5U_15) <- N_gender
-  
-  dim(IC1S1J5U_16) <- N_gender
-  dim(IC2S1J5U_16) <- N_gender
-  dim(IC3S1J5U_16) <- N_gender
-  dim(IC4S1J5U_16) <- N_gender
-  
-  dim(IC1S1J5U_17) <- N_gender
-  dim(IC2S1J5U_17) <- N_gender
-  dim(IC3S1J5U_17) <- N_gender
-  dim(IC4S1J5U_17) <- N_gender
-  
-  
-  
-  dim(IC1S2J5U_10) <- N_gender
-  dim(IC2S2J5U_10) <- N_gender
-  dim(IC3S2J5U_10) <- N_gender
-  dim(IC4S2J5U_10) <- N_gender
-  
-  dim(IC1S2J5U_11) <- N_gender
-  dim(IC2S2J5U_11) <- N_gender
-  dim(IC3S2J5U_11) <- N_gender
-  dim(IC4S2J5U_11) <- N_gender
-  
-  dim(IC1S2J5U_12) <- N_gender
-  dim(IC2S2J5U_12) <- N_gender
-  dim(IC3S2J5U_12) <- N_gender
-  dim(IC4S2J5U_12) <- N_gender
-  
-  dim(IC1S2J5U_13) <- N_gender
-  dim(IC2S2J5U_13) <- N_gender
-  dim(IC3S2J5U_13) <- N_gender
-  dim(IC4S2J5U_13) <- N_gender
-  
-  dim(IC1S2J5U_14) <- N_gender
-  dim(IC2S2J5U_14) <- N_gender
-  dim(IC3S2J5U_14) <- N_gender
-  dim(IC4S2J5U_14) <- N_gender
-  
-  dim(IC1S2J5U_15) <- N_gender
-  dim(IC2S2J5U_15) <- N_gender
-  dim(IC3S2J5U_15) <- N_gender
-  dim(IC4S2J5U_15) <- N_gender
-  
-  dim(IC1S2J5U_16) <- N_gender
-  dim(IC2S2J5U_16) <- N_gender
-  dim(IC3S2J5U_16) <- N_gender
-  dim(IC4S2J5U_16) <- N_gender
-  
-  dim(IC1S2J5U_17) <- N_gender
-  dim(IC2S2J5U_17) <- N_gender
-  dim(IC3S2J5U_17) <- N_gender
-  dim(IC4S2J5U_17) <- N_gender
- 
+  dim(IC1S1_10) <- N_gender
+  dim(IC2S1_10) <- N_gender
+  dim(IC3S1_10) <- N_gender
+  dim(IC4S1_10) <- N_gender
+  
+  dim(IC1S1_11) <- N_gender
+  dim(IC2S1_11) <- N_gender
+  dim(IC3S1_11) <- N_gender
+  dim(IC4S1_11) <- N_gender
+  
+  dim(IC1S1_12) <- N_gender
+  dim(IC2S1_12) <- N_gender
+  dim(IC3S1_12) <- N_gender
+  dim(IC4S1_12) <- N_gender
+  
+  dim(IC1S1_13) <- N_gender
+  dim(IC2S1_13) <- N_gender
+  dim(IC3S1_13) <- N_gender
+  dim(IC4S1_13) <- N_gender
+  
+  dim(IC1S1_14) <- N_gender
+  dim(IC2S1_14) <- N_gender
+  dim(IC3S1_14) <- N_gender
+  dim(IC4S1_14) <- N_gender
+  
+  dim(IC1S1_15) <- N_gender
+  dim(IC2S1_15) <- N_gender
+  dim(IC3S1_15) <- N_gender
+  dim(IC4S1_15) <- N_gender
+  
+  dim(IC1S1_16) <- N_gender
+  dim(IC2S1_16) <- N_gender
+  dim(IC3S1_16) <- N_gender
+  dim(IC4S1_16) <- N_gender
+  
+  dim(IC1S1_17) <- N_gender
+  dim(IC2S1_17) <- N_gender
+  dim(IC3S1_17) <- N_gender
+  dim(IC4S1_17) <- N_gender
+  
+  
+  
+  dim(IC1S2_10) <- N_gender
+  dim(IC2S2_10) <- N_gender
+  dim(IC3S2_10) <- N_gender
+  dim(IC4S2_10) <- N_gender
+  
+  dim(IC1S2_11) <- N_gender
+  dim(IC2S2_11) <- N_gender
+  dim(IC3S2_11) <- N_gender
+  dim(IC4S2_11) <- N_gender
+  
+  dim(IC1S2_12) <- N_gender
+  dim(IC2S2_12) <- N_gender
+  dim(IC3S2_12) <- N_gender
+  dim(IC4S2_12) <- N_gender
+  
+  dim(IC1S2_13) <- N_gender
+  dim(IC2S2_13) <- N_gender
+  dim(IC3S2_13) <- N_gender
+  dim(IC4S2_13) <- N_gender
+  
+  dim(IC1S2_14) <- N_gender
+  dim(IC2S2_14) <- N_gender
+  dim(IC3S2_14) <- N_gender
+  dim(IC4S2_14) <- N_gender
+  
+  dim(IC1S2_15) <- N_gender
+  dim(IC2S2_15) <- N_gender
+  dim(IC3S2_15) <- N_gender
+  dim(IC4S2_15) <- N_gender
+  
+  dim(IC1S2_16) <- N_gender
+  dim(IC2S2_16) <- N_gender
+  dim(IC3S2_16) <- N_gender
+  dim(IC4S2_16) <- N_gender
+  
+  dim(IC1S2_17) <- N_gender
+  dim(IC2S2_17) <- N_gender
+  dim(IC3S2_17) <- N_gender
+  dim(IC4S2_17) <- N_gender
+  
+  
+  dim(EC1S1_10) <- N_gender
+  dim(EC2S1_10) <- N_gender
+  dim(EC3S1_10) <- N_gender
+  dim(EC4S1_10) <- N_gender
+  
+  dim(EC1S1_11) <- N_gender
+  dim(EC2S1_11) <- N_gender
+  dim(EC3S1_11) <- N_gender
+  dim(EC4S1_11) <- N_gender
+  
+  dim(EC1S1_12) <- N_gender
+  dim(EC2S1_12) <- N_gender
+  dim(EC3S1_12) <- N_gender
+  dim(EC4S1_12) <- N_gender
+  
+  dim(EC1S1_13) <- N_gender
+  dim(EC2S1_13) <- N_gender
+  dim(EC3S1_13) <- N_gender
+  dim(EC4S1_13) <- N_gender
+  
+  dim(EC1S1_14) <- N_gender
+  dim(EC2S1_14) <- N_gender
+  dim(EC3S1_14) <- N_gender
+  dim(EC4S1_14) <- N_gender
+  
+  dim(EC1S1_15) <- N_gender
+  dim(EC2S1_15) <- N_gender
+  dim(EC3S1_15) <- N_gender
+  dim(EC4S1_15) <- N_gender
+  
+  dim(EC1S1_16) <- N_gender
+  dim(EC2S1_16) <- N_gender
+  dim(EC3S1_16) <- N_gender
+  dim(EC4S1_16) <- N_gender
+  
+  dim(EC1S1_17) <- N_gender
+  dim(EC2S1_17) <- N_gender
+  dim(EC3S1_17) <- N_gender
+  dim(EC4S1_17) <- N_gender
+  
+  
+  
+  dim(EC1S2_10) <- N_gender
+  dim(EC2S2_10) <- N_gender
+  dim(EC3S2_10) <- N_gender
+  dim(EC4S2_10) <- N_gender
+  
+  dim(EC1S2_11) <- N_gender
+  dim(EC2S2_11) <- N_gender
+  dim(EC3S2_11) <- N_gender
+  dim(EC4S2_11) <- N_gender
+  
+  dim(EC1S2_12) <- N_gender
+  dim(EC2S2_12) <- N_gender
+  dim(EC3S2_12) <- N_gender
+  dim(EC4S2_12) <- N_gender
+  
+  dim(EC1S2_13) <- N_gender
+  dim(EC2S2_13) <- N_gender
+  dim(EC3S2_13) <- N_gender
+  dim(EC4S2_13) <- N_gender
+  
+  dim(EC1S2_14) <- N_gender
+  dim(EC2S2_14) <- N_gender
+  dim(EC3S2_14) <- N_gender
+  dim(EC4S2_14) <- N_gender
+  
+  dim(EC1S2_15) <- N_gender
+  dim(EC2S2_15) <- N_gender
+  dim(EC3S2_15) <- N_gender
+  dim(EC4S2_15) <- N_gender
+  
+  dim(EC1S2_16) <- N_gender
+  dim(EC2S2_16) <- N_gender
+  dim(EC3S2_16) <- N_gender
+  dim(EC4S2_16) <- N_gender
+  
+  dim(EC1S2_17) <- N_gender
+  dim(EC2S2_17) <- N_gender
+  dim(EC3S2_17) <- N_gender
+  dim(EC4S2_17) <- N_gender
+  
+  
+  
   ##############################################################################################################################
   ##initial conditions####################################################################
   ##############################################################################################################################
-  dim(IC1S1J1U_10_ini) <- N_gender
-  dim(IC2S1J1U_10_ini) <- N_gender
-  dim(IC3S1J1U_10_ini) <- N_gender
-  dim(IC4S1J1U_10_ini) <- N_gender
-  
-  dim(IC1S1J1U_11_ini) <- N_gender
-  dim(IC2S1J1U_11_ini) <- N_gender
-  dim(IC3S1J1U_11_ini) <- N_gender
-  dim(IC4S1J1U_11_ini) <- N_gender
-  
-  dim(IC1S1J1U_12_ini) <- N_gender
-  dim(IC2S1J1U_12_ini) <- N_gender
-  dim(IC3S1J1U_12_ini) <- N_gender
-  dim(IC4S1J1U_12_ini) <- N_gender
-  
-  dim(IC1S1J1U_13_ini) <- N_gender
-  dim(IC2S1J1U_13_ini) <- N_gender
-  dim(IC3S1J1U_13_ini) <- N_gender
-  dim(IC4S1J1U_13_ini) <- N_gender
-  
-  dim(IC1S1J1U_14_ini) <- N_gender
-  dim(IC2S1J1U_14_ini) <- N_gender
-  dim(IC3S1J1U_14_ini) <- N_gender
-  dim(IC4S1J1U_14_ini) <- N_gender
-  
-  dim(IC1S1J1U_15_ini) <- N_gender
-  dim(IC2S1J1U_15_ini) <- N_gender
-  dim(IC3S1J1U_15_ini) <- N_gender
-  dim(IC4S1J1U_15_ini) <- N_gender
-  
-  dim(IC1S1J1U_16_ini) <- N_gender
-  dim(IC2S1J1U_16_ini) <- N_gender
-  dim(IC3S1J1U_16_ini) <- N_gender
-  dim(IC4S1J1U_16_ini) <- N_gender
-  
-  dim(IC1S1J1U_17_ini) <- N_gender
-  dim(IC2S1J1U_17_ini) <- N_gender
-  dim(IC3S1J1U_17_ini) <- N_gender
-  dim(IC4S1J1U_17_ini) <- N_gender
-  
-  
-  
-  dim(IC1S2J1U_10_ini) <- N_gender
-  dim(IC2S2J1U_10_ini) <- N_gender
-  dim(IC3S2J1U_10_ini) <- N_gender
-  dim(IC4S2J1U_10_ini) <- N_gender
-  
-  dim(IC1S2J1U_11_ini) <- N_gender
-  dim(IC2S2J1U_11_ini) <- N_gender
-  dim(IC3S2J1U_11_ini) <- N_gender
-  dim(IC4S2J1U_11_ini) <- N_gender
-  
-  dim(IC1S2J1U_12_ini) <- N_gender
-  dim(IC2S2J1U_12_ini) <- N_gender
-  dim(IC3S2J1U_12_ini) <- N_gender
-  dim(IC4S2J1U_12_ini) <- N_gender
-  
-  dim(IC1S2J1U_13_ini) <- N_gender
-  dim(IC2S2J1U_13_ini) <- N_gender
-  dim(IC3S2J1U_13_ini) <- N_gender
-  dim(IC4S2J1U_13_ini) <- N_gender
-  
-  dim(IC1S2J1U_14_ini) <- N_gender
-  dim(IC2S2J1U_14_ini) <- N_gender
-  dim(IC3S2J1U_14_ini) <- N_gender
-  dim(IC4S2J1U_14_ini) <- N_gender
-  
-  dim(IC1S2J1U_15_ini) <- N_gender
-  dim(IC2S2J1U_15_ini) <- N_gender
-  dim(IC3S2J1U_15_ini) <- N_gender
-  dim(IC4S2J1U_15_ini) <- N_gender
-  
-  dim(IC1S2J1U_16_ini) <- N_gender
-  dim(IC2S2J1U_16_ini) <- N_gender
-  dim(IC3S2J1U_16_ini) <- N_gender
-  dim(IC4S2J1U_16_ini) <- N_gender
-  
-  dim(IC1S2J1U_17_ini) <- N_gender
-  dim(IC2S2J1U_17_ini) <- N_gender
-  dim(IC3S2J1U_17_ini) <- N_gender
-  dim(IC4S2J1U_17_ini) <- N_gender
-  
-  
-  
-  dim(IC1S1J2U_10_ini) <- N_gender
-  dim(IC2S1J2U_10_ini) <- N_gender
-  dim(IC3S1J2U_10_ini) <- N_gender
-  dim(IC4S1J2U_10_ini) <- N_gender
-  
-  dim(IC1S1J2U_11_ini) <- N_gender
-  dim(IC2S1J2U_11_ini) <- N_gender
-  dim(IC3S1J2U_11_ini) <- N_gender
-  dim(IC4S1J2U_11_ini) <- N_gender
-  
-  dim(IC1S1J2U_12_ini) <- N_gender
-  dim(IC2S1J2U_12_ini) <- N_gender
-  dim(IC3S1J2U_12_ini) <- N_gender
-  dim(IC4S1J2U_12_ini) <- N_gender
-  
-  dim(IC1S1J2U_13_ini) <- N_gender
-  dim(IC2S1J2U_13_ini) <- N_gender
-  dim(IC3S1J2U_13_ini) <- N_gender
-  dim(IC4S1J2U_13_ini) <- N_gender
-  
-  dim(IC1S1J2U_14_ini) <- N_gender
-  dim(IC2S1J2U_14_ini) <- N_gender
-  dim(IC3S1J2U_14_ini) <- N_gender
-  dim(IC4S1J2U_14_ini) <- N_gender
-  
-  dim(IC1S1J2U_15_ini) <- N_gender
-  dim(IC2S1J2U_15_ini) <- N_gender
-  dim(IC3S1J2U_15_ini) <- N_gender
-  dim(IC4S1J2U_15_ini) <- N_gender
-  
-  dim(IC1S1J2U_16_ini) <- N_gender
-  dim(IC2S1J2U_16_ini) <- N_gender
-  dim(IC3S1J2U_16_ini) <- N_gender
-  dim(IC4S1J2U_16_ini) <- N_gender
-  
-  dim(IC1S1J2U_17_ini) <- N_gender
-  dim(IC2S1J2U_17_ini) <- N_gender
-  dim(IC3S1J2U_17_ini) <- N_gender
-  dim(IC4S1J2U_17_ini) <- N_gender
-  
-  
-  
-  dim(IC1S2J2U_10_ini) <- N_gender
-  dim(IC2S2J2U_10_ini) <- N_gender
-  dim(IC3S2J2U_10_ini) <- N_gender
-  dim(IC4S2J2U_10_ini) <- N_gender
-  
-  dim(IC1S2J2U_11_ini) <- N_gender
-  dim(IC2S2J2U_11_ini) <- N_gender
-  dim(IC3S2J2U_11_ini) <- N_gender
-  dim(IC4S2J2U_11_ini) <- N_gender
-  
-  dim(IC1S2J2U_12_ini) <- N_gender
-  dim(IC2S2J2U_12_ini) <- N_gender
-  dim(IC3S2J2U_12_ini) <- N_gender
-  dim(IC4S2J2U_12_ini) <- N_gender
-  
-  dim(IC1S2J2U_13_ini) <- N_gender
-  dim(IC2S2J2U_13_ini) <- N_gender
-  dim(IC3S2J2U_13_ini) <- N_gender
-  dim(IC4S2J2U_13_ini) <- N_gender
-  
-  dim(IC1S2J2U_14_ini) <- N_gender
-  dim(IC2S2J2U_14_ini) <- N_gender
-  dim(IC3S2J2U_14_ini) <- N_gender
-  dim(IC4S2J2U_14_ini) <- N_gender
-  
-  dim(IC1S2J2U_15_ini) <- N_gender
-  dim(IC2S2J2U_15_ini) <- N_gender
-  dim(IC3S2J2U_15_ini) <- N_gender
-  dim(IC4S2J2U_15_ini) <- N_gender
-  
-  dim(IC1S2J2U_16_ini) <- N_gender
-  dim(IC2S2J2U_16_ini) <- N_gender
-  dim(IC3S2J2U_16_ini) <- N_gender
-  dim(IC4S2J2U_16_ini) <- N_gender
-  
-  dim(IC1S2J2U_17_ini) <- N_gender
-  dim(IC2S2J2U_17_ini) <- N_gender
-  dim(IC3S2J2U_17_ini) <- N_gender
-  dim(IC4S2J2U_17_ini) <- N_gender
-  
-  
-  
-  dim(IC1S1J3U_10_ini) <- N_gender
-  dim(IC2S1J3U_10_ini) <- N_gender
-  dim(IC3S1J3U_10_ini) <- N_gender
-  dim(IC4S1J3U_10_ini) <- N_gender
-  
-  dim(IC1S1J3U_11_ini) <- N_gender
-  dim(IC2S1J3U_11_ini) <- N_gender
-  dim(IC3S1J3U_11_ini) <- N_gender
-  dim(IC4S1J3U_11_ini) <- N_gender
-  
-  dim(IC1S1J3U_12_ini) <- N_gender
-  dim(IC2S1J3U_12_ini) <- N_gender
-  dim(IC3S1J3U_12_ini) <- N_gender
-  dim(IC4S1J3U_12_ini) <- N_gender
-  
-  dim(IC1S1J3U_13_ini) <- N_gender
-  dim(IC2S1J3U_13_ini) <- N_gender
-  dim(IC3S1J3U_13_ini) <- N_gender
-  dim(IC4S1J3U_13_ini) <- N_gender
-  
-  dim(IC1S1J3U_14_ini) <- N_gender
-  dim(IC2S1J3U_14_ini) <- N_gender
-  dim(IC3S1J3U_14_ini) <- N_gender
-  dim(IC4S1J3U_14_ini) <- N_gender
-  
-  dim(IC1S1J3U_15_ini) <- N_gender
-  dim(IC2S1J3U_15_ini) <- N_gender
-  dim(IC3S1J3U_15_ini) <- N_gender
-  dim(IC4S1J3U_15_ini) <- N_gender
-  
-  dim(IC1S1J3U_16_ini) <- N_gender
-  dim(IC2S1J3U_16_ini) <- N_gender
-  dim(IC3S1J3U_16_ini) <- N_gender
-  dim(IC4S1J3U_16_ini) <- N_gender
-  
-  dim(IC1S1J3U_17_ini) <- N_gender
-  dim(IC2S1J3U_17_ini) <- N_gender
-  dim(IC3S1J3U_17_ini) <- N_gender
-  dim(IC4S1J3U_17_ini) <- N_gender
-  
-  
-  
-  dim(IC1S2J3U_10_ini) <- N_gender
-  dim(IC2S2J3U_10_ini) <- N_gender
-  dim(IC3S2J3U_10_ini) <- N_gender
-  dim(IC4S2J3U_10_ini) <- N_gender
-  
-  dim(IC1S2J3U_11_ini) <- N_gender
-  dim(IC2S2J3U_11_ini) <- N_gender
-  dim(IC3S2J3U_11_ini) <- N_gender
-  dim(IC4S2J3U_11_ini) <- N_gender
-  
-  dim(IC1S2J3U_12_ini) <- N_gender
-  dim(IC2S2J3U_12_ini) <- N_gender
-  dim(IC3S2J3U_12_ini) <- N_gender
-  dim(IC4S2J3U_12_ini) <- N_gender
-  
-  dim(IC1S2J3U_13_ini) <- N_gender
-  dim(IC2S2J3U_13_ini) <- N_gender
-  dim(IC3S2J3U_13_ini) <- N_gender
-  dim(IC4S2J3U_13_ini) <- N_gender
-  
-  dim(IC1S2J3U_14_ini) <- N_gender
-  dim(IC2S2J3U_14_ini) <- N_gender
-  dim(IC3S2J3U_14_ini) <- N_gender
-  dim(IC4S2J3U_14_ini) <- N_gender
-  
-  dim(IC1S2J3U_15_ini) <- N_gender
-  dim(IC2S2J3U_15_ini) <- N_gender
-  dim(IC3S2J3U_15_ini) <- N_gender
-  dim(IC4S2J3U_15_ini) <- N_gender
-  
-  dim(IC1S2J3U_16_ini) <- N_gender
-  dim(IC2S2J3U_16_ini) <- N_gender
-  dim(IC3S2J3U_16_ini) <- N_gender
-  dim(IC4S2J3U_16_ini) <- N_gender
-  
-  dim(IC1S2J3U_17_ini) <- N_gender
-  dim(IC2S2J3U_17_ini) <- N_gender
-  dim(IC3S2J3U_17_ini) <- N_gender
-  dim(IC4S2J3U_17_ini) <- N_gender
-  
-  
-  
-  dim(IC1S1J4U_10_ini) <- N_gender
-  dim(IC2S1J4U_10_ini) <- N_gender
-  dim(IC3S1J4U_10_ini) <- N_gender
-  dim(IC4S1J4U_10_ini) <- N_gender
-  
-  dim(IC1S1J4U_11_ini) <- N_gender
-  dim(IC2S1J4U_11_ini) <- N_gender
-  dim(IC3S1J4U_11_ini) <- N_gender
-  dim(IC4S1J4U_11_ini) <- N_gender
-  
-  dim(IC1S1J4U_12_ini) <- N_gender
-  dim(IC2S1J4U_12_ini) <- N_gender
-  dim(IC3S1J4U_12_ini) <- N_gender
-  dim(IC4S1J4U_12_ini) <- N_gender
-  
-  dim(IC1S1J4U_13_ini) <- N_gender
-  dim(IC2S1J4U_13_ini) <- N_gender
-  dim(IC3S1J4U_13_ini) <- N_gender
-  dim(IC4S1J4U_13_ini) <- N_gender
-  
-  dim(IC1S1J4U_14_ini) <- N_gender
-  dim(IC2S1J4U_14_ini) <- N_gender
-  dim(IC3S1J4U_14_ini) <- N_gender
-  dim(IC4S1J4U_14_ini) <- N_gender
-  
-  dim(IC1S1J4U_15_ini) <- N_gender
-  dim(IC2S1J4U_15_ini) <- N_gender
-  dim(IC3S1J4U_15_ini) <- N_gender
-  dim(IC4S1J4U_15_ini) <- N_gender
-  
-  dim(IC1S1J4U_16_ini) <- N_gender
-  dim(IC2S1J4U_16_ini) <- N_gender
-  dim(IC3S1J4U_16_ini) <- N_gender
-  dim(IC4S1J4U_16_ini) <- N_gender
-  
-  dim(IC1S1J4U_17_ini) <- N_gender
-  dim(IC2S1J4U_17_ini) <- N_gender
-  dim(IC3S1J4U_17_ini) <- N_gender
-  dim(IC4S1J4U_17_ini) <- N_gender
-  
-  
-  
-  dim(IC1S2J4U_10_ini) <- N_gender
-  dim(IC2S2J4U_10_ini) <- N_gender
-  dim(IC3S2J4U_10_ini) <- N_gender
-  dim(IC4S2J4U_10_ini) <- N_gender
-  
-  dim(IC1S2J4U_11_ini) <- N_gender
-  dim(IC2S2J4U_11_ini) <- N_gender
-  dim(IC3S2J4U_11_ini) <- N_gender
-  dim(IC4S2J4U_11_ini) <- N_gender
-  
-  dim(IC1S2J4U_12_ini) <- N_gender
-  dim(IC2S2J4U_12_ini) <- N_gender
-  dim(IC3S2J4U_12_ini) <- N_gender
-  dim(IC4S2J4U_12_ini) <- N_gender
-  
-  dim(IC1S2J4U_13_ini) <- N_gender
-  dim(IC2S2J4U_13_ini) <- N_gender
-  dim(IC3S2J4U_13_ini) <- N_gender
-  dim(IC4S2J4U_13_ini) <- N_gender
-  
-  dim(IC1S2J4U_14_ini) <- N_gender
-  dim(IC2S2J4U_14_ini) <- N_gender
-  dim(IC3S2J4U_14_ini) <- N_gender
-  dim(IC4S2J4U_14_ini) <- N_gender
-  
-  dim(IC1S2J4U_15_ini) <- N_gender
-  dim(IC2S2J4U_15_ini) <- N_gender
-  dim(IC3S2J4U_15_ini) <- N_gender
-  dim(IC4S2J4U_15_ini) <- N_gender
-  
-  dim(IC1S2J4U_16_ini) <- N_gender
-  dim(IC2S2J4U_16_ini) <- N_gender
-  dim(IC3S2J4U_16_ini) <- N_gender
-  dim(IC4S2J4U_16_ini) <- N_gender
-  
-  dim(IC1S2J4U_17_ini) <- N_gender
-  dim(IC2S2J4U_17_ini) <- N_gender
-  dim(IC3S2J4U_17_ini) <- N_gender
-  dim(IC4S2J4U_17_ini) <- N_gender
-  
-  
-  
-  dim(IC1S1J5U_10_ini) <- N_gender
-  dim(IC2S1J5U_10_ini) <- N_gender
-  dim(IC3S1J5U_10_ini) <- N_gender
-  dim(IC4S1J5U_10_ini) <- N_gender
-  
-  dim(IC1S1J5U_11_ini) <- N_gender
-  dim(IC2S1J5U_11_ini) <- N_gender
-  dim(IC3S1J5U_11_ini) <- N_gender
-  dim(IC4S1J5U_11_ini) <- N_gender
-  
-  dim(IC1S1J5U_12_ini) <- N_gender
-  dim(IC2S1J5U_12_ini) <- N_gender
-  dim(IC3S1J5U_12_ini) <- N_gender
-  dim(IC4S1J5U_12_ini) <- N_gender
-  
-  dim(IC1S1J5U_13_ini) <- N_gender
-  dim(IC2S1J5U_13_ini) <- N_gender
-  dim(IC3S1J5U_13_ini) <- N_gender
-  dim(IC4S1J5U_13_ini) <- N_gender
-  
-  dim(IC1S1J5U_14_ini) <- N_gender
-  dim(IC2S1J5U_14_ini) <- N_gender
-  dim(IC3S1J5U_14_ini) <- N_gender
-  dim(IC4S1J5U_14_ini) <- N_gender
-  
-  dim(IC1S1J5U_15_ini) <- N_gender
-  dim(IC2S1J5U_15_ini) <- N_gender
-  dim(IC3S1J5U_15_ini) <- N_gender
-  dim(IC4S1J5U_15_ini) <- N_gender
-  
-  dim(IC1S1J5U_16_ini) <- N_gender
-  dim(IC2S1J5U_16_ini) <- N_gender
-  dim(IC3S1J5U_16_ini) <- N_gender
-  dim(IC4S1J5U_16_ini) <- N_gender
-  
-  dim(IC1S1J5U_17_ini) <- N_gender
-  dim(IC2S1J5U_17_ini) <- N_gender
-  dim(IC3S1J5U_17_ini) <- N_gender
-  dim(IC4S1J5U_17_ini) <- N_gender
-  
-  
-  
-  dim(IC1S2J5U_10_ini) <- N_gender
-  dim(IC2S2J5U_10_ini) <- N_gender
-  dim(IC3S2J5U_10_ini) <- N_gender
-  dim(IC4S2J5U_10_ini) <- N_gender
-  
-  dim(IC1S2J5U_11_ini) <- N_gender
-  dim(IC2S2J5U_11_ini) <- N_gender
-  dim(IC3S2J5U_11_ini) <- N_gender
-  dim(IC4S2J5U_11_ini) <- N_gender
-  
-  dim(IC1S2J5U_12_ini) <- N_gender
-  dim(IC2S2J5U_12_ini) <- N_gender
-  dim(IC3S2J5U_12_ini) <- N_gender
-  dim(IC4S2J5U_12_ini) <- N_gender
-  
-  dim(IC1S2J5U_13_ini) <- N_gender
-  dim(IC2S2J5U_13_ini) <- N_gender
-  dim(IC3S2J5U_13_ini) <- N_gender
-  dim(IC4S2J5U_13_ini) <- N_gender
-  
-  dim(IC1S2J5U_14_ini) <- N_gender
-  dim(IC2S2J5U_14_ini) <- N_gender
-  dim(IC3S2J5U_14_ini) <- N_gender
-  dim(IC4S2J5U_14_ini) <- N_gender
-  
-  dim(IC1S2J5U_15_ini) <- N_gender
-  dim(IC2S2J5U_15_ini) <- N_gender
-  dim(IC3S2J5U_15_ini) <- N_gender
-  dim(IC4S2J5U_15_ini) <- N_gender
-  
-  dim(IC1S2J5U_16_ini) <- N_gender
-  dim(IC2S2J5U_16_ini) <- N_gender
-  dim(IC3S2J5U_16_ini) <- N_gender
-  dim(IC4S2J5U_16_ini) <- N_gender
-  
-  dim(IC1S2J5U_17_ini) <- N_gender
-  dim(IC2S2J5U_17_ini) <- N_gender
-  dim(IC3S2J5U_17_ini) <- N_gender
-  dim(IC4S2J5U_17_ini) <- N_gender
-  
-
+  dim(IC1S1_10_ini) <- N_gender
+  dim(IC2S1_10_ini) <- N_gender
+  dim(IC3S1_10_ini) <- N_gender
+  dim(IC4S1_10_ini) <- N_gender
+  
+  dim(IC1S1_11_ini) <- N_gender
+  dim(IC2S1_11_ini) <- N_gender
+  dim(IC3S1_11_ini) <- N_gender
+  dim(IC4S1_11_ini) <- N_gender
+  
+  dim(IC1S1_12_ini) <- N_gender
+  dim(IC2S1_12_ini) <- N_gender
+  dim(IC3S1_12_ini) <- N_gender
+  dim(IC4S1_12_ini) <- N_gender
+  
+  dim(IC1S1_13_ini) <- N_gender
+  dim(IC2S1_13_ini) <- N_gender
+  dim(IC3S1_13_ini) <- N_gender
+  dim(IC4S1_13_ini) <- N_gender
+  
+  dim(IC1S1_14_ini) <- N_gender
+  dim(IC2S1_14_ini) <- N_gender
+  dim(IC3S1_14_ini) <- N_gender
+  dim(IC4S1_14_ini) <- N_gender
+  
+  dim(IC1S1_15_ini) <- N_gender
+  dim(IC2S1_15_ini) <- N_gender
+  dim(IC3S1_15_ini) <- N_gender
+  dim(IC4S1_15_ini) <- N_gender
+  
+  dim(IC1S1_16_ini) <- N_gender
+  dim(IC2S1_16_ini) <- N_gender
+  dim(IC3S1_16_ini) <- N_gender
+  dim(IC4S1_16_ini) <- N_gender
+  
+  dim(IC1S1_17_ini) <- N_gender
+  dim(IC2S1_17_ini) <- N_gender
+  dim(IC3S1_17_ini) <- N_gender
+  dim(IC4S1_17_ini) <- N_gender
+  
+  
+  
+  dim(IC1S2_10_ini) <- N_gender
+  dim(IC2S2_10_ini) <- N_gender
+  dim(IC3S2_10_ini) <- N_gender
+  dim(IC4S2_10_ini) <- N_gender
+  
+  dim(IC1S2_11_ini) <- N_gender
+  dim(IC2S2_11_ini) <- N_gender
+  dim(IC3S2_11_ini) <- N_gender
+  dim(IC4S2_11_ini) <- N_gender
+  
+  dim(IC1S2_12_ini) <- N_gender
+  dim(IC2S2_12_ini) <- N_gender
+  dim(IC3S2_12_ini) <- N_gender
+  dim(IC4S2_12_ini) <- N_gender
+  
+  dim(IC1S2_13_ini) <- N_gender
+  dim(IC2S2_13_ini) <- N_gender
+  dim(IC3S2_13_ini) <- N_gender
+  dim(IC4S2_13_ini) <- N_gender
+  
+  dim(IC1S2_14_ini) <- N_gender
+  dim(IC2S2_14_ini) <- N_gender
+  dim(IC3S2_14_ini) <- N_gender
+  dim(IC4S2_14_ini) <- N_gender
+  
+  dim(IC1S2_15_ini) <- N_gender
+  dim(IC2S2_15_ini) <- N_gender
+  dim(IC3S2_15_ini) <- N_gender
+  dim(IC4S2_15_ini) <- N_gender
+  
+  dim(IC1S2_16_ini) <- N_gender
+  dim(IC2S2_16_ini) <- N_gender
+  dim(IC3S2_16_ini) <- N_gender
+  dim(IC4S2_16_ini) <- N_gender
+  
+  dim(IC1S2_17_ini) <- N_gender
+  dim(IC2S2_17_ini) <- N_gender
+  dim(IC3S2_17_ini) <- N_gender
+  dim(IC4S2_17_ini) <- N_gender
+  
+  
+  
+  dim(EC1S1_10_ini) <- N_gender
+  dim(EC2S1_10_ini) <- N_gender
+  dim(EC3S1_10_ini) <- N_gender
+  dim(EC4S1_10_ini) <- N_gender
+  
+  dim(EC1S1_11_ini) <- N_gender
+  dim(EC2S1_11_ini) <- N_gender
+  dim(EC3S1_11_ini) <- N_gender
+  dim(EC4S1_11_ini) <- N_gender
+  
+  dim(EC1S1_12_ini) <- N_gender
+  dim(EC2S1_12_ini) <- N_gender
+  dim(EC3S1_12_ini) <- N_gender
+  dim(EC4S1_12_ini) <- N_gender
+  
+  dim(EC1S1_13_ini) <- N_gender
+  dim(EC2S1_13_ini) <- N_gender
+  dim(EC3S1_13_ini) <- N_gender
+  dim(EC4S1_13_ini) <- N_gender
+  
+  dim(EC1S1_14_ini) <- N_gender
+  dim(EC2S1_14_ini) <- N_gender
+  dim(EC3S1_14_ini) <- N_gender
+  dim(EC4S1_14_ini) <- N_gender
+  
+  dim(EC1S1_15_ini) <- N_gender
+  dim(EC2S1_15_ini) <- N_gender
+  dim(EC3S1_15_ini) <- N_gender
+  dim(EC4S1_15_ini) <- N_gender
+  
+  dim(EC1S1_16_ini) <- N_gender
+  dim(EC2S1_16_ini) <- N_gender
+  dim(EC3S1_16_ini) <- N_gender
+  dim(EC4S1_16_ini) <- N_gender
+  
+  dim(EC1S1_17_ini) <- N_gender
+  dim(EC2S1_17_ini) <- N_gender
+  dim(EC3S1_17_ini) <- N_gender
+  dim(EC4S1_17_ini) <- N_gender
+  
+  
+  
+  dim(EC1S2_10_ini) <- N_gender
+  dim(EC2S2_10_ini) <- N_gender
+  dim(EC3S2_10_ini) <- N_gender
+  dim(EC4S2_10_ini) <- N_gender
+  
+  dim(EC1S2_11_ini) <- N_gender
+  dim(EC2S2_11_ini) <- N_gender
+  dim(EC3S2_11_ini) <- N_gender
+  dim(EC4S2_11_ini) <- N_gender
+  
+  dim(EC1S2_12_ini) <- N_gender
+  dim(EC2S2_12_ini) <- N_gender
+  dim(EC3S2_12_ini) <- N_gender
+  dim(EC4S2_12_ini) <- N_gender
+  
+  dim(EC1S2_13_ini) <- N_gender
+  dim(EC2S2_13_ini) <- N_gender
+  dim(EC3S2_13_ini) <- N_gender
+  dim(EC4S2_13_ini) <- N_gender
+  
+  dim(EC1S2_14_ini) <- N_gender
+  dim(EC2S2_14_ini) <- N_gender
+  dim(EC3S2_14_ini) <- N_gender
+  dim(EC4S2_14_ini) <- N_gender
+  
+  dim(EC1S2_15_ini) <- N_gender
+  dim(EC2S2_15_ini) <- N_gender
+  dim(EC3S2_15_ini) <- N_gender
+  dim(EC4S2_15_ini) <- N_gender
+  
+  dim(EC1S2_16_ini) <- N_gender
+  dim(EC2S2_16_ini) <- N_gender
+  dim(EC3S2_16_ini) <- N_gender
+  dim(EC4S2_16_ini) <- N_gender
+  
+  dim(EC1S2_17_ini) <- N_gender
+  dim(EC2S2_17_ini) <- N_gender
+  dim(EC3S2_17_ini) <- N_gender
+  dim(EC4S2_17_ini) <- N_gender
   
   # parameters
   dim(turn10) <- N_gender
@@ -3061,205 +996,52 @@ sep_model = odin::odin({
   dim(r2p) <- N_gender
   
   
-  dim(t10_ic1s1j1u) <- N_gender
-  dim(t10_ic2s1j1u) <- N_gender
-  dim(t10_ic3s1j1u) <- N_gender
-  dim(t10_ic4s1j1u) <- N_gender
+  dim(t10_ic1s1) <- N_gender
+  dim(t10_ic2s1) <- N_gender
+  dim(t10_ic3s1) <- N_gender
+  dim(t10_ic4s1) <- N_gender
   
-  dim(t10_ic1s2j1u) <- N_gender
-  dim(t10_ic2s2j1u) <- N_gender
-  dim(t10_ic3s2j1u) <- N_gender
-  dim(t10_ic4s2j1u) <- N_gender
+  dim(t10_ic1s2) <- N_gender
+  dim(t10_ic2s2) <- N_gender
+  dim(t10_ic3s2) <- N_gender
+  dim(t10_ic4s2) <- N_gender
   
-  dim(t10_ic1s1j2u) <- N_gender
-  dim(t10_ic2s1j2u) <- N_gender
-  dim(t10_ic3s1j2u) <- N_gender
-  dim(t10_ic4s1j2u) <- N_gender
   
-  dim(t10_ic1s2j2u) <- N_gender
-  dim(t10_ic2s2j2u) <- N_gender
-  dim(t10_ic3s2j2u) <- N_gender
-  dim(t10_ic4s2j2u) <- N_gender
   
-  dim(t10_ic1s1j3u) <- N_gender
-  dim(t10_ic2s1j3u) <- N_gender
-  dim(t10_ic3s1j3u) <- N_gender
-  dim(t10_ic4s1j3u) <- N_gender
+  dim(t10_ec1s1) <- N_gender
+  dim(t10_ec2s1) <- N_gender
+  dim(t10_ec3s1) <- N_gender
+  dim(t10_ec4s1) <- N_gender
   
-  dim(t10_ic1s2j3u) <- N_gender
-  dim(t10_ic2s2j3u) <- N_gender
-  dim(t10_ic3s2j3u) <- N_gender
-  dim(t10_ic4s2j3u) <- N_gender
+  dim(t10_ec1s2) <- N_gender
+  dim(t10_ec2s2) <- N_gender
+  dim(t10_ec3s2) <- N_gender
+  dim(t10_ec4s2) <- N_gender
   
-  dim(t10_ic1s1j4u) <- N_gender
-  dim(t10_ic2s1j4u) <- N_gender
-  dim(t10_ic3s1j4u) <- N_gender
-  dim(t10_ic4s1j4u) <- N_gender
   
-  dim(t10_ic1s2j4u) <- N_gender
-  dim(t10_ic2s2j4u) <- N_gender
-  dim(t10_ic3s2j4u) <- N_gender
-  dim(t10_ic4s2j4u) <- N_gender
+  dim(neet16_ic1s1) <- N_gender
+  dim(neet16_ic2s1) <- N_gender
+  dim(neet16_ic3s1) <- N_gender
+  dim(neet16_ic4s1) <- N_gender
   
-  dim(t10_ic1s1j5u) <- N_gender
-  dim(t10_ic2s1j5u) <- N_gender
-  dim(t10_ic3s1j5u) <- N_gender
-  dim(t10_ic4s1j5u) <- N_gender
+  dim(neet16_ic1s2) <- N_gender
+  dim(neet16_ic2s2) <- N_gender
+  dim(neet16_ic3s2) <- N_gender
+  dim(neet16_ic4s2) <- N_gender
   
-  dim(t10_ic1s2j5u) <- N_gender
-  dim(t10_ic2s2j5u) <- N_gender
-  dim(t10_ic3s2j5u) <- N_gender
-  dim(t10_ic4s2j5u) <- N_gender
   
-  dim(t10_ec1s1j1u) <- N_gender
-  dim(t10_ec2s1j1u) <- N_gender
-  dim(t10_ec3s1j1u) <- N_gender
-  dim(t10_ec4s1j1u) <- N_gender
   
-  dim(t10_ec1s2j1u) <- N_gender
-  dim(t10_ec2s2j1u) <- N_gender
-  dim(t10_ec3s2j1u) <- N_gender
-  dim(t10_ec4s2j1u) <- N_gender
+  dim(neet16_ec1s1) <- N_gender
+  dim(neet16_ec2s1) <- N_gender
+  dim(neet16_ec3s1) <- N_gender
+  dim(neet16_ec4s1) <- N_gender
   
-  dim(t10_ec1s1j2u) <- N_gender
-  dim(t10_ec2s1j2u) <- N_gender
-  dim(t10_ec3s1j2u) <- N_gender
-  dim(t10_ec4s1j2u) <- N_gender
+  dim(neet16_ec1s2) <- N_gender
+  dim(neet16_ec2s2) <- N_gender
+  dim(neet16_ec3s2) <- N_gender
+  dim(neet16_ec4s2) <- N_gender
   
-  dim(t10_ec1s2j2u) <- N_gender
-  dim(t10_ec2s2j2u) <- N_gender
-  dim(t10_ec3s2j2u) <- N_gender
-  dim(t10_ec4s2j2u) <- N_gender
   
-  dim(t10_ec1s1j3u) <- N_gender
-  dim(t10_ec2s1j3u) <- N_gender
-  dim(t10_ec3s1j3u) <- N_gender
-  dim(t10_ec4s1j3u) <- N_gender
-  
-  dim(t10_ec1s2j3u) <- N_gender
-  dim(t10_ec2s2j3u) <- N_gender
-  dim(t10_ec3s2j3u) <- N_gender
-  dim(t10_ec4s2j3u) <- N_gender
-  
-  dim(t10_ec1s1j4u) <- N_gender
-  dim(t10_ec2s1j4u) <- N_gender
-  dim(t10_ec3s1j4u) <- N_gender
-  dim(t10_ec4s1j4u) <- N_gender
-  
-  dim(t10_ec1s2j4u) <- N_gender
-  dim(t10_ec2s2j4u) <- N_gender
-  dim(t10_ec3s2j4u) <- N_gender
-  dim(t10_ec4s2j4u) <- N_gender
-  
-  dim(t10_ec1s1j5u) <- N_gender
-  dim(t10_ec2s1j5u) <- N_gender
-  dim(t10_ec3s1j5u) <- N_gender
-  dim(t10_ec4s1j5u) <- N_gender
-  
-  dim(t10_ec1s2j5u) <- N_gender
-  dim(t10_ec2s2j5u) <- N_gender
-  dim(t10_ec3s2j5u) <- N_gender
-  dim(t10_ec4s2j5u) <- N_gender
-  
-  dim(neet16_ic1s1j1u) <- N_gender
-  dim(neet16_ic2s1j1u) <- N_gender
-  dim(neet16_ic3s1j1u) <- N_gender
-  dim(neet16_ic4s1j1u) <- N_gender
-  
-  dim(neet16_ic1s2j1u) <- N_gender
-  dim(neet16_ic2s2j1u) <- N_gender
-  dim(neet16_ic3s2j1u) <- N_gender
-  dim(neet16_ic4s2j1u) <- N_gender
-  
-  dim(neet16_ic1s1j2u) <- N_gender
-  dim(neet16_ic2s1j2u) <- N_gender
-  dim(neet16_ic3s1j2u) <- N_gender
-  dim(neet16_ic4s1j2u) <- N_gender
-  
-  dim(neet16_ic1s2j2u) <- N_gender
-  dim(neet16_ic2s2j2u) <- N_gender
-  dim(neet16_ic3s2j2u) <- N_gender
-  dim(neet16_ic4s2j2u) <- N_gender
-  
-  dim(neet16_ic1s1j3u) <- N_gender
-  dim(neet16_ic2s1j3u) <- N_gender
-  dim(neet16_ic3s1j3u) <- N_gender
-  dim(neet16_ic4s1j3u) <- N_gender
-  
-  dim(neet16_ic1s2j3u) <- N_gender
-  dim(neet16_ic2s2j3u) <- N_gender
-  dim(neet16_ic3s2j3u) <- N_gender
-  dim(neet16_ic4s2j3u) <- N_gender
-  
-  dim(neet16_ic1s1j4u) <- N_gender
-  dim(neet16_ic2s1j4u) <- N_gender
-  dim(neet16_ic3s1j4u) <- N_gender
-  dim(neet16_ic4s1j4u) <- N_gender
-  
-  dim(neet16_ic1s2j4u) <- N_gender
-  dim(neet16_ic2s2j4u) <- N_gender
-  dim(neet16_ic3s2j4u) <- N_gender
-  dim(neet16_ic4s2j4u) <- N_gender
-  
-  dim(neet16_ic1s1j5u) <- N_gender
-  dim(neet16_ic2s1j5u) <- N_gender
-  dim(neet16_ic3s1j5u) <- N_gender
-  dim(neet16_ic4s1j5u) <- N_gender
-  
-  dim(neet16_ic1s2j5u) <- N_gender
-  dim(neet16_ic2s2j5u) <- N_gender
-  dim(neet16_ic3s2j5u) <- N_gender
-  dim(neet16_ic4s2j5u) <- N_gender
-  
-  dim(neet16_ec1s1j1u) <- N_gender
-  dim(neet16_ec2s1j1u) <- N_gender
-  dim(neet16_ec3s1j1u) <- N_gender
-  dim(neet16_ec4s1j1u) <- N_gender
-  
-  dim(neet16_ec1s2j1u) <- N_gender
-  dim(neet16_ec2s2j1u) <- N_gender
-  dim(neet16_ec3s2j1u) <- N_gender
-  dim(neet16_ec4s2j1u) <- N_gender
-  
-  dim(neet16_ec1s1j2u) <- N_gender
-  dim(neet16_ec2s1j2u) <- N_gender
-  dim(neet16_ec3s1j2u) <- N_gender
-  dim(neet16_ec4s1j2u) <- N_gender
-  
-  dim(neet16_ec1s2j2u) <- N_gender
-  dim(neet16_ec2s2j2u) <- N_gender
-  dim(neet16_ec3s2j2u) <- N_gender
-  dim(neet16_ec4s2j2u) <- N_gender
-  
-  dim(neet16_ec1s1j3u) <- N_gender
-  dim(neet16_ec2s1j3u) <- N_gender
-  dim(neet16_ec3s1j3u) <- N_gender
-  dim(neet16_ec4s1j3u) <- N_gender
-  
-  dim(neet16_ec1s2j3u) <- N_gender
-  dim(neet16_ec2s2j3u) <- N_gender
-  dim(neet16_ec3s2j3u) <- N_gender
-  dim(neet16_ec4s2j3u) <- N_gender
-  
-  dim(neet16_ec1s1j4u) <- N_gender
-  dim(neet16_ec2s1j4u) <- N_gender
-  dim(neet16_ec3s1j4u) <- N_gender
-  dim(neet16_ec4s1j4u) <- N_gender
-  
-  dim(neet16_ec1s2j4u) <- N_gender
-  dim(neet16_ec2s2j4u) <- N_gender
-  dim(neet16_ec3s2j4u) <- N_gender
-  dim(neet16_ec4s2j4u) <- N_gender
-  
-  dim(neet16_ec1s1j5u) <- N_gender
-  dim(neet16_ec2s1j5u) <- N_gender
-  dim(neet16_ec3s1j5u) <- N_gender
-  dim(neet16_ec4s1j5u) <- N_gender
-  
-  dim(neet16_ec1s2j5u) <- N_gender
-  dim(neet16_ec2s2j5u) <- N_gender
-  dim(neet16_ec3s2j5u) <- N_gender
-  dim(neet16_ec4s2j5u) <- N_gender
   
   dim(n2care_i_10) <- N_gender
   dim(n2care_i_11) <- N_gender
@@ -3444,924 +1226,178 @@ sep_model = odin::odin({
   dim(miss_ec3u_17) <- N_gender
   dim(miss_ec4u_17) <- N_gender
   
-  dim(np2nc_ic1s1u_10) <- N_gender
-  dim(np2nc_ic2s1u_10) <- N_gender
-  dim(np2nc_ic3s1u_10) <- N_gender
-  dim(np2nc_ic4s1u_10) <- N_gender
   
-  dim(np2nc_ic1s1u_11) <- N_gender
-  dim(np2nc_ic2s1u_11) <- N_gender
-  dim(np2nc_ic3s1u_11) <- N_gender
-  dim(np2nc_ic4s1u_11) <- N_gender
-  
-  dim(np2nc_ic1s1u_12) <- N_gender
-  dim(np2nc_ic2s1u_12) <- N_gender
-  dim(np2nc_ic3s1u_12) <- N_gender
-  dim(np2nc_ic4s1u_12) <- N_gender
-  
-  dim(np2nc_ic1s1u_13) <- N_gender
-  dim(np2nc_ic2s1u_13) <- N_gender
-  dim(np2nc_ic3s1u_13) <- N_gender
-  dim(np2nc_ic4s1u_13) <- N_gender
-  
-  dim(np2nc_ic1s1u_14) <- N_gender
-  dim(np2nc_ic2s1u_14) <- N_gender
-  dim(np2nc_ic3s1u_14) <- N_gender
-  dim(np2nc_ic4s1u_14) <- N_gender
-  
-  dim(np2nc_ic1s1u_15) <- N_gender
-  dim(np2nc_ic2s1u_15) <- N_gender
-  dim(np2nc_ic3s1u_15) <- N_gender
-  dim(np2nc_ic4s1u_15) <- N_gender
-  
-  dim(np2nc_ic1s1u_16) <- N_gender
-  dim(np2nc_ic2s1u_16) <- N_gender
-  dim(np2nc_ic3s1u_16) <- N_gender
-  dim(np2nc_ic4s1u_16) <- N_gender
-  
-  dim(np2nc_ic1s1u_17) <- N_gender
-  dim(np2nc_ic2s1u_17) <- N_gender
-  dim(np2nc_ic3s1u_17) <- N_gender
-  dim(np2nc_ic4s1u_17) <- N_gender
-  
-  
-  
-  dim(np2nc_ic1s2u_10) <- N_gender
-  dim(np2nc_ic2s2u_10) <- N_gender
-  dim(np2nc_ic3s2u_10) <- N_gender
-  dim(np2nc_ic4s2u_10) <- N_gender
-  
-  dim(np2nc_ic1s2u_11) <- N_gender
-  dim(np2nc_ic2s2u_11) <- N_gender
-  dim(np2nc_ic3s2u_11) <- N_gender
-  dim(np2nc_ic4s2u_11) <- N_gender
-  
-  dim(np2nc_ic1s2u_12) <- N_gender
-  dim(np2nc_ic2s2u_12) <- N_gender
-  dim(np2nc_ic3s2u_12) <- N_gender
-  dim(np2nc_ic4s2u_12) <- N_gender
-  
-  dim(np2nc_ic1s2u_13) <- N_gender
-  dim(np2nc_ic2s2u_13) <- N_gender
-  dim(np2nc_ic3s2u_13) <- N_gender
-  dim(np2nc_ic4s2u_13) <- N_gender
-  
-  dim(np2nc_ic1s2u_14) <- N_gender
-  dim(np2nc_ic2s2u_14) <- N_gender
-  dim(np2nc_ic3s2u_14) <- N_gender
-  dim(np2nc_ic4s2u_14) <- N_gender
-  
-  dim(np2nc_ic1s2u_15) <- N_gender
-  dim(np2nc_ic2s2u_15) <- N_gender
-  dim(np2nc_ic3s2u_15) <- N_gender
-  dim(np2nc_ic4s2u_15) <- N_gender
-  
-  dim(np2nc_ic1s2u_16) <- N_gender
-  dim(np2nc_ic2s2u_16) <- N_gender
-  dim(np2nc_ic3s2u_16) <- N_gender
-  dim(np2nc_ic4s2u_16) <- N_gender
-  
-  dim(np2nc_ic1s2u_17) <- N_gender
-  dim(np2nc_ic2s2u_17) <- N_gender
-  dim(np2nc_ic3s2u_17) <- N_gender
-  dim(np2nc_ic4s2u_17) <- N_gender
-  
-  dim(np2nc_ec1s1u_10) <- N_gender
-  dim(np2nc_ec2s1u_10) <- N_gender
-  dim(np2nc_ec3s1u_10) <- N_gender
-  dim(np2nc_ec4s1u_10) <- N_gender
-  
-  dim(np2nc_ec1s1u_11) <- N_gender
-  dim(np2nc_ec2s1u_11) <- N_gender
-  dim(np2nc_ec3s1u_11) <- N_gender
-  dim(np2nc_ec4s1u_11) <- N_gender
-  
-  dim(np2nc_ec1s1u_12) <- N_gender
-  dim(np2nc_ec2s1u_12) <- N_gender
-  dim(np2nc_ec3s1u_12) <- N_gender
-  dim(np2nc_ec4s1u_12) <- N_gender
-  
-  dim(np2nc_ec1s1u_13) <- N_gender
-  dim(np2nc_ec2s1u_13) <- N_gender
-  dim(np2nc_ec3s1u_13) <- N_gender
-  dim(np2nc_ec4s1u_13) <- N_gender
-  
-  dim(np2nc_ec1s1u_14) <- N_gender
-  dim(np2nc_ec2s1u_14) <- N_gender
-  dim(np2nc_ec3s1u_14) <- N_gender
-  dim(np2nc_ec4s1u_14) <- N_gender
-  
-  dim(np2nc_ec1s1u_15) <- N_gender
-  dim(np2nc_ec2s1u_15) <- N_gender
-  dim(np2nc_ec3s1u_15) <- N_gender
-  dim(np2nc_ec4s1u_15) <- N_gender
-  
-  dim(np2nc_ec1s1u_16) <- N_gender
-  dim(np2nc_ec2s1u_16) <- N_gender
-  dim(np2nc_ec3s1u_16) <- N_gender
-  dim(np2nc_ec4s1u_16) <- N_gender
-  
-  dim(np2nc_ec1s1u_17) <- N_gender
-  dim(np2nc_ec2s1u_17) <- N_gender
-  dim(np2nc_ec3s1u_17) <- N_gender
-  dim(np2nc_ec4s1u_17) <- N_gender
-  
-  
-  
-  dim(np2nc_ec1s2u_10) <- N_gender
-  dim(np2nc_ec2s2u_10) <- N_gender
-  dim(np2nc_ec3s2u_10) <- N_gender
-  dim(np2nc_ec4s2u_10) <- N_gender
-  
-  dim(np2nc_ec1s2u_11) <- N_gender
-  dim(np2nc_ec2s2u_11) <- N_gender
-  dim(np2nc_ec3s2u_11) <- N_gender
-  dim(np2nc_ec4s2u_11) <- N_gender
-  
-  dim(np2nc_ec1s2u_12) <- N_gender
-  dim(np2nc_ec2s2u_12) <- N_gender
-  dim(np2nc_ec3s2u_12) <- N_gender
-  dim(np2nc_ec4s2u_12) <- N_gender
-  
-  dim(np2nc_ec1s2u_13) <- N_gender
-  dim(np2nc_ec2s2u_13) <- N_gender
-  dim(np2nc_ec3s2u_13) <- N_gender
-  dim(np2nc_ec4s2u_13) <- N_gender
-  
-  dim(np2nc_ec1s2u_14) <- N_gender
-  dim(np2nc_ec2s2u_14) <- N_gender
-  dim(np2nc_ec3s2u_14) <- N_gender
-  dim(np2nc_ec4s2u_14) <- N_gender
-  
-  dim(np2nc_ec1s2u_15) <- N_gender
-  dim(np2nc_ec2s2u_15) <- N_gender
-  dim(np2nc_ec3s2u_15) <- N_gender
-  dim(np2nc_ec4s2u_15) <- N_gender
-  
-  dim(np2nc_ec1s2u_16) <- N_gender
-  dim(np2nc_ec2s2u_16) <- N_gender
-  dim(np2nc_ec3s2u_16) <- N_gender
-  dim(np2nc_ec4s2u_16) <- N_gender
-  
-  dim(np2nc_ec1s2u_17) <- N_gender
-  dim(np2nc_ec2s2u_17) <- N_gender
-  dim(np2nc_ec3s2u_17) <- N_gender
-  dim(np2nc_ec4s2u_17) <- N_gender
-  
-  
-  dim(np2charge_ic1s1u_10) <- N_gender
-  dim(np2charge_ic2s1u_10) <- N_gender
-  dim(np2charge_ic3s1u_10) <- N_gender
-  dim(np2charge_ic4s1u_10) <- N_gender
-  
-  dim(np2charge_ic1s1u_11) <- N_gender
-  dim(np2charge_ic2s1u_11) <- N_gender
-  dim(np2charge_ic3s1u_11) <- N_gender
-  dim(np2charge_ic4s1u_11) <- N_gender
-  
-  dim(np2charge_ic1s1u_12) <- N_gender
-  dim(np2charge_ic2s1u_12) <- N_gender
-  dim(np2charge_ic3s1u_12) <- N_gender
-  dim(np2charge_ic4s1u_12) <- N_gender
-  
-  dim(np2charge_ic1s1u_13) <- N_gender
-  dim(np2charge_ic2s1u_13) <- N_gender
-  dim(np2charge_ic3s1u_13) <- N_gender
-  dim(np2charge_ic4s1u_13) <- N_gender
-  
-  dim(np2charge_ic1s1u_14) <- N_gender
-  dim(np2charge_ic2s1u_14) <- N_gender
-  dim(np2charge_ic3s1u_14) <- N_gender
-  dim(np2charge_ic4s1u_14) <- N_gender
-  
-  dim(np2charge_ic1s1u_15) <- N_gender
-  dim(np2charge_ic2s1u_15) <- N_gender
-  dim(np2charge_ic3s1u_15) <- N_gender
-  dim(np2charge_ic4s1u_15) <- N_gender
-  
-  dim(np2charge_ic1s1u_16) <- N_gender
-  dim(np2charge_ic2s1u_16) <- N_gender
-  dim(np2charge_ic3s1u_16) <- N_gender
-  dim(np2charge_ic4s1u_16) <- N_gender
-  
-  dim(np2charge_ic1s1u_17) <- N_gender
-  dim(np2charge_ic2s1u_17) <- N_gender
-  dim(np2charge_ic3s1u_17) <- N_gender
-  dim(np2charge_ic4s1u_17) <- N_gender
-  
-  
-  
-  dim(np2charge_ic1s2u_10) <- N_gender
-  dim(np2charge_ic2s2u_10) <- N_gender
-  dim(np2charge_ic3s2u_10) <- N_gender
-  dim(np2charge_ic4s2u_10) <- N_gender
-  
-  dim(np2charge_ic1s2u_11) <- N_gender
-  dim(np2charge_ic2s2u_11) <- N_gender
-  dim(np2charge_ic3s2u_11) <- N_gender
-  dim(np2charge_ic4s2u_11) <- N_gender
-  
-  dim(np2charge_ic1s2u_12) <- N_gender
-  dim(np2charge_ic2s2u_12) <- N_gender
-  dim(np2charge_ic3s2u_12) <- N_gender
-  dim(np2charge_ic4s2u_12) <- N_gender
-  
-  dim(np2charge_ic1s2u_13) <- N_gender
-  dim(np2charge_ic2s2u_13) <- N_gender
-  dim(np2charge_ic3s2u_13) <- N_gender
-  dim(np2charge_ic4s2u_13) <- N_gender
-  
-  dim(np2charge_ic1s2u_14) <- N_gender
-  dim(np2charge_ic2s2u_14) <- N_gender
-  dim(np2charge_ic3s2u_14) <- N_gender
-  dim(np2charge_ic4s2u_14) <- N_gender
-  
-  dim(np2charge_ic1s2u_15) <- N_gender
-  dim(np2charge_ic2s2u_15) <- N_gender
-  dim(np2charge_ic3s2u_15) <- N_gender
-  dim(np2charge_ic4s2u_15) <- N_gender
-  
-  dim(np2charge_ic1s2u_16) <- N_gender
-  dim(np2charge_ic2s2u_16) <- N_gender
-  dim(np2charge_ic3s2u_16) <- N_gender
-  dim(np2charge_ic4s2u_16) <- N_gender
-  
-  dim(np2charge_ic1s2u_17) <- N_gender
-  dim(np2charge_ic2s2u_17) <- N_gender
-  dim(np2charge_ic3s2u_17) <- N_gender
-  dim(np2charge_ic4s2u_17) <- N_gender
-  
-  dim(np2charge_ec1s1u_10) <- N_gender
-  dim(np2charge_ec2s1u_10) <- N_gender
-  dim(np2charge_ec3s1u_10) <- N_gender
-  dim(np2charge_ec4s1u_10) <- N_gender
-  
-  dim(np2charge_ec1s1u_11) <- N_gender
-  dim(np2charge_ec2s1u_11) <- N_gender
-  dim(np2charge_ec3s1u_11) <- N_gender
-  dim(np2charge_ec4s1u_11) <- N_gender
-  
-  dim(np2charge_ec1s1u_12) <- N_gender
-  dim(np2charge_ec2s1u_12) <- N_gender
-  dim(np2charge_ec3s1u_12) <- N_gender
-  dim(np2charge_ec4s1u_12) <- N_gender
-  
-  dim(np2charge_ec1s1u_13) <- N_gender
-  dim(np2charge_ec2s1u_13) <- N_gender
-  dim(np2charge_ec3s1u_13) <- N_gender
-  dim(np2charge_ec4s1u_13) <- N_gender
-  
-  dim(np2charge_ec1s1u_14) <- N_gender
-  dim(np2charge_ec2s1u_14) <- N_gender
-  dim(np2charge_ec3s1u_14) <- N_gender
-  dim(np2charge_ec4s1u_14) <- N_gender
-  
-  dim(np2charge_ec1s1u_15) <- N_gender
-  dim(np2charge_ec2s1u_15) <- N_gender
-  dim(np2charge_ec3s1u_15) <- N_gender
-  dim(np2charge_ec4s1u_15) <- N_gender
-  
-  dim(np2charge_ec1s1u_16) <- N_gender
-  dim(np2charge_ec2s1u_16) <- N_gender
-  dim(np2charge_ec3s1u_16) <- N_gender
-  dim(np2charge_ec4s1u_16) <- N_gender
-  
-  dim(np2charge_ec1s1u_17) <- N_gender
-  dim(np2charge_ec2s1u_17) <- N_gender
-  dim(np2charge_ec3s1u_17) <- N_gender
-  dim(np2charge_ec4s1u_17) <- N_gender
-  
-  
-  
-  dim(np2charge_ec1s2u_10) <- N_gender
-  dim(np2charge_ec2s2u_10) <- N_gender
-  dim(np2charge_ec3s2u_10) <- N_gender
-  dim(np2charge_ec4s2u_10) <- N_gender
-  
-  dim(np2charge_ec1s2u_11) <- N_gender
-  dim(np2charge_ec2s2u_11) <- N_gender
-  dim(np2charge_ec3s2u_11) <- N_gender
-  dim(np2charge_ec4s2u_11) <- N_gender
-  
-  dim(np2charge_ec1s2u_12) <- N_gender
-  dim(np2charge_ec2s2u_12) <- N_gender
-  dim(np2charge_ec3s2u_12) <- N_gender
-  dim(np2charge_ec4s2u_12) <- N_gender
-  
-  dim(np2charge_ec1s2u_13) <- N_gender
-  dim(np2charge_ec2s2u_13) <- N_gender
-  dim(np2charge_ec3s2u_13) <- N_gender
-  dim(np2charge_ec4s2u_13) <- N_gender
-  
-  dim(np2charge_ec1s2u_14) <- N_gender
-  dim(np2charge_ec2s2u_14) <- N_gender
-  dim(np2charge_ec3s2u_14) <- N_gender
-  dim(np2charge_ec4s2u_14) <- N_gender
-  
-  dim(np2charge_ec1s2u_15) <- N_gender
-  dim(np2charge_ec2s2u_15) <- N_gender
-  dim(np2charge_ec3s2u_15) <- N_gender
-  dim(np2charge_ec4s2u_15) <- N_gender
-  
-  dim(np2charge_ec1s2u_16) <- N_gender
-  dim(np2charge_ec2s2u_16) <- N_gender
-  dim(np2charge_ec3s2u_16) <- N_gender
-  dim(np2charge_ec4s2u_16) <- N_gender
-  
-  dim(np2charge_ec1s2u_17) <- N_gender
-  dim(np2charge_ec2s2u_17) <- N_gender
-  dim(np2charge_ec3s2u_17) <- N_gender
-  dim(np2charge_ec4s2u_17) <- N_gender
-  
-  
-  
-  dim(p2charge_ic1s1u_10) <- N_gender
-  dim(p2charge_ic2s1u_10) <- N_gender
-  dim(p2charge_ic3s1u_10) <- N_gender
-  dim(p2charge_ic4s1u_10) <- N_gender
-  
-  dim(p2charge_ic1s1u_11) <- N_gender
-  dim(p2charge_ic2s1u_11) <- N_gender
-  dim(p2charge_ic3s1u_11) <- N_gender
-  dim(p2charge_ic4s1u_11) <- N_gender
-  
-  dim(p2charge_ic1s1u_12) <- N_gender
-  dim(p2charge_ic2s1u_12) <- N_gender
-  dim(p2charge_ic3s1u_12) <- N_gender
-  dim(p2charge_ic4s1u_12) <- N_gender
-  
-  dim(p2charge_ic1s1u_13) <- N_gender
-  dim(p2charge_ic2s1u_13) <- N_gender
-  dim(p2charge_ic3s1u_13) <- N_gender
-  dim(p2charge_ic4s1u_13) <- N_gender
-  
-  dim(p2charge_ic1s1u_14) <- N_gender
-  dim(p2charge_ic2s1u_14) <- N_gender
-  dim(p2charge_ic3s1u_14) <- N_gender
-  dim(p2charge_ic4s1u_14) <- N_gender
-  
-  dim(p2charge_ic1s1u_15) <- N_gender
-  dim(p2charge_ic2s1u_15) <- N_gender
-  dim(p2charge_ic3s1u_15) <- N_gender
-  dim(p2charge_ic4s1u_15) <- N_gender
-  
-  dim(p2charge_ic1s1u_16) <- N_gender
-  dim(p2charge_ic2s1u_16) <- N_gender
-  dim(p2charge_ic3s1u_16) <- N_gender
-  dim(p2charge_ic4s1u_16) <- N_gender
-  
-  dim(p2charge_ic1s1u_17) <- N_gender
-  dim(p2charge_ic2s1u_17) <- N_gender
-  dim(p2charge_ic3s1u_17) <- N_gender
-  dim(p2charge_ic4s1u_17) <- N_gender
-  
-  
-  
-  dim(p2charge_ic1s2u_10) <- N_gender
-  dim(p2charge_ic2s2u_10) <- N_gender
-  dim(p2charge_ic3s2u_10) <- N_gender
-  dim(p2charge_ic4s2u_10) <- N_gender
-  
-  dim(p2charge_ic1s2u_11) <- N_gender
-  dim(p2charge_ic2s2u_11) <- N_gender
-  dim(p2charge_ic3s2u_11) <- N_gender
-  dim(p2charge_ic4s2u_11) <- N_gender
-  
-  dim(p2charge_ic1s2u_12) <- N_gender
-  dim(p2charge_ic2s2u_12) <- N_gender
-  dim(p2charge_ic3s2u_12) <- N_gender
-  dim(p2charge_ic4s2u_12) <- N_gender
-  
-  dim(p2charge_ic1s2u_13) <- N_gender
-  dim(p2charge_ic2s2u_13) <- N_gender
-  dim(p2charge_ic3s2u_13) <- N_gender
-  dim(p2charge_ic4s2u_13) <- N_gender
-  
-  dim(p2charge_ic1s2u_14) <- N_gender
-  dim(p2charge_ic2s2u_14) <- N_gender
-  dim(p2charge_ic3s2u_14) <- N_gender
-  dim(p2charge_ic4s2u_14) <- N_gender
-  
-  dim(p2charge_ic1s2u_15) <- N_gender
-  dim(p2charge_ic2s2u_15) <- N_gender
-  dim(p2charge_ic3s2u_15) <- N_gender
-  dim(p2charge_ic4s2u_15) <- N_gender
-  
-  dim(p2charge_ic1s2u_16) <- N_gender
-  dim(p2charge_ic2s2u_16) <- N_gender
-  dim(p2charge_ic3s2u_16) <- N_gender
-  dim(p2charge_ic4s2u_16) <- N_gender
-  
-  dim(p2charge_ic1s2u_17) <- N_gender
-  dim(p2charge_ic2s2u_17) <- N_gender
-  dim(p2charge_ic3s2u_17) <- N_gender
-  dim(p2charge_ic4s2u_17) <- N_gender
-  
-  dim(p2charge_ec1s1u_10) <- N_gender
-  dim(p2charge_ec2s1u_10) <- N_gender
-  dim(p2charge_ec3s1u_10) <- N_gender
-  dim(p2charge_ec4s1u_10) <- N_gender
-  
-  dim(p2charge_ec1s1u_11) <- N_gender
-  dim(p2charge_ec2s1u_11) <- N_gender
-  dim(p2charge_ec3s1u_11) <- N_gender
-  dim(p2charge_ec4s1u_11) <- N_gender
-  
-  dim(p2charge_ec1s1u_12) <- N_gender
-  dim(p2charge_ec2s1u_12) <- N_gender
-  dim(p2charge_ec3s1u_12) <- N_gender
-  dim(p2charge_ec4s1u_12) <- N_gender
-  
-  dim(p2charge_ec1s1u_13) <- N_gender
-  dim(p2charge_ec2s1u_13) <- N_gender
-  dim(p2charge_ec3s1u_13) <- N_gender
-  dim(p2charge_ec4s1u_13) <- N_gender
-  
-  dim(p2charge_ec1s1u_14) <- N_gender
-  dim(p2charge_ec2s1u_14) <- N_gender
-  dim(p2charge_ec3s1u_14) <- N_gender
-  dim(p2charge_ec4s1u_14) <- N_gender
-  
-  dim(p2charge_ec1s1u_15) <- N_gender
-  dim(p2charge_ec2s1u_15) <- N_gender
-  dim(p2charge_ec3s1u_15) <- N_gender
-  dim(p2charge_ec4s1u_15) <- N_gender
-  
-  dim(p2charge_ec1s1u_16) <- N_gender
-  dim(p2charge_ec2s1u_16) <- N_gender
-  dim(p2charge_ec3s1u_16) <- N_gender
-  dim(p2charge_ec4s1u_16) <- N_gender
-  
-  dim(p2charge_ec1s1u_17) <- N_gender
-  dim(p2charge_ec2s1u_17) <- N_gender
-  dim(p2charge_ec3s1u_17) <- N_gender
-  dim(p2charge_ec4s1u_17) <- N_gender
-  
-  
-  
-  dim(p2charge_ec1s2u_10) <- N_gender
-  dim(p2charge_ec2s2u_10) <- N_gender
-  dim(p2charge_ec3s2u_10) <- N_gender
-  dim(p2charge_ec4s2u_10) <- N_gender
-  
-  dim(p2charge_ec1s2u_11) <- N_gender
-  dim(p2charge_ec2s2u_11) <- N_gender
-  dim(p2charge_ec3s2u_11) <- N_gender
-  dim(p2charge_ec4s2u_11) <- N_gender
-  
-  dim(p2charge_ec1s2u_12) <- N_gender
-  dim(p2charge_ec2s2u_12) <- N_gender
-  dim(p2charge_ec3s2u_12) <- N_gender
-  dim(p2charge_ec4s2u_12) <- N_gender
-  
-  dim(p2charge_ec1s2u_13) <- N_gender
-  dim(p2charge_ec2s2u_13) <- N_gender
-  dim(p2charge_ec3s2u_13) <- N_gender
-  dim(p2charge_ec4s2u_13) <- N_gender
-  
-  dim(p2charge_ec1s2u_14) <- N_gender
-  dim(p2charge_ec2s2u_14) <- N_gender
-  dim(p2charge_ec3s2u_14) <- N_gender
-  dim(p2charge_ec4s2u_14) <- N_gender
-  
-  dim(p2charge_ec1s2u_15) <- N_gender
-  dim(p2charge_ec2s2u_15) <- N_gender
-  dim(p2charge_ec3s2u_15) <- N_gender
-  dim(p2charge_ec4s2u_15) <- N_gender
-  
-  dim(p2charge_ec1s2u_16) <- N_gender
-  dim(p2charge_ec2s2u_16) <- N_gender
-  dim(p2charge_ec3s2u_16) <- N_gender
-  dim(p2charge_ec4s2u_16) <- N_gender
-  
-  dim(p2charge_ec1s2u_17) <- N_gender
-  dim(p2charge_ec2s2u_17) <- N_gender
-  dim(p2charge_ec3s2u_17) <- N_gender
-  dim(p2charge_ec4s2u_17) <- N_gender
   
   
   ##############################################################################################################################
   # DIFFERENTIAL EQUATIONS # # #  # # #
   ###############################################################################################################################
-  deriv(IC1S1J1U_10[]) <- 3
-  deriv(IC2S1J1U_10[]) <- 3
-  deriv(IC3S1J1U_10[]) <- 3
-  deriv(IC4S1J1U_10[]) <- 3
-  
-  deriv(IC1S1J1U_11[]) <- 3
-  deriv(IC2S1J1U_11[]) <- 3
-  deriv(IC3S1J1U_11[]) <- 3
-  deriv(IC4S1J1U_11[]) <- 3
-  
-  deriv(IC1S1J1U_12[]) <- 3
-  deriv(IC2S1J1U_12[]) <- 3
-  deriv(IC3S1J1U_12[]) <- 3
-  deriv(IC4S1J1U_12[]) <- 3
-  
-  deriv(IC1S1J1U_13[]) <- 3
-  deriv(IC2S1J1U_13[]) <- 3
-  deriv(IC3S1J1U_13[]) <- 3
-  deriv(IC4S1J1U_13[]) <- 3
-  
-  deriv(IC1S1J1U_14[]) <- 3
-  deriv(IC2S1J1U_14[]) <- 3
-  deriv(IC3S1J1U_14[]) <- 3
-  deriv(IC4S1J1U_14[]) <- 3
-  
-  deriv(IC1S1J1U_15[]) <- 3
-  deriv(IC2S1J1U_15[]) <- 3
-  deriv(IC3S1J1U_15[]) <- 3
-  deriv(IC4S1J1U_15[]) <- 3
-  
-  deriv(IC1S1J1U_16[]) <- 3
-  deriv(IC2S1J1U_16[]) <- 3
-  deriv(IC3S1J1U_16[]) <- 3
-  deriv(IC4S1J1U_16[]) <- 3
-  
-  deriv(IC1S1J1U_17[]) <- 3
-  deriv(IC2S1J1U_17[]) <- 3
-  deriv(IC3S1J1U_17[]) <- 3
-  deriv(IC4S1J1U_17[]) <- 3
-  
-  
-  
-  deriv(IC1S2J1U_10[]) <- 3
-  deriv(IC2S2J1U_10[]) <- 3
-  deriv(IC3S2J1U_10[]) <- 3
-  deriv(IC4S2J1U_10[]) <- 3
-  
-  deriv(IC1S2J1U_11[]) <- 3
-  deriv(IC2S2J1U_11[]) <- 3
-  deriv(IC3S2J1U_11[]) <- 3
-  deriv(IC4S2J1U_11[]) <- 3
-  
-  deriv(IC1S2J1U_12[]) <- 3
-  deriv(IC2S2J1U_12[]) <- 3
-  deriv(IC3S2J1U_12[]) <- 3
-  deriv(IC4S2J1U_12[]) <- 3
-  
-  deriv(IC1S2J1U_13[]) <- 3
-  deriv(IC2S2J1U_13[]) <- 3
-  deriv(IC3S2J1U_13[]) <- 3
-  deriv(IC4S2J1U_13[]) <- 3
-  
-  deriv(IC1S2J1U_14[]) <- 3
-  deriv(IC2S2J1U_14[]) <- 3
-  deriv(IC3S2J1U_14[]) <- 3
-  deriv(IC4S2J1U_14[]) <- 3
-  
-  deriv(IC1S2J1U_15[]) <- 3
-  deriv(IC2S2J1U_15[]) <- 3
-  deriv(IC3S2J1U_15[]) <- 3
-  deriv(IC4S2J1U_15[]) <- 3
-  
-  deriv(IC1S2J1U_16[]) <- 3
-  deriv(IC2S2J1U_16[]) <- 3
-  deriv(IC3S2J1U_16[]) <- 3
-  deriv(IC4S2J1U_16[]) <- 3
-  
-  deriv(IC1S2J1U_17[]) <- 3
-  deriv(IC2S2J1U_17[]) <- 3
-  deriv(IC3S2J1U_17[]) <- 3
-  deriv(IC4S2J1U_17[]) <- 3
-  
-  
-  
-  deriv(IC1S1J2U_10[]) <- 3
-  deriv(IC2S1J2U_10[]) <- 3
-  deriv(IC3S1J2U_10[]) <- 3
-  deriv(IC4S1J2U_10[]) <- 3
-  
-  deriv(IC1S1J2U_11[]) <- 3
-  deriv(IC2S1J2U_11[]) <- 3
-  deriv(IC3S1J2U_11[]) <- 3
-  deriv(IC4S1J2U_11[]) <- 3
-  
-  deriv(IC1S1J2U_12[]) <- 3
-  deriv(IC2S1J2U_12[]) <- 3
-  deriv(IC3S1J2U_12[]) <- 3
-  deriv(IC4S1J2U_12[]) <- 3
-  
-  deriv(IC1S1J2U_13[]) <- 3
-  deriv(IC2S1J2U_13[]) <- 3
-  deriv(IC3S1J2U_13[]) <- 3
-  deriv(IC4S1J2U_13[]) <- 3
-  
-  deriv(IC1S1J2U_14[]) <- 3
-  deriv(IC2S1J2U_14[]) <- 3
-  deriv(IC3S1J2U_14[]) <- 3
-  deriv(IC4S1J2U_14[]) <- 3
-  
-  deriv(IC1S1J2U_15[]) <- 3
-  deriv(IC2S1J2U_15[]) <- 3
-  deriv(IC3S1J2U_15[]) <- 3
-  deriv(IC4S1J2U_15[]) <- 3
-  
-  deriv(IC1S1J2U_16[]) <- 3
-  deriv(IC2S1J2U_16[]) <- 3
-  deriv(IC3S1J2U_16[]) <- 3
-  deriv(IC4S1J2U_16[]) <- 3
-  
-  deriv(IC1S1J2U_17[]) <- 3
-  deriv(IC2S1J2U_17[]) <- 3
-  deriv(IC3S1J2U_17[]) <- 3
-  deriv(IC4S1J2U_17[]) <- 3
-  
-  
-  
-  deriv(IC1S2J2U_10[]) <- 3
-  deriv(IC2S2J2U_10[]) <- 3
-  deriv(IC3S2J2U_10[]) <- 3
-  deriv(IC4S2J2U_10[]) <- 3
-  
-  deriv(IC1S2J2U_11[]) <- 3
-  deriv(IC2S2J2U_11[]) <- 3
-  deriv(IC3S2J2U_11[]) <- 3
-  deriv(IC4S2J2U_11[]) <- 3
-  
-  deriv(IC1S2J2U_12[]) <- 3
-  deriv(IC2S2J2U_12[]) <- 3
-  deriv(IC3S2J2U_12[]) <- 3
-  deriv(IC4S2J2U_12[]) <- 3
-  
-  deriv(IC1S2J2U_13[]) <- 3
-  deriv(IC2S2J2U_13[]) <- 3
-  deriv(IC3S2J2U_13[]) <- 3
-  deriv(IC4S2J2U_13[]) <- 3
-  
-  deriv(IC1S2J2U_14[]) <- 3
-  deriv(IC2S2J2U_14[]) <- 3
-  deriv(IC3S2J2U_14[]) <- 3
-  deriv(IC4S2J2U_14[]) <- 3
-  
-  deriv(IC1S2J2U_15[]) <- 3
-  deriv(IC2S2J2U_15[]) <- 3
-  deriv(IC3S2J2U_15[]) <- 3
-  deriv(IC4S2J2U_15[]) <- 3
-  
-  deriv(IC1S2J2U_16[]) <- 3
-  deriv(IC2S2J2U_16[]) <- 3
-  deriv(IC3S2J2U_16[]) <- 3
-  deriv(IC4S2J2U_16[]) <- 3
-  
-  deriv(IC1S2J2U_17[]) <- 3
-  deriv(IC2S2J2U_17[]) <- 3
-  deriv(IC3S2J2U_17[]) <- 3
-  deriv(IC4S2J2U_17[]) <- 3
-  
-  
-  
-  deriv(IC1S1J3U_10[]) <- 3
-  deriv(IC2S1J3U_10[]) <- 3
-  deriv(IC3S1J3U_10[]) <- 3
-  deriv(IC4S1J3U_10[]) <- 3
-  
-  deriv(IC1S1J3U_11[]) <- 3
-  deriv(IC2S1J3U_11[]) <- 3
-  deriv(IC3S1J3U_11[]) <- 3
-  deriv(IC4S1J3U_11[]) <- 3
-  
-  deriv(IC1S1J3U_12[]) <- 3
-  deriv(IC2S1J3U_12[]) <- 3
-  deriv(IC3S1J3U_12[]) <- 3
-  deriv(IC4S1J3U_12[]) <- 3
-  
-  deriv(IC1S1J3U_13[]) <- 3
-  deriv(IC2S1J3U_13[]) <- 3
-  deriv(IC3S1J3U_13[]) <- 3
-  deriv(IC4S1J3U_13[]) <- 3
-  
-  deriv(IC1S1J3U_14[]) <- 3
-  deriv(IC2S1J3U_14[]) <- 3
-  deriv(IC3S1J3U_14[]) <- 3
-  deriv(IC4S1J3U_14[]) <- 3
-  
-  deriv(IC1S1J3U_15[]) <- 3
-  deriv(IC2S1J3U_15[]) <- 3
-  deriv(IC3S1J3U_15[]) <- 3
-  deriv(IC4S1J3U_15[]) <- 3
-  
-  deriv(IC1S1J3U_16[]) <- 3
-  deriv(IC2S1J3U_16[]) <- 3
-  deriv(IC3S1J3U_16[]) <- 3
-  deriv(IC4S1J3U_16[]) <- 3
-  
-  deriv(IC1S1J3U_17[]) <- 3
-  deriv(IC2S1J3U_17[]) <- 3
-  deriv(IC3S1J3U_17[]) <- 3
-  deriv(IC4S1J3U_17[]) <- 3
-  
-  
-  
-  deriv(IC1S2J3U_10[]) <- 3
-  deriv(IC2S2J3U_10[]) <- 3
-  deriv(IC3S2J3U_10[]) <- 3
-  deriv(IC4S2J3U_10[]) <- 3
-  
-  deriv(IC1S2J3U_11[]) <- 3
-  deriv(IC2S2J3U_11[]) <- 3
-  deriv(IC3S2J3U_11[]) <- 3
-  deriv(IC4S2J3U_11[]) <- 3
-  
-  deriv(IC1S2J3U_12[]) <- 3
-  deriv(IC2S2J3U_12[]) <- 3
-  deriv(IC3S2J3U_12[]) <- 3
-  deriv(IC4S2J3U_12[]) <- 3
-  
-  deriv(IC1S2J3U_13[]) <- 3
-  deriv(IC2S2J3U_13[]) <- 3
-  deriv(IC3S2J3U_13[]) <- 3
-  deriv(IC4S2J3U_13[]) <- 3
-  
-  deriv(IC1S2J3U_14[]) <- 3
-  deriv(IC2S2J3U_14[]) <- 3
-  deriv(IC3S2J3U_14[]) <- 3
-  deriv(IC4S2J3U_14[]) <- 3
-  
-  deriv(IC1S2J3U_15[]) <- 3
-  deriv(IC2S2J3U_15[]) <- 3
-  deriv(IC3S2J3U_15[]) <- 3
-  deriv(IC4S2J3U_15[]) <- 3
-  
-  deriv(IC1S2J3U_16[]) <- 3
-  deriv(IC2S2J3U_16[]) <- 3
-  deriv(IC3S2J3U_16[]) <- 3
-  deriv(IC4S2J3U_16[]) <- 3
-  
-  deriv(IC1S2J3U_17[]) <- 3
-  deriv(IC2S2J3U_17[]) <- 3
-  deriv(IC3S2J3U_17[]) <- 3
-  deriv(IC4S2J3U_17[]) <- 3
-  
-  
-  
-  deriv(IC1S1J4U_10[]) <- 3
-  deriv(IC2S1J4U_10[]) <- 3
-  deriv(IC3S1J4U_10[]) <- 3
-  deriv(IC4S1J4U_10[]) <- 3
-  
-  deriv(IC1S1J4U_11[]) <- 3
-  deriv(IC2S1J4U_11[]) <- 3
-  deriv(IC3S1J4U_11[]) <- 3
-  deriv(IC4S1J4U_11[]) <- 3
-  
-  deriv(IC1S1J4U_12[]) <- 3
-  deriv(IC2S1J4U_12[]) <- 3
-  deriv(IC3S1J4U_12[]) <- 3
-  deriv(IC4S1J4U_12[]) <- 3
-  
-  deriv(IC1S1J4U_13[]) <- 3
-  deriv(IC2S1J4U_13[]) <- 3
-  deriv(IC3S1J4U_13[]) <- 3
-  deriv(IC4S1J4U_13[]) <- 3
-  
-  deriv(IC1S1J4U_14[]) <- 3
-  deriv(IC2S1J4U_14[]) <- 3
-  deriv(IC3S1J4U_14[]) <- 3
-  deriv(IC4S1J4U_14[]) <- 3
-  
-  deriv(IC1S1J4U_15[]) <- 3
-  deriv(IC2S1J4U_15[]) <- 3
-  deriv(IC3S1J4U_15[]) <- 3
-  deriv(IC4S1J4U_15[]) <- 3
-  
-  deriv(IC1S1J4U_16[]) <- 3
-  deriv(IC2S1J4U_16[]) <- 3
-  deriv(IC3S1J4U_16[]) <- 3
-  deriv(IC4S1J4U_16[]) <- 3
-  
-  deriv(IC1S1J4U_17[]) <- 3
-  deriv(IC2S1J4U_17[]) <- 3
-  deriv(IC3S1J4U_17[]) <- 3
-  deriv(IC4S1J4U_17[]) <- 3
-  
-  
-  
-  deriv(IC1S2J4U_10[]) <- 3
-  deriv(IC2S2J4U_10[]) <- 3
-  deriv(IC3S2J4U_10[]) <- 3
-  deriv(IC4S2J4U_10[]) <- 3
-  
-  deriv(IC1S2J4U_11[]) <- 3
-  deriv(IC2S2J4U_11[]) <- 3
-  deriv(IC3S2J4U_11[]) <- 3
-  deriv(IC4S2J4U_11[]) <- 3
-  
-  deriv(IC1S2J4U_12[]) <- 3
-  deriv(IC2S2J4U_12[]) <- 3
-  deriv(IC3S2J4U_12[]) <- 3
-  deriv(IC4S2J4U_12[]) <- 3
-  
-  deriv(IC1S2J4U_13[]) <- 3
-  deriv(IC2S2J4U_13[]) <- 3
-  deriv(IC3S2J4U_13[]) <- 3
-  deriv(IC4S2J4U_13[]) <- 3
-  
-  deriv(IC1S2J4U_14[]) <- 3
-  deriv(IC2S2J4U_14[]) <- 3
-  deriv(IC3S2J4U_14[]) <- 3
-  deriv(IC4S2J4U_14[]) <- 3
-  
-  deriv(IC1S2J4U_15[]) <- 3
-  deriv(IC2S2J4U_15[]) <- 3
-  deriv(IC3S2J4U_15[]) <- 3
-  deriv(IC4S2J4U_15[]) <- 3
-  
-  deriv(IC1S2J4U_16[]) <- 3
-  deriv(IC2S2J4U_16[]) <- 3
-  deriv(IC3S2J4U_16[]) <- 3
-  deriv(IC4S2J4U_16[]) <- 3
-  
-  deriv(IC1S2J4U_17[]) <- 3
-  deriv(IC2S2J4U_17[]) <- 3
-  deriv(IC3S2J4U_17[]) <- 3
-  deriv(IC4S2J4U_17[]) <- 3
-  
-  
-  
-  deriv(IC1S1J5U_10[]) <- 3
-  deriv(IC2S1J5U_10[]) <- 3
-  deriv(IC3S1J5U_10[]) <- 3
-  deriv(IC4S1J5U_10[]) <- 3
-  
-  deriv(IC1S1J5U_11[]) <- 3
-  deriv(IC2S1J5U_11[]) <- 3
-  deriv(IC3S1J5U_11[]) <- 3
-  deriv(IC4S1J5U_11[]) <- 3
-  
-  deriv(IC1S1J5U_12[]) <- 3
-  deriv(IC2S1J5U_12[]) <- 3
-  deriv(IC3S1J5U_12[]) <- 3
-  deriv(IC4S1J5U_12[]) <- 3
-  
-  deriv(IC1S1J5U_13[]) <- 3
-  deriv(IC2S1J5U_13[]) <- 3
-  deriv(IC3S1J5U_13[]) <- 3
-  deriv(IC4S1J5U_13[]) <- 3
-  
-  deriv(IC1S1J5U_14[]) <- 3
-  deriv(IC2S1J5U_14[]) <- 3
-  deriv(IC3S1J5U_14[]) <- 3
-  deriv(IC4S1J5U_14[]) <- 3
-  
-  deriv(IC1S1J5U_15[]) <- 3
-  deriv(IC2S1J5U_15[]) <- 3
-  deriv(IC3S1J5U_15[]) <- 3
-  deriv(IC4S1J5U_15[]) <- 3
-  
-  deriv(IC1S1J5U_16[]) <- 3
-  deriv(IC2S1J5U_16[]) <- 3
-  deriv(IC3S1J5U_16[]) <- 3
-  deriv(IC4S1J5U_16[]) <- 3
-  
-  deriv(IC1S1J5U_17[]) <- 3
-  deriv(IC2S1J5U_17[]) <- 3
-  deriv(IC3S1J5U_17[]) <- 3
-  deriv(IC4S1J5U_17[]) <- 3
-  
-  
-  
-  deriv(IC1S2J5U_10[]) <- 3
-  deriv(IC2S2J5U_10[]) <- 3
-  deriv(IC3S2J5U_10[]) <- 3
-  deriv(IC4S2J5U_10[]) <- 3
-  
-  deriv(IC1S2J5U_11[]) <- 3
-  deriv(IC2S2J5U_11[]) <- 3
-  deriv(IC3S2J5U_11[]) <- 3
-  deriv(IC4S2J5U_11[]) <- 3
-  
-  deriv(IC1S2J5U_12[]) <- 3
-  deriv(IC2S2J5U_12[]) <- 3
-  deriv(IC3S2J5U_12[]) <- 3
-  deriv(IC4S2J5U_12[]) <- 3
-  
-  deriv(IC1S2J5U_13[]) <- 3
-  deriv(IC2S2J5U_13[]) <- 3
-  deriv(IC3S2J5U_13[]) <- 3
-  deriv(IC4S2J5U_13[]) <- 3
-  
-  deriv(IC1S2J5U_14[]) <- 3
-  deriv(IC2S2J5U_14[]) <- 3
-  deriv(IC3S2J5U_14[]) <- 3
-  deriv(IC4S2J5U_14[]) <- 3
-  
-  deriv(IC1S2J5U_15[]) <- 3
-  deriv(IC2S2J5U_15[]) <- 3
-  deriv(IC3S2J5U_15[]) <- 3
-  deriv(IC4S2J5U_15[]) <- 3
-  
-  deriv(IC1S2J5U_16[]) <- 3
-  deriv(IC2S2J5U_16[]) <- 3
-  deriv(IC3S2J5U_16[]) <- 3
-  deriv(IC4S2J5U_16[]) <- 3
-  
-  deriv(IC1S2J5U_17[]) <- 3
-  deriv(IC2S2J5U_17[]) <- 3
-  deriv(IC3S2J5U_17[]) <- 3
-  deriv(IC4S2J5U_17[]) <- 3
-  
-
+  deriv(IC1S1_10[]) <- t10_ic1s1[i]*pc_incl*turn10[i] - age_up*IC1S1_10[i] + r[i]*EC1S1_10[i] - f[i]*IC1S1_10[i] - n2care_i_10[i]*IC1S1_10[i] - m2pru_ic1_10[i]*IC1S1_10[i] 
+  deriv(IC2S1_10[]) <- t10_ic2s1[i]*pc_incl*turn10[i] - age_up*IC2S1_10[i] + r[i]*EC2S1_10[i] - f[i]*IC2S1_10[i] + n2nr[i]*n2care_i_10[i]*IC1S1_10[i] + p2nr[i]*p2care[i]*IC4S1_10[i] + r2nr[i]*end_res[i]*IC3S1_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_10[i] - m2pru_ic2_10[i]*IC2S1_10[i] 
+  deriv(IC3S1_10[]) <- t10_ic3s1[i]*pc_incl*turn10[i] - age_up*IC3S1_10[i] + r[i]*EC3S1_10[i] - f[i]*IC3S1_10[i] + n2r[i]*n2care_i_10[i]*IC2S1_10[i] + p2r[i]*p2care[i]*IC4S1_10[i] + nr2r[i]*end_nr[i]*IC2S1_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_10[i] - m2pru_ic3_10[i]*IC3S1_10[i] 
+  deriv(IC4S1_10[]) <- t10_ic4s1[i]*pc_incl*turn10[i] - age_up*IC4S1_10[i] + r[i]*EC4S1_10[i] - f[i]*IC4S1_10[i] + nr2p[i]*end_nr[i]*IC2S1_10[i] + r2p[i]*end_res[i]*IC3S1_10[i] - p2care[i]*IC4S1_10[i] - m2pru_ic4_10[i]*IC4S1_10[i] 
+  
+  deriv(IC1S1_11[]) <- age_up*(IC1S1_10[i] + IC1S2_10[i]) - age_up*IC1S1_11[i] + r[i]*EC1S1_11[i] - f[i]*IC1S1_11[i] - n2care_i_11[i]*IC1S1_11[i] - m2pru_ic1_11[i]*IC1S1_11[i] 
+  deriv(IC2S1_11[]) <- age_up*(IC2S1_10[i] + IC2S2_10[i]) - age_up*IC2S1_11[i] + r[i]*EC2S1_11[i] - f[i]*IC2S1_11[i] + n2nr[i]*n2care_i_11[i]*IC1S1_11[i] + p2nr[i]*p2care[i]*IC4S1_11[i] + r2nr[i]*end_res[i]*IC3S1_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_11[i] - m2pru_ic2_11[i]*IC2S1_11[i] 
+  deriv(IC3S1_11[]) <- age_up*(IC3S1_10[i] + IC3S2_10[i]) - age_up*IC3S1_11[i] + r[i]*EC3S1_11[i] - f[i]*IC3S1_11[i] + n2r[i]*n2care_i_11[i]*IC2S1_11[i] + p2r[i]*p2care[i]*IC4S1_11[i] + nr2r[i]*end_nr[i]*IC2S1_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_11[i] - m2pru_ic3_11[i]*IC3S1_11[i] 
+  deriv(IC4S1_11[]) <- age_up*(IC4S1_10[i] + IC4S2_10[i]) - age_up*IC4S1_11[i] + r[i]*EC4S1_11[i] - f[i]*IC4S1_11[i] + nr2p[i]*end_nr[i]*IC2S1_11[i] + r2p[i]*end_res[i]*IC3S1_11[i] - p2care[i]*IC4S1_11[i] - m2pru_ic4_11[i]*IC4S1_11[i] 
+  
+  deriv(IC1S1_12[]) <- age_up*IC1S1_11[i] - age_up*IC1S1_12[i] + r[i]*EC1S1_12[i] - f[i]*IC1S1_12[i] - n2care_i_12[i]*IC1S1_12[i] - m2pru_ic1_12[i]*IC1S1_12[i] 
+  deriv(IC2S1_12[]) <- age_up*IC2S1_11[i] - age_up*IC2S1_12[i] + r[i]*EC2S1_12[i] - f[i]*IC2S1_12[i] + n2nr[i]*n2care_i_12[i]*IC1S1_12[i] + p2nr[i]*p2care[i]*IC4S1_12[i] + r2nr[i]*end_res[i]*IC3S1_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_12[i] - m2pru_ic2_12[i]*IC2S1_12[i] 
+  deriv(IC3S1_12[]) <- age_up*IC3S1_11[i] - age_up*IC3S1_12[i] + r[i]*EC3S1_12[i] - f[i]*IC3S1_12[i] + n2r[i]*n2care_i_12[i]*IC2S1_12[i] + p2r[i]*p2care[i]*IC4S1_12[i] + nr2r[i]*end_nr[i]*IC2S1_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_12[i] - m2pru_ic3_12[i]*IC3S1_12[i] 
+  deriv(IC4S1_12[]) <- age_up*IC4S1_11[i] - age_up*IC4S1_12[i] + r[i]*EC4S1_12[i] - f[i]*IC4S1_12[i] + nr2p[i]*end_nr[i]*IC2S1_12[i] + r2p[i]*end_res[i]*IC3S1_12[i] - p2care[i]*IC4S1_12[i] - m2pru_ic4_12[i]*IC4S1_12[i] 
+  
+  deriv(IC1S1_13[]) <- age_up*IC1S1_12[i] - age_up*IC1S1_13[i] + r[i]*EC1S1_13[i] - f[i]*IC1S1_13[i] - n2care_i_13[i]*IC1S1_13[i] - m2pru_ic1_13[i]*IC1S1_13[i] 
+  deriv(IC2S1_13[]) <- age_up*IC2S1_12[i] - age_up*IC2S1_13[i] + r[i]*EC2S1_13[i] - f[i]*IC2S1_13[i] + n2nr[i]*n2care_i_13[i]*IC1S1_13[i] + p2nr[i]*p2care[i]*IC4S1_13[i] + r2nr[i]*end_res[i]*IC3S1_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_13[i] - m2pru_ic2_13[i]*IC2S1_13[i] 
+  deriv(IC3S1_13[]) <- age_up*IC3S1_12[i] - age_up*IC3S1_13[i] + r[i]*EC3S1_13[i] - f[i]*IC3S1_13[i] + n2r[i]*n2care_i_13[i]*IC2S1_13[i] + p2r[i]*p2care[i]*IC4S1_13[i] + nr2r[i]*end_nr[i]*IC2S1_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_13[i] - m2pru_ic3_13[i]*IC3S1_13[i] 
+  deriv(IC4S1_13[]) <- age_up*IC4S1_12[i] - age_up*IC4S1_13[i] + r[i]*EC4S1_13[i] - f[i]*IC4S1_13[i] + nr2p[i]*end_nr[i]*IC2S1_13[i] + r2p[i]*end_res[i]*IC3S1_13[i] - p2care[i]*IC4S1_13[i] - m2pru_ic4_13[i]*IC4S1_13[i] 
+  
+  deriv(IC1S1_14[]) <- age_up*IC1S1_13[i] - age_up*IC1S1_14[i] + r[i]*EC1S1_14[i] - f[i]*IC1S1_14[i] - n2care_i_14[i]*IC1S1_14[i] - m2pru_ic1_14[i]*IC1S1_14[i] 
+  deriv(IC2S1_14[]) <- age_up*IC2S1_13[i] - age_up*IC2S1_14[i] + r[i]*EC2S1_14[i] - f[i]*IC2S1_14[i] + n2nr[i]*n2care_i_14[i]*IC1S1_14[i] + p2nr[i]*p2care[i]*IC4S1_14[i] + r2nr[i]*end_res[i]*IC3S1_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_14[i] - m2pru_ic2_14[i]*IC2S1_14[i] 
+  deriv(IC3S1_14[]) <- age_up*IC3S1_13[i] - age_up*IC3S1_14[i] + r[i]*EC3S1_14[i] - f[i]*IC3S1_14[i] + n2r[i]*n2care_i_14[i]*IC2S1_14[i] + p2r[i]*p2care[i]*IC4S1_14[i] + nr2r[i]*end_nr[i]*IC2S1_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_14[i] - m2pru_ic3_14[i]*IC3S1_14[i] 
+  deriv(IC4S1_14[]) <- age_up*IC4S1_13[i] - age_up*IC4S1_14[i] + r[i]*EC4S1_14[i] - f[i]*IC4S1_14[i] + nr2p[i]*end_nr[i]*IC2S1_14[i] + r2p[i]*end_res[i]*IC3S1_14[i] - p2care[i]*IC4S1_14[i] - m2pru_ic4_14[i]*IC4S1_14[i] 
+  
+  deriv(IC1S1_15[]) <- age_up*IC1S1_14[i] - age_up*IC1S1_15[i] + r[i]*EC1S1_15[i] - f[i]*IC1S1_15[i] - n2care_i_15[i]*IC1S1_15[i] - m2pru_ic1_15[i]*IC1S1_15[i] 
+  deriv(IC2S1_15[]) <- age_up*IC2S1_14[i] - age_up*IC2S1_15[i] + r[i]*EC2S1_15[i] - f[i]*IC2S1_15[i] + n2nr[i]*n2care_i_15[i]*IC1S1_15[i] + p2nr[i]*p2care[i]*IC4S1_15[i] + r2nr[i]*end_res[i]*IC3S1_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_15[i] - m2pru_ic2_15[i]*IC2S1_15[i] 
+  deriv(IC3S1_15[]) <- age_up*IC3S1_14[i] - age_up*IC3S1_15[i] + r[i]*EC3S1_15[i] - f[i]*IC3S1_15[i] + n2r[i]*n2care_i_15[i]*IC2S1_15[i] + p2r[i]*p2care[i]*IC4S1_15[i] + nr2r[i]*end_nr[i]*IC2S1_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_15[i] - m2pru_ic3_15[i]*IC3S1_15[i] 
+  deriv(IC4S1_15[]) <- age_up*IC4S1_14[i] - age_up*IC4S1_15[i] + r[i]*EC4S1_15[i] - f[i]*IC4S1_15[i] + nr2p[i]*end_nr[i]*IC2S1_15[i] + r2p[i]*end_res[i]*IC3S1_15[i] - p2care[i]*IC4S1_15[i] - m2pru_ic4_15[i]*IC4S1_15[i] 
+  
+  deriv(IC1S1_16[]) <- age_up*(neet16_ic1s1[i]*IC1S1_15[i] + neet16_ic1s2[i]*IC1S2_15[i]) - age_up*IC1S1_16[i] + r[i]*EC1S1_16[i] - f[i]*IC1S1_16[i] - n2care_i_16[i]*IC1S1_16[i] + neet2m_i[i]*IC1S2_16[i] - m2neet_ic1_16[i]*IC1S1_16[i] 
+  deriv(IC2S1_16[]) <- age_up*(neet16_ic2s1[i]*IC2S1_15[i] + neet16_ic2s2[i]*IC2S2_15[i]) - age_up*IC2S1_16[i] + r[i]*EC2S1_16[i] - f[i]*IC2S1_16[i] + n2nr[i]*n2care_i_16[i]*IC1S1_16[i] + p2nr[i]*p2care[i]*IC4S1_16[i] + r2nr[i]*end_res[i]*IC3S1_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_16[i] + neet2m_i[i]*IC2S2_16[i] - m2neet_ic2_16[i]*IC2S1_16[i] 
+  deriv(IC3S1_16[]) <- age_up*(neet16_ic3s1[i]*IC3S1_15[i] + neet16_ic3s2[i]*IC3S2_15[i]) - age_up*IC3S1_16[i] + r[i]*EC3S1_16[i] - f[i]*IC3S1_16[i] + n2r[i]*n2care_i_16[i]*IC2S1_16[i] + p2r[i]*p2care[i]*IC4S1_16[i] + nr2r[i]*end_nr[i]*IC2S1_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_16[i] + neet2m_i[i]*IC3S2_16[i] - m2neet_ic3_16[i]*IC3S1_16[i] 
+  deriv(IC4S1_16[]) <- age_up*(neet16_ic4s1[i]*IC4S1_15[i] + neet16_ic4s2[i]*IC4S2_15[i]) - age_up*IC4S1_16[i] + r[i]*EC4S1_16[i] - f[i]*IC4S1_16[i] + nr2p[i]*end_nr[i]*IC2S1_16[i] + r2p[i]*end_res[i]*IC3S1_16[i] - p2care[i]*IC4S1_16[i] + neet2m_i[i]*IC4S2_16[i] - m2neet_ic4_16[i]*IC4S1_16[i] 
+  
+  deriv(IC1S1_17[]) <- age_up*IC1S1_16[i] - age_up*IC1S1_17[i] + r[i]*EC1S1_17[i] - f[i]*IC1S1_17[i] - n2care_i_17[i]*IC1S1_17[i] + neet2m_i[i]*IC1S2_17[i] - m2neet_ic1_17[i]*IC1S1_17[i] 
+  deriv(IC2S1_17[]) <- age_up*IC2S1_16[i] - age_up*IC2S1_17[i] + r[i]*EC2S1_17[i] - f[i]*IC2S1_17[i] + n2nr[i]*n2care_i_17[i]*IC1S1_17[i] + p2nr[i]*p2care[i]*IC4S1_17[i] + r2nr[i]*end_res[i]*IC3S1_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_17[i] + neet2m_i[i]*IC2S2_17[i] - m2neet_ic2_17[i]*IC2S1_17[i] 
+  deriv(IC3S1_17[]) <- age_up*IC3S1_16[i] - age_up*IC3S1_17[i] + r[i]*EC3S1_17[i] - f[i]*IC3S1_17[i] + n2r[i]*n2care_i_17[i]*IC2S1_17[i] + p2r[i]*p2care[i]*IC4S1_17[i] + nr2r[i]*end_nr[i]*IC2S1_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_17[i] + neet2m_i[i]*IC3S2_17[i] - m2neet_ic3_17[i]*IC3S1_17[i] 
+  deriv(IC4S1_17[]) <- age_up*IC4S1_16[i] - age_up*IC4S1_17[i] + r[i]*EC4S1_17[i] - f[i]*IC4S1_17[i] + nr2p[i]*end_nr[i]*IC2S1_17[i] + r2p[i]*end_res[i]*IC3S1_17[i] - p2care[i]*IC4S1_17[i] + neet2m_i[i]*IC4S2_17[i] - m2neet_ic4_17[i]*IC4S1_17[i] 
+  
+  
+  
+  deriv(IC1S2_10[]) <- t10_ic1s2[i]*pc_incl*turn10[i] - age_up*IC1S2_10[i] + r[i]*EC1S2_10[i] - f[i]*IC1S2_10[i] - n2care_i_10[i]*IC1S2_10[i] + m2pru_ic1_10[i]*IC1S1_10[i] 
+  deriv(IC2S2_10[]) <- t10_ic2s2[i]*pc_incl*turn10[i] - age_up*IC2S2_10[i] + r[i]*EC2S2_10[i] - f[i]*IC2S2_10[i] + n2nr[i]*n2care_i_10[i]*IC1S2_10[i] + p2nr[i]*p2care[i]*IC4S2_10[i] + r2nr[i]*end_res[i]*IC3S2_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_10[i] + m2pru_ic2_10[i]*IC2S1_10[i] 
+  deriv(IC3S2_10[]) <- t10_ic3s2[i]*pc_incl*turn10[i] - age_up*IC3S2_10[i] + r[i]*EC3S2_10[i] - f[i]*IC3S2_10[i] + n2r[i]*n2care_i_10[i]*IC2S2_10[i] + p2r[i]*p2care[i]*IC4S2_10[i] + nr2r[i]*end_nr[i]*IC2S2_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_10[i] + m2pru_ic3_10[i]*IC3S1_10[i] 
+  deriv(IC4S2_10[]) <- t10_ic4s2[i]*pc_incl*turn10[i] - age_up*IC4S2_10[i] + r[i]*EC4S2_10[i] - f[i]*IC4S2_10[i] + nr2p[i]*end_nr[i]*IC2S2_10[i] + r2p[i]*end_res[i]*IC3S2_10[i] - p2care[i]*IC4S2_10[i] + m2pru_ic4_10[i]*IC4S1_10[i] 
+  
+  deriv(IC1S2_11[]) <- -age_up*IC1S2_11[i] + r[i]*EC1S2_11[i] - f[i]*IC1S2_11[i] - n2care_i_11[i]*IC1S2_11[i] + m2pru_ic1_11[i]*IC1S1_11[i] 
+  deriv(IC2S2_11[]) <- -age_up*IC2S2_11[i] + r[i]*EC2S2_11[i] - f[i]*IC2S2_11[i] + n2nr[i]*n2care_i_11[i]*IC1S2_11[i] + p2nr[i]*p2care[i]*IC4S2_11[i] + r2nr[i]*end_res[i]*IC3S2_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_11[i] + m2pru_ic2_11[i]*IC2S1_11[i] 
+  deriv(IC3S2_11[]) <- -age_up*IC3S2_11[i] + r[i]*EC3S2_11[i] - f[i]*IC3S2_11[i] + n2r[i]*n2care_i_11[i]*IC2S2_11[i] + p2r[i]*p2care[i]*IC4S2_11[i] + nr2r[i]*end_nr[i]*IC2S2_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_11[i] + m2pru_ic3_11[i]*IC3S1_11[i] 
+  deriv(IC4S2_11[]) <- -age_up*IC4S2_11[i] + r[i]*EC4S2_11[i] - f[i]*IC4S2_11[i] + nr2p[i]*end_nr[i]*IC2S2_11[i] + r2p[i]*end_res[i]*IC3S2_11[i] - p2care[i]*IC4S2_11[i] + m2pru_ic4_11[i]*IC4S1_11[i] 
+  
+  deriv(IC1S2_12[]) <- age_up*IC1S2_11[i] - age_up*IC1S2_12[i] + r[i]*EC1S2_12[i] - f[i]*IC1S2_12[i] - n2care_i_12[i]*IC1S2_12[i] + m2pru_ic1_12[i]*IC1S1_12[i] 
+  deriv(IC2S2_12[]) <- age_up*IC2S2_11[i] - age_up*IC2S2_12[i] + r[i]*EC2S2_12[i] - f[i]*IC2S2_12[i] + n2nr[i]*n2care_i_12[i]*IC1S2_12[i] + p2nr[i]*p2care[i]*IC4S2_12[i] + r2nr[i]*end_res[i]*IC3S2_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_12[i] + m2pru_ic2_12[i]*IC2S1_12[i] 
+  deriv(IC3S2_12[]) <- age_up*IC3S2_11[i] - age_up*IC3S2_12[i] + r[i]*EC3S2_12[i] - f[i]*IC3S2_12[i] + n2r[i]*n2care_i_12[i]*IC2S2_12[i] + p2r[i]*p2care[i]*IC4S2_12[i] + nr2r[i]*end_nr[i]*IC2S2_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_12[i] + m2pru_ic3_12[i]*IC3S1_12[i] 
+  deriv(IC4S2_12[]) <- age_up*IC4S2_11[i] - age_up*IC4S2_12[i] + r[i]*EC4S2_12[i] - f[i]*IC4S2_12[i] + nr2p[i]*end_nr[i]*IC2S2_12[i] + r2p[i]*end_res[i]*IC3S2_12[i] - p2care[i]*IC4S2_12[i] + m2pru_ic4_12[i]*IC4S1_12[i] 
+  
+  deriv(IC1S2_13[]) <- age_up*IC1S2_12[i] - age_up*IC1S2_13[i] + r[i]*EC1S2_13[i] - f[i]*IC1S2_13[i] - n2care_i_13[i]*IC1S2_13[i] + m2pru_ic1_13[i]*IC1S1_13[i] 
+  deriv(IC2S2_13[]) <- age_up*IC2S2_12[i] - age_up*IC2S2_13[i] + r[i]*EC2S2_13[i] - f[i]*IC2S2_13[i] + n2nr[i]*n2care_i_13[i]*IC1S2_13[i] + p2nr[i]*p2care[i]*IC4S2_13[i] + r2nr[i]*end_res[i]*IC3S2_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_13[i] + m2pru_ic2_13[i]*IC2S1_13[i] 
+  deriv(IC3S2_13[]) <- age_up*IC3S2_12[i] - age_up*IC3S2_13[i] + r[i]*EC3S2_13[i] - f[i]*IC3S2_13[i] + n2r[i]*n2care_i_13[i]*IC2S2_13[i] + p2r[i]*p2care[i]*IC4S2_13[i] + nr2r[i]*end_nr[i]*IC2S2_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_13[i] + m2pru_ic3_13[i]*IC3S1_13[i] 
+  deriv(IC4S2_13[]) <- age_up*IC4S2_12[i] - age_up*IC4S2_13[i] + r[i]*EC4S2_13[i] - f[i]*IC4S2_13[i] + nr2p[i]*end_nr[i]*IC2S2_13[i] + r2p[i]*end_res[i]*IC3S2_13[i] - p2care[i]*IC4S2_13[i] + m2pru_ic4_13[i]*IC4S1_13[i] 
+  
+  deriv(IC1S2_14[]) <- age_up*IC1S2_13[i] - age_up*IC1S2_14[i] + r[i]*EC1S2_14[i] - f[i]*IC1S2_14[i] - n2care_i_14[i]*IC1S2_14[i] + m2pru_ic1_14[i]*IC1S1_14[i] 
+  deriv(IC2S2_14[]) <- age_up*IC2S2_13[i] - age_up*IC2S2_14[i] + r[i]*EC2S2_14[i] - f[i]*IC2S2_14[i] + n2nr[i]*n2care_i_14[i]*IC1S2_14[i] + p2nr[i]*p2care[i]*IC4S2_14[i] + r2nr[i]*end_res[i]*IC3S2_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_14[i] + m2pru_ic2_14[i]*IC2S1_14[i] 
+  deriv(IC3S2_14[]) <- age_up*IC3S2_13[i] - age_up*IC3S2_14[i] + r[i]*EC3S2_14[i] - f[i]*IC3S2_14[i] + n2r[i]*n2care_i_14[i]*IC2S2_14[i] + p2r[i]*p2care[i]*IC4S2_14[i] + nr2r[i]*end_nr[i]*IC2S2_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_14[i] + m2pru_ic3_14[i]*IC3S1_14[i] 
+  deriv(IC4S2_14[]) <- age_up*IC4S2_13[i] - age_up*IC4S2_14[i] + r[i]*EC4S2_14[i] - f[i]*IC4S2_14[i] + nr2p[i]*end_nr[i]*IC2S2_14[i] + r2p[i]*end_res[i]*IC3S2_14[i] - p2care[i]*IC4S2_14[i] + m2pru_ic4_14[i]*IC4S1_14[i] 
+  
+  deriv(IC1S2_15[]) <- age_up*IC1S2_14[i] - age_up*IC1S2_15[i] + r[i]*EC1S2_15[i] - f[i]*IC1S2_15[i] - n2care_i_15[i]*IC1S2_15[i] + m2pru_ic1_15[i]*IC1S1_15[i] 
+  deriv(IC2S2_15[]) <- age_up*IC2S2_14[i] - age_up*IC2S2_15[i] + r[i]*EC2S2_15[i] - f[i]*IC2S2_15[i] + n2nr[i]*n2care_i_15[i]*IC1S2_15[i] + p2nr[i]*p2care[i]*IC4S2_15[i] + r2nr[i]*end_res[i]*IC3S2_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_15[i] + m2pru_ic2_15[i]*IC2S1_15[i] 
+  deriv(IC3S2_15[]) <- age_up*IC3S2_14[i] - age_up*IC3S2_15[i] + r[i]*EC3S2_15[i] - f[i]*IC3S2_15[i] + n2r[i]*n2care_i_15[i]*IC2S2_15[i] + p2r[i]*p2care[i]*IC4S2_15[i] + nr2r[i]*end_nr[i]*IC2S2_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_15[i] + m2pru_ic3_15[i]*IC3S1_15[i] 
+  deriv(IC4S2_15[]) <- age_up*IC4S2_14[i] - age_up*IC4S2_15[i] + r[i]*EC4S2_15[i] - f[i]*IC4S2_15[i] + nr2p[i]*end_nr[i]*IC2S2_15[i] + r2p[i]*end_res[i]*IC3S2_15[i] - p2care[i]*IC4S2_15[i] + m2pru_ic4_15[i]*IC4S1_15[i] 
+  
+  deriv(IC1S2_16[]) <- age_up*((1 - neet16_ic1s2[i])*IC1S2_15[i] + (1 - neet16_ic1s1[i])*IC1S1_15[i]) - age_up*IC1S2_16[i] + r[i]*EC1S2_16[i] - f[i]*IC1S2_16[i] - n2care_i_16[i]*IC1S2_16[i] + m2neet_ic1_16[i]*IC1S1_16[i] - neet2m_i[i]*IC1S2_16[i] 
+  deriv(IC2S2_16[]) <- age_up*((1 - neet16_ic2s2[i])*IC2S2_15[i] + (1 - neet16_ic2s1[i])*IC2S1_15[i]) - age_up*IC2S2_16[i] + r[i]*EC2S2_16[i] - f[i]*IC2S2_16[i] + n2nr[i]*n2care_i_16[i]*IC1S2_16[i] + p2nr[i]*p2care[i]*IC4S2_16[i] + r2nr[i]*end_res[i]*IC3S2_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_16[i] + m2neet_ic2_16[i]*IC2S1_16[i] - neet2m_i[i]*IC2S2_16[i] 
+  deriv(IC3S2_16[]) <- age_up*((1 - neet16_ic3s2[i])*IC3S2_15[i] + (1 - neet16_ic3s1[i])*IC3S1_15[i]) - age_up*IC3S2_16[i] + r[i]*EC3S2_16[i] - f[i]*IC3S2_16[i] + n2r[i]*n2care_i_16[i]*IC2S2_16[i] + p2r[i]*p2care[i]*IC4S2_16[i] + nr2r[i]*end_nr[i]*IC2S2_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_16[i] + m2neet_ic3_16[i]*IC3S1_16[i] - neet2m_i[i]*IC3S2_16[i] 
+  deriv(IC4S2_16[]) <- age_up*((1 - neet16_ic4s2[i])*IC4S2_15[i] + (1 - neet16_ic4s1[i])*IC4S1_15[i]) - age_up*IC4S2_16[i] + r[i]*EC4S2_16[i] - f[i]*IC4S2_16[i] + nr2p[i]*end_nr[i]*IC2S2_16[i] + r2p[i]*end_res[i]*IC3S2_16[i] - p2care[i]*IC4S2_16[i] + m2neet_ic4_16[i]*IC4S1_16[i] - neet2m_i[i]*IC4S2_16[i] 
+  
+  deriv(IC1S2_17[]) <- age_up*IC1S2_16[i] - age_up*IC1S2_17[i] + r[i]*EC1S2_17[i] - f[i]*IC1S2_17[i] - n2care_i_17[i]*IC1S2_17[i] + m2neet_ic1_17[i]*IC1S1_17[i] - neet2m_i[i]*IC1S2_17[i] 
+  deriv(IC2S2_17[]) <- age_up*IC2S2_16[i] - age_up*IC2S2_17[i] + r[i]*EC2S2_17[i] - f[i]*IC2S2_17[i] + n2nr[i]*n2care_i_17[i]*IC1S2_17[i] + p2nr[i]*p2care[i]*IC4S2_17[i] + r2nr[i]*end_res[i]*IC3S2_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_17[i] + m2neet_ic2_17[i]*IC2S1_17[i] - neet2m_i[i]*IC2S2_17[i] 
+  deriv(IC3S2_17[]) <- age_up*IC3S2_16[i] - age_up*IC3S2_17[i] + r[i]*EC3S2_17[i] - f[i]*IC3S2_17[i] + n2r[i]*n2care_i_17[i]*IC2S2_17[i] + p2r[i]*p2care[i]*IC4S2_17[i] + nr2r[i]*end_nr[i]*IC2S2_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_17[i] + m2neet_ic3_17[i]*IC3S1_17[i] - neet2m_i[i]*IC3S2_17[i] 
+  deriv(IC4S2_17[]) <- age_up*IC4S2_16[i] - age_up*IC4S2_17[i] + r[i]*EC4S2_17[i] - f[i]*IC4S2_17[i] + nr2p[i]*end_nr[i]*IC2S2_17[i] + r2p[i]*end_res[i]*IC3S2_17[i] - p2care[i]*IC4S2_17[i] + m2neet_ic4_17[i]*IC4S1_17[i] - neet2m_i[i]*IC4S2_17[i] 
+  
+  
+  
+  deriv(EC1S1_10[]) <- t10_ec1s1[i]*pc_excl*turn10[i] - age_up*EC1S1_10[i] + f[i]*IC1S1_10[i] - r[i]*EC1S1_10[i] - n2care_e_10[i]*EC1S1_10[i] - m2pru_ec1_10[i]*EC1S1_10[i] 
+  deriv(EC2S1_10[]) <- t10_ec2s1[i]*pc_excl*turn10[i] - age_up*EC2S1_10[i] + f[i]*IC2S1_10[i] - r[i]*EC2S1_10[i] + n2nr[i]*n2care_e_10[i]*EC1S1_10[i] + p2nr[i]*p2care[i]*EC4S1_10[i] + r2nr[i]*end_res[i]*EC3S1_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_10[i] - m2pru_ec2_10[i]*EC2S1_10[i] 
+  deriv(EC3S1_10[]) <- t10_ec3s1[i]*pc_excl*turn10[i] - age_up*EC3S1_10[i] + f[i]*IC3S1_10[i] - r[i]*EC3S1_10[i] + n2r[i]*n2care_e_10[i]*EC2S1_10[i] + p2r[i]*p2care[i]*EC4S1_10[i] + nr2r[i]*end_nr[i]*EC2S1_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_10[i] - m2pru_ec3_10[i]*EC3S1_10[i] 
+  deriv(EC4S1_10[]) <- t10_ec4s1[i]*pc_excl*turn10[i] - age_up*EC4S1_10[i] + f[i]*IC4S1_10[i] - r[i]*EC4S1_10[i] + nr2p[i]*end_nr[i]*EC2S1_10[i] + r2p[i]*end_res[i]*EC3S1_10[i] - p2care[i]*EC4S1_10[i] - m2pru_ec4_10[i]*EC4S1_10[i] 
+  
+  deriv(EC1S1_11[]) <- age_up*(EC1S1_10[i] + EC1S2_10[i]) - age_up*EC1S1_11[i] + f[i]*IC1S1_11[i] - r[i]*EC1S1_11[i] - n2care_e_11[i]*EC1S1_11[i] - m2pru_ec1_11[i]*EC1S1_11[i] 
+  deriv(EC2S1_11[]) <- age_up*(EC2S1_10[i] + EC2S2_10[i]) - age_up*EC2S1_11[i] + f[i]*IC2S1_11[i] - r[i]*EC2S1_11[i] + n2nr[i]*n2care_e_11[i]*EC1S1_11[i] + p2nr[i]*p2care[i]*EC4S1_11[i] + r2nr[i]*end_res[i]*EC3S1_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_11[i] - m2pru_ec2_11[i]*EC2S1_11[i] 
+  deriv(EC3S1_11[]) <- age_up*(EC3S1_10[i] + EC3S2_10[i]) - age_up*EC3S1_11[i] + f[i]*IC3S1_11[i] - r[i]*EC3S1_11[i] + n2r[i]*n2care_e_11[i]*EC2S1_11[i] + p2r[i]*p2care[i]*EC4S1_11[i] + nr2r[i]*end_nr[i]*EC2S1_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_11[i] - m2pru_ec3_11[i]*EC3S1_11[i] 
+  deriv(EC4S1_11[]) <- age_up*(EC4S1_10[i] + EC4S2_10[i]) - age_up*EC4S1_11[i] + f[i]*IC4S1_11[i] - r[i]*EC4S1_11[i] + nr2p[i]*end_nr[i]*EC2S1_11[i] + r2p[i]*end_res[i]*EC3S1_11[i] - p2care[i]*EC4S1_11[i] - m2pru_ec4_11[i]*EC4S1_11[i] 
+  
+  deriv(EC1S1_12[]) <- age_up*EC1S1_11[i] - age_up*EC1S1_12[i] + f[i]*IC1S1_12[i] - r[i]*EC1S1_12[i] - n2care_e_12[i]*EC1S1_12[i] - m2pru_ec1_12[i]*EC1S1_12[i] 
+  deriv(EC2S1_12[]) <- age_up*EC2S1_11[i] - age_up*EC2S1_12[i] + f[i]*IC2S1_12[i] - r[i]*EC2S1_12[i] + n2nr[i]*n2care_e_12[i]*EC1S1_12[i] + p2nr[i]*p2care[i]*EC4S1_12[i] + r2nr[i]*end_res[i]*EC3S1_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_12[i] - m2pru_ec2_12[i]*EC2S1_12[i] 
+  deriv(EC3S1_12[]) <- age_up*EC3S1_11[i] - age_up*EC3S1_12[i] + f[i]*IC3S1_12[i] - r[i]*EC3S1_12[i] + n2r[i]*n2care_e_12[i]*EC2S1_12[i] + p2r[i]*p2care[i]*EC4S1_12[i] + nr2r[i]*end_nr[i]*EC2S1_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_12[i] - m2pru_ec3_12[i]*EC3S1_12[i] 
+  deriv(EC4S1_12[]) <- age_up*EC4S1_11[i] - age_up*EC4S1_12[i] + f[i]*IC4S1_12[i] - r[i]*EC4S1_12[i] + nr2p[i]*end_nr[i]*EC2S1_12[i] + r2p[i]*end_res[i]*EC3S1_12[i] - p2care[i]*EC4S1_12[i] - m2pru_ec4_12[i]*EC4S1_12[i] 
+  
+  deriv(EC1S1_13[]) <- age_up*EC1S1_12[i] - age_up*EC1S1_13[i] + f[i]*IC1S1_13[i] - r[i]*EC1S1_13[i] - n2care_e_13[i]*EC1S1_13[i] - m2pru_ec1_13[i]*EC1S1_13[i] 
+  deriv(EC2S1_13[]) <- age_up*EC2S1_12[i] - age_up*EC2S1_13[i] + f[i]*IC2S1_13[i] - r[i]*EC2S1_13[i] + n2nr[i]*n2care_e_13[i]*EC1S1_13[i] + p2nr[i]*p2care[i]*EC4S1_13[i] + r2nr[i]*end_res[i]*EC3S1_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_13[i] - m2pru_ec2_13[i]*EC2S1_13[i] 
+  deriv(EC3S1_13[]) <- age_up*EC3S1_12[i] - age_up*EC3S1_13[i] + f[i]*IC3S1_13[i] - r[i]*EC3S1_13[i] + n2r[i]*n2care_e_13[i]*EC2S1_13[i] + p2r[i]*p2care[i]*EC4S1_13[i] + nr2r[i]*end_nr[i]*EC2S1_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_13[i] - m2pru_ec3_13[i]*EC3S1_13[i] 
+  deriv(EC4S1_13[]) <- age_up*EC4S1_12[i] - age_up*EC4S1_13[i] + f[i]*IC4S1_13[i] - r[i]*EC4S1_13[i] + nr2p[i]*end_nr[i]*EC2S1_13[i] + r2p[i]*end_res[i]*EC3S1_13[i] - p2care[i]*EC4S1_13[i] - m2pru_ec4_13[i]*EC4S1_13[i] 
+  
+  deriv(EC1S1_14[]) <- age_up*EC1S1_13[i] - age_up*EC1S1_14[i] + f[i]*IC1S1_14[i] - r[i]*EC1S1_14[i] - n2care_e_14[i]*EC1S1_14[i] - m2pru_ec1_14[i]*EC1S1_14[i] 
+  deriv(EC2S1_14[]) <- age_up*EC2S1_13[i] - age_up*EC2S1_14[i] + f[i]*IC2S1_14[i] - r[i]*EC2S1_14[i] + n2nr[i]*n2care_e_14[i]*EC1S1_14[i] + p2nr[i]*p2care[i]*EC4S1_14[i] + r2nr[i]*end_res[i]*EC3S1_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_14[i] - m2pru_ec2_14[i]*EC2S1_14[i] 
+  deriv(EC3S1_14[]) <- age_up*EC3S1_13[i] - age_up*EC3S1_14[i] + f[i]*IC3S1_14[i] - r[i]*EC3S1_14[i] + n2r[i]*n2care_e_14[i]*EC2S1_14[i] + p2r[i]*p2care[i]*EC4S1_14[i] + nr2r[i]*end_nr[i]*EC2S1_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_14[i] - m2pru_ec3_14[i]*EC3S1_14[i] 
+  deriv(EC4S1_14[]) <- age_up*EC4S1_13[i] - age_up*EC4S1_14[i] + f[i]*IC4S1_14[i] - r[i]*EC4S1_14[i] + nr2p[i]*end_nr[i]*EC2S1_14[i] + r2p[i]*end_res[i]*EC3S1_14[i] - p2care[i]*EC4S1_14[i] - m2pru_ec4_14[i]*EC4S1_14[i] 
+  
+  deriv(EC1S1_15[]) <- age_up*EC1S1_14[i] - age_up*EC1S1_15[i] + f[i]*IC1S1_15[i] - r[i]*EC1S1_15[i] - n2care_e_15[i]*EC1S1_15[i] - m2pru_ec1_15[i]*EC1S1_15[i] 
+  deriv(EC2S1_15[]) <- age_up*EC2S1_14[i] - age_up*EC2S1_15[i] + f[i]*IC2S1_15[i] - r[i]*EC2S1_15[i] + n2nr[i]*n2care_e_15[i]*EC1S1_15[i] + p2nr[i]*p2care[i]*EC4S1_15[i] + r2nr[i]*end_res[i]*EC3S1_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_15[i] - m2pru_ec2_15[i]*EC2S1_15[i] 
+  deriv(EC3S1_15[]) <- age_up*EC3S1_14[i] - age_up*EC3S1_15[i] + f[i]*IC3S1_15[i] - r[i]*EC3S1_15[i] + n2r[i]*n2care_e_15[i]*EC2S1_15[i] + p2r[i]*p2care[i]*EC4S1_15[i] + nr2r[i]*end_nr[i]*EC2S1_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_15[i] - m2pru_ec3_15[i]*EC3S1_15[i] 
+  deriv(EC4S1_15[]) <- age_up*EC4S1_14[i] - age_up*EC4S1_15[i] + f[i]*IC4S1_15[i] - r[i]*EC4S1_15[i] + nr2p[i]*end_nr[i]*EC2S1_15[i] + r2p[i]*end_res[i]*EC3S1_15[i] - p2care[i]*EC4S1_15[i] - m2pru_ec4_15[i]*EC4S1_15[i] 
+  
+  deriv(EC1S1_16[]) <- age_up*(neet16_ec1s1[i]*EC1S1_15[i] + neet16_ec1s2[i]*EC1S2_15[i]) - age_up*EC1S1_16[i] + f[i]*IC1S1_16[i] - r[i]*EC1S1_16[i] - n2care_e_16[i]*EC1S1_16[i] + neet2m_e[i]*EC1S2_16[i] - m2neet_ec1_16[i]*EC1S1_16[i] 
+  deriv(EC2S1_16[]) <- age_up*(neet16_ec2s1[i]*EC2S1_15[i] + neet16_ec2s2[i]*EC2S2_15[i]) - age_up*EC2S1_16[i] + f[i]*IC2S1_16[i] - r[i]*EC2S1_16[i] + n2nr[i]*n2care_e_16[i]*EC1S1_16[i] + p2nr[i]*p2care[i]*EC4S1_16[i] + r2nr[i]*end_res[i]*EC3S1_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_16[i] + neet2m_e[i]*EC2S2_16[i] - m2neet_ec2_16[i]*EC2S1_16[i] 
+  deriv(EC3S1_16[]) <- age_up*(neet16_ec3s1[i]*EC3S1_15[i] + neet16_ec3s2[i]*EC3S2_15[i]) - age_up*EC3S1_16[i] + f[i]*IC3S1_16[i] - r[i]*EC3S1_16[i] + n2r[i]*n2care_e_16[i]*EC2S1_16[i] + p2r[i]*p2care[i]*EC4S1_16[i] + nr2r[i]*end_nr[i]*EC2S1_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_16[i] + neet2m_e[i]*EC3S2_16[i] - m2neet_ec3_16[i]*EC3S1_16[i] 
+  deriv(EC4S1_16[]) <- age_up*(neet16_ec4s1[i]*EC4S1_15[i] + neet16_ec4s2[i]*EC4S2_15[i]) - age_up*EC4S1_16[i] + f[i]*IC4S1_16[i] - r[i]*EC4S1_16[i] + nr2p[i]*end_nr[i]*EC2S1_16[i] + r2p[i]*end_res[i]*EC3S1_16[i] - p2care[i]*EC4S1_16[i] + neet2m_e[i]*EC4S2_16[i] - m2neet_ec4_16[i]*EC4S1_16[i] 
+  
+  deriv(EC1S1_17[]) <- age_up*EC1S1_16[i] - age_up*EC1S1_17[i] + f[i]*IC1S1_17[i] - r[i]*EC1S1_17[i] - n2care_e_17[i]*EC1S1_17[i] + neet2m_e[i]*EC1S2_17[i] - m2neet_ec1_17[i]*EC1S1_17[i] 
+  deriv(EC2S1_17[]) <- age_up*EC2S1_16[i] - age_up*EC2S1_17[i] + f[i]*IC2S1_17[i] - r[i]*EC2S1_17[i] + n2nr[i]*n2care_e_17[i]*EC1S1_17[i] + p2nr[i]*p2care[i]*EC4S1_17[i] + r2nr[i]*end_res[i]*EC3S1_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_17[i] + neet2m_e[i]*EC2S2_17[i] - m2neet_ec2_17[i]*EC2S1_17[i] 
+  deriv(EC3S1_17[]) <- age_up*EC3S1_16[i] - age_up*EC3S1_17[i] + f[i]*IC3S1_17[i] - r[i]*EC3S1_17[i] + n2r[i]*n2care_e_17[i]*EC2S1_17[i] + p2r[i]*p2care[i]*EC4S1_17[i] + nr2r[i]*end_nr[i]*EC2S1_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_17[i] + neet2m_e[i]*EC3S2_17[i] - m2neet_ec3_17[i]*EC3S1_17[i] 
+  deriv(EC4S1_17[]) <- age_up*EC4S1_16[i] - age_up*EC4S1_17[i] + f[i]*IC4S1_17[i] - r[i]*EC4S1_17[i] + nr2p[i]*end_nr[i]*EC2S1_17[i] + r2p[i]*end_res[i]*EC3S1_17[i] - p2care[i]*EC4S1_17[i] + neet2m_e[i]*EC4S2_17[i] - m2neet_ec4_17[i]*EC4S1_17[i] 
+  
+  
+  
+  deriv(EC1S2_10[]) <- t10_ec1s2[i]*pc_excl*turn10[i] - age_up*EC1S2_10[i] + f[i]*IC1S2_10[i] - r[i]*EC1S2_10[i] - n2care_e_10[i]*EC1S2_10[i] + m2pru_ec1_10[i]*EC1S1_10[i] 
+  deriv(EC2S2_10[]) <- t10_ec2s2[i]*pc_excl*turn10[i] - age_up*EC2S2_10[i] + f[i]*IC2S2_10[i] - r[i]*EC2S2_10[i] + n2nr[i]*n2care_e_10[i]*EC1S2_10[i] + p2nr[i]*p2care[i]*EC4S2_10[i] + r2nr[i]*end_res[i]*EC3S2_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_10[i] + m2pru_ec2_10[i]*EC2S1_10[i] 
+  deriv(EC3S2_10[]) <- t10_ec3s2[i]*pc_excl*turn10[i] - age_up*EC3S2_10[i] + f[i]*IC3S2_10[i] - r[i]*EC3S2_10[i] + n2r[i]*n2care_e_10[i]*EC2S2_10[i] + p2r[i]*p2care[i]*EC4S2_10[i] + nr2r[i]*end_nr[i]*EC2S2_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_10[i] + m2pru_ec3_10[i]*EC3S1_10[i] 
+  deriv(EC4S2_10[]) <- t10_ec4s2[i]*pc_excl*turn10[i] - age_up*EC4S2_10[i] + f[i]*IC4S2_10[i] - r[i]*EC4S2_10[i] + nr2p[i]*end_nr[i]*EC2S2_10[i] + r2p[i]*end_res[i]*EC3S2_10[i] - p2care[i]*EC4S2_10[i] + m2pru_ec4_10[i]*EC4S1_10[i] 
+  
+  deriv(EC1S2_11[]) <- -age_up*EC1S2_11[i] + f[i]*IC1S2_11[i] - r[i]*EC1S2_11[i] - n2care_e_11[i]*EC1S2_11[i] + m2pru_ec1_11[i]*EC1S1_11[i] 
+  deriv(EC2S2_11[]) <- -age_up*EC2S2_11[i] + f[i]*IC2S2_11[i] - r[i]*EC2S2_11[i] + n2nr[i]*n2care_e_11[i]*EC1S2_11[i] + p2nr[i]*p2care[i]*EC4S2_11[i] + r2nr[i]*end_res[i]*EC3S2_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_11[i] + m2pru_ec2_11[i]*EC2S1_11[i] 
+  deriv(EC3S2_11[]) <- -age_up*EC3S2_11[i] + f[i]*IC3S2_11[i] - r[i]*EC3S2_11[i] + n2r[i]*n2care_e_11[i]*EC2S2_11[i] + p2r[i]*p2care[i]*EC4S2_11[i] + nr2r[i]*end_nr[i]*EC2S2_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_11[i] + m2pru_ec3_11[i]*EC3S1_11[i] 
+  deriv(EC4S2_11[]) <- -age_up*EC4S2_11[i] + f[i]*IC4S2_11[i] - r[i]*EC4S2_11[i] + nr2p[i]*end_nr[i]*EC2S2_11[i] + r2p[i]*end_res[i]*EC3S2_11[i] - p2care[i]*EC4S2_11[i] + m2pru_ec4_11[i]*EC4S1_11[i] 
+  
+  deriv(EC1S2_12[]) <- age_up*EC1S2_11[i] - age_up*EC1S2_12[i] + f[i]*IC1S2_12[i] - r[i]*EC1S2_12[i] - n2care_e_12[i]*EC1S2_12[i] + m2pru_ec1_12[i]*EC1S1_12[i] 
+  deriv(EC2S2_12[]) <- age_up*EC2S2_11[i] - age_up*EC2S2_12[i] + f[i]*IC2S2_12[i] - r[i]*EC2S2_12[i] + n2nr[i]*n2care_e_12[i]*EC1S2_12[i] + p2nr[i]*p2care[i]*EC4S2_12[i] + r2nr[i]*end_res[i]*EC3S2_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_12[i] + m2pru_ec2_12[i]*EC2S1_12[i] 
+  deriv(EC3S2_12[]) <- age_up*EC3S2_11[i] - age_up*EC3S2_12[i] + f[i]*IC3S2_12[i] - r[i]*EC3S2_12[i] + n2r[i]*n2care_e_12[i]*EC2S2_12[i] + p2r[i]*p2care[i]*EC4S2_12[i] + nr2r[i]*end_nr[i]*EC2S2_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_12[i] + m2pru_ec3_12[i]*EC3S1_12[i] 
+  deriv(EC4S2_12[]) <- age_up*EC4S2_11[i] - age_up*EC4S2_12[i] + f[i]*IC4S2_12[i] - r[i]*EC4S2_12[i] + nr2p[i]*end_nr[i]*EC2S2_12[i] + r2p[i]*end_res[i]*EC3S2_12[i] - p2care[i]*EC4S2_12[i] + m2pru_ec4_12[i]*EC4S1_12[i] 
+  
+  deriv(EC1S2_13[]) <- age_up*EC1S2_12[i] - age_up*EC1S2_13[i] + f[i]*IC1S2_13[i] - r[i]*EC1S2_13[i] - n2care_e_13[i]*EC1S2_13[i] + m2pru_ec1_13[i]*EC1S1_13[i] 
+  deriv(EC2S2_13[]) <- age_up*EC2S2_12[i] - age_up*EC2S2_13[i] + f[i]*IC2S2_13[i] - r[i]*EC2S2_13[i] + n2nr[i]*n2care_e_13[i]*EC1S2_13[i] + p2nr[i]*p2care[i]*EC4S2_13[i] + r2nr[i]*end_res[i]*EC3S2_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_13[i] + m2pru_ec2_13[i]*EC2S1_13[i] 
+  deriv(EC3S2_13[]) <- age_up*EC3S2_12[i] - age_up*EC3S2_13[i] + f[i]*IC3S2_13[i] - r[i]*EC3S2_13[i] + n2r[i]*n2care_e_13[i]*EC2S2_13[i] + p2r[i]*p2care[i]*EC4S2_13[i] + nr2r[i]*end_nr[i]*EC2S2_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_13[i] + m2pru_ec3_13[i]*EC3S1_13[i] 
+  deriv(EC4S2_13[]) <- age_up*EC4S2_12[i] - age_up*EC4S2_13[i] + f[i]*IC4S2_13[i] - r[i]*EC4S2_13[i] + nr2p[i]*end_nr[i]*EC2S2_13[i] + r2p[i]*end_res[i]*EC3S2_13[i] - p2care[i]*EC4S2_13[i] + m2pru_ec4_13[i]*EC4S1_13[i] 
+  
+  deriv(EC1S2_14[]) <- age_up*EC1S2_13[i] - age_up*EC1S2_14[i] + f[i]*IC1S2_14[i] - r[i]*EC1S2_14[i] - n2care_e_14[i]*EC1S2_14[i] + m2pru_ec1_14[i]*EC1S1_14[i] 
+  deriv(EC2S2_14[]) <- age_up*EC2S2_13[i] - age_up*EC2S2_14[i] + f[i]*IC2S2_14[i] - r[i]*EC2S2_14[i] + n2nr[i]*n2care_e_14[i]*EC1S2_14[i] + p2nr[i]*p2care[i]*EC4S2_14[i] + r2nr[i]*end_res[i]*EC3S2_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_14[i] + m2pru_ec2_14[i]*EC2S1_14[i] 
+  deriv(EC3S2_14[]) <- age_up*EC3S2_13[i] - age_up*EC3S2_14[i] + f[i]*IC3S2_14[i] - r[i]*EC3S2_14[i] + n2r[i]*n2care_e_14[i]*EC2S2_14[i] + p2r[i]*p2care[i]*EC4S2_14[i] + nr2r[i]*end_nr[i]*EC2S2_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_14[i] + m2pru_ec3_14[i]*EC3S1_14[i] 
+  deriv(EC4S2_14[]) <- age_up*EC4S2_13[i] - age_up*EC4S2_14[i] + f[i]*IC4S2_14[i] - r[i]*EC4S2_14[i] + nr2p[i]*end_nr[i]*EC2S2_14[i] + r2p[i]*end_res[i]*EC3S2_14[i] - p2care[i]*EC4S2_14[i] + m2pru_ec4_14[i]*EC4S1_14[i] 
+  
+  deriv(EC1S2_15[]) <- age_up*EC1S2_14[i] - age_up*EC1S2_15[i] + f[i]*IC1S2_15[i] - r[i]*EC1S2_15[i] - n2care_e_15[i]*EC1S2_15[i] + m2pru_ec1_15[i]*EC1S1_15[i] 
+  deriv(EC2S2_15[]) <- age_up*EC2S2_14[i] - age_up*EC2S2_15[i] + f[i]*IC2S2_15[i] - r[i]*EC2S2_15[i] + n2nr[i]*n2care_e_15[i]*EC1S2_15[i] + p2nr[i]*p2care[i]*EC4S2_15[i] + r2nr[i]*end_res[i]*EC3S2_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_15[i] + m2pru_ec2_15[i]*EC2S1_15[i] 
+  deriv(EC3S2_15[]) <- age_up*EC3S2_14[i] - age_up*EC3S2_15[i] + f[i]*IC3S2_15[i] - r[i]*EC3S2_15[i] + n2r[i]*n2care_e_15[i]*EC2S2_15[i] + p2r[i]*p2care[i]*EC4S2_15[i] + nr2r[i]*end_nr[i]*EC2S2_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_15[i] + m2pru_ec3_15[i]*EC3S1_15[i] 
+  deriv(EC4S2_15[]) <- age_up*EC4S2_14[i] - age_up*EC4S2_15[i] + f[i]*IC4S2_15[i] - r[i]*EC4S2_15[i] + nr2p[i]*end_nr[i]*EC2S2_15[i] + r2p[i]*end_res[i]*EC3S2_15[i] - p2care[i]*EC4S2_15[i] + m2pru_ec4_15[i]*EC4S1_15[i] 
+  
+  deriv(EC1S2_16[]) <- age_up*((1 - neet16_ec1s2[i])*EC1S2_15[i] + (1 - neet16_ec1s1[i])*EC1S1_15[i]) - age_up*EC1S2_16[i] + f[i]*IC1S2_16[i] - r[i]*EC1S2_16[i] - n2care_e_16[i]*EC1S2_16[i] + m2neet_ec1_16[i]*EC1S1_16[i] - neet2m_e[i]*EC1S2_16[i] 
+  deriv(EC2S2_16[]) <- age_up*((1 - neet16_ec2s2[i])*EC2S2_15[i] + (1 - neet16_ec2s1[i])*EC2S1_15[i]) - age_up*EC2S2_16[i] + f[i]*IC2S2_16[i] - r[i]*EC2S2_16[i] + n2nr[i]*n2care_e_16[i]*EC1S2_16[i] + p2nr[i]*p2care[i]*EC4S2_16[i] + r2nr[i]*end_res[i]*EC3S2_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_16[i] + m2neet_ec2_16[i]*EC2S1_16[i] - neet2m_e[i]*EC2S2_16[i] 
+  deriv(EC3S2_16[]) <- age_up*((1 - neet16_ec3s2[i])*EC3S2_15[i] + (1 - neet16_ec3s1[i])*EC3S1_15[i]) - age_up*EC3S2_16[i] + f[i]*IC3S2_16[i] - r[i]*EC3S2_16[i] + n2r[i]*n2care_e_16[i]*EC2S2_16[i] + p2r[i]*p2care[i]*EC4S2_16[i] + nr2r[i]*end_nr[i]*EC2S2_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_16[i] + m2neet_ec3_16[i]*EC3S1_16[i] - neet2m_e[i]*EC3S2_16[i] 
+  deriv(EC4S2_16[]) <- age_up*((1 - neet16_ec4s2[i])*EC4S2_15[i] + (1 - neet16_ec4s1[i])*EC4S1_15[i]) - age_up*EC4S2_16[i] + f[i]*IC4S2_16[i] - r[i]*EC4S2_16[i] + nr2p[i]*end_nr[i]*EC2S2_16[i] + r2p[i]*end_res[i]*EC3S2_16[i] - p2care[i]*EC4S2_16[i] + m2neet_ec4_16[i]*EC4S1_16[i] - neet2m_e[i]*EC4S2_16[i] 
+  
+  deriv(EC1S2_17[]) <- age_up*EC1S2_16[i] - age_up*EC1S2_17[i] + f[i]*IC1S2_17[i] - r[i]*EC1S2_17[i] - n2care_e_17[i]*EC1S2_17[i] + m2neet_ec1_17[i]*EC1S1_17[i] - neet2m_e[i]*EC1S2_17[i] 
+  deriv(EC2S2_17[]) <- age_up*EC2S2_16[i] - age_up*EC2S2_17[i] + f[i]*IC2S2_17[i] - r[i]*EC2S2_17[i] + n2nr[i]*n2care_e_17[i]*EC1S2_17[i] + p2nr[i]*p2care[i]*EC4S2_17[i] + r2nr[i]*end_res[i]*EC3S2_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_17[i] + m2neet_ec2_17[i]*EC2S1_17[i] - neet2m_e[i]*EC2S2_17[i] 
+  deriv(EC3S2_17[]) <- age_up*EC3S2_16[i] - age_up*EC3S2_17[i] + f[i]*IC3S2_17[i] - r[i]*EC3S2_17[i] + n2r[i]*n2care_e_17[i]*EC2S2_17[i] + p2r[i]*p2care[i]*EC4S2_17[i] + nr2r[i]*end_nr[i]*EC2S2_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_17[i] + m2neet_ec3_17[i]*EC3S1_17[i] - neet2m_e[i]*EC3S2_17[i] 
+  deriv(EC4S2_17[]) <- age_up*EC4S2_16[i] - age_up*EC4S2_17[i] + f[i]*IC4S2_17[i] - r[i]*EC4S2_17[i] + nr2p[i]*end_nr[i]*EC2S2_17[i] + r2p[i]*end_res[i]*EC3S2_17[i] - p2care[i]*EC4S2_17[i] + m2neet_ec4_17[i]*EC4S1_17[i] - neet2m_e[i]*EC4S2_17[i] 
+  
 },
 target = 'c')  
 
@@ -4370,208 +1406,52 @@ pars <- list(turn10 = c(100,100),
              pc_incl = 0.7,
              pc_excl = 0.3,
              
-             t10_ic1s1j1u = c(0.01,0.01),
-             t10_ic2s1j1u = c(0.01,0.01),
-             t10_ic3s1j1u = c(0.01,0.01),
-             t10_ic4s1j1u = c(0.01,0.01),
+             t10_ic1s1 = c(0.01,0.01),
+             t10_ic2s1 = c(0.01,0.01),
+             t10_ic3s1 = c(0.01,0.01),
+             t10_ic4s1 = c(0.01,0.01),
              
-             t10_ic1s2j1u = c(0.01,0.01),
-             t10_ic2s2j1u = c(0.01,0.01),
-             t10_ic3s2j1u = c(0.01,0.01),
-             t10_ic4s2j1u = c(0.01,0.01),
-             
-             t10_ic1s1j2u = c(0.01,0.01),
-             t10_ic2s1j2u = c(0.01,0.01),
-             t10_ic3s1j2u = c(0.01,0.01),
-             t10_ic4s1j2u = c(0.01,0.01),
-             
-             t10_ic1s2j2u = c(0.01,0.01),
-             t10_ic2s2j2u = c(0.01,0.01),
-             t10_ic3s2j2u = c(0.01,0.01),
-             t10_ic4s2j2u = c(0.01,0.01),
-             
-             t10_ic1s1j3u = c(0.01,0.01),
-             t10_ic2s1j3u = c(0.01,0.01),
-             t10_ic3s1j3u = c(0.01,0.01),
-             t10_ic4s1j3u = c(0.01,0.01),
-             
-             t10_ic1s2j3u = c(0.01,0.01),
-             t10_ic2s2j3u = c(0.01,0.01),
-             t10_ic3s2j3u = c(0.01,0.01),
-             t10_ic4s2j3u = c(0.01,0.01),
-             
-             t10_ic1s1j4u = c(0.01,0.01),
-             t10_ic2s1j4u = c(0.01,0.01),
-             t10_ic3s1j4u = c(0.01,0.01),
-             t10_ic4s1j4u = c(0.01,0.01),
-             
-             t10_ic1s2j4u = c(0.01,0.01),
-             t10_ic2s2j4u = c(0.01,0.01),
-             t10_ic3s2j4u = c(0.01,0.01),
-             t10_ic4s2j4u = c(0.01,0.01),
-             
-             t10_ic1s1j5u = c(0.01,0.01),
-             t10_ic2s1j5u = c(0.01,0.01),
-             t10_ic3s1j5u = c(0.01,0.01),
-             t10_ic4s1j5u = c(0.01,0.01),
-             
-             t10_ic1s2j5u = c(0.01,0.01),
-             t10_ic2s2j5u = c(0.01,0.01),
-             t10_ic3s2j5u = c(0.01,0.01),
-             t10_ic4s2j5u = c(0.01,0.01),
+             t10_ic1s2 = c(0.01,0.01),
+             t10_ic2s2 = c(0.01,0.01),
+             t10_ic3s2 = c(0.01,0.01),
+             t10_ic4s2 = c(0.01,0.01),
              
              
-             t10_ec1s1j1u = c(0.01,0.01),
-             t10_ec2s1j1u = c(0.01,0.01),
-             t10_ec3s1j1u = c(0.01,0.01),
-             t10_ec4s1j1u = c(0.01,0.01),
              
-             t10_ec1s2j1u = c(0.01,0.01),
-             t10_ec2s2j1u = c(0.01,0.01),
-             t10_ec3s2j1u = c(0.01,0.01),
-             t10_ec4s2j1u = c(0.01,0.01),
+             t10_ec1s1 = c(0.01,0.01),
+             t10_ec2s1 = c(0.01,0.01),
+             t10_ec3s1 = c(0.01,0.01),
+             t10_ec4s1 = c(0.01,0.01),
              
-             t10_ec1s1j2u = c(0.01,0.01),
-             t10_ec2s1j2u = c(0.01,0.01),
-             t10_ec3s1j2u = c(0.01,0.01),
-             t10_ec4s1j2u = c(0.01,0.01),
+             t10_ec1s2 = c(0.01,0.01),
+             t10_ec2s2 = c(0.01,0.01),
+             t10_ec3s2 = c(0.01,0.01),
+             t10_ec4s2 = c(0.01,0.01),
              
-             t10_ec1s2j2u = c(0.01,0.01),
-             t10_ec2s2j2u = c(0.01,0.01),
-             t10_ec3s2j2u = c(0.01,0.01),
-             t10_ec4s2j2u = c(0.01,0.01),
              
-             t10_ec1s1j3u = c(0.01,0.01),
-             t10_ec2s1j3u = c(0.01,0.01),
-             t10_ec3s1j3u = c(0.01,0.01),
-             t10_ec4s1j3u = c(0.01,0.01),
              
-             t10_ec1s2j3u = c(0.01,0.01),
-             t10_ec2s2j3u = c(0.01,0.01),
-             t10_ec3s2j3u = c(0.01,0.01),
-             t10_ec4s2j3u = c(0.01,0.01),
              
-             t10_ec1s1j4u = c(0.01,0.01),
-             t10_ec2s1j4u = c(0.01,0.01),
-             t10_ec3s1j4u = c(0.01,0.01),
-             t10_ec4s1j4u = c(0.01,0.01),
+             neet16_ic1s1 = c(0.0001,0.0001),
+             neet16_ic2s1 = c(0.0001,0.0001),
+             neet16_ic3s1 = c(0.0001,0.0001),
+             neet16_ic4s1 = c(0.0001,0.0001),
              
-             t10_ec1s2j4u = c(0.01,0.01),
-             t10_ec2s2j4u = c(0.01,0.01),
-             t10_ec3s2j4u = c(0.01,0.01),
-             t10_ec4s2j4u = c(0.01,0.01),
+             neet16_ic1s2 = c(0.0001,0.0001),
+             neet16_ic2s2 = c(0.0001,0.0001),
+             neet16_ic3s2 = c(0.0001,0.0001),
+             neet16_ic4s2 = c(0.0001,0.0001),
              
-             t10_ec1s1j5u = c(0.01,0.01),
-             t10_ec2s1j5u = c(0.01,0.01),
-             t10_ec3s1j5u = c(0.01,0.01),
-             t10_ec4s1j5u = c(0.01,0.01),
              
-             t10_ec1s2j5u = c(0.01,0.01),
-             t10_ec2s2j5u = c(0.01,0.01),
-             t10_ec3s2j5u = c(0.01,0.01),
-             t10_ec4s2j5u = c(0.01,0.01),
-
              
-             neet16_ic1s1j1u = c(0.0001,0.0001),
-             neet16_ic2s1j1u = c(0.0001,0.0001),
-             neet16_ic3s1j1u = c(0.0001,0.0001),
-             neet16_ic4s1j1u = c(0.0001,0.0001),
+             neet16_ec1s1 = c(0.0001,0.0001),
+             neet16_ec2s1 = c(0.0001,0.0001),
+             neet16_ec3s1 = c(0.0001,0.0001),
+             neet16_ec4s1 = c(0.0001,0.0001),
              
-             neet16_ic1s2j1u = c(0.0001,0.0001),
-             neet16_ic2s2j1u = c(0.0001,0.0001),
-             neet16_ic3s2j1u = c(0.0001,0.0001),
-             neet16_ic4s2j1u = c(0.0001,0.0001),
-             
-             neet16_ic1s1j2u = c(0.0001,0.0001),
-             neet16_ic2s1j2u = c(0.0001,0.0001),
-             neet16_ic3s1j2u = c(0.0001,0.0001),
-             neet16_ic4s1j2u = c(0.0001,0.0001),
-             
-             neet16_ic1s2j2u = c(0.0001,0.0001),
-             neet16_ic2s2j2u = c(0.0001,0.0001),
-             neet16_ic3s2j2u = c(0.0001,0.0001),
-             neet16_ic4s2j2u = c(0.0001,0.0001),
-             
-             neet16_ic1s1j3u = c(0.0001,0.0001),
-             neet16_ic2s1j3u = c(0.0001,0.0001),
-             neet16_ic3s1j3u = c(0.0001,0.0001),
-             neet16_ic4s1j3u = c(0.0001,0.0001),
-             
-             neet16_ic1s2j3u = c(0.0001,0.0001),
-             neet16_ic2s2j3u = c(0.0001,0.0001),
-             neet16_ic3s2j3u = c(0.0001,0.0001),
-             neet16_ic4s2j3u = c(0.0001,0.0001),
-             
-             neet16_ic1s1j4u = c(0.0001,0.0001),
-             neet16_ic2s1j4u = c(0.0001,0.0001),
-             neet16_ic3s1j4u = c(0.0001,0.0001),
-             neet16_ic4s1j4u = c(0.0001,0.0001),
-             
-             neet16_ic1s2j4u = c(0.0001,0.0001),
-             neet16_ic2s2j4u = c(0.0001,0.0001),
-             neet16_ic3s2j4u = c(0.0001,0.0001),
-             neet16_ic4s2j4u = c(0.0001,0.0001),
-             
-             neet16_ic1s1j5u = c(0.0001,0.0001),
-             neet16_ic2s1j5u = c(0.0001,0.0001),
-             neet16_ic3s1j5u = c(0.0001,0.0001),
-             neet16_ic4s1j5u = c(0.0001,0.0001),
-             
-             neet16_ic1s2j5u = c(0.0001,0.0001),
-             neet16_ic2s2j5u = c(0.0001,0.0001),
-             neet16_ic3s2j5u = c(0.0001,0.0001),
-             neet16_ic4s2j5u = c(0.0001,0.0001),
-
-             
-             neet16_ec1s1j1u = c(0.0001,0.0001),
-             neet16_ec2s1j1u = c(0.0001,0.0001),
-             neet16_ec3s1j1u = c(0.0001,0.0001),
-             neet16_ec4s1j1u = c(0.0001,0.0001),
-             
-             neet16_ec1s2j1u = c(0.0001,0.0001),
-             neet16_ec2s2j1u = c(0.0001,0.0001),
-             neet16_ec3s2j1u = c(0.0001,0.0001),
-             neet16_ec4s2j1u = c(0.0001,0.0001),
-             
-             neet16_ec1s1j2u = c(0.0001,0.0001),
-             neet16_ec2s1j2u = c(0.0001,0.0001),
-             neet16_ec3s1j2u = c(0.0001,0.0001),
-             neet16_ec4s1j2u = c(0.0001,0.0001),
-             
-             neet16_ec1s2j2u = c(0.0001,0.0001),
-             neet16_ec2s2j2u = c(0.0001,0.0001),
-             neet16_ec3s2j2u = c(0.0001,0.0001),
-             neet16_ec4s2j2u = c(0.0001,0.0001),
-             
-             neet16_ec1s1j3u = c(0.0001,0.0001),
-             neet16_ec2s1j3u = c(0.0001,0.0001),
-             neet16_ec3s1j3u = c(0.0001,0.0001),
-             neet16_ec4s1j3u = c(0.0001,0.0001),
-             
-             neet16_ec1s2j3u = c(0.0001,0.0001),
-             neet16_ec2s2j3u = c(0.0001,0.0001),
-             neet16_ec3s2j3u = c(0.0001,0.0001),
-             neet16_ec4s2j3u = c(0.0001,0.0001),
-             
-             neet16_ec1s1j4u = c(0.0001,0.0001),
-             neet16_ec2s1j4u = c(0.0001,0.0001),
-             neet16_ec3s1j4u = c(0.0001,0.0001),
-             neet16_ec4s1j4u = c(0.0001,0.0001),
-             
-             neet16_ec1s2j4u = c(0.0001,0.0001),
-             neet16_ec2s2j4u = c(0.0001,0.0001),
-             neet16_ec3s2j4u = c(0.0001,0.0001),
-             neet16_ec4s2j4u = c(0.0001,0.0001),
-             
-             neet16_ec1s1j5u = c(0.0001,0.0001),
-             neet16_ec2s1j5u = c(0.0001,0.0001),
-             neet16_ec3s1j5u = c(0.0001,0.0001),
-             neet16_ec4s1j5u = c(0.0001,0.0001),
-             
-             neet16_ec1s2j5u = c(0.0001,0.0001),
-             neet16_ec2s2j5u = c(0.0001,0.0001),
-             neet16_ec3s2j5u = c(0.0001,0.0001),
-             neet16_ec4s2j5u = c(0.0001,0.0001),
+             neet16_ec1s2 = c(0.0001,0.0001),
+             neet16_ec2s2 = c(0.0001,0.0001),
+             neet16_ec3s2 = c(0.0001,0.0001),
+             neet16_ec4s2 = c(0.0001,0.0001),
              
              
              r = c(0.0001,0.0001),
@@ -4776,1348 +1656,176 @@ pars <- list(turn10 = c(100,100),
              miss_ec4u_17 = c(0.0001,0.0001),
              
              
-             np2nc_ic1s1u_10 = c(0.0001,0.0001),
-             np2nc_ic2s1u_10 = c(0.0001,0.0001),
-             np2nc_ic3s1u_10 = c(0.0001,0.0001),
-             np2nc_ic4s1u_10 = c(0.0001,0.0001),
-             
-             np2nc_ic1s1u_11 = c(0.0001,0.0001),
-             np2nc_ic2s1u_11 = c(0.0001,0.0001),
-             np2nc_ic3s1u_11 = c(0.0001,0.0001),
-             np2nc_ic4s1u_11 = c(0.0001,0.0001),
-             
-             np2nc_ic1s1u_12 = c(0.0001,0.0001),
-             np2nc_ic2s1u_12 = c(0.0001,0.0001),
-             np2nc_ic3s1u_12 = c(0.0001,0.0001),
-             np2nc_ic4s1u_12 = c(0.0001,0.0001),
-             
-             np2nc_ic1s1u_13 = c(0.0001,0.0001),
-             np2nc_ic2s1u_13 = c(0.0001,0.0001),
-             np2nc_ic3s1u_13 = c(0.0001,0.0001),
-             np2nc_ic4s1u_13 = c(0.0001,0.0001),
-             
-             np2nc_ic1s1u_14 = c(0.0001,0.0001),
-             np2nc_ic2s1u_14 = c(0.0001,0.0001),
-             np2nc_ic3s1u_14 = c(0.0001,0.0001),
-             np2nc_ic4s1u_14 = c(0.0001,0.0001),
-             
-             np2nc_ic1s1u_15 = c(0.0001,0.0001),
-             np2nc_ic2s1u_15 = c(0.0001,0.0001),
-             np2nc_ic3s1u_15 = c(0.0001,0.0001),
-             np2nc_ic4s1u_15 = c(0.0001,0.0001),
-             
-             np2nc_ic1s1u_16 = c(0.0001,0.0001),
-             np2nc_ic2s1u_16 = c(0.0001,0.0001),
-             np2nc_ic3s1u_16 = c(0.0001,0.0001),
-             np2nc_ic4s1u_16 = c(0.0001,0.0001),
-             
-             np2nc_ic1s1u_17 = c(0.0001,0.0001),
-             np2nc_ic2s1u_17 = c(0.0001,0.0001),
-             np2nc_ic3s1u_17 = c(0.0001,0.0001),
-             np2nc_ic4s1u_17 = c(0.0001,0.0001),
-             
-             
-             
-             np2nc_ic1s2u_10 = c(0.0001,0.0001),
-             np2nc_ic2s2u_10 = c(0.0001,0.0001),
-             np2nc_ic3s2u_10 = c(0.0001,0.0001),
-             np2nc_ic4s2u_10 = c(0.0001,0.0001),
-             
-             np2nc_ic1s2u_11 = c(0.0001,0.0001),
-             np2nc_ic2s2u_11 = c(0.0001,0.0001),
-             np2nc_ic3s2u_11 = c(0.0001,0.0001),
-             np2nc_ic4s2u_11 = c(0.0001,0.0001),
-             
-             np2nc_ic1s2u_12 = c(0.0001,0.0001),
-             np2nc_ic2s2u_12 = c(0.0001,0.0001),
-             np2nc_ic3s2u_12 = c(0.0001,0.0001),
-             np2nc_ic4s2u_12 = c(0.0001,0.0001),
-             
-             np2nc_ic1s2u_13 = c(0.0001,0.0001),
-             np2nc_ic2s2u_13 = c(0.0001,0.0001),
-             np2nc_ic3s2u_13 = c(0.0001,0.0001),
-             np2nc_ic4s2u_13 = c(0.0001,0.0001),
-             
-             np2nc_ic1s2u_14 = c(0.0001,0.0001),
-             np2nc_ic2s2u_14 = c(0.0001,0.0001),
-             np2nc_ic3s2u_14 = c(0.0001,0.0001),
-             np2nc_ic4s2u_14 = c(0.0001,0.0001),
-             
-             np2nc_ic1s2u_15 = c(0.0001,0.0001),
-             np2nc_ic2s2u_15 = c(0.0001,0.0001),
-             np2nc_ic3s2u_15 = c(0.0001,0.0001),
-             np2nc_ic4s2u_15 = c(0.0001,0.0001),
-             
-             np2nc_ic1s2u_16 = c(0.0001,0.0001),
-             np2nc_ic2s2u_16 = c(0.0001,0.0001),
-             np2nc_ic3s2u_16 = c(0.0001,0.0001),
-             np2nc_ic4s2u_16 = c(0.0001,0.0001),
-             
-             np2nc_ic1s2u_17 = c(0.0001,0.0001),
-             np2nc_ic2s2u_17 = c(0.0001,0.0001),
-             np2nc_ic3s2u_17 = c(0.0001,0.0001),
-             np2nc_ic4s2u_17 = c(0.0001,0.0001),
-             
-
-             
-             np2nc_ec1s1u_10 = c(0.0001,0.0001),
-             np2nc_ec2s1u_10 = c(0.0001,0.0001),
-             np2nc_ec3s1u_10 = c(0.0001,0.0001),
-             np2nc_ec4s1u_10 = c(0.0001,0.0001),
-             
-             np2nc_ec1s1u_11 = c(0.0001,0.0001),
-             np2nc_ec2s1u_11 = c(0.0001,0.0001),
-             np2nc_ec3s1u_11 = c(0.0001,0.0001),
-             np2nc_ec4s1u_11 = c(0.0001,0.0001),
-             
-             np2nc_ec1s1u_12 = c(0.0001,0.0001),
-             np2nc_ec2s1u_12 = c(0.0001,0.0001),
-             np2nc_ec3s1u_12 = c(0.0001,0.0001),
-             np2nc_ec4s1u_12 = c(0.0001,0.0001),
-             
-             np2nc_ec1s1u_13 = c(0.0001,0.0001),
-             np2nc_ec2s1u_13 = c(0.0001,0.0001),
-             np2nc_ec3s1u_13 = c(0.0001,0.0001),
-             np2nc_ec4s1u_13 = c(0.0001,0.0001),
-             
-             np2nc_ec1s1u_14 = c(0.0001,0.0001),
-             np2nc_ec2s1u_14 = c(0.0001,0.0001),
-             np2nc_ec3s1u_14 = c(0.0001,0.0001),
-             np2nc_ec4s1u_14 = c(0.0001,0.0001),
-             
-             np2nc_ec1s1u_15 = c(0.0001,0.0001),
-             np2nc_ec2s1u_15 = c(0.0001,0.0001),
-             np2nc_ec3s1u_15 = c(0.0001,0.0001),
-             np2nc_ec4s1u_15 = c(0.0001,0.0001),
-             
-             np2nc_ec1s1u_16 = c(0.0001,0.0001),
-             np2nc_ec2s1u_16 = c(0.0001,0.0001),
-             np2nc_ec3s1u_16 = c(0.0001,0.0001),
-             np2nc_ec4s1u_16 = c(0.0001,0.0001),
-             
-             np2nc_ec1s1u_17 = c(0.0001,0.0001),
-             np2nc_ec2s1u_17 = c(0.0001,0.0001),
-             np2nc_ec3s1u_17 = c(0.0001,0.0001),
-             np2nc_ec4s1u_17 = c(0.0001,0.0001),
-             
-             
-             
-             np2nc_ec1s2u_10 = c(0.0001,0.0001),
-             np2nc_ec2s2u_10 = c(0.0001,0.0001),
-             np2nc_ec3s2u_10 = c(0.0001,0.0001),
-             np2nc_ec4s2u_10 = c(0.0001,0.0001),
-             
-             np2nc_ec1s2u_11 = c(0.0001,0.0001),
-             np2nc_ec2s2u_11 = c(0.0001,0.0001),
-             np2nc_ec3s2u_11 = c(0.0001,0.0001),
-             np2nc_ec4s2u_11 = c(0.0001,0.0001),
-             
-             np2nc_ec1s2u_12 = c(0.0001,0.0001),
-             np2nc_ec2s2u_12 = c(0.0001,0.0001),
-             np2nc_ec3s2u_12 = c(0.0001,0.0001),
-             np2nc_ec4s2u_12 = c(0.0001,0.0001),
-             
-             np2nc_ec1s2u_13 = c(0.0001,0.0001),
-             np2nc_ec2s2u_13 = c(0.0001,0.0001),
-             np2nc_ec3s2u_13 = c(0.0001,0.0001),
-             np2nc_ec4s2u_13 = c(0.0001,0.0001),
-             
-             np2nc_ec1s2u_14 = c(0.0001,0.0001),
-             np2nc_ec2s2u_14 = c(0.0001,0.0001),
-             np2nc_ec3s2u_14 = c(0.0001,0.0001),
-             np2nc_ec4s2u_14 = c(0.0001,0.0001),
-             
-             np2nc_ec1s2u_15 = c(0.0001,0.0001),
-             np2nc_ec2s2u_15 = c(0.0001,0.0001),
-             np2nc_ec3s2u_15 = c(0.0001,0.0001),
-             np2nc_ec4s2u_15 = c(0.0001,0.0001),
-             
-             np2nc_ec1s2u_16 = c(0.0001,0.0001),
-             np2nc_ec2s2u_16 = c(0.0001,0.0001),
-             np2nc_ec3s2u_16 = c(0.0001,0.0001),
-             np2nc_ec4s2u_16 = c(0.0001,0.0001),
-             
-             np2nc_ec1s2u_17 = c(0.0001,0.0001),
-             np2nc_ec2s2u_17 = c(0.0001,0.0001),
-             np2nc_ec3s2u_17 = c(0.0001,0.0001),
-             np2nc_ec4s2u_17 = c(0.0001,0.0001),
-             
-
-             
-             np2charge_ic1s1u_10 = c(0.0001,0.0001),
-             np2charge_ic2s1u_10 = c(0.0001,0.0001),
-             np2charge_ic3s1u_10 = c(0.0001,0.0001),
-             np2charge_ic4s1u_10 = c(0.0001,0.0001),
-             
-             np2charge_ic1s1u_11 = c(0.0001,0.0001),
-             np2charge_ic2s1u_11 = c(0.0001,0.0001),
-             np2charge_ic3s1u_11 = c(0.0001,0.0001),
-             np2charge_ic4s1u_11 = c(0.0001,0.0001),
-             
-             np2charge_ic1s1u_12 = c(0.0001,0.0001),
-             np2charge_ic2s1u_12 = c(0.0001,0.0001),
-             np2charge_ic3s1u_12 = c(0.0001,0.0001),
-             np2charge_ic4s1u_12 = c(0.0001,0.0001),
-             
-             np2charge_ic1s1u_13 = c(0.0001,0.0001),
-             np2charge_ic2s1u_13 = c(0.0001,0.0001),
-             np2charge_ic3s1u_13 = c(0.0001,0.0001),
-             np2charge_ic4s1u_13 = c(0.0001,0.0001),
-             
-             np2charge_ic1s1u_14 = c(0.0001,0.0001),
-             np2charge_ic2s1u_14 = c(0.0001,0.0001),
-             np2charge_ic3s1u_14 = c(0.0001,0.0001),
-             np2charge_ic4s1u_14 = c(0.0001,0.0001),
-             
-             np2charge_ic1s1u_15 = c(0.0001,0.0001),
-             np2charge_ic2s1u_15 = c(0.0001,0.0001),
-             np2charge_ic3s1u_15 = c(0.0001,0.0001),
-             np2charge_ic4s1u_15 = c(0.0001,0.0001),
-             
-             np2charge_ic1s1u_16 = c(0.0001,0.0001),
-             np2charge_ic2s1u_16 = c(0.0001,0.0001),
-             np2charge_ic3s1u_16 = c(0.0001,0.0001),
-             np2charge_ic4s1u_16 = c(0.0001,0.0001),
-             
-             np2charge_ic1s1u_17 = c(0.0001,0.0001),
-             np2charge_ic2s1u_17 = c(0.0001,0.0001),
-             np2charge_ic3s1u_17 = c(0.0001,0.0001),
-             np2charge_ic4s1u_17 = c(0.0001,0.0001),
-             
-             
-             
-             np2charge_ic1s2u_10 = c(0.0001,0.0001),
-             np2charge_ic2s2u_10 = c(0.0001,0.0001),
-             np2charge_ic3s2u_10 = c(0.0001,0.0001),
-             np2charge_ic4s2u_10 = c(0.0001,0.0001),
-             
-             np2charge_ic1s2u_11 = c(0.0001,0.0001),
-             np2charge_ic2s2u_11 = c(0.0001,0.0001),
-             np2charge_ic3s2u_11 = c(0.0001,0.0001),
-             np2charge_ic4s2u_11 = c(0.0001,0.0001),
-             
-             np2charge_ic1s2u_12 = c(0.0001,0.0001),
-             np2charge_ic2s2u_12 = c(0.0001,0.0001),
-             np2charge_ic3s2u_12 = c(0.0001,0.0001),
-             np2charge_ic4s2u_12 = c(0.0001,0.0001),
-             
-             np2charge_ic1s2u_13 = c(0.0001,0.0001),
-             np2charge_ic2s2u_13 = c(0.0001,0.0001),
-             np2charge_ic3s2u_13 = c(0.0001,0.0001),
-             np2charge_ic4s2u_13 = c(0.0001,0.0001),
-             
-             np2charge_ic1s2u_14 = c(0.0001,0.0001),
-             np2charge_ic2s2u_14 = c(0.0001,0.0001),
-             np2charge_ic3s2u_14 = c(0.0001,0.0001),
-             np2charge_ic4s2u_14 = c(0.0001,0.0001),
-             
-             np2charge_ic1s2u_15 = c(0.0001,0.0001),
-             np2charge_ic2s2u_15 = c(0.0001,0.0001),
-             np2charge_ic3s2u_15 = c(0.0001,0.0001),
-             np2charge_ic4s2u_15 = c(0.0001,0.0001),
-             
-             np2charge_ic1s2u_16 = c(0.0001,0.0001),
-             np2charge_ic2s2u_16 = c(0.0001,0.0001),
-             np2charge_ic3s2u_16 = c(0.0001,0.0001),
-             np2charge_ic4s2u_16 = c(0.0001,0.0001),
-             
-             np2charge_ic1s2u_17 = c(0.0001,0.0001),
-             np2charge_ic2s2u_17 = c(0.0001,0.0001),
-             np2charge_ic3s2u_17 = c(0.0001,0.0001),
-             np2charge_ic4s2u_17 = c(0.0001,0.0001),
-             
-             
-             
-             np2charge_ec1s1u_10 = c(0.0001,0.0001),
-             np2charge_ec2s1u_10 = c(0.0001,0.0001),
-             np2charge_ec3s1u_10 = c(0.0001,0.0001),
-             np2charge_ec4s1u_10 = c(0.0001,0.0001),
-             
-             np2charge_ec1s1u_11 = c(0.0001,0.0001),
-             np2charge_ec2s1u_11 = c(0.0001,0.0001),
-             np2charge_ec3s1u_11 = c(0.0001,0.0001),
-             np2charge_ec4s1u_11 = c(0.0001,0.0001),
-             
-             np2charge_ec1s1u_12 = c(0.0001,0.0001),
-             np2charge_ec2s1u_12 = c(0.0001,0.0001),
-             np2charge_ec3s1u_12 = c(0.0001,0.0001),
-             np2charge_ec4s1u_12 = c(0.0001,0.0001),
-             
-             np2charge_ec1s1u_13 = c(0.0001,0.0001),
-             np2charge_ec2s1u_13 = c(0.0001,0.0001),
-             np2charge_ec3s1u_13 = c(0.0001,0.0001),
-             np2charge_ec4s1u_13 = c(0.0001,0.0001),
-             
-             np2charge_ec1s1u_14 = c(0.0001,0.0001),
-             np2charge_ec2s1u_14 = c(0.0001,0.0001),
-             np2charge_ec3s1u_14 = c(0.0001,0.0001),
-             np2charge_ec4s1u_14 = c(0.0001,0.0001),
-             
-             np2charge_ec1s1u_15 = c(0.0001,0.0001),
-             np2charge_ec2s1u_15 = c(0.0001,0.0001),
-             np2charge_ec3s1u_15 = c(0.0001,0.0001),
-             np2charge_ec4s1u_15 = c(0.0001,0.0001),
-             
-             np2charge_ec1s1u_16 = c(0.0001,0.0001),
-             np2charge_ec2s1u_16 = c(0.0001,0.0001),
-             np2charge_ec3s1u_16 = c(0.0001,0.0001),
-             np2charge_ec4s1u_16 = c(0.0001,0.0001),
-             
-             np2charge_ec1s1u_17 = c(0.0001,0.0001),
-             np2charge_ec2s1u_17 = c(0.0001,0.0001),
-             np2charge_ec3s1u_17 = c(0.0001,0.0001),
-             np2charge_ec4s1u_17 = c(0.0001,0.0001),
-             
-             
-             
-             np2charge_ec1s2u_10 = c(0.0001,0.0001),
-             np2charge_ec2s2u_10 = c(0.0001,0.0001),
-             np2charge_ec3s2u_10 = c(0.0001,0.0001),
-             np2charge_ec4s2u_10 = c(0.0001,0.0001),
-             
-             np2charge_ec1s2u_11 = c(0.0001,0.0001),
-             np2charge_ec2s2u_11 = c(0.0001,0.0001),
-             np2charge_ec3s2u_11 = c(0.0001,0.0001),
-             np2charge_ec4s2u_11 = c(0.0001,0.0001),
-             
-             np2charge_ec1s2u_12 = c(0.0001,0.0001),
-             np2charge_ec2s2u_12 = c(0.0001,0.0001),
-             np2charge_ec3s2u_12 = c(0.0001,0.0001),
-             np2charge_ec4s2u_12 = c(0.0001,0.0001),
-             
-             np2charge_ec1s2u_13 = c(0.0001,0.0001),
-             np2charge_ec2s2u_13 = c(0.0001,0.0001),
-             np2charge_ec3s2u_13 = c(0.0001,0.0001),
-             np2charge_ec4s2u_13 = c(0.0001,0.0001),
-             
-             np2charge_ec1s2u_14 = c(0.0001,0.0001),
-             np2charge_ec2s2u_14 = c(0.0001,0.0001),
-             np2charge_ec3s2u_14 = c(0.0001,0.0001),
-             np2charge_ec4s2u_14 = c(0.0001,0.0001),
-             
-             np2charge_ec1s2u_15 = c(0.0001,0.0001),
-             np2charge_ec2s2u_15 = c(0.0001,0.0001),
-             np2charge_ec3s2u_15 = c(0.0001,0.0001),
-             np2charge_ec4s2u_15 = c(0.0001,0.0001),
-             
-             np2charge_ec1s2u_16 = c(0.0001,0.0001),
-             np2charge_ec2s2u_16 = c(0.0001,0.0001),
-             np2charge_ec3s2u_16 = c(0.0001,0.0001),
-             np2charge_ec4s2u_16 = c(0.0001,0.0001),
-             
-             np2charge_ec1s2u_17 = c(0.0001,0.0001),
-             np2charge_ec2s2u_17 = c(0.0001,0.0001),
-             np2charge_ec3s2u_17 = c(0.0001,0.0001),
-             np2charge_ec4s2u_17 = c(0.0001,0.0001),
-
-             
-             p2charge_ic1s1u_10 = c(0.0001,0.0001),
-             p2charge_ic2s1u_10 = c(0.0001,0.0001),
-             p2charge_ic3s1u_10 = c(0.0001,0.0001),
-             p2charge_ic4s1u_10 = c(0.0001,0.0001),
-             
-             p2charge_ic1s1u_11 = c(0.0001,0.0001),
-             p2charge_ic2s1u_11 = c(0.0001,0.0001),
-             p2charge_ic3s1u_11 = c(0.0001,0.0001),
-             p2charge_ic4s1u_11 = c(0.0001,0.0001),
-             
-             p2charge_ic1s1u_12 = c(0.0001,0.0001),
-             p2charge_ic2s1u_12 = c(0.0001,0.0001),
-             p2charge_ic3s1u_12 = c(0.0001,0.0001),
-             p2charge_ic4s1u_12 = c(0.0001,0.0001),
-             
-             p2charge_ic1s1u_13 = c(0.0001,0.0001),
-             p2charge_ic2s1u_13 = c(0.0001,0.0001),
-             p2charge_ic3s1u_13 = c(0.0001,0.0001),
-             p2charge_ic4s1u_13 = c(0.0001,0.0001),
-             
-             p2charge_ic1s1u_14 = c(0.0001,0.0001),
-             p2charge_ic2s1u_14 = c(0.0001,0.0001),
-             p2charge_ic3s1u_14 = c(0.0001,0.0001),
-             p2charge_ic4s1u_14 = c(0.0001,0.0001),
-             
-             p2charge_ic1s1u_15 = c(0.0001,0.0001),
-             p2charge_ic2s1u_15 = c(0.0001,0.0001),
-             p2charge_ic3s1u_15 = c(0.0001,0.0001),
-             p2charge_ic4s1u_15 = c(0.0001,0.0001),
-             
-             p2charge_ic1s1u_16 = c(0.0001,0.0001),
-             p2charge_ic2s1u_16 = c(0.0001,0.0001),
-             p2charge_ic3s1u_16 = c(0.0001,0.0001),
-             p2charge_ic4s1u_16 = c(0.0001,0.0001),
-             
-             p2charge_ic1s1u_17 = c(0.0001,0.0001),
-             p2charge_ic2s1u_17 = c(0.0001,0.0001),
-             p2charge_ic3s1u_17 = c(0.0001,0.0001),
-             p2charge_ic4s1u_17 = c(0.0001,0.0001),
-             
-             
-             
-             p2charge_ic1s2u_10 = c(0.0001,0.0001),
-             p2charge_ic2s2u_10 = c(0.0001,0.0001),
-             p2charge_ic3s2u_10 = c(0.0001,0.0001),
-             p2charge_ic4s2u_10 = c(0.0001,0.0001),
-             
-             p2charge_ic1s2u_11 = c(0.0001,0.0001),
-             p2charge_ic2s2u_11 = c(0.0001,0.0001),
-             p2charge_ic3s2u_11 = c(0.0001,0.0001),
-             p2charge_ic4s2u_11 = c(0.0001,0.0001),
-             
-             p2charge_ic1s2u_12 = c(0.0001,0.0001),
-             p2charge_ic2s2u_12 = c(0.0001,0.0001),
-             p2charge_ic3s2u_12 = c(0.0001,0.0001),
-             p2charge_ic4s2u_12 = c(0.0001,0.0001),
-             
-             p2charge_ic1s2u_13 = c(0.0001,0.0001),
-             p2charge_ic2s2u_13 = c(0.0001,0.0001),
-             p2charge_ic3s2u_13 = c(0.0001,0.0001),
-             p2charge_ic4s2u_13 = c(0.0001,0.0001),
-             
-             p2charge_ic1s2u_14 = c(0.0001,0.0001),
-             p2charge_ic2s2u_14 = c(0.0001,0.0001),
-             p2charge_ic3s2u_14 = c(0.0001,0.0001),
-             p2charge_ic4s2u_14 = c(0.0001,0.0001),
-             
-             p2charge_ic1s2u_15 = c(0.0001,0.0001),
-             p2charge_ic2s2u_15 = c(0.0001,0.0001),
-             p2charge_ic3s2u_15 = c(0.0001,0.0001),
-             p2charge_ic4s2u_15 = c(0.0001,0.0001),
-             
-             p2charge_ic1s2u_16 = c(0.0001,0.0001),
-             p2charge_ic2s2u_16 = c(0.0001,0.0001),
-             p2charge_ic3s2u_16 = c(0.0001,0.0001),
-             p2charge_ic4s2u_16 = c(0.0001,0.0001),
-             
-             p2charge_ic1s2u_17 = c(0.0001,0.0001),
-             p2charge_ic2s2u_17 = c(0.0001,0.0001),
-             p2charge_ic3s2u_17 = c(0.0001,0.0001),
-             p2charge_ic4s2u_17 = c(0.0001,0.0001),
-
-             
-             p2charge_ec1s1u_10 = c(0.0001,0.0001),
-             p2charge_ec2s1u_10 = c(0.0001,0.0001),
-             p2charge_ec3s1u_10 = c(0.0001,0.0001),
-             p2charge_ec4s1u_10 = c(0.0001,0.0001),
-             
-             p2charge_ec1s1u_11 = c(0.0001,0.0001),
-             p2charge_ec2s1u_11 = c(0.0001,0.0001),
-             p2charge_ec3s1u_11 = c(0.0001,0.0001),
-             p2charge_ec4s1u_11 = c(0.0001,0.0001),
-             
-             p2charge_ec1s1u_12 = c(0.0001,0.0001),
-             p2charge_ec2s1u_12 = c(0.0001,0.0001),
-             p2charge_ec3s1u_12 = c(0.0001,0.0001),
-             p2charge_ec4s1u_12 = c(0.0001,0.0001),
-             
-             p2charge_ec1s1u_13 = c(0.0001,0.0001),
-             p2charge_ec2s1u_13 = c(0.0001,0.0001),
-             p2charge_ec3s1u_13 = c(0.0001,0.0001),
-             p2charge_ec4s1u_13 = c(0.0001,0.0001),
-             
-             p2charge_ec1s1u_14 = c(0.0001,0.0001),
-             p2charge_ec2s1u_14 = c(0.0001,0.0001),
-             p2charge_ec3s1u_14 = c(0.0001,0.0001),
-             p2charge_ec4s1u_14 = c(0.0001,0.0001),
-             
-             p2charge_ec1s1u_15 = c(0.0001,0.0001),
-             p2charge_ec2s1u_15 = c(0.0001,0.0001),
-             p2charge_ec3s1u_15 = c(0.0001,0.0001),
-             p2charge_ec4s1u_15 = c(0.0001,0.0001),
-             
-             p2charge_ec1s1u_16 = c(0.0001,0.0001),
-             p2charge_ec2s1u_16 = c(0.0001,0.0001),
-             p2charge_ec3s1u_16 = c(0.0001,0.0001),
-             p2charge_ec4s1u_16 = c(0.0001,0.0001),
-             
-             p2charge_ec1s1u_17 = c(0.0001,0.0001),
-             p2charge_ec2s1u_17 = c(0.0001,0.0001),
-             p2charge_ec3s1u_17 = c(0.0001,0.0001),
-             p2charge_ec4s1u_17 = c(0.0001,0.0001),
-             
-             
-             
-             p2charge_ec1s2u_10 = c(0.0001,0.0001),
-             p2charge_ec2s2u_10 = c(0.0001,0.0001),
-             p2charge_ec3s2u_10 = c(0.0001,0.0001),
-             p2charge_ec4s2u_10 = c(0.0001,0.0001),
-             
-             p2charge_ec1s2u_11 = c(0.0001,0.0001),
-             p2charge_ec2s2u_11 = c(0.0001,0.0001),
-             p2charge_ec3s2u_11 = c(0.0001,0.0001),
-             p2charge_ec4s2u_11 = c(0.0001,0.0001),
-             
-             p2charge_ec1s2u_12 = c(0.0001,0.0001),
-             p2charge_ec2s2u_12 = c(0.0001,0.0001),
-             p2charge_ec3s2u_12 = c(0.0001,0.0001),
-             p2charge_ec4s2u_12 = c(0.0001,0.0001),
-             
-             p2charge_ec1s2u_13 = c(0.0001,0.0001),
-             p2charge_ec2s2u_13 = c(0.0001,0.0001),
-             p2charge_ec3s2u_13 = c(0.0001,0.0001),
-             p2charge_ec4s2u_13 = c(0.0001,0.0001),
-             
-             p2charge_ec1s2u_14 = c(0.0001,0.0001),
-             p2charge_ec2s2u_14 = c(0.0001,0.0001),
-             p2charge_ec3s2u_14 = c(0.0001,0.0001),
-             p2charge_ec4s2u_14 = c(0.0001,0.0001),
-             
-             p2charge_ec1s2u_15 = c(0.0001,0.0001),
-             p2charge_ec2s2u_15 = c(0.0001,0.0001),
-             p2charge_ec3s2u_15 = c(0.0001,0.0001),
-             p2charge_ec4s2u_15 = c(0.0001,0.0001),
-             
-             p2charge_ec1s2u_16 = c(0.0001,0.0001),
-             p2charge_ec2s2u_16 = c(0.0001,0.0001),
-             p2charge_ec3s2u_16 = c(0.0001,0.0001),
-             p2charge_ec4s2u_16 = c(0.0001,0.0001),
-             
-             p2charge_ec1s2u_17 = c(0.0001,0.0001),
-             p2charge_ec2s2u_17 = c(0.0001,0.0001),
-             p2charge_ec3s2u_17 = c(0.0001,0.0001),
-             p2charge_ec4s2u_17 = c(0.0001,0.0001),
-             
-             
-
-             
              
              # initial conditions
-             IC1S1J1U_10_ini = c(200,200),
-             IC2S1J1U_10_ini = c(200,200),
-             IC3S1J1U_10_ini = c(200,200),
-             IC4S1J1U_10_ini = c(200,200),
-             
-             IC1S1J1U_11_ini = c(200,200),
-             IC2S1J1U_11_ini = c(200,200),
-             IC3S1J1U_11_ini = c(200,200),
-             IC4S1J1U_11_ini = c(200,200),
-             
-             IC1S1J1U_12_ini = c(200,200),
-             IC2S1J1U_12_ini = c(200,200),
-             IC3S1J1U_12_ini = c(200,200),
-             IC4S1J1U_12_ini = c(200,200),
-             
-             IC1S1J1U_13_ini = c(200,200),
-             IC2S1J1U_13_ini = c(200,200),
-             IC3S1J1U_13_ini = c(200,200),
-             IC4S1J1U_13_ini = c(200,200),
-             
-             IC1S1J1U_14_ini = c(200,200),
-             IC2S1J1U_14_ini = c(200,200),
-             IC3S1J1U_14_ini = c(200,200),
-             IC4S1J1U_14_ini = c(200,200),
-             
-             IC1S1J1U_15_ini = c(200,200),
-             IC2S1J1U_15_ini = c(200,200),
-             IC3S1J1U_15_ini = c(200,200),
-             IC4S1J1U_15_ini = c(200,200),
-             
-             IC1S1J1U_16_ini = c(200,200),
-             IC2S1J1U_16_ini = c(200,200),
-             IC3S1J1U_16_ini = c(200,200),
-             IC4S1J1U_16_ini = c(200,200),
-             
-             IC1S1J1U_17_ini = c(200,200),
-             IC2S1J1U_17_ini = c(200,200),
-             IC3S1J1U_17_ini = c(200,200),
-             IC4S1J1U_17_ini = c(200,200),
-             
-             
-             
-             IC1S2J1U_10_ini = c(200,200),
-             IC2S2J1U_10_ini = c(200,200),
-             IC3S2J1U_10_ini = c(200,200),
-             IC4S2J1U_10_ini = c(200,200),
-             
-             IC1S2J1U_11_ini = c(200,200),
-             IC2S2J1U_11_ini = c(200,200),
-             IC3S2J1U_11_ini = c(200,200),
-             IC4S2J1U_11_ini = c(200,200),
-             
-             IC1S2J1U_12_ini = c(200,200),
-             IC2S2J1U_12_ini = c(200,200),
-             IC3S2J1U_12_ini = c(200,200),
-             IC4S2J1U_12_ini = c(200,200),
-             
-             IC1S2J1U_13_ini = c(200,200),
-             IC2S2J1U_13_ini = c(200,200),
-             IC3S2J1U_13_ini = c(200,200),
-             IC4S2J1U_13_ini = c(200,200),
-             
-             IC1S2J1U_14_ini = c(200,200),
-             IC2S2J1U_14_ini = c(200,200),
-             IC3S2J1U_14_ini = c(200,200),
-             IC4S2J1U_14_ini = c(200,200),
-             
-             IC1S2J1U_15_ini = c(200,200),
-             IC2S2J1U_15_ini = c(200,200),
-             IC3S2J1U_15_ini = c(200,200),
-             IC4S2J1U_15_ini = c(200,200),
-             
-             IC1S2J1U_16_ini = c(200,200),
-             IC2S2J1U_16_ini = c(200,200),
-             IC3S2J1U_16_ini = c(200,200),
-             IC4S2J1U_16_ini = c(200,200),
-             
-             IC1S2J1U_17_ini = c(200,200),
-             IC2S2J1U_17_ini = c(200,200),
-             IC3S2J1U_17_ini = c(200,200),
-             IC4S2J1U_17_ini = c(200,200),
-             
-             
-             
-             IC1S1J2U_10_ini = c(200,200),
-             IC2S1J2U_10_ini = c(200,200),
-             IC3S1J2U_10_ini = c(200,200),
-             IC4S1J2U_10_ini = c(200,200),
-             
-             IC1S1J2U_11_ini = c(200,200),
-             IC2S1J2U_11_ini = c(200,200),
-             IC3S1J2U_11_ini = c(200,200),
-             IC4S1J2U_11_ini = c(200,200),
-             
-             IC1S1J2U_12_ini = c(200,200),
-             IC2S1J2U_12_ini = c(200,200),
-             IC3S1J2U_12_ini = c(200,200),
-             IC4S1J2U_12_ini = c(200,200),
-             
-             IC1S1J2U_13_ini = c(200,200),
-             IC2S1J2U_13_ini = c(200,200),
-             IC3S1J2U_13_ini = c(200,200),
-             IC4S1J2U_13_ini = c(200,200),
-             
-             IC1S1J2U_14_ini = c(200,200),
-             IC2S1J2U_14_ini = c(200,200),
-             IC3S1J2U_14_ini = c(200,200),
-             IC4S1J2U_14_ini = c(200,200),
-             
-             IC1S1J2U_15_ini = c(200,200),
-             IC2S1J2U_15_ini = c(200,200),
-             IC3S1J2U_15_ini = c(200,200),
-             IC4S1J2U_15_ini = c(200,200),
-             
-             IC1S1J2U_16_ini = c(200,200),
-             IC2S1J2U_16_ini = c(200,200),
-             IC3S1J2U_16_ini = c(200,200),
-             IC4S1J2U_16_ini = c(200,200),
-             
-             IC1S1J2U_17_ini = c(200,200),
-             IC2S1J2U_17_ini = c(200,200),
-             IC3S1J2U_17_ini = c(200,200),
-             IC4S1J2U_17_ini = c(200,200),
-             
-             
-             
-             IC1S2J2U_10_ini = c(200,200),
-             IC2S2J2U_10_ini = c(200,200),
-             IC3S2J2U_10_ini = c(200,200),
-             IC4S2J2U_10_ini = c(200,200),
-             
-             IC1S2J2U_11_ini = c(200,200),
-             IC2S2J2U_11_ini = c(200,200),
-             IC3S2J2U_11_ini = c(200,200),
-             IC4S2J2U_11_ini = c(200,200),
-             
-             IC1S2J2U_12_ini = c(200,200),
-             IC2S2J2U_12_ini = c(200,200),
-             IC3S2J2U_12_ini = c(200,200),
-             IC4S2J2U_12_ini = c(200,200),
-             
-             IC1S2J2U_13_ini = c(200,200),
-             IC2S2J2U_13_ini = c(200,200),
-             IC3S2J2U_13_ini = c(200,200),
-             IC4S2J2U_13_ini = c(200,200),
-             
-             IC1S2J2U_14_ini = c(200,200),
-             IC2S2J2U_14_ini = c(200,200),
-             IC3S2J2U_14_ini = c(200,200),
-             IC4S2J2U_14_ini = c(200,200),
-             
-             IC1S2J2U_15_ini = c(200,200),
-             IC2S2J2U_15_ini = c(200,200),
-             IC3S2J2U_15_ini = c(200,200),
-             IC4S2J2U_15_ini = c(200,200),
-             
-             IC1S2J2U_16_ini = c(200,200),
-             IC2S2J2U_16_ini = c(200,200),
-             IC3S2J2U_16_ini = c(200,200),
-             IC4S2J2U_16_ini = c(200,200),
-             
-             IC1S2J2U_17_ini = c(200,200),
-             IC2S2J2U_17_ini = c(200,200),
-             IC3S2J2U_17_ini = c(200,200),
-             IC4S2J2U_17_ini = c(200,200),
-             
-             
-             
-             IC1S1J3U_10_ini = c(200,200),
-             IC2S1J3U_10_ini = c(200,200),
-             IC3S1J3U_10_ini = c(200,200),
-             IC4S1J3U_10_ini = c(200,200),
-             
-             IC1S1J3U_11_ini = c(200,200),
-             IC2S1J3U_11_ini = c(200,200),
-             IC3S1J3U_11_ini = c(200,200),
-             IC4S1J3U_11_ini = c(200,200),
-             
-             IC1S1J3U_12_ini = c(200,200),
-             IC2S1J3U_12_ini = c(200,200),
-             IC3S1J3U_12_ini = c(200,200),
-             IC4S1J3U_12_ini = c(200,200),
-             
-             IC1S1J3U_13_ini = c(200,200),
-             IC2S1J3U_13_ini = c(200,200),
-             IC3S1J3U_13_ini = c(200,200),
-             IC4S1J3U_13_ini = c(200,200),
-             
-             IC1S1J3U_14_ini = c(200,200),
-             IC2S1J3U_14_ini = c(200,200),
-             IC3S1J3U_14_ini = c(200,200),
-             IC4S1J3U_14_ini = c(200,200),
-             
-             IC1S1J3U_15_ini = c(200,200),
-             IC2S1J3U_15_ini = c(200,200),
-             IC3S1J3U_15_ini = c(200,200),
-             IC4S1J3U_15_ini = c(200,200),
-             
-             IC1S1J3U_16_ini = c(200,200),
-             IC2S1J3U_16_ini = c(200,200),
-             IC3S1J3U_16_ini = c(200,200),
-             IC4S1J3U_16_ini = c(200,200),
-             
-             IC1S1J3U_17_ini = c(200,200),
-             IC2S1J3U_17_ini = c(200,200),
-             IC3S1J3U_17_ini = c(200,200),
-             IC4S1J3U_17_ini = c(200,200),
-             
-             
-             
-             IC1S2J3U_10_ini = c(200,200),
-             IC2S2J3U_10_ini = c(200,200),
-             IC3S2J3U_10_ini = c(200,200),
-             IC4S2J3U_10_ini = c(200,200),
-             
-             IC1S2J3U_11_ini = c(200,200),
-             IC2S2J3U_11_ini = c(200,200),
-             IC3S2J3U_11_ini = c(200,200),
-             IC4S2J3U_11_ini = c(200,200),
-             
-             IC1S2J3U_12_ini = c(200,200),
-             IC2S2J3U_12_ini = c(200,200),
-             IC3S2J3U_12_ini = c(200,200),
-             IC4S2J3U_12_ini = c(200,200),
-             
-             IC1S2J3U_13_ini = c(200,200),
-             IC2S2J3U_13_ini = c(200,200),
-             IC3S2J3U_13_ini = c(200,200),
-             IC4S2J3U_13_ini = c(200,200),
-             
-             IC1S2J3U_14_ini = c(200,200),
-             IC2S2J3U_14_ini = c(200,200),
-             IC3S2J3U_14_ini = c(200,200),
-             IC4S2J3U_14_ini = c(200,200),
-             
-             IC1S2J3U_15_ini = c(200,200),
-             IC2S2J3U_15_ini = c(200,200),
-             IC3S2J3U_15_ini = c(200,200),
-             IC4S2J3U_15_ini = c(200,200),
-             
-             IC1S2J3U_16_ini = c(200,200),
-             IC2S2J3U_16_ini = c(200,200),
-             IC3S2J3U_16_ini = c(200,200),
-             IC4S2J3U_16_ini = c(200,200),
-             
-             IC1S2J3U_17_ini = c(200,200),
-             IC2S2J3U_17_ini = c(200,200),
-             IC3S2J3U_17_ini = c(200,200),
-             IC4S2J3U_17_ini = c(200,200),
-             
-             
-             
-             IC1S1J4U_10_ini = c(200,200),
-             IC2S1J4U_10_ini = c(200,200),
-             IC3S1J4U_10_ini = c(200,200),
-             IC4S1J4U_10_ini = c(200,200),
-             
-             IC1S1J4U_11_ini = c(200,200),
-             IC2S1J4U_11_ini = c(200,200),
-             IC3S1J4U_11_ini = c(200,200),
-             IC4S1J4U_11_ini = c(200,200),
-             
-             IC1S1J4U_12_ini = c(200,200),
-             IC2S1J4U_12_ini = c(200,200),
-             IC3S1J4U_12_ini = c(200,200),
-             IC4S1J4U_12_ini = c(200,200),
-             
-             IC1S1J4U_13_ini = c(200,200),
-             IC2S1J4U_13_ini = c(200,200),
-             IC3S1J4U_13_ini = c(200,200),
-             IC4S1J4U_13_ini = c(200,200),
-             
-             IC1S1J4U_14_ini = c(200,200),
-             IC2S1J4U_14_ini = c(200,200),
-             IC3S1J4U_14_ini = c(200,200),
-             IC4S1J4U_14_ini = c(200,200),
-             
-             IC1S1J4U_15_ini = c(200,200),
-             IC2S1J4U_15_ini = c(200,200),
-             IC3S1J4U_15_ini = c(200,200),
-             IC4S1J4U_15_ini = c(200,200),
-             
-             IC1S1J4U_16_ini = c(200,200),
-             IC2S1J4U_16_ini = c(200,200),
-             IC3S1J4U_16_ini = c(200,200),
-             IC4S1J4U_16_ini = c(200,200),
-             
-             IC1S1J4U_17_ini = c(200,200),
-             IC2S1J4U_17_ini = c(200,200),
-             IC3S1J4U_17_ini = c(200,200),
-             IC4S1J4U_17_ini = c(200,200),
-             
-             
-             
-             IC1S2J4U_10_ini = c(200,200),
-             IC2S2J4U_10_ini = c(200,200),
-             IC3S2J4U_10_ini = c(200,200),
-             IC4S2J4U_10_ini = c(200,200),
-             
-             IC1S2J4U_11_ini = c(200,200),
-             IC2S2J4U_11_ini = c(200,200),
-             IC3S2J4U_11_ini = c(200,200),
-             IC4S2J4U_11_ini = c(200,200),
-             
-             IC1S2J4U_12_ini = c(200,200),
-             IC2S2J4U_12_ini = c(200,200),
-             IC3S2J4U_12_ini = c(200,200),
-             IC4S2J4U_12_ini = c(200,200),
-             
-             IC1S2J4U_13_ini = c(200,200),
-             IC2S2J4U_13_ini = c(200,200),
-             IC3S2J4U_13_ini = c(200,200),
-             IC4S2J4U_13_ini = c(200,200),
-             
-             IC1S2J4U_14_ini = c(200,200),
-             IC2S2J4U_14_ini = c(200,200),
-             IC3S2J4U_14_ini = c(200,200),
-             IC4S2J4U_14_ini = c(200,200),
-             
-             IC1S2J4U_15_ini = c(200,200),
-             IC2S2J4U_15_ini = c(200,200),
-             IC3S2J4U_15_ini = c(200,200),
-             IC4S2J4U_15_ini = c(200,200),
-             
-             IC1S2J4U_16_ini = c(200,200),
-             IC2S2J4U_16_ini = c(200,200),
-             IC3S2J4U_16_ini = c(200,200),
-             IC4S2J4U_16_ini = c(200,200),
-             
-             IC1S2J4U_17_ini = c(200,200),
-             IC2S2J4U_17_ini = c(200,200),
-             IC3S2J4U_17_ini = c(200,200),
-             IC4S2J4U_17_ini = c(200,200),
-             
-             
-             
-             IC1S1J5U_10_ini = c(200,200),
-             IC2S1J5U_10_ini = c(200,200),
-             IC3S1J5U_10_ini = c(200,200),
-             IC4S1J5U_10_ini = c(200,200),
-             
-             IC1S1J5U_11_ini = c(200,200),
-             IC2S1J5U_11_ini = c(200,200),
-             IC3S1J5U_11_ini = c(200,200),
-             IC4S1J5U_11_ini = c(200,200),
-             
-             IC1S1J5U_12_ini = c(200,200),
-             IC2S1J5U_12_ini = c(200,200),
-             IC3S1J5U_12_ini = c(200,200),
-             IC4S1J5U_12_ini = c(200,200),
-             
-             IC1S1J5U_13_ini = c(200,200),
-             IC2S1J5U_13_ini = c(200,200),
-             IC3S1J5U_13_ini = c(200,200),
-             IC4S1J5U_13_ini = c(200,200),
-             
-             IC1S1J5U_14_ini = c(200,200),
-             IC2S1J5U_14_ini = c(200,200),
-             IC3S1J5U_14_ini = c(200,200),
-             IC4S1J5U_14_ini = c(200,200),
-             
-             IC1S1J5U_15_ini = c(200,200),
-             IC2S1J5U_15_ini = c(200,200),
-             IC3S1J5U_15_ini = c(200,200),
-             IC4S1J5U_15_ini = c(200,200),
-             
-             IC1S1J5U_16_ini = c(200,200),
-             IC2S1J5U_16_ini = c(200,200),
-             IC3S1J5U_16_ini = c(200,200),
-             IC4S1J5U_16_ini = c(200,200),
-             
-             IC1S1J5U_17_ini = c(200,200),
-             IC2S1J5U_17_ini = c(200,200),
-             IC3S1J5U_17_ini = c(200,200),
-             IC4S1J5U_17_ini = c(200,200),
-             
-             
-             
-             IC1S2J5U_10_ini = c(200,200),
-             IC2S2J5U_10_ini = c(200,200),
-             IC3S2J5U_10_ini = c(200,200),
-             IC4S2J5U_10_ini = c(200,200),
-             
-             IC1S2J5U_11_ini = c(200,200),
-             IC2S2J5U_11_ini = c(200,200),
-             IC3S2J5U_11_ini = c(200,200),
-             IC4S2J5U_11_ini = c(200,200),
-             
-             IC1S2J5U_12_ini = c(200,200),
-             IC2S2J5U_12_ini = c(200,200),
-             IC3S2J5U_12_ini = c(200,200),
-             IC4S2J5U_12_ini = c(200,200),
-             
-             IC1S2J5U_13_ini = c(200,200),
-             IC2S2J5U_13_ini = c(200,200),
-             IC3S2J5U_13_ini = c(200,200),
-             IC4S2J5U_13_ini = c(200,200),
-             
-             IC1S2J5U_14_ini = c(200,200),
-             IC2S2J5U_14_ini = c(200,200),
-             IC3S2J5U_14_ini = c(200,200),
-             IC4S2J5U_14_ini = c(200,200),
-             
-             IC1S2J5U_15_ini = c(200,200),
-             IC2S2J5U_15_ini = c(200,200),
-             IC3S2J5U_15_ini = c(200,200),
-             IC4S2J5U_15_ini = c(200,200),
-             
-             IC1S2J5U_16_ini = c(200,200),
-             IC2S2J5U_16_ini = c(200,200),
-             IC3S2J5U_16_ini = c(200,200),
-             IC4S2J5U_16_ini = c(200,200),
-             
-             IC1S2J5U_17_ini = c(200,200),
-             IC2S2J5U_17_ini = c(200,200),
-             IC3S2J5U_17_ini = c(200,200),
-             IC4S2J5U_17_ini = c(200,200),
-
-             
-             EC1S1J1U_10_ini = c(1,0),
-             EC2S1J1U_10_ini = c(1,0),
-             EC3S1J1U_10_ini = c(1,0),
-             EC4S1J1U_10_ini = c(1,0),
-             
-             EC1S1J1U_11_ini = c(1,0),
-             EC2S1J1U_11_ini = c(1,0),
-             EC3S1J1U_11_ini = c(1,0),
-             EC4S1J1U_11_ini = c(1,0),
-             
-             EC1S1J1U_12_ini = c(1,0),
-             EC2S1J1U_12_ini = c(1,0),
-             EC3S1J1U_12_ini = c(1,0),
-             EC4S1J1U_12_ini = c(1,0),
-             
-             EC1S1J1U_13_ini = c(1,0),
-             EC2S1J1U_13_ini = c(1,0),
-             EC3S1J1U_13_ini = c(1,0),
-             EC4S1J1U_13_ini = c(1,0),
-             
-             EC1S1J1U_14_ini = c(1,0),
-             EC2S1J1U_14_ini = c(1,0),
-             EC3S1J1U_14_ini = c(1,0),
-             EC4S1J1U_14_ini = c(1,0),
-             
-             EC1S1J1U_15_ini = c(1,0),
-             EC2S1J1U_15_ini = c(1,0),
-             EC3S1J1U_15_ini = c(1,0),
-             EC4S1J1U_15_ini = c(1,0),
-             
-             EC1S1J1U_16_ini = c(1,0),
-             EC2S1J1U_16_ini = c(1,0),
-             EC3S1J1U_16_ini = c(1,0),
-             EC4S1J1U_16_ini = c(1,0),
-             
-             EC1S1J1U_17_ini = c(1,0),
-             EC2S1J1U_17_ini = c(1,0),
-             EC3S1J1U_17_ini = c(1,0),
-             EC4S1J1U_17_ini = c(1,0),
-             
-             
-             
-             EC1S2J1U_10_ini = c(1,0),
-             EC2S2J1U_10_ini = c(1,0),
-             EC3S2J1U_10_ini = c(1,0),
-             EC4S2J1U_10_ini = c(1,0),
-             
-             EC1S2J1U_11_ini = c(1,0),
-             EC2S2J1U_11_ini = c(1,0),
-             EC3S2J1U_11_ini = c(1,0),
-             EC4S2J1U_11_ini = c(1,0),
-             
-             EC1S2J1U_12_ini = c(1,0),
-             EC2S2J1U_12_ini = c(1,0),
-             EC3S2J1U_12_ini = c(1,0),
-             EC4S2J1U_12_ini = c(1,0),
-             
-             EC1S2J1U_13_ini = c(1,0),
-             EC2S2J1U_13_ini = c(1,0),
-             EC3S2J1U_13_ini = c(1,0),
-             EC4S2J1U_13_ini = c(1,0),
-             
-             EC1S2J1U_14_ini = c(1,0),
-             EC2S2J1U_14_ini = c(1,0),
-             EC3S2J1U_14_ini = c(1,0),
-             EC4S2J1U_14_ini = c(1,0),
-             
-             EC1S2J1U_15_ini = c(1,0),
-             EC2S2J1U_15_ini = c(1,0),
-             EC3S2J1U_15_ini = c(1,0),
-             EC4S2J1U_15_ini = c(1,0),
-             
-             EC1S2J1U_16_ini = c(1,0),
-             EC2S2J1U_16_ini = c(1,0),
-             EC3S2J1U_16_ini = c(1,0),
-             EC4S2J1U_16_ini = c(1,0),
-             
-             EC1S2J1U_17_ini = c(1,0),
-             EC2S2J1U_17_ini = c(1,0),
-             EC3S2J1U_17_ini = c(1,0),
-             EC4S2J1U_17_ini = c(1,0),
-             
-             
-             
-             EC1S1J2U_10_ini = c(1,0),
-             EC2S1J2U_10_ini = c(1,0),
-             EC3S1J2U_10_ini = c(1,0),
-             EC4S1J2U_10_ini = c(1,0),
-             
-             EC1S1J2U_11_ini = c(1,0),
-             EC2S1J2U_11_ini = c(1,0),
-             EC3S1J2U_11_ini = c(1,0),
-             EC4S1J2U_11_ini = c(1,0),
-             
-             EC1S1J2U_12_ini = c(1,0),
-             EC2S1J2U_12_ini = c(1,0),
-             EC3S1J2U_12_ini = c(1,0),
-             EC4S1J2U_12_ini = c(1,0),
-             
-             EC1S1J2U_13_ini = c(1,0),
-             EC2S1J2U_13_ini = c(1,0),
-             EC3S1J2U_13_ini = c(1,0),
-             EC4S1J2U_13_ini = c(1,0),
-             
-             EC1S1J2U_14_ini = c(1,0),
-             EC2S1J2U_14_ini = c(1,0),
-             EC3S1J2U_14_ini = c(1,0),
-             EC4S1J2U_14_ini = c(1,0),
-             
-             EC1S1J2U_15_ini = c(1,0),
-             EC2S1J2U_15_ini = c(1,0),
-             EC3S1J2U_15_ini = c(1,0),
-             EC4S1J2U_15_ini = c(1,0),
-             
-             EC1S1J2U_16_ini = c(1,0),
-             EC2S1J2U_16_ini = c(1,0),
-             EC3S1J2U_16_ini = c(1,0),
-             EC4S1J2U_16_ini = c(1,0),
-             
-             EC1S1J2U_17_ini = c(1,0),
-             EC2S1J2U_17_ini = c(1,0),
-             EC3S1J2U_17_ini = c(1,0),
-             EC4S1J2U_17_ini = c(1,0),
-             
-             
-             
-             EC1S2J2U_10_ini = c(1,0),
-             EC2S2J2U_10_ini = c(1,0),
-             EC3S2J2U_10_ini = c(1,0),
-             EC4S2J2U_10_ini = c(1,0),
-             
-             EC1S2J2U_11_ini = c(1,0),
-             EC2S2J2U_11_ini = c(1,0),
-             EC3S2J2U_11_ini = c(1,0),
-             EC4S2J2U_11_ini = c(1,0),
-             
-             EC1S2J2U_12_ini = c(1,0),
-             EC2S2J2U_12_ini = c(1,0),
-             EC3S2J2U_12_ini = c(1,0),
-             EC4S2J2U_12_ini = c(1,0),
-             
-             EC1S2J2U_13_ini = c(1,0),
-             EC2S2J2U_13_ini = c(1,0),
-             EC3S2J2U_13_ini = c(1,0),
-             EC4S2J2U_13_ini = c(1,0),
-             
-             EC1S2J2U_14_ini = c(1,0),
-             EC2S2J2U_14_ini = c(1,0),
-             EC3S2J2U_14_ini = c(1,0),
-             EC4S2J2U_14_ini = c(1,0),
-             
-             EC1S2J2U_15_ini = c(1,0),
-             EC2S2J2U_15_ini = c(1,0),
-             EC3S2J2U_15_ini = c(1,0),
-             EC4S2J2U_15_ini = c(1,0),
-             
-             EC1S2J2U_16_ini = c(1,0),
-             EC2S2J2U_16_ini = c(1,0),
-             EC3S2J2U_16_ini = c(1,0),
-             EC4S2J2U_16_ini = c(1,0),
-             
-             EC1S2J2U_17_ini = c(1,0),
-             EC2S2J2U_17_ini = c(1,0),
-             EC3S2J2U_17_ini = c(1,0),
-             EC4S2J2U_17_ini = c(1,0),
-             
-             
-             
-             EC1S1J3U_10_ini = c(1,0),
-             EC2S1J3U_10_ini = c(1,0),
-             EC3S1J3U_10_ini = c(1,0),
-             EC4S1J3U_10_ini = c(1,0),
-             
-             EC1S1J3U_11_ini = c(1,0),
-             EC2S1J3U_11_ini = c(1,0),
-             EC3S1J3U_11_ini = c(1,0),
-             EC4S1J3U_11_ini = c(1,0),
-             
-             EC1S1J3U_12_ini = c(1,0),
-             EC2S1J3U_12_ini = c(1,0),
-             EC3S1J3U_12_ini = c(1,0),
-             EC4S1J3U_12_ini = c(1,0),
-             
-             EC1S1J3U_13_ini = c(1,0),
-             EC2S1J3U_13_ini = c(1,0),
-             EC3S1J3U_13_ini = c(1,0),
-             EC4S1J3U_13_ini = c(1,0),
-             
-             EC1S1J3U_14_ini = c(1,0),
-             EC2S1J3U_14_ini = c(1,0),
-             EC3S1J3U_14_ini = c(1,0),
-             EC4S1J3U_14_ini = c(1,0),
-             
-             EC1S1J3U_15_ini = c(1,0),
-             EC2S1J3U_15_ini = c(1,0),
-             EC3S1J3U_15_ini = c(1,0),
-             EC4S1J3U_15_ini = c(1,0),
-             
-             EC1S1J3U_16_ini = c(1,0),
-             EC2S1J3U_16_ini = c(1,0),
-             EC3S1J3U_16_ini = c(1,0),
-             EC4S1J3U_16_ini = c(1,0),
-             
-             EC1S1J3U_17_ini = c(1,0),
-             EC2S1J3U_17_ini = c(1,0),
-             EC3S1J3U_17_ini = c(1,0),
-             EC4S1J3U_17_ini = c(1,0),
-             
-             
-             
-             EC1S2J3U_10_ini = c(1,0),
-             EC2S2J3U_10_ini = c(1,0),
-             EC3S2J3U_10_ini = c(1,0),
-             EC4S2J3U_10_ini = c(1,0),
-             
-             EC1S2J3U_11_ini = c(1,0),
-             EC2S2J3U_11_ini = c(1,0),
-             EC3S2J3U_11_ini = c(1,0),
-             EC4S2J3U_11_ini = c(1,0),
-             
-             EC1S2J3U_12_ini = c(1,0),
-             EC2S2J3U_12_ini = c(1,0),
-             EC3S2J3U_12_ini = c(1,0),
-             EC4S2J3U_12_ini = c(1,0),
-             
-             EC1S2J3U_13_ini = c(1,0),
-             EC2S2J3U_13_ini = c(1,0),
-             EC3S2J3U_13_ini = c(1,0),
-             EC4S2J3U_13_ini = c(1,0),
-             
-             EC1S2J3U_14_ini = c(1,0),
-             EC2S2J3U_14_ini = c(1,0),
-             EC3S2J3U_14_ini = c(1,0),
-             EC4S2J3U_14_ini = c(1,0),
-             
-             EC1S2J3U_15_ini = c(1,0),
-             EC2S2J3U_15_ini = c(1,0),
-             EC3S2J3U_15_ini = c(1,0),
-             EC4S2J3U_15_ini = c(1,0),
-             
-             EC1S2J3U_16_ini = c(1,0),
-             EC2S2J3U_16_ini = c(1,0),
-             EC3S2J3U_16_ini = c(1,0),
-             EC4S2J3U_16_ini = c(1,0),
-             
-             EC1S2J3U_17_ini = c(1,0),
-             EC2S2J3U_17_ini = c(1,0),
-             EC3S2J3U_17_ini = c(1,0),
-             EC4S2J3U_17_ini = c(1,0),
-             
-             
-             
-             EC1S1J4U_10_ini = c(1,0),
-             EC2S1J4U_10_ini = c(1,0),
-             EC3S1J4U_10_ini = c(1,0),
-             EC4S1J4U_10_ini = c(1,0),
-             
-             EC1S1J4U_11_ini = c(1,0),
-             EC2S1J4U_11_ini = c(1,0),
-             EC3S1J4U_11_ini = c(1,0),
-             EC4S1J4U_11_ini = c(1,0),
-             
-             EC1S1J4U_12_ini = c(1,0),
-             EC2S1J4U_12_ini = c(1,0),
-             EC3S1J4U_12_ini = c(1,0),
-             EC4S1J4U_12_ini = c(1,0),
-             
-             EC1S1J4U_13_ini = c(1,0),
-             EC2S1J4U_13_ini = c(1,0),
-             EC3S1J4U_13_ini = c(1,0),
-             EC4S1J4U_13_ini = c(1,0),
-             
-             EC1S1J4U_14_ini = c(1,0),
-             EC2S1J4U_14_ini = c(1,0),
-             EC3S1J4U_14_ini = c(1,0),
-             EC4S1J4U_14_ini = c(1,0),
-             
-             EC1S1J4U_15_ini = c(1,0),
-             EC2S1J4U_15_ini = c(1,0),
-             EC3S1J4U_15_ini = c(1,0),
-             EC4S1J4U_15_ini = c(1,0),
-             
-             EC1S1J4U_16_ini = c(1,0),
-             EC2S1J4U_16_ini = c(1,0),
-             EC3S1J4U_16_ini = c(1,0),
-             EC4S1J4U_16_ini = c(1,0),
-             
-             EC1S1J4U_17_ini = c(1,0),
-             EC2S1J4U_17_ini = c(1,0),
-             EC3S1J4U_17_ini = c(1,0),
-             EC4S1J4U_17_ini = c(1,0),
-             
-             
-             
-             EC1S2J4U_10_ini = c(1,0),
-             EC2S2J4U_10_ini = c(1,0),
-             EC3S2J4U_10_ini = c(1,0),
-             EC4S2J4U_10_ini = c(1,0),
-             
-             EC1S2J4U_11_ini = c(1,0),
-             EC2S2J4U_11_ini = c(1,0),
-             EC3S2J4U_11_ini = c(1,0),
-             EC4S2J4U_11_ini = c(1,0),
-             
-             EC1S2J4U_12_ini = c(1,0),
-             EC2S2J4U_12_ini = c(1,0),
-             EC3S2J4U_12_ini = c(1,0),
-             EC4S2J4U_12_ini = c(1,0),
-             
-             EC1S2J4U_13_ini = c(1,0),
-             EC2S2J4U_13_ini = c(1,0),
-             EC3S2J4U_13_ini = c(1,0),
-             EC4S2J4U_13_ini = c(1,0),
-             
-             EC1S2J4U_14_ini = c(1,0),
-             EC2S2J4U_14_ini = c(1,0),
-             EC3S2J4U_14_ini = c(1,0),
-             EC4S2J4U_14_ini = c(1,0),
-             
-             EC1S2J4U_15_ini = c(1,0),
-             EC2S2J4U_15_ini = c(1,0),
-             EC3S2J4U_15_ini = c(1,0),
-             EC4S2J4U_15_ini = c(1,0),
-             
-             EC1S2J4U_16_ini = c(1,0),
-             EC2S2J4U_16_ini = c(1,0),
-             EC3S2J4U_16_ini = c(1,0),
-             EC4S2J4U_16_ini = c(1,0),
-             
-             EC1S2J4U_17_ini = c(1,0),
-             EC2S2J4U_17_ini = c(1,0),
-             EC3S2J4U_17_ini = c(1,0),
-             EC4S2J4U_17_ini = c(1,0),
-             
-             
-             
-             EC1S1J5U_10_ini = c(1,0),
-             EC2S1J5U_10_ini = c(1,0),
-             EC3S1J5U_10_ini = c(1,0),
-             EC4S1J5U_10_ini = c(1,0),
-             
-             EC1S1J5U_11_ini = c(1,0),
-             EC2S1J5U_11_ini = c(1,0),
-             EC3S1J5U_11_ini = c(1,0),
-             EC4S1J5U_11_ini = c(1,0),
-             
-             EC1S1J5U_12_ini = c(1,0),
-             EC2S1J5U_12_ini = c(1,0),
-             EC3S1J5U_12_ini = c(1,0),
-             EC4S1J5U_12_ini = c(1,0),
-             
-             EC1S1J5U_13_ini = c(1,0),
-             EC2S1J5U_13_ini = c(1,0),
-             EC3S1J5U_13_ini = c(1,0),
-             EC4S1J5U_13_ini = c(1,0),
-             
-             EC1S1J5U_14_ini = c(1,0),
-             EC2S1J5U_14_ini = c(1,0),
-             EC3S1J5U_14_ini = c(1,0),
-             EC4S1J5U_14_ini = c(1,0),
-             
-             EC1S1J5U_15_ini = c(1,0),
-             EC2S1J5U_15_ini = c(1,0),
-             EC3S1J5U_15_ini = c(1,0),
-             EC4S1J5U_15_ini = c(1,0),
-             
-             EC1S1J5U_16_ini = c(1,0),
-             EC2S1J5U_16_ini = c(1,0),
-             EC3S1J5U_16_ini = c(1,0),
-             EC4S1J5U_16_ini = c(1,0),
-             
-             EC1S1J5U_17_ini = c(1,0),
-             EC2S1J5U_17_ini = c(1,0),
-             EC3S1J5U_17_ini = c(1,0),
-             EC4S1J5U_17_ini = c(1,0),
-             
-             
-             
-             EC1S2J5U_10_ini = c(1,0),
-             EC2S2J5U_10_ini = c(1,0),
-             EC3S2J5U_10_ini = c(1,0),
-             EC4S2J5U_10_ini = c(1,0),
-             
-             EC1S2J5U_11_ini = c(1,0),
-             EC2S2J5U_11_ini = c(1,0),
-             EC3S2J5U_11_ini = c(1,0),
-             EC4S2J5U_11_ini = c(1,0),
-             
-             EC1S2J5U_12_ini = c(1,0),
-             EC2S2J5U_12_ini = c(1,0),
-             EC3S2J5U_12_ini = c(1,0),
-             EC4S2J5U_12_ini = c(1,0),
-             
-             EC1S2J5U_13_ini = c(1,0),
-             EC2S2J5U_13_ini = c(1,0),
-             EC3S2J5U_13_ini = c(1,0),
-             EC4S2J5U_13_ini = c(1,0),
-             
-             EC1S2J5U_14_ini = c(1,0),
-             EC2S2J5U_14_ini = c(1,0),
-             EC3S2J5U_14_ini = c(1,0),
-             EC4S2J5U_14_ini = c(1,0),
-             
-             EC1S2J5U_15_ini = c(1,0),
-             EC2S2J5U_15_ini = c(1,0),
-             EC3S2J5U_15_ini = c(1,0),
-             EC4S2J5U_15_ini = c(1,0),
-             
-             EC1S2J5U_16_ini = c(1,0),
-             EC2S2J5U_16_ini = c(1,0),
-             EC3S2J5U_16_ini = c(1,0),
-             EC4S2J5U_16_ini = c(1,0),
-             
-             EC1S2J5U_17_ini = c(1,0),
-             EC2S2J5U_17_ini = c(1,0),
-             EC3S2J5U_17_ini = c(1,0),
-             EC4S2J5U_17_ini = c(1,0)
-      )
+             IC1S1_10_ini = c(200,200),
+             IC2S1_10_ini = c(200,200),
+             IC3S1_10_ini = c(200,200),
+             IC4S1_10_ini = c(200,200),
+             
+             IC1S1_11_ini = c(200,200),
+             IC2S1_11_ini = c(200,200),
+             IC3S1_11_ini = c(200,200),
+             IC4S1_11_ini = c(200,200),
+             
+             IC1S1_12_ini = c(200,200),
+             IC2S1_12_ini = c(200,200),
+             IC3S1_12_ini = c(200,200),
+             IC4S1_12_ini = c(200,200),
+             
+             IC1S1_13_ini = c(200,200),
+             IC2S1_13_ini = c(200,200),
+             IC3S1_13_ini = c(200,200),
+             IC4S1_13_ini = c(200,200),
+             
+             IC1S1_14_ini = c(200,200),
+             IC2S1_14_ini = c(200,200),
+             IC3S1_14_ini = c(200,200),
+             IC4S1_14_ini = c(200,200),
+             
+             IC1S1_15_ini = c(200,200),
+             IC2S1_15_ini = c(200,200),
+             IC3S1_15_ini = c(200,200),
+             IC4S1_15_ini = c(200,200),
+             
+             IC1S1_16_ini = c(200,200),
+             IC2S1_16_ini = c(200,200),
+             IC3S1_16_ini = c(200,200),
+             IC4S1_16_ini = c(200,200),
+             
+             IC1S1_17_ini = c(200,200),
+             IC2S1_17_ini = c(200,200),
+             IC3S1_17_ini = c(200,200),
+             IC4S1_17_ini = c(200,200),
+             
+             
+             
+             IC1S2_10_ini = c(200,200),
+             IC2S2_10_ini = c(200,200),
+             IC3S2_10_ini = c(200,200),
+             IC4S2_10_ini = c(200,200),
+             
+             IC1S2_11_ini = c(200,200),
+             IC2S2_11_ini = c(200,200),
+             IC3S2_11_ini = c(200,200),
+             IC4S2_11_ini = c(200,200),
+             
+             IC1S2_12_ini = c(200,200),
+             IC2S2_12_ini = c(200,200),
+             IC3S2_12_ini = c(200,200),
+             IC4S2_12_ini = c(200,200),
+             
+             IC1S2_13_ini = c(200,200),
+             IC2S2_13_ini = c(200,200),
+             IC3S2_13_ini = c(200,200),
+             IC4S2_13_ini = c(200,200),
+             
+             IC1S2_14_ini = c(200,200),
+             IC2S2_14_ini = c(200,200),
+             IC3S2_14_ini = c(200,200),
+             IC4S2_14_ini = c(200,200),
+             
+             IC1S2_15_ini = c(200,200),
+             IC2S2_15_ini = c(200,200),
+             IC3S2_15_ini = c(200,200),
+             IC4S2_15_ini = c(200,200),
+             
+             IC1S2_16_ini = c(200,200),
+             IC2S2_16_ini = c(200,200),
+             IC3S2_16_ini = c(200,200),
+             IC4S2_16_ini = c(200,200),
+             
+             IC1S2_17_ini = c(200,200),
+             IC2S2_17_ini = c(200,200),
+             IC3S2_17_ini = c(200,200),
+             IC4S2_17_ini = c(200,200),
+             
+             
+             
+             
+             
+             EC1S1_10_ini = c(1,0),
+             EC2S1_10_ini = c(1,0),
+             EC3S1_10_ini = c(1,0),
+             EC4S1_10_ini = c(1,0),
+             
+             EC1S1_11_ini = c(1,0),
+             EC2S1_11_ini = c(1,0),
+             EC3S1_11_ini = c(1,0),
+             EC4S1_11_ini = c(1,0),
+             
+             EC1S1_12_ini = c(1,0),
+             EC2S1_12_ini = c(1,0),
+             EC3S1_12_ini = c(1,0),
+             EC4S1_12_ini = c(1,0),
+             
+             EC1S1_13_ini = c(1,0),
+             EC2S1_13_ini = c(1,0),
+             EC3S1_13_ini = c(1,0),
+             EC4S1_13_ini = c(1,0),
+             
+             EC1S1_14_ini = c(1,0),
+             EC2S1_14_ini = c(1,0),
+             EC3S1_14_ini = c(1,0),
+             EC4S1_14_ini = c(1,0),
+             
+             EC1S1_15_ini = c(1,0),
+             EC2S1_15_ini = c(1,0),
+             EC3S1_15_ini = c(1,0),
+             EC4S1_15_ini = c(1,0),
+             
+             EC1S1_16_ini = c(1,0),
+             EC2S1_16_ini = c(1,0),
+             EC3S1_16_ini = c(1,0),
+             EC4S1_16_ini = c(1,0),
+             
+             EC1S1_17_ini = c(1,0),
+             EC2S1_17_ini = c(1,0),
+             EC3S1_17_ini = c(1,0),
+             EC4S1_17_ini = c(1,0),
+             
+             
+             
+             EC1S2_10_ini = c(1,0),
+             EC2S2_10_ini = c(1,0),
+             EC3S2_10_ini = c(1,0),
+             EC4S2_10_ini = c(1,0),
+             
+             EC1S2_11_ini = c(1,0),
+             EC2S2_11_ini = c(1,0),
+             EC3S2_11_ini = c(1,0),
+             EC4S2_11_ini = c(1,0),
+             
+             EC1S2_12_ini = c(1,0),
+             EC2S2_12_ini = c(1,0),
+             EC3S2_12_ini = c(1,0),
+             EC4S2_12_ini = c(1,0),
+             
+             EC1S2_13_ini = c(1,0),
+             EC2S2_13_ini = c(1,0),
+             EC3S2_13_ini = c(1,0),
+             EC4S2_13_ini = c(1,0),
+             
+             EC1S2_14_ini = c(1,0),
+             EC2S2_14_ini = c(1,0),
+             EC3S2_14_ini = c(1,0),
+             EC4S2_14_ini = c(1,0),
+             
+             EC1S2_15_ini = c(1,0),
+             EC2S2_15_ini = c(1,0),
+             EC3S2_15_ini = c(1,0),
+             EC4S2_15_ini = c(1,0),
+             
+             EC1S2_16_ini = c(1,0),
+             EC2S2_16_ini = c(1,0),
+             EC3S2_16_ini = c(1,0),
+             EC4S2_16_ini = c(1,0),
+             
+             EC1S2_17_ini = c(1,0),
+             EC2S2_17_ini = c(1,0),
+             EC3S2_17_ini = c(1,0),
+             EC4S2_17_ini = c(1,0)
+)
 
 
 
