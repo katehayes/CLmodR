@@ -2,6 +2,161 @@ library(jsonlite)
 library(magrittr)
 library(tidyverse)
 
+https://www.westmidlands-pcc.gov.uk/commissioning-dashboard/
+the above for later
+
+
+
+
+
+wmp_vul_index <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/WM_VRU_Risk_index/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes, geometry))
+
+save(wmp_vul_index, file = "Output/Data/Scraped/wmp_vul_index.Rdata")
+
+wmp_yp <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                    simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes, geometry))
+
+
+
+
+
+
+
+
+wmp_rli <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Relative_Low_Income_by_LSOA_2020_21_WFL1/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                             simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes, geometry))
+
+
+
+early_cl <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/CountyLines_Dashboard/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes, geometry))
+
+
+
+early_nrm <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/National_Referral_Mechanism_Dashboard/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                               simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+early_nrm_1000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/National_Referral_Mechanism_Dashboard/FeatureServer/0/query?where=ObjectId>1000&0%3D0&outFields=%2A&f=json',
+                                simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+early_nrm_2000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/National_Referral_Mechanism_Dashboard/FeatureServer/0/query?where=ObjectId>2000&0%3D0&outFields=%2A&f=json',
+                                     simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+early_nrm_3000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/National_Referral_Mechanism_Dashboard/FeatureServer/0/query?where=ObjectId>3000&0%3D0&outFields=%2A&f=json',
+                                     simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+early_nrm_4000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/National_Referral_Mechanism_Dashboard/FeatureServer/0/query?where=ObjectId>4000&0%3D0&outFields=%2A&f=json',
+                                     simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+early_nrm_5000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/National_Referral_Mechanism_Dashboard/FeatureServer/0/query?where=ObjectId>5000&0%3D0&outFields=%2A&f=json',
+                                     simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+non_dashboard_nrm <- bind_rows(early_nrm, early_nrm_1000,
+                               early_nrm_2000, early_nrm_3000,
+                               early_nrm_4000, early_nrm_5000)
+
+save(non_dashboard_nrm, file = "Output/Data/Scraped/non_dashboard_nrm.Rdata")
+
+
+# https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Risk_Index
+
+
+vru_risk_index <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Risk_Index/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                    simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes, geometry))
+
+save(vru_risk_index, file = "Output/Data/Scraped/vru_risk_index.Rdata")
+
+# what they call "custody service"
+
+wmp_custody_service <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/CustodyService/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                               simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+save(wmp_custody_service, file = "Output/Data/Scraped/wmp_custody_service.Rdata")
+
+# NEED TO COME BACK HERE AND TAKE EVERYTHING....
+misper v2 apparently
+
+misper_v2 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Misper_V2/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                          simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+
+
+vru_knife_vic <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Knife_Crime_Victim_Incident/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                               simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes, geometry))
+
+save(vru_knife_vic, file = "Output/Data/Scraped/vru_knife_vic.Rdata")
+
+
+vru_pru_data <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Pupil_Referral_Units/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                    simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+save(vru_pru_data, file = "Output/Data/Scraped/vru_pru_data.Rdata")
+
+vru_hospital_data <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/SO_HospitalAdmissions/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                          simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes, geometry))
+
+save(vru_hospital_data, file = "Output/Data/Scraped/vru_hospital_data.Rdata")
+
+
+commissioning <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/9_June_Dashboard_1/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                          simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+
+commissioning_1000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/9_June_Dashboard_1/FeatureServer/0/query?where=ObjectId>1000&0%3D0&outFields=%2A&f=json',
+                                    simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+
+vru_project_data <- bind_rows(commissioning, commissioning_1000)
+save(vru_project_data, file = "Output/Data/Scraped/vru_project_data.Rdata")
+
+
+
+
+
 As of tuesday the 20th of June 2023
 
 # this one has a weird list of data sources

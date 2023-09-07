@@ -23,7 +23,8 @@ cl_draft = odin::odin({
   
   
   # rate of ageing out of your age compartment - 1/52
-  age_up <- user(1/52) 
+  age_up <- user(1/52)
+  turn10[] <- user(0)
   # desination on ageing in
   pc_incl <- user(0)
   pc_excl <- user(0)
@@ -63,7 +64,6 @@ cl_draft = odin::odin({
   pc_rem <- user(0)
   end_rem <- user(0)
   end_cust <- user(0)
-  r2c <- user(0)
   
   surv <- user(0)
   
@@ -572,6 +572,166 @@ cl_draft = odin::odin({
   m2neet_ec2_17[] <- user(0)
   m2neet_ec3_17[] <- user(0)
   m2neet_ec4_17[] <- user(0)
+  
+  miss_ic1u_10[] <- user(0)
+  miss_ic2u_10[] <- user(0)
+  miss_ic3u_10[] <- user(0)
+  miss_ic4u_10[] <- user(0)
+  
+  miss_ic1u_11[] <- user(0)
+  miss_ic2u_11[] <- user(0)
+  miss_ic3u_11[] <- user(0)
+  miss_ic4u_11[] <- user(0)
+  
+  miss_ic1u_12[] <- user(0)
+  miss_ic2u_12[] <- user(0)
+  miss_ic3u_12[] <- user(0)
+  miss_ic4u_12[] <- user(0)
+  
+  miss_ic1u_13[] <- user(0)
+  miss_ic2u_13[] <- user(0)
+  miss_ic3u_13[] <- user(0)
+  miss_ic4u_13[] <- user(0)
+  
+  miss_ic1u_14[] <- user(0)
+  miss_ic2u_14[] <- user(0)
+  miss_ic3u_14[] <- user(0)
+  miss_ic4u_14[] <- user(0)
+  
+  miss_ic1u_15[] <- user(0)
+  miss_ic2u_15[] <- user(0)
+  miss_ic3u_15[] <- user(0)
+  miss_ic4u_15[] <- user(0)
+  
+  miss_ic1u_16[] <- user(0)
+  miss_ic2u_16[] <- user(0)
+  miss_ic3u_16[] <- user(0)
+  miss_ic4u_16[] <- user(0)
+  
+  miss_ic1u_17[] <- user(0)
+  miss_ic2u_17[] <- user(0)
+  miss_ic3u_17[] <- user(0)
+  miss_ic4u_17[] <- user(0)
+  
+  miss_ic1w_10[] <- user(0)
+  miss_ic2w_10[] <- user(0)
+  miss_ic3w_10[] <- user(0)
+  miss_ic4w_10[] <- user(0)
+  
+  miss_ic1w_11[] <- user(0)
+  miss_ic2w_11[] <- user(0)
+  miss_ic3w_11[] <- user(0)
+  miss_ic4w_11[] <- user(0)
+  
+  miss_ic1w_12[] <- user(0)
+  miss_ic2w_12[] <- user(0)
+  miss_ic3w_12[] <- user(0)
+  miss_ic4w_12[] <- user(0)
+  
+  miss_ic1w_13[] <- user(0)
+  miss_ic2w_13[] <- user(0)
+  miss_ic3w_13[] <- user(0)
+  miss_ic4w_13[] <- user(0)
+  
+  miss_ic1w_14[] <- user(0)
+  miss_ic2w_14[] <- user(0)
+  miss_ic3w_14[] <- user(0)
+  miss_ic4w_14[] <- user(0)
+  
+  miss_ic1w_15[] <- user(0)
+  miss_ic2w_15[] <- user(0)
+  miss_ic3w_15[] <- user(0)
+  miss_ic4w_15[] <- user(0)
+  
+  miss_ic1w_16[] <- user(0)
+  miss_ic2w_16[] <- user(0)
+  miss_ic3w_16[] <- user(0)
+  miss_ic4w_16[] <- user(0)
+  
+  miss_ic1w_17[] <- user(0)
+  miss_ic2w_17[] <- user(0)
+  miss_ic3w_17[] <- user(0)
+  miss_ic4w_17[] <- user(0)
+  
+  miss_ec1u_10[] <- user(0)
+  miss_ec2u_10[] <- user(0)
+  miss_ec3u_10[] <- user(0)
+  miss_ec4u_10[] <- user(0)
+  
+  miss_ec1u_11[] <- user(0)
+  miss_ec2u_11[] <- user(0)
+  miss_ec3u_11[] <- user(0)
+  miss_ec4u_11[] <- user(0)
+  
+  miss_ec1u_12[] <- user(0)
+  miss_ec2u_12[] <- user(0)
+  miss_ec3u_12[] <- user(0)
+  miss_ec4u_12[] <- user(0)
+  
+  miss_ec1u_13[] <- user(0)
+  miss_ec2u_13[] <- user(0)
+  miss_ec3u_13[] <- user(0)
+  miss_ec4u_13[] <- user(0)
+  
+  miss_ec1u_14[] <- user(0)
+  miss_ec2u_14[] <- user(0)
+  miss_ec3u_14[] <- user(0)
+  miss_ec4u_14[] <- user(0)
+  
+  miss_ec1u_15[] <- user(0)
+  miss_ec2u_15[] <- user(0)
+  miss_ec3u_15[] <- user(0)
+  miss_ec4u_15[] <- user(0)
+  
+  miss_ec1u_16[] <- user(0)
+  miss_ec2u_16[] <- user(0)
+  miss_ec3u_16[] <- user(0)
+  miss_ec4u_16[] <- user(0)
+  
+  miss_ec1u_17[] <- user(0)
+  miss_ec2u_17[] <- user(0)
+  miss_ec3u_17[] <- user(0)
+  miss_ec4u_17[] <- user(0)
+  
+  miss_ec1w_10[] <- user(0)
+  miss_ec2w_10[] <- user(0)
+  miss_ec3w_10[] <- user(0)
+  miss_ec4w_10[] <- user(0)
+  
+  miss_ec1w_11[] <- user(0)
+  miss_ec2w_11[] <- user(0)
+  miss_ec3w_11[] <- user(0)
+  miss_ec4w_11[] <- user(0)
+  
+  miss_ec1w_12[] <- user(0)
+  miss_ec2w_12[] <- user(0)
+  miss_ec3w_12[] <- user(0)
+  miss_ec4w_12[] <- user(0)
+  
+  miss_ec1w_13[] <- user(0)
+  miss_ec2w_13[] <- user(0)
+  miss_ec3w_13[] <- user(0)
+  miss_ec4w_13[] <- user(0)
+  
+  miss_ec1w_14[] <- user(0)
+  miss_ec2w_14[] <- user(0)
+  miss_ec3w_14[] <- user(0)
+  miss_ec4w_14[] <- user(0)
+  
+  miss_ec1w_15[] <- user(0)
+  miss_ec2w_15[] <- user(0)
+  miss_ec3w_15[] <- user(0)
+  miss_ec4w_15[] <- user(0)
+  
+  miss_ec1w_16[] <- user(0)
+  miss_ec2w_16[] <- user(0)
+  miss_ec3w_16[] <- user(0)
+  miss_ec4w_16[] <- user(0)
+  
+  miss_ec1w_17[] <- user(0)
+  miss_ec2w_17[] <- user(0)
+  miss_ec3w_17[] <- user(0)
+  miss_ec4w_17[] <- user(0)
   
   
   np2nc_ic1s1u_10[] <- user(0)
@@ -17259,7 +17419,7 @@ dim(cl_EC4S2J5W_17) <- N_gender
 ## mixing components ####################################################################
 ##############################################################################################################################
 
-dim(cl_cust) <- N_gender
+
 dim(x) <- c(N_gender, N_gender)
 
 
@@ -17320,6 +17480,8 @@ dim(cl_mix_p_17) <- c(N_gender, N_gender)
 ##############################################################################################################################
 ## parameters ####################################################################
 ##############################################################################################################################
+dim(turn10) <- N_gender
+
 dim(r) <- N_gender
 dim(f) <- N_gender
 
@@ -17339,6 +17501,11 @@ dim(r2nr) <- N_gender
 dim(r2p) <- N_gender
 
 dim(pc_cl) <- N_gender
+
+dim(rec_i) <- N_gender
+dim(rec_e) <- N_gender
+dim(rec_p) <- N_gender
+
 
 dim(t10_ic1s1j1u) <- N_gender
 dim(t10_ic2s1j1u) <- N_gender
@@ -17846,6 +18013,167 @@ dim(m2neet_ec1_17) <- N_gender
 dim(m2neet_ec2_17) <- N_gender
 dim(m2neet_ec3_17) <- N_gender
 dim(m2neet_ec4_17) <- N_gender
+
+
+dim(miss_ic1u_10) <- N_gender
+dim(miss_ic2u_10) <- N_gender
+dim(miss_ic3u_10) <- N_gender
+dim(miss_ic4u_10) <- N_gender
+
+dim(miss_ic1u_11) <- N_gender
+dim(miss_ic2u_11) <- N_gender
+dim(miss_ic3u_11) <- N_gender
+dim(miss_ic4u_11) <- N_gender
+
+dim(miss_ic1u_12) <- N_gender
+dim(miss_ic2u_12) <- N_gender
+dim(miss_ic3u_12) <- N_gender
+dim(miss_ic4u_12) <- N_gender
+
+dim(miss_ic1u_13) <- N_gender
+dim(miss_ic2u_13) <- N_gender
+dim(miss_ic3u_13) <- N_gender
+dim(miss_ic4u_13) <- N_gender
+
+dim(miss_ic1u_14) <- N_gender
+dim(miss_ic2u_14) <- N_gender
+dim(miss_ic3u_14) <- N_gender
+dim(miss_ic4u_14) <- N_gender
+
+dim(miss_ic1u_15) <- N_gender
+dim(miss_ic2u_15) <- N_gender
+dim(miss_ic3u_15) <- N_gender
+dim(miss_ic4u_15) <- N_gender
+
+dim(miss_ic1u_16) <- N_gender
+dim(miss_ic2u_16) <- N_gender
+dim(miss_ic3u_16) <- N_gender
+dim(miss_ic4u_16) <- N_gender
+
+dim(miss_ic1u_17) <- N_gender
+dim(miss_ic2u_17) <- N_gender
+dim(miss_ic3u_17) <- N_gender
+dim(miss_ic4u_17) <- N_gender
+
+dim(miss_ic1w_10) <- N_gender
+dim(miss_ic2w_10) <- N_gender
+dim(miss_ic3w_10) <- N_gender
+dim(miss_ic4w_10) <- N_gender
+
+dim(miss_ic1w_11) <- N_gender
+dim(miss_ic2w_11) <- N_gender
+dim(miss_ic3w_11) <- N_gender
+dim(miss_ic4w_11) <- N_gender
+
+dim(miss_ic1w_12) <- N_gender
+dim(miss_ic2w_12) <- N_gender
+dim(miss_ic3w_12) <- N_gender
+dim(miss_ic4w_12) <- N_gender
+
+dim(miss_ic1w_13) <- N_gender
+dim(miss_ic2w_13) <- N_gender
+dim(miss_ic3w_13) <- N_gender
+dim(miss_ic4w_13) <- N_gender
+
+dim(miss_ic1w_14) <- N_gender
+dim(miss_ic2w_14) <- N_gender
+dim(miss_ic3w_14) <- N_gender
+dim(miss_ic4w_14) <- N_gender
+
+dim(miss_ic1w_15) <- N_gender
+dim(miss_ic2w_15) <- N_gender
+dim(miss_ic3w_15) <- N_gender
+dim(miss_ic4w_15) <- N_gender
+
+dim(miss_ic1w_16) <- N_gender
+dim(miss_ic2w_16) <- N_gender
+dim(miss_ic3w_16) <- N_gender
+dim(miss_ic4w_16) <- N_gender
+
+dim(miss_ic1w_17) <- N_gender
+dim(miss_ic2w_17) <- N_gender
+dim(miss_ic3w_17) <- N_gender
+dim(miss_ic4w_17) <- N_gender
+
+dim(miss_ec1u_10) <- N_gender
+dim(miss_ec2u_10) <- N_gender
+dim(miss_ec3u_10) <- N_gender
+dim(miss_ec4u_10) <- N_gender
+
+dim(miss_ec1u_11) <- N_gender
+dim(miss_ec2u_11) <- N_gender
+dim(miss_ec3u_11) <- N_gender
+dim(miss_ec4u_11) <- N_gender
+
+dim(miss_ec1u_12) <- N_gender
+dim(miss_ec2u_12) <- N_gender
+dim(miss_ec3u_12) <- N_gender
+dim(miss_ec4u_12) <- N_gender
+
+dim(miss_ec1u_13) <- N_gender
+dim(miss_ec2u_13) <- N_gender
+dim(miss_ec3u_13) <- N_gender
+dim(miss_ec4u_13) <- N_gender
+
+dim(miss_ec1u_14) <- N_gender
+dim(miss_ec2u_14) <- N_gender
+dim(miss_ec3u_14) <- N_gender
+dim(miss_ec4u_14) <- N_gender
+
+dim(miss_ec1u_15) <- N_gender
+dim(miss_ec2u_15) <- N_gender
+dim(miss_ec3u_15) <- N_gender
+dim(miss_ec4u_15) <- N_gender
+
+dim(miss_ec1u_16) <- N_gender
+dim(miss_ec2u_16) <- N_gender
+dim(miss_ec3u_16) <- N_gender
+dim(miss_ec4u_16) <- N_gender
+
+dim(miss_ec1u_17) <- N_gender
+dim(miss_ec2u_17) <- N_gender
+dim(miss_ec3u_17) <- N_gender
+dim(miss_ec4u_17) <- N_gender
+
+dim(miss_ec1w_10) <- N_gender
+dim(miss_ec2w_10) <- N_gender
+dim(miss_ec3w_10) <- N_gender
+dim(miss_ec4w_10) <- N_gender
+
+dim(miss_ec1w_11) <- N_gender
+dim(miss_ec2w_11) <- N_gender
+dim(miss_ec3w_11) <- N_gender
+dim(miss_ec4w_11) <- N_gender
+
+dim(miss_ec1w_12) <- N_gender
+dim(miss_ec2w_12) <- N_gender
+dim(miss_ec3w_12) <- N_gender
+dim(miss_ec4w_12) <- N_gender
+
+dim(miss_ec1w_13) <- N_gender
+dim(miss_ec2w_13) <- N_gender
+dim(miss_ec3w_13) <- N_gender
+dim(miss_ec4w_13) <- N_gender
+
+dim(miss_ec1w_14) <- N_gender
+dim(miss_ec2w_14) <- N_gender
+dim(miss_ec3w_14) <- N_gender
+dim(miss_ec4w_14) <- N_gender
+
+dim(miss_ec1w_15) <- N_gender
+dim(miss_ec2w_15) <- N_gender
+dim(miss_ec3w_15) <- N_gender
+dim(miss_ec4w_15) <- N_gender
+
+dim(miss_ec1w_16) <- N_gender
+dim(miss_ec2w_16) <- N_gender
+dim(miss_ec3w_16) <- N_gender
+dim(miss_ec4w_16) <- N_gender
+
+dim(miss_ec1w_17) <- N_gender
+dim(miss_ec2w_17) <- N_gender
+dim(miss_ec3w_17) <- N_gender
+dim(miss_ec4w_17) <- N_gender
 
 
 dim(np2nc_ic1s1u_10) <- N_gender
@@ -28736,6 +29064,420 @@ cl_IC2S1J4U_10[] <- det*IC2S1J4W_10[i] - c*rec_cust*pc_cl[i]*IC2S1J4U_10[i]
 cl_IC3S1J4U_10[] <- det*IC3S1J4W_10[i] - c*rec_cust*pc_cl[i]*IC3S1J4U_10[i]
 cl_IC4S1J4U_10[] <- det*IC4S1J4W_10[i] - c*rec_cust*pc_cl[i]*IC4S1J4U_10[i]
 
+cl_IC1S1J4U_11[] <- det*IC1S1J4W_11[i] - c*rec_cust*pc_cl[i]*IC1S1J4U_11[i]
+cl_IC2S1J4U_11[] <- det*IC2S1J4W_11[i] - c*rec_cust*pc_cl[i]*IC2S1J4U_11[i]
+cl_IC3S1J4U_11[] <- det*IC3S1J4W_11[i] - c*rec_cust*pc_cl[i]*IC3S1J4U_11[i]
+cl_IC4S1J4U_11[] <- det*IC4S1J4W_11[i] - c*rec_cust*pc_cl[i]*IC4S1J4U_11[i]
+
+cl_IC1S1J4U_12[] <- det*IC1S1J4W_12[i] - c*rec_cust*pc_cl[i]*IC1S1J4U_12[i]
+cl_IC2S1J4U_12[] <- det*IC2S1J4W_12[i] - c*rec_cust*pc_cl[i]*IC2S1J4U_12[i]
+cl_IC3S1J4U_12[] <- det*IC3S1J4W_12[i] - c*rec_cust*pc_cl[i]*IC3S1J4U_12[i]
+cl_IC4S1J4U_12[] <- det*IC4S1J4W_12[i] - c*rec_cust*pc_cl[i]*IC4S1J4U_12[i]
+
+cl_IC1S1J4U_13[] <- det*IC1S1J4W_13[i] - c*rec_cust*pc_cl[i]*IC1S1J4U_13[i]
+cl_IC2S1J4U_13[] <- det*IC2S1J4W_13[i] - c*rec_cust*pc_cl[i]*IC2S1J4U_13[i]
+cl_IC3S1J4U_13[] <- det*IC3S1J4W_13[i] - c*rec_cust*pc_cl[i]*IC3S1J4U_13[i]
+cl_IC4S1J4U_13[] <- det*IC4S1J4W_13[i] - c*rec_cust*pc_cl[i]*IC4S1J4U_13[i]
+
+cl_IC1S1J4U_14[] <- det*IC1S1J4W_14[i] - c*rec_cust*pc_cl[i]*IC1S1J4U_14[i]
+cl_IC2S1J4U_14[] <- det*IC2S1J4W_14[i] - c*rec_cust*pc_cl[i]*IC2S1J4U_14[i]
+cl_IC3S1J4U_14[] <- det*IC3S1J4W_14[i] - c*rec_cust*pc_cl[i]*IC3S1J4U_14[i]
+cl_IC4S1J4U_14[] <- det*IC4S1J4W_14[i] - c*rec_cust*pc_cl[i]*IC4S1J4U_14[i]
+
+cl_IC1S1J4U_15[] <- det*IC1S1J4W_15[i] - c*rec_cust*pc_cl[i]*IC1S1J4U_15[i]
+cl_IC2S1J4U_15[] <- det*IC2S1J4W_15[i] - c*rec_cust*pc_cl[i]*IC2S1J4U_15[i]
+cl_IC3S1J4U_15[] <- det*IC3S1J4W_15[i] - c*rec_cust*pc_cl[i]*IC3S1J4U_15[i]
+cl_IC4S1J4U_15[] <- det*IC4S1J4W_15[i] - c*rec_cust*pc_cl[i]*IC4S1J4U_15[i]
+
+cl_IC1S1J4U_16[] <- det*IC1S1J4W_16[i] - c*rec_cust*pc_cl[i]*IC1S1J4U_16[i]
+cl_IC2S1J4U_16[] <- det*IC2S1J4W_16[i] - c*rec_cust*pc_cl[i]*IC2S1J4U_16[i]
+cl_IC3S1J4U_16[] <- det*IC3S1J4W_16[i] - c*rec_cust*pc_cl[i]*IC3S1J4U_16[i]
+cl_IC4S1J4U_16[] <- det*IC4S1J4W_16[i] - c*rec_cust*pc_cl[i]*IC4S1J4U_16[i]
+
+cl_IC1S1J4U_17[] <- det*IC1S1J4W_17[i] - c*rec_cust*pc_cl[i]*IC1S1J4U_17[i]
+cl_IC2S1J4U_17[] <- det*IC2S1J4W_17[i] - c*rec_cust*pc_cl[i]*IC2S1J4U_17[i]
+cl_IC3S1J4U_17[] <- det*IC3S1J4W_17[i] - c*rec_cust*pc_cl[i]*IC3S1J4U_17[i]
+cl_IC4S1J4U_17[] <- det*IC4S1J4W_17[i] - c*rec_cust*pc_cl[i]*IC4S1J4U_17[i]
+
+
+
+cl_IC1S2J4U_10[] <- det*IC1S2J4W_10[i] - c*rec_cust*pc_cl[i]*IC1S2J4U_10[i]
+cl_IC2S2J4U_10[] <- det*IC2S2J4W_10[i] - c*rec_cust*pc_cl[i]*IC2S2J4U_10[i]
+cl_IC3S2J4U_10[] <- det*IC3S2J4W_10[i] - c*rec_cust*pc_cl[i]*IC3S2J4U_10[i]
+cl_IC4S2J4U_10[] <- det*IC4S2J4W_10[i] - c*rec_cust*pc_cl[i]*IC4S2J4U_10[i]
+
+cl_IC1S2J4U_11[] <- det*IC1S2J4W_11[i] - c*rec_cust*pc_cl[i]*IC1S2J4U_11[i]
+cl_IC2S2J4U_11[] <- det*IC2S2J4W_11[i] - c*rec_cust*pc_cl[i]*IC2S2J4U_11[i]
+cl_IC3S2J4U_11[] <- det*IC3S2J4W_11[i] - c*rec_cust*pc_cl[i]*IC3S2J4U_11[i]
+cl_IC4S2J4U_11[] <- det*IC4S2J4W_11[i] - c*rec_cust*pc_cl[i]*IC4S2J4U_11[i]
+
+cl_IC1S2J4U_12[] <- det*IC1S2J4W_12[i] - c*rec_cust*pc_cl[i]*IC1S2J4U_12[i]
+cl_IC2S2J4U_12[] <- det*IC2S2J4W_12[i] - c*rec_cust*pc_cl[i]*IC2S2J4U_12[i]
+cl_IC3S2J4U_12[] <- det*IC3S2J4W_12[i] - c*rec_cust*pc_cl[i]*IC3S2J4U_12[i]
+cl_IC4S2J4U_12[] <- det*IC4S2J4W_12[i] - c*rec_cust*pc_cl[i]*IC4S2J4U_12[i]
+
+cl_IC1S2J4U_13[] <- det*IC1S2J4W_13[i] - c*rec_cust*pc_cl[i]*IC1S2J4U_13[i]
+cl_IC2S2J4U_13[] <- det*IC2S2J4W_13[i] - c*rec_cust*pc_cl[i]*IC2S2J4U_13[i]
+cl_IC3S2J4U_13[] <- det*IC3S2J4W_13[i] - c*rec_cust*pc_cl[i]*IC3S2J4U_13[i]
+cl_IC4S2J4U_13[] <- det*IC4S2J4W_13[i] - c*rec_cust*pc_cl[i]*IC4S2J4U_13[i]
+
+cl_IC1S2J4U_14[] <- det*IC1S2J4W_14[i] - c*rec_cust*pc_cl[i]*IC1S2J4U_14[i]
+cl_IC2S2J4U_14[] <- det*IC2S2J4W_14[i] - c*rec_cust*pc_cl[i]*IC2S2J4U_14[i]
+cl_IC3S2J4U_14[] <- det*IC3S2J4W_14[i] - c*rec_cust*pc_cl[i]*IC3S2J4U_14[i]
+cl_IC4S2J4U_14[] <- det*IC4S2J4W_14[i] - c*rec_cust*pc_cl[i]*IC4S2J4U_14[i]
+
+cl_IC1S2J4U_15[] <- det*IC1S2J4W_15[i] - c*rec_cust*pc_cl[i]*IC1S2J4U_15[i]
+cl_IC2S2J4U_15[] <- det*IC2S2J4W_15[i] - c*rec_cust*pc_cl[i]*IC2S2J4U_15[i]
+cl_IC3S2J4U_15[] <- det*IC3S2J4W_15[i] - c*rec_cust*pc_cl[i]*IC3S2J4U_15[i]
+cl_IC4S2J4U_15[] <- det*IC4S2J4W_15[i] - c*rec_cust*pc_cl[i]*IC4S2J4U_15[i]
+
+cl_IC1S2J4U_16[] <- det*IC1S2J4W_16[i] - c*rec_cust*pc_cl[i]*IC1S2J4U_16[i]
+cl_IC2S2J4U_16[] <- det*IC2S2J4W_16[i] - c*rec_cust*pc_cl[i]*IC2S2J4U_16[i]
+cl_IC3S2J4U_16[] <- det*IC3S2J4W_16[i] - c*rec_cust*pc_cl[i]*IC3S2J4U_16[i]
+cl_IC4S2J4U_16[] <- det*IC4S2J4W_16[i] - c*rec_cust*pc_cl[i]*IC4S2J4U_16[i]
+
+cl_IC1S2J4U_17[] <- det*IC1S2J4W_17[i] - c*rec_cust*pc_cl[i]*IC1S2J4U_17[i]
+cl_IC2S2J4U_17[] <- det*IC2S2J4W_17[i] - c*rec_cust*pc_cl[i]*IC2S2J4U_17[i]
+cl_IC3S2J4U_17[] <- det*IC3S2J4W_17[i] - c*rec_cust*pc_cl[i]*IC3S2J4U_17[i]
+cl_IC4S2J4U_17[] <- det*IC4S2J4W_17[i] - c*rec_cust*pc_cl[i]*IC4S2J4U_17[i]
+
+
+
+cl_IC1S1J5U_10[] <- det*IC1S1J5W_10[i] - c*rec_cust*pc_cl[i]*IC1S1J5U_10[i]
+cl_IC2S1J5U_10[] <- det*IC2S1J5W_10[i] - c*rec_cust*pc_cl[i]*IC2S1J5U_10[i]
+cl_IC3S1J5U_10[] <- det*IC3S1J5W_10[i] - c*rec_cust*pc_cl[i]*IC3S1J5U_10[i]
+cl_IC4S1J5U_10[] <- det*IC4S1J5W_10[i] - c*rec_cust*pc_cl[i]*IC4S1J5U_10[i]
+
+cl_IC1S1J5U_11[] <- det*IC1S1J5W_11[i] - c*rec_cust*pc_cl[i]*IC1S1J5U_11[i]
+cl_IC2S1J5U_11[] <- det*IC2S1J5W_11[i] - c*rec_cust*pc_cl[i]*IC2S1J5U_11[i]
+cl_IC3S1J5U_11[] <- det*IC3S1J5W_11[i] - c*rec_cust*pc_cl[i]*IC3S1J5U_11[i]
+cl_IC4S1J5U_11[] <- det*IC4S1J5W_11[i] - c*rec_cust*pc_cl[i]*IC4S1J5U_11[i]
+
+cl_IC1S1J5U_12[] <- det*IC1S1J5W_12[i] - c*rec_cust*pc_cl[i]*IC1S1J5U_12[i]
+cl_IC2S1J5U_12[] <- det*IC2S1J5W_12[i] - c*rec_cust*pc_cl[i]*IC2S1J5U_12[i]
+cl_IC3S1J5U_12[] <- det*IC3S1J5W_12[i] - c*rec_cust*pc_cl[i]*IC3S1J5U_12[i]
+cl_IC4S1J5U_12[] <- det*IC4S1J5W_12[i] - c*rec_cust*pc_cl[i]*IC4S1J5U_12[i]
+
+cl_IC1S1J5U_13[] <- det*IC1S1J5W_13[i] - c*rec_cust*pc_cl[i]*IC1S1J5U_13[i]
+cl_IC2S1J5U_13[] <- det*IC2S1J5W_13[i] - c*rec_cust*pc_cl[i]*IC2S1J5U_13[i]
+cl_IC3S1J5U_13[] <- det*IC3S1J5W_13[i] - c*rec_cust*pc_cl[i]*IC3S1J5U_13[i]
+cl_IC4S1J5U_13[] <- det*IC4S1J5W_13[i] - c*rec_cust*pc_cl[i]*IC4S1J5U_13[i]
+
+cl_IC1S1J5U_14[] <- det*IC1S1J5W_14[i] - c*rec_cust*pc_cl[i]*IC1S1J5U_14[i]
+cl_IC2S1J5U_14[] <- det*IC2S1J5W_14[i] - c*rec_cust*pc_cl[i]*IC2S1J5U_14[i]
+cl_IC3S1J5U_14[] <- det*IC3S1J5W_14[i] - c*rec_cust*pc_cl[i]*IC3S1J5U_14[i]
+cl_IC4S1J5U_14[] <- det*IC4S1J5W_14[i] - c*rec_cust*pc_cl[i]*IC4S1J5U_14[i]
+
+cl_IC1S1J5U_15[] <- det*IC1S1J5W_15[i] - c*rec_cust*pc_cl[i]*IC1S1J5U_15[i]
+cl_IC2S1J5U_15[] <- det*IC2S1J5W_15[i] - c*rec_cust*pc_cl[i]*IC2S1J5U_15[i]
+cl_IC3S1J5U_15[] <- det*IC3S1J5W_15[i] - c*rec_cust*pc_cl[i]*IC3S1J5U_15[i]
+cl_IC4S1J5U_15[] <- det*IC4S1J5W_15[i] - c*rec_cust*pc_cl[i]*IC4S1J5U_15[i]
+
+cl_IC1S1J5U_16[] <- det*IC1S1J5W_16[i] - c*rec_cust*pc_cl[i]*IC1S1J5U_16[i]
+cl_IC2S1J5U_16[] <- det*IC2S1J5W_16[i] - c*rec_cust*pc_cl[i]*IC2S1J5U_16[i]
+cl_IC3S1J5U_16[] <- det*IC3S1J5W_16[i] - c*rec_cust*pc_cl[i]*IC3S1J5U_16[i]
+cl_IC4S1J5U_16[] <- det*IC4S1J5W_16[i] - c*rec_cust*pc_cl[i]*IC4S1J5U_16[i]
+
+cl_IC1S1J5U_17[] <- det*IC1S1J5W_17[i] - c*rec_cust*pc_cl[i]*IC1S1J5U_17[i]
+cl_IC2S1J5U_17[] <- det*IC2S1J5W_17[i] - c*rec_cust*pc_cl[i]*IC2S1J5U_17[i]
+cl_IC3S1J5U_17[] <- det*IC3S1J5W_17[i] - c*rec_cust*pc_cl[i]*IC3S1J5U_17[i]
+cl_IC4S1J5U_17[] <- det*IC4S1J5W_17[i] - c*rec_cust*pc_cl[i]*IC4S1J5U_17[i]
+
+
+
+cl_IC1S2J5U_10[] <- det*IC1S2J5W_10[i] - c*rec_cust*pc_cl[i]*IC1S2J5U_10[i]
+cl_IC2S2J5U_10[] <- det*IC2S2J5W_10[i] - c*rec_cust*pc_cl[i]*IC2S2J5U_10[i]
+cl_IC3S2J5U_10[] <- det*IC3S2J5W_10[i] - c*rec_cust*pc_cl[i]*IC3S2J5U_10[i]
+cl_IC4S2J5U_10[] <- det*IC4S2J5W_10[i] - c*rec_cust*pc_cl[i]*IC4S2J5U_10[i]
+
+cl_IC1S2J5U_11[] <- det*IC1S2J5W_11[i] - c*rec_cust*pc_cl[i]*IC1S2J5U_11[i]
+cl_IC2S2J5U_11[] <- det*IC2S2J5W_11[i] - c*rec_cust*pc_cl[i]*IC2S2J5U_11[i]
+cl_IC3S2J5U_11[] <- det*IC3S2J5W_11[i] - c*rec_cust*pc_cl[i]*IC3S2J5U_11[i]
+cl_IC4S2J5U_11[] <- det*IC4S2J5W_11[i] - c*rec_cust*pc_cl[i]*IC4S2J5U_11[i]
+
+cl_IC1S2J5U_12[] <- det*IC1S2J5W_12[i] - c*rec_cust*pc_cl[i]*IC1S2J5U_12[i]
+cl_IC2S2J5U_12[] <- det*IC2S2J5W_12[i] - c*rec_cust*pc_cl[i]*IC2S2J5U_12[i]
+cl_IC3S2J5U_12[] <- det*IC3S2J5W_12[i] - c*rec_cust*pc_cl[i]*IC3S2J5U_12[i]
+cl_IC4S2J5U_12[] <- det*IC4S2J5W_12[i] - c*rec_cust*pc_cl[i]*IC4S2J5U_12[i]
+
+cl_IC1S2J5U_13[] <- det*IC1S2J5W_13[i] - c*rec_cust*pc_cl[i]*IC1S2J5U_13[i]
+cl_IC2S2J5U_13[] <- det*IC2S2J5W_13[i] - c*rec_cust*pc_cl[i]*IC2S2J5U_13[i]
+cl_IC3S2J5U_13[] <- det*IC3S2J5W_13[i] - c*rec_cust*pc_cl[i]*IC3S2J5U_13[i]
+cl_IC4S2J5U_13[] <- det*IC4S2J5W_13[i] - c*rec_cust*pc_cl[i]*IC4S2J5U_13[i]
+
+cl_IC1S2J5U_14[] <- det*IC1S2J5W_14[i] - c*rec_cust*pc_cl[i]*IC1S2J5U_14[i]
+cl_IC2S2J5U_14[] <- det*IC2S2J5W_14[i] - c*rec_cust*pc_cl[i]*IC2S2J5U_14[i]
+cl_IC3S2J5U_14[] <- det*IC3S2J5W_14[i] - c*rec_cust*pc_cl[i]*IC3S2J5U_14[i]
+cl_IC4S2J5U_14[] <- det*IC4S2J5W_14[i] - c*rec_cust*pc_cl[i]*IC4S2J5U_14[i]
+
+cl_IC1S2J5U_15[] <- det*IC1S2J5W_15[i] - c*rec_cust*pc_cl[i]*IC1S2J5U_15[i]
+cl_IC2S2J5U_15[] <- det*IC2S2J5W_15[i] - c*rec_cust*pc_cl[i]*IC2S2J5U_15[i]
+cl_IC3S2J5U_15[] <- det*IC3S2J5W_15[i] - c*rec_cust*pc_cl[i]*IC3S2J5U_15[i]
+cl_IC4S2J5U_15[] <- det*IC4S2J5W_15[i] - c*rec_cust*pc_cl[i]*IC4S2J5U_15[i]
+
+cl_IC1S2J5U_16[] <- det*IC1S2J5W_16[i] - c*rec_cust*pc_cl[i]*IC1S2J5U_16[i]
+cl_IC2S2J5U_16[] <- det*IC2S2J5W_16[i] - c*rec_cust*pc_cl[i]*IC2S2J5U_16[i]
+cl_IC3S2J5U_16[] <- det*IC3S2J5W_16[i] - c*rec_cust*pc_cl[i]*IC3S2J5U_16[i]
+cl_IC4S2J5U_16[] <- det*IC4S2J5W_16[i] - c*rec_cust*pc_cl[i]*IC4S2J5U_16[i]
+
+cl_IC1S2J5U_17[] <- det*IC1S2J5W_17[i] - c*rec_cust*pc_cl[i]*IC1S2J5U_17[i]
+cl_IC2S2J5U_17[] <- det*IC2S2J5W_17[i] - c*rec_cust*pc_cl[i]*IC2S2J5U_17[i]
+cl_IC3S2J5U_17[] <- det*IC3S2J5W_17[i] - c*rec_cust*pc_cl[i]*IC3S2J5U_17[i]
+cl_IC4S2J5U_17[] <- det*IC4S2J5W_17[i] - c*rec_cust*pc_cl[i]*IC4S2J5U_17[i]
+
+
+
+cl_IC1S1J1W_10[] <- c*rec_i[i]*IC1S1J1U_10[i]*sum(cl_mix_i_10[,i]) - des*IC1S1J1W_10[i]
+cl_IC2S1J1W_10[] <- c*rec_i[i]*IC2S1J1U_10[i]*sum(cl_mix_i_10[,i]) - des*IC2S1J1W_10[i]
+cl_IC3S1J1W_10[] <- c*rec_p[i]*IC3S1J1U_10[i]*sum(cl_mix_p_10[,i]) - des*IC3S1J1W_10[i]
+cl_IC4S1J1W_10[] <- c*rec_i[i]*IC4S1J1U_10[i]*sum(cl_mix_i_10[,i]) - des*IC4S1J1W_10[i]
+
+cl_IC1S1J1W_11[] <- c*rec_i[i]*IC1S1J1U_11[i]*sum(cl_mix_i_11[,i]) - des*IC1S1J1W_11[i]
+cl_IC2S1J1W_11[] <- c*rec_i[i]*IC2S1J1U_11[i]*sum(cl_mix_i_11[,i]) - des*IC2S1J1W_11[i]
+cl_IC3S1J1W_11[] <- c*rec_p[i]*IC3S1J1U_11[i]*sum(cl_mix_p_11[,i]) - des*IC3S1J1W_11[i]
+cl_IC4S1J1W_11[] <- c*rec_i[i]*IC4S1J1U_11[i]*sum(cl_mix_i_11[,i]) - des*IC4S1J1W_11[i]
+
+cl_IC1S1J1W_12[] <- c*rec_i[i]*IC1S1J1U_12[i]*sum(cl_mix_i_12[,i]) - des*IC1S1J1W_12[i]
+cl_IC2S1J1W_12[] <- c*rec_i[i]*IC2S1J1U_12[i]*sum(cl_mix_i_12[,i]) - des*IC2S1J1W_12[i]
+cl_IC3S1J1W_12[] <- c*rec_p[i]*IC3S1J1U_12[i]*sum(cl_mix_p_12[,i]) - des*IC3S1J1W_12[i]
+cl_IC4S1J1W_12[] <- c*rec_i[i]*IC4S1J1U_12[i]*sum(cl_mix_i_12[,i]) - des*IC4S1J1W_12[i]
+
+cl_IC1S1J1W_13[] <- c*rec_i[i]*IC1S1J1U_13[i]*sum(cl_mix_i_13[,i]) - des*IC1S1J1W_13[i]
+cl_IC2S1J1W_13[] <- c*rec_i[i]*IC2S1J1U_13[i]*sum(cl_mix_i_13[,i]) - des*IC2S1J1W_13[i]
+cl_IC3S1J1W_13[] <- c*rec_p[i]*IC3S1J1U_13[i]*sum(cl_mix_p_13[,i]) - des*IC3S1J1W_13[i]
+cl_IC4S1J1W_13[] <- c*rec_i[i]*IC4S1J1U_13[i]*sum(cl_mix_i_13[,i]) - des*IC4S1J1W_13[i]
+
+cl_IC1S1J1W_14[] <- c*rec_i[i]*IC1S1J1U_14[i]*sum(cl_mix_i_14[,i]) - des*IC1S1J1W_14[i]
+cl_IC2S1J1W_14[] <- c*rec_i[i]*IC2S1J1U_14[i]*sum(cl_mix_i_14[,i]) - des*IC2S1J1W_14[i]
+cl_IC3S1J1W_14[] <- c*rec_p[i]*IC3S1J1U_14[i]*sum(cl_mix_p_14[,i]) - des*IC3S1J1W_14[i]
+cl_IC4S1J1W_14[] <- c*rec_i[i]*IC4S1J1U_14[i]*sum(cl_mix_i_14[,i]) - des*IC4S1J1W_14[i]
+
+cl_IC1S1J1W_15[] <- c*rec_i[i]*IC1S1J1U_15[i]*sum(cl_mix_i_15[,i]) - des*IC1S1J1W_15[i]
+cl_IC2S1J1W_15[] <- c*rec_i[i]*IC2S1J1U_15[i]*sum(cl_mix_i_15[,i]) - des*IC2S1J1W_15[i]
+cl_IC3S1J1W_15[] <- c*rec_p[i]*IC3S1J1U_15[i]*sum(cl_mix_p_15[,i]) - des*IC3S1J1W_15[i]
+cl_IC4S1J1W_15[] <- c*rec_i[i]*IC4S1J1U_15[i]*sum(cl_mix_i_15[,i]) - des*IC4S1J1W_15[i]
+
+cl_IC1S1J1W_16[] <- c*rec_i[i]*IC1S1J1U_16[i]*sum(cl_mix_i_16[,i]) - des*IC1S1J1W_16[i]
+cl_IC2S1J1W_16[] <- c*rec_i[i]*IC2S1J1U_16[i]*sum(cl_mix_i_16[,i]) - des*IC2S1J1W_16[i]
+cl_IC3S1J1W_16[] <- c*rec_p[i]*IC3S1J1U_16[i]*sum(cl_mix_p_16[,i]) - des*IC3S1J1W_16[i]
+cl_IC4S1J1W_16[] <- c*rec_i[i]*IC4S1J1U_16[i]*sum(cl_mix_i_16[,i]) - des*IC4S1J1W_16[i]
+
+cl_IC1S1J1W_17[] <- c*rec_i[i]*IC1S1J1U_17[i]*sum(cl_mix_i_17[,i]) - des*IC1S1J1W_17[i]
+cl_IC2S1J1W_17[] <- c*rec_i[i]*IC2S1J1U_17[i]*sum(cl_mix_i_17[,i]) - des*IC2S1J1W_17[i]
+cl_IC3S1J1W_17[] <- c*rec_p[i]*IC3S1J1U_17[i]*sum(cl_mix_p_17[,i]) - des*IC3S1J1W_17[i]
+cl_IC4S1J1W_17[] <- c*rec_i[i]*IC4S1J1U_17[i]*sum(cl_mix_i_17[,i]) - des*IC4S1J1W_17[i]
+
+
+
+cl_IC1S2J1W_10[] <- c*rec_p[i]*IC1S2J1U_10[i]*sum(cl_mix_p_10[,i]) - des*IC1S2J1W_10[i]
+cl_IC2S2J1W_10[] <- c*rec_p[i]*IC2S2J1U_10[i]*sum(cl_mix_p_10[,i]) - des*IC2S2J1W_10[i]
+cl_IC3S2J1W_10[] <- c*rec_p[i]*IC3S2J1U_10[i]*sum(cl_mix_p_10[,i]) - des*IC3S2J1W_10[i]
+cl_IC4S2J1W_10[] <- c*rec_p[i]*IC4S2J1U_10[i]*sum(cl_mix_p_10[,i]) - des*IC4S2J1W_10[i]
+
+cl_IC1S2J1W_11[] <- c*rec_p[i]*IC1S2J1U_11[i]*sum(cl_mix_p_11[,i]) - des*IC1S2J1W_11[i]
+cl_IC2S2J1W_11[] <- c*rec_p[i]*IC2S2J1U_11[i]*sum(cl_mix_p_11[,i]) - des*IC2S2J1W_11[i]
+cl_IC3S2J1W_11[] <- c*rec_p[i]*IC3S2J1U_11[i]*sum(cl_mix_p_11[,i]) - des*IC3S2J1W_11[i]
+cl_IC4S2J1W_11[] <- c*rec_p[i]*IC4S2J1U_11[i]*sum(cl_mix_p_11[,i]) - des*IC4S2J1W_11[i]
+
+cl_IC1S2J1W_12[] <- c*rec_p[i]*IC1S2J1U_12[i]*sum(cl_mix_p_12[,i]) - des*IC1S2J1W_12[i]
+cl_IC2S2J1W_12[] <- c*rec_p[i]*IC2S2J1U_12[i]*sum(cl_mix_p_12[,i]) - des*IC2S2J1W_12[i]
+cl_IC3S2J1W_12[] <- c*rec_p[i]*IC3S2J1U_12[i]*sum(cl_mix_p_12[,i]) - des*IC3S2J1W_12[i]
+cl_IC4S2J1W_12[] <- c*rec_p[i]*IC4S2J1U_12[i]*sum(cl_mix_p_12[,i]) - des*IC4S2J1W_12[i]
+
+cl_IC1S2J1W_13[] <- c*rec_p[i]*IC1S2J1U_13[i]*sum(cl_mix_p_13[,i]) - des*IC1S2J1W_13[i]
+cl_IC2S2J1W_13[] <- c*rec_p[i]*IC2S2J1U_13[i]*sum(cl_mix_p_13[,i]) - des*IC2S2J1W_13[i]
+cl_IC3S2J1W_13[] <- c*rec_p[i]*IC3S2J1U_13[i]*sum(cl_mix_p_13[,i]) - des*IC3S2J1W_13[i]
+cl_IC4S2J1W_13[] <- c*rec_p[i]*IC4S2J1U_13[i]*sum(cl_mix_p_13[,i]) - des*IC4S2J1W_13[i]
+
+cl_IC1S2J1W_14[] <- c*rec_p[i]*IC1S2J1U_14[i]*sum(cl_mix_p_14[,i]) - des*IC1S2J1W_14[i]
+cl_IC2S2J1W_14[] <- c*rec_p[i]*IC2S2J1U_14[i]*sum(cl_mix_p_14[,i]) - des*IC2S2J1W_14[i]
+cl_IC3S2J1W_14[] <- c*rec_p[i]*IC3S2J1U_14[i]*sum(cl_mix_p_14[,i]) - des*IC3S2J1W_14[i]
+cl_IC4S2J1W_14[] <- c*rec_p[i]*IC4S2J1U_14[i]*sum(cl_mix_p_14[,i]) - des*IC4S2J1W_14[i]
+
+cl_IC1S2J1W_15[] <- c*rec_p[i]*IC1S2J1U_15[i]*sum(cl_mix_p_15[,i]) - des*IC1S2J1W_15[i]
+cl_IC2S2J1W_15[] <- c*rec_p[i]*IC2S2J1U_15[i]*sum(cl_mix_p_15[,i]) - des*IC2S2J1W_15[i]
+cl_IC3S2J1W_15[] <- c*rec_p[i]*IC3S2J1U_15[i]*sum(cl_mix_p_15[,i]) - des*IC3S2J1W_15[i]
+cl_IC4S2J1W_15[] <- c*rec_p[i]*IC4S2J1U_15[i]*sum(cl_mix_p_15[,i]) - des*IC4S2J1W_15[i]
+
+cl_IC1S2J1W_16[] <- c*rec_i[i]*IC1S2J1U_16[i]*sum(cl_mix_i_16[,i]) - des*IC1S2J1W_16[i]
+cl_IC2S2J1W_16[] <- c*rec_i[i]*IC2S2J1U_16[i]*sum(cl_mix_i_16[,i]) - des*IC2S2J1W_16[i]
+cl_IC3S2J1W_16[] <- c*rec_p[i]*IC3S2J1U_16[i]*sum(cl_mix_p_16[,i]) - des*IC3S2J1W_16[i]
+cl_IC4S2J1W_16[] <- c*rec_i[i]*IC4S2J1U_16[i]*sum(cl_mix_i_16[,i]) - des*IC4S2J1W_16[i]
+
+cl_IC1S2J1W_17[] <- c*rec_i[i]*IC1S2J1U_17[i]*sum(cl_mix_i_17[,i]) - des*IC1S2J1W_17[i]
+cl_IC2S2J1W_17[] <- c*rec_i[i]*IC2S2J1U_17[i]*sum(cl_mix_i_17[,i]) - des*IC2S2J1W_17[i]
+cl_IC3S2J1W_17[] <- c*rec_p[i]*IC3S2J1U_17[i]*sum(cl_mix_p_17[,i]) - des*IC3S2J1W_17[i]
+cl_IC4S2J1W_17[] <- c*rec_i[i]*IC4S2J1U_17[i]*sum(cl_mix_i_17[,i]) - des*IC4S2J1W_17[i]
+
+
+
+cl_IC1S1J2W_10[] <- c*rec_i[i]*IC1S1J2U_10[i]*sum(cl_mix_i_10[,i]) - des*IC1S1J2W_10[i]
+cl_IC2S1J2W_10[] <- c*rec_i[i]*IC2S1J2U_10[i]*sum(cl_mix_i_10[,i]) - des*IC2S1J2W_10[i]
+cl_IC3S1J2W_10[] <- c*rec_p[i]*IC3S1J2U_10[i]*sum(cl_mix_p_10[,i]) - des*IC3S1J2W_10[i]
+cl_IC4S1J2W_10[] <- c*rec_i[i]*IC4S1J2U_10[i]*sum(cl_mix_i_10[,i]) - des*IC4S1J2W_10[i]
+
+cl_IC1S1J2W_11[] <- c*rec_i[i]*IC1S1J2U_11[i]*sum(cl_mix_i_11[,i]) - des*IC1S1J2W_11[i]
+cl_IC2S1J2W_11[] <- c*rec_i[i]*IC2S1J2U_11[i]*sum(cl_mix_i_11[,i]) - des*IC2S1J2W_11[i]
+cl_IC3S1J2W_11[] <- c*rec_p[i]*IC3S1J2U_11[i]*sum(cl_mix_p_11[,i]) - des*IC3S1J2W_11[i]
+cl_IC4S1J2W_11[] <- c*rec_i[i]*IC4S1J2U_11[i]*sum(cl_mix_i_11[,i]) - des*IC4S1J2W_11[i]
+
+cl_IC1S1J2W_12[] <- c*rec_i[i]*IC1S1J2U_12[i]*sum(cl_mix_i_12[,i]) - des*IC1S1J2W_12[i]
+cl_IC2S1J2W_12[] <- c*rec_i[i]*IC2S1J2U_12[i]*sum(cl_mix_i_12[,i]) - des*IC2S1J2W_12[i]
+cl_IC3S1J2W_12[] <- c*rec_p[i]*IC3S1J2U_12[i]*sum(cl_mix_p_12[,i]) - des*IC3S1J2W_12[i]
+cl_IC4S1J2W_12[] <- c*rec_i[i]*IC4S1J2U_12[i]*sum(cl_mix_i_12[,i]) - des*IC4S1J2W_12[i]
+
+cl_IC1S1J2W_13[] <- c*rec_i[i]*IC1S1J2U_13[i]*sum(cl_mix_i_13[,i]) - des*IC1S1J2W_13[i]
+cl_IC2S1J2W_13[] <- c*rec_i[i]*IC2S1J2U_13[i]*sum(cl_mix_i_13[,i]) - des*IC2S1J2W_13[i]
+cl_IC3S1J2W_13[] <- c*rec_p[i]*IC3S1J2U_13[i]*sum(cl_mix_p_13[,i]) - des*IC3S1J2W_13[i]
+cl_IC4S1J2W_13[] <- c*rec_i[i]*IC4S1J2U_13[i]*sum(cl_mix_i_13[,i]) - des*IC4S1J2W_13[i]
+
+cl_IC1S1J2W_14[] <- c*rec_i[i]*IC1S1J2U_14[i]*sum(cl_mix_i_14[,i]) - des*IC1S1J2W_14[i]
+cl_IC2S1J2W_14[] <- c*rec_i[i]*IC2S1J2U_14[i]*sum(cl_mix_i_14[,i]) - des*IC2S1J2W_14[i]
+cl_IC3S1J2W_14[] <- c*rec_p[i]*IC3S1J2U_14[i]*sum(cl_mix_p_14[,i]) - des*IC3S1J2W_14[i]
+cl_IC4S1J2W_14[] <- c*rec_i[i]*IC4S1J2U_14[i]*sum(cl_mix_i_14[,i]) - des*IC4S1J2W_14[i]
+
+cl_IC1S1J2W_15[] <- c*rec_i[i]*IC1S1J2U_15[i]*sum(cl_mix_i_15[,i]) - des*IC1S1J2W_15[i]
+cl_IC2S1J2W_15[] <- c*rec_i[i]*IC2S1J2U_15[i]*sum(cl_mix_i_15[,i]) - des*IC2S1J2W_15[i]
+cl_IC3S1J2W_15[] <- c*rec_p[i]*IC3S1J2U_15[i]*sum(cl_mix_p_15[,i]) - des*IC3S1J2W_15[i]
+cl_IC4S1J2W_15[] <- c*rec_i[i]*IC4S1J2U_15[i]*sum(cl_mix_i_15[,i]) - des*IC4S1J2W_15[i]
+
+cl_IC1S1J2W_16[] <- c*rec_i[i]*IC1S1J2U_16[i]*sum(cl_mix_i_16[,i]) - des*IC1S1J2W_16[i]
+cl_IC2S1J2W_16[] <- c*rec_i[i]*IC2S1J2U_16[i]*sum(cl_mix_i_16[,i]) - des*IC2S1J2W_16[i]
+cl_IC3S1J2W_16[] <- c*rec_p[i]*IC3S1J2U_16[i]*sum(cl_mix_p_16[,i]) - des*IC3S1J2W_16[i]
+cl_IC4S1J2W_16[] <- c*rec_i[i]*IC4S1J2U_16[i]*sum(cl_mix_i_16[,i]) - des*IC4S1J2W_16[i]
+
+cl_IC1S1J2W_17[] <- c*rec_i[i]*IC1S1J2U_17[i]*sum(cl_mix_i_17[,i]) - des*IC1S1J2W_17[i]
+cl_IC2S1J2W_17[] <- c*rec_i[i]*IC2S1J2U_17[i]*sum(cl_mix_i_17[,i]) - des*IC2S1J2W_17[i]
+cl_IC3S1J2W_17[] <- c*rec_p[i]*IC3S1J2U_17[i]*sum(cl_mix_p_17[,i]) - des*IC3S1J2W_17[i]
+cl_IC4S1J2W_17[] <- c*rec_i[i]*IC4S1J2U_17[i]*sum(cl_mix_i_17[,i]) - des*IC4S1J2W_17[i]
+
+
+
+cl_IC1S2J2W_10[] <- c*rec_p[i]*IC1S2J2U_10[i]*sum(cl_mix_p_10[,i]) - des*IC1S2J2W_10[i]
+cl_IC2S2J2W_10[] <- c*rec_p[i]*IC2S2J2U_10[i]*sum(cl_mix_p_10[,i]) - des*IC2S2J2W_10[i]
+cl_IC3S2J2W_10[] <- c*rec_p[i]*IC3S2J2U_10[i]*sum(cl_mix_p_10[,i]) - des*IC3S2J2W_10[i]
+cl_IC4S2J2W_10[] <- c*rec_p[i]*IC4S2J2U_10[i]*sum(cl_mix_p_10[,i]) - des*IC4S2J2W_10[i]
+
+cl_IC1S2J2W_11[] <- c*rec_p[i]*IC1S2J2U_11[i]*sum(cl_mix_p_11[,i]) - des*IC1S2J2W_11[i]
+cl_IC2S2J2W_11[] <- c*rec_p[i]*IC2S2J2U_11[i]*sum(cl_mix_p_11[,i]) - des*IC2S2J2W_11[i]
+cl_IC3S2J2W_11[] <- c*rec_p[i]*IC3S2J2U_11[i]*sum(cl_mix_p_11[,i]) - des*IC3S2J2W_11[i]
+cl_IC4S2J2W_11[] <- c*rec_p[i]*IC4S2J2U_11[i]*sum(cl_mix_p_11[,i]) - des*IC4S2J2W_11[i]
+
+cl_IC1S2J2W_12[] <- c*rec_p[i]*IC1S2J2U_12[i]*sum(cl_mix_p_12[,i]) - des*IC1S2J2W_12[i]
+cl_IC2S2J2W_12[] <- c*rec_p[i]*IC2S2J2U_12[i]*sum(cl_mix_p_12[,i]) - des*IC2S2J2W_12[i]
+cl_IC3S2J2W_12[] <- c*rec_p[i]*IC3S2J2U_12[i]*sum(cl_mix_p_12[,i]) - des*IC3S2J2W_12[i]
+cl_IC4S2J2W_12[] <- c*rec_p[i]*IC4S2J2U_12[i]*sum(cl_mix_p_12[,i]) - des*IC4S2J2W_12[i]
+
+cl_IC1S2J2W_13[] <- c*rec_p[i]*IC1S2J2U_13[i]*sum(cl_mix_p_13[,i]) - des*IC1S2J2W_13[i]
+cl_IC2S2J2W_13[] <- c*rec_p[i]*IC2S2J2U_13[i]*sum(cl_mix_p_13[,i]) - des*IC2S2J2W_13[i]
+cl_IC3S2J2W_13[] <- c*rec_p[i]*IC3S2J2U_13[i]*sum(cl_mix_p_13[,i]) - des*IC3S2J2W_13[i]
+cl_IC4S2J2W_13[] <- c*rec_p[i]*IC4S2J2U_13[i]*sum(cl_mix_p_13[,i]) - des*IC4S2J2W_13[i]
+
+cl_IC1S2J2W_14[] <- c*rec_p[i]*IC1S2J2U_14[i]*sum(cl_mix_p_14[,i]) - des*IC1S2J2W_14[i]
+cl_IC2S2J2W_14[] <- c*rec_p[i]*IC2S2J2U_14[i]*sum(cl_mix_p_14[,i]) - des*IC2S2J2W_14[i]
+cl_IC3S2J2W_14[] <- c*rec_p[i]*IC3S2J2U_14[i]*sum(cl_mix_p_14[,i]) - des*IC3S2J2W_14[i]
+cl_IC4S2J2W_14[] <- c*rec_p[i]*IC4S2J2U_14[i]*sum(cl_mix_p_14[,i]) - des*IC4S2J2W_14[i]
+
+cl_IC1S2J2W_15[] <- c*rec_p[i]*IC1S2J2U_15[i]*sum(cl_mix_p_15[,i]) - des*IC1S2J2W_15[i]
+cl_IC2S2J2W_15[] <- c*rec_p[i]*IC2S2J2U_15[i]*sum(cl_mix_p_15[,i]) - des*IC2S2J2W_15[i]
+cl_IC3S2J2W_15[] <- c*rec_p[i]*IC3S2J2U_15[i]*sum(cl_mix_p_15[,i]) - des*IC3S2J2W_15[i]
+cl_IC4S2J2W_15[] <- c*rec_p[i]*IC4S2J2U_15[i]*sum(cl_mix_p_15[,i]) - des*IC4S2J2W_15[i]
+
+cl_IC1S2J2W_16[] <- c*rec_i[i]*IC1S2J2U_16[i]*sum(cl_mix_i_16[,i]) - des*IC1S2J2W_16[i]
+cl_IC2S2J2W_16[] <- c*rec_i[i]*IC2S2J2U_16[i]*sum(cl_mix_i_16[,i]) - des*IC2S2J2W_16[i]
+cl_IC3S2J2W_16[] <- c*rec_p[i]*IC3S2J2U_16[i]*sum(cl_mix_p_16[,i]) - des*IC3S2J2W_16[i]
+cl_IC4S2J2W_16[] <- c*rec_i[i]*IC4S2J2U_16[i]*sum(cl_mix_i_16[,i]) - des*IC4S2J2W_16[i]
+
+cl_IC1S2J2W_17[] <- c*rec_i[i]*IC1S2J2U_17[i]*sum(cl_mix_i_17[,i]) - des*IC1S2J2W_17[i]
+cl_IC2S2J2W_17[] <- c*rec_i[i]*IC2S2J2U_17[i]*sum(cl_mix_i_17[,i]) - des*IC2S2J2W_17[i]
+cl_IC3S2J2W_17[] <- c*rec_p[i]*IC3S2J2U_17[i]*sum(cl_mix_p_17[,i]) - des*IC3S2J2W_17[i]
+cl_IC4S2J2W_17[] <- c*rec_i[i]*IC4S2J2U_17[i]*sum(cl_mix_i_17[,i]) - des*IC4S2J2W_17[i]
+
+
+
+cl_IC1S1J3W_10[] <- c*rec_i[i]*IC1S1J3U_10[i]*sum(cl_mix_i_10[,i]) - des*IC1S1J3W_10[i]
+cl_IC2S1J3W_10[] <- c*rec_i[i]*IC2S1J3U_10[i]*sum(cl_mix_i_10[,i]) - des*IC2S1J3W_10[i]
+cl_IC3S1J3W_10[] <- c*rec_p[i]*IC3S1J3U_10[i]*sum(cl_mix_p_10[,i]) - des*IC3S1J3W_10[i]
+cl_IC4S1J3W_10[] <- c*rec_i[i]*IC4S1J3U_10[i]*sum(cl_mix_i_10[,i]) - des*IC4S1J3W_10[i]
+
+cl_IC1S1J3W_11[] <- c*rec_i[i]*IC1S1J3U_11[i]*sum(cl_mix_i_11[,i]) - des*IC1S1J3W_11[i]
+cl_IC2S1J3W_11[] <- c*rec_i[i]*IC2S1J3U_11[i]*sum(cl_mix_i_11[,i]) - des*IC2S1J3W_11[i]
+cl_IC3S1J3W_11[] <- c*rec_p[i]*IC3S1J3U_11[i]*sum(cl_mix_p_11[,i]) - des*IC3S1J3W_11[i]
+cl_IC4S1J3W_11[] <- c*rec_i[i]*IC4S1J3U_11[i]*sum(cl_mix_i_11[,i]) - des*IC4S1J3W_11[i]
+
+cl_IC1S1J3W_12[] <- c*rec_i[i]*IC1S1J3U_12[i]*sum(cl_mix_i_12[,i]) - des*IC1S1J3W_12[i]
+cl_IC2S1J3W_12[] <- c*rec_i[i]*IC2S1J3U_12[i]*sum(cl_mix_i_12[,i]) - des*IC2S1J3W_12[i]
+cl_IC3S1J3W_12[] <- c*rec_p[i]*IC3S1J3U_12[i]*sum(cl_mix_p_12[,i]) - des*IC3S1J3W_12[i]
+cl_IC4S1J3W_12[] <- c*rec_i[i]*IC4S1J3U_12[i]*sum(cl_mix_i_12[,i]) - des*IC4S1J3W_12[i]
+
+cl_IC1S1J3W_13[] <- c*rec_i[i]*IC1S1J3U_13[i]*sum(cl_mix_i_13[,i]) - des*IC1S1J3W_13[i]
+cl_IC2S1J3W_13[] <- c*rec_i[i]*IC2S1J3U_13[i]*sum(cl_mix_i_13[,i]) - des*IC2S1J3W_13[i]
+cl_IC3S1J3W_13[] <- c*rec_p[i]*IC3S1J3U_13[i]*sum(cl_mix_p_13[,i]) - des*IC3S1J3W_13[i]
+cl_IC4S1J3W_13[] <- c*rec_i[i]*IC4S1J3U_13[i]*sum(cl_mix_i_13[,i]) - des*IC4S1J3W_13[i]
+
+cl_IC1S1J3W_14[] <- c*rec_i[i]*IC1S1J3U_14[i]*sum(cl_mix_i_14[,i]) - des*IC1S1J3W_14[i]
+cl_IC2S1J3W_14[] <- c*rec_i[i]*IC2S1J3U_14[i]*sum(cl_mix_i_14[,i]) - des*IC2S1J3W_14[i]
+cl_IC3S1J3W_14[] <- c*rec_p[i]*IC3S1J3U_14[i]*sum(cl_mix_p_14[,i]) - des*IC3S1J3W_14[i]
+cl_IC4S1J3W_14[] <- c*rec_i[i]*IC4S1J3U_14[i]*sum(cl_mix_i_14[,i]) - des*IC4S1J3W_14[i]
+
+cl_IC1S1J3W_15[] <- c*rec_i[i]*IC1S1J3U_15[i]*sum(cl_mix_i_15[,i]) - des*IC1S1J3W_15[i]
+cl_IC2S1J3W_15[] <- c*rec_i[i]*IC2S1J3U_15[i]*sum(cl_mix_i_15[,i]) - des*IC2S1J3W_15[i]
+cl_IC3S1J3W_15[] <- c*rec_p[i]*IC3S1J3U_15[i]*sum(cl_mix_p_15[,i]) - des*IC3S1J3W_15[i]
+cl_IC4S1J3W_15[] <- c*rec_i[i]*IC4S1J3U_15[i]*sum(cl_mix_i_15[,i]) - des*IC4S1J3W_15[i]
+
+cl_IC1S1J3W_16[] <- c*rec_i[i]*IC1S1J3U_16[i]*sum(cl_mix_i_16[,i]) - des*IC1S1J3W_16[i]
+cl_IC2S1J3W_16[] <- c*rec_i[i]*IC2S1J3U_16[i]*sum(cl_mix_i_16[,i]) - des*IC2S1J3W_16[i]
+cl_IC3S1J3W_16[] <- c*rec_p[i]*IC3S1J3U_16[i]*sum(cl_mix_p_16[,i]) - des*IC3S1J3W_16[i]
+cl_IC4S1J3W_16[] <- c*rec_i[i]*IC4S1J3U_16[i]*sum(cl_mix_i_16[,i]) - des*IC4S1J3W_16[i]
+
+cl_IC1S1J3W_17[] <- c*rec_i[i]*IC1S1J3U_17[i]*sum(cl_mix_i_17[,i]) - des*IC1S1J3W_17[i]
+cl_IC2S1J3W_17[] <- c*rec_i[i]*IC2S1J3U_17[i]*sum(cl_mix_i_17[,i]) - des*IC2S1J3W_17[i]
+cl_IC3S1J3W_17[] <- c*rec_p[i]*IC3S1J3U_17[i]*sum(cl_mix_p_17[,i]) - des*IC3S1J3W_17[i]
+cl_IC4S1J3W_17[] <- c*rec_i[i]*IC4S1J3U_17[i]*sum(cl_mix_i_17[,i]) - des*IC4S1J3W_17[i]
+
+
+
+cl_IC1S2J3W_10[] <- c*rec_p[i]*IC1S2J3U_10[i]*sum(cl_mix_p_10[,i]) - des*IC1S2J3W_10[i]
+cl_IC2S2J3W_10[] <- c*rec_p[i]*IC2S2J3U_10[i]*sum(cl_mix_p_10[,i]) - des*IC2S2J3W_10[i]
+cl_IC3S2J3W_10[] <- c*rec_p[i]*IC3S2J3U_10[i]*sum(cl_mix_p_10[,i]) - des*IC3S2J3W_10[i]
+cl_IC4S2J3W_10[] <- c*rec_p[i]*IC4S2J3U_10[i]*sum(cl_mix_p_10[,i]) - des*IC4S2J3W_10[i]
+
+cl_IC1S2J3W_11[] <- c*rec_p[i]*IC1S2J3U_11[i]*sum(cl_mix_p_11[,i]) - des*IC1S2J3W_11[i]
+cl_IC2S2J3W_11[] <- c*rec_p[i]*IC2S2J3U_11[i]*sum(cl_mix_p_11[,i]) - des*IC2S2J3W_11[i]
+cl_IC3S2J3W_11[] <- c*rec_p[i]*IC3S2J3U_11[i]*sum(cl_mix_p_11[,i]) - des*IC3S2J3W_11[i]
+cl_IC4S2J3W_11[] <- c*rec_p[i]*IC4S2J3U_11[i]*sum(cl_mix_p_11[,i]) - des*IC4S2J3W_11[i]
+
+cl_IC1S2J3W_12[] <- c*rec_p[i]*IC1S2J3U_12[i]*sum(cl_mix_p_12[,i]) - des*IC1S2J3W_12[i]
+cl_IC2S2J3W_12[] <- c*rec_p[i]*IC2S2J3U_12[i]*sum(cl_mix_p_12[,i]) - des*IC2S2J3W_12[i]
+cl_IC3S2J3W_12[] <- c*rec_p[i]*IC3S2J3U_12[i]*sum(cl_mix_p_12[,i]) - des*IC3S2J3W_12[i]
+cl_IC4S2J3W_12[] <- c*rec_p[i]*IC4S2J3U_12[i]*sum(cl_mix_p_12[,i]) - des*IC4S2J3W_12[i]
+
+cl_IC1S2J3W_13[] <- c*rec_p[i]*IC1S2J3U_13[i]*sum(cl_mix_p_13[,i]) - des*IC1S2J3W_13[i]
+cl_IC2S2J3W_13[] <- c*rec_p[i]*IC2S2J3U_13[i]*sum(cl_mix_p_13[,i]) - des*IC2S2J3W_13[i]
+cl_IC3S2J3W_13[] <- c*rec_p[i]*IC3S2J3U_13[i]*sum(cl_mix_p_13[,i]) - des*IC3S2J3W_13[i]
+cl_IC4S2J3W_13[] <- c*rec_p[i]*IC4S2J3U_13[i]*sum(cl_mix_p_13[,i]) - des*IC4S2J3W_13[i]
+
+cl_IC1S2J3W_14[] <- c*rec_p[i]*IC1S2J3U_14[i]*sum(cl_mix_p_14[,i]) - des*IC1S2J3W_14[i]
+cl_IC2S2J3W_14[] <- c*rec_p[i]*IC2S2J3U_14[i]*sum(cl_mix_p_14[,i]) - des*IC2S2J3W_14[i]
+cl_IC3S2J3W_14[] <- c*rec_p[i]*IC3S2J3U_14[i]*sum(cl_mix_p_14[,i]) - des*IC3S2J3W_14[i]
+cl_IC4S2J3W_14[] <- c*rec_p[i]*IC4S2J3U_14[i]*sum(cl_mix_p_14[,i]) - des*IC4S2J3W_14[i]
+
+cl_IC1S2J3W_15[] <- c*rec_p[i]*IC1S2J3U_15[i]*sum(cl_mix_p_15[,i]) - des*IC1S2J3W_15[i]
+cl_IC2S2J3W_15[] <- c*rec_p[i]*IC2S2J3U_15[i]*sum(cl_mix_p_15[,i]) - des*IC2S2J3W_15[i]
+cl_IC3S2J3W_15[] <- c*rec_p[i]*IC3S2J3U_15[i]*sum(cl_mix_p_15[,i]) - des*IC3S2J3W_15[i]
+cl_IC4S2J3W_15[] <- c*rec_p[i]*IC4S2J3U_15[i]*sum(cl_mix_p_15[,i]) - des*IC4S2J3W_15[i]
+
+cl_IC1S2J3W_16[] <- c*rec_i[i]*IC1S2J3U_16[i]*sum(cl_mix_i_16[,i]) - des*IC1S2J3W_16[i]
+cl_IC2S2J3W_16[] <- c*rec_i[i]*IC2S2J3U_16[i]*sum(cl_mix_i_16[,i]) - des*IC2S2J3W_16[i]
+cl_IC3S2J3W_16[] <- c*rec_p[i]*IC3S2J3U_16[i]*sum(cl_mix_p_16[,i]) - des*IC3S2J3W_16[i]
+cl_IC4S2J3W_16[] <- c*rec_i[i]*IC4S2J3U_16[i]*sum(cl_mix_i_16[,i]) - des*IC4S2J3W_16[i]
+
+cl_IC1S2J3W_17[] <- c*rec_i[i]*IC1S2J3U_17[i]*sum(cl_mix_i_17[,i]) - des*IC1S2J3W_17[i]
+cl_IC2S2J3W_17[] <- c*rec_i[i]*IC2S2J3U_17[i]*sum(cl_mix_i_17[,i]) - des*IC2S2J3W_17[i]
+cl_IC3S2J3W_17[] <- c*rec_p[i]*IC3S2J3U_17[i]*sum(cl_mix_p_17[,i]) - des*IC3S2J3W_17[i]
+cl_IC4S2J3W_17[] <- c*rec_i[i]*IC4S2J3U_17[i]*sum(cl_mix_i_17[,i]) - des*IC4S2J3W_17[i]
+
+
 
 cl_IC1S1J4W_10[] <- c*rec_cust*pc_cl[i]*IC1S1J4U_10[i] - det*IC1S1J4W_10[i]
 cl_IC2S1J4W_10[] <- c*rec_cust*pc_cl[i]*IC2S1J4U_10[i] - det*IC2S1J4W_10[i]
@@ -29743,6 +30485,6 @@ cl_EC2S2J5W_17[] <- c*rec_cust*pc_cl[i]*EC2S2J5U_17[i] - det*EC2S2J5W_17[i]
 cl_EC3S2J5W_17[] <- c*rec_cust*pc_cl[i]*EC3S2J5U_17[i] - det*EC3S2J5W_17[i]
 cl_EC4S2J5W_17[] <- c*rec_cust*pc_cl[i]*EC4S2J5U_17[i] - det*EC4S2J5W_17[i]
 
-
 },
 target = 'c')        #or c
+
