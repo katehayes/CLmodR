@@ -233,6 +233,19 @@ ABC_sequential <- function(method, model, prior, nb_simul, summary_stat_target, 
 
 # BELOW HERE IS JUST REJECTION SAMPLING
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 # set up
 N <- 1000 #number of accepted particles
 epsilon <- 20 #epsilon value

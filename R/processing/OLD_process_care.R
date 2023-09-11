@@ -788,15 +788,61 @@ check <- school_pru %>%
   group_by(age, gender, fsm) %>% 
   mutate(pc_2013 = ifelse(end_period_year %in% c(2010:2013), pc_in_pru, NA),
          pc_2013 = mean(pc_2013, na.rm = T),
-         diff = (pc_in_pru - pc_2013)/pc_2013) %>% 
+         diff = pc_in_pru/pc_2013) %>% 
   ungroup()
 
-check %>% 
+pc_diff_pru <- check %>% 
   # mutate(diff = ifelse(gender == "Girls" & age == 11, 0, diff)) %>% 
   ggplot() +
   geom_line(aes(x=as.character(end_period_year), y = diff, group = fsm, colour = fsm)) +
   facet_grid(rows = vars(gender),
-             cols = vars(age))
+             cols = vars(age)) +
+  geom_hline(yintercept=1)
+pc_diff_pru
+ggsave(filename = "output/graphs/pc_diff_pru.png", pc_diff_pru)
+
+
+
+curve_shape <- school_pru %>% 
+  mutate(pc_in_pru = PRU/(PRU + `Not PRU`)) %>% 
+  filter(age <= 15) %>% 
+  group_by(age, gender, fsm) %>% 
+  mutate(pc_2013 = ifelse(end_period_year %in% c(2010:2013), pc_in_pru, NA),
+         pc_2013 = mean(pc_2013, na.rm = T),
+         diff = pc_in_pru/pc_2013) %>% 
+  ungroup() %>% 
+  filter(end_period_year %in% c(2013:2020),
+         age %in% c(12:14),
+         fsm == "FSM eligible",
+         !(gender == "Girls" & age == 12)) %>% 
+  select(end_period_year, gender, age, diff) %>% 
+  group_by(age, gender) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_diff = smooth.spline(end_period_year, diff, lambda = 0.005)$y) %>% 
+  ungroup() %>% 
+  group_by(end_period_year) %>% 
+  summarise(mean_diff = mean(smooth_diff)) %>% 
+  mutate(curve = ifelse(end_period_year == 2017, mean_diff, NA),
+         curve = sum(curve, na.rm = T),
+         curve = mean_diff/curve)
+
+
+curve_shape %>% 
+  ggplot() +
+  geom_line(aes(x=as.character(end_period_year), y = mean_diff, group = gender, colour = gender)) +
+  facet_grid(~age) +
+  geom_hline(yintercept=1)
+
+
+
+
+curve_shape %>% 
+  # mutate(diff = ifelse(gender == "Girls" & age == 11, 0, diff)) %>% 
+  ggplot() +
+  geom_line(aes(x=as.character(end_period_year), y = smooth_diff, group = gender, colour = gender)) +
+  facet_grid(~age) +
+  geom_hline(yintercept=1)
+
 
 
 
