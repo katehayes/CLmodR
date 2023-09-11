@@ -11,6 +11,12 @@
 
 sep_model = odin::odin({
   
+  
+  tau <- user(52)
+  
+  
+  
+  
   ##############################################################################################################################
   ##PARAMETERS########################################################################################################################################
   ##############################################################################################################################
@@ -287,10 +293,182 @@ sep_model = odin::odin({
   miss_ec4u_17[] <- user(0)
   
   
+  ##############################################################################################################################
+  ## Delays ####################################################################
+  ##############################################################################################################################
+  
+  
+  IC1S1_10_lag[] <- delay(IC1S1_10[i], tau)
+  IC2S1_10_lag[] <- delay(IC2S1_10[i], tau)
+  IC3S1_10_lag[] <- delay(IC3S1_10[i], tau)
+  IC4S1_10_lag[] <- delay(IC4S1_10[i], tau)
+  
+  IC1S1_11_lag[] <- delay(IC1S1_11[i], tau)
+  IC2S1_11_lag[] <- delay(IC2S1_11[i], tau)
+  IC3S1_11_lag[] <- delay(IC3S1_11[i], tau)
+  IC4S1_11_lag[] <- delay(IC4S1_11[i], tau)
+  
+  IC1S1_12_lag[] <- delay(IC1S1_12[i], tau)
+  IC2S1_12_lag[] <- delay(IC2S1_12[i], tau)
+  IC3S1_12_lag[] <- delay(IC3S1_12[i], tau)
+  IC4S1_12_lag[] <- delay(IC4S1_12[i], tau)
+  
+  IC1S1_13_lag[] <- delay(IC1S1_13[i], tau)
+  IC2S1_13_lag[] <- delay(IC2S1_13[i], tau)
+  IC3S1_13_lag[] <- delay(IC3S1_13[i], tau)
+  IC4S1_13_lag[] <- delay(IC4S1_13[i], tau)
+  
+  IC1S1_14_lag[] <- delay(IC1S1_14[i], tau)
+  IC2S1_14_lag[] <- delay(IC2S1_14[i], tau)
+  IC3S1_14_lag[] <- delay(IC3S1_14[i], tau)
+  IC4S1_14_lag[] <- delay(IC4S1_14[i], tau)
+  
+  IC1S1_15_lag[] <- delay(IC1S1_15[i], tau)
+  IC2S1_15_lag[] <- delay(IC2S1_15[i], tau)
+  IC3S1_15_lag[] <- delay(IC3S1_15[i], tau)
+  IC4S1_15_lag[] <- delay(IC4S1_15[i], tau)
+  
+  IC1S1_16_lag[] <- delay(IC1S1_16[i], tau)
+  IC2S1_16_lag[] <- delay(IC2S1_16[i], tau)
+  IC3S1_16_lag[] <- delay(IC3S1_16[i], tau)
+  IC4S1_16_lag[] <- delay(IC4S1_16[i], tau)
+  
+  IC1S1_17_lag[] <- delay(IC1S1_17[i], tau)
+  IC2S1_17_lag[] <- delay(IC2S1_17[i], tau)
+  IC3S1_17_lag[] <- delay(IC3S1_17[i], tau)
+  IC4S1_17_lag[] <- delay(IC4S1_17[i], tau)
+  
+  
+  
+  IC1S2_10_lag[] <- delay(IC1S2_10[i], tau)
+  IC2S2_10_lag[] <- delay(IC2S2_10[i], tau)
+  IC3S2_10_lag[] <- delay(IC3S2_10[i], tau)
+  IC4S2_10_lag[] <- delay(IC4S2_10[i], tau)
+  
+  IC1S2_11_lag[] <- delay(IC1S2_11[i], tau)
+  IC2S2_11_lag[] <- delay(IC2S2_11[i], tau)
+  IC3S2_11_lag[] <- delay(IC3S2_11[i], tau)
+  IC4S2_11_lag[] <- delay(IC4S2_11[i], tau)
+  
+  IC1S2_12_lag[] <- delay(IC1S2_12[i], tau)
+  IC2S2_12_lag[] <- delay(IC2S2_12[i], tau)
+  IC3S2_12_lag[] <- delay(IC3S2_12[i], tau)
+  IC4S2_12_lag[] <- delay(IC4S2_12[i], tau)
+  
+  IC1S2_13_lag[] <- delay(IC1S2_13[i], tau)
+  IC2S2_13_lag[] <- delay(IC2S2_13[i], tau)
+  IC3S2_13_lag[] <- delay(IC3S2_13[i], tau)
+  IC4S2_13_lag[] <- delay(IC4S2_13[i], tau)
+  
+  IC1S2_14_lag[] <- delay(IC1S2_14[i], tau)
+  IC2S2_14_lag[] <- delay(IC2S2_14[i], tau)
+  IC3S2_14_lag[] <- delay(IC3S2_14[i], tau)
+  IC4S2_14_lag[] <- delay(IC4S2_14[i], tau)
+  
+  IC1S2_15_lag[] <- delay(IC1S2_15[i], tau)
+  IC2S2_15_lag[] <- delay(IC2S2_15[i], tau)
+  IC3S2_15_lag[] <- delay(IC3S2_15[i], tau)
+  IC4S2_15_lag[] <- delay(IC4S2_15[i], tau)
+  
+  IC1S2_16_lag[] <- delay(IC1S2_16[i], tau)
+  IC2S2_16_lag[] <- delay(IC2S2_16[i], tau)
+  IC3S2_16_lag[] <- delay(IC3S2_16[i], tau)
+  IC4S2_16_lag[] <- delay(IC4S2_16[i], tau)
+  
+  IC1S2_17_lag[] <- delay(IC1S2_17[i], tau)
+  IC2S2_17_lag[] <- delay(IC2S2_17[i], tau)
+  IC3S2_17_lag[] <- delay(IC3S2_17[i], tau)
+  IC4S2_17_lag[] <- delay(IC4S2_17[i], tau)
+  
+  
+  
+  EC1S1_10_lag[] <- delay(EC1S1_10[i], tau)
+  EC2S1_10_lag[] <- delay(EC2S1_10[i], tau)
+  EC3S1_10_lag[] <- delay(EC3S1_10[i], tau)
+  EC4S1_10_lag[] <- delay(EC4S1_10[i], tau)
+  
+  EC1S1_11_lag[] <- delay(EC1S1_11[i], tau)
+  EC2S1_11_lag[] <- delay(EC2S1_11[i], tau)
+  EC3S1_11_lag[] <- delay(EC3S1_11[i], tau)
+  EC4S1_11_lag[] <- delay(EC4S1_11[i], tau)
+  
+  EC1S1_12_lag[] <- delay(EC1S1_12[i], tau)
+  EC2S1_12_lag[] <- delay(EC2S1_12[i], tau)
+  EC3S1_12_lag[] <- delay(EC3S1_12[i], tau)
+  EC4S1_12_lag[] <- delay(EC4S1_12[i], tau)
+  
+  EC1S1_13_lag[] <- delay(EC1S1_13[i], tau)
+  EC2S1_13_lag[] <- delay(EC2S1_13[i], tau)
+  EC3S1_13_lag[] <- delay(EC3S1_13[i], tau)
+  EC4S1_13_lag[] <- delay(EC4S1_13[i], tau)
+  
+  EC1S1_14_lag[] <- delay(EC1S1_14[i], tau)
+  EC2S1_14_lag[] <- delay(EC2S1_14[i], tau)
+  EC3S1_14_lag[] <- delay(EC3S1_14[i], tau)
+  EC4S1_14_lag[] <- delay(EC4S1_14[i], tau)
+  
+  EC1S1_15_lag[] <- delay(EC1S1_15[i], tau)
+  EC2S1_15_lag[] <- delay(EC2S1_15[i], tau)
+  EC3S1_15_lag[] <- delay(EC3S1_15[i], tau)
+  EC4S1_15_lag[] <- delay(EC4S1_15[i], tau)
+  
+  EC1S1_16_lag[] <- delay(EC1S1_16[i], tau)
+  EC2S1_16_lag[] <- delay(EC2S1_16[i], tau)
+  EC3S1_16_lag[] <- delay(EC3S1_16[i], tau)
+  EC4S1_16_lag[] <- delay(EC4S1_16[i], tau)
+  
+  EC1S1_17_lag[] <- delay(EC1S1_17[i], tau)
+  EC2S1_17_lag[] <- delay(EC2S1_17[i], tau)
+  EC3S1_17_lag[] <- delay(EC3S1_17[i], tau)
+  EC4S1_17_lag[] <- delay(EC4S1_17[i], tau)
+  
+  
+  
+  EC1S2_10_lag[] <- delay(EC1S2_10[i], tau)
+  EC2S2_10_lag[] <- delay(EC2S2_10[i], tau)
+  EC3S2_10_lag[] <- delay(EC3S2_10[i], tau)
+  EC4S2_10_lag[] <- delay(EC4S2_10[i], tau)
+  
+  EC1S2_11_lag[] <- delay(EC1S2_11[i], tau)
+  EC2S2_11_lag[] <- delay(EC2S2_11[i], tau)
+  EC3S2_11_lag[] <- delay(EC3S2_11[i], tau)
+  EC4S2_11_lag[] <- delay(EC4S2_11[i], tau)
+  
+  EC1S2_12_lag[] <- delay(EC1S2_12[i], tau)
+  EC2S2_12_lag[] <- delay(EC2S2_12[i], tau)
+  EC3S2_12_lag[] <- delay(EC3S2_12[i], tau)
+  EC4S2_12_lag[] <- delay(EC4S2_12[i], tau)
+  
+  EC1S2_13_lag[] <- delay(EC1S2_13[i], tau)
+  EC2S2_13_lag[] <- delay(EC2S2_13[i], tau)
+  EC3S2_13_lag[] <- delay(EC3S2_13[i], tau)
+  EC4S2_13_lag[] <- delay(EC4S2_13[i], tau)
+  
+  EC1S2_14_lag[] <- delay(EC1S2_14[i], tau)
+  EC2S2_14_lag[] <- delay(EC2S2_14[i], tau)
+  EC3S2_14_lag[] <- delay(EC3S2_14[i], tau)
+  EC4S2_14_lag[] <- delay(EC4S2_14[i], tau)
+  
+  EC1S2_15_lag[] <- delay(EC1S2_15[i], tau)
+  EC2S2_15_lag[] <- delay(EC2S2_15[i], tau)
+  EC3S2_15_lag[] <- delay(EC3S2_15[i], tau)
+  EC4S2_15_lag[] <- delay(EC4S2_15[i], tau)
+  
+  EC1S2_16_lag[] <- delay(EC1S2_16[i], tau)
+  EC2S2_16_lag[] <- delay(EC2S2_16[i], tau)
+  EC3S2_16_lag[] <- delay(EC3S2_16[i], tau)
+  EC4S2_16_lag[] <- delay(EC4S2_16[i], tau)
+  
+  EC1S2_17_lag[] <- delay(EC1S2_17[i], tau)
+  EC2S2_17_lag[] <- delay(EC2S2_17[i], tau)
+  EC3S2_17_lag[] <- delay(EC3S2_17[i], tau)
+  EC4S2_17_lag[] <- delay(EC4S2_17[i], tau)
   
   ##############################################################################################################################
   ## INITIAL CONDITIONS ####################################################################
   ##############################################################################################################################
+  
+  
   IC1S1_10_ini[] <- user(0)
   IC2S1_10_ini[] <- user(0)
   IC3S1_10_ini[] <- user(0)
@@ -974,6 +1152,181 @@ sep_model = odin::odin({
   dim(EC3S2_17_ini) <- N_gender
   dim(EC4S2_17_ini) <- N_gender
   
+  
+  
+  ##############################################################################################################################
+  ##lags####################################################################
+  ##############################################################################################################################
+  
+  
+  
+  dim(IC1S1_10_lag) <- N_gender
+  dim(IC2S1_10_lag) <- N_gender
+  dim(IC3S1_10_lag) <- N_gender
+  dim(IC4S1_10_lag) <- N_gender
+  
+  dim(IC1S1_11_lag) <- N_gender
+  dim(IC2S1_11_lag) <- N_gender
+  dim(IC3S1_11_lag) <- N_gender
+  dim(IC4S1_11_lag) <- N_gender
+  
+  dim(IC1S1_12_lag) <- N_gender
+  dim(IC2S1_12_lag) <- N_gender
+  dim(IC3S1_12_lag) <- N_gender
+  dim(IC4S1_12_lag) <- N_gender
+  
+  dim(IC1S1_13_lag) <- N_gender
+  dim(IC2S1_13_lag) <- N_gender
+  dim(IC3S1_13_lag) <- N_gender
+  dim(IC4S1_13_lag) <- N_gender
+  
+  dim(IC1S1_14_lag) <- N_gender
+  dim(IC2S1_14_lag) <- N_gender
+  dim(IC3S1_14_lag) <- N_gender
+  dim(IC4S1_14_lag) <- N_gender
+  
+  dim(IC1S1_15_lag) <- N_gender
+  dim(IC2S1_15_lag) <- N_gender
+  dim(IC3S1_15_lag) <- N_gender
+  dim(IC4S1_15_lag) <- N_gender
+  
+  dim(IC1S1_16_lag) <- N_gender
+  dim(IC2S1_16_lag) <- N_gender
+  dim(IC3S1_16_lag) <- N_gender
+  dim(IC4S1_16_lag) <- N_gender
+  
+  dim(IC1S1_17_lag) <- N_gender
+  dim(IC2S1_17_lag) <- N_gender
+  dim(IC3S1_17_lag) <- N_gender
+  dim(IC4S1_17_lag) <- N_gender
+  
+  
+  
+  dim(IC1S2_10_lag) <- N_gender
+  dim(IC2S2_10_lag) <- N_gender
+  dim(IC3S2_10_lag) <- N_gender
+  dim(IC4S2_10_lag) <- N_gender
+  
+  dim(IC1S2_11_lag) <- N_gender
+  dim(IC2S2_11_lag) <- N_gender
+  dim(IC3S2_11_lag) <- N_gender
+  dim(IC4S2_11_lag) <- N_gender
+  
+  dim(IC1S2_12_lag) <- N_gender
+  dim(IC2S2_12_lag) <- N_gender
+  dim(IC3S2_12_lag) <- N_gender
+  dim(IC4S2_12_lag) <- N_gender
+  
+  dim(IC1S2_13_lag) <- N_gender
+  dim(IC2S2_13_lag) <- N_gender
+  dim(IC3S2_13_lag) <- N_gender
+  dim(IC4S2_13_lag) <- N_gender
+  
+  dim(IC1S2_14_lag) <- N_gender
+  dim(IC2S2_14_lag) <- N_gender
+  dim(IC3S2_14_lag) <- N_gender
+  dim(IC4S2_14_lag) <- N_gender
+  
+  dim(IC1S2_15_lag) <- N_gender
+  dim(IC2S2_15_lag) <- N_gender
+  dim(IC3S2_15_lag) <- N_gender
+  dim(IC4S2_15_lag) <- N_gender
+  
+  dim(IC1S2_16_lag) <- N_gender
+  dim(IC2S2_16_lag) <- N_gender
+  dim(IC3S2_16_lag) <- N_gender
+  dim(IC4S2_16_lag) <- N_gender
+  
+  dim(IC1S2_17_lag) <- N_gender
+  dim(IC2S2_17_lag) <- N_gender
+  dim(IC3S2_17_lag) <- N_gender
+  dim(IC4S2_17_lag) <- N_gender
+  
+  
+  
+  dim(EC1S1_10_lag) <- N_gender
+  dim(EC2S1_10_lag) <- N_gender
+  dim(EC3S1_10_lag) <- N_gender
+  dim(EC4S1_10_lag) <- N_gender
+  
+  dim(EC1S1_11_lag) <- N_gender
+  dim(EC2S1_11_lag) <- N_gender
+  dim(EC3S1_11_lag) <- N_gender
+  dim(EC4S1_11_lag) <- N_gender
+  
+  dim(EC1S1_12_lag) <- N_gender
+  dim(EC2S1_12_lag) <- N_gender
+  dim(EC3S1_12_lag) <- N_gender
+  dim(EC4S1_12_lag) <- N_gender
+  
+  dim(EC1S1_13_lag) <- N_gender
+  dim(EC2S1_13_lag) <- N_gender
+  dim(EC3S1_13_lag) <- N_gender
+  dim(EC4S1_13_lag) <- N_gender
+  
+  dim(EC1S1_14_lag) <- N_gender
+  dim(EC2S1_14_lag) <- N_gender
+  dim(EC3S1_14_lag) <- N_gender
+  dim(EC4S1_14_lag) <- N_gender
+  
+  dim(EC1S1_15_lag) <- N_gender
+  dim(EC2S1_15_lag) <- N_gender
+  dim(EC3S1_15_lag) <- N_gender
+  dim(EC4S1_15_lag) <- N_gender
+  
+  dim(EC1S1_16_lag) <- N_gender
+  dim(EC2S1_16_lag) <- N_gender
+  dim(EC3S1_16_lag) <- N_gender
+  dim(EC4S1_16_lag) <- N_gender
+  
+  dim(EC1S1_17_lag) <- N_gender
+  dim(EC2S1_17_lag) <- N_gender
+  dim(EC3S1_17_lag) <- N_gender
+  dim(EC4S1_17_lag) <- N_gender
+  
+  
+  
+  dim(EC1S2_10_lag) <- N_gender
+  dim(EC2S2_10_lag) <- N_gender
+  dim(EC3S2_10_lag) <- N_gender
+  dim(EC4S2_10_lag) <- N_gender
+  
+  dim(EC1S2_11_lag) <- N_gender
+  dim(EC2S2_11_lag) <- N_gender
+  dim(EC3S2_11_lag) <- N_gender
+  dim(EC4S2_11_lag) <- N_gender
+  
+  dim(EC1S2_12_lag) <- N_gender
+  dim(EC2S2_12_lag) <- N_gender
+  dim(EC3S2_12_lag) <- N_gender
+  dim(EC4S2_12_lag) <- N_gender
+  
+  dim(EC1S2_13_lag) <- N_gender
+  dim(EC2S2_13_lag) <- N_gender
+  dim(EC3S2_13_lag) <- N_gender
+  dim(EC4S2_13_lag) <- N_gender
+  
+  dim(EC1S2_14_lag) <- N_gender
+  dim(EC2S2_14_lag) <- N_gender
+  dim(EC3S2_14_lag) <- N_gender
+  dim(EC4S2_14_lag) <- N_gender
+  
+  dim(EC1S2_15_lag) <- N_gender
+  dim(EC2S2_15_lag) <- N_gender
+  dim(EC3S2_15_lag) <- N_gender
+  dim(EC4S2_15_lag) <- N_gender
+  
+  dim(EC1S2_16_lag) <- N_gender
+  dim(EC2S2_16_lag) <- N_gender
+  dim(EC3S2_16_lag) <- N_gender
+  dim(EC4S2_16_lag) <- N_gender
+  
+  dim(EC1S2_17_lag) <- N_gender
+  dim(EC2S2_17_lag) <- N_gender
+  dim(EC3S2_17_lag) <- N_gender
+  dim(EC4S2_17_lag) <- N_gender
+  
+  
   # parameters
   dim(turn10) <- N_gender
   
@@ -1232,173 +1585,175 @@ sep_model = odin::odin({
   ##############################################################################################################################
   # DIFFERENTIAL EQUATIONS # # #  # # #
   ###############################################################################################################################
-  deriv(IC1S1_10[]) <- t10_ic1s1[i]*pc_incl*turn10[i] - age_up*IC1S1_10[i] + r[i]*EC1S1_10[i] - f[i]*IC1S1_10[i] - n2care_i_10[i]*IC1S1_10[i] - m2pru_ic1_10[i]*IC1S1_10[i] 
-  deriv(IC2S1_10[]) <- t10_ic2s1[i]*pc_incl*turn10[i] - age_up*IC2S1_10[i] + r[i]*EC2S1_10[i] - f[i]*IC2S1_10[i] + n2nr[i]*n2care_i_10[i]*IC1S1_10[i] + p2nr[i]*p2care[i]*IC4S1_10[i] + r2nr[i]*end_res[i]*IC3S1_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_10[i] - m2pru_ic2_10[i]*IC2S1_10[i] 
-  deriv(IC3S1_10[]) <- t10_ic3s1[i]*pc_incl*turn10[i] - age_up*IC3S1_10[i] + r[i]*EC3S1_10[i] - f[i]*IC3S1_10[i] + n2r[i]*n2care_i_10[i]*IC2S1_10[i] + p2r[i]*p2care[i]*IC4S1_10[i] + nr2r[i]*end_nr[i]*IC2S1_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_10[i] - m2pru_ic3_10[i]*IC3S1_10[i] 
-  deriv(IC4S1_10[]) <- t10_ic4s1[i]*pc_incl*turn10[i] - age_up*IC4S1_10[i] + r[i]*EC4S1_10[i] - f[i]*IC4S1_10[i] + nr2p[i]*end_nr[i]*IC2S1_10[i] + r2p[i]*end_res[i]*IC3S1_10[i] - p2care[i]*IC4S1_10[i] - m2pru_ic4_10[i]*IC4S1_10[i] 
+  deriv(IC1S1_10[]) <- t10_ic1s1[i]*pc_incl*turn10[i] - age_up*IC1S1_10_lag[i] + r[i]*EC1S1_10[i] - f[i]*IC1S1_10[i] - n2care_i_10[i]*IC1S1_10[i] - m2pru_ic1_10[i]*IC1S1_10[i] 
+  deriv(IC2S1_10[]) <- t10_ic2s1[i]*pc_incl*turn10[i] - age_up*IC2S1_10_lag[i] + r[i]*EC2S1_10[i] - f[i]*IC2S1_10[i] + n2nr[i]*n2care_i_10[i]*IC1S1_10[i] + p2nr[i]*p2care[i]*IC4S1_10[i] + r2nr[i]*end_res[i]*IC3S1_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_10[i] - m2pru_ic2_10[i]*IC2S1_10[i] 
+  deriv(IC3S1_10[]) <- t10_ic3s1[i]*pc_incl*turn10[i] - age_up*IC3S1_10_lag[i] + r[i]*EC3S1_10[i] - f[i]*IC3S1_10[i] + n2r[i]*n2care_i_10[i]*IC2S1_10[i] + p2r[i]*p2care[i]*IC4S1_10[i] + nr2r[i]*end_nr[i]*IC2S1_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_10[i] - m2pru_ic3_10[i]*IC3S1_10[i] 
+  deriv(IC4S1_10[]) <- t10_ic4s1[i]*pc_incl*turn10[i] - age_up*IC4S1_10_lag[i] + r[i]*EC4S1_10[i] - f[i]*IC4S1_10[i] + nr2p[i]*end_nr[i]*IC2S1_10[i] + r2p[i]*end_res[i]*IC3S1_10[i] - p2care[i]*IC4S1_10[i] - m2pru_ic4_10[i]*IC4S1_10[i] 
   
-  deriv(IC1S1_11[]) <- age_up*(IC1S1_10[i] + IC1S2_10[i]) - age_up*IC1S1_11[i] + r[i]*EC1S1_11[i] - f[i]*IC1S1_11[i] - n2care_i_11[i]*IC1S1_11[i] - m2pru_ic1_11[i]*IC1S1_11[i] 
-  deriv(IC2S1_11[]) <- age_up*(IC2S1_10[i] + IC2S2_10[i]) - age_up*IC2S1_11[i] + r[i]*EC2S1_11[i] - f[i]*IC2S1_11[i] + n2nr[i]*n2care_i_11[i]*IC1S1_11[i] + p2nr[i]*p2care[i]*IC4S1_11[i] + r2nr[i]*end_res[i]*IC3S1_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_11[i] - m2pru_ic2_11[i]*IC2S1_11[i] 
-  deriv(IC3S1_11[]) <- age_up*(IC3S1_10[i] + IC3S2_10[i]) - age_up*IC3S1_11[i] + r[i]*EC3S1_11[i] - f[i]*IC3S1_11[i] + n2r[i]*n2care_i_11[i]*IC2S1_11[i] + p2r[i]*p2care[i]*IC4S1_11[i] + nr2r[i]*end_nr[i]*IC2S1_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_11[i] - m2pru_ic3_11[i]*IC3S1_11[i] 
-  deriv(IC4S1_11[]) <- age_up*(IC4S1_10[i] + IC4S2_10[i]) - age_up*IC4S1_11[i] + r[i]*EC4S1_11[i] - f[i]*IC4S1_11[i] + nr2p[i]*end_nr[i]*IC2S1_11[i] + r2p[i]*end_res[i]*IC3S1_11[i] - p2care[i]*IC4S1_11[i] - m2pru_ic4_11[i]*IC4S1_11[i] 
+  deriv(IC1S1_11[]) <- age_up*(IC1S1_10_lag[i] + IC1S2_10_lag[i]) - age_up*IC1S1_11_lag[i] + r[i]*EC1S1_11[i] - f[i]*IC1S1_11[i] - n2care_i_11[i]*IC1S1_11[i] - m2pru_ic1_11[i]*IC1S1_11[i] 
+  deriv(IC2S1_11[]) <- age_up*(IC2S1_10_lag[i] + IC2S2_10_lag[i]) - age_up*IC2S1_11_lag[i] + r[i]*EC2S1_11[i] - f[i]*IC2S1_11[i] + n2nr[i]*n2care_i_11[i]*IC1S1_11[i] + p2nr[i]*p2care[i]*IC4S1_11[i] + r2nr[i]*end_res[i]*IC3S1_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_11[i] - m2pru_ic2_11[i]*IC2S1_11[i] 
+  deriv(IC3S1_11[]) <- age_up*(IC3S1_10_lag[i] + IC3S2_10_lag[i]) - age_up*IC3S1_11_lag[i] + r[i]*EC3S1_11[i] - f[i]*IC3S1_11[i] + n2r[i]*n2care_i_11[i]*IC2S1_11[i] + p2r[i]*p2care[i]*IC4S1_11[i] + nr2r[i]*end_nr[i]*IC2S1_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_11[i] - m2pru_ic3_11[i]*IC3S1_11[i] 
+  deriv(IC4S1_11[]) <- age_up*(IC4S1_10_lag[i] + IC4S2_10_lag[i]) - age_up*IC4S1_11_lag[i] + r[i]*EC4S1_11[i] - f[i]*IC4S1_11[i] + nr2p[i]*end_nr[i]*IC2S1_11[i] + r2p[i]*end_res[i]*IC3S1_11[i] - p2care[i]*IC4S1_11[i] - m2pru_ic4_11[i]*IC4S1_11[i] 
   
-  deriv(IC1S1_12[]) <- age_up*IC1S1_11[i] - age_up*IC1S1_12[i] + r[i]*EC1S1_12[i] - f[i]*IC1S1_12[i] - n2care_i_12[i]*IC1S1_12[i] - m2pru_ic1_12[i]*IC1S1_12[i] 
-  deriv(IC2S1_12[]) <- age_up*IC2S1_11[i] - age_up*IC2S1_12[i] + r[i]*EC2S1_12[i] - f[i]*IC2S1_12[i] + n2nr[i]*n2care_i_12[i]*IC1S1_12[i] + p2nr[i]*p2care[i]*IC4S1_12[i] + r2nr[i]*end_res[i]*IC3S1_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_12[i] - m2pru_ic2_12[i]*IC2S1_12[i] 
-  deriv(IC3S1_12[]) <- age_up*IC3S1_11[i] - age_up*IC3S1_12[i] + r[i]*EC3S1_12[i] - f[i]*IC3S1_12[i] + n2r[i]*n2care_i_12[i]*IC2S1_12[i] + p2r[i]*p2care[i]*IC4S1_12[i] + nr2r[i]*end_nr[i]*IC2S1_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_12[i] - m2pru_ic3_12[i]*IC3S1_12[i] 
-  deriv(IC4S1_12[]) <- age_up*IC4S1_11[i] - age_up*IC4S1_12[i] + r[i]*EC4S1_12[i] - f[i]*IC4S1_12[i] + nr2p[i]*end_nr[i]*IC2S1_12[i] + r2p[i]*end_res[i]*IC3S1_12[i] - p2care[i]*IC4S1_12[i] - m2pru_ic4_12[i]*IC4S1_12[i] 
+  deriv(IC1S1_12[]) <- age_up*IC1S1_11_lag[i] - age_up*IC1S1_12_lag[i] + r[i]*EC1S1_12[i] - f[i]*IC1S1_12[i] - n2care_i_12[i]*IC1S1_12[i] - m2pru_ic1_12[i]*IC1S1_12[i] 
+  deriv(IC2S1_12[]) <- age_up*IC2S1_11_lag[i] - age_up*IC2S1_12_lag[i] + r[i]*EC2S1_12[i] - f[i]*IC2S1_12[i] + n2nr[i]*n2care_i_12[i]*IC1S1_12[i] + p2nr[i]*p2care[i]*IC4S1_12[i] + r2nr[i]*end_res[i]*IC3S1_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_12[i] - m2pru_ic2_12[i]*IC2S1_12[i] 
+  deriv(IC3S1_12[]) <- age_up*IC3S1_11_lag[i] - age_up*IC3S1_12_lag[i] + r[i]*EC3S1_12[i] - f[i]*IC3S1_12[i] + n2r[i]*n2care_i_12[i]*IC2S1_12[i] + p2r[i]*p2care[i]*IC4S1_12[i] + nr2r[i]*end_nr[i]*IC2S1_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_12[i] - m2pru_ic3_12[i]*IC3S1_12[i] 
+  deriv(IC4S1_12[]) <- age_up*IC4S1_11_lag[i] - age_up*IC4S1_12_lag[i] + r[i]*EC4S1_12[i] - f[i]*IC4S1_12[i] + nr2p[i]*end_nr[i]*IC2S1_12[i] + r2p[i]*end_res[i]*IC3S1_12[i] - p2care[i]*IC4S1_12[i] - m2pru_ic4_12[i]*IC4S1_12[i] 
   
-  deriv(IC1S1_13[]) <- age_up*IC1S1_12[i] - age_up*IC1S1_13[i] + r[i]*EC1S1_13[i] - f[i]*IC1S1_13[i] - n2care_i_13[i]*IC1S1_13[i] - m2pru_ic1_13[i]*IC1S1_13[i] 
-  deriv(IC2S1_13[]) <- age_up*IC2S1_12[i] - age_up*IC2S1_13[i] + r[i]*EC2S1_13[i] - f[i]*IC2S1_13[i] + n2nr[i]*n2care_i_13[i]*IC1S1_13[i] + p2nr[i]*p2care[i]*IC4S1_13[i] + r2nr[i]*end_res[i]*IC3S1_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_13[i] - m2pru_ic2_13[i]*IC2S1_13[i] 
-  deriv(IC3S1_13[]) <- age_up*IC3S1_12[i] - age_up*IC3S1_13[i] + r[i]*EC3S1_13[i] - f[i]*IC3S1_13[i] + n2r[i]*n2care_i_13[i]*IC2S1_13[i] + p2r[i]*p2care[i]*IC4S1_13[i] + nr2r[i]*end_nr[i]*IC2S1_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_13[i] - m2pru_ic3_13[i]*IC3S1_13[i] 
-  deriv(IC4S1_13[]) <- age_up*IC4S1_12[i] - age_up*IC4S1_13[i] + r[i]*EC4S1_13[i] - f[i]*IC4S1_13[i] + nr2p[i]*end_nr[i]*IC2S1_13[i] + r2p[i]*end_res[i]*IC3S1_13[i] - p2care[i]*IC4S1_13[i] - m2pru_ic4_13[i]*IC4S1_13[i] 
+  deriv(IC1S1_13[]) <- age_up*IC1S1_12_lag[i] - age_up*IC1S1_13_lag[i] + r[i]*EC1S1_13[i] - f[i]*IC1S1_13[i] - n2care_i_13[i]*IC1S1_13[i] - m2pru_ic1_13[i]*IC1S1_13[i] 
+  deriv(IC2S1_13[]) <- age_up*IC2S1_12_lag[i] - age_up*IC2S1_13_lag[i] + r[i]*EC2S1_13[i] - f[i]*IC2S1_13[i] + n2nr[i]*n2care_i_13[i]*IC1S1_13[i] + p2nr[i]*p2care[i]*IC4S1_13[i] + r2nr[i]*end_res[i]*IC3S1_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_13[i] - m2pru_ic2_13[i]*IC2S1_13[i] 
+  deriv(IC3S1_13[]) <- age_up*IC3S1_12_lag[i] - age_up*IC3S1_13_lag[i] + r[i]*EC3S1_13[i] - f[i]*IC3S1_13[i] + n2r[i]*n2care_i_13[i]*IC2S1_13[i] + p2r[i]*p2care[i]*IC4S1_13[i] + nr2r[i]*end_nr[i]*IC2S1_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_13[i] - m2pru_ic3_13[i]*IC3S1_13[i] 
+  deriv(IC4S1_13[]) <- age_up*IC4S1_12_lag[i] - age_up*IC4S1_13_lag[i] + r[i]*EC4S1_13[i] - f[i]*IC4S1_13[i] + nr2p[i]*end_nr[i]*IC2S1_13[i] + r2p[i]*end_res[i]*IC3S1_13[i] - p2care[i]*IC4S1_13[i] - m2pru_ic4_13[i]*IC4S1_13[i] 
   
-  deriv(IC1S1_14[]) <- age_up*IC1S1_13[i] - age_up*IC1S1_14[i] + r[i]*EC1S1_14[i] - f[i]*IC1S1_14[i] - n2care_i_14[i]*IC1S1_14[i] - m2pru_ic1_14[i]*IC1S1_14[i] 
-  deriv(IC2S1_14[]) <- age_up*IC2S1_13[i] - age_up*IC2S1_14[i] + r[i]*EC2S1_14[i] - f[i]*IC2S1_14[i] + n2nr[i]*n2care_i_14[i]*IC1S1_14[i] + p2nr[i]*p2care[i]*IC4S1_14[i] + r2nr[i]*end_res[i]*IC3S1_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_14[i] - m2pru_ic2_14[i]*IC2S1_14[i] 
-  deriv(IC3S1_14[]) <- age_up*IC3S1_13[i] - age_up*IC3S1_14[i] + r[i]*EC3S1_14[i] - f[i]*IC3S1_14[i] + n2r[i]*n2care_i_14[i]*IC2S1_14[i] + p2r[i]*p2care[i]*IC4S1_14[i] + nr2r[i]*end_nr[i]*IC2S1_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_14[i] - m2pru_ic3_14[i]*IC3S1_14[i] 
-  deriv(IC4S1_14[]) <- age_up*IC4S1_13[i] - age_up*IC4S1_14[i] + r[i]*EC4S1_14[i] - f[i]*IC4S1_14[i] + nr2p[i]*end_nr[i]*IC2S1_14[i] + r2p[i]*end_res[i]*IC3S1_14[i] - p2care[i]*IC4S1_14[i] - m2pru_ic4_14[i]*IC4S1_14[i] 
+  deriv(IC1S1_14[]) <- age_up*IC1S1_13_lag[i] - age_up*IC1S1_14_lag[i] + r[i]*EC1S1_14[i] - f[i]*IC1S1_14[i] - n2care_i_14[i]*IC1S1_14[i] - m2pru_ic1_14[i]*IC1S1_14[i] 
+  deriv(IC2S1_14[]) <- age_up*IC2S1_13_lag[i] - age_up*IC2S1_14_lag[i] + r[i]*EC2S1_14[i] - f[i]*IC2S1_14[i] + n2nr[i]*n2care_i_14[i]*IC1S1_14[i] + p2nr[i]*p2care[i]*IC4S1_14[i] + r2nr[i]*end_res[i]*IC3S1_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_14[i] - m2pru_ic2_14[i]*IC2S1_14[i] 
+  deriv(IC3S1_14[]) <- age_up*IC3S1_13_lag[i] - age_up*IC3S1_14_lag[i] + r[i]*EC3S1_14[i] - f[i]*IC3S1_14[i] + n2r[i]*n2care_i_14[i]*IC2S1_14[i] + p2r[i]*p2care[i]*IC4S1_14[i] + nr2r[i]*end_nr[i]*IC2S1_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_14[i] - m2pru_ic3_14[i]*IC3S1_14[i] 
+  deriv(IC4S1_14[]) <- age_up*IC4S1_13_lag[i] - age_up*IC4S1_14_lag[i] + r[i]*EC4S1_14[i] - f[i]*IC4S1_14[i] + nr2p[i]*end_nr[i]*IC2S1_14[i] + r2p[i]*end_res[i]*IC3S1_14[i] - p2care[i]*IC4S1_14[i] - m2pru_ic4_14[i]*IC4S1_14[i] 
   
-  deriv(IC1S1_15[]) <- age_up*IC1S1_14[i] - age_up*IC1S1_15[i] + r[i]*EC1S1_15[i] - f[i]*IC1S1_15[i] - n2care_i_15[i]*IC1S1_15[i] - m2pru_ic1_15[i]*IC1S1_15[i] 
-  deriv(IC2S1_15[]) <- age_up*IC2S1_14[i] - age_up*IC2S1_15[i] + r[i]*EC2S1_15[i] - f[i]*IC2S1_15[i] + n2nr[i]*n2care_i_15[i]*IC1S1_15[i] + p2nr[i]*p2care[i]*IC4S1_15[i] + r2nr[i]*end_res[i]*IC3S1_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_15[i] - m2pru_ic2_15[i]*IC2S1_15[i] 
-  deriv(IC3S1_15[]) <- age_up*IC3S1_14[i] - age_up*IC3S1_15[i] + r[i]*EC3S1_15[i] - f[i]*IC3S1_15[i] + n2r[i]*n2care_i_15[i]*IC2S1_15[i] + p2r[i]*p2care[i]*IC4S1_15[i] + nr2r[i]*end_nr[i]*IC2S1_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_15[i] - m2pru_ic3_15[i]*IC3S1_15[i] 
-  deriv(IC4S1_15[]) <- age_up*IC4S1_14[i] - age_up*IC4S1_15[i] + r[i]*EC4S1_15[i] - f[i]*IC4S1_15[i] + nr2p[i]*end_nr[i]*IC2S1_15[i] + r2p[i]*end_res[i]*IC3S1_15[i] - p2care[i]*IC4S1_15[i] - m2pru_ic4_15[i]*IC4S1_15[i] 
+  deriv(IC1S1_15[]) <- age_up*IC1S1_14_lag[i] - age_up*IC1S1_15_lag[i] + r[i]*EC1S1_15[i] - f[i]*IC1S1_15[i] - n2care_i_15[i]*IC1S1_15[i] - m2pru_ic1_15[i]*IC1S1_15[i] 
+  deriv(IC2S1_15[]) <- age_up*IC2S1_14_lag[i] - age_up*IC2S1_15_lag[i] + r[i]*EC2S1_15[i] - f[i]*IC2S1_15[i] + n2nr[i]*n2care_i_15[i]*IC1S1_15[i] + p2nr[i]*p2care[i]*IC4S1_15[i] + r2nr[i]*end_res[i]*IC3S1_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_15[i] - m2pru_ic2_15[i]*IC2S1_15[i] 
+  deriv(IC3S1_15[]) <- age_up*IC3S1_14_lag[i] - age_up*IC3S1_15_lag[i] + r[i]*EC3S1_15[i] - f[i]*IC3S1_15[i] + n2r[i]*n2care_i_15[i]*IC2S1_15[i] + p2r[i]*p2care[i]*IC4S1_15[i] + nr2r[i]*end_nr[i]*IC2S1_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_15[i] - m2pru_ic3_15[i]*IC3S1_15[i] 
+  deriv(IC4S1_15[]) <- age_up*IC4S1_14_lag[i] - age_up*IC4S1_15_lag[i] + r[i]*EC4S1_15[i] - f[i]*IC4S1_15[i] + nr2p[i]*end_nr[i]*IC2S1_15[i] + r2p[i]*end_res[i]*IC3S1_15[i] - p2care[i]*IC4S1_15[i] - m2pru_ic4_15[i]*IC4S1_15[i] 
   
-  deriv(IC1S1_16[]) <- age_up*(neet16_ic1s1[i]*IC1S1_15[i] + neet16_ic1s2[i]*IC1S2_15[i]) - age_up*IC1S1_16[i] + r[i]*EC1S1_16[i] - f[i]*IC1S1_16[i] - n2care_i_16[i]*IC1S1_16[i] + neet2m_i[i]*IC1S2_16[i] - m2neet_ic1_16[i]*IC1S1_16[i] 
-  deriv(IC2S1_16[]) <- age_up*(neet16_ic2s1[i]*IC2S1_15[i] + neet16_ic2s2[i]*IC2S2_15[i]) - age_up*IC2S1_16[i] + r[i]*EC2S1_16[i] - f[i]*IC2S1_16[i] + n2nr[i]*n2care_i_16[i]*IC1S1_16[i] + p2nr[i]*p2care[i]*IC4S1_16[i] + r2nr[i]*end_res[i]*IC3S1_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_16[i] + neet2m_i[i]*IC2S2_16[i] - m2neet_ic2_16[i]*IC2S1_16[i] 
-  deriv(IC3S1_16[]) <- age_up*(neet16_ic3s1[i]*IC3S1_15[i] + neet16_ic3s2[i]*IC3S2_15[i]) - age_up*IC3S1_16[i] + r[i]*EC3S1_16[i] - f[i]*IC3S1_16[i] + n2r[i]*n2care_i_16[i]*IC2S1_16[i] + p2r[i]*p2care[i]*IC4S1_16[i] + nr2r[i]*end_nr[i]*IC2S1_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_16[i] + neet2m_i[i]*IC3S2_16[i] - m2neet_ic3_16[i]*IC3S1_16[i] 
-  deriv(IC4S1_16[]) <- age_up*(neet16_ic4s1[i]*IC4S1_15[i] + neet16_ic4s2[i]*IC4S2_15[i]) - age_up*IC4S1_16[i] + r[i]*EC4S1_16[i] - f[i]*IC4S1_16[i] + nr2p[i]*end_nr[i]*IC2S1_16[i] + r2p[i]*end_res[i]*IC3S1_16[i] - p2care[i]*IC4S1_16[i] + neet2m_i[i]*IC4S2_16[i] - m2neet_ic4_16[i]*IC4S1_16[i] 
+  # SEEMS LIKE THE INTUITIVE MEANING OF NEET16 IS THE PC OF KIDS THAT ARE NEET STRAIGHT AWAY ON TURNING 16
+  # SO THE WAY ITS INCLUDED HERE IS BACKWARDS!!
+  deriv(IC1S1_16[]) <- age_up*(neet16_ic1s1[i]*IC1S1_15_lag[i] + neet16_ic1s2[i]*IC1S2_15_lag[i]) - age_up*IC1S1_16_lag[i] + r[i]*EC1S1_16[i] - f[i]*IC1S1_16[i] - n2care_i_16[i]*IC1S1_16[i] + neet2m_i[i]*IC1S2_16[i] - m2neet_ic1_16[i]*IC1S1_16[i] 
+  deriv(IC2S1_16[]) <- age_up*(neet16_ic2s1[i]*IC2S1_15_lag[i] + neet16_ic2s2[i]*IC2S2_15_lag[i]) - age_up*IC2S1_16_lag[i] + r[i]*EC2S1_16[i] - f[i]*IC2S1_16[i] + n2nr[i]*n2care_i_16[i]*IC1S1_16[i] + p2nr[i]*p2care[i]*IC4S1_16[i] + r2nr[i]*end_res[i]*IC3S1_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_16[i] + neet2m_i[i]*IC2S2_16[i] - m2neet_ic2_16[i]*IC2S1_16[i] 
+  deriv(IC3S1_16[]) <- age_up*(neet16_ic3s1[i]*IC3S1_15_lag[i] + neet16_ic3s2[i]*IC3S2_15_lag[i]) - age_up*IC3S1_16_lag[i] + r[i]*EC3S1_16[i] - f[i]*IC3S1_16[i] + n2r[i]*n2care_i_16[i]*IC2S1_16[i] + p2r[i]*p2care[i]*IC4S1_16[i] + nr2r[i]*end_nr[i]*IC2S1_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_16[i] + neet2m_i[i]*IC3S2_16[i] - m2neet_ic3_16[i]*IC3S1_16[i] 
+  deriv(IC4S1_16[]) <- age_up*(neet16_ic4s1[i]*IC4S1_15_lag[i] + neet16_ic4s2[i]*IC4S2_15_lag[i]) - age_up*IC4S1_16_lag[i] + r[i]*EC4S1_16[i] - f[i]*IC4S1_16[i] + nr2p[i]*end_nr[i]*IC2S1_16[i] + r2p[i]*end_res[i]*IC3S1_16[i] - p2care[i]*IC4S1_16[i] + neet2m_i[i]*IC4S2_16[i] - m2neet_ic4_16[i]*IC4S1_16[i] 
   
-  deriv(IC1S1_17[]) <- age_up*IC1S1_16[i] - age_up*IC1S1_17[i] + r[i]*EC1S1_17[i] - f[i]*IC1S1_17[i] - n2care_i_17[i]*IC1S1_17[i] + neet2m_i[i]*IC1S2_17[i] - m2neet_ic1_17[i]*IC1S1_17[i] 
-  deriv(IC2S1_17[]) <- age_up*IC2S1_16[i] - age_up*IC2S1_17[i] + r[i]*EC2S1_17[i] - f[i]*IC2S1_17[i] + n2nr[i]*n2care_i_17[i]*IC1S1_17[i] + p2nr[i]*p2care[i]*IC4S1_17[i] + r2nr[i]*end_res[i]*IC3S1_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_17[i] + neet2m_i[i]*IC2S2_17[i] - m2neet_ic2_17[i]*IC2S1_17[i] 
-  deriv(IC3S1_17[]) <- age_up*IC3S1_16[i] - age_up*IC3S1_17[i] + r[i]*EC3S1_17[i] - f[i]*IC3S1_17[i] + n2r[i]*n2care_i_17[i]*IC2S1_17[i] + p2r[i]*p2care[i]*IC4S1_17[i] + nr2r[i]*end_nr[i]*IC2S1_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_17[i] + neet2m_i[i]*IC3S2_17[i] - m2neet_ic3_17[i]*IC3S1_17[i] 
-  deriv(IC4S1_17[]) <- age_up*IC4S1_16[i] - age_up*IC4S1_17[i] + r[i]*EC4S1_17[i] - f[i]*IC4S1_17[i] + nr2p[i]*end_nr[i]*IC2S1_17[i] + r2p[i]*end_res[i]*IC3S1_17[i] - p2care[i]*IC4S1_17[i] + neet2m_i[i]*IC4S2_17[i] - m2neet_ic4_17[i]*IC4S1_17[i] 
-  
-  
-  
-  deriv(IC1S2_10[]) <- t10_ic1s2[i]*pc_incl*turn10[i] - age_up*IC1S2_10[i] + r[i]*EC1S2_10[i] - f[i]*IC1S2_10[i] - n2care_i_10[i]*IC1S2_10[i] + m2pru_ic1_10[i]*IC1S1_10[i] 
-  deriv(IC2S2_10[]) <- t10_ic2s2[i]*pc_incl*turn10[i] - age_up*IC2S2_10[i] + r[i]*EC2S2_10[i] - f[i]*IC2S2_10[i] + n2nr[i]*n2care_i_10[i]*IC1S2_10[i] + p2nr[i]*p2care[i]*IC4S2_10[i] + r2nr[i]*end_res[i]*IC3S2_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_10[i] + m2pru_ic2_10[i]*IC2S1_10[i] 
-  deriv(IC3S2_10[]) <- t10_ic3s2[i]*pc_incl*turn10[i] - age_up*IC3S2_10[i] + r[i]*EC3S2_10[i] - f[i]*IC3S2_10[i] + n2r[i]*n2care_i_10[i]*IC2S2_10[i] + p2r[i]*p2care[i]*IC4S2_10[i] + nr2r[i]*end_nr[i]*IC2S2_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_10[i] + m2pru_ic3_10[i]*IC3S1_10[i] 
-  deriv(IC4S2_10[]) <- t10_ic4s2[i]*pc_incl*turn10[i] - age_up*IC4S2_10[i] + r[i]*EC4S2_10[i] - f[i]*IC4S2_10[i] + nr2p[i]*end_nr[i]*IC2S2_10[i] + r2p[i]*end_res[i]*IC3S2_10[i] - p2care[i]*IC4S2_10[i] + m2pru_ic4_10[i]*IC4S1_10[i] 
-  
-  deriv(IC1S2_11[]) <- -age_up*IC1S2_11[i] + r[i]*EC1S2_11[i] - f[i]*IC1S2_11[i] - n2care_i_11[i]*IC1S2_11[i] + m2pru_ic1_11[i]*IC1S1_11[i] 
-  deriv(IC2S2_11[]) <- -age_up*IC2S2_11[i] + r[i]*EC2S2_11[i] - f[i]*IC2S2_11[i] + n2nr[i]*n2care_i_11[i]*IC1S2_11[i] + p2nr[i]*p2care[i]*IC4S2_11[i] + r2nr[i]*end_res[i]*IC3S2_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_11[i] + m2pru_ic2_11[i]*IC2S1_11[i] 
-  deriv(IC3S2_11[]) <- -age_up*IC3S2_11[i] + r[i]*EC3S2_11[i] - f[i]*IC3S2_11[i] + n2r[i]*n2care_i_11[i]*IC2S2_11[i] + p2r[i]*p2care[i]*IC4S2_11[i] + nr2r[i]*end_nr[i]*IC2S2_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_11[i] + m2pru_ic3_11[i]*IC3S1_11[i] 
-  deriv(IC4S2_11[]) <- -age_up*IC4S2_11[i] + r[i]*EC4S2_11[i] - f[i]*IC4S2_11[i] + nr2p[i]*end_nr[i]*IC2S2_11[i] + r2p[i]*end_res[i]*IC3S2_11[i] - p2care[i]*IC4S2_11[i] + m2pru_ic4_11[i]*IC4S1_11[i] 
-  
-  deriv(IC1S2_12[]) <- age_up*IC1S2_11[i] - age_up*IC1S2_12[i] + r[i]*EC1S2_12[i] - f[i]*IC1S2_12[i] - n2care_i_12[i]*IC1S2_12[i] + m2pru_ic1_12[i]*IC1S1_12[i] 
-  deriv(IC2S2_12[]) <- age_up*IC2S2_11[i] - age_up*IC2S2_12[i] + r[i]*EC2S2_12[i] - f[i]*IC2S2_12[i] + n2nr[i]*n2care_i_12[i]*IC1S2_12[i] + p2nr[i]*p2care[i]*IC4S2_12[i] + r2nr[i]*end_res[i]*IC3S2_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_12[i] + m2pru_ic2_12[i]*IC2S1_12[i] 
-  deriv(IC3S2_12[]) <- age_up*IC3S2_11[i] - age_up*IC3S2_12[i] + r[i]*EC3S2_12[i] - f[i]*IC3S2_12[i] + n2r[i]*n2care_i_12[i]*IC2S2_12[i] + p2r[i]*p2care[i]*IC4S2_12[i] + nr2r[i]*end_nr[i]*IC2S2_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_12[i] + m2pru_ic3_12[i]*IC3S1_12[i] 
-  deriv(IC4S2_12[]) <- age_up*IC4S2_11[i] - age_up*IC4S2_12[i] + r[i]*EC4S2_12[i] - f[i]*IC4S2_12[i] + nr2p[i]*end_nr[i]*IC2S2_12[i] + r2p[i]*end_res[i]*IC3S2_12[i] - p2care[i]*IC4S2_12[i] + m2pru_ic4_12[i]*IC4S1_12[i] 
-  
-  deriv(IC1S2_13[]) <- age_up*IC1S2_12[i] - age_up*IC1S2_13[i] + r[i]*EC1S2_13[i] - f[i]*IC1S2_13[i] - n2care_i_13[i]*IC1S2_13[i] + m2pru_ic1_13[i]*IC1S1_13[i] 
-  deriv(IC2S2_13[]) <- age_up*IC2S2_12[i] - age_up*IC2S2_13[i] + r[i]*EC2S2_13[i] - f[i]*IC2S2_13[i] + n2nr[i]*n2care_i_13[i]*IC1S2_13[i] + p2nr[i]*p2care[i]*IC4S2_13[i] + r2nr[i]*end_res[i]*IC3S2_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_13[i] + m2pru_ic2_13[i]*IC2S1_13[i] 
-  deriv(IC3S2_13[]) <- age_up*IC3S2_12[i] - age_up*IC3S2_13[i] + r[i]*EC3S2_13[i] - f[i]*IC3S2_13[i] + n2r[i]*n2care_i_13[i]*IC2S2_13[i] + p2r[i]*p2care[i]*IC4S2_13[i] + nr2r[i]*end_nr[i]*IC2S2_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_13[i] + m2pru_ic3_13[i]*IC3S1_13[i] 
-  deriv(IC4S2_13[]) <- age_up*IC4S2_12[i] - age_up*IC4S2_13[i] + r[i]*EC4S2_13[i] - f[i]*IC4S2_13[i] + nr2p[i]*end_nr[i]*IC2S2_13[i] + r2p[i]*end_res[i]*IC3S2_13[i] - p2care[i]*IC4S2_13[i] + m2pru_ic4_13[i]*IC4S1_13[i] 
-  
-  deriv(IC1S2_14[]) <- age_up*IC1S2_13[i] - age_up*IC1S2_14[i] + r[i]*EC1S2_14[i] - f[i]*IC1S2_14[i] - n2care_i_14[i]*IC1S2_14[i] + m2pru_ic1_14[i]*IC1S1_14[i] 
-  deriv(IC2S2_14[]) <- age_up*IC2S2_13[i] - age_up*IC2S2_14[i] + r[i]*EC2S2_14[i] - f[i]*IC2S2_14[i] + n2nr[i]*n2care_i_14[i]*IC1S2_14[i] + p2nr[i]*p2care[i]*IC4S2_14[i] + r2nr[i]*end_res[i]*IC3S2_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_14[i] + m2pru_ic2_14[i]*IC2S1_14[i] 
-  deriv(IC3S2_14[]) <- age_up*IC3S2_13[i] - age_up*IC3S2_14[i] + r[i]*EC3S2_14[i] - f[i]*IC3S2_14[i] + n2r[i]*n2care_i_14[i]*IC2S2_14[i] + p2r[i]*p2care[i]*IC4S2_14[i] + nr2r[i]*end_nr[i]*IC2S2_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_14[i] + m2pru_ic3_14[i]*IC3S1_14[i] 
-  deriv(IC4S2_14[]) <- age_up*IC4S2_13[i] - age_up*IC4S2_14[i] + r[i]*EC4S2_14[i] - f[i]*IC4S2_14[i] + nr2p[i]*end_nr[i]*IC2S2_14[i] + r2p[i]*end_res[i]*IC3S2_14[i] - p2care[i]*IC4S2_14[i] + m2pru_ic4_14[i]*IC4S1_14[i] 
-  
-  deriv(IC1S2_15[]) <- age_up*IC1S2_14[i] - age_up*IC1S2_15[i] + r[i]*EC1S2_15[i] - f[i]*IC1S2_15[i] - n2care_i_15[i]*IC1S2_15[i] + m2pru_ic1_15[i]*IC1S1_15[i] 
-  deriv(IC2S2_15[]) <- age_up*IC2S2_14[i] - age_up*IC2S2_15[i] + r[i]*EC2S2_15[i] - f[i]*IC2S2_15[i] + n2nr[i]*n2care_i_15[i]*IC1S2_15[i] + p2nr[i]*p2care[i]*IC4S2_15[i] + r2nr[i]*end_res[i]*IC3S2_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_15[i] + m2pru_ic2_15[i]*IC2S1_15[i] 
-  deriv(IC3S2_15[]) <- age_up*IC3S2_14[i] - age_up*IC3S2_15[i] + r[i]*EC3S2_15[i] - f[i]*IC3S2_15[i] + n2r[i]*n2care_i_15[i]*IC2S2_15[i] + p2r[i]*p2care[i]*IC4S2_15[i] + nr2r[i]*end_nr[i]*IC2S2_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_15[i] + m2pru_ic3_15[i]*IC3S1_15[i] 
-  deriv(IC4S2_15[]) <- age_up*IC4S2_14[i] - age_up*IC4S2_15[i] + r[i]*EC4S2_15[i] - f[i]*IC4S2_15[i] + nr2p[i]*end_nr[i]*IC2S2_15[i] + r2p[i]*end_res[i]*IC3S2_15[i] - p2care[i]*IC4S2_15[i] + m2pru_ic4_15[i]*IC4S1_15[i] 
-  
-  deriv(IC1S2_16[]) <- age_up*((1 - neet16_ic1s2[i])*IC1S2_15[i] + (1 - neet16_ic1s1[i])*IC1S1_15[i]) - age_up*IC1S2_16[i] + r[i]*EC1S2_16[i] - f[i]*IC1S2_16[i] - n2care_i_16[i]*IC1S2_16[i] + m2neet_ic1_16[i]*IC1S1_16[i] - neet2m_i[i]*IC1S2_16[i] 
-  deriv(IC2S2_16[]) <- age_up*((1 - neet16_ic2s2[i])*IC2S2_15[i] + (1 - neet16_ic2s1[i])*IC2S1_15[i]) - age_up*IC2S2_16[i] + r[i]*EC2S2_16[i] - f[i]*IC2S2_16[i] + n2nr[i]*n2care_i_16[i]*IC1S2_16[i] + p2nr[i]*p2care[i]*IC4S2_16[i] + r2nr[i]*end_res[i]*IC3S2_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_16[i] + m2neet_ic2_16[i]*IC2S1_16[i] - neet2m_i[i]*IC2S2_16[i] 
-  deriv(IC3S2_16[]) <- age_up*((1 - neet16_ic3s2[i])*IC3S2_15[i] + (1 - neet16_ic3s1[i])*IC3S1_15[i]) - age_up*IC3S2_16[i] + r[i]*EC3S2_16[i] - f[i]*IC3S2_16[i] + n2r[i]*n2care_i_16[i]*IC2S2_16[i] + p2r[i]*p2care[i]*IC4S2_16[i] + nr2r[i]*end_nr[i]*IC2S2_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_16[i] + m2neet_ic3_16[i]*IC3S1_16[i] - neet2m_i[i]*IC3S2_16[i] 
-  deriv(IC4S2_16[]) <- age_up*((1 - neet16_ic4s2[i])*IC4S2_15[i] + (1 - neet16_ic4s1[i])*IC4S1_15[i]) - age_up*IC4S2_16[i] + r[i]*EC4S2_16[i] - f[i]*IC4S2_16[i] + nr2p[i]*end_nr[i]*IC2S2_16[i] + r2p[i]*end_res[i]*IC3S2_16[i] - p2care[i]*IC4S2_16[i] + m2neet_ic4_16[i]*IC4S1_16[i] - neet2m_i[i]*IC4S2_16[i] 
-  
-  deriv(IC1S2_17[]) <- age_up*IC1S2_16[i] - age_up*IC1S2_17[i] + r[i]*EC1S2_17[i] - f[i]*IC1S2_17[i] - n2care_i_17[i]*IC1S2_17[i] + m2neet_ic1_17[i]*IC1S1_17[i] - neet2m_i[i]*IC1S2_17[i] 
-  deriv(IC2S2_17[]) <- age_up*IC2S2_16[i] - age_up*IC2S2_17[i] + r[i]*EC2S2_17[i] - f[i]*IC2S2_17[i] + n2nr[i]*n2care_i_17[i]*IC1S2_17[i] + p2nr[i]*p2care[i]*IC4S2_17[i] + r2nr[i]*end_res[i]*IC3S2_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_17[i] + m2neet_ic2_17[i]*IC2S1_17[i] - neet2m_i[i]*IC2S2_17[i] 
-  deriv(IC3S2_17[]) <- age_up*IC3S2_16[i] - age_up*IC3S2_17[i] + r[i]*EC3S2_17[i] - f[i]*IC3S2_17[i] + n2r[i]*n2care_i_17[i]*IC2S2_17[i] + p2r[i]*p2care[i]*IC4S2_17[i] + nr2r[i]*end_nr[i]*IC2S2_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_17[i] + m2neet_ic3_17[i]*IC3S1_17[i] - neet2m_i[i]*IC3S2_17[i] 
-  deriv(IC4S2_17[]) <- age_up*IC4S2_16[i] - age_up*IC4S2_17[i] + r[i]*EC4S2_17[i] - f[i]*IC4S2_17[i] + nr2p[i]*end_nr[i]*IC2S2_17[i] + r2p[i]*end_res[i]*IC3S2_17[i] - p2care[i]*IC4S2_17[i] + m2neet_ic4_17[i]*IC4S1_17[i] - neet2m_i[i]*IC4S2_17[i] 
+  deriv(IC1S1_17[]) <- age_up*IC1S1_16_lag[i] - age_up*IC1S1_17_lag[i] + r[i]*EC1S1_17[i] - f[i]*IC1S1_17[i] - n2care_i_17[i]*IC1S1_17[i] + neet2m_i[i]*IC1S2_17[i] - m2neet_ic1_17[i]*IC1S1_17[i] 
+  deriv(IC2S1_17[]) <- age_up*IC2S1_16_lag[i] - age_up*IC2S1_17_lag[i] + r[i]*EC2S1_17[i] - f[i]*IC2S1_17[i] + n2nr[i]*n2care_i_17[i]*IC1S1_17[i] + p2nr[i]*p2care[i]*IC4S1_17[i] + r2nr[i]*end_res[i]*IC3S1_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S1_17[i] + neet2m_i[i]*IC2S2_17[i] - m2neet_ic2_17[i]*IC2S1_17[i] 
+  deriv(IC3S1_17[]) <- age_up*IC3S1_16_lag[i] - age_up*IC3S1_17_lag[i] + r[i]*EC3S1_17[i] - f[i]*IC3S1_17[i] + n2r[i]*n2care_i_17[i]*IC2S1_17[i] + p2r[i]*p2care[i]*IC4S1_17[i] + nr2r[i]*end_nr[i]*IC2S1_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S1_17[i] + neet2m_i[i]*IC3S2_17[i] - m2neet_ic3_17[i]*IC3S1_17[i] 
+  deriv(IC4S1_17[]) <- age_up*IC4S1_16_lag[i] - age_up*IC4S1_17_lag[i] + r[i]*EC4S1_17[i] - f[i]*IC4S1_17[i] + nr2p[i]*end_nr[i]*IC2S1_17[i] + r2p[i]*end_res[i]*IC3S1_17[i] - p2care[i]*IC4S1_17[i] + neet2m_i[i]*IC4S2_17[i] - m2neet_ic4_17[i]*IC4S1_17[i] 
   
   
   
-  deriv(EC1S1_10[]) <- t10_ec1s1[i]*pc_excl*turn10[i] - age_up*EC1S1_10[i] + f[i]*IC1S1_10[i] - r[i]*EC1S1_10[i] - n2care_e_10[i]*EC1S1_10[i] - m2pru_ec1_10[i]*EC1S1_10[i] 
-  deriv(EC2S1_10[]) <- t10_ec2s1[i]*pc_excl*turn10[i] - age_up*EC2S1_10[i] + f[i]*IC2S1_10[i] - r[i]*EC2S1_10[i] + n2nr[i]*n2care_e_10[i]*EC1S1_10[i] + p2nr[i]*p2care[i]*EC4S1_10[i] + r2nr[i]*end_res[i]*EC3S1_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_10[i] - m2pru_ec2_10[i]*EC2S1_10[i] 
-  deriv(EC3S1_10[]) <- t10_ec3s1[i]*pc_excl*turn10[i] - age_up*EC3S1_10[i] + f[i]*IC3S1_10[i] - r[i]*EC3S1_10[i] + n2r[i]*n2care_e_10[i]*EC2S1_10[i] + p2r[i]*p2care[i]*EC4S1_10[i] + nr2r[i]*end_nr[i]*EC2S1_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_10[i] - m2pru_ec3_10[i]*EC3S1_10[i] 
-  deriv(EC4S1_10[]) <- t10_ec4s1[i]*pc_excl*turn10[i] - age_up*EC4S1_10[i] + f[i]*IC4S1_10[i] - r[i]*EC4S1_10[i] + nr2p[i]*end_nr[i]*EC2S1_10[i] + r2p[i]*end_res[i]*EC3S1_10[i] - p2care[i]*EC4S1_10[i] - m2pru_ec4_10[i]*EC4S1_10[i] 
+  deriv(IC1S2_10[]) <- t10_ic1s2[i]*pc_incl*turn10[i] - age_up*IC1S2_10_lag[i] + r[i]*EC1S2_10[i] - f[i]*IC1S2_10[i] - n2care_i_10[i]*IC1S2_10[i] + m2pru_ic1_10[i]*IC1S1_10[i] 
+  deriv(IC2S2_10[]) <- t10_ic2s2[i]*pc_incl*turn10[i] - age_up*IC2S2_10_lag[i] + r[i]*EC2S2_10[i] - f[i]*IC2S2_10[i] + n2nr[i]*n2care_i_10[i]*IC1S2_10[i] + p2nr[i]*p2care[i]*IC4S2_10[i] + r2nr[i]*end_res[i]*IC3S2_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_10[i] + m2pru_ic2_10[i]*IC2S1_10[i] 
+  deriv(IC3S2_10[]) <- t10_ic3s2[i]*pc_incl*turn10[i] - age_up*IC3S2_10_lag[i] + r[i]*EC3S2_10[i] - f[i]*IC3S2_10[i] + n2r[i]*n2care_i_10[i]*IC2S2_10[i] + p2r[i]*p2care[i]*IC4S2_10[i] + nr2r[i]*end_nr[i]*IC2S2_10[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_10[i] + m2pru_ic3_10[i]*IC3S1_10[i] 
+  deriv(IC4S2_10[]) <- t10_ic4s2[i]*pc_incl*turn10[i] - age_up*IC4S2_10_lag[i] + r[i]*EC4S2_10[i] - f[i]*IC4S2_10[i] + nr2p[i]*end_nr[i]*IC2S2_10[i] + r2p[i]*end_res[i]*IC3S2_10[i] - p2care[i]*IC4S2_10[i] + m2pru_ic4_10[i]*IC4S1_10[i] 
   
-  deriv(EC1S1_11[]) <- age_up*(EC1S1_10[i] + EC1S2_10[i]) - age_up*EC1S1_11[i] + f[i]*IC1S1_11[i] - r[i]*EC1S1_11[i] - n2care_e_11[i]*EC1S1_11[i] - m2pru_ec1_11[i]*EC1S1_11[i] 
-  deriv(EC2S1_11[]) <- age_up*(EC2S1_10[i] + EC2S2_10[i]) - age_up*EC2S1_11[i] + f[i]*IC2S1_11[i] - r[i]*EC2S1_11[i] + n2nr[i]*n2care_e_11[i]*EC1S1_11[i] + p2nr[i]*p2care[i]*EC4S1_11[i] + r2nr[i]*end_res[i]*EC3S1_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_11[i] - m2pru_ec2_11[i]*EC2S1_11[i] 
-  deriv(EC3S1_11[]) <- age_up*(EC3S1_10[i] + EC3S2_10[i]) - age_up*EC3S1_11[i] + f[i]*IC3S1_11[i] - r[i]*EC3S1_11[i] + n2r[i]*n2care_e_11[i]*EC2S1_11[i] + p2r[i]*p2care[i]*EC4S1_11[i] + nr2r[i]*end_nr[i]*EC2S1_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_11[i] - m2pru_ec3_11[i]*EC3S1_11[i] 
-  deriv(EC4S1_11[]) <- age_up*(EC4S1_10[i] + EC4S2_10[i]) - age_up*EC4S1_11[i] + f[i]*IC4S1_11[i] - r[i]*EC4S1_11[i] + nr2p[i]*end_nr[i]*EC2S1_11[i] + r2p[i]*end_res[i]*EC3S1_11[i] - p2care[i]*EC4S1_11[i] - m2pru_ec4_11[i]*EC4S1_11[i] 
+  deriv(IC1S2_11[]) <- -age_up*IC1S2_11_lag[i] + r[i]*EC1S2_11[i] - f[i]*IC1S2_11[i] - n2care_i_11[i]*IC1S2_11[i] + m2pru_ic1_11[i]*IC1S1_11[i] 
+  deriv(IC2S2_11[]) <- -age_up*IC2S2_11_lag[i] + r[i]*EC2S2_11[i] - f[i]*IC2S2_11[i] + n2nr[i]*n2care_i_11[i]*IC1S2_11[i] + p2nr[i]*p2care[i]*IC4S2_11[i] + r2nr[i]*end_res[i]*IC3S2_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_11[i] + m2pru_ic2_11[i]*IC2S1_11[i] 
+  deriv(IC3S2_11[]) <- -age_up*IC3S2_11_lag[i] + r[i]*EC3S2_11[i] - f[i]*IC3S2_11[i] + n2r[i]*n2care_i_11[i]*IC2S2_11[i] + p2r[i]*p2care[i]*IC4S2_11[i] + nr2r[i]*end_nr[i]*IC2S2_11[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_11[i] + m2pru_ic3_11[i]*IC3S1_11[i] 
+  deriv(IC4S2_11[]) <- -age_up*IC4S2_11_lag[i] + r[i]*EC4S2_11[i] - f[i]*IC4S2_11[i] + nr2p[i]*end_nr[i]*IC2S2_11[i] + r2p[i]*end_res[i]*IC3S2_11[i] - p2care[i]*IC4S2_11[i] + m2pru_ic4_11[i]*IC4S1_11[i] 
   
-  deriv(EC1S1_12[]) <- age_up*EC1S1_11[i] - age_up*EC1S1_12[i] + f[i]*IC1S1_12[i] - r[i]*EC1S1_12[i] - n2care_e_12[i]*EC1S1_12[i] - m2pru_ec1_12[i]*EC1S1_12[i] 
-  deriv(EC2S1_12[]) <- age_up*EC2S1_11[i] - age_up*EC2S1_12[i] + f[i]*IC2S1_12[i] - r[i]*EC2S1_12[i] + n2nr[i]*n2care_e_12[i]*EC1S1_12[i] + p2nr[i]*p2care[i]*EC4S1_12[i] + r2nr[i]*end_res[i]*EC3S1_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_12[i] - m2pru_ec2_12[i]*EC2S1_12[i] 
-  deriv(EC3S1_12[]) <- age_up*EC3S1_11[i] - age_up*EC3S1_12[i] + f[i]*IC3S1_12[i] - r[i]*EC3S1_12[i] + n2r[i]*n2care_e_12[i]*EC2S1_12[i] + p2r[i]*p2care[i]*EC4S1_12[i] + nr2r[i]*end_nr[i]*EC2S1_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_12[i] - m2pru_ec3_12[i]*EC3S1_12[i] 
-  deriv(EC4S1_12[]) <- age_up*EC4S1_11[i] - age_up*EC4S1_12[i] + f[i]*IC4S1_12[i] - r[i]*EC4S1_12[i] + nr2p[i]*end_nr[i]*EC2S1_12[i] + r2p[i]*end_res[i]*EC3S1_12[i] - p2care[i]*EC4S1_12[i] - m2pru_ec4_12[i]*EC4S1_12[i] 
+  deriv(IC1S2_12[]) <- age_up*IC1S2_11_lag[i] - age_up*IC1S2_12_lag[i] + r[i]*EC1S2_12[i] - f[i]*IC1S2_12[i] - n2care_i_12[i]*IC1S2_12[i] + m2pru_ic1_12[i]*IC1S1_12[i] 
+  deriv(IC2S2_12[]) <- age_up*IC2S2_11_lag[i] - age_up*IC2S2_12_lag[i] + r[i]*EC2S2_12[i] - f[i]*IC2S2_12[i] + n2nr[i]*n2care_i_12[i]*IC1S2_12[i] + p2nr[i]*p2care[i]*IC4S2_12[i] + r2nr[i]*end_res[i]*IC3S2_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_12[i] + m2pru_ic2_12[i]*IC2S1_12[i] 
+  deriv(IC3S2_12[]) <- age_up*IC3S2_11_lag[i] - age_up*IC3S2_12_lag[i] + r[i]*EC3S2_12[i] - f[i]*IC3S2_12[i] + n2r[i]*n2care_i_12[i]*IC2S2_12[i] + p2r[i]*p2care[i]*IC4S2_12[i] + nr2r[i]*end_nr[i]*IC2S2_12[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_12[i] + m2pru_ic3_12[i]*IC3S1_12[i] 
+  deriv(IC4S2_12[]) <- age_up*IC4S2_11_lag[i] - age_up*IC4S2_12_lag[i] + r[i]*EC4S2_12[i] - f[i]*IC4S2_12[i] + nr2p[i]*end_nr[i]*IC2S2_12[i] + r2p[i]*end_res[i]*IC3S2_12[i] - p2care[i]*IC4S2_12[i] + m2pru_ic4_12[i]*IC4S1_12[i] 
   
-  deriv(EC1S1_13[]) <- age_up*EC1S1_12[i] - age_up*EC1S1_13[i] + f[i]*IC1S1_13[i] - r[i]*EC1S1_13[i] - n2care_e_13[i]*EC1S1_13[i] - m2pru_ec1_13[i]*EC1S1_13[i] 
-  deriv(EC2S1_13[]) <- age_up*EC2S1_12[i] - age_up*EC2S1_13[i] + f[i]*IC2S1_13[i] - r[i]*EC2S1_13[i] + n2nr[i]*n2care_e_13[i]*EC1S1_13[i] + p2nr[i]*p2care[i]*EC4S1_13[i] + r2nr[i]*end_res[i]*EC3S1_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_13[i] - m2pru_ec2_13[i]*EC2S1_13[i] 
-  deriv(EC3S1_13[]) <- age_up*EC3S1_12[i] - age_up*EC3S1_13[i] + f[i]*IC3S1_13[i] - r[i]*EC3S1_13[i] + n2r[i]*n2care_e_13[i]*EC2S1_13[i] + p2r[i]*p2care[i]*EC4S1_13[i] + nr2r[i]*end_nr[i]*EC2S1_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_13[i] - m2pru_ec3_13[i]*EC3S1_13[i] 
-  deriv(EC4S1_13[]) <- age_up*EC4S1_12[i] - age_up*EC4S1_13[i] + f[i]*IC4S1_13[i] - r[i]*EC4S1_13[i] + nr2p[i]*end_nr[i]*EC2S1_13[i] + r2p[i]*end_res[i]*EC3S1_13[i] - p2care[i]*EC4S1_13[i] - m2pru_ec4_13[i]*EC4S1_13[i] 
+  deriv(IC1S2_13[]) <- age_up*IC1S2_12_lag[i] - age_up*IC1S2_13_lag[i] + r[i]*EC1S2_13[i] - f[i]*IC1S2_13[i] - n2care_i_13[i]*IC1S2_13[i] + m2pru_ic1_13[i]*IC1S1_13[i] 
+  deriv(IC2S2_13[]) <- age_up*IC2S2_12_lag[i] - age_up*IC2S2_13_lag[i] + r[i]*EC2S2_13[i] - f[i]*IC2S2_13[i] + n2nr[i]*n2care_i_13[i]*IC1S2_13[i] + p2nr[i]*p2care[i]*IC4S2_13[i] + r2nr[i]*end_res[i]*IC3S2_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_13[i] + m2pru_ic2_13[i]*IC2S1_13[i] 
+  deriv(IC3S2_13[]) <- age_up*IC3S2_12_lag[i] - age_up*IC3S2_13_lag[i] + r[i]*EC3S2_13[i] - f[i]*IC3S2_13[i] + n2r[i]*n2care_i_13[i]*IC2S2_13[i] + p2r[i]*p2care[i]*IC4S2_13[i] + nr2r[i]*end_nr[i]*IC2S2_13[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_13[i] + m2pru_ic3_13[i]*IC3S1_13[i] 
+  deriv(IC4S2_13[]) <- age_up*IC4S2_12_lag[i] - age_up*IC4S2_13_lag[i] + r[i]*EC4S2_13[i] - f[i]*IC4S2_13[i] + nr2p[i]*end_nr[i]*IC2S2_13[i] + r2p[i]*end_res[i]*IC3S2_13[i] - p2care[i]*IC4S2_13[i] + m2pru_ic4_13[i]*IC4S1_13[i] 
   
-  deriv(EC1S1_14[]) <- age_up*EC1S1_13[i] - age_up*EC1S1_14[i] + f[i]*IC1S1_14[i] - r[i]*EC1S1_14[i] - n2care_e_14[i]*EC1S1_14[i] - m2pru_ec1_14[i]*EC1S1_14[i] 
-  deriv(EC2S1_14[]) <- age_up*EC2S1_13[i] - age_up*EC2S1_14[i] + f[i]*IC2S1_14[i] - r[i]*EC2S1_14[i] + n2nr[i]*n2care_e_14[i]*EC1S1_14[i] + p2nr[i]*p2care[i]*EC4S1_14[i] + r2nr[i]*end_res[i]*EC3S1_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_14[i] - m2pru_ec2_14[i]*EC2S1_14[i] 
-  deriv(EC3S1_14[]) <- age_up*EC3S1_13[i] - age_up*EC3S1_14[i] + f[i]*IC3S1_14[i] - r[i]*EC3S1_14[i] + n2r[i]*n2care_e_14[i]*EC2S1_14[i] + p2r[i]*p2care[i]*EC4S1_14[i] + nr2r[i]*end_nr[i]*EC2S1_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_14[i] - m2pru_ec3_14[i]*EC3S1_14[i] 
-  deriv(EC4S1_14[]) <- age_up*EC4S1_13[i] - age_up*EC4S1_14[i] + f[i]*IC4S1_14[i] - r[i]*EC4S1_14[i] + nr2p[i]*end_nr[i]*EC2S1_14[i] + r2p[i]*end_res[i]*EC3S1_14[i] - p2care[i]*EC4S1_14[i] - m2pru_ec4_14[i]*EC4S1_14[i] 
+  deriv(IC1S2_14[]) <- age_up*IC1S2_13_lag[i] - age_up*IC1S2_14_lag[i] + r[i]*EC1S2_14[i] - f[i]*IC1S2_14[i] - n2care_i_14[i]*IC1S2_14[i] + m2pru_ic1_14[i]*IC1S1_14[i] 
+  deriv(IC2S2_14[]) <- age_up*IC2S2_13_lag[i] - age_up*IC2S2_14_lag[i] + r[i]*EC2S2_14[i] - f[i]*IC2S2_14[i] + n2nr[i]*n2care_i_14[i]*IC1S2_14[i] + p2nr[i]*p2care[i]*IC4S2_14[i] + r2nr[i]*end_res[i]*IC3S2_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_14[i] + m2pru_ic2_14[i]*IC2S1_14[i] 
+  deriv(IC3S2_14[]) <- age_up*IC3S2_13_lag[i] - age_up*IC3S2_14_lag[i] + r[i]*EC3S2_14[i] - f[i]*IC3S2_14[i] + n2r[i]*n2care_i_14[i]*IC2S2_14[i] + p2r[i]*p2care[i]*IC4S2_14[i] + nr2r[i]*end_nr[i]*IC2S2_14[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_14[i] + m2pru_ic3_14[i]*IC3S1_14[i] 
+  deriv(IC4S2_14[]) <- age_up*IC4S2_13_lag[i] - age_up*IC4S2_14_lag[i] + r[i]*EC4S2_14[i] - f[i]*IC4S2_14[i] + nr2p[i]*end_nr[i]*IC2S2_14[i] + r2p[i]*end_res[i]*IC3S2_14[i] - p2care[i]*IC4S2_14[i] + m2pru_ic4_14[i]*IC4S1_14[i] 
   
-  deriv(EC1S1_15[]) <- age_up*EC1S1_14[i] - age_up*EC1S1_15[i] + f[i]*IC1S1_15[i] - r[i]*EC1S1_15[i] - n2care_e_15[i]*EC1S1_15[i] - m2pru_ec1_15[i]*EC1S1_15[i] 
-  deriv(EC2S1_15[]) <- age_up*EC2S1_14[i] - age_up*EC2S1_15[i] + f[i]*IC2S1_15[i] - r[i]*EC2S1_15[i] + n2nr[i]*n2care_e_15[i]*EC1S1_15[i] + p2nr[i]*p2care[i]*EC4S1_15[i] + r2nr[i]*end_res[i]*EC3S1_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_15[i] - m2pru_ec2_15[i]*EC2S1_15[i] 
-  deriv(EC3S1_15[]) <- age_up*EC3S1_14[i] - age_up*EC3S1_15[i] + f[i]*IC3S1_15[i] - r[i]*EC3S1_15[i] + n2r[i]*n2care_e_15[i]*EC2S1_15[i] + p2r[i]*p2care[i]*EC4S1_15[i] + nr2r[i]*end_nr[i]*EC2S1_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_15[i] - m2pru_ec3_15[i]*EC3S1_15[i] 
-  deriv(EC4S1_15[]) <- age_up*EC4S1_14[i] - age_up*EC4S1_15[i] + f[i]*IC4S1_15[i] - r[i]*EC4S1_15[i] + nr2p[i]*end_nr[i]*EC2S1_15[i] + r2p[i]*end_res[i]*EC3S1_15[i] - p2care[i]*EC4S1_15[i] - m2pru_ec4_15[i]*EC4S1_15[i] 
+  deriv(IC1S2_15[]) <- age_up*IC1S2_14_lag[i] - age_up*IC1S2_15_lag[i] + r[i]*EC1S2_15[i] - f[i]*IC1S2_15[i] - n2care_i_15[i]*IC1S2_15[i] + m2pru_ic1_15[i]*IC1S1_15[i] 
+  deriv(IC2S2_15[]) <- age_up*IC2S2_14_lag[i] - age_up*IC2S2_15_lag[i] + r[i]*EC2S2_15[i] - f[i]*IC2S2_15[i] + n2nr[i]*n2care_i_15[i]*IC1S2_15[i] + p2nr[i]*p2care[i]*IC4S2_15[i] + r2nr[i]*end_res[i]*IC3S2_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_15[i] + m2pru_ic2_15[i]*IC2S1_15[i] 
+  deriv(IC3S2_15[]) <- age_up*IC3S2_14_lag[i] - age_up*IC3S2_15_lag[i] + r[i]*EC3S2_15[i] - f[i]*IC3S2_15[i] + n2r[i]*n2care_i_15[i]*IC2S2_15[i] + p2r[i]*p2care[i]*IC4S2_15[i] + nr2r[i]*end_nr[i]*IC2S2_15[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_15[i] + m2pru_ic3_15[i]*IC3S1_15[i] 
+  deriv(IC4S2_15[]) <- age_up*IC4S2_14_lag[i] - age_up*IC4S2_15_lag[i] + r[i]*EC4S2_15[i] - f[i]*IC4S2_15[i] + nr2p[i]*end_nr[i]*IC2S2_15[i] + r2p[i]*end_res[i]*IC3S2_15[i] - p2care[i]*IC4S2_15[i] + m2pru_ic4_15[i]*IC4S1_15[i] 
   
-  deriv(EC1S1_16[]) <- age_up*(neet16_ec1s1[i]*EC1S1_15[i] + neet16_ec1s2[i]*EC1S2_15[i]) - age_up*EC1S1_16[i] + f[i]*IC1S1_16[i] - r[i]*EC1S1_16[i] - n2care_e_16[i]*EC1S1_16[i] + neet2m_e[i]*EC1S2_16[i] - m2neet_ec1_16[i]*EC1S1_16[i] 
-  deriv(EC2S1_16[]) <- age_up*(neet16_ec2s1[i]*EC2S1_15[i] + neet16_ec2s2[i]*EC2S2_15[i]) - age_up*EC2S1_16[i] + f[i]*IC2S1_16[i] - r[i]*EC2S1_16[i] + n2nr[i]*n2care_e_16[i]*EC1S1_16[i] + p2nr[i]*p2care[i]*EC4S1_16[i] + r2nr[i]*end_res[i]*EC3S1_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_16[i] + neet2m_e[i]*EC2S2_16[i] - m2neet_ec2_16[i]*EC2S1_16[i] 
-  deriv(EC3S1_16[]) <- age_up*(neet16_ec3s1[i]*EC3S1_15[i] + neet16_ec3s2[i]*EC3S2_15[i]) - age_up*EC3S1_16[i] + f[i]*IC3S1_16[i] - r[i]*EC3S1_16[i] + n2r[i]*n2care_e_16[i]*EC2S1_16[i] + p2r[i]*p2care[i]*EC4S1_16[i] + nr2r[i]*end_nr[i]*EC2S1_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_16[i] + neet2m_e[i]*EC3S2_16[i] - m2neet_ec3_16[i]*EC3S1_16[i] 
-  deriv(EC4S1_16[]) <- age_up*(neet16_ec4s1[i]*EC4S1_15[i] + neet16_ec4s2[i]*EC4S2_15[i]) - age_up*EC4S1_16[i] + f[i]*IC4S1_16[i] - r[i]*EC4S1_16[i] + nr2p[i]*end_nr[i]*EC2S1_16[i] + r2p[i]*end_res[i]*EC3S1_16[i] - p2care[i]*EC4S1_16[i] + neet2m_e[i]*EC4S2_16[i] - m2neet_ec4_16[i]*EC4S1_16[i] 
+  deriv(IC1S2_16[]) <- age_up*((1 - neet16_ic1s2[i])*IC1S2_15_lag[i] + (1 - neet16_ic1s1[i])*IC1S1_15_lag[i]) - age_up*IC1S2_16_lag[i] + r[i]*EC1S2_16[i] - f[i]*IC1S2_16[i] - n2care_i_16[i]*IC1S2_16[i] + m2neet_ic1_16[i]*IC1S1_16[i] - neet2m_i[i]*IC1S2_16[i] 
+  deriv(IC2S2_16[]) <- age_up*((1 - neet16_ic2s2[i])*IC2S2_15_lag[i] + (1 - neet16_ic2s1[i])*IC2S1_15_lag[i]) - age_up*IC2S2_16_lag[i] + r[i]*EC2S2_16[i] - f[i]*IC2S2_16[i] + n2nr[i]*n2care_i_16[i]*IC1S2_16[i] + p2nr[i]*p2care[i]*IC4S2_16[i] + r2nr[i]*end_res[i]*IC3S2_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_16[i] + m2neet_ic2_16[i]*IC2S1_16[i] - neet2m_i[i]*IC2S2_16[i] 
+  deriv(IC3S2_16[]) <- age_up*((1 - neet16_ic3s2[i])*IC3S2_15_lag[i] + (1 - neet16_ic3s1[i])*IC3S1_15_lag[i]) - age_up*IC3S2_16_lag[i] + r[i]*EC3S2_16[i] - f[i]*IC3S2_16[i] + n2r[i]*n2care_i_16[i]*IC2S2_16[i] + p2r[i]*p2care[i]*IC4S2_16[i] + nr2r[i]*end_nr[i]*IC2S2_16[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_16[i] + m2neet_ic3_16[i]*IC3S1_16[i] - neet2m_i[i]*IC3S2_16[i] 
+  deriv(IC4S2_16[]) <- age_up*((1 - neet16_ic4s2[i])*IC4S2_15_lag[i] + (1 - neet16_ic4s1[i])*IC4S1_15_lag[i]) - age_up*IC4S2_16_lag[i] + r[i]*EC4S2_16[i] - f[i]*IC4S2_16[i] + nr2p[i]*end_nr[i]*IC2S2_16[i] + r2p[i]*end_res[i]*IC3S2_16[i] - p2care[i]*IC4S2_16[i] + m2neet_ic4_16[i]*IC4S1_16[i] - neet2m_i[i]*IC4S2_16[i] 
   
-  deriv(EC1S1_17[]) <- age_up*EC1S1_16[i] - age_up*EC1S1_17[i] + f[i]*IC1S1_17[i] - r[i]*EC1S1_17[i] - n2care_e_17[i]*EC1S1_17[i] + neet2m_e[i]*EC1S2_17[i] - m2neet_ec1_17[i]*EC1S1_17[i] 
-  deriv(EC2S1_17[]) <- age_up*EC2S1_16[i] - age_up*EC2S1_17[i] + f[i]*IC2S1_17[i] - r[i]*EC2S1_17[i] + n2nr[i]*n2care_e_17[i]*EC1S1_17[i] + p2nr[i]*p2care[i]*EC4S1_17[i] + r2nr[i]*end_res[i]*EC3S1_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_17[i] + neet2m_e[i]*EC2S2_17[i] - m2neet_ec2_17[i]*EC2S1_17[i] 
-  deriv(EC3S1_17[]) <- age_up*EC3S1_16[i] - age_up*EC3S1_17[i] + f[i]*IC3S1_17[i] - r[i]*EC3S1_17[i] + n2r[i]*n2care_e_17[i]*EC2S1_17[i] + p2r[i]*p2care[i]*EC4S1_17[i] + nr2r[i]*end_nr[i]*EC2S1_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_17[i] + neet2m_e[i]*EC3S2_17[i] - m2neet_ec3_17[i]*EC3S1_17[i] 
-  deriv(EC4S1_17[]) <- age_up*EC4S1_16[i] - age_up*EC4S1_17[i] + f[i]*IC4S1_17[i] - r[i]*EC4S1_17[i] + nr2p[i]*end_nr[i]*EC2S1_17[i] + r2p[i]*end_res[i]*EC3S1_17[i] - p2care[i]*EC4S1_17[i] + neet2m_e[i]*EC4S2_17[i] - m2neet_ec4_17[i]*EC4S1_17[i] 
+  deriv(IC1S2_17[]) <- age_up*IC1S2_16_lag[i] - age_up*IC1S2_17_lag[i] + r[i]*EC1S2_17[i] - f[i]*IC1S2_17[i] - n2care_i_17[i]*IC1S2_17[i] + m2neet_ic1_17[i]*IC1S1_17[i] - neet2m_i[i]*IC1S2_17[i] 
+  deriv(IC2S2_17[]) <- age_up*IC2S2_16_lag[i] - age_up*IC2S2_17_lag[i] + r[i]*EC2S2_17[i] - f[i]*IC2S2_17[i] + n2nr[i]*n2care_i_17[i]*IC1S2_17[i] + p2nr[i]*p2care[i]*IC4S2_17[i] + r2nr[i]*end_res[i]*IC3S2_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*IC2S2_17[i] + m2neet_ic2_17[i]*IC2S1_17[i] - neet2m_i[i]*IC2S2_17[i] 
+  deriv(IC3S2_17[]) <- age_up*IC3S2_16_lag[i] - age_up*IC3S2_17_lag[i] + r[i]*EC3S2_17[i] - f[i]*IC3S2_17[i] + n2r[i]*n2care_i_17[i]*IC2S2_17[i] + p2r[i]*p2care[i]*IC4S2_17[i] + nr2r[i]*end_nr[i]*IC2S2_17[i] - (r2nr[i] + r2p[i])*end_res[i]*IC3S2_17[i] + m2neet_ic3_17[i]*IC3S1_17[i] - neet2m_i[i]*IC3S2_17[i] 
+  deriv(IC4S2_17[]) <- age_up*IC4S2_16_lag[i] - age_up*IC4S2_17_lag[i] + r[i]*EC4S2_17[i] - f[i]*IC4S2_17[i] + nr2p[i]*end_nr[i]*IC2S2_17[i] + r2p[i]*end_res[i]*IC3S2_17[i] - p2care[i]*IC4S2_17[i] + m2neet_ic4_17[i]*IC4S1_17[i] - neet2m_i[i]*IC4S2_17[i] 
   
   
   
-  deriv(EC1S2_10[]) <- t10_ec1s2[i]*pc_excl*turn10[i] - age_up*EC1S2_10[i] + f[i]*IC1S2_10[i] - r[i]*EC1S2_10[i] - n2care_e_10[i]*EC1S2_10[i] + m2pru_ec1_10[i]*EC1S1_10[i] 
-  deriv(EC2S2_10[]) <- t10_ec2s2[i]*pc_excl*turn10[i] - age_up*EC2S2_10[i] + f[i]*IC2S2_10[i] - r[i]*EC2S2_10[i] + n2nr[i]*n2care_e_10[i]*EC1S2_10[i] + p2nr[i]*p2care[i]*EC4S2_10[i] + r2nr[i]*end_res[i]*EC3S2_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_10[i] + m2pru_ec2_10[i]*EC2S1_10[i] 
-  deriv(EC3S2_10[]) <- t10_ec3s2[i]*pc_excl*turn10[i] - age_up*EC3S2_10[i] + f[i]*IC3S2_10[i] - r[i]*EC3S2_10[i] + n2r[i]*n2care_e_10[i]*EC2S2_10[i] + p2r[i]*p2care[i]*EC4S2_10[i] + nr2r[i]*end_nr[i]*EC2S2_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_10[i] + m2pru_ec3_10[i]*EC3S1_10[i] 
-  deriv(EC4S2_10[]) <- t10_ec4s2[i]*pc_excl*turn10[i] - age_up*EC4S2_10[i] + f[i]*IC4S2_10[i] - r[i]*EC4S2_10[i] + nr2p[i]*end_nr[i]*EC2S2_10[i] + r2p[i]*end_res[i]*EC3S2_10[i] - p2care[i]*EC4S2_10[i] + m2pru_ec4_10[i]*EC4S1_10[i] 
+  deriv(EC1S1_10[]) <- t10_ec1s1[i]*pc_excl*turn10[i] - age_up*EC1S1_10_lag[i] + f[i]*IC1S1_10[i] - r[i]*EC1S1_10[i] - n2care_e_10[i]*EC1S1_10[i] - m2pru_ec1_10[i]*EC1S1_10[i] 
+  deriv(EC2S1_10[]) <- t10_ec2s1[i]*pc_excl*turn10[i] - age_up*EC2S1_10_lag[i] + f[i]*IC2S1_10[i] - r[i]*EC2S1_10[i] + n2nr[i]*n2care_e_10[i]*EC1S1_10[i] + p2nr[i]*p2care[i]*EC4S1_10[i] + r2nr[i]*end_res[i]*EC3S1_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_10[i] - m2pru_ec2_10[i]*EC2S1_10[i] 
+  deriv(EC3S1_10[]) <- t10_ec3s1[i]*pc_excl*turn10[i] - age_up*EC3S1_10_lag[i] + f[i]*IC3S1_10[i] - r[i]*EC3S1_10[i] + n2r[i]*n2care_e_10[i]*EC2S1_10[i] + p2r[i]*p2care[i]*EC4S1_10[i] + nr2r[i]*end_nr[i]*EC2S1_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_10[i] - m2pru_ec3_10[i]*EC3S1_10[i] 
+  deriv(EC4S1_10[]) <- t10_ec4s1[i]*pc_excl*turn10[i] - age_up*EC4S1_10_lag[i] + f[i]*IC4S1_10[i] - r[i]*EC4S1_10[i] + nr2p[i]*end_nr[i]*EC2S1_10[i] + r2p[i]*end_res[i]*EC3S1_10[i] - p2care[i]*EC4S1_10[i] - m2pru_ec4_10[i]*EC4S1_10[i] 
   
-  deriv(EC1S2_11[]) <- -age_up*EC1S2_11[i] + f[i]*IC1S2_11[i] - r[i]*EC1S2_11[i] - n2care_e_11[i]*EC1S2_11[i] + m2pru_ec1_11[i]*EC1S1_11[i] 
-  deriv(EC2S2_11[]) <- -age_up*EC2S2_11[i] + f[i]*IC2S2_11[i] - r[i]*EC2S2_11[i] + n2nr[i]*n2care_e_11[i]*EC1S2_11[i] + p2nr[i]*p2care[i]*EC4S2_11[i] + r2nr[i]*end_res[i]*EC3S2_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_11[i] + m2pru_ec2_11[i]*EC2S1_11[i] 
-  deriv(EC3S2_11[]) <- -age_up*EC3S2_11[i] + f[i]*IC3S2_11[i] - r[i]*EC3S2_11[i] + n2r[i]*n2care_e_11[i]*EC2S2_11[i] + p2r[i]*p2care[i]*EC4S2_11[i] + nr2r[i]*end_nr[i]*EC2S2_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_11[i] + m2pru_ec3_11[i]*EC3S1_11[i] 
-  deriv(EC4S2_11[]) <- -age_up*EC4S2_11[i] + f[i]*IC4S2_11[i] - r[i]*EC4S2_11[i] + nr2p[i]*end_nr[i]*EC2S2_11[i] + r2p[i]*end_res[i]*EC3S2_11[i] - p2care[i]*EC4S2_11[i] + m2pru_ec4_11[i]*EC4S1_11[i] 
+  deriv(EC1S1_11[]) <- age_up*(EC1S1_10_lag[i] + EC1S2_10_lag[i]) - age_up*EC1S1_11_lag[i] + f[i]*IC1S1_11[i] - r[i]*EC1S1_11[i] - n2care_e_11[i]*EC1S1_11[i] - m2pru_ec1_11[i]*EC1S1_11[i] 
+  deriv(EC2S1_11[]) <- age_up*(EC2S1_10_lag[i] + EC2S2_10_lag[i]) - age_up*EC2S1_11_lag[i] + f[i]*IC2S1_11[i] - r[i]*EC2S1_11[i] + n2nr[i]*n2care_e_11[i]*EC1S1_11[i] + p2nr[i]*p2care[i]*EC4S1_11[i] + r2nr[i]*end_res[i]*EC3S1_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_11[i] - m2pru_ec2_11[i]*EC2S1_11[i] 
+  deriv(EC3S1_11[]) <- age_up*(EC3S1_10_lag[i] + EC3S2_10_lag[i]) - age_up*EC3S1_11_lag[i] + f[i]*IC3S1_11[i] - r[i]*EC3S1_11[i] + n2r[i]*n2care_e_11[i]*EC2S1_11[i] + p2r[i]*p2care[i]*EC4S1_11[i] + nr2r[i]*end_nr[i]*EC2S1_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_11[i] - m2pru_ec3_11[i]*EC3S1_11[i] 
+  deriv(EC4S1_11[]) <- age_up*(EC4S1_10_lag[i] + EC4S2_10_lag[i]) - age_up*EC4S1_11_lag[i] + f[i]*IC4S1_11[i] - r[i]*EC4S1_11[i] + nr2p[i]*end_nr[i]*EC2S1_11[i] + r2p[i]*end_res[i]*EC3S1_11[i] - p2care[i]*EC4S1_11[i] - m2pru_ec4_11[i]*EC4S1_11[i] 
   
-  deriv(EC1S2_12[]) <- age_up*EC1S2_11[i] - age_up*EC1S2_12[i] + f[i]*IC1S2_12[i] - r[i]*EC1S2_12[i] - n2care_e_12[i]*EC1S2_12[i] + m2pru_ec1_12[i]*EC1S1_12[i] 
-  deriv(EC2S2_12[]) <- age_up*EC2S2_11[i] - age_up*EC2S2_12[i] + f[i]*IC2S2_12[i] - r[i]*EC2S2_12[i] + n2nr[i]*n2care_e_12[i]*EC1S2_12[i] + p2nr[i]*p2care[i]*EC4S2_12[i] + r2nr[i]*end_res[i]*EC3S2_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_12[i] + m2pru_ec2_12[i]*EC2S1_12[i] 
-  deriv(EC3S2_12[]) <- age_up*EC3S2_11[i] - age_up*EC3S2_12[i] + f[i]*IC3S2_12[i] - r[i]*EC3S2_12[i] + n2r[i]*n2care_e_12[i]*EC2S2_12[i] + p2r[i]*p2care[i]*EC4S2_12[i] + nr2r[i]*end_nr[i]*EC2S2_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_12[i] + m2pru_ec3_12[i]*EC3S1_12[i] 
-  deriv(EC4S2_12[]) <- age_up*EC4S2_11[i] - age_up*EC4S2_12[i] + f[i]*IC4S2_12[i] - r[i]*EC4S2_12[i] + nr2p[i]*end_nr[i]*EC2S2_12[i] + r2p[i]*end_res[i]*EC3S2_12[i] - p2care[i]*EC4S2_12[i] + m2pru_ec4_12[i]*EC4S1_12[i] 
+  deriv(EC1S1_12[]) <- age_up*EC1S1_11_lag[i] - age_up*EC1S1_12_lag[i] + f[i]*IC1S1_12[i] - r[i]*EC1S1_12[i] - n2care_e_12[i]*EC1S1_12[i] - m2pru_ec1_12[i]*EC1S1_12[i] 
+  deriv(EC2S1_12[]) <- age_up*EC2S1_11_lag[i] - age_up*EC2S1_12_lag[i] + f[i]*IC2S1_12[i] - r[i]*EC2S1_12[i] + n2nr[i]*n2care_e_12[i]*EC1S1_12[i] + p2nr[i]*p2care[i]*EC4S1_12[i] + r2nr[i]*end_res[i]*EC3S1_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_12[i] - m2pru_ec2_12[i]*EC2S1_12[i] 
+  deriv(EC3S1_12[]) <- age_up*EC3S1_11_lag[i] - age_up*EC3S1_12_lag[i] + f[i]*IC3S1_12[i] - r[i]*EC3S1_12[i] + n2r[i]*n2care_e_12[i]*EC2S1_12[i] + p2r[i]*p2care[i]*EC4S1_12[i] + nr2r[i]*end_nr[i]*EC2S1_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_12[i] - m2pru_ec3_12[i]*EC3S1_12[i] 
+  deriv(EC4S1_12[]) <- age_up*EC4S1_11_lag[i] - age_up*EC4S1_12_lag[i] + f[i]*IC4S1_12[i] - r[i]*EC4S1_12[i] + nr2p[i]*end_nr[i]*EC2S1_12[i] + r2p[i]*end_res[i]*EC3S1_12[i] - p2care[i]*EC4S1_12[i] - m2pru_ec4_12[i]*EC4S1_12[i] 
   
-  deriv(EC1S2_13[]) <- age_up*EC1S2_12[i] - age_up*EC1S2_13[i] + f[i]*IC1S2_13[i] - r[i]*EC1S2_13[i] - n2care_e_13[i]*EC1S2_13[i] + m2pru_ec1_13[i]*EC1S1_13[i] 
-  deriv(EC2S2_13[]) <- age_up*EC2S2_12[i] - age_up*EC2S2_13[i] + f[i]*IC2S2_13[i] - r[i]*EC2S2_13[i] + n2nr[i]*n2care_e_13[i]*EC1S2_13[i] + p2nr[i]*p2care[i]*EC4S2_13[i] + r2nr[i]*end_res[i]*EC3S2_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_13[i] + m2pru_ec2_13[i]*EC2S1_13[i] 
-  deriv(EC3S2_13[]) <- age_up*EC3S2_12[i] - age_up*EC3S2_13[i] + f[i]*IC3S2_13[i] - r[i]*EC3S2_13[i] + n2r[i]*n2care_e_13[i]*EC2S2_13[i] + p2r[i]*p2care[i]*EC4S2_13[i] + nr2r[i]*end_nr[i]*EC2S2_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_13[i] + m2pru_ec3_13[i]*EC3S1_13[i] 
-  deriv(EC4S2_13[]) <- age_up*EC4S2_12[i] - age_up*EC4S2_13[i] + f[i]*IC4S2_13[i] - r[i]*EC4S2_13[i] + nr2p[i]*end_nr[i]*EC2S2_13[i] + r2p[i]*end_res[i]*EC3S2_13[i] - p2care[i]*EC4S2_13[i] + m2pru_ec4_13[i]*EC4S1_13[i] 
+  deriv(EC1S1_13[]) <- age_up*EC1S1_12_lag[i] - age_up*EC1S1_13_lag[i] + f[i]*IC1S1_13[i] - r[i]*EC1S1_13[i] - n2care_e_13[i]*EC1S1_13[i] - m2pru_ec1_13[i]*EC1S1_13[i] 
+  deriv(EC2S1_13[]) <- age_up*EC2S1_12_lag[i] - age_up*EC2S1_13_lag[i] + f[i]*IC2S1_13[i] - r[i]*EC2S1_13[i] + n2nr[i]*n2care_e_13[i]*EC1S1_13[i] + p2nr[i]*p2care[i]*EC4S1_13[i] + r2nr[i]*end_res[i]*EC3S1_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_13[i] - m2pru_ec2_13[i]*EC2S1_13[i] 
+  deriv(EC3S1_13[]) <- age_up*EC3S1_12_lag[i] - age_up*EC3S1_13_lag[i] + f[i]*IC3S1_13[i] - r[i]*EC3S1_13[i] + n2r[i]*n2care_e_13[i]*EC2S1_13[i] + p2r[i]*p2care[i]*EC4S1_13[i] + nr2r[i]*end_nr[i]*EC2S1_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_13[i] - m2pru_ec3_13[i]*EC3S1_13[i] 
+  deriv(EC4S1_13[]) <- age_up*EC4S1_12_lag[i] - age_up*EC4S1_13_lag[i] + f[i]*IC4S1_13[i] - r[i]*EC4S1_13[i] + nr2p[i]*end_nr[i]*EC2S1_13[i] + r2p[i]*end_res[i]*EC3S1_13[i] - p2care[i]*EC4S1_13[i] - m2pru_ec4_13[i]*EC4S1_13[i] 
   
-  deriv(EC1S2_14[]) <- age_up*EC1S2_13[i] - age_up*EC1S2_14[i] + f[i]*IC1S2_14[i] - r[i]*EC1S2_14[i] - n2care_e_14[i]*EC1S2_14[i] + m2pru_ec1_14[i]*EC1S1_14[i] 
-  deriv(EC2S2_14[]) <- age_up*EC2S2_13[i] - age_up*EC2S2_14[i] + f[i]*IC2S2_14[i] - r[i]*EC2S2_14[i] + n2nr[i]*n2care_e_14[i]*EC1S2_14[i] + p2nr[i]*p2care[i]*EC4S2_14[i] + r2nr[i]*end_res[i]*EC3S2_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_14[i] + m2pru_ec2_14[i]*EC2S1_14[i] 
-  deriv(EC3S2_14[]) <- age_up*EC3S2_13[i] - age_up*EC3S2_14[i] + f[i]*IC3S2_14[i] - r[i]*EC3S2_14[i] + n2r[i]*n2care_e_14[i]*EC2S2_14[i] + p2r[i]*p2care[i]*EC4S2_14[i] + nr2r[i]*end_nr[i]*EC2S2_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_14[i] + m2pru_ec3_14[i]*EC3S1_14[i] 
-  deriv(EC4S2_14[]) <- age_up*EC4S2_13[i] - age_up*EC4S2_14[i] + f[i]*IC4S2_14[i] - r[i]*EC4S2_14[i] + nr2p[i]*end_nr[i]*EC2S2_14[i] + r2p[i]*end_res[i]*EC3S2_14[i] - p2care[i]*EC4S2_14[i] + m2pru_ec4_14[i]*EC4S1_14[i] 
+  deriv(EC1S1_14[]) <- age_up*EC1S1_13_lag[i] - age_up*EC1S1_14_lag[i] + f[i]*IC1S1_14[i] - r[i]*EC1S1_14[i] - n2care_e_14[i]*EC1S1_14[i] - m2pru_ec1_14[i]*EC1S1_14[i] 
+  deriv(EC2S1_14[]) <- age_up*EC2S1_13_lag[i] - age_up*EC2S1_14_lag[i] + f[i]*IC2S1_14[i] - r[i]*EC2S1_14[i] + n2nr[i]*n2care_e_14[i]*EC1S1_14[i] + p2nr[i]*p2care[i]*EC4S1_14[i] + r2nr[i]*end_res[i]*EC3S1_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_14[i] - m2pru_ec2_14[i]*EC2S1_14[i] 
+  deriv(EC3S1_14[]) <- age_up*EC3S1_13_lag[i] - age_up*EC3S1_14_lag[i] + f[i]*IC3S1_14[i] - r[i]*EC3S1_14[i] + n2r[i]*n2care_e_14[i]*EC2S1_14[i] + p2r[i]*p2care[i]*EC4S1_14[i] + nr2r[i]*end_nr[i]*EC2S1_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_14[i] - m2pru_ec3_14[i]*EC3S1_14[i] 
+  deriv(EC4S1_14[]) <- age_up*EC4S1_13_lag[i] - age_up*EC4S1_14_lag[i] + f[i]*IC4S1_14[i] - r[i]*EC4S1_14[i] + nr2p[i]*end_nr[i]*EC2S1_14[i] + r2p[i]*end_res[i]*EC3S1_14[i] - p2care[i]*EC4S1_14[i] - m2pru_ec4_14[i]*EC4S1_14[i] 
   
-  deriv(EC1S2_15[]) <- age_up*EC1S2_14[i] - age_up*EC1S2_15[i] + f[i]*IC1S2_15[i] - r[i]*EC1S2_15[i] - n2care_e_15[i]*EC1S2_15[i] + m2pru_ec1_15[i]*EC1S1_15[i] 
-  deriv(EC2S2_15[]) <- age_up*EC2S2_14[i] - age_up*EC2S2_15[i] + f[i]*IC2S2_15[i] - r[i]*EC2S2_15[i] + n2nr[i]*n2care_e_15[i]*EC1S2_15[i] + p2nr[i]*p2care[i]*EC4S2_15[i] + r2nr[i]*end_res[i]*EC3S2_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_15[i] + m2pru_ec2_15[i]*EC2S1_15[i] 
-  deriv(EC3S2_15[]) <- age_up*EC3S2_14[i] - age_up*EC3S2_15[i] + f[i]*IC3S2_15[i] - r[i]*EC3S2_15[i] + n2r[i]*n2care_e_15[i]*EC2S2_15[i] + p2r[i]*p2care[i]*EC4S2_15[i] + nr2r[i]*end_nr[i]*EC2S2_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_15[i] + m2pru_ec3_15[i]*EC3S1_15[i] 
-  deriv(EC4S2_15[]) <- age_up*EC4S2_14[i] - age_up*EC4S2_15[i] + f[i]*IC4S2_15[i] - r[i]*EC4S2_15[i] + nr2p[i]*end_nr[i]*EC2S2_15[i] + r2p[i]*end_res[i]*EC3S2_15[i] - p2care[i]*EC4S2_15[i] + m2pru_ec4_15[i]*EC4S1_15[i] 
+  deriv(EC1S1_15[]) <- age_up*EC1S1_14_lag[i] - age_up*EC1S1_15_lag[i] + f[i]*IC1S1_15[i] - r[i]*EC1S1_15[i] - n2care_e_15[i]*EC1S1_15[i] - m2pru_ec1_15[i]*EC1S1_15[i] 
+  deriv(EC2S1_15[]) <- age_up*EC2S1_14_lag[i] - age_up*EC2S1_15_lag[i] + f[i]*IC2S1_15[i] - r[i]*EC2S1_15[i] + n2nr[i]*n2care_e_15[i]*EC1S1_15[i] + p2nr[i]*p2care[i]*EC4S1_15[i] + r2nr[i]*end_res[i]*EC3S1_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_15[i] - m2pru_ec2_15[i]*EC2S1_15[i] 
+  deriv(EC3S1_15[]) <- age_up*EC3S1_14_lag[i] - age_up*EC3S1_15_lag[i] + f[i]*IC3S1_15[i] - r[i]*EC3S1_15[i] + n2r[i]*n2care_e_15[i]*EC2S1_15[i] + p2r[i]*p2care[i]*EC4S1_15[i] + nr2r[i]*end_nr[i]*EC2S1_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_15[i] - m2pru_ec3_15[i]*EC3S1_15[i] 
+  deriv(EC4S1_15[]) <- age_up*EC4S1_14_lag[i] - age_up*EC4S1_15_lag[i] + f[i]*IC4S1_15[i] - r[i]*EC4S1_15[i] + nr2p[i]*end_nr[i]*EC2S1_15[i] + r2p[i]*end_res[i]*EC3S1_15[i] - p2care[i]*EC4S1_15[i] - m2pru_ec4_15[i]*EC4S1_15[i] 
   
-  deriv(EC1S2_16[]) <- age_up*((1 - neet16_ec1s2[i])*EC1S2_15[i] + (1 - neet16_ec1s1[i])*EC1S1_15[i]) - age_up*EC1S2_16[i] + f[i]*IC1S2_16[i] - r[i]*EC1S2_16[i] - n2care_e_16[i]*EC1S2_16[i] + m2neet_ec1_16[i]*EC1S1_16[i] - neet2m_e[i]*EC1S2_16[i] 
-  deriv(EC2S2_16[]) <- age_up*((1 - neet16_ec2s2[i])*EC2S2_15[i] + (1 - neet16_ec2s1[i])*EC2S1_15[i]) - age_up*EC2S2_16[i] + f[i]*IC2S2_16[i] - r[i]*EC2S2_16[i] + n2nr[i]*n2care_e_16[i]*EC1S2_16[i] + p2nr[i]*p2care[i]*EC4S2_16[i] + r2nr[i]*end_res[i]*EC3S2_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_16[i] + m2neet_ec2_16[i]*EC2S1_16[i] - neet2m_e[i]*EC2S2_16[i] 
-  deriv(EC3S2_16[]) <- age_up*((1 - neet16_ec3s2[i])*EC3S2_15[i] + (1 - neet16_ec3s1[i])*EC3S1_15[i]) - age_up*EC3S2_16[i] + f[i]*IC3S2_16[i] - r[i]*EC3S2_16[i] + n2r[i]*n2care_e_16[i]*EC2S2_16[i] + p2r[i]*p2care[i]*EC4S2_16[i] + nr2r[i]*end_nr[i]*EC2S2_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_16[i] + m2neet_ec3_16[i]*EC3S1_16[i] - neet2m_e[i]*EC3S2_16[i] 
-  deriv(EC4S2_16[]) <- age_up*((1 - neet16_ec4s2[i])*EC4S2_15[i] + (1 - neet16_ec4s1[i])*EC4S1_15[i]) - age_up*EC4S2_16[i] + f[i]*IC4S2_16[i] - r[i]*EC4S2_16[i] + nr2p[i]*end_nr[i]*EC2S2_16[i] + r2p[i]*end_res[i]*EC3S2_16[i] - p2care[i]*EC4S2_16[i] + m2neet_ec4_16[i]*EC4S1_16[i] - neet2m_e[i]*EC4S2_16[i] 
+  deriv(EC1S1_16[]) <- age_up*(neet16_ec1s1[i]*EC1S1_15_lag[i] + neet16_ec1s2[i]*EC1S2_15_lag[i]) - age_up*EC1S1_16_lag[i] + f[i]*IC1S1_16[i] - r[i]*EC1S1_16[i] - n2care_e_16[i]*EC1S1_16[i] + neet2m_e[i]*EC1S2_16[i] - m2neet_ec1_16[i]*EC1S1_16[i] 
+  deriv(EC2S1_16[]) <- age_up*(neet16_ec2s1[i]*EC2S1_15_lag[i] + neet16_ec2s2[i]*EC2S2_15_lag[i]) - age_up*EC2S1_16_lag[i] + f[i]*IC2S1_16[i] - r[i]*EC2S1_16[i] + n2nr[i]*n2care_e_16[i]*EC1S1_16[i] + p2nr[i]*p2care[i]*EC4S1_16[i] + r2nr[i]*end_res[i]*EC3S1_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_16[i] + neet2m_e[i]*EC2S2_16[i] - m2neet_ec2_16[i]*EC2S1_16[i] 
+  deriv(EC3S1_16[]) <- age_up*(neet16_ec3s1[i]*EC3S1_15_lag[i] + neet16_ec3s2[i]*EC3S2_15_lag[i]) - age_up*EC3S1_16_lag[i] + f[i]*IC3S1_16[i] - r[i]*EC3S1_16[i] + n2r[i]*n2care_e_16[i]*EC2S1_16[i] + p2r[i]*p2care[i]*EC4S1_16[i] + nr2r[i]*end_nr[i]*EC2S1_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_16[i] + neet2m_e[i]*EC3S2_16[i] - m2neet_ec3_16[i]*EC3S1_16[i] 
+  deriv(EC4S1_16[]) <- age_up*(neet16_ec4s1[i]*EC4S1_15_lag[i] + neet16_ec4s2[i]*EC4S2_15_lag[i]) - age_up*EC4S1_16_lag[i] + f[i]*IC4S1_16[i] - r[i]*EC4S1_16[i] + nr2p[i]*end_nr[i]*EC2S1_16[i] + r2p[i]*end_res[i]*EC3S1_16[i] - p2care[i]*EC4S1_16[i] + neet2m_e[i]*EC4S2_16[i] - m2neet_ec4_16[i]*EC4S1_16[i] 
   
-  deriv(EC1S2_17[]) <- age_up*EC1S2_16[i] - age_up*EC1S2_17[i] + f[i]*IC1S2_17[i] - r[i]*EC1S2_17[i] - n2care_e_17[i]*EC1S2_17[i] + m2neet_ec1_17[i]*EC1S1_17[i] - neet2m_e[i]*EC1S2_17[i] 
-  deriv(EC2S2_17[]) <- age_up*EC2S2_16[i] - age_up*EC2S2_17[i] + f[i]*IC2S2_17[i] - r[i]*EC2S2_17[i] + n2nr[i]*n2care_e_17[i]*EC1S2_17[i] + p2nr[i]*p2care[i]*EC4S2_17[i] + r2nr[i]*end_res[i]*EC3S2_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_17[i] + m2neet_ec2_17[i]*EC2S1_17[i] - neet2m_e[i]*EC2S2_17[i] 
-  deriv(EC3S2_17[]) <- age_up*EC3S2_16[i] - age_up*EC3S2_17[i] + f[i]*IC3S2_17[i] - r[i]*EC3S2_17[i] + n2r[i]*n2care_e_17[i]*EC2S2_17[i] + p2r[i]*p2care[i]*EC4S2_17[i] + nr2r[i]*end_nr[i]*EC2S2_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_17[i] + m2neet_ec3_17[i]*EC3S1_17[i] - neet2m_e[i]*EC3S2_17[i] 
-  deriv(EC4S2_17[]) <- age_up*EC4S2_16[i] - age_up*EC4S2_17[i] + f[i]*IC4S2_17[i] - r[i]*EC4S2_17[i] + nr2p[i]*end_nr[i]*EC2S2_17[i] + r2p[i]*end_res[i]*EC3S2_17[i] - p2care[i]*EC4S2_17[i] + m2neet_ec4_17[i]*EC4S1_17[i] - neet2m_e[i]*EC4S2_17[i] 
+  deriv(EC1S1_17[]) <- age_up*EC1S1_16_lag[i] - age_up*EC1S1_17_lag[i] + f[i]*IC1S1_17[i] - r[i]*EC1S1_17[i] - n2care_e_17[i]*EC1S1_17[i] + neet2m_e[i]*EC1S2_17[i] - m2neet_ec1_17[i]*EC1S1_17[i] 
+  deriv(EC2S1_17[]) <- age_up*EC2S1_16_lag[i] - age_up*EC2S1_17_lag[i] + f[i]*IC2S1_17[i] - r[i]*EC2S1_17[i] + n2nr[i]*n2care_e_17[i]*EC1S1_17[i] + p2nr[i]*p2care[i]*EC4S1_17[i] + r2nr[i]*end_res[i]*EC3S1_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S1_17[i] + neet2m_e[i]*EC2S2_17[i] - m2neet_ec2_17[i]*EC2S1_17[i] 
+  deriv(EC3S1_17[]) <- age_up*EC3S1_16_lag[i] - age_up*EC3S1_17_lag[i] + f[i]*IC3S1_17[i] - r[i]*EC3S1_17[i] + n2r[i]*n2care_e_17[i]*EC2S1_17[i] + p2r[i]*p2care[i]*EC4S1_17[i] + nr2r[i]*end_nr[i]*EC2S1_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S1_17[i] + neet2m_e[i]*EC3S2_17[i] - m2neet_ec3_17[i]*EC3S1_17[i] 
+  deriv(EC4S1_17[]) <- age_up*EC4S1_16_lag[i] - age_up*EC4S1_17_lag[i] + f[i]*IC4S1_17[i] - r[i]*EC4S1_17[i] + nr2p[i]*end_nr[i]*EC2S1_17[i] + r2p[i]*end_res[i]*EC3S1_17[i] - p2care[i]*EC4S1_17[i] + neet2m_e[i]*EC4S2_17[i] - m2neet_ec4_17[i]*EC4S1_17[i] 
   
-},
+  
+  
+  deriv(EC1S2_10[]) <- t10_ec1s2[i]*pc_excl*turn10[i] - age_up*EC1S2_10_lag[i] + f[i]*IC1S2_10[i] - r[i]*EC1S2_10[i] - n2care_e_10[i]*EC1S2_10[i] + m2pru_ec1_10[i]*EC1S1_10[i] 
+  deriv(EC2S2_10[]) <- t10_ec2s2[i]*pc_excl*turn10[i] - age_up*EC2S2_10_lag[i] + f[i]*IC2S2_10[i] - r[i]*EC2S2_10[i] + n2nr[i]*n2care_e_10[i]*EC1S2_10[i] + p2nr[i]*p2care[i]*EC4S2_10[i] + r2nr[i]*end_res[i]*EC3S2_10[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_10[i] + m2pru_ec2_10[i]*EC2S1_10[i] 
+  deriv(EC3S2_10[]) <- t10_ec3s2[i]*pc_excl*turn10[i] - age_up*EC3S2_10_lag[i] + f[i]*IC3S2_10[i] - r[i]*EC3S2_10[i] + n2r[i]*n2care_e_10[i]*EC2S2_10[i] + p2r[i]*p2care[i]*EC4S2_10[i] + nr2r[i]*end_nr[i]*EC2S2_10[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_10[i] + m2pru_ec3_10[i]*EC3S1_10[i] 
+  deriv(EC4S2_10[]) <- t10_ec4s2[i]*pc_excl*turn10[i] - age_up*EC4S2_10_lag[i] + f[i]*IC4S2_10[i] - r[i]*EC4S2_10[i] + nr2p[i]*end_nr[i]*EC2S2_10[i] + r2p[i]*end_res[i]*EC3S2_10[i] - p2care[i]*EC4S2_10[i] + m2pru_ec4_10[i]*EC4S1_10[i] 
+  
+  deriv(EC1S2_11[]) <- -age_up*EC1S2_11_lag[i] + f[i]*IC1S2_11[i] - r[i]*EC1S2_11[i] - n2care_e_11[i]*EC1S2_11[i] + m2pru_ec1_11[i]*EC1S1_11[i] 
+  deriv(EC2S2_11[]) <- -age_up*EC2S2_11_lag[i] + f[i]*IC2S2_11[i] - r[i]*EC2S2_11[i] + n2nr[i]*n2care_e_11[i]*EC1S2_11[i] + p2nr[i]*p2care[i]*EC4S2_11[i] + r2nr[i]*end_res[i]*EC3S2_11[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_11[i] + m2pru_ec2_11[i]*EC2S1_11[i] 
+  deriv(EC3S2_11[]) <- -age_up*EC3S2_11_lag[i] + f[i]*IC3S2_11[i] - r[i]*EC3S2_11[i] + n2r[i]*n2care_e_11[i]*EC2S2_11[i] + p2r[i]*p2care[i]*EC4S2_11[i] + nr2r[i]*end_nr[i]*EC2S2_11[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_11[i] + m2pru_ec3_11[i]*EC3S1_11[i] 
+  deriv(EC4S2_11[]) <- -age_up*EC4S2_11_lag[i] + f[i]*IC4S2_11[i] - r[i]*EC4S2_11[i] + nr2p[i]*end_nr[i]*EC2S2_11[i] + r2p[i]*end_res[i]*EC3S2_11[i] - p2care[i]*EC4S2_11[i] + m2pru_ec4_11[i]*EC4S1_11[i] 
+  
+  deriv(EC1S2_12[]) <- age_up*EC1S2_11_lag[i] - age_up*EC1S2_12_lag[i] + f[i]*IC1S2_12[i] - r[i]*EC1S2_12[i] - n2care_e_12[i]*EC1S2_12[i] + m2pru_ec1_12[i]*EC1S1_12[i] 
+  deriv(EC2S2_12[]) <- age_up*EC2S2_11_lag[i] - age_up*EC2S2_12_lag[i] + f[i]*IC2S2_12[i] - r[i]*EC2S2_12[i] + n2nr[i]*n2care_e_12[i]*EC1S2_12[i] + p2nr[i]*p2care[i]*EC4S2_12[i] + r2nr[i]*end_res[i]*EC3S2_12[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_12[i] + m2pru_ec2_12[i]*EC2S1_12[i] 
+  deriv(EC3S2_12[]) <- age_up*EC3S2_11_lag[i] - age_up*EC3S2_12_lag[i] + f[i]*IC3S2_12[i] - r[i]*EC3S2_12[i] + n2r[i]*n2care_e_12[i]*EC2S2_12[i] + p2r[i]*p2care[i]*EC4S2_12[i] + nr2r[i]*end_nr[i]*EC2S2_12[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_12[i] + m2pru_ec3_12[i]*EC3S1_12[i] 
+  deriv(EC4S2_12[]) <- age_up*EC4S2_11_lag[i] - age_up*EC4S2_12_lag[i] + f[i]*IC4S2_12[i] - r[i]*EC4S2_12[i] + nr2p[i]*end_nr[i]*EC2S2_12[i] + r2p[i]*end_res[i]*EC3S2_12[i] - p2care[i]*EC4S2_12[i] + m2pru_ec4_12[i]*EC4S1_12[i] 
+  
+  deriv(EC1S2_13[]) <- age_up*EC1S2_12_lag[i] - age_up*EC1S2_13_lag[i] + f[i]*IC1S2_13[i] - r[i]*EC1S2_13[i] - n2care_e_13[i]*EC1S2_13[i] + m2pru_ec1_13[i]*EC1S1_13[i] 
+  deriv(EC2S2_13[]) <- age_up*EC2S2_12_lag[i] - age_up*EC2S2_13_lag[i] + f[i]*IC2S2_13[i] - r[i]*EC2S2_13[i] + n2nr[i]*n2care_e_13[i]*EC1S2_13[i] + p2nr[i]*p2care[i]*EC4S2_13[i] + r2nr[i]*end_res[i]*EC3S2_13[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_13[i] + m2pru_ec2_13[i]*EC2S1_13[i] 
+  deriv(EC3S2_13[]) <- age_up*EC3S2_12_lag[i] - age_up*EC3S2_13_lag[i] + f[i]*IC3S2_13[i] - r[i]*EC3S2_13[i] + n2r[i]*n2care_e_13[i]*EC2S2_13[i] + p2r[i]*p2care[i]*EC4S2_13[i] + nr2r[i]*end_nr[i]*EC2S2_13[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_13[i] + m2pru_ec3_13[i]*EC3S1_13[i] 
+  deriv(EC4S2_13[]) <- age_up*EC4S2_12_lag[i] - age_up*EC4S2_13_lag[i] + f[i]*IC4S2_13[i] - r[i]*EC4S2_13[i] + nr2p[i]*end_nr[i]*EC2S2_13[i] + r2p[i]*end_res[i]*EC3S2_13[i] - p2care[i]*EC4S2_13[i] + m2pru_ec4_13[i]*EC4S1_13[i] 
+  
+  deriv(EC1S2_14[]) <- age_up*EC1S2_13_lag[i] - age_up*EC1S2_14_lag[i] + f[i]*IC1S2_14[i] - r[i]*EC1S2_14[i] - n2care_e_14[i]*EC1S2_14[i] + m2pru_ec1_14[i]*EC1S1_14[i] 
+  deriv(EC2S2_14[]) <- age_up*EC2S2_13_lag[i] - age_up*EC2S2_14_lag[i] + f[i]*IC2S2_14[i] - r[i]*EC2S2_14[i] + n2nr[i]*n2care_e_14[i]*EC1S2_14[i] + p2nr[i]*p2care[i]*EC4S2_14[i] + r2nr[i]*end_res[i]*EC3S2_14[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_14[i] + m2pru_ec2_14[i]*EC2S1_14[i] 
+  deriv(EC3S2_14[]) <- age_up*EC3S2_13_lag[i] - age_up*EC3S2_14_lag[i] + f[i]*IC3S2_14[i] - r[i]*EC3S2_14[i] + n2r[i]*n2care_e_14[i]*EC2S2_14[i] + p2r[i]*p2care[i]*EC4S2_14[i] + nr2r[i]*end_nr[i]*EC2S2_14[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_14[i] + m2pru_ec3_14[i]*EC3S1_14[i] 
+  deriv(EC4S2_14[]) <- age_up*EC4S2_13_lag[i] - age_up*EC4S2_14_lag[i] + f[i]*IC4S2_14[i] - r[i]*EC4S2_14[i] + nr2p[i]*end_nr[i]*EC2S2_14[i] + r2p[i]*end_res[i]*EC3S2_14[i] - p2care[i]*EC4S2_14[i] + m2pru_ec4_14[i]*EC4S1_14[i] 
+  
+  deriv(EC1S2_15[]) <- age_up*EC1S2_14_lag[i] - age_up*EC1S2_15_lag[i] + f[i]*IC1S2_15[i] - r[i]*EC1S2_15[i] - n2care_e_15[i]*EC1S2_15[i] + m2pru_ec1_15[i]*EC1S1_15[i] 
+  deriv(EC2S2_15[]) <- age_up*EC2S2_14_lag[i] - age_up*EC2S2_15_lag[i] + f[i]*IC2S2_15[i] - r[i]*EC2S2_15[i] + n2nr[i]*n2care_e_15[i]*EC1S2_15[i] + p2nr[i]*p2care[i]*EC4S2_15[i] + r2nr[i]*end_res[i]*EC3S2_15[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_15[i] + m2pru_ec2_15[i]*EC2S1_15[i] 
+  deriv(EC3S2_15[]) <- age_up*EC3S2_14_lag[i] - age_up*EC3S2_15_lag[i] + f[i]*IC3S2_15[i] - r[i]*EC3S2_15[i] + n2r[i]*n2care_e_15[i]*EC2S2_15[i] + p2r[i]*p2care[i]*EC4S2_15[i] + nr2r[i]*end_nr[i]*EC2S2_15[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_15[i] + m2pru_ec3_15[i]*EC3S1_15[i] 
+  deriv(EC4S2_15[]) <- age_up*EC4S2_14_lag[i] - age_up*EC4S2_15_lag[i] + f[i]*IC4S2_15[i] - r[i]*EC4S2_15[i] + nr2p[i]*end_nr[i]*EC2S2_15[i] + r2p[i]*end_res[i]*EC3S2_15[i] - p2care[i]*EC4S2_15[i] + m2pru_ec4_15[i]*EC4S1_15[i] 
+  
+  deriv(EC1S2_16[]) <- age_up*((1 - neet16_ec1s2[i])*EC1S2_15_lag[i] + (1 - neet16_ec1s1[i])*EC1S1_15_lag[i]) - age_up*EC1S2_16_lag[i] + f[i]*IC1S2_16[i] - r[i]*EC1S2_16[i] - n2care_e_16[i]*EC1S2_16[i] + m2neet_ec1_16[i]*EC1S1_16[i] - neet2m_e[i]*EC1S2_16[i] 
+  deriv(EC2S2_16[]) <- age_up*((1 - neet16_ec2s2[i])*EC2S2_15_lag[i] + (1 - neet16_ec2s1[i])*EC2S1_15_lag[i]) - age_up*EC2S2_16_lag[i] + f[i]*IC2S2_16[i] - r[i]*EC2S2_16[i] + n2nr[i]*n2care_e_16[i]*EC1S2_16[i] + p2nr[i]*p2care[i]*EC4S2_16[i] + r2nr[i]*end_res[i]*EC3S2_16[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_16[i] + m2neet_ec2_16[i]*EC2S1_16[i] - neet2m_e[i]*EC2S2_16[i] 
+  deriv(EC3S2_16[]) <- age_up*((1 - neet16_ec3s2[i])*EC3S2_15_lag[i] + (1 - neet16_ec3s1[i])*EC3S1_15_lag[i]) - age_up*EC3S2_16_lag[i] + f[i]*IC3S2_16[i] - r[i]*EC3S2_16[i] + n2r[i]*n2care_e_16[i]*EC2S2_16[i] + p2r[i]*p2care[i]*EC4S2_16[i] + nr2r[i]*end_nr[i]*EC2S2_16[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_16[i] + m2neet_ec3_16[i]*EC3S1_16[i] - neet2m_e[i]*EC3S2_16[i] 
+  deriv(EC4S2_16[]) <- age_up*((1 - neet16_ec4s2[i])*EC4S2_15_lag[i] + (1 - neet16_ec4s1[i])*EC4S1_15_lag[i]) - age_up*EC4S2_16_lag[i] + f[i]*IC4S2_16[i] - r[i]*EC4S2_16[i] + nr2p[i]*end_nr[i]*EC2S2_16[i] + r2p[i]*end_res[i]*EC3S2_16[i] - p2care[i]*EC4S2_16[i] + m2neet_ec4_16[i]*EC4S1_16[i] - neet2m_e[i]*EC4S2_16[i] 
+  
+  deriv(EC1S2_17[]) <- age_up*EC1S2_16_lag[i] - age_up*EC1S2_17_lag[i] + f[i]*IC1S2_17[i] - r[i]*EC1S2_17[i] - n2care_e_17[i]*EC1S2_17[i] + m2neet_ec1_17[i]*EC1S1_17[i] - neet2m_e[i]*EC1S2_17[i] 
+  deriv(EC2S2_17[]) <- age_up*EC2S2_16_lag[i] - age_up*EC2S2_17_lag[i] + f[i]*IC2S2_17[i] - r[i]*EC2S2_17[i] + n2nr[i]*n2care_e_17[i]*EC1S2_17[i] + p2nr[i]*p2care[i]*EC4S2_17[i] + r2nr[i]*end_res[i]*EC3S2_17[i] - (nr2r[i] + nr2p[i])*end_nr[i]*EC2S2_17[i] + m2neet_ec2_17[i]*EC2S1_17[i] - neet2m_e[i]*EC2S2_17[i] 
+  deriv(EC3S2_17[]) <- age_up*EC3S2_16_lag[i] - age_up*EC3S2_17_lag[i] + f[i]*IC3S2_17[i] - r[i]*EC3S2_17[i] + n2r[i]*n2care_e_17[i]*EC2S2_17[i] + p2r[i]*p2care[i]*EC4S2_17[i] + nr2r[i]*end_nr[i]*EC2S2_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_17[i] + m2neet_ec3_17[i]*EC3S1_17[i] - neet2m_e[i]*EC3S2_17[i] 
+  deriv(EC4S2_17[]) <- age_up*EC4S2_16_lag[i] - age_up*EC4S2_17_lag[i] + f[i]*IC4S2_17[i] - r[i]*EC4S2_17[i] + nr2p[i]*end_nr[i]*EC2S2_17[i] + r2p[i]*end_res[i]*EC3S2_17[i] - p2care[i]*EC4S2_17[i] + m2neet_ec4_17[i]*EC4S1_17[i] - neet2m_e[i]*EC4S2_17[i] 
+  
+  },
 target = 'c')  
 
 

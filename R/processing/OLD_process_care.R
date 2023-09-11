@@ -733,6 +733,14 @@ school_in_care <- school_pru %>%
   mutate(pc_in_pru = PRU/(PRU + `Not PRU`)) %>% 
   filter(age <= 15) 
 
+
+
+pru_rate <- school_pru %>% 
+  filter(age <= 15) 
+
+
+
+
   
 school_in_care %>% 
   ungroup() %>% 
@@ -772,6 +780,65 @@ ggsave(filename = "output/graphs/pru_rate_byfsm_girl.png", pru_rate_byfsm_girl)
 
 # WOW weird, pretty much all of the increase in PRU rates just came from the
 # children who were FSM eligible - only exception being 15 year olds
+
+
+check <- school_pru %>% 
+  mutate(pc_in_pru = PRU/(PRU + `Not PRU`)) %>% 
+  filter(age <= 15) %>% 
+  group_by(age, gender, fsm) %>% 
+  mutate(pc_2013 = ifelse(end_period_year %in% c(2010:2013), pc_in_pru, NA),
+         pc_2013 = mean(pc_2013, na.rm = T),
+         diff = (pc_in_pru - pc_2013)/pc_2013) %>% 
+  ungroup()
+
+check %>% 
+  # mutate(diff = ifelse(gender == "Girls" & age == 11, 0, diff)) %>% 
+  ggplot() +
+  geom_line(aes(x=as.character(end_period_year), y = diff, group = fsm, colour = fsm)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age))
+
+
+
+# what about change in pc PRU going from year to year for each cohort
+check2 <- school_pru %>% 
+  mutate(pc_in_pru = PRU/(PRU + `Not PRU`)) %>% 
+  filter(age <= 15) %>%
+  add_cohort() %>% 
+  group_by(gender, cohort, fsm) %>% 
+  arrange(age) %>% 
+  mutate(diff = (pc_in_pru - lag(pc_in_pru))/(1-lag(pc_in_pru)))
+
+
+check2 %>% 
+  # mutate(diff = ifelse(gender == "Girls" & age == 11, 0, diff)) %>% 
+  ggplot() +
+  geom_line(aes(x=as.character(end_period_year), y = diff, group = fsm, colour = fsm)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age))
+
+check2 %>% 
+  filter(gender == "Boys",
+         !cohort %in% c("Cohort 3", "Cohort 4", "Cohort 19", "Cohort 20")) %>% 
+  ggplot() +
+  geom_line(aes(x=as.character(age), y = diff, group = fsm, colour = fsm)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(cohort)) +
+  theme_bw() +
+  theme(panel.spacing.x = unit(0, "lines"),
+        legend.position = "none")
+
+
+check2 %>% 
+ filter(gender == "Girls",
+        !cohort %in% c("Cohort 3", "Cohort 4", "Cohort 19", "Cohort 20")) %>% 
+  ggplot() +
+  geom_line(aes(x=as.character(age), y = diff, group = fsm, colour = fsm)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(cohort)) +
+  theme_bw() +
+  theme(panel.spacing.x = unit(0, "lines"),
+        legend.position = "none")
 
 school_pru %>% 
   mutate(pc_in_pru = PRU/(PRU + `Not PRU`)) %>% 

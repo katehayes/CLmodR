@@ -8,8 +8,6 @@ load("/Users/katehayes/CLmodR/output/data/cleaned/schools_10to22_ethnicity.Rdata
 
 
 
-
-
 s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/school_categories.csv")
 
 
@@ -61,17 +59,7 @@ pru <- schools %>%
   group_by(gender, age, fsm) %>% 
   arrange(end_period_year) %>% 
   # although no point really in smoothing until youve got the pcs of total?? not sure
-  mutate(smooth_count = smooth.spline(end_period_year, count)$y)
-
-
-school_pru <- schools %>% 
-  mutate(pru = ifelse(school_type == "Pupil referral unit", "PRU", "Not PRU")) %>%
-  group_by(end_period_year, age, gender, pru, fsm) %>%
-  summarise(count = sum(count)) %>% 
-  pivot_wider(names_from = pru,
-              values_from = count,
-              values_fill = 0)
-
+  mutate(smooth_count = smooth.spline(end_period_year, count, lambda = 0.002)$y)
 
 
 pru %>% 
@@ -84,6 +72,152 @@ pru %>%
   ggplot() +
   geom_bar(aes(x = end_period_year, y = smooth_count, fill = fsm),
            stat = "identity", position = "stack")
+
+
+school_pru <- schools %>% 
+  mutate(pru = ifelse(school_type == "Pupil referral unit", "PRU", "Not PRU")) %>%
+  group_by(end_period_year, age, gender, pru, fsm) %>%
+  summarise(count = sum(count)) %>% 
+  pivot_wider(names_from = pru,
+              values_from = count,
+              values_fill = 0)
+
+
+
+pru_rate <- schools %>% 
+  mutate(pru = ifelse(school_type == "Pupil referral unit", "PRU", "Not PRU")) %>%
+  group_by(end_period_year, age, gender, pru, fsm) %>%
+  summarise(count = sum(count)) %>% 
+  filter(age != 15) %>% 
+  mutate(pru = factor(pru),
+         fsm = factor(fsm),
+         gender = factor(gender),
+         age = factor(age))
+
+
+
+mylogit <- glm(pru ~ gender + age + fsm, data = mydata, family = "binomial")
+
+
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # more recent than above - checking things for fitting# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+
+obs_pru_rate <- schools %>% 
+  mutate(pru = ifelse(school_type == "Pupil referral unit", "PRU", "Not PRU")) %>%
+  filter(age %in% c(10:15)) %>% 
+         # age != 11) %>% 
+  group_by(end_period_year, age, gender, pru) %>%
+  summarise(count = sum(count)) %>% 
+  pivot_wider(names_from = pru,
+              values_from = count,
+              values_fill = 0) %>% 
+  mutate(pc = PRU/(PRU + `Not PRU`)) %>% 
+  select(end_period_year, age, gender, pc) %>% 
+  ungroup() %>% 
+  group_by(gender, age) %>% 
+  arrange(end_period_year) %>% 
+  mutate(smooth_pc = smooth.spline(end_period_year, pc, lambda = 0.02)$y)
+
+# %>% 
+#   pivot_wider(names_from = gender,
+#               values_from = c(pc, smooth_pc)) %>% 
+# 
+# # %>% 
+#   # group_by(age) %>% 
+#   # mutate(Girls = ifelse(age %in% c(10,12) & Girls < 0.00000001, mean(Girls)/4, Girls)) %>% 
+#   mutate(rel_rate = pc_Boys/pc_Girls,
+#          rel_rate = ifelse(age == 11, 1, rel_rate),
+#          rel_rate = ifelse(age %in% c(10,12) & pc_Girls < 0.00000001, NA, rel_rate)) %>% 
+#   ungroup() %>% 
+#   group_by(age) %>% 
+#   arrange(end_period_year) %>% 
+#   mutate(rel_rate = ifelse(age %in% c(10,12) & pc_Girls < 0.00000001, (lead(rel_rate) + lag(rel_rate))/2, rel_rate)) %>% 
+#   ungroup() %>% 
+#   mutate(smooth_rel_rate = smooth_pc_Boys/smooth_pc_Girls)
+
+pc_pru_age_gen2 <- obs_pru_rate %>% 
+  pivot_longer(c(Girls, Boys),
+               names_to = "gender",
+               values_to = "pc") %>% 
+  ggplot() +
+  geom_line(aes(x = age, y = pc, group = interaction(as.character(end_period_year), gender), color = interaction(as.character(end_period_year), gender))) + 
+  # scale_color_manual(values = c("#FDEDEC",
+  #                               "#FADBD8",
+  #                               "#F5B7B1",
+  #                               "#EC7063",
+  #                               "#E74C3C",
+  #                               "#CB4335",
+  #                               "#B03A2E",
+  #                               "#943126",
+  #                               "#78281F",
+  #                               "#641E16",
+  #                               "#49150F",
+  #                               "#2E0D09",
+  #                               "#1A0705")) +
+  scale_colour_viridis(option = "plasma",
+                       discrete = T) +
+  theme_bw()
+pc_pru_age_gen2
+ggsave(filename = "output/graphs/pc_pru_age_gen2.png", pc_pru_age_gen2)  
+
+pc_pru_age_gen <- obs_pru_rate %>% 
+  # filter(gender == "Boys") %>% 
+  # pivot_longer(c(Girls, Boys),
+  #              names_to = "gender",
+  #              values_to = "pc") %>% 
+  ggplot() +
+  geom_line(aes(x = age, y = pc, group = gender, color = gender)) +
+  # geom_line(aes(x = age, y = smooth_pc, group = gender, color = gender)) +
+  facet_grid(~as.character(end_period_year)) +
+  # scale_colour_viridis(option = "magma",
+  #                    discrete = T) +
+  theme_bw() +
+  theme(panel.spacing.x = unit(0, "lines"),
+        legend.position = "none")
+pc_pru_age_gen
+
+ggsave(filename = "output/graphs/pc_pru_age_gen.png", pc_pru_age_gen)  
+
+rel_rate_pru_bygen <- obs_pru_rate %>% 
+  add_cohort() %>% 
+  ggplot() +
+  geom_line(aes(x = age, y = rel_rate, group = as.character(end_period_year), colour = as.character(end_period_year))) +
+  geom_line(aes(x = age, y = smooth_rel_rate, group = as.character(end_period_year), colour = as.character(end_period_year))) +
+  scale_colour_viridis(option = "turbo",
+                       discrete = T) +
+  theme_bw()
+rel_rate_pru_bygen
+ggsave(filename = "output/graphs/rel_rate_pru_bygen.png", rel_rate_pru_bygen)  
+
+
+rel_rate_pru_bygen2 <- obs_pru_rate %>% 
+  add_cohort() %>% 
+  ggplot() +
+  geom_line(aes(x = as.character(end_period_year), y = rel_rate, group = as.character(age), colour = as.character(age))) +
+  scale_colour_viridis(option = "turbo",
+                       discrete = T) +
+  theme_bw()
+rel_rate_pru_bygen2
+ggsave(filename = "output/graphs/rel_rate_pru_bygen2.png", rel_rate_pru_bygen2)  
+
+
+rel_rate_pru_bygen3 <- obs_pru_rate %>% 
+  add_cohort() %>% 
+  ggplot() +
+  geom_line(aes(x = cohort, y = rel_rate, group = as.character(age), colour = as.character(age))) +
+  scale_colour_viridis(option = "turbo",
+                       discrete = T) +
+  theme_bw()
+rel_rate_pru_bygen3
+ggsave(filename = "output/graphs/rel_rate_pru_bygen2.png", rel_rate_pru_bygen2)  
+
+
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # not sure what i was up to# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
