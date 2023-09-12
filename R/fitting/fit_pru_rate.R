@@ -1,8 +1,7 @@
 install.packages("lognorm")
 library(lognorm)
-
-
-candidate_pars <- c(0.0000785, 3, 2, 1.3, 0.25, 1.75, 3.43, 6.44, 10.2, 2.5, 0.00003, 0.9) 
+install.packages("texreg")
+library(texreg)
 
 
 obs_data <- schools %>% 
@@ -22,6 +21,177 @@ obs_data <- schools %>%
   ungroup() %>% 
   filter(pru == "PRU") %>% 
   select(-c(pru, count)) 
+
+
+
+logit_obs <- obs_data %>% 
+  mutate(age = factor(age),
+         gender = factor(gender, levels = c("Girls", "Boys")),
+         fsm = factor(fsm, levels = c("Not FSM eligible", "FSM eligible")),
+         end_period_year = factor(end_period_year))
+
+
+reg_data <- schools %>% 
+  filter(age <= 15) %>% 
+  mutate(pru = ifelse(school_type == "Pupil referral unit", "PRU", "Not PRU")) %>%
+  group_by(end_period_year, age, gender, pru, fsm) %>%
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = pru,
+              values_from = count,
+              values_fill = 0) %>% 
+  pivot_longer(c(PRU, `Not PRU`),
+               names_to = "pru",
+               values_to = "count") %>% 
+  mutate(near_change = ifelse(age %in% c(11:14), "Not near", "Near to transition point")) %>% 
+  mutate(age = factor(age),
+         gender = factor(gender, levels = c("Girls", "Boys")),
+         fsm = factor(fsm, levels = c("Not FSM eligible", "FSM eligible")),
+         near_change = factor(near_change, levels = c("Not near", "Near to transition point")),
+         end_period_year = factor(end_period_year),
+         pru = factor(pru),
+         count = round(count, digits = 0)) %>% 
+  mutate(policy_period = ifelse(end_period_year %in% c(2014:2020), 1, 0))
+
+
+
+pru_logit <- glm(pru ~ gender + age + fsm + age*fsm + end_period_year + end_period_year*near_change , family="binomial", weight = reg_data$count, data = reg_data)
+
+summary(pru_logit)
+
+
+pru_logit_pol <- glm(pru ~ gender + age + fsm + age*fsm + policy_period*near_change , family="binomial", weight = reg_data$count, data = reg_data)
+
+summary(pru_logit_pol)
+
+
+
+states <- schools %>% 
+  filter(age <= 15) %>% 
+  mutate(pru = ifelse(school_type == "Pupil referral unit", "PRU", "Not PRU")) %>%
+  group_by(end_period_year, age, gender, pru, fsm) %>%
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = pru,
+              values_from = count,
+              values_fill = 0) %>% 
+  select(end_period_year, gender, age, fsm)
+
+logit_states <- states %>% 
+  mutate(near_change = ifelse(age %in% c(11:14), "Not near", "Near to transition point")) %>% 
+  mutate(policy_period = ifelse(end_period_year %in% c(2014:2020), 1, 0)) %>% 
+  mutate(age = factor(age),
+         gender = factor(gender, levels = c("Girls", "Boys")),
+         fsm = factor(fsm, levels = c("Not FSM eligible", "FSM eligible")),
+         near_change = factor(near_change, levels = c("Not near", "Near to transition point")),
+         end_period_year = factor(end_period_year))
+
+
+pru_predict <- cbind(logit_states, 
+                     predict(pru_logit, newdata = logit_states, type = "link", se = TRUE)) %>% 
+  mutate(pred_prob_pru = plogis(fit),
+         LL = plogis(fit - (1.96 * se.fit)),
+         UL = plogis(fit + (1.96 * se.fit)))
+
+  
+  
+pru_predict %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pred_prob_pru, group = fsm, colour = fsm), linetype = "dashed") +
+  # scale_colour_manual(values = c("red", "blue")) +
+  geom_ribbon(aes(x = as.numeric(end_period_year), ymin = LL, ymax = UL, fill = fsm), alpha = 0.3) +
+  geom_line(data = logit_obs, aes(x = end_period_year, y = pc, group = fsm, color = fsm)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age)) 
+  
+
+pru_logit_boys <- pru_predict %>% 
+  filter(gender == "Boys") %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pred_prob_pru, group = fsm, colour = fsm), linetype = "dashed") +
+  # scale_colour_manual(values = c("red", "blue")) +
+  geom_ribbon(aes(x = as.numeric(end_period_year), ymin = LL, ymax = UL, fill = fsm), alpha = 0.3) +
+  geom_line(data = logit_obs %>% 
+              filter(gender == "Boys"), 
+            aes(x = end_period_year, y = pc, group = fsm, color = fsm)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age)) 
+pru_logit_boys
+ggsave(filename = "output/graphs/pru_logit_boys.png", pru_logit_boys)  
+
+
+pru_logit_girls <- pru_predict %>% 
+  filter(gender == "Girls") %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pred_prob_pru, group = fsm, colour = fsm), linetype = "dashed") +
+  # scale_colour_manual(values = c("red", "blue")) +
+  geom_ribbon(aes(x = as.numeric(end_period_year), ymin = LL, ymax = UL, fill = fsm), alpha = 0.3) +
+  geom_line(data = logit_obs %>% 
+              filter(gender == "Girls"), 
+            aes(x = end_period_year, y = pc, group = fsm, color = fsm)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age)) 
+pru_logit_girls
+ggsave(filename = "output/graphs/pru_logit_girls.png", pru_logit_girls)  
+
+
+
+
+pru_predict_pol <- cbind(logit_states, 
+                     predict(pru_logit_pol, newdata = logit_states, type = "link", se = TRUE)) %>% 
+  mutate(pred_prob_pru = plogis(fit),
+         LL = plogis(fit - (1.96 * se.fit)),
+         UL = plogis(fit + (1.96 * se.fit)))
+
+
+pru_predict_pol %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pred_prob_pru, group = fsm, colour = fsm)) +
+  # scale_colour_manual(values = c("red", "blue")) +
+  geom_ribbon(aes(x = as.numeric(end_period_year), ymin = LL, ymax = UL, fill = fsm), alpha = 0.3) +
+  geom_line(data = logit_obs, aes(x = end_period_year, y = pc, group = fsm, color = fsm)) +
+  facet_grid(rows = vars(gender),
+             cols = vars(age)) +
+  theme_bw()
+
+
+# ok obviously you cant model it like this with a flat top
+# is there some way other people model like a policy change &
+# then allow it to have a shape/length of effect that is determined
+# by a fit to the data??
+
+
+
+
+
+
+# hmm.. what am i modelling here?
+# a mixed model (some multiplicative some additive components)
+# an interaction between FSM and age? (decreasing effect of FSM as age steps up?)
+
+
+
+obs_data <- schools %>% 
+  filter(age <= 15) %>% 
+  mutate(pru = ifelse(school_type == "Pupil referral unit", "PRU", "Not PRU")) %>%
+  group_by(end_period_year, age, gender, pru, fsm) %>%
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = pru,
+              values_from = count,
+              values_fill = 0) %>% 
+  pivot_longer(c(PRU, `Not PRU`),
+               names_to = "pru",
+               values_to = "count") %>% 
+  group_by(end_period_year, age, gender, fsm) %>%
+  mutate(pc = count/sum(count)) %>% 
+  ungroup() %>% 
+  filter(pru == "PRU") %>% 
+  select(-c(pru, count)) 
+
+
+
+
 
 
 decomp_model <- function(level, Boys, FSM_eligible, fsm_step, a11, a12, a13, a14, a15, y2017, near_change, damp) {
@@ -169,7 +339,7 @@ like <- c(4,9,11,13,14,19)
 accepted <- candidate_pars[like,]
 
 i <- 4
-picked <- decomp_model(level = 0.0003, Boys = 3, FSM_eligible = 2.6, fsm_step = 0.6, a11 = candidate_pars$`a11`[i], a12 = 2, a13 = 3, a14 = 4, a15 = 6.9, y2017 = 1.6, near_change = candidate_pars$`near_change`[[i]], damp = 1) %>% 
+picked <- decomp_model(level = 0.0003, Boys = 3, FSM_eligible = 2.6, fsm_step = 0.6, a11 = candidate_pars$`a11`[i], a12 = 2, a13 = 3, a14 = 4, a15 = 6.9, y2017 = 1.6, near_change = candidate_pars$`near_change`[[i]], damp = 1) %>%
   full_join(obs_data)
 
 picked %>% 
@@ -187,3 +357,8 @@ picked %>%
   geom_line(aes(x=end_period_year, y = pc, group = fsm, colour = fsm)) +
   facet_grid(rows = vars(gender),
              cols = vars(age))
+
+# picked <- decomp_model(level = 0.0003, Boys = 3, FSM_eligible = 2.6, fsm_step = 0.6, a11 = candidate_pars$`a11`[i], a12 = 2, a13 = 3, a14 = 4, a15 = 6.9, y2017 = 1.6, near_change = candidate_pars$`near_change`[[i]], damp = 1) %>% 
+#   full_join(obs_data) <- this is not a terrible choice
+
+# candidate_pars <- c(0.0000785, 3, 2, 1.3, 0.25, 1.75, 3.43, 6.44, 10.2, 2.5, 0.00003, 0.9) 

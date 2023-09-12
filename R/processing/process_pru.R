@@ -151,16 +151,7 @@ pru_decomp %>%
   facet_grid(rows = vars(gender),
              cols = vars(age))
 
-states <- schools %>% 
-  filter(age <= 15) %>% 
-  mutate(pru = ifelse(school_type == "Pupil referral unit", "PRU", "Not PRU")) %>%
-  group_by(end_period_year, age, gender, pru, fsm) %>%
-  summarise(count = sum(count)) %>% 
-  ungroup() %>% 
-  pivot_wider(names_from = pru,
-              values_from = count,
-              values_fill = 0) %>% 
- select(end_period_year, gender, age, fsm)
+
   
  
 
