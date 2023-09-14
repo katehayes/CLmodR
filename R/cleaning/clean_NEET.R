@@ -229,7 +229,7 @@ neet_15 <- n_data %>%
   mutate(count_nk_16 = (pc_nk_16*100)*count_neet_16/(pc_neet_16*100),
          count_nk_17 = (pc_nk_17*100)*count_neet_17/(pc_neet_17*100)) %>% 
   mutate(count_16 = count_neet_16/pc_neet_16,
-         count_17 = count_neet_17/pc_neet_17) # %>% 
+         count_17 = count_neet_17/pc_neet_17) %>% 
   # mutate(count_notneet_16 = ((1-pc_neet_16)*100)*(count_neet_16/(pc_neet_16*100)),
   #        count_notneet_17 = ((1-pc_neet_17)*100)*(count_neet_17/(pc_neet_17*100))) %>% 
   select(-c(starts_with("pc"))) %>% 
@@ -533,7 +533,7 @@ neet_16to23_age_gender <- neet_19to23 %>%
 save(neet_16to23_age_gender, file = "output/data/cleaned/neet_16to23_age_gender.Rdata")
 
 
-neet_12to23_age <- neet_16to23_age_gender %>% 
+neet_11to23_age <- neet_16to23_age_gender %>% 
   group_by(end_period_year, neet, age) %>% 
   summarise(count = sum(count)) %>% 
   bind_rows(neet_15, neet_14, neet_13, neet_12, neet_11) %>% 
@@ -543,9 +543,9 @@ neet_12to23_age <- neet_16to23_age_gender %>%
   # summarise(neet = sum(count)) %>%
   # ungroup() %>% 
   arrange(end_period_year) 
-save(neet_12to23_age, file = "output/data/cleaned/neet_12to23_age.Rdata")
+save(neet_11to23_age, file = "output/data/cleaned/neet_11to23_age.Rdata")
 
-neet_12to23_age %>% 
+neet_v_pop <- neet_11to23_age %>% 
   ggplot() +
   geom_bar(aes(x = end_period_year, y = count, fill = neet),
            stat = "identity", position = "stack") +
@@ -557,6 +557,9 @@ neet_12to23_age %>%
                   summarise(count = sum(count)),
 aes(x = end_period_year, y = count)) +
   facet_wrap(~age)
+
+neet_v_pop
+ggsave(filename = "output/graphs/neet_v_pop.png", neet_v_pop)  
 # JESUS CHRIST so annoying why is population so much bigger
 
 

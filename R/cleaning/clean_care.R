@@ -1373,8 +1373,10 @@ care_out_16 <- c_data %>%
 
 
 # all together
-care_out_16to22 <- care_out_18to22 %>% 
+care_neet_16to22 <- care_out_18to22 %>% 
   bind_rows(care_out_17, care_out_16)
+
+save(care_neet_16to22, file = "output/data/cleaned/care_neet_16to22.Rdata")
 
 neet_pc <- care_out_16to22 %>% 
   group_by(neet) %>% 
@@ -1382,10 +1384,21 @@ neet_pc <- care_out_16to22 %>%
 
 
 # neet steadily rising for 17/18 year olds, pretty steady for 19-20
-care_out_16to22 %>% 
+neet_rates_care <- care_neet_16to22 %>% 
+  filter(age == "17-18",
+         neet == "NEET") %>% 
+  mutate(age = "17-18 (care-experienced)") %>% 
+  full_join(neet_11to23_age %>% 
+              group_by(end_period_year, age) %>% 
+              mutate(pc = count/sum(count)) %>% 
+              ungroup() %>% 
+              select(-count) %>% 
+              filter(neet == "NEET") %>% 
+              mutate(age = as.character(age))) %>% 
   ggplot() +
-  geom_line(aes(x = end_period_year, y = pc, group = neet, colour = neet)) +
-  facet_grid(~age)
+  geom_line(aes(x = end_period_year, y = pc, group = age, colour = age))
+neet_rates_care
+ggsave(filename = "output/graphs/neet_rates_care.png", neet_rates_care)
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -1403,7 +1416,14 @@ care_school_16to22 <- c_data %>%
   rename(end_period_year = time_period) %>% 
   select(end_period_year, starts_with("t_"))
 
+save(care_school_16to22, file = "output/data/cleaned/care_school_16to22.Rdata")
 
+pru_rates_care <- care_school_16to22 %>% 
+  mutate(pc = as.numeric(t_pru)/(as.numeric(t_pru) + as.numeric(t_secondary))) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc))
+pru_rates_care
+ggsave(filename = "output/graphs/neet_rates_care.png", neet_rates_care)
 
 
 
