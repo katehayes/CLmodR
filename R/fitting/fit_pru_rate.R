@@ -4,6 +4,211 @@ install.packages("texreg")
 library(texreg)
 
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# neet# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+neet_reg_data <- neet_16to23_age_gender %>% 
+  mutate(age = factor(age),
+         gender = factor(gender, levels = c("Girls", "Boys", "Unknown")),
+         end_period_year = factor(end_period_year),
+         neet = factor(neet, levels = c("Not NEET", "NEET")),
+         count = round(count, digits = 0))
+
+
+neet_states <- neet_16to23_age_gender %>% 
+  filter(gender != "Unknown") %>% 
+  mutate(age = factor(age),
+         gender = factor(gender, levels = c("Girls", "Boys", "Unknown")),
+         end_period_year = factor(end_period_year),
+         neet = factor(neet, levels = c("Not NEET", "NEET"))) %>% 
+  select(-count)
+
+neet_logit <- glm(neet ~ gender + age + end_period_year + end_period_year*age, family="binomial", weight = neet_reg_data$count, data = neet_reg_data)
+
+neet_logit4 <- glm(neet ~ gender + age + end_period_year, family="binomial", weight = neet_reg_data$count, data = neet_reg_data)
+
+# gender_OR <- bind_cols(names(coef(neet_logit)), coef(neet_logit)) %>% 
+#   filter(`...1` %in% c("genderBoys", "(Intercept)")) %>% 
+#   mutate(exp_coeff = exp(`...2`)) %>% 
+#   select(-`...2`) %>% 
+#   pivot_wider(names_from = `...1`,
+#               values_from = exp_coeff) %>% 
+#   mutate(genderBoys = genderBoys*`(Intercept)`)
+
+
+sum_neet <- summary(neet_logit)
+
+
+neet_predict <- cbind(neet_states, 
+                     predict(neet_logit, newdata = neet_states, type = "link", se = TRUE)) %>% 
+  mutate(pred_prob_neet = plogis(fit),
+         LL = plogis(fit - (1.96 * se.fit)),
+         UL = plogis(fit + (1.96 * se.fit)))
+
+
+
+neet_predict_logit <- neet_predict %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pred_prob_neet, group = interaction(gender, age), colour = interaction(gender, age)), linetype = "dashed") +
+  geom_line(data = neet_16to23_age_gender %>% 
+              filter(gender != "Unknown") %>% 
+              ungroup() %>% 
+              group_by(end_period_year, gender, age) %>% 
+              mutate(pc = count/sum(count)) %>% 
+              ungroup() %>% 
+              filter(neet == "NEET") %>% 
+              mutate(age = factor(age),
+                     gender = factor(gender, levels = c("Girls", "Boys")),
+                     end_period_year = factor(end_period_year)),
+            aes(x = end_period_year, y = pc, group = interaction(gender, age), colour = interaction(gender, age)), linewidth = 0.9) +
+  geom_ribbon(aes(x = as.numeric(end_period_year), ymin = LL, ymax = UL, fill = interaction(gender, age)), alpha = 0.25) +
+  scale_color_manual(values = c("#F99679", "#DE4434", "#86B3F5", "#2159AB")) +
+  scale_fill_manual(values = c("#F99679", "#DE4434", "#86B3F5", "#2159AB")) +
+  theme_bw() +
+  scale_x_discrete(name = "Year") +
+  scale_y_continuous(name = "Proportion of children who are NEET")
+
+neet_predict_logit
+ggsave(filename = "output/graphs/neet_predict_logit.png", neet_predict_logit)
+
+
+
+summary(neet_logit4)
+
+
+ratio_plot <- bind_cols(names(coef(neet_logit)), coef(neet_logit)) %>% 
+  filter(grepl("age17", `...1`)) %>% 
+  mutate(exp_coeff = exp(`...2`),
+         age = ifelse(`...1` == "age17", exp_coeff, exp_coeff*3.78003534)) %>% 
+  rename(end_period_year = `...1`) %>% 
+  mutate(end_period_year = as.numeric(paste("20", 
+                                 substring(end_period_year, nchar(end_period_year) - 1, nchar(end_period_year)),
+                                 sep = ""))) %>% 
+  select(end_period_year, age) %>% 
+  mutate(period = "age & gender, int w year") %>% 
+  bind_rows(bind_cols(names(coef(neet_logit4)), coef(neet_logit4)) %>% 
+              filter(grepl("age17", `...1`)) %>% 
+              mutate(age = exp(`...2`)) %>% 
+              select(age) %>%
+              mutate(end_period_year = 2016,
+                     period = "age & gender, no int")) %>% 
+  bind_rows(data.frame(end_period_year = c(2017:2023),
+                       period = "age & gender, no int",
+                       age = 1.916832)) %>% 
+  bind_rows(bind_cols(names(coef(neet3_logit)), coef(neet3_logit)) %>% 
+              filter(grepl("age17", `...1`)) %>% 
+              mutate(exp_coeff = exp(`...2`),
+                     age = ifelse(`...1` == "age17", exp_coeff, exp_coeff*1.5371371)) %>% 
+              rename(end_period_year = `...1`) %>% 
+              mutate(end_period_year = ifelse(end_period_year == "age17", 2011,
+                                              as.numeric(paste("20", 
+                                                               substring(end_period_year, nchar(end_period_year) - 1, nchar(end_period_year)),
+                                                               sep = "")))) %>% 
+              select(end_period_year, age) %>% 
+              mutate(period = "age only, int w year")) %>% 
+  bind_rows(bind_cols(names(coef(neet2_logit)), coef(neet2_logit)) %>% 
+              filter(grepl("age17", `...1`)) %>% 
+              mutate(age = exp(`...2`)) %>% 
+              select(age) %>%
+              mutate(end_period_year = 2011,
+                       period = "age only, no int")) %>% 
+  bind_rows(data.frame(end_period_year = c(2012:2023),
+                       period = "age only, no int",
+                       age = 2.016404)) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = age, group = period, color = period)) +
+  scale_y_continuous(name = "Odds ratio of being NEET, age 17 compared to 16",
+                     limits = c(0, 4)) +
+  scale_x_continuous(name = "Year", 
+                     breaks = c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
+                     labels = c("2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"))
+
+ratio_plot
+ggsave(filename = "output/graphs/ratio_plot.png", ratio_plot)
+
+# Your coefficients are on the log odds scale, such that a coefficient is
+# log(odds_y==1 / odds_y == 0). We can exponentiate to get odds instead.
+
+
+
+
+
+
+neet2_reg_data <- neet_11to23_age %>% 
+  mutate(age = factor(age),
+         end_period_year = factor(end_period_year),
+         neet = factor(neet, levels = c("Not NEET", "NEET")),
+         count = round(count, digits = 0)) %>% 
+  filter(!(age == 16 & end_period_year == 2014))
+
+
+neet2_states <- neet_11to23_age %>% 
+  mutate(age = factor(age),
+         end_period_year = factor(end_period_year),
+         neet = factor(neet, levels = c("Not NEET", "NEET"))) %>% 
+  select(-count)
+
+neet3_logit <- glm(neet ~ age + end_period_year + end_period_year*age, family="binomial", weight = neet2_reg_data$count, data = neet2_reg_data)
+
+
+neet2_logit <- glm(neet ~ age + end_period_year, family="binomial", weight = neet2_reg_data$count, data = neet2_reg_data)
+
+summary(neet2_logit)
+
+neet2_predict <- cbind(neet2_states, 
+                      predict(neet2_logit, newdata = neet2_states, type = "link", se = TRUE)) %>% 
+  mutate(pred_prob_neet = plogis(fit),
+         LL = plogis(fit - (1.96 * se.fit)),
+         UL = plogis(fit + (1.96 * se.fit)))
+
+
+
+neet2_predict_logit <- neet2_predict %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pred_prob_neet, group = age, colour = age), linetype = "dashed") +
+  geom_line(data = neet_11to23_age %>% 
+              ungroup() %>% 
+              group_by(end_period_year, age) %>% 
+              mutate(pc = count/sum(count)) %>% 
+              ungroup() %>% 
+              filter(neet == "NEET") %>% 
+              mutate(age = factor(age),
+                     end_period_year = factor(end_period_year)),
+            aes(x = end_period_year, y = pc, group = age, colour = age), linewidth = 0.9) +
+  geom_ribbon(aes(x = as.numeric(end_period_year), ymin = LL, ymax = UL, fill = age), alpha = 0.25) +
+  scale_color_manual(values = c("#DE4434", "#2159AB")) +
+  scale_fill_manual(values = c("#DE4434", "#2159AB")) +
+  theme_bw() +
+  scale_x_discrete(name = "Year") +
+  scale_y_continuous(name = "Proportion of children who are NEET")
+
+neet2_predict_logit
+
+ggsave(filename = "output/graphs/neet2_predict_logit.png", neet2_predict_logit)
+
+
+
+
+
+# %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc, group = interaction(age, gender), color = interaction(age, gender))) +
+  geom_line(data = neet_11to23_age %>% 
+              group_by(end_period_year, age) %>% 
+              mutate(pc = count/sum(count)) %>% 
+              ungroup() %>% 
+              filter(neet == "NEET"),
+            aes(x = end_period_year, y = pc, group = as.character(age), colour = as.character(age))) +
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# below is pru, above is neet,# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+
+
+
 obs_data <- schools %>% 
   filter(age <= 15) %>% 
   mutate(pru = ifelse(school_type == "Pupil referral unit", "PRU", "Not PRU")) %>%

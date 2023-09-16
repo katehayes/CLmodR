@@ -3,18 +3,71 @@ load("/Users/katehayes/CLmodR/output/data/cleaned/neet_12to23_age.Rdata")
 load("/Users/katehayes/CLmodR/output/data/cleaned/part_18to23_age_gender.Rdata")
 load("/Users/katehayes/CLmodR/output/data/cleaned/part_type_18to23.Rdata")
 
-gender_pc <- neet_16to23_age_gender %>% 
-  filter(gender != "Unknown",
-         neet == "NEET") %>% 
+neet_gender_pc <- neet_16to23_age_gender %>% 
+  filter(gender != "Unknown") %>% 
   ungroup() %>% 
-  group_by(end_period_year, age) %>% 
+  group_by(end_period_year, gender, age) %>% 
   mutate(pc = count/sum(count)) %>% 
   ungroup() %>% 
-  group_by(gender, age) 
- %>% 
-  summarise(pc = mean(pc))
+  filter(neet == "NEET") %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc, group = interaction(age, gender), color = interaction(age, gender))) +
+  geom_line(data = neet_11to23_age %>% 
+              group_by(end_period_year, age) %>% 
+              mutate(pc = count/sum(count)) %>% 
+              ungroup() %>% 
+              filter(neet == "NEET"),
+            aes(x = end_period_year, y = pc, group = as.character(age), colour = as.character(age))) +
+  # scale_color_manual(values = c("lightgrey", "#DE4434", "#399FE0", "darkgrey", "#9C2F24", "#246D9C")) +
+  scale_color_manual(values = c("#2159AB", "#082C61", "#86B3F5",  "#DE4434", "#611F08", "#F99679")) +
+  theme_bw() +
+  scale_x_continuous(name = "Year", 
+                   breaks = c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
+                   labels = c("2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023")) +
+  scale_y_continuous(name = "Proportion of children who are NEET")
 
-ok!! essentially 60:40
+neet_gender_pc
+ggsave(filename = "output/graphs/neet_gender_pc.png", neet_gender_pc)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+neet_gender_pc_c <- neet_16to23_age_gender %>% 
+  filter(gender != "Unknown") %>% 
+  ungroup() %>% 
+  group_by(end_period_year, gender, age) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  ungroup() %>% 
+  filter(neet == "NEET") %>% 
+  full_join(neet_11to23_age %>% 
+              group_by(end_period_year, age) %>% 
+              mutate(pc = count/sum(count)) %>% 
+              ungroup() %>% 
+              filter(neet == "NEET") %>% 
+              mutate(gender = "All")) %>% 
+  add_cohort() %>% 
+  filter(!cohort %in% c("Cohort 2", "Cohort 8", "Cohort 9", "Cohort 15")) %>% 
+  ggplot() +
+  geom_line(aes(x = age, y = pc, group = gender, color = gender)) +
+  facet_grid(~cohort) +
+  scale_x_continuous(name = "Age", 
+                     breaks = c(16, 17), 
+                     labels = c("16", "17")) +
+  scale_y_continuous(name = "Proportion of children who are NEET")
+
+
+neet_gender_pc_c
+ggsave(filename = "output/graphs/neet_gender_pc_c.png", neet_gender_pc_c)
 
 
 
