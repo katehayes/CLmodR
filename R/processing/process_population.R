@@ -139,3 +139,17 @@ v_turn10_e_scenario <- age_in_pov %>%
 
 save(v_turn10_i_scenario, file = "output/data/input/v_turn10_i_scenario.Rdata")
 save(v_turn10_e_scenario, file = "output/data/input/v_turn10_e_scenario.Rdata")
+
+
+
+pop_estimate_01to20_age_gender
+
+
+
+
+
+
+
+
+
+

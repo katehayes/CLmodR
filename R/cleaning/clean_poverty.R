@@ -11,7 +11,7 @@
 # Date: Point in time
 
 
-p_data <- read_xlsx("/Users/katehayes/temp_data/local_child_poverty_basket_of_indicators.xlsx",
+p_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/local_child_poverty_basket_of_indicators (1).xlsx",
                     sheet = 7, skip = 3, n_max = 162, col_names = T)
 c_names <- c("level",
              "2006 - pc", "2007 - pc", "2008 - pc", "2009 - pc", "2010 - pc", "2011 - pc", "2012 - pc",
@@ -31,7 +31,8 @@ p_data_pc <- poverty_data %>%
                names_to = "end_period_year", values_to = "pc") %>%
   mutate(end_period_year = str_sub(end_period_year, 1, 4),
          end_period_month = "August",
-         period_length = "Day")
+         period_length = "Day") %>% 
+  mutate(measure = "HBAI - children 0-20")
 
 p_data_count <- poverty_data %>%
   select(-c(`2006 - pc`:`2012 - pc`)) %>%
@@ -77,6 +78,59 @@ poverty_data_1621 <- t(p_data[,-1]) %>%
          end_period_month = "Unknown",
          period_length = "Year",
          level = ifelse(level == "West Midlands", "West Midlands (region)", level))
+
+
+# i saved the ods as xlsx
+# this is FINANCIAL YEAR END
+p_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/children-in-low-income-families-local-area-statistics-2014-to-2022.xlsx",
+                    sheet = 7, skip = 9)
+
+poverty_1522 <- p_data %>% 
+  filter(`Local Authority [note 2]` == "Birmingham") %>% 
+  select(starts_with("Percentage")) %>% 
+  pivot_longer(everything(),
+               names_to = "end_period_year",
+               values_to = "pc") %>% 
+  mutate(end_period_year = str_extract(end_period_year, "[0-9]{4}")) %>% 
+  mutate(measure = "HBAI",
+         level = "Birmingham")
+
+# %>% 
+  # mutate(end_period_month = "FYE")
+
+
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # #NOT LOCAL - just to copy the trends for the mssing years # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Table 4.16ts: Percentage of children living in households with less than 60 per cent of contemporary median household income, by region and country, United Kingdom1,2,4
+# these are rolling region/Country 3-year averages
+
+p_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/hbai-2019-2020-tables-ods-files/children-hbai-timeseries-1994-95-2019-20-tables.xlsx",
+  sheet = 20, skip = 6, n_max = 10)
+
+poverty_9520 <- p_data %>% 
+  filter(`...1` %in% c("England", "West Midlands")) %>% 
+  rename(level = `...1`) %>% 
+  pivot_longer(-level,
+               names_to = "end_period_year",
+               values_to = "pc") %>% 
+  mutate(pc = pc/100) %>% 
+  mutate(end_period_year = substr(end_period_year, nchar(end_period_year)-1, nchar(end_period_year))) %>% 
+  mutate(end_period_year = as.numeric(ifelse(end_period_year > 30, paste("19", end_period_year, sep = ""), paste("20", end_period_year, sep = "")))) %>% 
+  mutate(measure = "HBAI - 3 year rolling average")
+  
+  
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # #WARD LEVEL # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Table 4.16ts: Percentage of children living in households with less than 60 per cent of contemporary median household income, by region and country, United Kingdom1,2,4
+# these are rolling region/Country 3-year averages
+
+p_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/children-in-low-income-families-local-area-statistics-2014-to-2022.xlsx",
+                      sheet = 11, skip = 10)
+
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

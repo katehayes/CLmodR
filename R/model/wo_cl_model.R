@@ -2,6 +2,7 @@
 # library(odin)
 
 
+# THIS IS THE CURRENT WORKING VERSION
 
 # object: gender, age, poverty, care, school
 # get the IC's perfect
@@ -26,13 +27,11 @@ sep_model = odin::odin({
   N_gender <- user(2)
   age_up <- user(1/52)
   turn10[] <- user(0)
+  
   # desination on ageing in
   pc_incl <- user(0)
   pc_excl <- user(0)
-  
-  
-  #percentage of custody remands that result in a custodial sentence
-  r2c <- user(0.33) 
+
   
   
   
@@ -85,28 +84,42 @@ sep_model = odin::odin({
   t10_ec4s2[] <- user(0)
   
   
+  # Initial lump transfer to NEET
+  # for neet, the initial transition is only place where there can be a PRU mutliplier
+  # also, there is no age multiplier since this is just about the immediate transition age 16
   
-  neet16_ic1s1[] <- user(0)
-  neet16_ic2s1[] <- user(0)
-  neet16_ic3s1[] <- user(0)
-  neet16_ic4s1[] <- user(0)
+  #this is the group of terms that set the percentage of people in each group that will be need immediately on turning 16
+   neet_16 <- user(0) 
   
-  neet16_ic1s2[] <- user(0)
-  neet16_ic2s2[] <- user(0)
-  neet16_ic3s2[] <- user(0)
-  neet16_ic4s2[] <- user(0)
+  # how do you do a gender multiplier - like how do you code one?
+  varsig_g[] <- user(0)  #just set it equal to (boy_mult, 1)
+  
+  vsig_s <- user(10) # PRU multiplier - is 10 
+  vsig_e <- user(1) # Poverty multiplier - ?
+  vsig_c <- user(1) # Care multiplier
   
   
-  neet16_ec1s1[] <- user(0)
-  neet16_ec2s1[] <- user(0)
-  neet16_ec3s1[] <- user(0)
-  neet16_ec4s1[] <- user(0)
-  
-  neet16_ec1s2[] <- user(0)
-  neet16_ec2s2[] <- user(0)
-  neet16_ec3s2[] <- user(0)
-  neet16_ec4s2[] <- user(0)
-  
+  neet16_ic1s1[] <- neet_16*varsig_g[i]
+  neet16_ic2s1[] <- neet_16*varsig_g[i]*vsig_c
+  neet16_ic3s1[] <- neet_16*varsig_g[i]*vsig_c
+  neet16_ic4s1[] <- neet_16*varsig_g[i]*vsig_c
+
+  neet16_ic1s2[] <- neet_16*varsig_g[i]*vsig_s
+  neet16_ic2s2[] <- neet_16*varsig_g[i]*vsig_c*vsig_s
+  neet16_ic3s2[] <- neet_16*varsig_g[i]*vsig_c*vsig_s
+  neet16_ic4s2[] <- neet_16*varsig_g[i]*vsig_c*vsig_s
+
+
+  neet16_ec1s1[] <- neet_16*varsig_g[i]*vsig_e
+  neet16_ec2s1[] <- neet_16*varsig_g[i]*vsig_e*vsig_c
+  neet16_ec3s1[] <- neet_16*varsig_g[i]*vsig_e*vsig_c
+  neet16_ec4s1[] <- neet_16*varsig_g[i]*vsig_e*vsig_c
+
+  neet16_ec1s2[] <- neet_16*varsig_g[i]*vsig_e*vsig_s
+  neet16_ec2s2[] <- neet_16*varsig_g[i]*vsig_e*vsig_c*vsig_s
+  neet16_ec3s2[] <- neet_16*varsig_g[i]*vsig_e*vsig_c*vsig_s
+  neet16_ec4s2[] <- neet_16*varsig_g[i]*vsig_e*vsig_c*vsig_s
+
   
   
   n2care_i_10[] <- user(0)
@@ -130,6 +143,8 @@ sep_model = odin::odin({
   neet2m_i[] <- user(0)
   neet2m_e[] <- user(0)
   
+  
+
   
   m2pru_ic1_10[] <- user(0)
   m2pru_ic2_10[] <- user(0)
@@ -160,16 +175,6 @@ sep_model = odin::odin({
   m2pru_ic2_15[] <- user(0)
   m2pru_ic3_15[] <- user(0)
   m2pru_ic4_15[] <- user(0)
-  
-  m2neet_ic1_16[] <- user(0)
-  m2neet_ic2_16[] <- user(0)
-  m2neet_ic3_16[] <- user(0)
-  m2neet_ic4_16[] <- user(0)
-  
-  m2neet_ic1_17[] <- user(0)
-  m2neet_ic2_17[] <- user(0)
-  m2neet_ic3_17[] <- user(0)
-  m2neet_ic4_17[] <- user(0)
   
   
   m2pru_ec1_10[] <- user(0)
@@ -202,15 +207,42 @@ sep_model = odin::odin({
   m2pru_ec3_15[] <- user(0)
   m2pru_ec4_15[] <- user(0)
   
-  m2neet_ec1_16[] <- user(0)
-  m2neet_ec2_16[] <- user(0)
-  m2neet_ec3_16[] <- user(0)
-  m2neet_ec4_16[] <- user(0)
   
-  m2neet_ec1_17[] <- user(0)
-  m2neet_ec2_17[] <- user(0)
-  m2neet_ec3_17[] <- user(0)
-  m2neet_ec4_17[] <- user(0)
+  
+  
+  # steady step to NEET
+  sig_g <- user(1)
+  sig_17 <- user(1)
+  sig_e <- user(1) # Poverty multiplier - ?
+  sig_c <- user(1) # Care multiplier
+
+  m2neet <- user(0)
+  
+  m2neet_ic1_16[] <- m2neet*sig_g[i]
+  m2neet_ic2_16[] <- m2neet*sig_g[i]*sig_c
+  m2neet_ic3_16[] <- m2neet*sig_g[i]*sig_c
+  m2neet_ic4_16[] <- m2neet*sig_g[i]*sig_c
+  
+  m2neet_ic1_17[] <- m2neet*sig_g[i]*sig_17
+  m2neet_ic2_17[] <- m2neet*sig_g[i]*sig_17*sig_c
+  m2neet_ic3_17[] <- m2neet*sig_g[i]*sig_17*sig_c
+  m2neet_ic4_17[] <- m2neet*sig_g[i]*sig_17*sig_c
+  
+  m2neet_ec1_16[] <- m2neet*sig_g[i]
+  m2neet_ec2_16[] <- m2neet*sig_g[i]*sig_e*sig_c
+  m2neet_ec3_16[] <- m2neet*sig_g[i]*sig_e*sig_c
+  m2neet_ec4_16[] <- m2neet*sig_g[i]*sig_e*sig_c
+  
+  m2neet_ec1_17[] <- m2neet*sig_g[i]*sig_e*sig_17
+  m2neet_ec2_17[] <- m2neet*sig_g[i]*sig_e*sig_17*sig_c
+  m2neet_ec3_17[] <- m2neet*sig_g[i]*sig_e*sig_17*sig_c
+  m2neet_ec4_17[] <- m2neet*sig_g[i]*sig_e*sig_17*sig_c
+  
+  
+  
+
+  
+
   
   miss_ic1u_10[] <- user(0)
   miss_ic2u_10[] <- user(0)

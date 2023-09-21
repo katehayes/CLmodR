@@ -1406,7 +1406,8 @@ ggsave(filename = "output/graphs/neet_rates_care.png", neet_rates_care)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # https://explore-education-statistics.service.gov.uk/find-statistics/outcomes-for-children-in-need-including-children-looked-after-by-local-authorities-in-england/data-guidance
 
-
+# CONSIDER CHANGING THIS SO INSTEAD OF COMPARING TO NUMBER IN SECONDARY YOU COMPARE TO NUMBER OF CHILDREN IN CARE
+# IN THE RIGHT AGE BRACKET
 c_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/outcomes-for-children-in-need-including-children-looked-after-by-local-authorities-in-england_2022/data/school_type_la.csv")
 
 care_school_16to22 <- c_data %>% 
@@ -1415,6 +1416,12 @@ care_school_16to22 <- c_data %>%
   mutate(time_period = as.numeric(paste(substr(time_period,1,2), substr(time_period,5,6), sep = ""))) %>% 
   rename(end_period_year = time_period) %>% 
   select(end_period_year, starts_with("t_"))
+
+# this is just CLA on that day in march - do you have another source that gives age for birm for CLA 12 months
+check <- care_11to22_age %>% 
+  filter(age == "10-15",
+         level == "Birmingham") %>% 
+  select(end_period_year, count)
 
 save(care_school_16to22, file = "output/data/cleaned/care_school_16to22.Rdata")
 

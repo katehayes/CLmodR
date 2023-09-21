@@ -135,26 +135,30 @@ ggsave(filename = "output/graphs/ratio_plot.png", ratio_plot)
 
 
 
+
 neet2_reg_data <- neet_11to23_age %>% 
   mutate(age = factor(age),
          end_period_year = factor(end_period_year),
          neet = factor(neet, levels = c("Not NEET", "NEET")),
          count = round(count, digits = 0)) %>% 
-  filter(!(age == 16 & end_period_year == 2014))
+  filter(end_period_year != "2014",
+         end_period_year != "2011")
 
 
 neet2_states <- neet_11to23_age %>% 
+  filter(end_period_year != "2014",
+         end_period_year != "2011") %>% 
   mutate(age = factor(age),
          end_period_year = factor(end_period_year),
          neet = factor(neet, levels = c("Not NEET", "NEET"))) %>% 
   select(-count)
 
-neet3_logit <- glm(neet ~ age + end_period_year + end_period_year*age, family="binomial", weight = neet2_reg_data$count, data = neet2_reg_data)
+neet2_logit <- glm(neet ~ age + end_period_year + end_period_year*age, family="binomial", weight = neet2_reg_data$count, data = neet2_reg_data)
 
 
 neet2_logit <- glm(neet ~ age + end_period_year, family="binomial", weight = neet2_reg_data$count, data = neet2_reg_data)
 
-summary(neet2_logit)
+summary(neet3_logit)
 
 neet2_predict <- cbind(neet2_states, 
                       predict(neet2_logit, newdata = neet2_states, type = "link", se = TRUE)) %>% 
@@ -168,6 +172,7 @@ neet2_predict_logit <- neet2_predict %>%
   ggplot() +
   geom_line(aes(x = end_period_year, y = pred_prob_neet, group = age, colour = age), linetype = "dashed") +
   geom_line(data = neet_11to23_age %>% 
+              filter(end_period_year != 2014) %>% 
               ungroup() %>% 
               group_by(end_period_year, age) %>% 
               mutate(pc = count/sum(count)) %>% 
@@ -201,7 +206,50 @@ ggsave(filename = "output/graphs/neet2_predict_logit.png", neet2_predict_logit)
               filter(neet == "NEET"),
             aes(x = end_period_year, y = pc, group = as.character(age), colour = as.character(age))) +
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+    
+    
+    
+    age_OR_reg <- bind_cols(names(coef(neet2_logit)), coef(neet2_logit)) %>% 
+    filter(grepl("age17", `...1`)) %>% 
+    mutate(exp_coeff = exp(`...2`),
+           age_OR = ifelse(`...1` == "age17", exp_coeff, exp_coeff*1.5371371)) %>% 
+    rename(end_period_year = `...1`) %>% 
+    mutate(end_period_year = ifelse(end_period_year == "age17", 2012,
+                                    as.numeric(paste("20", 
+                                                     substring(end_period_year, nchar(end_period_year) - 1, nchar(end_period_year)),
+                                                     sep = "")))) %>% 
+    select(end_period_year, age_OR) %>% 
+    filter(end_period_year != 2014)  %>% 
+    full_join(neet_11to23_age %>% 
+                filter(end_period_year != 2014) %>% 
+                group_by(end_period_year, neet) %>% 
+                summarise(count = sum(count)) %>% 
+                ungroup() %>% 
+                group_by(end_period_year) %>% 
+                mutate(NEET_rate = count/sum(count)) %>% 
+                ungroup() %>% 
+                filter(neet == "NEET") %>% 
+                select(end_period_year, NEET_rate))
+  
+  age_OR_reg %>% 
+    mutate(NEET_rate = NEET_rate*20) %>% 
+    ggplot() + 
+    geom_line(aes(x = end_period_year, y = NEET_rate), colour = "red") +
+    geom_line(aes(x = end_period_year, y = age_OR), colour = "blue")
+  
+  
+  age_or_v_rate <- lm(age_OR ~ NEET_rate, data = age_OR_reg)
+  
+  summary(age_or_v_rate)
+  
+  # the message is, essentially, if i am ridiculous and just throw out data that 
+  # doesn't suit me, then i will have the overall finding that  the higher the NEET
+  # rate the higher the age odds ratio 
+    
+    
+    
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # below is pru, above is neet,# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
@@ -248,24 +296,24 @@ reg_data <- schools %>%
   pivot_longer(c(PRU, `Not PRU`),
                names_to = "pru",
                values_to = "count") %>% 
-  mutate(near_change = ifelse(age %in% c(11:14), "Not near", "Near to transition point")) %>% 
+  mutate(near_change = ifelse(age %in% c(11:14), "Not near", ifelse(age == 10, "Near to transition point - 10", "Near to transition point - 15"))) %>% 
+  mutate(near_change = ifelse(end_period_year %in% c(2014:2020), near_change, "Not near")) %>% 
   mutate(age = factor(age),
          gender = factor(gender, levels = c("Girls", "Boys")),
          fsm = factor(fsm, levels = c("Not FSM eligible", "FSM eligible")),
-         near_change = factor(near_change, levels = c("Not near", "Near to transition point")),
+         near_change = factor(near_change, levels = c("Not near", "Near to transition point - 10", "Near to transition point - 15")),
          end_period_year = factor(end_period_year),
          pru = factor(pru),
-         count = round(count, digits = 0)) %>% 
-  mutate(policy_period = ifelse(end_period_year %in% c(2014:2020), 1, 0))
+         count = round(count, digits = 0)) 
 
 
 
-pru_logit <- glm(pru ~ gender + age + fsm + age*fsm + end_period_year + end_period_year*near_change , family="binomial", weight = reg_data$count, data = reg_data)
+pru_logit <- glm(pru ~ gender + age + fsm + age*fsm + end_period_year + end_period_year*near_change, family="binomial", weight = reg_data$count, data = reg_data)
 
 summary(pru_logit)
 
 
-pru_logit_pol <- glm(pru ~ gender + age + fsm + age*fsm + policy_period*near_change , family="binomial", weight = reg_data$count, data = reg_data)
+pru_logit_pol <- glm(pru ~ gender + age + fsm + end_period_year + near_change*end_period_year + end_period_year*fsm, family="binomial", weight = reg_data$count, data = reg_data)
 
 summary(pru_logit_pol)
 
@@ -283,17 +331,18 @@ states <- schools %>%
   select(end_period_year, gender, age, fsm)
 
 logit_states <- states %>% 
-  mutate(near_change = ifelse(age %in% c(11:14), "Not near", "Near to transition point")) %>% 
+  mutate(near_change = ifelse(age %in% c(11:14), "Not near", ifelse(age == 10, "Near to transition point - 10", "Near to transition point - 15"))) %>% 
+  mutate(near_change = ifelse(end_period_year %in% c(2014:2020), near_change, "Not near")) %>% 
   mutate(policy_period = ifelse(end_period_year %in% c(2014:2020), 1, 0)) %>% 
   mutate(age = factor(age),
          gender = factor(gender, levels = c("Girls", "Boys")),
          fsm = factor(fsm, levels = c("Not FSM eligible", "FSM eligible")),
-         near_change = factor(near_change, levels = c("Not near", "Near to transition point")),
+         near_change = factor(near_change, levels = c("Not near", "Near to transition point - 10", "Near to transition point - 15")),
          end_period_year = factor(end_period_year))
 
 
 pru_predict <- cbind(logit_states, 
-                     predict(pru_logit, newdata = logit_states, type = "link", se = TRUE)) %>% 
+                     predict(pru_logit_pol, newdata = logit_states, type = "link", se = TRUE)) %>% 
   mutate(pred_prob_pru = plogis(fit),
          LL = plogis(fit - (1.96 * se.fit)),
          UL = plogis(fit + (1.96 * se.fit)))

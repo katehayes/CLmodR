@@ -7,7 +7,7 @@ tidy_sim_data <- function(sim_data) {
   sim_data <- sim_data %>%
     pivot_longer(-t, names_to = "state", values_to = "count") %>%
     mutate(age = as.numeric(str_extract_all(state, "(\\d{2})")),
-           gender = if_else(grepl("\\[1\\]", state), "Boy", "Girl"),
+           gender = if_else(grepl("\\[1\\]", state), "Boys", "Girls"),
            state = str_remove(state, "(\\d{2})"),
            state = str_remove(state, "\\[\\d{1}\\]"),
            class = substring(state, 1, 1),
@@ -43,9 +43,16 @@ obs_pru_rate <- schools
 
 get_sum_stats <- function(sim_data) {
   
+  summ_stats <- list()
+  
   # now what summary statistics do we want?
   
-  # RATE OF PRU ATTENDANCE BY AGE & GENDER # # # # # # # # # # # # 
+  
+  
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+  ## !!!!!!!!PUPIL REFERRAL UNIT SUMMARY STATISTICS !!!!!!!!!# # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+  
   # pars to be calibrated - m2pru, by age and gender, yearly realisation
   # whats the form? want to estimate relationships so that we can change certain inputs & there will be a dynamic response
   # that kind of means want to estimate risk multipliers, i think?
@@ -53,18 +60,277 @@ get_sum_stats <- function(sim_data) {
   # is the age*gender multiplier seperable into age mutliplied by gender?
   # maybe the word is decomposable - can the trends we decomposed neatly into a set of multiplier that are meaningful?
   
-  # could i fit to a regression? describing likelihood of pru as function of
-  # age gender and time?
-  # and fit to the reg estimates?
   
   # or what about i spit out PRU rates by age and gen for each year
   # and the distance measure is the sum of sum of squared errors (like every error, for each gender and age at each time point combined)
   
   
-  pru_rate <- sim_data %>% 
-    filter(t %in% t_yearly_jan) 
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+  ## OVERALL RATE OF PRU ATTENDANCE YEARLY # # # # # # # # # # # # # # # # # # # # # 
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
   
+  pru_summ_stats_rate <- sim_data %>% 
+    filter(t %in% t_yearly_jan,
+           age %in% c(10:15)) %>% 
+    mutate(end_period_year = 2010 + floor(t/52)) %>% 
+    select(-t) %>% 
+    group_by(end_period_year, school) %>% 
+    summarise(count = sum(count)) %>% 
+    ungroup() %>% 
+    group_by(end_period_year) %>% 
+    mutate(pc = count/sum(count)) %>% 
+    ungroup() %>% 
+    filter(school == "S2") %>% 
+    select(end_period_year, pc) %>% 
+    rename(year = end_period_year,
+           PRU_rate = pc)
+  
+  summ_stats[[1]] <- pru_summ_stats_rate
+  
+  
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+  # ODDS RATIO of boy:girl, ages, poor:not # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+  
+  # could i fit to a regression? describing likelihood of pru as function of
+  # age gender and time?
+  # and fit to the reg estimates?
+  
+  # if im fitting to a log regression output - should i do one time point?
+  # or an average of the year?
+  
+  pru_input <- sim_data %>% 
+    filter(t %in% t_yearly_jan,
+           age %in% c(10:15)) %>% 
+    mutate(end_period_year = 2010 + floor(t/52)) %>% 
+    select(-t) %>% 
+    group_by(end_period_year, gender, age, class, school) %>% 
+    summarise(count = sum(count)) %>% 
+    ungroup() %>% 
+    mutate(near_change = ifelse(age %in% c(11:14), "Not near", ifelse(age == 10, "Near to transition point - 10", "Near to transition point - 15"))) %>% 
+    mutate(near_change = ifelse(end_period_year %in% c(2014:2020), near_change, "Not near")) %>% 
+    mutate(age = factor(age),
+           gender = factor(gender, levels = c("Girls", "Boys")),
+           class = factor(class, levels = c("I", "E")),
+           near_change = factor(near_change, levels = c("Not near", "Near to transition point - 10", "Near to transition point - 15")),
+           end_period_year = factor(end_period_year),
+           school = factor(school, levels = c("S1", "S2")),
+           count = round(count, digits = 0))
+    
+    
+    pru_logit_model <- glm(school ~ gender + age + class + end_period_year + end_period_year*near_change , family="binomial", weight = pru_input$count, data = pru_input)
+    
+    pru_summ_stats_OR <- bind_cols(names(coef(pru_logit_model)), exp(coef(pru_logit_model))) %>% 
+      filter(`...1` %in% c("genderBoys",
+                           "age11", "age12", "age13", "age14", "age15",
+                           "fsmFSM eligible")) %>% 
+      pivot_wider(everything(),
+                  names_from = `...1`,
+                  values_from = `...2`) %>% 
+      rename(Boys_OR = genderBoys,
+             age_11_OR = age11, 
+             age_12_OR = age12, 
+             age_13_OR = age13, 
+             age_14_OR = age14, 
+             age_15_OR = age15, 
+             FSM_OR = `fsmFSM eligible`) %>% 
+      pivot_longer(everything(),
+                   names_to = "variables",
+                   values_to = "PRU_OR")
+    
+    
+    summ_stats[[2]] <- pru_summ_stats_OR
+
+    
+  
+    
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    ## RATE OF PRU ATTENDANCE FOR CARE-EXPERIENCED CHILDREN - 2016-2020 # # # # # # # # 
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    # should I apply it to C4 also?
+    # apply it to only what it applies to in the measured data i think
+    # but the multiplier for care, you could maybe still apply that in the model to C4?
+    
+    # also - using "CLA 12 months at 31 March" - so first need to go get that as the denominator
+    # second, going to assume that children who've been in care less than 12 months have the same
+    # PRU rates as kids who've been there less - (probably not?)
+    # but third, just fit it to the two active care states
+    # and let the rate of entry that is calibrated to that fit apply also to C4
+    
+    pru_summ_stats_care <- sim_data %>% 
+      filter(t %in% t_yearly_jan,
+             age %in% c(10:15),
+             care %in% c("C2", "C3")) %>% 
+      mutate(end_period_year = 2010 + floor(t/52)) %>% 
+      filter(end_period_year >= 2016) %>% 
+      select(-t) %>% 
+      group_by(end_period_year, school) %>% 
+      summarise(count = sum(count)) %>% 
+      ungroup() %>% 
+      group_by(end_period_year) %>% 
+      mutate(pc = count/sum(count)) %>% 
+      ungroup() %>% 
+      filter(school == "S2") %>% 
+      select(end_period_year, pc) %>% 
+      rename(year = end_period_year,
+             PRU_rate = pc)
+    
+    summ_stats[[3]] <- pru_summ_stats_care
+    
+    
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    ## !!!!!!!! NEET SUMMARY STATISTICS !!!!!!!!!# # # # # # # # # # # #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    
+    # We could try regress the overall rate of NEET on the OR you estimate of 17:16
+    # To try get an idea of how to adjust 17 OR under say really high neet conditions
+    
+    
+    # need to find some information to fit to for:
+    #   gender, 
+    # age
+    # care,
+    # poverty
+    
+    
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    ## OVERALL NEET RATE YEARLY # # # # # # # # # # # # # # # # # # # # # 
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    # neet rates are collected at three points in the year and averaged 
+    # we might as well do yearly average
+    
+    neet_summ_stats_rate <- tidy_sim %>% 
+      filter(age %in% c(16,17)) %>% 
+      mutate(end_period_year = 2010 + floor(t/52)) %>% 
+      select(-t) %>% 
+      group_by(end_period_year, school) %>% 
+      summarise(count = sum(count)) %>% 
+      ungroup() %>%
+      group_by(end_period_year) %>% 
+      mutate(NEET_rate = count/sum(count)) %>% 
+      ungroup() %>% 
+      filter(school == "S2") %>% 
+      select(end_period_year, NEET_rate) %>% 
+      rename(year = end_period_year)
+    
+    
+    
+    summ_stats[[4]] <- neet_summ_stats_care
+    
+    
+    
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    # ODDS RATIO of boy:girl # # # # # # # # # # # # # # # # # # #  # # # # # #  # # # 
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    
+    neet_input <- sim_data %>% 
+      filter(t %in% t_yearly_jan,
+             age %in% c(16:17)) %>% 
+      mutate(end_period_year = 2010 + floor(t/52)) %>% 
+      filter(end_period_year >= 2016) %>% 
+      select(-t) %>% 
+      group_by(end_period_year, gender, age, school) %>% 
+      summarise(count = sum(count)) %>% 
+      ungroup() %>% 
+      mutate(age = factor(age),
+             gender = factor(gender, levels = c("Girls", "Boys")),
+             end_period_year = factor(end_period_year),
+             school = factor(neet, levels = c("S1", "S2")),
+             count = round(count, digits = 0))
+  
+    
+    neet_logit_model <- glm(school ~ gender + age + end_period_year + end_period_year*age, family="binomial", weight = neet_input$count, data = neet_input)
+    
+    neet_summ_stats_OR <- bind_cols(names(coef(neet_logit_model)), exp(coef(neet_logit_model))) %>% 
+      filter(`...1` == "genderBoys") %>% 
+      rename(variables = `...1`,
+             NEET_OR = `...2`) %>% 
+      mutate(variables = "Boys_OR")
+    
+    
+    summ_stats[[5]] <- neet_summ_stats_OR
+    
+    
+    
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    ## NEET RATE OF CARE-EXPERIENCED CHILDREN - 2016-2020 # # # # # # # # # # # # # 
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    # the data is 17-18 year olds - since pru rate tends to increase monotonically,
+    # lets say that's an upper bound for 17 year olds? or soemthing like that?
+    # i think this is all care & care experienced
+    
+    # this data series is so wonky - might be best to turn into a min/max situation
+    
+    neet_summ_stats_care <- sim_data %>% 
+      filter(t %in% t_yearly_jan,
+             age == 17,
+             care != "C4") %>% 
+      mutate(end_period_year = 2010 + floor(t/52)) %>% 
+      select(-t) %>% 
+      filter(end_period_year >= 2016) %>% 
+      group_by(end_period_year, school) %>% 
+      summarise(count = sum(count)) %>% 
+      ungroup() %>% 
+      group_by(end_period_year) %>% 
+      mutate(NEET_rate = count/sum(count)) %>% 
+      ungroup() %>% 
+      filter(school == "S2") %>% 
+      mutate(NEET_rate_min = min(NEET_rate),
+             NEET_rate_max = max(NEET_rate),
+             NEET_rate_mean = mean(NEET_rate)) %>% 
+      select(NEET_rate_min, NEET_rate_mean, NEET_rate_max) %>% 
+      distinct(NEET_rate_min, NEET_rate_mean, NEET_rate_max)
+    
+    summ_stats[[6]] <- neet_summ_stats_care
+    
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    ## NEET RATE OF CHILDREN IN POVERTY # # # # # # # # # # # # # # # # # # # # # # # #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    # unfortunately have practically no information for this one
+    # maybe can just VERY VERY VERY annoyingly kind of try peg it to RR of 2?
+    
+    # since i don't have any specific date for this measure I'll just use averages
+    # of every year.... pretty big tolerance then . 
+    
+    neet_summ_stats_pov <- tidy_sim %>% 
+      filter(age %in% c(16,17)) %>% 
+      mutate(end_period_year = 2010 + floor(t/52)) %>% 
+      select(-t) %>% 
+      group_by(end_period_year, class, school) %>% 
+      summarise(count = sum(count)) %>% 
+      ungroup() %>%
+      group_by(end_period_year, class) %>% 
+      mutate(NEET_rate = count/sum(count)) %>% 
+      ungroup() %>% 
+      filter(school == "S2") %>%
+      select(-c(school, count)) %>% 
+      pivot_wider(names_from = class,
+                  values_from = NEET_rate) %>% 
+      mutate(poverty_RR = E/I) %>% 
+      rename(year = end_period_year) %>% 
+      select(year, poverty_RR)
+    
+    
+    
+    summ_stats[[7]] <- neet_summ_stats_care
+    
+
+    
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    ## DONE - return list of all summary stats # # # # # # # # # # # # # # # # # # # # 
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  # # # # # 
+    
+    
+    return(summ_stats)
+    
 }
+
+
+
+
+
+
+
 
 
 

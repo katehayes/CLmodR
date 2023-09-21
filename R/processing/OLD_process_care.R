@@ -9,6 +9,9 @@ load("/Users/katehayes/CLmodR/output/data/cleaned/care_convicted_15to22.Rdata")
 load("/Users/katehayes/CLmodR/output/data/processed/population.Rdata")
 load("/Users/katehayes/CLmodR/output/data/processed/care_cum_pc.Rdata")
 
+
+
+                
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # for care duration  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # making estimates of earlier years to fill back to 2010 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
