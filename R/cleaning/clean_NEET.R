@@ -898,11 +898,8 @@ neet_levels_11to23_age <- neet_levels_19to23 %>%
   summarise(count = sum(count)) %>% 
   bind_rows(neet_levels_15, neet_levels_14, neet_levels_13, neet_levels_12, neet_levels_11) %>% 
   ungroup() %>% 
-  # filter(neet != "Not NEET") %>% 
-  # group_by(end_period_year, age) %>% 
-  # summarise(neet = sum(count)) %>%
-  # ungroup() %>% 
-  arrange(end_period_year) 
+  arrange(end_period_year) %>% 
+  mutate(level = ifelse(level == "West Midlands", "West Midlands (region)", level))
 save(neet_levels_11to23_age, file = "output/data/cleaned/neet_levels_11to23_age.Rdata")
 
 

@@ -37,11 +37,58 @@ plot_grid(poverty_plot, fsm_plot, pru_plot, ncol = 1, align = "v")
 
 plot_grid(poverty_plot, pru_plot, neet_gender_pc, ncol = 1, align = "v")
 
-plot_grid(poverty_plot, care_levels_plot, pru_plot, ncol = 1, align = "v")
+plot_grid(poverty_plot, care_levels_plot, pru_plot, neet_levels_plot, ncol = 1, align = "v")
+
+p1 <- plot_grid(poverty_plot, care_levels_plot, neet_levels_plot, ncol = 1, align = "v")
+p1
+ggsave(filename = "output/graphs/p1.png", p1)
+
+
+p2 <- plot_grid(poverty_plot, pru_plot, neet_levels_plot, ncol = 1, align = "v")
+p2
+ggsave(filename = "output/graphs/p2.png", p2)
+
 
 #7E57C2FF #673AB7FF 
 
 #702F8AFF #9063CDFF
+
+
+
+policy_plot <- poverty_series %>% 
+  ggplot() +
+  scale_y_continuous(name = "",
+                     limits = c(0, 1),
+                     expand = c(0,0)) +
+  scale_x_continuous(name = "", 
+                     breaks = c(1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022), 
+                     labels = c("1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"),
+                     limits = c(1996.5, 2022.5),
+                     expand = c(0,0)) +
+  theme_bw() +
+  geom_vline(xintercept = 2019, #linetype="dashed", 
+             color = "red", size=1, alpha = 0.4) +
+  geom_vline(xintercept = 2013, #linetype="dashed", 
+             color = "black", size=1, alpha = 0.3) +
+  # geom_text(aes(x=2012.1, label="\nPolicy change for 16+", y=0.02), colour="grey", angle=90) +
+  geom_vline(xintercept = 2011, #linetype="dashed", 
+             color = "black", size=1, alpha = 0.3) +
+  # geom_text(aes(x=2010.6, label="\n2011 Education Act ends required monitoring of participation", y=0.04), colour="grey", angle=90) +
+  geom_vline(xintercept = 2014.5, #linetype="dashed", 
+             color = "black", size=1, alpha = 0.3) +
+  # geom_text(aes(x=2014.1, label="\nPolicy change for 17+", y=0.075), colour="grey", angle=90) +
+ geom_text(aes(x=2018.6, label="\nCOVID", y=0.075), colour="red", angle=90)
+
+
+# 
+
+policy_plot 
+
+
+
+
+
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # poverty# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -119,16 +166,16 @@ poverty_plot <- poverty_series %>%
             fill="#F7F7F7", alpha = 0.1) +
   geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
             fill="#EEEEEE", alpha = 0.1) +
-  geom_vline(xintercept = 1998, linetype="dotted",
-                         color = "black", size=0.7, alpha = 0.3) +
-  geom_vline(xintercept = 2005, linetype="dotted",
-             color = "black", size=0.7, alpha = 0.3) +
-  geom_vline(xintercept = 2008, linetype="dotted",
-             color = "black", size=0.7, alpha = 0.3) +
-  geom_vline(xintercept = 2014, linetype="dotted",
-             color = "black", size=0.7, alpha = 0.3) +
-  geom_vline(xintercept = 2022, linetype="dotted",
-             color = "black", size=0.7, alpha = 0.3) +
+  geom_vline(xintercept = 1998,  #linetype="dotted",
+                         color = "black", size=0.7, alpha = 0.1) +
+  geom_vline(xintercept = 2005,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_vline(xintercept = 2008,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_vline(xintercept = 2022,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
     # geom_text(aes(x=2008, label="\nDecline from 2008-2014 due largely to a fall in median incomes", y=0.2), colour="#BDCFD6", angle=90) +
     # geom_text(aes(x=2008.5, label="\ncaused by the GFC", y=0.07), colour="#BDCFD6", angle=90) +
     geom_line(aes(x = end_period_year, y = pc, group = level, color = level)) + 
@@ -142,27 +189,31 @@ poverty_plot <- poverty_series %>%
                      expand = c(0,0)) +
     theme_bw() +
   # scale_color_manual(values = c("#762A83FF", "#5AAE61FF", "#2166ACFF", "#9970ABFF", "#ACD39EFF", "#92C5DEFF"),
-    scale_color_manual(values = c("#762A83FF", "#5AAE61FF"),
+    scale_color_manual(values = c("#673AB7FF", "#1A9850FF"),
                        guide = FALSE) +
     geom_line(data = poverty_series %>% 
                 mutate(measure = ifelse(level == "Birmingham", "Estimate", measure)) %>% 
                 filter(measure != "HBAI - children 0-20") %>% 
                 filter(level == "Birmingham",
                        end_period_year %in% c(2012:2015)),
-                aes(x = end_period_year, y = pc), linetype = "dashed", color = "#2166ACFF") +
+                aes(x = end_period_year, y = pc), alpha = 0.4, color = "#0054FFFF") +
   geom_line(data = poverty_series %>% 
               mutate(measure = ifelse(level == "Birmingham", "Estimate", measure)) %>% 
               filter(measure != "HBAI - children 0-20") %>% 
               filter(level == "Birmingham",
                      end_period_year <= 2012),
-            aes(x = end_period_year, y = pc), color = "#2166ACFF") +
+            aes(x = end_period_year, y = pc), color = "#0054FFFF") +
   geom_line(data = poverty_series %>% 
               mutate(measure = ifelse(level == "Birmingham", "Estimate", measure)) %>% 
               filter(measure != "HBAI - children 0-20") %>% 
               filter(level == "Birmingham",
                      end_period_year >= 2015),
-            aes(x = end_period_year, y = pc), color = "#2166ACFF") +
-  geom_vline(xintercept = 2019, linetype="dashed", 
+            aes(x = end_period_year, y = pc), color = "#0054FFFF") +
+  geom_vline(xintercept = 2019,
+             color = "white", size=1.2, alpha = 1) +
+  geom_vline(xintercept = 2010.4, linetype="dashed", 
+             color = "darkblue", size=1, alpha = 0.4) +
+  geom_vline(xintercept = 1997.4, linetype="dashed", 
              color = "red", size=1, alpha = 0.4) 
   # geom_text(aes(x=2021.1, label="\nBirmingham", y=0.4), colour="#634E8B", angle=0) +
   # geom_text(aes(x=2021.4, label="\nWest Midlands", y=0.31), colour="#4CAEDB", angle=0) +
@@ -213,16 +264,16 @@ care_levels_plot <- care_levels %>%
             fill="#F7F7F7", alpha = 0.1) +
   geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
             fill="#EEEEEE", alpha = 0.1) +
-  geom_vline(xintercept = 2014, linetype="dotted",
-             color = "black", size=0.7, alpha = 0.3) +
-  geom_vline(xintercept = 2022, linetype="dotted",
-             color = "black", size=0.7, alpha = 0.3) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_vline(xintercept = 2022,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
   geom_line(aes(x = end_period_year, y = pc, group = interaction(level, age), color = interaction(level, age))) +
   scale_color_manual(values = c("#3299FFFF", "#66BD63FF","#B39DDBFF", "#0054FFFF", "#1A9850FF", "#673AB7FF"),
                      guide = FALSE) +
   theme_bw() +
-  geom_vline(xintercept = 2019, linetype="dashed", 
-             color = "red", size=1, alpha = 0.4) +
+  geom_vline(xintercept = 2019,
+             color = "white", size=1.2, alpha = 1) +
   # geom_text(aes(x=2018.6, label="\nCOVID", y=0.0025), colour="grey", angle=90) +
   scale_y_continuous(name = "",
                      limits = c(0, 0.0275),
@@ -231,7 +282,7 @@ care_levels_plot <- care_levels %>%
                      expand = c(0,0),
                      name = "", 
                      breaks = c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
-                     labels = c("2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"))
+                     labels = c("2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023")) 
 # ggtitle("Trends in care rates in Birmingham") 
 care_levels_plot
 ggsave(filename = "output/graphs/care_levels_plot.png", care_levels_plot)
@@ -368,6 +419,60 @@ ggsave(filename = "output/graphs/care_rates_plot.png", care_rates_plot)
 # # # # # # # # # NEET # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+
+
+neet_levels_plot <- neet_levels_11to23_age  %>% 
+  group_by(end_period_year, level, age) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  ungroup() %>% 
+  filter(neet == "NEET") %>% 
+  select(-c(count, neet)) %>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_vline(xintercept = 2022,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_line(aes(x = end_period_year, y = pc, group = interaction(level, age), colour = interaction(level, age))) +
+  # scale_color_manual(values = c("lightgrey", "#DE4434", "#399FE0", "darkgrey", "#9C2F24", "#246D9C")) +
+  scale_color_manual(values = c("#3299FFFF", "#66BD63FF","#B39DDBFF", "#0054FFFF", "#1A9850FF", "#673AB7FF"),
+                     guide = FALSE) +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     limits = c(2010.5, 2023.5),
+                     expand = c(0,0),
+                     breaks = c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
+                     labels = c("2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.09),
+                     expand = c(0,0)) +
+  geom_line(data = neet_11to23_age %>%
+              group_by(end_period_year, age) %>%
+              mutate(pc = count/sum(count)) %>%
+              ungroup() %>%
+              filter(neet == "NEET",
+                     age == 16) %>%
+              filter(end_period_year %in% c(2013, 2015)),
+            aes(x = end_period_year, y = pc), color = "#3299FFFF", alpha = 0.4) +
+  geom_vline(xintercept = 2013.67,  linetype="dashed", 
+             color = "#FBC02DFF", size=1, alpha = 0.35) +  #just guessing happened in sept
+  # geom_text(aes(x=2012.1, label="\nPolicy change for 16+", y=0.02), colour="grey", angle=90) +
+  # geom_vline(xintercept = 2011, linetype="dashed", 
+  #            color = "black", size=1, alpha = 0.3) +
+  # geom_text(aes(x=2010.6, label="\n2011 Education Act ends required monitoring of participation", y=0.04), colour="grey", angle=90) +
+  geom_vline(xintercept = 2015.67, linetype="dashed", 
+             color = "#FBC02DFF", size=1, alpha = 0.5) + #just guessing happened in sept
+  # geom_text(aes(x=2014.1, label="\nPolicy change for 17+", y=0.075), colour="grey", angle=90) +
+  geom_vline(xintercept = 2019,
+             color = "white", size=1.2, alpha = 1)
+# geom_text(aes(x=2018.6, label="\nCOVID", y=0.075), colour="grey", angle=90)
+
+neet_levels_plot
+# need to read maguire 2015 and fergusson 2014 
+ggsave(filename = "output/graphs/neet_rates_plot.png", neet_rates_plot)
 
 
 
@@ -582,10 +687,10 @@ fsm_plot <- schools_fsm %>%
             fill="#F7F7F7", alpha = 0.1) +
   geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
             fill="#EEEEEE", alpha = 0.1) +
-  geom_vline(xintercept = 2014, linetype="dotted",
-             color = "black", size=0.7, alpha = 0.3) +
-  geom_vline(xintercept = 2022, linetype="dotted",
-             color = "black", size=0.7, alpha = 0.3) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_vline(xintercept = 2022,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
   geom_line(aes(x = end_period_year, y = pc, color = level)) +
   theme_bw() +
   scale_x_continuous(name = "", 
@@ -599,8 +704,8 @@ fsm_plot <- schools_fsm %>%
   # ggtitle("Trends in FSM eligibility rates, in Birmingham, the West Midlands, England") +
   scale_color_manual(values = c("#5AAE61FF","#762A83FF", "#2166ACFF"),
                      guide = FALSE) +
-  geom_vline(xintercept = 2019, linetype="dashed", 
-             color = "red", size=1, alpha = 0.4)
+  geom_vline(xintercept = 2019,
+             color = "white", size=1.2, alpha = 1)
 
 fsm_plot
 ggsave(filename = "output/graphsfsm_plot.png", fsm_plot)
@@ -646,10 +751,10 @@ pru_plot <- schools %>%
             fill="#F7F7F7", alpha = 0.1) +
   geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
             fill="#EEEEEE", alpha = 0.1) +
-  geom_vline(xintercept = 2014, linetype="dotted",
-             color = "black", size=0.7, alpha = 0.3) +
-  geom_vline(xintercept = 2022, linetype="dotted",
-             color = "black", size=0.7, alpha = 0.3) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_vline(xintercept = 2022,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
   geom_line(aes(x = end_period_year, y = pc, color = interaction(level, fsm))) +
   theme_bw() +
   scale_x_continuous(limits = c(2009.5, 2022.5),
@@ -661,26 +766,26 @@ pru_plot <- schools %>%
                      limits = c(0, 0.025),
                      expand = c(0,0)) +
   # ggtitle("Trends in PRU attendance rates, in Birmingham, the West Midlands, England") +
-  scale_color_manual(values = c("#762A83FF", "#1A9850FF", "#0054FFFF", "#9970ABFF", "#66BD63FF", "#3299FFFF"),
+  scale_color_manual(values = c("#673AB7FF", "#1A9850FF", "#0054FFFF", "#B39DDBFF", "#66BD63FF", "#3299FFFF"),
                      guide = FALSE) +
-  geom_vline(xintercept = 2011, linetype="dashed", 
-             color = "black", size=1, alpha = 0.3) +
+  geom_vline(xintercept = 2011.85, linetype="dashed", 
+             color = "#FBC02DFF", size=1, alpha = 0.35) + #bill got royal assent in november
   # geom_text(aes(x=2010.6, label="\nEducation Act 2011", y=0.01364), colour="grey", angle=90) +
-  geom_vline(xintercept = 2012, linetype="dashed", 
-             color = "black", size=1, alpha = 0.3) +
+  geom_vline(xintercept = 2012.67, linetype="dashed", 
+             color = "#FBC02DFF", size=1, alpha = 0.35) + #regulation in effect 1st sep
   # geom_text(aes(x=2011.6, label="\nSchool Discipline Regulations 2012", y=0.017), colour="grey", angle=90) +
-  geom_vline(xintercept = 2018, linetype="dashed", 
-             color = "black", size=1, alpha = 0.3) +
+  # geom_vline(xintercept = 2018, linetype="dashed", 
+  #            color = "black", size=1, alpha = 0.3) +
   # geom_text(aes(x=2017.6, label="\n???", y=0.022), colour="grey", angle=90) +
   # geom_text(aes(x=2019, label="\nEngland:", y=0.022), hjust = 0, colour="black", angle=0) +
   # geom_text(aes(x=2019, label="\nWest Midlands:", y=0.0205), hjust = 0, colour="black", angle=0) +
   # geom_text(aes(x=2019, label="\nBirmingham:", y=0.019), hjust = 0, colour="black", angle=0) +
   # geom_text(aes(x=2020.1, label="\nEligible/", y=0.022), hjust = 0, colour="#468F5F", angle=0) +
   # geom_text(aes(x=2021.1, label="\nNot", y=0.022), hjust = 0, colour="#9BD4B1", angle=0) +
-  geom_vline(xintercept = 2019, linetype="dashed", 
-             color = "red", size=1, alpha = 0.4)
-
-
+  geom_vline(xintercept = 2019,
+             color = "white", size=1.2, alpha = 1) +
+  geom_vline(xintercept = 2010.4, linetype="dashed", 
+             color = "darkblue", size=1, alpha = 0.4)
 
 
 pru_plot
