@@ -235,7 +235,34 @@ neet_18 <- n_data %>%
                names_to = "neet",
                values_to = "count")
 
-# 9.2%	2.2%	7.0%
+neet_nk_18 <- n_data %>% 
+  filter(`...3` == "Birmingham") %>% 
+  select(-c(1:13)) %>% 
+  select(-c(1, 4, 5, 7, 9, 10, 11)) %>% 
+  select(-c(7, 8, 10, 12)) %>% 
+  rename(count_boys_16 = 1,
+         count_girls_16 = 2,
+         count_boys_neet_16 = 3,
+         count_girls_neet_16 = 4,
+         count_boys_17 = 5,
+         count_girls_17 = 6,
+         count_boys_neet_17 = 7,
+         count_girls_neet_17 = 8) %>% 
+  mutate(across(everything(), ~as.numeric(.x))) %>% 
+  mutate(end_period_year = 2018) %>% 
+  pivot_longer(-end_period_year,
+               names_to = "neet",
+               values_to = "count") %>% 
+  mutate(gender = ifelse(grepl("girls", neet), "Girls", "Boys"),
+         age = ifelse(grepl("16", neet), 16, 17),
+         neet = ifelse(grepl("neet", neet), "NEET", "Total")) %>% 
+  pivot_wider(names_from = neet, 
+              values_from = count) %>% 
+  mutate(NEET = (2.2/9.2)*NEET) %>% 
+  mutate(NK = (7/9.2)*NEET) %>% 
+  pivot_longer(c(NEET, NK, Total),
+               names_to = "neet",
+               values_to = "count")
 
 
 
@@ -336,6 +363,38 @@ neet_16 <- n_data %>%
                names_to = "neet",
                values_to = "count") 
 
+
+neet_nk_16 <- n_data %>% 
+  filter(`...3` == "Birmingham") %>% 
+  select(-c(1:14, 17, 18, 20, 22:24, 27, 28, 30, 32, 33)) %>% 
+  rename(count_boys_16 = 1,
+         count_girls_16 = 2,
+         count_boys_neet_16 = 3,
+         count_girls_neet_16 = 4,
+         count_boys_17 = 5,
+         count_girls_17 = 6,
+         count_boys_neet_17 = 7,
+         count_girls_neet_17 = 8) %>% 
+  mutate(across(everything(), ~as.numeric(.x))) %>% 
+  mutate(end_period_year = 2016) %>% 
+  pivot_longer(-end_period_year,
+               names_to = "neet",
+               values_to = "count") %>% 
+  mutate(gender = ifelse(grepl("girls", neet), "Girls", "Boys"),
+         age = ifelse(grepl("16", neet), 16, 17),
+         neet = ifelse(grepl("neet", neet), "NEET", "Total")) %>% 
+  pivot_wider(names_from = neet, 
+              values_from = count) %>% 
+  mutate(NEET = NEET*(2.8/10.2)) %>% 
+  mutate(NK = NEET*(7.4/10.2)) %>% 
+  pivot_longer(c(NEET, NK, Total),
+               names_to = "neet",
+               values_to = "count") 
+
+
+
+
+
   # 10.2%	2.8%	7.4% 
   
 # 2015 - HERE WE NO LONGER HAVE GENDER
@@ -421,6 +480,29 @@ neet_15 <- n_data %>%
                values_to = "count")
   
 
+
+neet_nk_15 <- n_data %>% 
+  filter(`...2` == "Birmingham") %>% 
+  select(-c(1, 2, 6, 10:13))  %>% 
+  rename(count_neet_16 = 1,
+         pc_neet_16 = 2,
+         pc_nk_16 = 3,
+         count_neet_17 = 4,
+         pc_neet_17 = 5,
+         pc_nk_17 = 6) %>% 
+  mutate(count_nk_16 = (pc_nk_16*100)*count_neet_16/(pc_neet_16*100),
+         count_nk_17 = (pc_nk_17*100)*count_neet_17/(pc_neet_17*100)) %>% 
+  mutate(count_16 = count_neet_16/pc_neet_16,
+         count_17 = count_neet_17/pc_neet_17) %>% 
+  select(-c(starts_with("pc"))) %>% 
+  mutate(end_period_year = 2015) %>% 
+  pivot_longer(-end_period_year,
+               names_to = "neet",
+               values_to = "count") %>% 
+  mutate(age = ifelse(grepl("16", neet), 16, 17),
+         neet = ifelse(grepl("nk", neet), "NK", 
+                       ifelse(grepl("neet", neet), "NEET", "Total"))) 
+
 # 2014
 n_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/2014_local_authority_NEET_figures.xls",
                    sheet = 2, skip = 4)
@@ -505,6 +587,29 @@ neet_14 <- n_data %>%
   pivot_longer(c(NEET, `Not NEET`),
                names_to = "neet",
                values_to = "count")
+
+
+neet_nk_14 <- n_data %>% 
+  filter(`...2` == "Birmingham") %>% 
+  select(-c(1, 2, 6, 10:13))  %>% 
+  rename(count_neet_16 = 1,
+         pc_neet_16 = 2,
+         pc_nk_16 = 3,
+         count_neet_17 = 4,
+         pc_neet_17 = 5,
+         pc_nk_17 = 6) %>% 
+  mutate(count_nk_16 = (pc_nk_16*100)*count_neet_16/(pc_neet_16*100),
+         count_nk_17 = (pc_nk_17*100)*count_neet_17/(pc_neet_17*100)) %>% 
+  mutate(count_16 = count_neet_16/pc_neet_16,
+         count_17 = count_neet_17/pc_neet_17) %>% 
+  select(-c(starts_with("pc"))) %>% 
+  mutate(end_period_year = 2014) %>% 
+  pivot_longer(-end_period_year,
+               names_to = "neet",
+               values_to = "count") %>% 
+  mutate(age = ifelse(grepl("16", neet), 16, 17),
+         neet = ifelse(grepl("nk", neet), "NK", 
+                       ifelse(grepl("neet", neet), "NEET", "Total")))
 
 
 # 2013
@@ -593,6 +698,28 @@ neet_13 <- n_data %>%
                  names_to = "neet",
                  values_to = "count")
 
+neet_nk_13 <- n_data %>% 
+  filter(`...2` == "Birmingham") %>% 
+  select(-c(1, 2, 6, 10:13))  %>% 
+  rename(count_neet_16 = 1,
+         pc_neet_16 = 2,
+         pc_nk_16 = 3,
+         count_neet_17 = 4,
+         pc_neet_17 = 5,
+         pc_nk_17 = 6) %>% 
+  mutate(count_nk_16 = (pc_nk_16*100)*count_neet_16/(pc_neet_16*100),
+         count_nk_17 = (pc_nk_17*100)*count_neet_17/(pc_neet_17*100)) %>% 
+  mutate(count_16 = count_neet_16/pc_neet_16,
+         count_17 = count_neet_17/pc_neet_17) %>% 
+  select(-c(starts_with("pc"))) %>% 
+  mutate(end_period_year = 2013) %>% 
+  pivot_longer(-end_period_year,
+               names_to = "neet",
+               values_to = "count") %>% 
+  mutate(age = ifelse(grepl("16", neet), 16, 17),
+         neet = ifelse(grepl("nk", neet), "NK", 
+                       ifelse(grepl("neet", neet), "NEET", "Total")))
+
 # TWNETY TWELVE
 n_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/2012_local_authority_NEET_figures.xls",
                    sheet = 2, skip = 4)
@@ -675,8 +802,27 @@ neet_12 <- n_data %>%
                  names_to = "neet",
                  values_to = "count")
 
-
-
+neet_nk_12 <- n_data %>% 
+  filter(`...2` == "Birmingham") %>% 
+  select(-c(1, 2, 6, 10:13))  %>% 
+  rename(count_neet_16 = 1,
+         pc_neet_16 = 2,
+         pc_nk_16 = 3,
+         count_neet_17 = 4,
+         pc_neet_17 = 5,
+         pc_nk_17 = 6) %>% 
+  mutate(count_nk_16 = (pc_nk_16*100)*count_neet_16/(pc_neet_16*100),
+         count_nk_17 = (pc_nk_17*100)*count_neet_17/(pc_neet_17*100))%>% 
+  mutate(count_16 = count_neet_16/pc_neet_16,
+         count_17 = count_neet_17/pc_neet_17) %>% 
+  select(-c(starts_with("pc"))) %>% 
+  mutate(end_period_year = 2012) %>% 
+  pivot_longer(-end_period_year,
+               names_to = "neet",
+               values_to = "count") %>% 
+  mutate(age = ifelse(grepl("16", neet), 16, 17),
+         neet = ifelse(grepl("nk", neet), "NK", 
+                       ifelse(grepl("neet", neet), "NEET", "Total"))) 
 
 # TWENTY ELEVEN
 n_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/2011_local_authority_neet_figures.xls",
@@ -759,6 +905,28 @@ neet_11 <- n_data %>%
   pivot_longer(c(NEET, `Not NEET`),
                names_to = "neet",
                values_to = "count")
+
+neet_nk_11 <- n_data %>% 
+  filter(`...2` == "Birmingham") %>% 
+  select(-c(1, 2, 6, 10:13))  %>% 
+  rename(count_neet_16 = 1,
+         pc_neet_16 = 2,
+         pc_nk_16 = 3,
+         count_neet_17 = 4,
+         pc_neet_17 = 5,
+         pc_nk_17 = 6) %>% 
+  mutate(count_nk_16 = (pc_nk_16*100)*count_neet_16/(pc_neet_16*100),
+         count_nk_17 = (pc_nk_17*100)*count_neet_17/(pc_neet_17*100))%>% 
+  mutate(count_16 = count_neet_16/pc_neet_16,
+         count_17 = count_neet_17/pc_neet_17) %>% 
+   select(-c(starts_with("pc"))) %>% 
+  mutate(end_period_year = 2011) %>% 
+  pivot_longer(-end_period_year,
+               names_to = "neet",
+               values_to = "count") %>% 
+  mutate(age = ifelse(grepl("16", neet), 16, 17),
+         neet = ifelse(grepl("nk", neet), "NK", 
+                       ifelse(grepl("neet", neet), "NEET", "Total")))
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # VULNERABLE GROUPS# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -881,6 +1049,27 @@ neet_11to23_age <- neet_16to23_age_gender %>%
   # ungroup() %>% 
   arrange(end_period_year) 
 save(neet_11to23_age, file = "output/data/cleaned/neet_11to23_age.Rdata")
+
+
+neet_nk_11to23_age <- neet_19to23 %>% 
+  mutate(across(c(starts_with("count"), age), ~as.numeric(.x))) %>% 
+  rename(Total = count_avg_tot,
+         NEET = count_neet,
+         NK = count_nk) %>% 
+  select(c(end_period_year, gender, age, NEET, NK, Total)) %>% 
+  pivot_longer(c(NEET, NK, Total),
+               names_to = "neet",
+               values_to = "count") %>% 
+  bind_rows(neet_nk_18, neet_nk_16) %>% 
+  mutate(count = as.numeric(count)) %>% 
+  group_by(end_period_year, neet, age) %>% 
+  summarise(count = sum(count)) %>% 
+  bind_rows(neet_nk_15, neet_nk_14,
+            neet_nk_13, neet_nk_12,
+            neet_nk_11)
+  
+
+
 
 
 neet_levels_11to23_age <- neet_levels_19to23 %>% 

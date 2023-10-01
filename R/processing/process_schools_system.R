@@ -85,9 +85,7 @@ check <- pru_care %>%
 # just checking here the whole about 5% of kids in care should be in PRUs...
 
 care_v_all_pru_rate <- care_school_16to22 %>% 
-  select(time_period, t_pru, t_secondary) %>% 
-  mutate(time_period = as.numeric(paste(substr(time_period,1,2), substr(time_period,5,6), sep = ""))) %>% 
-  rename(end_period_year = time_period) %>%
+  select(end_period_year, t_pru, t_secondary) %>% 
   mutate(pc = as.numeric(t_pru)/(as.numeric(t_secondary)+as.numeric(t_pru))) %>% 
   select(end_period_year, pc) %>% 
   mutate(group = "care") %>% 
@@ -96,7 +94,14 @@ care_v_all_pru_rate <- care_school_16to22 %>%
               summarise(`Not PRU` = sum(`Not PRU`),
                         PRU = sum(PRU)) %>% 
               mutate(pc = PRU/(PRU +`Not PRU`)) %>% 
-              mutate(group = "all")) %>% 
+              mutate(group = "all"))  %>% 
+  bind_rows(school_pru %>% 
+              filter(fsm == "FSM eligible") %>% 
+              group_by(end_period_year) %>% 
+              summarise(`Not PRU` = sum(`Not PRU`),
+                        PRU = sum(PRU)) %>% 
+              mutate(pc = PRU/(PRU +`Not PRU`)) %>% 
+              mutate(group = "FSM"))  %>% 
   ggplot() +
   geom_line(aes(x = end_period_year, y = pc, group = group, colour = group))
 care_v_all_pru_rate
