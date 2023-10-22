@@ -92,6 +92,22 @@ school_age_fsm_gen_group
 ggsave(filename = "output/graphs/school_age_fsm_gen_group.png",school_age_fsm_gen_group)
 
 
+
+
+care_at_pru <- plot_grid(care_1015, care_v_all_pru_rate, ncol = 1, align = "v")
+
+care_at_pru
+ggsave(filename = "output/graphs/care_at_pru.png",care_at_pru)
+
+
+
+
+
+
+
+
+
+
 policy_plot <- poverty_series %>% 
   ggplot() +
   scale_y_continuous(name = "",
@@ -936,17 +952,21 @@ academy <- schools_10to22_age_gender %>%
   filter(age %in% 10:15) %>% 
   left_join(s_data) %>% 
   ungroup() %>% 
+  mutate(check = 1) %>% 
   group_by(end_period_year, level, academy) %>%
-  summarise(count = sum(count)) %>% 
+  summarise(count = sum(count),
+            num_acad = sum(check)) %>% 
   ungroup() %>% 
   pivot_wider(names_from = academy,
-              values_from = count,
+              values_from = c(count, num_acad),
               values_fill = 0) %>% 
-  mutate(pc = Academy/(Academy + `Not academy`)) %>% 
+  mutate(pc_pupils = count_Academy/(count_Academy + `count_Not academy`),
+         pc_schools = num_acad_Academy/(num_acad_Academy + `num_acad_Not academy`)) %>% 
+# %>% 
 # %>% 
   # select(end_period_year, level, pc) %>% 
   ggplot() +
-  geom_line(aes(x = end_period_year, y = pc, color = level)) +
+  geom_line(aes(x = end_period_year, y = pc_pupils, color = level)) +
   theme_bw() +
   scale_x_continuous(name = "", 
                      limits = c(2009.5, 2022.5),
@@ -963,6 +983,35 @@ academy <- schools_10to22_age_gender %>%
 academy
 ggsave(filename = "output/graphs/academy.png", academy)
 # ROUGH JOB, HAVENT DONE V THOROUGH CHECK ABOUT WHETHER IVE IDENTIFIED ALL THE ACADEMIES
+https://birmingham.cmis.uk.com/Birmingham/Document.ashx?czJKcaeAi5tUFL1DTL2UE4zNRBcoShgo=usanmLdDA3wNIUjaYD4HgKfXiogrOpLpKud8nzmoUCUzIJ4znDqUxQ%3D%3D&rUzwRPf%2BZ3zd4E7Ikn8Lyw%3D%3D=pwRE6AGJFLDNlh225F5QMaQWCtPHwdhUfCZ%2FLUQzgA2uL5jNRG4jdQ%3D%3D&mCTIbCubSFf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 schools_fsm <- schools_10to22_fsm %>%
   left_join(s_data) 
@@ -1158,11 +1207,86 @@ segregation
 ggsave(filename = "output/graphs/segregation.png", segregation)
 
 
+care_age_check <- schools_10to22_age_gender %>%
+  left_join(s_data) %>% 
+  filter(age %in% c(10:15),
+         level == "Birmingham",
+         school == "Laces") %>% 
+  group_by(end_period_year, gender, age) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup()
+
+
+
+  care_calc <- care_school_16to22 %>% 
+    select(end_period_year, t_pru, t_secondary) %>% 
+    mutate(pc = as.numeric(t_pru)/(as.numeric(t_secondary)+as.numeric(t_pru))) %>% 
+    select(end_period_year, pc) %>% 
+    mutate(group = "care") %>% 
+    bind_rows(schools_10to22_age_gender %>%
+                left_join(s_data) %>% 
+                filter(age %in% c(10:15),
+                       level == "Birmingham",
+                       school == "Laces") %>% 
+                group_by(end_period_year) %>% 
+                summarise(pru = sum(count)) %>% 
+                ungroup() %>% 
+                left_join(care_11to22_age %>% 
+                            filter(age == "10-15",
+                                   level == "Birmingham") %>% 
+                            select(end_period_year, count)) %>% 
+                mutate(pc = pru/count,
+                       group = "care") %>% 
+                filter(end_period_year %in% c(2011:2012)) %>% 
+                select(end_period_year, pc, group)) %>% 
+    bind_rows(school_pru %>% 
+                group_by(end_period_year) %>% 
+                summarise(`Not PRU` = sum(`Not PRU`),
+                          PRU = sum(PRU)) %>% 
+                mutate(pc = PRU/(PRU +`Not PRU`)) %>% 
+                mutate(group = "all"))  %>% 
+    bind_rows(school_pru %>% 
+                filter(fsm == "FSM eligible") %>% 
+                group_by(end_period_year) %>% 
+                summarise(`Not PRU` = sum(`Not PRU`),
+                          PRU = sum(PRU)) %>% 
+                mutate(pc = PRU/(PRU +`Not PRU`)) %>% 
+                mutate(group = "FSM")) %>% 
+    select(end_period_year, pc, group) %>% 
+    pivot_wider(names_from = group,
+                values_from = pc) %>% 
+    mutate(care_mult = care/all,
+           fsm_mult = FSM/all) %>% 
+    ggplot() +
+    geom_line(aes(x = end_period_year, y = fsm_mult)) +
+    geom_line(aes(x = end_period_year, y = care_mult)) 
+
+
+  care_calc
+  
+  
+
 care_v_all_pru_rate <- care_school_16to22 %>% 
   select(end_period_year, t_pru, t_secondary) %>% 
   mutate(pc = as.numeric(t_pru)/(as.numeric(t_secondary)+as.numeric(t_pru))) %>% 
   select(end_period_year, pc) %>% 
   mutate(group = "care") %>% 
+  bind_rows(schools_10to22_age_gender %>%
+              left_join(s_data) %>% 
+              filter(age %in% c(10:15),
+                     level == "Birmingham",
+                     school == "Laces") %>% 
+              group_by(end_period_year) %>% 
+              summarise(pru = sum(count)) %>% 
+              ungroup() %>% 
+              left_join(care_11to22_age %>% 
+                          filter(age == "10-15",
+                                 level == "Birmingham") %>% 
+                          select(end_period_year, count)) %>% 
+              mutate(pc = pru/count,
+                     group = "min_rate_care") %>% 
+              filter(end_period_year %in% c(2011:2012)) %>% 
+              select(end_period_year, pc, group)) %>% 
   bind_rows(school_pru %>% 
               group_by(end_period_year) %>% 
               summarise(`Not PRU` = sum(`Not PRU`),
@@ -1177,6 +1301,14 @@ care_v_all_pru_rate <- care_school_16to22 %>%
               mutate(pc = PRU/(PRU +`Not PRU`)) %>% 
               mutate(group = "FSM")) %>% 
   ggplot() +
+  geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_vline(xintercept = 2022,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
   geom_line(aes(x = end_period_year, y = pc, group = group, colour = group)) +
   theme_bw() +
   scale_x_continuous(limits = c(2009.5, 2022.5),
@@ -1185,14 +1317,66 @@ care_v_all_pru_rate <- care_school_16to22 %>%
                      breaks = c(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
                      labels = c("2010","2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023")) +
   scale_y_continuous(name = "",
-                     limits = c(0, 0.05),
+                     limits = c(0, 0.052),
                      expand = c(0,0)) +
   # ggtitle("Trends in PRU attendance rates, in Birmingham, the West Midlands, England") +
-  scale_color_manual(values = c("#99E5FFFF", "#003FFFFF", "#4CA5FFFF"),
+  scale_color_manual(values = c("#39B185FF", "#ED3F39FF", "#4CA5FFFF", "#ED3F39FF"),
                      guide = F) 
 care_v_all_pru_rate
 
 ggsave(filename = "output/graphs/care_v_all_pru_rate.png", care_v_all_pru_rate)
+
+
+care_1015 <- care_11to22_age %>% 
+  filter(level == "Birmingham",
+         age %in% c("10-15","16+"))%>% 
+  left_join(neet_11to23_age %>% 
+              group_by(end_period_year) %>% 
+              summarise(school_pop = sum(count)) %>% 
+              mutate(age = "16+") %>% 
+              bind_rows(schools_school_level %>% 
+                          filter(level == "Birmingham",
+                                 age %in% c(10:15)) %>%
+                          group_by(end_period_year) %>% 
+                          summarise(school_pop = sum(count)) %>% 
+                          mutate(age = "10-15"))) %>% 
+  left_join(population %>% 
+              filter(age %in% c(10:17),
+                     end_period_year %in% c(2011:2023)) %>%
+              mutate(age = ifelse(age %in% c(10:15), "10-15", "16+")) %>% 
+              group_by(end_period_year, age) %>%
+              summarise(census_pop = sum(count))) %>% 
+  mutate(pc_school = count/school_pop,
+         pc_census = count/census_pop) %>% 
+  filter(age == "10-15") %>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_vline(xintercept = 2022,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_line(aes(x = end_period_year, y = pc_school), colour = "#762A83FF") +
+  theme_bw() +
+  scale_x_continuous(limits = c(2010.5, 2022.5),
+                     expand = c(0,0),
+                     name = "", 
+                     breaks = c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
+                     labels = c("2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.0124),
+                     expand = c(0,0)) 
+care_1015
+
+
+
+
+
+
+
+
 
 care_v_all_pru_rate <- care_school_16to22 %>% 
   select(end_period_year, t_pru, t_secondary) %>% 
@@ -1985,8 +2169,8 @@ pru_ft_pt <-  schools_10to22_age_gender %>%
                        expand = c(0,0),
                        breaks = c(0,30,60),
                        labels = c("0","30","60")) +
-    scale_color_manual(values = c("#A4661EFF", "#A4661EFF",  "#356EB2FF","#356EB2FF", "#356EB2FF",  "#BE3428FF", "#356EB2FF",  "#356EB2FF"),
-                       guide = FALSE) +
+    scale_color_manual(values = c("#A4661EFF", "#A4661EFF",  "#356EB2FF","#356EB2FF", "#356EB2FF",  "#BE3428FF", "#356EB2FF",  "#356EB2FF")) +
+                       # guide = FALSE) +
   scale_fill_manual(values = c("#D9D6A6FF", "#D9D6A6FF",  "#9BB0FEFF","#9BB0FEFF", "#9BB0FEFF",  "#BE3428FF", "#9BB0FEFF", "#9BB0FEFF"),
                      guide = FALSE) +
     theme(strip.text = element_blank())
@@ -1996,6 +2180,78 @@ pru_ft_pt <-  schools_10to22_age_gender %>%
   
   , colour="#B48A2CFF"
   , fill="#DCD66EFF"
+  
+  
+  At the most recent on May 2017 it
+  was rated “Inedequate” due to the
+  quality of teaching,learning and
+  assessment.  - The Edge
+  Academy
+  
+  
+  
+  
+  
+  num_prus_big <- schools_10to22_age_gender %>%
+    left_join(s_data) %>% 
+    filter(age %in% c(10:15),
+           level == "Birmingham",
+           my_categories == "Pupil referral unit") %>% 
+    mutate(school = ifelse(school %in% c("The City of Birmingham School", "City of Birmingham School", "The Behaviour Support Service"), "Behaviour Support Service at The City of Birmingham School", school),
+           school = ifelse(school == "EBN Free School", "East Birmingham Network Academy", school),
+           school = ifelse(school == "Ebn Academy  2", "EBN Academy Phase 2", school),
+           school = ifelse(school == "Titan St Georges Academy", "St Georges Academy", school),
+           school = ifelse(school == "CUL Academy Trust", "Titan Aston Academy", school)) %>%
+    group_by(end_period_year, school) %>% 
+    summarise(count = sum(count)) %>% 
+    ungroup() %>% 
+    add_row(school = "Virtual College", end_period_year = 2013.25, count = 0) %>% # closed 31 March 2013
+    add_row(school = "Laces", end_period_year = 2013.25, count = 0) %>% # closed 31 March 2013
+    add_row(school = "St Georges Academy", end_period_year = 2013.67, count = 0) %>% # opened 2 September 2013
+    add_row(school = "The Edge Academy", end_period_year = 2015.67, count = 0) %>% # opened 1 September 2015
+    add_row(school = "Reach School", end_period_year = 2013.67, count = 0) %>%  # opened 2 September 2013
+    add_row(school = "Titan Aston Academy", end_period_year = 2014.67, count = 0) %>% 
+    add_row(school = "Titan Aston Academy", end_period_year = 2018.75, count = 21) %>% 
+    add_row(school = "Titan Aston Academy", end_period_year = 2018.83, count = 0) %>% 
+    add_row(school = "Titan Aston Academy", end_period_year = 2018.85, count = 0) %>% 
+    add_row(school = "EBN Academy Phase 2", end_period_year = 2015.67, count = 0) %>% 
+    add_row(school = "East Birmingham Network Academy", end_period_year = 2012.67, count = 0) %>% 
+    filter(school == "Behaviour Support Service at The City of Birmingham School") %>% 
+     ggplot() + 
+    geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+              fill="#F7F7F7", alpha = 0.1) +
+    geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+              fill="#EEEEEE", alpha = 0.1) +
+    geom_vline(xintercept = 2014,  #linetype="dotted",
+               color = "black", size=0.7, alpha = 0.05) +
+    geom_vline(xintercept = 2022,  #linetype="dotted",
+               color = "black", size=0.7, alpha = 0.05) +
+    geom_line(aes(x = end_period_year, y=count, colour = school)) +
+    geom_ribbon(aes(x = end_period_year, ymin=0,ymax=count, fill = school), alpha=0.5) +
+    theme_bw() +
+    scale_x_continuous(limits = c(2009.5, 2022.5),
+                       expand = c(0,0),
+                       name = "", 
+                       breaks = c(2010, 2012, 2014, 2016, 2018, 2020, 2022), 
+                       labels = c("2010", "2012", "2014", "2016", "2018", "2020", "2022")) +
+    scale_y_continuous(name = "",
+                       limits = c(0, 400),
+                       expand = c(0,0),
+                       breaks = c(0,30,60,90,120,150,180,210,240,270,300,330,360,390),
+                       labels = c("0","","60","","120","","180","","240","","300","","360","")) +
+    scale_color_manual(values = c("#356EB2FF"),
+                       guide = FALSE) +
+    scale_fill_manual(values = c("#9BB0FEFF"),
+                      guide = FALSE) +
+    theme(strip.text = element_blank())
+  
+  
+  num_prus_big
+  
+  
+  
+  
+  
   
   
   
@@ -2039,12 +2295,12 @@ pru_ft_pt <-  schools_10to22_age_gender %>%
     summarise(pc_in_pru = mean(pc_in_pru)) %>% 
     ggplot() + 
     geom_line(aes(x = age, y = pc_in_pru, colour = interaction(gender, fsm))) +
-    geom_ribbon(aes(x = age, ymin=0,ymax=pc_in_pru, fill = interaction(gender, fsm)), alpha=0.1) +
+    # geom_ribbon(aes(x = age, ymin=0,ymax=pc_in_pru, fill = interaction(gender, fsm)), alpha=0.1) +
     facet_grid(cols = vars(period))+
     scale_colour_manual(values = c("#3A488AFF", "#BE3428FF", "#8785B2FF", "#D95F30FF"),
                         guide = F) +
-    scale_fill_manual(values = c("#3A488AFF", "#BE3428FF", "#8785B2FF", "#D95F30FF"),
-                      guide = F) +
+    # scale_fill_manual(values = c("#3A488AFF", "#BE3428FF", "#8785B2FF", "#D95F30FF"),
+    #                   guide = F) +
     theme_bw() +
     theme(strip.text = element_blank()) +
     scale_x_continuous(name = "") +
