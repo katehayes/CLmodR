@@ -55,7 +55,7 @@ p_data_count <- poverty_data %>%
 
 
 
-p_data <- read_xlsx("/Users/katehayes/temp_data/CHILD POVERTY FEB.xlsx",
+p_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/CHILD POVERTY FEB (1).xlsx",
                     sheet = 1, skip = 9, n_max = 5, col_names = F)
 
 c_names <- unlist(p_data[,1])

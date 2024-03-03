@@ -9,6 +9,7 @@ nrm_exploc_all <- nrm_19to22 %>%
   geom_bar(aes(x = date, fill = fct_rev(expl_loc_type)),
            stat = "count", position = "stack") +
   scale_fill_manual(values = c( "grey", "#99CCCC", "#9999CC", "#9966CC"))
+nrm_exploc_all
 ggsave(filename = "Output/Graphs/nrm_exploc_all.png", nrm_exploc_all)
 
 # where would county lines kids from birmingham be classed as being exploited in?
@@ -72,8 +73,62 @@ nrm_child_birm
 ggsave(filename = "Output/Graphs/nrm_child_birm_cl.png", nrm_child_birm)
 
 
+
+nrm_cl <- nrm_19to22 %>%
+  filter(age <= 17,
+         expl_location == "Birmingham",
+         cl_mention == "Yes") %>%
+  mutate(date2 = dmy(paste0("01 ", month, " ", year))) %>% 
+  select(age, gender, nationality, date2) %>% 
+  ggplot() +
+  geom_bar(aes(x = age, fill = gender),
+           stat = "count", position = "stack")
+
+
+
+
+
+nrm_cl <- nrm_19to22 %>%
+  filter(age <= 17,
+         expl_location == "Birmingham",
+         cl_mention == "No")
+
+nrm_cl <- nrm_19to22 %>%
+  filter(age <= 17,
+         expl_location == "Birmingham",
+         cl_mention == "Yes") %>%
+  mutate(date2 = dmy(paste0("01 ", month, " ", year))) %>% 
+  select(age, gender, nationality, date2) %>% 
+  ggplot() +
+  geom_bar(aes(x = date2, fill = as.factor(age)),
+           stat = "count", position = "stack") +
+  scale_y_continuous(limits = c(0, 42)) +
+  scale_x_date(date_breaks = "6 month",
+               limits = c(as.Date('1/12/2018', format="%d/%m/%Y"), as.Date('1/3/2023', format="%d/%m/%Y")),
+               date_labels="%b-%Y")
+nrm_cl
+
+cl_nrm <-  cl_19to22 %>%
+  filter(year != 0,
+         age <= 17,
+         la == "Birmingham",
+         nrm_referral == "Yes") %>% 
+  mutate(date2 = dmy(paste0("01 ", month, " ", year))) %>% 
+  select(age, gender, ethnicity, date2) %>% 
+  ggplot() +
+  geom_bar(aes(x = date2, fill = as.factor(age)),
+           stat = "count", position = "stack") +
+  scale_y_continuous(limits = c(0, 42)) +
+  scale_x_date(date_breaks = "6 month",
+               limits = c(as.Date('1/12/2018', format="%d/%m/%Y"), as.Date('1/3/2023', format="%d/%m/%Y")),
+               date_labels="%b-%Y")
+
+cl_nrm
+
+comp_cl_nrm <- 
+
 # birmingham county lines children with an NRM referral
-cl_child_birm <- cl_1922 %>%
+cl_child_birm <- cl_19to22 %>%
   filter(year != 0,
          age <= 17,
          la == "Birmingham") %>% # birmingham kids are younger than the other west midlands kids
@@ -193,4 +248,39 @@ nrm_fr <- nrm_19to22 %>%
            stat = "count", position = "stack") +
   scale_fill_viridis(option = "turbo", discrete = TRUE, direction = 1)
 nrm_fr
+
+
+
+
+nrm_child_birm_all <- nrm_19to22 %>%
+  filter(age <= 17,
+         expl_location == "Birmingham") %>%
+  mutate(date2 = dmy(paste0("01 ", month, " ", year))) %>%
+  # mutate(expl_loc_type = factor(expl_loc_type, levels = c("West Midlands Police Force Area",
+  #                                                         "Out of Force Area", "Overseas", "Unknown"))) %>%
+  mutate(all_flag = "No") %>% 
+  mutate(all_flag = ifelse(cl_mention == "Yes", "Yes", all_flag)) %>% 
+  mutate(all_flag = ifelse(gangs_mention == "Yes", "Yes", all_flag)) %>% 
+  mutate(all_flag = ifelse(drugs_mention == "Yes", "Yes", all_flag)) %>%                   
+  ggplot() +
+  geom_bar(aes(x = date2, fill = all_flag),
+           stat = "count", position = "stack") +
+  scale_y_continuous(limits = c(0, 42)) +
+  scale_x_date(date_breaks = "6 month",
+               limits = c(as.Date('1/12/2018', format="%d/%m/%Y"), as.Date('1/3/2023', format="%d/%m/%Y")),
+               date_labels="%b-%Y" ) +
+  ggtitle("Child NRM referrals, exploited in Birmingham. In red if recorded as CL/gangs/drugs-related") +
+  theme(legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        plot.title = element_text(color="black", size=10)) +
+  scale_fill_manual(values = c( "lightgrey", "#CC0033"))
+nrm_child_birm_all
+ggsave(filename = "Output/Graphs/nrm_child_birm_all.png", nrm_child_birm_all)
+
+
+
+
+
+
 

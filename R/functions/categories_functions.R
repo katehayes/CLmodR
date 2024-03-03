@@ -10,6 +10,9 @@ court_types <- c("Magistrates' courts", "Crown court")
 
 disposal_types <- c("Pre-court", "First-tier", "Community", "Custody")
 
+
+
+
 # las in the west mids
 LAs_in_WM_list <- c("Birmingham", "Coventry", "Dudley", "Herefordshire",
                     "Sandwell", "Shropshire", "Solihull", "Staffordshire",
@@ -65,9 +68,8 @@ reconcile_dashboard <- function(x) {
   x <- case_when(x %in% yes_list ~ "Yes",
                  x %in% no_list ~ "No",
                  x %in% unknown_list ~ "Unknown",
-                 x %in% na_list ~ " ",
-                 !(x %in% total_list) ~ "CHECK THIS VALUE"
-                 )
+                 x %in% na_list ~ "",
+                 !(x %in% total_list) ~ "CHECK THIS VALUE")
 
 }
 
@@ -168,8 +170,10 @@ aggregate_custody_disposals <- function(x) {
 
 
 
-# how to write a function that mutates a column in dplyr
+# want a function that mutates a column 
 # as in mutate(gender = reconcile_gender(gender))
+# can be applied to any gender col to standardise it
+
 reconcile_gender <- function(x) {
 
   boys_list <- c("Boys", "boys", "Boy", "boy",
@@ -190,6 +194,12 @@ reconcile_gender <- function(x) {
                  !(x %in% total_list) ~ "CHECK THIS VALUE")
 
 }
+
+
+
+
+
+
 
 
 # VERY MUCH EXPERIMENTAL

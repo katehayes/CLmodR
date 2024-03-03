@@ -1,5 +1,164 @@
 load("/Users/katehayes/CLmodR/output/data/cleaned/cl_19to22.Rdata")
 
+library(ggplot2)
+library(tidyverse)
+library(viridis)
+
+
+wm_nrm_age <- cl_19to22 %>%
+  filter(age <= 17)
+
+
+
+wm_nrm_age <- cl_19to22 %>%
+  filter(!is.na(la),
+         year != 0,
+         date <= "Dec 2020",
+         age <= 17) %>% 
+
+
+# %>% 
+  mutate(count = 1,
+         la = ifelse(la == "Birmingham", la, "Not Birmingham")) %>% 
+  group_by(date, la) %>% 
+  summarise(count = sum(count)) %>% 
+  pivot_wider(names_from = la,
+              values_from = count,
+              values_fill = 0)
+
+
+
+birm_nrm <- cl_19to22 %>%
+  rename(end_period_year = year) %>% 
+  filter(!is.na(la),
+         end_period_year != 0,
+         la == "Birmingham",
+         age <= 17) %>% 
+  mutate(count = 1) %>% 
+  group_by(date, nrm_referral) %>% 
+  summarise(count = sum(count)) %>% 
+  # ungroup() %>% 
+  # group_by(nrm_referral) %>% 
+  # arrange(date) %>% 
+  # mutate(c = rollmean(count, k = 3, fill = 0, align = "center")) %>%
+  # mutate(c = rollmean(c, k = 3, fill = 0, align = "center")) %>%
+  pivot_wider(names_from = nrm_referral,
+              values_from = count,
+              values_fill = 0) %>% 
+  ggplot() +
+  geom_line(aes(x = date, y = Yes)) +
+  geom_line(aes(x = date, y = Yes+No)) +
+  geom_line(aes(x = date, y = Yes+No+Unknown)) +
+  geom_ribbon(aes(x = date, ymin=0,ymax=Yes), alpha=0.5) +
+  geom_ribbon(aes(x = date, ymin=Yes, ymax=Yes+No), fill = "#91A1BAFF", alpha=0.25) +
+  geom_ribbon(aes(x = date, ymin=Yes+No, ymax=Yes+No+Unknown), fill = "#91A1BAFF", alpha=0.1) +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0))
+birm_nrm
+
+
+birm_nrm <- cl_19to22 %>%
+  rename(end_period_year = year) %>% 
+  filter(!is.na(la),
+         end_period_year != 0,
+         end_period_year < 2021,
+         la == "Birmingham",
+         age <= 17) %>% 
+  mutate(count = 1) %>% 
+  group_by(nrm_referral) %>% 
+  summarise(count = sum(count))
+
+nrm_dec <- nrm_19to22 %>%
+  filter(cl_mention == "Yes",
+         age <= 17) %>% 
+  mutate(count = 1) %>% 
+  group_by(r_grounds) %>% 
+  summarise(count = sum(count))
+
+nrm_dec <- nrm_19to22 %>%
+  filter(cl_mention == "Yes",
+         age <= 17,
+         r_grounds == "Positive") %>% 
+  mutate(count = 1) %>% 
+  group_by(c_grounds) %>% 
+  summarise(count = sum(count))
+
+
+birm_nrm <- cl_19to22 %>%
+  rename(end_period_year = year) %>% 
+  filter(!is.na(la),
+         end_period_year != 0,
+         la == "Birmingham",
+         age <= 17) %>% 
+  mutate(count = 1) %>% 
+  group_by(date, nrm_referral) %>% 
+  summarise(count = sum(count)) %>% 
+  mutate(nrm_referral = factor(nrm_referral, 
+                               levels = c("Unknown","No",  "Yes"))) %>% 
+  # pivot_wider(names_from = nrm_referral,
+  #             values_from = count,
+  #             values_fill = 0) %>% 
+  ggplot() +
+  geom_bar(aes(x = date, y = count, fill = nrm_referral),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 45)) +
+  scale_fill_manual(values = c("lightgrey", "#99CCCC", "#9999CC"))
+birm_nrm
+
+ggsave(filename = "Output/Graphs/birm_nrm.png", birm_nrm)
+
+
+
+birm_wm_cl <- cl_19to22 %>%
+  rename(end_period_year = year) %>% 
+  filter(!is.na(la),
+         end_period_year != 0) %>% 
+  mutate(count = 1,
+         la = ifelse(la == "Birmingham", la, "Not Birmingham")) %>% 
+  group_by(date, la) %>% 
+  summarise(count = sum(count)) %>% 
+  pivot_wider(names_from = la,
+              values_from = count,
+              values_fill = 0) %>% 
+  ggplot() +
+  geom_line(aes(x = date, y = Birmingham)) +
+  geom_line(aes(x = date, y = Birmingham+`Not Birmingham`)) +
+  geom_ribbon(aes(x = date, ymin=Birmingham, ymax=Birmingham+`Not Birmingham`), fill = "#91A1BAFF", alpha=0.25) +
+  geom_ribbon(aes(x = date, ymin=0,ymax=Birmingham), alpha=0.5) +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                   expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0))
+
+birm_wm_cl
+# +
+  # geom_line(aes(x = end_period_year, y = pc, group = interaction(age, neet), colour = interaction(age, neet))) +
+  scale_color_manual(values = c("#3299FFFF"),
+                     guide = F) +
+  scale_fill_manual(values = c("#3299FFFF"),
+                    guide = F) +
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 cl_19to22 %>%
   filter(year != 0) %>%
@@ -13,6 +172,12 @@ cl_19to22 %>%
   scale_fill_viridis(option="turbo", discrete = TRUE, direction = -1,
                      begin = 0.1,
                      end = 0.9)
+
+
+
+
+
+
 
 cl_19to22 %>%
   filter(year != 0) %>%

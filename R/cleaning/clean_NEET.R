@@ -30,6 +30,24 @@ neet_19to23 <- n_data %>%
   mutate(gender = reconcile_gender(gender))
 
 
+neet_19to23 <- n_data %>% 
+  filter(la_name == "Birmingham",
+         Characteristic_grouping == "gender",
+         Age != "16-17") %>% 
+  mutate(end_period_month = "December",
+         avgNEET = as.numeric(avgNEET),
+         `Not NEET` = as.numeric(avgcohort) -avgNEET) %>% 
+  select(-c(time_identifier:la_name, avgNK, avgcohort, Characteristic_grouping, avgNEETNK, NEETNKprop:annual_change_NEETNK)) %>% 
+  rename(end_period_year = time_period,
+         gender = Characteristic,
+         age = Age,
+         NEET = avgNEET) %>% 
+    pivot_longer(c(NEET, `Not NEET`),
+                 names_to = "neet",
+                 values_to = "count") %>% 
+  mutate(gender = reconcile_gender(gender))
+
+
 neet_levels_19to23 <- n_data %>% 
 filter(la_name == "Birmingham",
        Characteristic_grouping == "gender",
@@ -74,6 +92,12 @@ filter(la_name == "Birmingham",
                      count_avg_tot = avgcohort) %>% 
               mutate(gender = reconcile_gender(gender)) %>% 
               mutate(level = "West Midlands (region)"))
+
+
+
+
+
+
 
 
 n_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/participation-in-education-training-and-neet-age-16-to-17-by-local-authority_2022-23/data/ud_participation_characteristics.csv")

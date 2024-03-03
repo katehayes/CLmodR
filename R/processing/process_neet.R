@@ -89,17 +89,51 @@ neet_rate <- neet_12to23_age %>%
   mutate(neet_rate = na.approx(neet_rate)) %>% 
   filter(neet == "NEET")
 
+neet_rate <- neet_11to23_age %>% 
+  group_by(end_period_year, age) %>% 
+  mutate(neet_rate = count/sum(count)) %>% 
+  ungroup() %>% 
+  bind_rows(data_frame(end_period_year = c(2017, 2017, 2017, 2017),
+                       age = c(16,17,16,17),
+                       neet = c("NEET", "NEET", "Not NEET", "Not NEET"))) %>% 
+  group_by(age, neet) %>% 
+  arrange(end_period_year) %>% 
+  mutate(neet_rate = na.approx(neet_rate)) %>% 
+  filter(neet == "NEET")
+
+
 
 neet_rate_bygen <- gender_pc %>% 
+  ungroup() %>% 
+  mutate(genage = paste(gender, age)) %>% 
   filter(neet == "NEET") %>% 
+  select(end_period_year, genage, neet_rate) %>% 
+  bind_rows(neet_rate %>% 
+              ungroup() %>% 
+              rename(genage = age) %>% 
+              mutate(genage = as.character(genage)) %>% 
+              select(end_period_year, genage, neet_rate)) %>% 
+
   ggplot()+
-  geom_line(aes(x = end_period_year, y = neet_rate, group = gender, colour = gender)) +
-  geom_line(data = neet_rate, aes(x = end_period_year, y = neet_rate)) +
-  facet_grid(~age)
+  geom_line(aes(x = end_period_year, y = neet_rate, group = genage, colour = genage)) +
+  scale_color_manual(values = c("black", "black", "#3299FFFF", "#0554AE", "#FF927B", "#C53E21")) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.085),
+                     expand = c(0,0)) +
+  scale_x_continuous(limits = c(2009.5, 2023.5),
+                     expand = c(0,0),
+                     name = "", 
+                     breaks = c(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
+                     labels = c("2010","2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"))
+
+
+
 neet_rate_bygen
 ggsave(filename = "output/graphs/neet_rate_bygen.png", neet_rate_bygen)
 
-
+# , "#A61F02
 
 check <- gender_pc %>% 
   select(-count) %>% 

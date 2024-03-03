@@ -1,6 +1,33 @@
 # 1721A_Attachment.xlsx < A NEW FOI
 
 
+
+
+
+a_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/arrests-open-data-tables-ppp-2e (1).csv")
+
+check <- a_data %>% 
+  filter(Force.Name == "West Midlands",
+         Age.group %in% c("10 - 17 years", "Under 10 years"),
+         Financial.Year %in% c("2019/20", "2020/21")) %>% 
+  group_by(Ethnic.Group..self.defined., Financial.Year, Age.group, Gender) %>% 
+  summarise(Arrests = sum(as.numeric(Arrests))) %>% 
+  ungroup() %>% 
+  group_by(Ethnic.Group..self.defined.,  Financial.Year) %>%
+  summarise(Arrests = sum(as.numeric(Arrests))) %>% 
+  # group_by(Gender, Financial.Year) %>% 
+  # summarise(Arrests = sum(as.numeric(Arrests)))
+  ungroup() %>% 
+  group_by(Financial.Year) %>%
+  mutate(pc = Arrests/sum(Arrests))
+  
+  
+  
+  
+  
+  distinct(Ethnic.Group..self.defined.)
+
+
 a_data <- read_xlsx("/Users/katehayes/temp_data/arrests-open-data-tables-mar22.xlsx", sheet = 3)
 
 arrest_data <- a_data %>%

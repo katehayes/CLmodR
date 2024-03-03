@@ -216,9 +216,14 @@ check <- jsonlite::fromJSON("https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgi
   ed_data <- bind_rows(ed_1000, ed_2000)
   save(ed_data, file = "Output/Data/Scraped/ed_data.Rdata")
 
+  
+  NRM_Data_WMP_V2
+  
+
+  
   # all of the national referral mechamism cases with full attributes?? "NRM_Data_WMP_V2" is null. NRM_Collated (Old) is also not in use
   nrm_1000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/National_Referral_Mechanism_Dashboard/FeatureServer/0/query?where=0%3D0&outFields=%2A&f=json',
-                             simplifyDataFrame=T) %>%
+                             simplifyDataFrame=T)  %>%
     .$features %>%
     unnest(cols = attributes)
 
@@ -293,10 +298,53 @@ check <- jsonlite::fromJSON("https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgi
     .$features %>%
     unnest(cols = attributes)
 
+  
+  # took this on the 3rd of march 24
+  missing_10000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Missing_Collated/FeatureServer/0/query?where=ObjectId>9000&0%3D0&outFields=%2A&f=json',
+                                     simplifyDataFrame=T) %>%
+    .$features %>%
+    unnest(cols = attributes)
+  
+  
+  missing_11000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Missing_Collated/FeatureServer/0/query?where=ObjectId>10000&0%3D0&outFields=%2A&f=json',
+                                      simplifyDataFrame=T) %>%
+    .$features %>%
+    unnest(cols = attributes)
+  
+  
+  missing_12000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Missing_Collated/FeatureServer/0/query?where=ObjectId>11000&0%3D0&outFields=%2A&f=json',
+                                      simplifyDataFrame=T) %>%
+    .$features %>%
+    unnest(cols = attributes)
+  
+  
+  missing_13000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Missing_Collated/FeatureServer/0/query?where=ObjectId>12000&0%3D0&outFields=%2A&f=json',
+                                      simplifyDataFrame=T) %>%
+    .$features %>%
+    unnest(cols = attributes)
+  
+  
+  missing_14000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Missing_Collated/FeatureServer/0/query?where=ObjectId>13000&0%3D0&outFields=%2A&f=json',
+                                      simplifyDataFrame=T) %>%
+    .$features %>%
+    unnest(cols = attributes)
+  
+  missing_15000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Missing_Collated/FeatureServer/0/query?where=ObjectId>14000&0%3D0&outFields=%2A&f=json',
+                                      simplifyDataFrame=T) %>%
+    .$features %>%
+    unnest(cols = attributes)
+  
+  
+  
   missing_data <- bind_rows(missing_1000, missing_2000, missing_3000, missing_4000, missing_5000, missing_6000, missing_7000, missing_8000, missing_9000)
   save(missing_data, file = "Output/Data/Scraped/missing_data.Rdata")
 
 
+  missing_noflag_data <- bind_rows(missing_1000, missing_2000, missing_3000, missing_4000, missing_5000, missing_6000, missing_7000, missing_8000, missing_9000,
+                            missing_10000, missing_11000, missing_12000, missing_13000, missing_14000, missing_15000)
+  save(missing_noflag_data, file = "Output/Data/Scraped/missing_noflag_data.Rdata")
+  
+  
 # the couple of interventions:
   # expect respect
   er_data <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/ExpectRespect/FeatureServer/0/query?where=0%3D0&outFields=%2A&f=json',
@@ -346,5 +394,77 @@ https://www.wmvru-sna.org/map/risk/additionalinfo/overallriskindex/notspecified/
 
 
 tm_2000 <- jsonlite::fromJSON('https://shoothillukwestgeneral.blob.core.windows.net/westmidsvru/tiles/wmmsoas/v2/11/1012/672.pbf')
+
+
+
+
+
+
+project <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/9_June_Dashboard_1/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                    simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+
+project_1000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/9_June_Dashboard_1/FeatureServer/0/query?where=ObjectId>1000&0%3D0&outFields=%2A&f=json',
+                                         simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+
+vru_project_data_nov <- bind_rows(project, project_1000)
+save(vru_project_data_nov, file = "Output/Data/Scraped/vru_project_data_nov.Rdata")
+
+
+
+# march 24
+
+
+AssetPlusSYVCharts <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/AssetPlusSYVCharts/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+save(AssetPlusSYVCharts, file = "Output/Data/Scraped/AssetPlusSYVCharts.Rdata")
+
+YJS_Dashboard_Public_v2 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/YJS_Dashboard_Public_v2/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                         simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+save(YJS_Dashboard_Public_v2, file = "Output/Data/Scraped/YJS_Dashboard_Public_v2.Rdata")
+
+
+
+YJSOffenceDashboard <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/YJSOffenceDashboard/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+YJSOffenceDashboard_1000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/YJSOffenceDashboard/FeatureServer/0/query?where=ObjectId>1000&0%3D0&outFields=%2A&f=json',
+                                          simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+YJSOffenceDashboard_2000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/YJSOffenceDashboard/FeatureServer/0/query?where=ObjectId>2000&0%3D0&outFields=%2A&f=json',
+                                               simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+YJSOffenceDashboard_3000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/YJSOffenceDashboard/FeatureServer/0/query?where=ObjectId>3000&0%3D0&outFields=%2A&f=json',
+                                               simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+YJSOffenceDashboard_10000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/YJSOffenceDashboard/FeatureServer/0/query?where=ObjectId>10000&0%3D0&outFields=%2A&f=json',
+                                               simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
 
 
