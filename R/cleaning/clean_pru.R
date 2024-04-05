@@ -4,7 +4,11 @@
 # a) total headcount b) most expansive definition of FSM eligibility
 
 
+check <- cl_19to22 %>% 
+  distinct(ethnicity, eth_detail)
 
+check <- arrests_07to22_reason_age_gender_ethnicity %>% 
+  distinct(ethnicity)
 
 
 # going to have children by age and sex, by school

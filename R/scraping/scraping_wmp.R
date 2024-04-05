@@ -455,16 +455,81 @@ YJSOffenceDashboard_2000 <- jsonlite::fromJSON('https://services9.arcgis.com/juE
   unnest(cols = c(attributes))
 
 
-YJSOffenceDashboard_3000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/YJSOffenceDashboard/FeatureServer/0/query?where=ObjectId>3000&0%3D0&outFields=%2A&f=json',
-                                               simplifyDataFrame=T) %>%
+YJSOffenceDashboard <- bind_rows(YJSOffenceDashboard, YJSOffenceDashboard_1000, YJSOffenceDashboard_2000)
+save(YJSOffenceDashboard, file = "Output/Data/Scraped/YJSOffenceDashboard.Rdata")
+
+
+
+
+SNA_MoJDfE <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/SNA_MoJDfE/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                          simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+save(SNA_MoJDfE, file = "Output/Data/Scraped/SNA_MoJDfE.Rdata")
+
+County_Lines_Chartsv2 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/County_Lines_Chartsv2/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                 simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+save(County_Lines_Chartsv2, file = "Output/Data/Scraped/County_Lines_Chartsv2.Rdata")
+
+CL_Esri_LA_IMD_Charts <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/CL_Esri_LA_IMD_Charts/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                            simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+save(CL_Esri_LA_IMD_Charts, file = "Output/Data/Scraped/CL_Esri_LA_IMD_Charts.Rdata")
+
+
+County_Lines_Trend <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/County_Lines_Trend/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                            simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+save(County_Lines_Trend, file = "Output/Data/Scraped/County_Lines_Trend.Rdata")
+
+
+NRM_Dashboard <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/NRM_Dashboard/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                         simplifyDataFrame=T) %>%
   .$features %>%
   unnest(cols = c(attributes))
 
 
-YJSOffenceDashboard_10000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/YJSOffenceDashboard/FeatureServer/0/query?where=ObjectId>10000&0%3D0&outFields=%2A&f=json',
-                                               simplifyDataFrame=T) %>%
+NRM_Dashboard_1000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/NRM_Dashboard/FeatureServer/0/query?where=ObjectId>1000&0%3D0&outFields=%2A&f=json',
+                                                             simplifyDataFrame=T) %>%
   .$features %>%
   unnest(cols = c(attributes))
 
+
+NRM_Dashboard_2000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/NRM_Dashboard/FeatureServer/0/query?where=ObjectId>2000&0%3D0&outFields=%2A&f=json',
+                                         simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+NRM_Dashboard_3000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/NRM_Dashboard/FeatureServer/0/query?where=ObjectId>3000&0%3D0&outFields=%2A&f=json',
+                                         simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+NRM_Dashboard_4000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/NRM_Dashboard/FeatureServer/0/query?where=ObjectId>4000&0%3D0&outFields=%2A&f=json',
+                                         simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+NRM_Dashboard_5000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/NRM_Dashboard/FeatureServer/0/query?where=ObjectId>5000&0%3D0&outFields=%2A&f=json',
+                                         simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+NRM_Dashboard <- bind_rows(NRM_Dashboard, NRM_Dashboard_1000, NRM_Dashboard_2000, NRM_Dashboard_3000,
+                           NRM_Dashboard_4000, NRM_Dashboard_5000)
+save(NRM_Dashboard, file = "Output/Data/Scraped/NRM_Dashboard.Rdata")
+
+YJSCensusDashboard <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/YJSCensusDashboard/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                            simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+save(YJSCensusDashboard, file = "Output/Data/Scraped/YJSCensusDashboard.Rdata")
 
 

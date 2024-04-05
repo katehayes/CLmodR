@@ -1,16 +1,16 @@
-install.packages("ggrepel")
+# install.packages("ggrepel")
 library(ggrepel)
 
-install.packages("ggpubr")
+# install.packages("ggpubr")
 library(ggpubr)
 
-install.packages("tidyr")
+# install.packages("tidyr")
 library(tidyr)
 
-install.packages("gtable")
+# install.packages("gtable")
 library(gtable)
 
-install.packages("cowplot")
+# install.packages("cowplot")
 library(cowplot)
 
 # general idea is lets look at big picture trends in the sectors that make up the model componants

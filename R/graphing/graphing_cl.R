@@ -273,8 +273,21 @@ cl_categories <- cl_19to22 %>%
   geom_bar(aes(x = date, fill = status),
            stat = "count", position = "stack") +
   facet_wrap(~category, nrow = 2) +
-  scale_fill_manual(values = c("grey", "#99CCCC", "#9999CC"))
+  scale_fill_manual(values = c("grey",  "#EBA07EFF", "#A8554EFF")) +
+  theme_bw() +
+  # scale_x_continuous(name = "", 
+  #                    limits = c(2010.5, 2023.5),
+  #                    expand = c(0,0),
+  #                    breaks = c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
+  #                    labels = c("2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 42),
+                     expand = c(0,0)) +
+  theme(strip.text = element_blank(),
+        legend.position = "none")
 cl_categories
+
+"#B48A2CFF", "#DCD66EFF"
 
 ggsave(filename = "Output/Graphs/birm_cl_category.png", cl_categories)
 

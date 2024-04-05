@@ -147,7 +147,7 @@ check <- gender_pc %>%
 
 
 
-neet <- neet_12to23_age %>% 
+neet <- neet_11to23_age %>% 
   group_by(end_period_year, age) %>% 
   mutate(neet_rate = count/sum(count)) %>% 
   ungroup() %>% 

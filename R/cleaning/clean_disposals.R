@@ -9,7 +9,7 @@ disposal_types <- c("Pre-court", "First-tier", "Community", "Custody")
 # Sheet R.1: Disposals given to young people, by region, 2009/10
 # WEST MIDS LEVEL
 # getting col names and setting disposal types & the disposals within them
-disposal_data <- read_xls("/Users/katehayes/temp_data/New Tables for Website/Regional tables.xls", sheet = 2, skip = 3, n_max = 1, col_names = TRUE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/New Tables for Website (1)/Regional tables.xls", sheet = 2, skip = 3, n_max = 1, col_names = TRUE)
 
 col_names <- disposal_data %>%
   get_colname(dat_type = "disposal")
@@ -20,7 +20,7 @@ col_names <- disposal_data %>%
 # Sheet R.1: Disposals given to young people, by region, 2009/10
 
 # ENG/wales
-disposal_data <- read_xls("/Users/katehayes/temp_data/New Tables for Website/Regional tables.xls", sheet = 2, skip = 7, n_max = 32, col_names = FALSE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/New Tables for Website (1)/Regional tables.xls", sheet = 2, skip = 7, n_max = 32, col_names = FALSE)
 
 disposal0910ew_data <- disposal_data %>%
   clean_disposal_09to14(col_nm = col_names,
@@ -35,7 +35,7 @@ disposal0910ew_data <- disposal_data %>%
 
 
 # WEST MIDS LEVEL
-disposal_data <- read_xls("/Users/katehayes/temp_data/New Tables for Website/Regional tables.xls", sheet = 2, skip = 340, n_max = 32, col_names = FALSE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/New Tables for Website (1)/Regional tables.xls", sheet = 2, skip = 340, n_max = 32, col_names = FALSE)
 
 disposal0910wm_data <- disposal_data %>%
   clean_disposal_09to14(col_nm = col_names,
@@ -56,7 +56,7 @@ disposal0910wm_data <- disposal_data %>%
 # Youth justice annual statistics: 2010 to 2011, Disposals, regionally, 2010 - 11
 
 # ew
-disposal_data <- read_xls("/Users/katehayes/temp_data/disposals-regionally-2010-11.xls", sheet = 1, skip = 4, n_max = 32, col_names = FALSE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/disposals-regionally-2010-11 (1).xls", sheet = 1, skip = 4, n_max = 32, col_names = FALSE)
 
 disposal1011ew_data <- disposal_data %>%
   clean_disposal_09to14(col_nm = col_names,
@@ -72,7 +72,7 @@ disposal1011ew_data <- disposal_data %>%
 # sheet 10 - west midlands
 # WEST MIDS LEVEL
 # exact same strcuture as above so using the above code
-disposal_data <- read_xls("/Users/katehayes/temp_data/disposals-regionally-2010-11.xls", sheet = 10, skip = 4, n_max = 32, col_names = FALSE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/disposals-regionally-2010-11 (1).xls", sheet = 10, skip = 4, n_max = 32, col_names = FALSE)
 
 disposal1011wm_data <- disposal_data %>%
   clean_disposal_09to14(col_nm = col_names,
@@ -85,7 +85,7 @@ disposal1011wm_data <- disposal_data %>%
 
 
 # BIRMINGHAM LEVEL
-disposal_data <- read_xls("/Users/katehayes/temp_data/disposals-regionally-2010-11.xls", sheet = 10, skip = 42, n_max = 32, col_names = FALSE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/disposals-regionally-2010-11 (1).xls", sheet = 10, skip = 42, n_max = 32, col_names = FALSE)
 
 disposal1011b_data <- disposal_data %>%
   clean_disposal_09to14(col_nm = col_names,
@@ -103,7 +103,7 @@ disposal1011b_data <- disposal_data %>%
 
 
 # eng/wales
-disposal_data <- read_xls("/Users/katehayes/temp_data/local-level-data-11-12/Disposals by region 2011-12 v1.1.xls", sheet = 1, skip = 4, n_max = 33, col_names = FALSE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/local-level-data-11-12 (1)/Disposals by region 2011-12 v1.1.xls", sheet = 1, skip = 4, n_max = 33, col_names = FALSE)
 
 disposal_data[6,1] <- "First-tier"
 disposal_data[16,1] <- "Community"
@@ -121,7 +121,7 @@ disposal1112ew_data <- disposal_data %>%
 
 # sheet 10 - west midlands
 # WEST MIDS LEVEL
-disposal_data <- read_xls("/Users/katehayes/temp_data/local-level-data-11-12/Disposals by region 2011-12 v1.1.xls", sheet = 10, skip = 4, n_max = 33, col_names = FALSE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/local-level-data-11-12 (1)/Disposals by region 2011-12 v1.1.xls", sheet = 10, skip = 4, n_max = 33, col_names = FALSE)
 
 disposal1112wm_data <- disposal_data %>%
   clean_disposal_09to14(col_nm = col_names,
@@ -133,7 +133,7 @@ disposal1112wm_data <- disposal_data %>%
   split_disposal_09to14(current_group_types = group_types)
 
 # BIRMINGHAM LEVEL
-disposal_data <- read_xls("/Users/katehayes/temp_data/local-level-data-11-12/Disposals by region 2011-12 v1.1.xls", sheet = 10, skip = 43, n_max = 33, col_names = FALSE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/local-level-data-11-12 (1)/Disposals by region 2011-12 v1.1.xls", sheet = 10, skip = 43, n_max = 33, col_names = FALSE)
 
 disposal1112b_data <- disposal_data %>%
   clean_disposal_09to14(col_nm = col_names,
@@ -241,7 +241,7 @@ disposal1314b_data <- disposal_data %>%
 # excel_sheets("/Users/katehayes/temp_data/local-level-data (1)/Disposal_by_YOT.xls")
 
 # ew
-disposal_data <- read_xls("/Users/katehayes/temp_data/local-level-data (1)/Disposal_by_YOT.xls", sheet = 6, col_names = TRUE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/local-level-data (2)/Disposal_by_YOT.xls", sheet = 6, col_names = TRUE)
 
 disposal1415ew_data <- disposal_data %>%
   clean_disposal_1415_ew() %>%
@@ -251,7 +251,20 @@ check <- disposal1415ew_data[[1]][[2]]
 
 
 
-disposal_data <- read_xls("/Users/katehayes/temp_data/local-level-data (1)/Disposal_by_YOT.xls", sheet = 6, col_names = TRUE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/local-level-data (2)/Disposal_by_YOT.xls", sheet = 6, col_names = TRUE)
+
+disposal_data <- disposal_data %>% 
+  filter(YOT == "Birmingham") %>% 
+  ggplot() +
+  geom_bar(aes(x = Ethn, fill = as.factor(Age2)),
+           stat = "count", position = "dodge") 
+
+check <- disposal_data %>% distinct(Outcome)
+
+# +
+  facet_grid(~Outcome) 
+
+disposal_data 
 
 disposal1415_data <- disposal_data %>%
   clean_disposal_1415() %>%
@@ -259,11 +272,14 @@ disposal1415_data <- disposal_data %>%
 
 check <- disposal1415_data[[1]][[2]]
 
+
+
+
 ########################NEW YEAR ################################################
 # https://www.gov.uk/government/statistics/youth-justice-statistics-2015-to-2016
 
 # EW
-disposal_data <- read_xls("/Users/katehayes/temp_data/local-level-data-2015-to-2016/Disposals_by_YOT.xls", sheet = 6, col_names = TRUE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/local-level-data-2015-to-2016 (1)/Disposals_by_YOT.xls", sheet = 6, col_names = TRUE)
 # col names are not the same as previous year - they're being less careful bc they expect it to be hidden
 
 disposal1516ew_data <- disposal_data %>%
@@ -275,7 +291,7 @@ check <- disposal1516ew_data[[1]][[2]]
 
 
 # excel_sheets("/Users/katehayes/temp_data/local-level-data-2015-to-2016/Disposals_by_YOT.xls")
-disposal_data <- read_xls("/Users/katehayes/temp_data/local-level-data-2015-to-2016/Disposals_by_YOT.xls", sheet = 6, col_names = TRUE)
+disposal_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/local-level-data-2015-to-2016 (1)/Disposals_by_YOT.xls", sheet = 6, col_names = TRUE)
 # col names are not the same as previous year - they're being less careful bc they expect it to be hidden
 
 disposal1516_data <- disposal_data %>%
@@ -295,6 +311,8 @@ disposal1617ew_data <- disposal_data %>%
   clean_and_split_disposal_1617_ew()
 
 check <- disposal1617ew_data[[1]][[2]]
+
+
 
 
 
@@ -365,30 +383,31 @@ save(disposals_10to21, file = "Output/Data/Cleaned/disposals_10to21.Rdata")
 
 
 # SECOND SET OF OUTPUT - CATEGORY BREAKDOWNS FOR THE YEARS THAT ITS POSSIBLE
-disposals_10to17_gender <- bind_rows(disposal0910wm_data[[2]], disposal1011wm_data[[2]]) %>%
-  bind_rows(disposal1011b_data[[2]]) %>%
+# disposals_10to17_gender 
+disposals <- bind_rows(disposal1011b_data[[2]], disposal1011wm_data[[2]]) %>%
   bind_rows(disposal1112wm_data[[2]]) %>%
   bind_rows(disposal1112b_data[[2]]) %>%
-  bind_rows(disposal1213wm_data[[2]]) %>%
-  bind_rows(disposal1213b_data[[2]]) %>%
-  bind_rows(disposal1314wm_data[[2]]) %>%
-  bind_rows(disposal1314b_data[[2]]) %>%
+  # bind_rows(disposal1213wm_data[[2]]) %>%
+  # bind_rows(disposal1213b_data[[2]]) %>%
+  # bind_rows(disposal1314wm_data[[2]]) %>%
+  # bind_rows(disposal1314b_data[[2]]) %>%
   bind_rows(disposal1415_data[[1]][[2]]) %>%
   bind_rows(disposal1415_data[[2]][[2]]) %>%
   bind_rows(disposal1516_data[[1]][[2]]) %>%
   bind_rows(disposal1516_data[[2]][[2]]) %>%
-  bind_rows(disposal1617_data[[2]]) %>%
+  # bind_rows(disposal1617_data[[2]]) %>%
   bind_rows(disposal0910ew_data[[2]]) %>%
   bind_rows(disposal1011ew_data[[2]]) %>%
   bind_rows(disposal1112ew_data[[2]]) %>%
-  bind_rows(disposal1213ew_data[[2]]) %>%
-  bind_rows(disposal1314ew_data[[2]]) %>%
+  # bind_rows(disposal1213ew_data[[2]]) %>%
+  # bind_rows(disposal1314ew_data[[2]]) %>%
   bind_rows(disposal1415ew_data[[1]][[2]]) %>%
   bind_rows(disposal1516ew_data[[1]][[2]]) %>%
-  bind_rows(disposal1617ew_data[[1]][[2]]) %>%
+  # bind_rows(disposal1617ew_data[[1]][[2]]) %>%
   filter(level != "Wales") %>%
   assign_disp_cat() %>%
-  mutate(gender = reconcile_gender(gender))
+  mutate(gender = reconcile_gender(gender)) %>% 
+  distinct(disposal, disposal_type)
 
 
 save(disposals_10to17_gender, file = "Output/Data/Cleaned/disposals_10to17_gender.Rdata")

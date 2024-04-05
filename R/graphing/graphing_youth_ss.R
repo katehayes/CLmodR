@@ -1,5 +1,13 @@
 load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/stop_search_1214to0322.Rdata")
 
+
+# this is the link from the police data website
+lsoa_shape <- st_read("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/THdata/Lower_layer_super_output_areas_(E+W)_2011_Boundaries_(Full_Extent)_V2/LSOA_2011_EW_BFE_V2.shp")
+# lsoa2LA <- read.csv("/Users/katehayes/THdata/OAs_to_LSOAs_to_MSOAs_to_LEP_to_LAD_(December_2022)_Lookup_in_England_(V2).csv")
+lsoa2LA <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/THdata/LSOA11_WD21_LAD21_EW_LU_V2.xlsx")
+w_shape <- st_read("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/Wards_December_2022_Boundaries_UK_BFC_-3416072881830331872 (1)/WD_DEC_2022_UK_BFC.shp")
+
+
 lsoa_list <- lsoa2LA %>%
   filter(LAD21NM %in% LAs_in_WMPF_list) %>%
   select(LSOA11NM, WD21NM) %>%
@@ -90,6 +98,328 @@ ss_map
 
 ggsave(filename = "Output/Graphs/ss_map.png", ss_map)
 
+
+
+
+######------######------######------######------######------######------######------
+######------######-new attempt at the geospatial sthings below ######------######------######------
+######------######------######------######------######------######------######------
+
+ss_map <- ss_birm %>%
+  st_drop_geometry() %>%
+  group_by(lsoa, ward, lsoa_shape) %>%
+  mutate(count = 1) %>%
+  summarise(count = sum(count)) %>% 
+  # filter(!(lsoa %in% c("Birmingham 138A", "Birmingham 050E", "Birmingham 135C", "Birmingham 050F"))) %>%
+  st_as_sf() %>%
+  st_transform(crs = 4326) %>%
+  bind_rows(add_missing_lsoa(ss_data = ss_birm,
+                             full_lsoa_list = birm_lsoa_list,
+                             full_lsoa_shapes = lsoa_shape)) %>%
+  ggplot(aes(fill=count)) +
+  geom_sf(colour="white") +
+  scale_fill_viridis(option = "turbo",
+                     begin = 0,
+                     end = 1)
+
+ss_map
+ggsave(filename = "Output/Graphs/ss_map.png", ss_map)
+
+
+
+ss_adult_child <- stop_search_1214to0322 %>%
+  mutate(a_c = ifelse(age %in% c("under 10", "10-17", "Oct-17"), "Child", "Adult"),
+         a_c = ifelse(is.na(age), "Unknown", a_c),
+         a_c = factor(a_c, levels = c("Unknown", "Child", "Adult")),
+         # month = lubridate::floor_date(short_date, "month")) %>% 
+         month = as.yearmon(short_date)) %>% 
+  mutate(count = 1) %>% 
+  group_by(month, a_c) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = month, y = count, fill = a_c),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 3500)) +
+  scale_fill_manual(values = c("lightgrey", "#99CCCC", "#9999CC"))
+
+ss_adult_child
+   
+ggsave(filename = "Output/Graphs/ss_adult_child.png", ss_adult_child)
+
+
+ss_adult_child_birm <- stop_search_1214to0322 %>%
+  filter(LA == "Birmingham") %>% 
+  mutate(a_c = ifelse(age %in% c("under 10", "10-17", "Oct-17"), "Child", "Adult"),
+         a_c = ifelse(is.na(age), "Unknown", a_c),
+         a_c = factor(a_c, levels = c("Unknown", "Child", "Adult")),
+         # month = lubridate::floor_date(short_date, "month")) %>% 
+         month = as.yearmon(short_date)) %>% 
+  mutate(count = 1) %>% 
+  group_by(month, a_c) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = month, y = count, fill = a_c),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 3500)) +
+  scale_fill_manual(values = c("lightgrey", "#99CCCC", "#9999CC"))
+
+ss_adult_child_birm
+
+ggsave(filename = "Output/Graphs/ss_adult_child_birm.png", ss_adult_child_birm)
+
+
+
+ss_adult_child_pc <- stop_search_1214to0322 %>%
+  mutate(a_c = ifelse(age %in% c("under 10", "10-17", "Oct-17"), "Child", "Adult"),
+         a_c = ifelse(is.na(age), "Unknown", a_c),
+         a_c = factor(a_c, levels = c("Unknown", "Child", "Adult")),
+         # month = lubridate::floor_date(short_date, "month")) %>% 
+         month = as.yearmon(short_date)) %>% 
+  mutate(count = 1) %>% 
+  group_by(month, a_c) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(month) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  ggplot() +
+  geom_line(aes(x = month, y = pc, group = a_c, color = a_c)) +
+  scale_color_manual(values = c("lightgrey", "#99CCCC", "#9999CC"))+
+                     # guide = FALSE) +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 1))
+
+
+ss_adult_child_pc
+
+ggsave(filename = "Output/Graphs/ss_adult_child_pc.png", ss_adult_child_pc)
+
+
+
+ss_birm_dw <- stop_search_1214to0322 %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(month = as.yearmon(short_date),
+         reason_dw = ifelse(reason == "Controlled drugs", reason, "Other"),
+         reason_dw = ifelse(reason == "Offensive weapons", reason, reason_dw),
+         reason_dw = factor(reason_dw, levels = c("Other", "Offensive weapons",  "Controlled drugs"))) %>% 
+  mutate(count = 1) %>% 
+  group_by(month, reason_dw) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = month, y = count, fill = reason_dw),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 600)) +
+  scale_fill_manual(values = c("grey",  "#EBA07EFF", "#A8554EFF"))
+
+ss_birm_dw
+
+ggsave(filename = "Output/Graphs/ss_birm_dw.png", ss_birm_dw)
+
+ss_birm <- stop_search_1214to0322 %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(month = as.yearmon(short_date),
+         reason_dw = ifelse(reason == "Controlled drugs", reason, "Other"),
+         reason_dw = ifelse(reason == "Offensive weapons", reason, reason_dw),
+         reason_dw = factor(reason_dw, levels = c("Other", "Offensive weapons",  "Controlled drugs"))) %>% 
+  mutate(count = 1) %>% 
+  group_by(month, reason_dw) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_line(aes(x = month, y = count, group = reason_dw, color = reason_dw)) +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 500)) +
+  scale_color_manual(values = c("grey",  "#EBA07EFF", "#A8554EFF"))
+
+ss_birm
+
+
+
+check <- stop_search_1214to0322 %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  distinct(outcome)
+
+
+
+
+
+ss_birm_outcome <- stop_search_1214to0322 %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(month = as.yearmon(short_date),
+         outcome_yn = ifelse(outcome %in% c("Nothing found - no further action",
+                                           "A no further action disposal"), "No further action", "Other"),
+         outcome_yn = ifelse(is.na(outcome), "Unknown", outcome_yn)) %>% 
+         # outcome_yn = factor(reason_dw, levels = c("Other", "Offensive weapons",  "Controlled drugs"))) %>% 
+  mutate(count = 1) %>% 
+  group_by(month, outcome_yn) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = month, y = count, fill = outcome_yn),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 600)) +
+  scale_fill_manual(values = c( "#EBA07EFF", "#A8554EFF", "grey"))
+
+ss_birm_outcome
+
+ggsave(filename = "Output/Graphs/ss_birm_outcome.png", ss_birm_outcome)
+
+
+# ss_birm_outcome_link <- stop_search_1214to0322 %>%
+#   filter(LA == "Birmingham",
+#          age %in% c("under 10", "10-17", "Oct-17"),
+#          !(outcome %in% c("Nothing found - no further action",
+#                          "A no further action disposal")),
+#          !is.na(outcome)) %>% 
+#   mutate(month = as.yearmon(short_date),
+#          reason_dw = ifelse(reason == "Controlled drugs", reason, "Other"),
+#          reason_dw = ifelse(reason == "Offensive weapons", reason, reason_dw),
+#          reason_dw = factor(reason_dw, levels = c("Other", "Offensive weapons",  "Controlled drugs"))) %>% 
+#   mutate(count = 1) %>% 
+#   group_by(month, reason_dw) %>% 
+#   summarise(count = sum(count)) %>% 
+#   ggplot() +
+#   geom_bar(aes(x = month, y = count, fill = reason_dw),
+#            stat = "identity", position = "stack") +
+#   theme_bw() +
+#   scale_x_continuous(name = "", 
+#                      expand = c(0,0)) +
+#   scale_y_continuous(name = "",
+#                      expand = c(0,0),
+#                      limits = c(0, 60)) +
+#   scale_fill_manual(values = c( "#EBA07EFF", "#A8554EFF", "grey"))
+# 
+# ss_birm_outcome_link
+
+
+
+what percentage of drug weapons and other are NFA
+what percentage of drug weapons and other are link
+
+check <- stop_search_1214to0322 %>%
+  distinct(link)
+
+
+# check <- stop_search_1214to0322 %>%
+#   mutate(month = as.yearmon(short_date),
+#          reason_dw = ifelse(reason == "Controlled drugs", reason, "Other"),
+#           reason_dw = ifelse(reason == "Offensive weapons", reason, reason_dw),
+#           reason_dw = factor(reason_dw, levels = c("Other", "Offensive weapons",  "Controlled drugs"))) %>% 
+#   filter(LA == "Birmingham",
+#          age %in% c("under 10", "10-17", "Oct-17"),
+#          reason_dw == "Other",
+#          month > "Dec 2018") %>% 
+#   distinct(link)
+
+ss_birm_dw_outcome <- stop_search_1214to0322 %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(month = as.yearmon(short_date),
+         link_yn = ifelse(link %in% c("True", "TRUE"), "Link - Yes", "No"),
+         link_yn = ifelse(is.na(outcome), "Unknown", link_yn)) %>% 
+  mutate(count = 1) %>% 
+  group_by(month, link_yn) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(month) %>% 
+  mutate(pc_link = count/sum(count)) %>% 
+  ungroup() %>% 
+  ggplot() +
+  geom_line(aes(x = month, y = pc_link, group = link_yn, color = link_yn)) +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 1)) +
+  scale_colour_manual(values = c("grey",  "#EBA07EFF", "#A8554EFF"))
+
+ss_birm_dw_outcome
+
+
+ss_birm_dw_outcome <- stop_search_1214to0322 %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17"),
+         !is.na(reason)) %>% 
+  mutate(month = as.yearmon(short_date),
+         reason_dw = ifelse(reason == "Controlled drugs", reason, "Other"),
+         reason_dw = ifelse(reason == "Offensive weapons", reason, reason_dw),
+         reason_dw = factor(reason_dw, levels = c("Other", "Offensive weapons",  "Controlled drugs")),
+         outcome_yn = ifelse(outcome %in% c("Nothing found - no further action",
+                                            "A no further action disposal"), "No", "Outcome - Yes"),
+         outcome_yn = ifelse(is.na(outcome), "Unknown", outcome_yn),
+         link_yn = ifelse(link %in% c("True", "TRUE"), "Link - Yes", "No"),
+         link_yn = ifelse(is.na(outcome), "Unknown", link_yn)) %>% 
+  mutate(count = 1) %>% 
+  group_by(month, reason_dw, outcome_yn) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(month, reason_dw) %>% 
+  mutate(pc = count/sum(count)) %>%
+  ungroup() %>% 
+  filter(outcome_yn == "Outcome - Yes") %>% 
+  ggplot() +
+  geom_line(aes(x = month, y = pc), color = "blue") +
+  geom_line(data = stop_search_1214to0322 %>%
+              filter(LA == "Birmingham",
+                     age %in% c("under 10", "10-17", "Oct-17")) %>% 
+              mutate(month = as.yearmon(short_date),
+                     reason_dw = ifelse(reason == "Controlled drugs", reason, "Other"),
+                     reason_dw = ifelse(reason == "Offensive weapons", reason, reason_dw),
+                     reason_dw = factor(reason_dw, levels = c("Other", "Offensive weapons",  "Controlled drugs")),
+                     outcome_yn = ifelse(outcome %in% c("Nothing found - no further action",
+                                                        "A no further action disposal"), "No", "Outcome - Yes"),
+                     outcome_yn = ifelse(is.na(outcome), "Unknown", outcome_yn),
+                     link_yn = ifelse(link %in% c("True", "TRUE"), "Link - Yes", "No"),
+                     link_yn = ifelse(is.na(outcome), "Unknown", link_yn)) %>% 
+              mutate(count = 1) %>% 
+              group_by(month, reason_dw, link_yn) %>% 
+              summarise(count = sum(count)) %>% 
+              ungroup() %>% 
+              group_by(month, reason_dw) %>% 
+              mutate(pc = count/sum(count)) %>%
+              ungroup() %>% 
+              filter(link_yn == "Link - Yes"),
+            aes(x = month, y = pc), color = "red") +
+  facet_grid(~reason_dw) +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 0.65)) 
+
+ss_birm_dw_outcome
+ggsave(filename = "Output/Graphs/ss_birm_dw_outcome.png", ss_birm_dw_outcome)
 
 ######------######------######------######------######------######------######------
 ######------######-old attempt at the geospatial sthings below ######------######------######------

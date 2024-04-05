@@ -18,8 +18,8 @@ library(sf)
 library(lubridate)
 
 # install.packages("waffle")
-remotes::install_github("hrbrmstr/waffle")
-library(waffle)
+# remotes::install_github("hrbrmstr/waffle")
+# library(waffle)
 
 # install.packages("waffle", repos = "https://cinc.rud.is")
 

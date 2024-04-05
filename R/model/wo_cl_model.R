@@ -1785,12 +1785,19 @@ sep_model = odin::odin({
   deriv(EC3S2_17[]) <- age_up*EC3S2_16_lag[i] - age_up*EC3S2_17_lag[i] + f[i]*IC3S2_17[i] - r[i]*EC3S2_17[i] + n2r[i]*n2care_e_17[i]*EC2S2_17[i] + p2r[i]*p2care[i]*EC4S2_17[i] + nr2r[i]*end_nr[i]*EC2S2_17[i] - (r2nr[i] + r2p[i])*end_res[i]*EC3S2_17[i] + m2neet_ec3_17[i]*EC3S1_17[i] - neet2m_e[i]*EC3S2_17[i] 
   deriv(EC4S2_17[]) <- age_up*EC4S2_16_lag[i] - age_up*EC4S2_17_lag[i] + f[i]*IC4S2_17[i] - r[i]*EC4S2_17[i] + nr2p[i]*end_nr[i]*EC2S2_17[i] + r2p[i]*end_res[i]*EC3S2_17[i] - p2care[i]*EC4S2_17[i] + m2neet_ec4_17[i]*EC4S1_17[i] - neet2m_e[i]*EC4S2_17[i] 
   
+  
+ 
+  
+  
+  
+  
+  
+  
   },
 target = 'c')  
 
 
-pars <- list(turn10 = c(100,100),
-             pc_incl = 0.7,
+pars <- list(pc_incl = 0.7,
              pc_excl = 0.3,
              
              t10_ic1s1 = c(0.01,0.01),
