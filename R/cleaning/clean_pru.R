@@ -22,7 +22,13 @@ check <- arrests_07to22_reason_age_gender_ethnicity %>%
 
 
 
-s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-hayeska@tcd.ie/My Drive/temp_data/spc_school_level_underlying_data_22.csv")
+s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/spc_school_level_underlying_data_22 (1).csv")
+
+check22 <- s_data %>% 
+  filter(la_name == "Birmingham") %>% 
+  distinct(School.Name, Academy_flag, Phase.type.grouping, `TypeOfEstablishment..name.`) %>% 
+  mutate(end_period_year = 2022)
+
 
 # s_data <- read.csv("/Users/katehayes/temp_data/spc_school_level_underlying_data_22.csv")
 
@@ -131,8 +137,16 @@ pru_data_22 <- pru_ptg %>%
 # https://explore-education-statistics.service.gov.uk/find-statistics/school-pupils-and-their-characteristics/2020-21
 
 
-s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-hayeska@tcd.ie/My Drive/temp_data/spc_school_level_underlying_data_220216.csv")
+s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/spc_school_level_underlying_data_220216.csv")
 # s_data <- read.csv("/Users/katehayes/temp_data/spc_school_level_underlying_data_220216.csv")
+
+check21 <- s_data %>% 
+  filter(la_name == "Birmingham") %>% 
+  distinct(School.Name, Academy_flag, Phase.type.grouping, `TypeOfEstablishment..name.`) %>% 
+  mutate(end_period_year = 2021)
+
+
+
 
 pru_data_21 <- s_data %>%
   mutate(across(everything(), ~ifelse(.x %in% c("z", ":"), NA, .x))) %>%
@@ -237,6 +251,15 @@ pru_data_21 <- pru_ptg %>%
 # spc_school_level_underlying_data.csv
 s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/spc_school_level_underlying_data.csv")
 # s_data <- read.csv("/Users/katehayes/temp_data/spc_school_level_underlying_data.csv")
+
+check20 <- s_data %>% 
+  filter(LA.name == "Birmingham") %>% 
+  distinct(School.Name, Academy_flag, Phase.type.grouping, `TypeOfEstablishment..name.`) %>% 
+  mutate(end_period_year = 2020)
+
+
+
+
 
 pru_data_20 <- s_data %>%
   mutate(across(everything(), ~ifelse(.x == ":", NA, .x))) %>%
@@ -364,6 +387,9 @@ pru_data_20 <- pru_ptg %>%
 # Schools_Pupils_and_their_Characteristics_2019_Underlying_Data/Schools_Pupils_and_their_Characteristics_2019_pupil_characteristics_UD.csv
 s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/Schools_Pupils_and_their_Characteristics_2019_Underlying_Data (1)/Schools_Pupils_and_their_Characteristics_2019_pupil_characteristics_UD.csv")
 # s_data <- read.csv("/Users/katehayes/temp_data/Schools_Pupils_and_their_Characteristics_2019_Underlying_Data/Schools_Pupils_and_their_Characteristics_2019_pupil_characteristics_UD.csv")
+
+
+
 
 pru_data_19 <- s_data %>%
   mutate(across(everything(), ~ifelse(.x == "..", NA, .x))) %>%

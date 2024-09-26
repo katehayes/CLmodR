@@ -1,3 +1,485 @@
+
+mutate(reason_dw = ifelse(reason == "Controlled drugs", reason, "Other"),
+       reason_dw = ifelse(reason == "Offensive weapons", reason, reason_dw),
+       reason_dw = factor(reason_dw, levels = c("Other", "Offensive weapons",  "Controlled drugs")),
+       outcome_yn = ifelse(outcome %in% c("Nothing found - no further action",
+                                          "A no further action disposal"), "No", "Outcome - Yes"),
+       outcome_yn = ifelse(is.na(outcome), "Unknown", outcome_yn),
+       link_yn = ifelse(link %in% c("True", "TRUE"), "Link - Yes", "No"),
+       link_yn = ifelse(is.na(outcome), "Unknown", link_yn))
+
+
+best_use_outcome <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17"),
+         !is.na(powers)) %>% 
+  mutate(sec60 = ifelse(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+                        "Section 60", "Other power"),
+         sec60 = ifelse(powers == "Police and Criminal Evidence Act 1984 (section 1)",
+                        "PACE", sec60),
+         sec60 = ifelse(powers == "Misuse of Drugs Act 1971 (section 23)",
+                        "Misuse of Drugs", sec60),
+         best_use = ifelse(short_date >= "2019-03-01", "Best use OFF", "Best use ON"),
+         best_use = factor(best_use, levels = c("Best use ON", "Best use OFF"))) %>% 
+  mutate(outcome_yn = ifelse(outcome %in% c("Nothing found - no further action",
+                                            "A no further action disposal"), "No", "Yes"),
+         outcome_yn = ifelse(is.na(outcome), "Unknown", outcome_yn),
+         outcome_yn = factor(outcome_yn, levels = c("Unknown", "No", "Yes"))) %>% 
+  mutate(count = 1) %>% 
+  group_by(sec60, outcome_yn, best_use) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  filter(sec60 != "Other power") %>% 
+  # group_by(sec60, best) %>% 
+  # mutate(pc = count/sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = best_use, y = count, fill = outcome_yn),
+           stat = "identity", position = "fill") +
+  facet_wrap(~sec60) +
+  scale_fill_manual(values = c("lightgrey", "#DCD66EFF", "#B48A2CFF")) +
+ theme_bw()
+  
+
+best_use_outcome
+
+ggsave(filename = "Output/Graphs/best_use_outcome.png", best_use_outcome)
+
+
+best_use_link <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17"),
+         !is.na(powers)) %>% 
+  mutate(sec60 = ifelse(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+                        "Section 60", "Other power"),
+         sec60 = ifelse(powers == "Police and Criminal Evidence Act 1984 (section 1)",
+                        "PACE", sec60),
+         sec60 = ifelse(powers == "Misuse of Drugs Act 1971 (section 23)",
+                        "Misuse of Drugs", sec60),
+         best_use = ifelse(short_date >= "2019-03-01", "Best use OFF", "Best use ON"),
+         best_use = factor(best_use, levels = c("Best use ON", "Best use OFF"))) %>% 
+  mutate(outcome_yn = ifelse(outcome %in% c("Nothing found - no further action",
+                                            "A no further action disposal"), "No", "Yes - Unlinked"),
+         outcome_yn = ifelse(is.na(outcome), "Unknown", outcome_yn),
+         outcome_yn = ifelse(link %in% c("True", "TRUE"), "Yes - Linked", outcome_yn),
+         outcome_yn = factor(outcome_yn, levels = c("Unknown", "No", "Yes - Unlinked", "Yes - Linked"))) %>% 
+  mutate(count = 1) %>% 
+  group_by(sec60, outcome_yn, best_use) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  filter(sec60 != "Other power") %>% 
+  # group_by(sec60, best) %>% 
+  # mutate(pc = count/sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = best_use, y = count, fill = outcome_yn),
+           stat = "identity", position = "fill") +
+  facet_wrap(~sec60) +
+  scale_fill_manual(values = c("lightgrey", "#DCD66EFF", "#B48A2CFF", "#934606")) +
+  theme_bw()
+
+
+best_use_link
+ggsave(filename = "Output/Graphs/best_use_link.png", best_use_link)
+
+
+
+
+
+
+
+
+
+best_use_link <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17"),
+         !is.na(powers)) %>% 
+  mutate(sec60 = ifelse(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+                        "Section 60", "Other power"),
+         sec60 = ifelse(powers == "Police and Criminal Evidence Act 1984 (section 1)",
+                        "PACE", sec60),
+         sec60 = ifelse(powers == "Misuse of Drugs Act 1971 (section 23)",
+                        "Misuse of Drugs", sec60),
+         best_use = ifelse(short_date >= "2019-03-01", "Best use OFF", "Best use ON"),
+         best_use = factor(best_use, levels = c("Best use ON", "Best use OFF"))) %>% 
+  mutate(outcome_yn = ifelse(outcome %in% c("Nothing found - no further action",
+                                            "A no further action disposal"), "No", "Yes"),
+         outcome_yn = ifelse(is.na(outcome), "Unknown", outcome_yn),
+         outcome_yn = factor(outcome_yn, levels = c("Unknown", "No", "Yes"))) %>% 
+  filter(outcome_yn == "Yes") %>% 
+  mutate(link_yn = ifelse(link %in% c("True", "TRUE"), "Linked", link),
+         link_yn = ifelse(link %in% c("False", "FALSE"), "Unlinked", link_yn),
+         link_yn = ifelse(is.na(link), "Unknown", link_yn),
+         link_yn = factor(link_yn, levels = c("Unknown", "Unlinked", "Linked"))) %>% 
+  mutate(count = 1) %>% 
+  group_by(sec60, best_use, link_yn) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  filter(sec60 != "Other power") %>% 
+  # group_by(sec60, best) %>% 
+  # mutate(pc = count/sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = best_use, y = count, fill = link_yn),
+           stat = "identity", position = "fill") +
+  facet_wrap(~sec60) +
+  scale_fill_manual(values = c("lightgrey", "#DCD66EFF", "#B48A2CFF")) +
+  theme_bw()
+  
+  
+best_use_link
+
+
+
+
+
+best_use_power <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17"),
+         !is.na(powers)) %>% 
+  mutate(sec60 = ifelse(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+                        "Section 60", "Other power"),
+         sec60 = ifelse(powers == "Police and Criminal Evidence Act 1984 (section 1)",
+                        "PACE", sec60),
+         sec60 = ifelse(powers == "Misuse of Drugs Act 1971 (section 23)",
+                        "Misuse of Drugs", sec60),
+         sec60 = factor(sec60, levels = c( "Section 60", "Misuse of Drugs", "PACE", "Other power")),
+         best_use = ifelse(short_date >= "2019-03-01", "Best use OFF", "Best use ON"),
+         best_use = factor(best_use, levels = c("Best use ON", "Best use OFF"))) %>% 
+  mutate(outcome_yn = ifelse(outcome %in% c("Nothing found - no further action",
+                                            "A no further action disposal"), "No", "Yes"),
+         outcome_yn = ifelse(is.na(outcome), "Unknown", outcome_yn),
+         outcome_yn = factor(outcome_yn, levels = c("Unknown", "No", "Yes"))) %>% 
+  mutate(count = 1) %>% 
+  group_by(sec60, best_use) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+
+  # group_by(sec60, best) %>% 
+  # mutate(pc = count/sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = best_use, y = count, fill = sec60),
+           stat = "identity", position = "fill") +
+  # scale_fill_manual(values = c("lightgrey", "#DCD66EFF", "#B48A2CFF")) +
+  theme_bw()
+
+best_use_power
+
+
+
+weekly_av <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(week = cut.Date(short_date, breaks = "1 week", labels = FALSE)) %>% 
+  mutate(count = 1) %>% 
+  group_by(week) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = week, y = count),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 260))
+
+weekly_av
+
+
+powers_birm_u17 <- stop_search_1214to0322 %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(sec60 = ifelse(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+                        "Section 60", "Other power"),
+         sec60 = ifelse(powers == "Police and Criminal Evidence Act 1984 (section 1)",
+                        "PACE", sec60),
+         sec60 = ifelse(powers == "Misuse of Drugs Act 1971 (section 23)",
+                        "Misuse of Drugs", sec60),
+         sec60 = factor(sec60, levels = c( "Section 60", "PACE", "Misuse of Drugs", "Other power")),
+         week = cut.Date(short_date, breaks = "1 week", labels = FALSE)) %>% 
+  mutate(count = 1) %>% 
+  group_by(week, sec60) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = week, y = count, fill = sec60),
+           stat = "identity", position = "stack", width=1) +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0),
+                     breaks = seq(6, 422, 52),
+                     labels = c("2015", "2016", "2017", "2018",
+                                "2019", "2020", "2021", "2022", "2023")) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 240)) +
+  scale_fill_manual(values = c("#A8554EFF", "#90CDE7", "#91A1BAFF", "lightgrey")) +
+  theme(legend.position = "none")
+
+powers_birm_u17
+ggsave(filename = "output/graphs/powers_birm_u17.png", powers_birm_u17)
+
+
+
+outcomes_birm_u17 <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(powers != "Criminal Justice and Public Order Act 1994 (section 60)",
+         LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(outcome_yn = ifelse(outcome %in% c("Nothing found - no further action",
+                                            "A no further action disposal"), "No/Unknown", "Yes"),
+         outcome_yn = ifelse(is.na(outcome), "No/Unknown", outcome_yn),
+         week = cut.Date(short_date, breaks = "1 week", labels = FALSE),
+         best_use = ifelse(week >= 223, "Best use OFF", "Best use ON")) %>% 
+  mutate(count = 1) %>% 
+  group_by(week, best_use, outcome_yn) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = outcome_yn,
+              values_from = count,
+              values_fill = 0) %>% 
+  mutate(count = Yes+`No/Unknown`,
+         pc = Yes/count) 
+
+linmod_birm_u17 <- lm(pc ~ count + best_use + count*best_use, data=outcomes_birm_u17)
+
+
+pc_pred_birm_u17 <- outcomes_birm_u17 %>% 
+  mutate(pc_model = predict(linmod_birm_u17, outcomes_birm_u17))
+
+outcomes_reg_birm_u17 <- pc_pred_birm_u17 %>% 
+  ggplot() +
+  geom_point(aes(x = count, y = pc, colour = best_use)) +
+  geom_line(aes(x = count, y = pc_model, colour = best_use))
+
+outcomes_reg_birm_u17
+
+ggsave(filename = "output/graphs/outcomes_reg_birm_u17.png", outcomes_reg_birm_u17)
+
+
+
+outcomes_all <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(powers != "Criminal Justice and Public Order Act 1994 (section 60)") %>% 
+  mutate(outcome_yn = ifelse(outcome %in% c("Nothing found - no further action",
+                                            "A no further action disposal"), "No/Unknown", "Yes"),
+         outcome_yn = ifelse(is.na(outcome), "No/Unknown", outcome_yn),
+         week = cut.Date(short_date, breaks = "1 week", labels = FALSE),
+         best_use = ifelse(week >= 223, "Best use OFF", "Best use ON")) %>% 
+  mutate(count = 1) %>% 
+  group_by(week, best_use, outcome_yn) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = outcome_yn,
+              values_from = count,
+              values_fill = 0) %>% 
+  mutate(count = Yes+`No/Unknown`,
+         pc = Yes/count) 
+
+linmod_all <- lm(pc ~ count + best_use + count*best_use, data=outcomes_all)
+
+
+pc_pred_all <- outcomes_all %>% 
+  mutate(pc_model = predict(linmod_all, outcomes_all))
+
+outcomes_reg_full <- pc_pred_all %>% 
+  ggplot() +
+  geom_point(aes(x = count, y = pc, colour = best_use)) +
+  geom_line(aes(x = count, y = pc_model, colour = best_use))
+
+outcomes_reg_full
+
+ggsave(filename = "output/graphs/outcomes_reg_full.png", outcomes_reg_full)
+
+
+
+outcomes_all <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+         LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(outcome_yn = ifelse(outcome %in% c("Nothing found - no further action",
+                                            "A no further action disposal"), "No/Unknown", "Yes"),
+         outcome_yn = ifelse(is.na(outcome), "No/Unknown", outcome_yn),
+         week = cut.Date(short_date, breaks = "1 week", labels = FALSE),
+         best_use = ifelse(week >= 223, "Best use OFF", "Best use ON")) %>% 
+  mutate(count = 1) %>% 
+  group_by(outcome_yn, best_use) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = outcome_yn,
+              values_from = count,
+              values_fill = 0) %>% 
+  mutate(count = Yes+`No/Unknown`,
+         pc = Yes/count) 
+
+
+regimes <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(powers != "Criminal Justice and Public Order Act 1994 (section 60)",
+         LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(week = cut.Date(short_date, breaks = "1 week", labels = FALSE),
+         best_use = ifelse(week >= 223, "Best use OFF", "Best use ON")) %>% 
+  mutate(count = 1) %>% 
+  group_by(week, best_use) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(best_use) %>% 
+  summarise(mean = mean(count),
+         sd = sd(count))
+
+ss_hist_daily <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(powers != "Criminal Justice and Public Order Act 1994 (section 60)",
+         LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(week = cut.Date(short_date, breaks = "1 week", labels = FALSE),
+         best_use = ifelse(week >= 223, "Best use OFF", "Best use ON")) %>% 
+  mutate(count = 1) %>% 
+  group_by(short_date, best_use) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_histogram(aes(x=count, color=best_use, fill=best_use),
+                 binwidth=1, alpha=0.5) +
+  theme_bw()
+ss_hist_daily
+
+
+ss_hist_weekly <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(powers != "Criminal Justice and Public Order Act 1994 (section 60)",
+         LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(week = cut.Date(short_date, breaks = "1 week", labels = FALSE),
+         best_use = ifelse(week >= 223, "Best use OFF", "Best use ON")) %>% 
+  mutate(count = 1) %>% 
+  group_by(week, best_use) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_histogram(aes(x=count, color=best_use, fill=best_use),
+                 binwidth=1, alpha=0.5) +
+  theme_bw()
+
+ss_hist_weekly
+
+ggsave(filename = "output/graphs/ss_hist_weekly.png", ss_hist_weekly)
+
+
+ss_hist_daily <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(powers != "Criminal Justice and Public Order Act 1994 (section 60)",
+         LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(date = as.Date(short_date))  %>% 
+  expand(LA, date = full_seq(date, 1)) %>% 
+  left_join(stop_search_1214to0322 %>%
+              st_drop_geometry() %>%
+              filter(powers != "Criminal Justice and Public Order Act 1994 (section 60)",
+                     LA == "Birmingham",
+                     age %in% c("under 10", "10-17", "Oct-17")) %>% 
+              mutate(date = as.Date(short_date)) %>% 
+              mutate(count = 1) %>% 
+              group_by(date) %>% 
+              summarise(count = sum(count))) %>% 
+  mutate(count = ifelse(is.na(count), 0, count)) %>% 
+  mutate(week = cut.Date(date, breaks = "1 week", labels = FALSE),
+         best_use = ifelse(week >= 223, "Best use OFF", "Best use ON")) %>% 
+  ggplot() + 
+  geom_histogram(aes(x=count, color=best_use, fill=best_use),
+                 binwidth=1, alpha=0.5) +
+  theme_bw()
+ss_hist_daily
+ggsave(filename = "output/graphs/ss_hist_daily.png", ss_hist_daily)
+
+
+
+ss_hist_weekly <- stop_search_1214to0322 %>%
+  st_drop_geometry() %>%
+  filter(powers != "Criminal Justice and Public Order Act 1994 (section 60)",
+         LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(date = as.Date(short_date))  %>% 
+  expand(LA, date = full_seq(date, 1)) %>% 
+  left_join(stop_search_1214to0322 %>%
+              st_drop_geometry() %>%
+              filter(powers != "Criminal Justice and Public Order Act 1994 (section 60)",
+                     LA == "Birmingham",
+                     age %in% c("under 10", "10-17", "Oct-17")) %>% 
+              mutate(date = as.Date(short_date)) %>% 
+              mutate(count = 1) %>% 
+              group_by(date) %>% 
+              summarise(count = sum(count))) %>% 
+  mutate(count = ifelse(is.na(count), 0, count)) %>% 
+  mutate(week = cut.Date(date, breaks = "1 week", labels = FALSE),
+         best_use = ifelse(week >= 223, "Best use OFF", "Best use ON")) %>% 
+  group_by(week, best_use)%>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_histogram(aes(x=count, color=best_use, fill=best_use),
+                 binwidth=1, alpha=0.5) +
+  theme_bw() +
+  # geom_histogram(data = data.frame(p = rpois(seq(1, 222, 1), 30)),
+  #                aes(x = p),
+  #                alpha=0.2)
+  geom_histogram(data = data.frame(p = rnorm(seq(1, 222, 1), 25, 10)),
+                 aes(x = p),
+                 binwidth=1,
+                 alpha=0.5) +
+  geom_histogram(data = data.frame(p = rnorm(seq(1, 222, 1), 42, 16)),
+                 aes(x = p),
+                 binwidth=1,
+                 alpha=0.5)
+
+
+# ok so these are not normal distributions anyway... but lets go with that for now..
+ss_hist_weekly
+ggsave(filename = "output/graphs/ss_hist_weekly.png", ss_hist_weekly)
+
+
+# # install.packages("lognorm")
+# library(lognorm)
+# # install.packages("prevalence")
+# library(prevalence)
+# meanlog <- -6.5
+# sdlog <- 1
+# lognorm_median <- getLognormMedian(meanlog)
+# lognorm_mode <- getLognormMode(meanlog, sdlog)
+# curve(dlnorm(x,meanlog,sdlog),from=0,to=0.015)
+# abline(v=lognorm_median, col=2); abline(v=lognorm_mode, col=3); 
+
+
+n <- seq(1, 222, 1)
+
+x <- rpois(n, 4)
+
+pois = data.frame(p = rpois(seq(1, 222, 1), 20)) 
+
+
+# %>% 
+  mutate(count = 1) %>% 
+  group_by(p) %>% 
+  summarise(count = sum(count))
+
+# check10 <- stop_search_1214to0322 %>%
+#   st_drop_geometry() %>%
+#   filter(powers != "Criminal Justice and Public Order Act 1994 (section 60)",
+#          LA == "Birmingham",
+#          age %in% c("under 10", "10-17", "Oct-17")) %>% 
+#   mutate(date = as.Date(short_date))  %>% 
+#   mutate(count = 1) %>% 
+#   group_by(date, lsoa, age, outcome) %>% 
+#   summarise(count = sum(count)) %>% 
+#   ungroup() %>% 
+#   group_by(date) %>% 
+#   filter(sum(count) == 10)
+
+
 load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/stop_search_1214to0322.Rdata")
 
 
@@ -52,6 +534,18 @@ map_lsoa <- stop_search_1214to0322 %>%
   bind_rows(add_missing_lsoa(ss_data = stop_search_1214to0322,
                              full_lsoa_list = lsoa_list,
                              full_lsoa_shapes = lsoa_shape))
+
+birm_map_lsoa <- ss_birm %>%
+  st_drop_geometry() %>%
+  group_by(lsoa, lsoa_shape) %>%
+  mutate(count = 0) %>%
+  summarise(count = sum(count)) %>%
+  st_as_sf() %>%
+  st_transform(crs = 4326) %>%
+  bind_rows(add_missing_lsoa(ss_data = ss_birm,
+                             full_lsoa_list = birm_lsoa_list,
+                             full_lsoa_shapes = lsoa_shape))
+
 
 
 map_ward <- stop_search_1214to0322 %>%
@@ -147,9 +641,320 @@ ss_adult_child <- stop_search_1214to0322 %>%
                      limits = c(0, 3500)) +
   scale_fill_manual(values = c("lightgrey", "#99CCCC", "#9999CC"))
 
+
+
 ss_adult_child
    
 ggsave(filename = "Output/Graphs/ss_adult_child.png", ss_adult_child)
+
+
+
+ss_adult_child_daily <- stop_search_1214to0322 %>%
+  mutate(a_c = ifelse(age %in% c("under 10", "10-17", "Oct-17"), "Child", "Adult"),
+         a_c = ifelse(is.na(age), "Unknown", a_c),
+         a_c = factor(a_c, levels = c("Unknown", "Child", "Adult")),
+         # month = lubridate::floor_date(short_date, "month")) %>% 
+         month = as.yearmon(short_date)) %>% 
+  mutate(count = 1) %>% 
+  group_by(short_date, a_c) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = short_date, y = count, fill = a_c),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 250)) +
+  scale_fill_manual(values = c("lightgrey", "#99CCCC", "#9999CC"),
+                    guide = "none")
+
+
+ggsave(filename = "Output/Graphs/ss_adult_child_daily.png", ss_adult_child_daily)
+
+
+
+
+check <- stop_search_1214to0322 %>%
+  distinct(powers) 
+# Criminal Justice and Public Order Act 1994 (section 60)
+
+ss_sec60 
+
+ss_sec60 <- stop_search_1214to0322 %>%
+  mutate(sec60 = ifelse(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+                        "Section 60", "Other power"),
+         # month = lubridate::floor_date(short_date, "month")) %>% 
+         month = as.yearmon(short_date)) %>% 
+  mutate(count = 1) %>% 
+  group_by(month, sec60) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = month, y = count, fill = sec60),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 3500)) +
+  scale_fill_manual(values = c("lightgrey", "#99CCCC"))
+
+ss_sec60
+
+
+ss_sec60 <- stop_search_1214to0322 %>%
+  # filter(LA == "Birmingham") %>% 
+  mutate(sec60 = ifelse(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+                        "Section 60", "Other power"),
+         sec60 = ifelse(powers == "Police and Criminal Evidence Act 1984 (section 1)",
+                        "PACE", sec60),
+         sec60 = ifelse(powers == "Misuse of Drugs Act 1971 (section 23)",
+                        "Misuse of Drugs", sec60),
+         sec60 = factor(sec60, levels = c( "Section 60", "PACE", "Misuse of Drugs", "Other power")),
+         # month = lubridate::floor_date(short_date, "month")) %>% 
+         month = as.yearmon(short_date)) %>% 
+  mutate(count = 1) %>% 
+  group_by(month, sec60) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = month, y = count, fill = sec60),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 3500)) +
+  scale_fill_manual(values = c("#A8554EFF", "#99CCCC", "#91A1BAFF", "lightgrey"))
+
+ss_sec60
+ggsave(filename = "Output/Graphs/ss_sec60.png", ss_sec60)
+
+
+powers_birm_u17 <- stop_search_1214to0322 %>%
+  filter(LA == "Birmingham",
+         age %in% c("under 10", "10-17", "Oct-17")) %>% 
+  mutate(sec60 = ifelse(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+                        "Section 60", "Other power"),
+         sec60 = ifelse(powers == "Police and Criminal Evidence Act 1984 (section 1)",
+                        "PACE", sec60),
+         sec60 = ifelse(powers == "Misuse of Drugs Act 1971 (section 23)",
+                        "Misuse of Drugs", sec60),
+         sec60 = factor(sec60, levels = c( "Section 60", "PACE", "Misuse of Drugs", "Other power")),
+         # month = lubridate::floor_date(short_date, "month")) %>% 
+         month = as.yearmon(short_date)) %>% 
+  mutate(count = 1) %>% 
+  group_by(month, sec60) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = month, y = count, fill = sec60),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 620)) +
+  scale_fill_manual(values = c("#A8554EFF", "#99CCCC", "#91A1BAFF", "lightgrey"))
+
+powers_birm_u17
+ggsave(filename = "Output/Graphs/powers_birm_u17.png", powers_birm_u17)
+
+
+
+ss_sec60 <- stop_search_1214to0322 %>%
+  filter(powers == "Criminal Justice and Public Order Act 1994 (section 60)") %>% 
+  mutate(count = 1) %>% 
+  group_by(short_date, lsoa) %>% 
+  summarise(count = sum(count)) 
+
+
+ss_sec60 <- stop_search_1214to0322 %>%
+  filter(powers == "Criminal Justice and Public Order Act 1994 (section 60)") %>% 
+  mutate(count = 1) %>% 
+  group_by(short_date) %>% 
+  summarise(count = sum(count)) 
+
+
+ss_sec60 <- ss_birm %>%
+  filter(powers == "Criminal Justice and Public Order Act 1994 (section 60)") %>% 
+  mutate(count = 1) %>% 
+  group_by(lsoa) %>% 
+  summarise(count = sum(count)) 
+
+ss_sec60 <- ss_birm %>%
+  filter(powers == "Criminal Justice and Public Order Act 1994 (section 60)") %>% 
+  mutate(count = 1) %>% 
+  group_by(lsoa, short_date) %>% 
+  summarise(count = sum(count)) 
+
+
+ss_sec60 <- ss_birm %>%
+  filter(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+         short_date >= "2019-02-26",
+         short_date <= "2019-04-01") %>% 
+  mutate(count = 1) %>% 
+  group_by(lsoa) %>% 
+  summarise(count = sum(count))
+
+spike2019 <- ss_birm %>%
+  filter(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+         short_date >= "2019-02-26",
+         short_date <= "2019-04-01") %>% 
+  mutate(count = 1) %>% 
+  group_by(short_date, lsoa) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = short_date, y = count, fill = lsoa),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 50)) +
+  scale_color_viridis(option = "turbo",
+                     begin = 0,
+                     end = 1) +
+  theme(legend.position = "none")
+
+spike2019
+
+ggsave(filename = "Output/Graphs/spike2019.png", spike2019)
+
+
+fullspike2019 <- ggplot() + 
+  geom_sf(data = birm_map_lsoa, fill = "black", color = "grey", linewidth = 0.1) +
+  # geom_sf(data = birm_map_lsoa, fill = NA, color = "black", linewidth = 0.5) +
+  geom_sf(data = ss_birm %>%
+            filter(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+                   short_date >= "2019-02-26",
+                   short_date <= "2019-04-01") %>% 
+            mutate(count = 1) %>% 
+            group_by(lsoa, ward, lsoa_shape) %>%
+            summarise(count = sum(count)) %>% 
+            st_as_sf() %>%
+            st_transform(crs = 4326), aes(fill=count, color = "white")) +
+  scale_fill_viridis(option = "turbo",
+                     direction = -1,
+                     begin = 0.5,
+                     end = 1)
+fullspike2019
+
+ggsave(filename = "Output/Graphs/fullspike2019.png", fullspike2019)
+
+
+th_map <- ggplot() + 
+  geom_sf(data = th_map_ward, fill = "grey", color = "grey") +
+  geom_sf(data = th_map_lsoa, fill = NA, colour="white", linewidth = 0.2) +
+  geom_sf(data = th_map_ward, fill = NA, color = "black", linewidth = 0.5) +
+  # geom_text(data =ward_coords, aes(x = X, y = Y, label = ward)) +
+  geom_sf_text(data = th_map_ward, aes(label = str_wrap(ward, 2)), colour = "black", size = 2.5) +
+  theme_bw()
+
+tight_spike2019 <- ggplot() + 
+  geom_sf(data = birm_map_lsoa, fill = "black", color = "grey", linewidth = 0.1) +
+  # geom_sf(data = birm_map_lsoa, fill = NA, color = "black", linewidth = 0.5) +
+  geom_sf(data = ss_birm %>%
+            filter(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+                   short_date >= "2019-02-26",
+                   short_date <= "2019-03-14") %>% 
+            mutate(count = 1) %>% 
+            group_by(lsoa, ward, lsoa_shape) %>%
+            summarise(count = sum(count)) %>% 
+            st_as_sf() %>%
+            st_transform(crs = 4326), aes(fill=count, color = "white")) +
+  scale_fill_viridis(option = "turbo",
+                     direction = -1,
+                     begin = 0.5,
+                     end = 1)
+tight_spike2019
+
+ggsave(filename = "Output/Graphs/tight_spike2019.png", tight_spike2019)
+
+
+tight_spike2019 <- ss_birm %>%
+  filter(powers == "Criminal Justice and Public Order Act 1994 (section 60)",
+         short_date >= "2019-02-26",
+         short_date <= "2019-03-14") %>% 
+  mutate(count = 1) %>% 
+  group_by(lsoa, ward, lsoa_shape) %>%
+  summarise(count = sum(count)) %>% 
+  st_as_sf() %>%
+  st_transform(crs = 4326) %>%
+  bind_rows(add_missing_lsoa(ss_data = ss_birm,
+                             full_lsoa_list = birm_lsoa_list,
+                             full_lsoa_shapes = lsoa_shape)) %>%
+  ggplot(aes(fill=count)) +
+  geom_sf(colour="white") +
+  scale_fill_viridis(option = "turbo",
+                     begin = 0,
+                     end = 1)
+
+
+tight_spike2019
+
+
+
+ss_sec60 <- ss_birm %>%
+  filter(powers == "Criminal Justice and Public Order Act 1994 (section 60)") %>% 
+  st_drop_geometry() %>%
+  group_by(lsoa, ward, lsoa_shape) %>%
+  mutate(count = 1) %>%
+  summarise(count = sum(count)) %>% 
+  # filter(!(lsoa %in% c("Birmingham 138A", "Birmingham 050E", "Birmingham 135C", "Birmingham 050F"))) %>%
+  st_as_sf() %>%
+  st_transform(crs = 4326) %>%
+  bind_rows(add_missing_lsoa(ss_data = ss_birm,
+                             full_lsoa_list = birm_lsoa_list,
+                             full_lsoa_shapes = lsoa_shape)) %>%
+  ggplot(aes(fill=count)) +
+  geom_sf(colour="white") +
+  scale_fill_viridis(option = "turbo",
+                     begin = 0,
+                     end = 1)
+
+ss_sec60
+ggsave(filename = "Output/Graphs/ss_map.png", ss_map)
+
+library(viridis)
+
+# %>% 
+  ggplot() +
+  geom_bar(aes(x = month, y = count, fill = sec60),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 3500)) +
+  scale_fill_manual(values = c("#A8554EFF", "#99CCCC", "#91A1BAFF", "lightgrey"))
+
+
+
+
+
+may_2017 <- stop_search_1214to0322 %>%
+  filter(short_date >= "2017-02-01",
+         short_date <= "2017-07-01") %>% 
+  mutate(date = ymd(short_date)) %>% 
+  mutate(count = 1) %>% 
+  group_by(date, powers) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = date, y = count, fill = powers),
+           stat = "identity", position = "stack") +
+  theme_bw() +
+  scale_x_date(date_breaks = "1 month") +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 130)) 
+
+may_2017
+
 
 
 ss_adult_child_birm <- stop_search_1214to0322 %>%
@@ -479,14 +1284,14 @@ ggsave(filename = "Output/Graphs/ss_graph.png", ss_graph)
 
 ######trying to get sense of age dist------######------######------######------######------######------######------
 
-ss_age_birm_18to21 <- ss_age %>%
+ss_age_birm_18to21 <- stop_search_18to21_age  %>%
   mutate(Year = as.numeric(Year),
          age = factor(age,
                       levels = c("7", "8", "10", "11", "12", "13", "14", "15", "16", "17"))) %>%
   ggplot() +
   geom_bar(aes(x = Year, y = count, fill = age),
            stat = "identity", position = "dodge") +
-  facet_grid(~`Neighbourhood Policing Unit`) +
+  # facet_grid(~`Neighbourhood Policing Unit`) +
   theme(plot.title = element_text(hjust = 0.5, size = 10)) +
   scale_fill_viridis(option="viridis", discrete = TRUE, direction = -1,
                      begin = 0.15,
@@ -494,17 +1299,19 @@ ss_age_birm_18to21 <- ss_age %>%
 
 ss_age_birm_18to21
 
+library(viridis)
+
 ggsave(filename = "Output/Graphs/ss_age_birm_18to21.png", ss_age_birm_18to21)
 
 
-ss_agepc_birm_18to21 <- ss_age %>%
+ss_agepc_birm_18to21 <- stop_search_18to21_age %>%
   mutate(Year = as.numeric(Year),
          age = factor(age,
                       levels = c("7", "8", "10", "11", "12", "13", "14", "15", "16", "17"))) %>%
   ggplot() +
   geom_bar(aes(x = Year, y = count, fill = age),
            stat = "identity", position = "fill") +
-  facet_grid(~`Neighbourhood Policing Unit`) +
+  # facet_grid(~`Neighbourhood Policing Unit`) +
   theme(plot.title = element_text(hjust = 0.5, size = 10)) +
   scale_fill_viridis(option="viridis", discrete = TRUE, direction = -1,
                      begin = 0.15,

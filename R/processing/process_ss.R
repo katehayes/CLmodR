@@ -1,14 +1,20 @@
 
 
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/stop_search_1214to0322_reason_outcome_gen_ward.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/stop_search_1214to0322.Rdata")
 
 # supplementary data for a little more age detail
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/stop_search_18to21_age.Rdata")
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/stop_search_18to21_age_wmgirls.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/stop_search_18to21_age.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/stop_search_18to21_age_wmgirls.Rdata")
+
+
+
+
+
+
+
+
 
 ######------###first estimating how these searches are distributed across a few different domains###------######------######------######------######------######------
-
-
 ######------###age###------######------######------######------######------######------
 
 age_pc <- stop_search_18to21_age %>%

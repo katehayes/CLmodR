@@ -1,3 +1,179 @@
+c_dur_ew <- custody_avduration_10to19_legal_basis %>% 
+  pivot_wider(names_from = measure,
+              values_from = nights) %>% 
+  filter(legal_basis != "Remand") %>%
+  select(end_period_year, legal_basis, Mean, Median) %>% 
+  mutate(scale = Mean/Median,
+         data_period = "Until 2019") %>% 
+  rbind(med %>% 
+          rename(legal_basis = `Legal basis`,
+                 Median = count) %>% 
+          mutate(legal_basis = ifelse(legal_basis == "DTO", 
+                                      "Detention and Training Order", "Section 90-92 or 226-228"),
+                 Mean = NA,
+                 scale = NA,
+                 data_period = "2019 on") %>% 
+          select(-`Number\r\nof nights`)) %>% 
+  group_by(legal_basis) %>% 
+  mutate(scale = sum(scale, na.rm = T)) %>% 
+  mutate(Mean = ifelse(end_period_year >= 2016,
+                       Median*scale,
+                       Mean),
+         Median = ifelse(end_period_year <= 2014,
+                       Mean/scale,
+                       Median)) %>% 
+  mutate(legal_basis = ifelse(data_period == "2019 on" & legal_basis == "Section 90-92 or 226-228", 
+                              "Other", legal_basis)) %>% 
+  select(-scale) %>% 
+  # filter(!(end_period_year == "2019" & legal_basis == "Detention and Training Order")) 
+  pivot_longer(c(Mean, Median),
+               names_to = "measure",
+               values_to = "nights") %>% 
+  mutate(estimate = ifelse(end_period_year < 2015 & measure == "Median", 
+                              "Estimate", NA),
+         estimate = ifelse(end_period_year >= 2015 & measure == "Median", 
+                           "Data", estimate),
+         estimate = ifelse(end_period_year <= 2015 & measure == "Mean", 
+                           "Data", estimate),
+         estimate = ifelse(end_period_year > 2015 & measure == "Mean", 
+                           "Estimate", estimate)) 
+
+
+x<- c_dur_ew %>% 
+  filter(end_period_year == 2015,
+         estimate == "Data") %>% 
+  mutate(estimate = "Estimate")
+
+c_dur_ew_plot <- c_dur_ew %>% 
+  rbind(x) %>% 
+  pivot_wider(names_from = estimate,
+              values_from = nights) %>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2009.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", linewidth=0.7, alpha = 0.05) +
+  geom_line(aes(x = end_period_year, y = Estimate, color = interaction(legal_basis, data_period)), linetype = "dashed") +
+  geom_line(aes(x = end_period_year, y = Data, color = interaction(legal_basis, data_period))) +
+  theme_bw() +
+  scale_color_manual(values = c("#E24F1A", "#D475CE","#E24F1A", "#9472DA")) +
+  facet_wrap(~measure) +
+  scale_x_continuous(limits = c(2009.5, 2023.5),
+                     expand = c(0,0),
+                     name = "",
+                     breaks = c(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
+                     labels = c("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023")) +
+  scale_y_continuous(name = "",
+                     # breaks = c(seq(0, 2500, 500)),
+                     limits = c(0, 530),
+                     expand = c(0,0)) +
+  theme(strip.text = element_blank()) +
+  theme(legend.position = "none")
+  # geom_vline(xintercept = 2019,  #linetype="dotted",
+  #            color = "yellow", linewidth=0.7, alpha = 0.25)
+  
+  
+# THERE IS A DIFF BETWEEN THE VALUES FOR 2019 DTO - will keep later version
+
+c_dur_ew_plot
+ggsave(c_dur_ew_plot, filename = "output/graphs/c_dur_ew_plot.png")
+
+
+
+# rbind(data.frame(end_period_year = 2015, ))
+# x <- c_dur_ew %>% 
+#   filter(end_period_year <= 2015) %>% 
+#   select(end_period_year, legal_basis, Median) %>% 
+#   mutate(measure = "estimate") %>% 
+
+custodial_duration_ew <- c_dur_ew %>% 
+  select(end_period_year, legal_basis, Mean) %>% 
+  filter(end_period_year <= 2015) %>% 
+  rename(data = Mean) %>% 
+  full_join(x)%>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2009.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", linewidth=0.7, alpha = 0.05) +
+  # geom_vline(xintercept = 2022,  #linetype="dotted",
+  #            color = "black", size=0.7, alpha = 0.05) +
+  geom_line(aes(x = end_period_year, y = data, color = legal_basis)) +
+  geom_line(aes(x = end_period_year, y = estimate, color = legal_basis), linetype="dashed") +
+  scale_color_manual(values = c("#6BAB90", "#037745"),
+                     guide = FALSE) +
+  theme_bw() +
+  scale_x_continuous(limits = c(2009.5, 2019.5),
+                     expand = c(0,0),
+                     name = "",
+                     breaks = c(2010, 2012,  2014, 2016,  2018), 
+                     labels = c("2010", "2012", "2014", "2016", "2018" )) +
+  scale_y_continuous(name = "",
+                     # breaks = c(seq(0, 2500, 500)),
+                     limits = c(0, 450),
+                     expand = c(0,0)) +
+  # ggtitle("Trends in PRU attendance rates, in Birmingham, the West Midlands, England") +
+  # scale_color_manual(values = c("#0054FFFF"),
+  #                    guide = FALSE) +
+  theme(strip.text = element_blank())
+  
+custodial_duration_ew
+ggsave(filename = "output/graphs/custodial_duration_ew.png")
+
+
+custody_legal_birm2 <- disposals_10to21 %>% 
+  filter(disposal_type == "Custody",
+         level == "Birmingham") %>% 
+  mutate(legal_basis = ifelse(grepl("Training", disposal), "Detention and Training Order", NA),
+         legal_basis = ifelse(grepl("9", disposal), "Section 90-92", legal_basis),
+         legal_basis = ifelse(grepl("22", disposal), "Section 226-228", legal_basis)) %>% 
+  group_by(end_period_year, legal_basis) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(data_period = "Until 2021") %>%
+  rbind(disposals_22to23 %>% 
+          mutate(data_period = "2021 on")) %>% 
+  mutate(legal_basis = factor(legal_basis, 
+                              levels = c("Detention and Training Order", "Section 90-92",
+                                         "Section 226-228", "Section 250/254/259 custody", "Young Offender Institution")),
+         data_period = factor(data_period, 
+                              levels = c("Until 2021", "2021 on"))) %>% 
+  ggplot() +
+  # geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+  #           fill="#F7F7F7", alpha = 0.1) +
+  # geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+  #           fill="#EEEEEE", alpha = 0.1) +
+  # geom_vline(xintercept = 2014,  #linetype="dotted",
+  #            color = "black", linewidth=0.7, alpha = 0.05) +
+  # geom_vline(xintercept = 2022,  #linetype="dotted",
+  #            color = "black", linewidth=0.7, alpha = 0.05) +
+  geom_bar(aes(x = data_period, y = count, fill = fct_rev(legal_basis)),
+            stat = "identity", position = "stack") +
+  facet_grid(cols = vars(end_period_year)) +
+  theme_bw() +
+  scale_fill_manual(values = c("#ECA9A4","#CAEFCF", "#ECA9A4","#CAEFCF","#A0AFF2")) +
+  scale_x_discrete(name = "",
+                   expand = c(0,0),
+                   breaks = "") +
+  scale_y_continuous(name = "",
+                     # breaks = c(seq(0, 2500, 500)),
+                     limits = c(0, 210),
+                     expand = c(0,0)) +
+  theme(strip.text = element_blank()) 
+
+# +
+  # theme(legend.position = "none")
+
+custody_legal_birm2        
+
+ggsave(custody_legal_birm2, filename = "output/graphs/custody_legal_birm2.png")
+
+
+# #  #  #  #  # #  #  #  #  OLDER WORK BELOW# #  #  #  #  # #  #  #  #
 # need number of custodial disposals a year
 # need avg monthly pop data for custodial sentences
 # need lengths of each type of custodial sentence

@@ -5,9 +5,152 @@ library(tidyverse)
 https://www.westmidlands-pcc.gov.uk/commissioning-dashboard/
 the above for later
 
+https://services9.arcgis.com/juEJUtOqaunVxGHJ/ArcGIS/rest/services
+
+
+# Data Last Edit Date: 3/26/2024 11:50:33 AM
+AssetPlusSYVChartsv2 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/AssetPlusSYVChartsv2/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                                    simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+save(AssetPlusSYVChartsv2, file = "/Users/katehayes/CLmodR/output/data/scraped/AssetPlusSYVChartsv2.Rdata")
 
 
 
+SNA_MoJ_DfE_Mult_Risk_Factors <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/SNA_MoJ_DfE_Mult_Risk_Factors/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                           simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+save(SNA_MoJ_DfE_Mult_Risk_Factors, file = "/Users/katehayes/CLmodR/output/data/scraped/SNA_MoJ_DfE_Mult_Risk_Factors.Rdata")
+
+
+
+
+County_Lines_msoa21 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/County_Lines_msoa21/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                          simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+VRPSurveyDashboardv2 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/VRPSurveyDashboardv2/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                           simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+
+Schools_Stats_June_2020 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Schools_Stats_June_2020/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+save(Schools_Stats_June_2020, file = "/Users/katehayes/CLmodR/output/data/scraped/Schools_Stats_June_2020.Rdata")
+
+
+
+
+# Data Last Edit Date: 8/13/2021
+Schools_Data <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Schools_Data/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                            simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+save(Schools_Data, file = "/Users/katehayes/CLmodR/output/data/scraped/Schools_Data.Rdata")
+
+# Data Last Edit Date: 3/18/2022
+Schools <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Schools/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                   simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+Schools_1000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Schools/FeatureServer/0/query?where=Rank>1000&0%3D0&outFields=%2A&f=json',
+                                     simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Schools <- Schools %>% 
+  rbind(Schools_1000)
+
+save(Schools, file = "/Users/katehayes/CLmodR/output/data/scraped/Schools.Rdata")
+
+
+# Data Last Edit Date: 9/21/2023
+Education <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Education/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Education_1000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/Education/FeatureServer/0/query?where=Rank>1000&0%3D0&outFields=%2A&f=json',
+                                simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Education <- Education %>% 
+  rbind(Education_1000)
+
+
+save(Education, file = "/Users/katehayes/CLmodR/output/data/scraped/Education.Rdata")
+
+
+
+check <- Education %>% 
+  filter(Safe_School == "Y")
+
+check <- Education %>% 
+  filter(Local_Authority == "Birmingham")
+
+check <- Education %>% 
+  filter(Local_Authority == "Birmingham") %>% 
+  select(School)
+
+
+# Data Last Edit Date: 3/25/2022
+PriorityPlaces <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/PriorityPlaces/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+save(PriorityPlaces, file = "/Users/katehayes/CLmodR/output/data/scraped/PriorityPlaces.Rdata")
+
+
+
+PrisonDashboardCharts <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/PrisonDashboardCharts/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                               simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+
+
+
+County_Lines_Chartsv3 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/County_Lines_Chartsv3/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                           simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+
+YJSDemographic <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/YJSDemographic/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                     simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+FTEDashboard <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/FTEDashboard/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                     simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+
+save(YJSDemographic, file = "output/scraped/YJSDemographic.Rdata")
+
+YJS_Layer
+
+YJS_Map <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/YJS_Map/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                    simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
 
 wmp_vul_index <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/WM_VRU_Risk_index/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
                               simplifyDataFrame=T) %>%
@@ -25,10 +168,7 @@ wmp_yp <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcg
 
 
 
-
-
-
-wmp_rli <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Relative_Low_Income_by_LSOA_2020_21_WFL1/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+Relative_Low_Income_by_LSOA <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Relative_Low_Income_by_LSOA/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
                              simplifyDataFrame=T) %>%
   .$features %>%
   unnest(cols = c(attributes, geometry))
@@ -176,6 +316,8 @@ check <- jsonlite::fromJSON("https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgi
 
 
 
+data_sources_new <- jsonlite::fromJSON('https://www.arcgis.com/sharing/rest/content/items/535e9a9d63494215ab6087f46c091e06/data?f=json',
+                                   simplifyDataFrame=T)
 
 
 
@@ -467,6 +609,12 @@ SNA_MoJDfE <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/
   unnest(cols = c(attributes))
 save(SNA_MoJDfE, file = "Output/Data/Scraped/SNA_MoJDfE.Rdata")
 
+MoJDfE <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/MoJDfE/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                 simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+MoJDfE
+
 County_Lines_Chartsv2 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/County_Lines_Chartsv2/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
                                  simplifyDataFrame=T) %>%
   .$features %>%
@@ -532,4 +680,196 @@ YJSCensusDashboard <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqa
   unnest(cols = c(attributes))
 save(YJSCensusDashboard, file = "Output/Data/Scraped/YJSCensusDashboard.Rdata")
 
+
+# APRIL, back again
+
+
+
+SNA_MoJ_DfE_Mult_Risk_Factors <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/SNA_MoJ_DfE_Mult_Risk_Factors/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                                    simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+save(SNA_MoJ_DfE_Mult_Risk_Factors, file = "output/data/scraped/SNA_MoJ_DfE_Mult_Risk_Factors.Rdata")
+
+
+
+# 
+# WMVRU20202021ImportFINALCSV2 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/WMVRU20202021ImportFINALCSV2/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+#                                                                     simplifyDataFrame=T) %>%
+#   .$features %>%
+#   unnest(cols = c(attributes))
+# 
+# 
+
+# Data updated: 27 Sept 2021, 13:12
+
+West_Midlands_Provision_x_VRU_Risk_Index_WFL1 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/West_Midlands_Provision_x_VRU_Risk_Index_WFL1/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                                    simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+save(West_Midlands_Provision_x_VRU_Risk_Index_WFL1, file = "output/data/scraped/West_Midlands_Provision_x_VRU_Risk_Index_WFL1.Rdata")
+
+
+
+
+WM_VRU_Risk_Index_x_Provision2_WFL1 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/WM_VRU_Risk_Index_x_Provision2_WFL1/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                                                    simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+
+WM_VRU_Risk_Index_x_Provision2_WFL1_2000 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/WM_VRU_Risk_Index_x_Provision2_WFL1/FeatureServer/0/query?where=ObjectID>2000&0%3D0&outFields=%2A&f=json',
+                                         simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+save(WM_VRU_Risk_Index_x_Provision2_WFL1, file = "output/data/scraped/WM_VRU_Risk_Index_x_Provision2_WFL1.Rdata")
+
+
+
+Young_People_Population_Size_by_LSOA_1 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                                          simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+Young_People_Population_Size_by_LSOA_2 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>2000&0%3D0&outFields=%2A&f=json',
+                                                           simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_4 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>4000&0%3D0&outFields=%2A&f=json',
+                                                             simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_6 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>6000&0%3D0&outFields=%2A&f=json',
+                                                             simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_8 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>8000&0%3D0&outFields=%2A&f=json',
+                                                             simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_10 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>10000&0%3D0&outFields=%2A&f=json',
+                                                             simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_12 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>12000&0%3D0&outFields=%2A&f=json',
+                                                             simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_14 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>14000&0%3D0&outFields=%2A&f=json',
+                                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_16 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>16000&0%3D0&outFields=%2A&f=json',
+                                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_18 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>18000&0%3D0&outFields=%2A&f=json',
+                                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_20 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>22000&0%3D0&outFields=%2A&f=json',
+                                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_22 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>24000&0%3D0&outFields=%2A&f=json',
+                                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+Young_People_Population_Size_by_LSOA_24 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>26000&0%3D0&outFields=%2A&f=json',
+                                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_26 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>28000&0%3D0&outFields=%2A&f=json',
+                                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_28 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>30000&0%3D0&outFields=%2A&f=json',
+                                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_30 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>20000&0%3D0&outFields=%2A&f=json',
+                                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+Young_People_Population_Size_by_LSOA_32 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>32000&0%3D0&outFields=%2A&f=json',
+                                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+Young_People_Population_Size_by_LSOA_34 <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/Young_People_Population_Size_by_LSOA/FeatureServer/0/query?where=OBJECTID>34000&0%3D0&outFields=%2A&f=json',
+                                                              simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+Young_People_Population_Size_by_LSOA <- bind_rows(Young_People_Population_Size_by_LSOA_1,
+                                                  Young_People_Population_Size_by_LSOA_2,
+                                                  
+                                                  Young_People_Population_Size_by_LSOA_4,
+                                              
+                                                  Young_People_Population_Size_by_LSOA_6,
+                                       
+                                                  Young_People_Population_Size_by_LSOA_8,
+                                     
+                                                  Young_People_Population_Size_by_LSOA_10,
+                                          
+                                                  Young_People_Population_Size_by_LSOA_12,
+                                     
+                                                  Young_People_Population_Size_by_LSOA_14,
+                                              
+                                                  Young_People_Population_Size_by_LSOA_16,
+                                           
+                                                  Young_People_Population_Size_by_LSOA_18,
+                                           
+                                                  Young_People_Population_Size_by_LSOA_20,
+                                                
+                                                  Young_People_Population_Size_by_LSOA_22,
+                                     
+                                                  Young_People_Population_Size_by_LSOA_24,
+                                               
+                                                  Young_People_Population_Size_by_LSOA_26,
+                                                  
+                                                  Young_People_Population_Size_by_LSOA_28,
+                                               
+                                                  Young_People_Population_Size_by_LSOA_30,
+                                          
+                                                  Young_People_Population_Size_by_LSOA_32)
+
+save(Young_People_Population_Size_by_LSOA, file = "output/data/scraped/Young_People_Population_Size_by_LSOA.Rdata")
+
+WM_VRU_Risk_index <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/WM_VRU_Risk_index/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                                          simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+IDACI_by_LSOA
+
+IDACI_by_LSOA <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPSQG/arcgis/rest/services/IDACI_by_LSOA/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                                             simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+# https://www.arcgis.com/home/search.html?restrict=false&sortField=relevance&sortOrder=desc&searchTerm=owner%3A%22dgrice%22#content
 

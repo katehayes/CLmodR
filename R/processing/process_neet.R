@@ -131,7 +131,7 @@ neet_rate_bygen <- gender_pc %>%
 
 
 neet_rate_bygen
-ggsave(filename = "output/graphs/neet_rate_bygen.png", neet_rate_bygen)
+# ggsave(filename = "output/graphs/neet_rate_bygen.png", neet_rate_bygen)
 
 # , "#A61F02
 
@@ -292,6 +292,8 @@ care_pov_neet %>%
   # geom_line(aes(x=end_period_year, y = smooth_count, group = care, colour = care)) +
   facet_grid(rows = vars(state),
              cols = vars(age)) 
+
+# FLAG FLAG
 
 care_pov_neet %>% 
   group_by(end_period_year, state, care) %>% 

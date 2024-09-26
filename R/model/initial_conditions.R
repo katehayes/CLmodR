@@ -13,3 +13,7 @@ care_ic <- pov_care_school %>%
          nres_incl = `Not in poverty_Not residential`,
          res_incl = `Not in poverty_Residential`,
          pri_incl = `Not in poverty_Prior`)
+
+
+save(pov_care_school, file = "/Users/katehayes/CLmodR/output/data/processed/pov_care_school.Rdata")
+save(care_ic, file = "/Users/katehayes/CLmodR/output/data/input/care_ic.Rdata")

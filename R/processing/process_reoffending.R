@@ -1,8 +1,8 @@
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/reoffending_10to20_gender.Rdata")
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/reoffending_10to20_offence.Rdata")
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/reoffending_10to20_disposal.Rdata")
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/reoffending_10to20_timetoreoffence.Rdata")
-load("/Users/katehayes/CLmodelR/Output/Data/Cleaned/reoffending_10to20_prevoffences.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/reoffending_10to20_gender.Rdata")
+load("/Users/katehayes/CLmodR/output/data/cleaned/reoffending_10to20_offence.Rdata")
+load("/Users/katehayes/CLmodelR/output/data/cleaned/reoffending_10to20_disposal.Rdata")
+load("/Users/katehayes/CLmodelR/output/data/cleaned/reoffending_10to20_timetoreoffence.Rdata")
+load("/Users/katehayes/CLmodelR/output/data/cleaned/reoffending_10to20_prevoffences.Rdata")
 
 params_reoffend <- reoffending_10to20_gender %>%
   mutate(end_period_month = ifelse(end_period_month == "March", "Mar", end_period_month)) %>%

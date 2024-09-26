@@ -634,6 +634,9 @@ casc_model = odin::odin({
   
   
   
+
+  
+  
   # differential equations # # # # # # # # # # # # # # # # # # # # # # # # # # #
   deriv(IC1_10[]) <- 0.9842*incl_rate[i]*turn10[i] - age_up*IC1_10_lag[i] - f[i]*IC1_10[i] + r[i]*EC1_10[i] - n2care_i10[i]*IC1_10[i]
   deriv(IC2_10[]) <- 0.003*incl_rate[i]*turn10[i] - age_up*IC2_10_lag[i] - f[i]*IC2_10[i] + r[i]*EC2_10[i] + n2nr_i10[i]*n2care_i10[i]*IC1_10[i] + 

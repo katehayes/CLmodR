@@ -964,6 +964,7 @@ https://department-for-education.shinyapps.io/neet-comparative-la-scorecard/
 #   Disclosed substance misuse-  Care leaver - Supervised by YOT (Youth Offending Team) 
 # Parent-not caring for own child - Alternative provision- Mental health flag
 
+
 n_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/participation-in-education-training-and-neet-age-16-to-17-by-local-authority_2022-23/data/ud_neetnk_la_dashboard_2023_final.csv")
 
 neet_vul_23 <- n_data %>% 
@@ -1011,7 +1012,28 @@ pru_neet <- n_data %>%
   mutate(destination = ifelse(destination == "Not in education, employment and training (NEET)",
                               "NEET", "Not NEET")) %>% 
   group_by(origin, age, term, destination) %>% 
-  summarise(pc = sum(pc)) %>% 
+  summarise(pc = sum(pc)) 
+
+
+entering_neet <- pru_neet %>% 
+  filter(destination == "NEET") %>% 
+  group_by(origin) %>% 
+  arrange(age, term) %>% 
+  ggplot() +
+  geom_bar(aes(x=interaction(term,age), y = pc, fill = origin),
+           stat = "identity") +
+    facet_grid(~fct_rev(origin)) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 22),
+                     expand = c(0,0)) +
+  scale_x_discrete(name = "") +
+  scale_fill_manual(values = c("#D3636A", "#8C3A3F"))
+entering_neet 
+ggsave(filename = "/Users/katehayes/CLmodR/output/graphs/entering_neet.png", entering_neet)
+
+# %>% 
   ungroup() %>% 
   pivot_wider(names_from = destination,
               values_from = pc) %>% 
@@ -1022,10 +1044,10 @@ pru_neet <- n_data %>%
 
 entering_neet <- pru_neet %>% 
   ggplot() +
-    geom_line(aes(x=interaction(term,age), y = pc_entering_NEET, group = origin, colour = origin))
+    geom_line(aes(x=interaction(term,age), y = pc_entering_NEET, group = origin, colour = origin)) +
+  
 
 entering_neet
-ggsave(filename = "output/graphs/entering_neet.png", entering_neet)
 
 
 

@@ -5,9 +5,320 @@ library(tidyverse)
 library(viridis)
 
 
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  group_by(date, age) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = date, y = count, fill = as.character(age)),
+           stat = "identity", position = "stack") 
+  
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  mutate(count = 1) %>% 
+  group_by(date) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  summarise(av = mean(count))
+
+# 16.28889 aaAPPROX 16 KIDS A MONTH
+
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  group_by(age) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count))
+
+
+
+
+
+
+
+
+
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  group_by(age) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count))
+
+
+# AGE
+# 8- 0.001364256
+# 12- 0.009549795
+# 13 - 0.050477490
+# 14 - 0.135061392
+# 15 - 0.264665757
+# 16 - 0.289222374
+# 17 - 0.249658936
+
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  group_by(ethnicity) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count)) %>% 
+  select(-count)
+
+# Asian
+# 0.171896317
+# Black
+# 0.523874488
+# Mixed
+# 0.019099591
+# Other
+# 0.008185539
+# Unknown
+# 0.103683492
+# White
+# 0.173260573
+
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+filter(ethnicity == "Black") %>% 
+  group_by(nrm_referral) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count)) %>% 
+  select(-count)
+# No
+# 0.27343750
+# Unknown
+# 0.66145833
+# Yes
+# 0.06510417
+
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  filter(ethnicity == "White") %>% 
+  group_by(nrm_referral) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count)) %>% 
+  select(-count)
+
+# No 0.2283465
+# Unknown 0.6692913
+# Yes 0.1023622
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  filter(ethnicity == "Asian") %>% 
+  group_by(nrm_referral) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count)) %>% 
+  select(-count)
+
+# No - 0.24603175
+# Unknown - 0.69841270
+# Yes - 0.05555556
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  filter(ethnicity == "Black") %>% 
+  group_by(role) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count)) %>% 
+  select(-count)
+# Management: Those who can be shown to be involved in running and managing the line such as phone holders, gang leaders etc
+# 0.03906250
+# Other: for any role that does not fit above criteria e.g. Cuckooed
+# 0.04687500
+# Unknown
+# 0.01822917
+# Workforce: A role that directly relates to the day-to-day running of the line e.g. runner, enforcer.
+# 0.89583333
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  filter(ethnicity == "White") %>% 
+  group_by(role) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count)) %>% 
+  select(-count)
+# Other: for any role that does not fit above criteria e.g. Cuckooed
+# 0.06299213
+# Unknown
+# 0.01574803
+# Workforce: A role that directly relates to the day-to-day running of the line e.g. runner, enforcer.
+# 0.92125984
+# 
+
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  filter(ethnicity == "Asian") %>% 
+  group_by(role) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count)) %>% 
+  select(-count)
+# Management: Those who can be shown to be involved in running and managing the line such as phone holders, gang leaders etc
+# 0.023809524
+# Other: for any role that does not fit above criteria e.g. Cuckooed
+# 0.055555556
+# Unknown
+# 0.007936508
+# Workforce: A role that directly relates to the day-to-day running of the line e.g. runner, enforcer.
+# 0.912698413
+
+
+
+# AGE
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  filter(ethnicity == "Black") %>% 
+  summarise(age = mean(age))
+
+# 15.6276
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  filter(ethnicity == "White") %>% 
+  summarise(age = mean(age))
+# 15.22047
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  filter(ethnicity == "Asian") %>% 
+  summarise(age = mean(age))
+# 15.54762
+
+
+
+
+
+# MISSING
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  filter(ethnicity == "Black") %>% 
+  group_by(missing) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count)) %>% 
+  select(-count)
+
+# No
+# 0.3385417
+# Unknown
+# 0.1562500
+# Yes
+# 0.5052083
+
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  filter(ethnicity == "White") %>% 
+  group_by(missing) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count)) %>% 
+  select(-count)
+
+# No
+# 0.5039370
+# Unknown
+# 0.1023622
+# Yes
+# 0.3937008
+
+
+cl <- cl_19to22 %>%
+  filter(age <= 17,
+         la == "Birmingham",
+         gender == "Male") %>% 
+  filter(ethnicity == "Asian") %>% 
+  group_by(missing) %>% 
+  mutate(count = 1) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(pc = count/sum(count)) %>% 
+  select(-count)
+
+# No
+# 0.4047619
+# Unknown
+# 0.1349206
+# Yes
+# 0.4603175
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 wm_nrm_age <- cl_19to22 %>%
   filter(age <= 17)
-
 
 
 wm_nrm_age <- cl_19to22 %>%

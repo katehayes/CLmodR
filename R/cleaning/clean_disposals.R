@@ -1,3 +1,27 @@
+
+library(stringr)
+
+d_data <- read_ods("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/Local_level_open_data_tables/Outcome_Table.ods")
+
+disposals_22to23 <- d_data %>% 
+  filter(
+    # Financial_Year %in% c("2021-22", "2022-23"),
+         YJS == "Birmingham",
+         Caution_or_sentence_tier == "Custody") %>% 
+  rename(legal_basis = Caution_or_sentence_type) %>% 
+  mutate(end_period_year = as.numeric(paste("20", substr(Financial_Year, 6,7), sep = ""))) %>% 
+  mutate(legal_basis = ifelse(legal_basis == "Detention And Training Order", 
+                              "Detention and Training Order", legal_basis)) %>% 
+  group_by(end_period_year, legal_basis) %>% 
+  summarise(count = sum(Number_Cautioned_Sentenced)) 
+
+
+
+  
+  # %>% 
+  # mutate(legal_basis = ifelse(Caution_or_sentence_type == "Detention And Training Order", 
+  #                             "Detention and Training Order", "Section 250/254/259 or YOI")) %>% 
+
 # setting disposal, group(characteristic),
 group_types <- c("Age", "Gender", "Ethnicity", "Sex")
 disposal_types <- c("Pre-court", "First-tier", "Community", "Custody")

@@ -1,4 +1,366 @@
-# number of FTEs in Birmingham
+
+fte_v_pop <- fte_09to20 %>% 
+  mutate(level = ifelse(level == "West Midlands", "West Midlands (region)", level)) %>% 
+  filter(level != "England") %>% 
+  left_join(pop_estimate_01to20_age_gender %>% 
+              filter(level %in% c("Eng/Wales", "West Midlands (region)", "Birmingham")) %>% 
+              filter(age %in% c(10:17),
+                     end_period_year %in% c(2009:2020)) %>%
+              group_by(end_period_year, level) %>%
+              summarise(census_pop = sum(count))) %>% 
+  mutate(pc = count/census_pop) %>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2008.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", linewidth=0.7, alpha = 0.05) +
+  # geom_vline(xintercept = 2022,  #linetype="dotted",
+  #            color = "black", size=0.7, alpha = 0.05) +
+  geom_line(aes(x = end_period_year, y = pc, color = level)) +
+  # facet_grid(
+  #            # rows = vars(gender),
+  #            cols = vars(level)) +
+  theme_bw() +
+  scale_x_continuous(limits = c(2008.5, 2020.5),
+                     expand = c(0,0),
+                     name = ""
+                     ,
+                     breaks = c(2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020), 
+                     labels = c("2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"),
+  ) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.0175),
+                     expand = c(0,0)) +
+  # ggtitle("Trends in PRU attendance rates, in Birmingham, the West Midlands, England") +
+  scale_color_manual(values = c("#0054FFFF", "#1A9850FF", "#673AB7FF"),
+                     guide = FALSE) +
+  theme(strip.text = element_blank())
+
+fte_v_pop
+
+ggsave(filename = "output/graphs/fte_v_pop.png", fte_v_pop)
+
+
+child_v_pop <- children_10to21_gender %>% 
+  filter(gender != "Unknown") %>% 
+  left_join(pop_estimate_01to20_age_gender %>% 
+              filter(level %in% c("Eng/Wales", "West Midlands (region)", "Birmingham")) %>% 
+              filter(age %in% c(10:17),
+                     end_period_year %in% c(2009:2020)) %>%
+              group_by(end_period_year, gender, level) %>%
+              summarise(census_pop = sum(count))) %>% 
+  mutate(pc = count/census_pop) %>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2009.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", linewidth=0.7, alpha = 0.05) +
+  # geom_vline(xintercept = 2022,  #linetype="dotted",
+  #            color = "black", size=0.7, alpha = 0.05) +
+  geom_line(aes(x = end_period_year, y = pc, color = interaction(level, gender))) +
+  # facet_grid(
+  #             rows = vars(gender)) +
+  #            cols = vars(level)) +
+  theme_bw() +
+  scale_x_continuous(limits = c(2009.5, 2020.5),
+                     expand = c(0,0),
+                     name = ""
+                     ,
+                     breaks = c(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020), 
+                     labels = c("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"),
+  ) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.045),
+                     expand = c(0,0)) +
+  # ggtitle("Trends in PRU attendance rates, in Birmingham, the West Midlands, England") +
+  scale_color_manual(values = c("#0054FFFF", "#1A9850FF", "#673AB7FF", "#3299FFFF", "#66BD63FF","#B39DDBFF"),
+                     guide = FALSE) +
+  theme(strip.text = element_blank())
+
+child_v_pop
+ggsave(filename = "output/graphs/child_v_pop.png", child_v_pop)
+
+fte_v_child <- fte_09to20 %>% 
+  mutate(level = ifelse(level == "West Midlands", "West Midlands (region)", level)) %>% 
+  filter(level != "England") %>% 
+  left_join(children_10to21_gender %>% 
+              filter(gender != "Unknown") %>% 
+              group_by(end_period_year, level) %>%
+              summarise(child_count = sum(count))) %>% 
+  mutate(pc = count/child_count) %>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2009.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", linewidth=0.7, alpha = 0.05) +
+  # geom_vline(xintercept = 2022,  #linetype="dotted",
+  #            color = "black", size=0.7, alpha = 0.05) +
+  geom_line(aes(x = end_period_year, y = pc, color = level)) +
+  # facet_grid(
+  #             rows = vars(gender)) +
+  #            cols = vars(level)) +
+  theme_bw() +
+  scale_x_continuous(limits = c(2009.5, 2020.5),
+                     expand = c(0,0),
+                     name = "",
+                     breaks = c(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020), 
+                     labels = c("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.82),
+                     expand = c(0,0)) +
+  # ggtitle("Trends in PRU attendance rates, in Birmingham, the West Midlands, England") +
+  scale_color_manual(values = c("#0054FFFF", "#1A9850FF", "#673AB7FF"),
+                     guide = FALSE) +
+  theme(strip.text = element_blank())
+
+fte_v_child
+
+ggsave(filename = "output/graphs/fte_v_child.png", fte_v_child)
+
+
+fte_child_plot <- plot_grid(child_v_pop, fte_v_pop, fte_v_child, ncol = 1, align = "v")
+fte_child_plot
+ggsave(filename = "output/graphs/fte_child_plot.png", fte_child_plot)
+
+
+
+fte_child_disp_ew <- fte_09to20 %>% 
+  mutate(level = ifelse(level == "West Midlands", "West Midlands (region)", level)) %>% 
+  filter(level != "England") %>% 
+  left_join(children_10to21_gender %>% 
+              filter(gender != "Unknown") %>% 
+              group_by(end_period_year, level) %>%
+              summarise(child_count = sum(count))) %>% 
+  left_join(disposals_10to21 %>% 
+              group_by(end_period_year, level) %>%
+              summarise(disp_count = sum(count))) %>% 
+  filter(level == "Eng/Wales") %>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2008.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", linewidth=0.7, alpha = 0.05) +
+  # geom_vline(xintercept = 2022,  #linetype="dotted",
+  #            color = "black", size=0.7, alpha = 0.05) +
+  geom_line(aes(x = end_period_year, y = count), color = "#ADE2C0") +
+  geom_line(aes(x = end_period_year, y = child_count), color = "#51C47B") +
+  geom_line(aes(x = end_period_year, y = disp_count), color =  "#1A9850FF") +
+  theme_bw() +
+  scale_x_continuous(limits = c(2008.5, 2020.5),
+                     expand = c(0,0),
+                     name = "",
+                     breaks = c(2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020), 
+                     labels = c("2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 170000),
+                     breaks = c(seq(0, 150000, 30000)),
+                     expand = c(0,0)) +
+  theme(strip.text = element_blank())
+
+fte_child_disp_ew
+
+
+fte_child_disp_wm <- fte_09to20 %>% 
+  mutate(level = ifelse(level == "West Midlands", "West Midlands (region)", level)) %>% 
+  filter(level != "England") %>% 
+  left_join(children_10to21_gender %>% 
+              filter(gender != "Unknown") %>% 
+              group_by(end_period_year, level) %>%
+              summarise(child_count = sum(count))) %>% 
+  left_join(disposals_10to21 %>% 
+              group_by(end_period_year, level) %>%
+              summarise(disp_count = sum(count))) %>% 
+  filter(level == "West Midlands (region)") %>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2008.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", linewidth=0.7, alpha = 0.05) +
+  # geom_vline(xintercept = 2022,  #linetype="dotted",
+  #            color = "black", size=0.7, alpha = 0.05) +
+  geom_line(aes(x = end_period_year, y = count), color = "#D8C6E7") +
+  geom_line(aes(x = end_period_year, y = child_count), color = "#B39DDBFF") +
+  geom_line(aes(x = end_period_year, y = disp_count), color = "#673AB7FF") +
+  theme_bw() +
+  scale_x_continuous(limits = c(2008.5, 2020.5),
+                     expand = c(0,0),
+                     name = "",
+                     breaks = c(2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020), 
+                     labels = c("2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 15500),
+                     breaks = c(seq(0, 15000, 3000)),
+                     expand = c(0,0)) +
+  # ggtitle("Trends in PRU attendance rates, in Birmingham, the West Midlands, England") +
+  theme(strip.text = element_blank())
+
+fte_child_disp_wm
+
+fte_child_disp_b <- fte_09to20 %>% 
+  mutate(level = ifelse(level == "West Midlands", "West Midlands (region)", level)) %>% 
+  filter(level != "England") %>% 
+  left_join(children_10to21_gender %>% 
+              filter(gender != "Unknown") %>% 
+              group_by(end_period_year, level) %>%
+              summarise(child_count = sum(count))) %>% 
+  left_join(disposals_10to21 %>% 
+              group_by(end_period_year, level) %>%
+              summarise(disp_count = sum(count))) %>% 
+  filter(level == "Birmingham") %>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2008.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", linewidth=0.7, alpha = 0.05) +
+  # geom_vline(xintercept = 2022,  #linetype="dotted",
+  #            color = "black", size=0.7, alpha = 0.05) +
+  geom_line(aes(x = end_period_year, y = count), color = "#54CBFF") +
+  geom_line(aes(x = end_period_year, y = child_count), color = "#3299FFFF") +
+  geom_line(aes(x = end_period_year, y = disp_count), color = "#0054FFFF") +
+  # facet_grid(
+  #   #             rows = vars(gender)) +
+  #   cols = vars(level)) +
+  theme_bw() +
+  scale_x_continuous(limits = c(2008.5, 2020.5),
+                     expand = c(0,0),
+                     name = "",
+                     breaks = c(2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020), 
+                     labels = c("2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020")) +
+  scale_y_continuous(name = "",
+                     breaks = c(seq(0, 2500, 500)),
+                     limits = c(0, 2850),
+                     expand = c(0,0)) +
+  # ggtitle("Trends in PRU attendance rates, in Birmingham, the West Midlands, England") +
+  # scale_color_manual(values = c("#0054FFFF"),
+  #                    guide = FALSE) +
+  theme(strip.text = element_blank())
+
+fte_child_disp_b
+
+fte_child_disp_plot <- plot_grid(fte_child_disp_ew, fte_child_disp_wm, fte_child_disp_b, ncol = 1, align = "v")
+fte_child_disp_plot
+ggsave(filename = "output/graphs/fte_child_disp_plot.png", fte_child_disp_plot)
+
+
+
+
+disp_graph <- disposals_10to21 %>% 
+  filter(level != "England",
+         disposal_type != "Other") %>% 
+  group_by(end_period_year, disposal_type, level) %>%
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year, level) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  mutate(disposal_type = factor(disposal_type, 
+                                levels = c("Pre-court",
+                                           "First-tier",
+                                           "Community",
+                                           "Custody"))) %>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2009.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", linewidth=0.7, alpha = 0.05) +
+  # geom_vline(xintercept = 2022,  #linetype="dotted",
+  #            color = "black", size=0.7, alpha = 0.05) +
+  geom_line(aes(x = end_period_year, y = pc, color = level)) +
+  scale_color_manual(values = c("#0054FFFF", "#1A9850FF", "#673AB7FF"),
+                     guide = FALSE) +
+  facet_grid(
+    #             rows = vars(gender)) +
+    cols = vars(disposal_type)) +
+  theme_bw() +
+  scale_x_continuous(limits = c(2009.5, 2020.5),
+                     expand = c(0,0),
+                     name = "",
+                     breaks = c(2010, 2012,  2014, 2016,  2018, 2020), 
+                     labels = c("2010", "2012", "2014", "2016", "2018", "2020")) +
+  scale_y_continuous(name = "",
+                     # breaks = c(seq(0, 2500, 500)),
+                     limits = c(0, 0.65),
+                     expand = c(0,0)) +
+  # ggtitle("Trends in PRU attendance rates, in Birmingham, the West Midlands, England") +
+  # scale_color_manual(values = c("#0054FFFF"),
+  #                    guide = FALSE) +
+  theme(strip.text = element_blank())
+
+disp_graph
+
+ggsave(filename = "output/graphs/disp_graph .png", disp_graph)
+
+
+
+x<- disposals_10to21 %>% 
+  distinct(disposal_type)
+
+c_v_nc_birm <- disposals_10to21 %>% 
+  filter(level == "Birmingham",
+         disposal_type != "Other") %>% 
+  mutate(disposal_type = ifelse(disposal_type == "Custody", "Custodial", "Non-custodial")) %>% 
+  group_by(end_period_year, disposal_type) %>%
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = disposal_type,
+              values_from = count) %>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2020.5,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", linewidth=0.7, alpha = 0.05) +
+  # geom_vline(xintercept = 2022,  #linetype="dotted",
+  #            color = "black", size=0.7, alpha = 0.05) +
+  
+  geom_line(aes(x = end_period_year, y = Custodial), color = "#91A1BAFF") +
+  geom_line(aes(x = end_period_year, y = `Non-custodial`+Custodial), color ="#91A1BAFF") +
+  geom_ribbon(aes(x = end_period_year, ymin=0, ymax=Custodial), fill = "#3299FFFF", alpha=0.5) +
+  geom_ribbon(aes(x = end_period_year, ymin=Custodial,ymax=Custodial+`Non-custodial`), fill =  "#54CBFF", alpha=0.5) +
+  # geom_line(aes(x = end_period_year, y = pc, group = interaction(age, neet), colour = interaction(age, neet))) +
+  # scale_color_manual(values = c("#0054FFFF"),
+  #                    guide = F) +
+  # scale_fill_manual(values = c("#0054FFFF"),
+  #                   guide = F) +
+  # theme_bw() +
+  # geom_line(aes(x = end_period_year, y = count, color = disposal_type)) +
+  # scale_color_manual(values = c("#3299FFFF", "#54CBFF"),
+  #                    guide = FALSE) +
+  theme_bw() +
+  scale_x_continuous(limits = c(2010.5, 2020.5),
+                     expand = c(0,0),
+                     name = "",
+                     breaks = c(2012,  2014, 2016,  2018, 2020), 
+                     labels = c("2012", "2014", "2016", "2018", "2020")) +
+  scale_y_continuous(name = "",
+                     # breaks = c(seq(0, 2500, 500)),
+                    limits = c(0, 2800),
+                     expand = c(0,0)) +
+  # ggtitle("Trends in PRU attendance rates, in Birmingham, the West Midlands, England") +
+  # scale_color_manual(values = c("#0054FFFF"),
+  #                    guide = FALSE) +
+  theme(strip.text = element_blank())
+
+c_v_nc_birm
+ggsave(filename = "output/graphs/c_v_nc_birm .png", c_v_nc_birm)
+
+
+# #  #  #  #  # #  #  #  #  OLDER WORK BELOW# #  #  #  #  # #  #  #  #
+# breakdown of disposal types in ftes compared to total disposals eng/wales# number of FTEs in Birmingham
 birm_fte <- fte_birm_pc %>%
   ggplot() +
   geom_bar(aes(x = year, y = Birmingham, fill = "blue"),

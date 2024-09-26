@@ -25,6 +25,678 @@ birm_dur_adj <- care_10to22 %>%
   mutate(adj = Birmingham/England)
 
 
+care_duration_inc_prev <- care_10to22 %>%
+  pivot_wider(names_from = period_length,
+              values_from = count) %>%
+  group_by(level) %>% 
+  arrange(end_period_year) %>% 
+  # mutate(Day = lag(Day)) %>% 
+  mutate(duration = Day / (Year / 365)) %>% 
+  filter(!is.na(duration)) %>% 
+  select(end_period_year, level, duration) %>% 
+  filter(level != "West Midlands (region)") %>% 
+  mutate(hi = "b") %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = duration, group =  interaction(hi,level), color = interaction(hi,level))) +
+  geom_line(data = care_11to22_placement %>% 
+              mutate(residential = ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                                           "Residential schools",
+                                                           "Other residential settings"),
+                                          "Residential",
+                                          "Not residential")) %>% 
+              group_by(end_period_year, level, residential) %>% 
+              summarise(count = sum(count)) %>% 
+              ungroup() %>% 
+              group_by(level, end_period_year) %>% 
+              mutate(pc_res = count/sum(count)) %>% 
+              ungroup() %>% 
+              left_join(care_duration_14to22) %>% 
+              mutate(av = pc_res*mean_dur) %>% 
+              group_by(level, end_period_year) %>% 
+              summarise(av = sum(av)) %>% 
+              mutate(hi = "a") %>% 
+              filter(level != "West Midlands (region)"),
+            aes(x = end_period_year, y = av, group =  interaction(hi,level), color = interaction(hi,level))) +
+  theme_bw() +
+  theme(legend.position = "none",
+        strip.text = element_blank()) +
+  scale_color_manual(values = c("#6FA7F9", "#9BD6A8", "#0A5FDD", "#49C364")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 390),
+                     expand = c(0,0)) +
+  scale_x_continuous(name = "", 
+                     breaks = c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022), 
+                     # labels = c("2012", "2014", "2016"),
+                     limits = c(2010.5, 2022.5),
+                     expand = c(0,0))
+  
+
+care_duration_inc_prev
+ggsave(filename = "output/graphs/care_duration_inc_prev.png", care_duration_inc_prev)
+
+duration_data <- care_duration_14to22 %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = mean_dur, group = residential, color = residential))
+duration_data
+
+
+dur_comp_plot <- care_duration_14to22 %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = mean_dur, group = residential, color = residential)) +
+  geom_line(data = care_10to22 %>%
+              pivot_wider(names_from = period_length,
+                          values_from = count) %>%
+              mutate(duration = Day / (Year / 365)) %>% 
+              filter(!is.na(duration)) %>% 
+              select(end_period_year, level, duration) %>% 
+              filter(level == "England"),
+              aes(x = end_period_year, y = duration))+
+  theme_bw() +
+  theme(legend.position = "none",
+        strip.text = element_blank()) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 420),
+                     expand = c(0,0)) +
+  scale_x_continuous(name = "", 
+                     breaks = c(2010, 2012,  2014,  2016, 2018,2020,2022), 
+                     labels = c("2010", "2012", "2014", "2016", "2018", "2020", "2022"),
+                     limits = c(2009.5, 2022.5),
+                     expand = c(0,0))
+dur_comp_plot 
+
+
+res_birm_v_eng <- care_11to22_placement %>% 
+  mutate(residential = ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                             "Residential schools",
+                                             "Other residential settings"),
+                       "Residential",
+                       "Not residential")) %>% 
+  group_by(end_period_year, level, residential) %>% 
+  summarise(count = sum(count)) %>% 
+  left_join(pop_estimate_01to20_age_gender %>% 
+              filter(age %in% c(0:17),
+                     end_period_year %in% c(2011:2022),
+                     level %in% c("Birmingham", "West Midlands (region)", "England")) %>%
+              group_by(end_period_year, level) %>%
+              summarise(census_pop = sum(count))) %>% 
+  mutate(care_rate = count/census_pop) %>% 
+  filter(level!= "West Midlands (region)") %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = care_rate, 
+                group = interaction(residential, level), color = interaction(residential, level))) +
+  theme_bw() +
+  theme(legend.position = "none",
+        strip.text = element_blank()) +
+  scale_color_manual(values = c("#6FA7F9", "#0A5FDD", "#9BD6A8", "#49C364")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.0075),
+                     expand = c(0,0)) +
+  scale_x_continuous(name = "", 
+                     breaks = c(2012,  2014,  2016, 2018,2020), 
+                     labels = c("2012", "2014", "2016", "2018", "2020"),
+                     limits = c(2010.5, 2020.5),
+                     expand = c(0,0))
+res_birm_v_eng
+
+
+res_dur_birmveng <- care_11to22_placement %>% 
+  mutate(residential = ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                               "Residential schools",
+                                               "Other residential settings"),
+                              "Residential",
+                              "Not residential")) %>% 
+  group_by(end_period_year, level, residential) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  left_join(care_duration_14to22) %>% 
+  mutate(x = count*mean_dur) %>%
+  group_by(level, end_period_year) %>% 
+  mutate(average = sum(x)/sum(count)) %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = average, 
+                group = level, color =  level))
+  
+res_dur_birmveng  
+
+gen_pc_birmveng <- care_11to22_gender %>% 
+  group_by(end_period_year, level, gender) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  # left_join(care_duration_14to22) %>% 
+  group_by(level, end_period_year) %>% 
+  mutate(pc_gen = count/sum(count)) %>% 
+  filter(gender == "Boys",
+         level != "West Midlands (region)") %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = pc_gen, 
+                group = level, color =  level)) +
+  theme_bw() +
+  theme(legend.position = "none",
+        strip.text = element_blank()) +
+  scale_color_manual(values = c("#3F42B2", "#3FB271")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.7),
+                     expand = c(0,0)) +
+  scale_x_continuous(name = "", 
+                     breaks = c(2012,  2014,  2016, 2018, 2020, 2022), 
+                     labels = c("2012", "2014", "2016", "2018", "2020", "2022"),
+                     limits = c(2010.5, 2022.5),
+                     expand = c(0,0))
+
+gen_pc_birmveng
+
+age_pc_birmveng <- care_11to22_age %>% 
+  group_by(end_period_year, level, age) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  # left_join(care_duration_14to22) %>% 
+  group_by(level, end_period_year) %>% 
+  mutate(pc_age = count/sum(count)) %>% 
+  filter(
+         level != "West Midlands (region)") %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = pc_age, 
+                group = level, color =  level)) +
+  facet_wrap(~age)+
+  theme_bw() +
+  # theme(legend.position = "none",
+  #       strip.text = element_blank()) +
+  scale_color_manual(values = c("#3F42B2", "#3FB271")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.7),
+                     expand = c(0,0)) +
+  scale_x_continuous(name = "", 
+                     breaks = c(2012,  2014,  2016, 2018, 2020, 2022), 
+                     labels = c("2012", "2014", "2016", "2018", "2020", "2022"),
+                     limits = c(2010.5, 2022.5),
+                     expand = c(0,0))
+
+age_pc_birmveng
+
+
+
+age_pc_birmveng <- care_11to22_age %>% 
+  filter(age %in% c("10-15", "16+")) %>% 
+  group_by(end_period_year, level, age) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  # left_join(care_duration_14to22) %>% 
+  group_by(level, end_period_year) %>% 
+  mutate(pc_age = count/sum(count)) %>% 
+  filter(age == "16+",
+    level != "West Midlands (region)") %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = pc_age, 
+                group = level, color =  level)) +
+  # facet_wrap(~age)+
+  theme_bw() +
+  # theme(legend.position = "none",
+  #       strip.text = element_blank()) +
+  scale_color_manual(values = c("#3F42B2", "#3FB271")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.7),
+                     expand = c(0,0)) +
+  scale_x_continuous(name = "", 
+                     breaks = c(2012,  2014,  2016, 2018, 2020, 2022), 
+                     labels = c("2012", "2014", "2016", "2018", "2020", "2022"),
+                     limits = c(2010.5, 2022.5),
+                     expand = c(0,0))
+
+age_pc_birmveng
+
+
+res_pc_birmveng <- care_11to22_placement %>% 
+  mutate(residential = ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                               "Residential schools",
+                                               "Other residential settings"),
+                              "Residential",
+                              "Not residential")) %>% 
+  group_by(end_period_year, level, residential) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  # left_join(care_duration_14to22) %>% 
+  group_by(level, end_period_year) %>% 
+  mutate(pc_res = count/sum(count)) %>% 
+  filter(residential == "Residential",
+         level != "West Midlands (region)") %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = pc_res, 
+                group = level, color =  level)) +
+  theme_bw() +
+  theme(legend.position = "none",
+        strip.text = element_blank()) +
+  scale_color_manual(values = c("#3F42B2", "#3FB271")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.215),
+                     expand = c(0,0)) +
+  scale_x_continuous(name = "", 
+                     breaks = c(2012,  2014,  2016, 2018, 2020, 2022), 
+                     labels = c("2012", "2014", "2016", "2018", "2020", "2022"),
+                     limits = c(2010.5, 2022.5),
+                     expand = c(0,0))
+
+res_pc_birmveng
+
+res_birm_v_eng
+
+
+res_dur_birmveng <- care_11to22_placement %>% 
+  mutate(residential = ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                               "Residential schools",
+                                               "Other residential settings"),
+                              "Residential",
+                              "Not residential")) %>% 
+  group_by(end_period_year, level, residential) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(level, end_period_year) %>% 
+  mutate(pc_res = count/sum(count)) %>% 
+  ungroup() %>% 
+  left_join(care_duration_14to22) %>% 
+  mutate(av = pc_res*mean_dur) %>% 
+  group_by(level, end_period_year) %>% 
+  summarise(av = sum(av)) %>% 
+  filter(level != "West Midlands (region)") %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = av, 
+                group = level, color =  level)) +
+  theme_bw() +
+  theme(legend.position = "none",
+        strip.text = element_blank()) +
+  scale_color_manual(values = c("#3F42B2", "#3FB271")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 390),
+                     expand = c(0,0)) +
+  scale_x_continuous(name = "", 
+                     breaks = c( 2014,  2016, 2018, 2020, 2022), 
+                     labels = c("2014", "2016", "2018", "2020", "2022"),
+                     limits = c(2013.5, 2022.5),
+                     expand = c(0,0))
+
+res_dur_birmveng
+
+
+birm_year_day <- care_10to22 %>%
+  filter(level == "Birmingham") %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count, fill = period_length),
+           stat = "identity") +
+  facet_grid(~period_length) +
+  scale_fill_manual(values = c("#023785", "#0A5FDD")) +
+  theme_bw() +
+  theme(legend.position = "none",
+        strip.text = element_blank()) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 3020),
+                     expand = c(0,0)) +
+  scale_x_continuous(name = "", 
+                     breaks = c(2010, 2012,  2014,  2016, 2018,2020,2022), 
+                     labels = c("2010", "2012", "2014", "2016", "2018", "2020", "2022"),
+                     limits = c(2009, 2023),
+                     expand = c(0,0))
+
+eng_year_day <- care_10to22 %>%
+  filter(level == "England") %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count, fill = period_length),
+           stat = "identity") +
+  facet_grid(~period_length) +
+  theme_bw() +
+  scale_fill_manual(values = c("#03741B", "#49C364")) +
+  theme(legend.position = "none",
+        strip.text = element_blank()) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 112000),
+                     expand = c(0,0)) +
+  scale_x_continuous(name = "", 
+                     breaks = c(2010, 2012,  2014,  2016, 2018,2020,2022), 
+                     labels = c("2010", "2012", "2014", "2016", "2018", "2020", "2022"),
+                     limits = c(2009, 2023),
+                     expand = c(0,0))
+
+
+
+pop_estimate_01to20_age_gender %>% 
+  filter(age %in% c(0:17)) %>% 
+  group_by(level, end_period_year) %>% 
+  summarise(count = sum(count)) %>% 
+  filter(level == "England") %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count),
+           stat = "identity")
+
+
+
+age <- care_11to22_age %>% 
+  left_join(pop_estimate_01to20_age_gender %>% 
+              filter(age %in% c(0:17)) %>% 
+              mutate(age2 = ifelse(age == 0, "<1", NA),
+                     age2 = ifelse(age %in% c(1:4), "1-4", age2),
+                     age2 = ifelse(age %in% c(5:9), "5-9", age2),
+                     age2 = ifelse(age %in% c(10:15), "10-15", age2),
+                     age2 = ifelse(age %in% c(16:17), "16+", age2)) %>% 
+              group_by(level, age2, end_period_year) %>% 
+              summarise(pop_count = sum(count)) %>% 
+              rename(age = age2) %>% 
+              filter(level %in% c("Birmingham", "West Midlands (region)", "England"))) %>% 
+  filter(level != "West Midlands (region)") %>% 
+  mutate(pc = count/pop_count) %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = pc, 
+                group = interaction(age,level), color = interaction(age,level))) +
+  scale_color_manual(values = c( "#0A5FDD", "#0A5FDD",  "#0A5FDD", "#0A5FDD",  "#0A5FDD",   "#49C364", "#49C364",  "#49C364", "#49C364","#49C364"))
+
+age
+
+
+
+
+
+
+pc_res_v_poverty <- care_11to22_placement %>% 
+  mutate(residential = ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                               "Residential schools",
+                                               "Other residential settings"),
+                              "Residential",
+                              "Not residential")) %>% 
+  group_by(end_period_year, level, residential) %>% 
+  summarise(count = sum(count)) %>% 
+  left_join(pop_estimate_01to20_age_gender %>% 
+              filter(age %in% c(0:17),
+                     end_period_year %in% c(2011:2022),
+                     level %in% c("Birmingham", "West Midlands (region)", "England")) %>%
+              group_by(end_period_year, level) %>%
+              summarise(census_pop = sum(count))) %>% 
+  mutate(care_rate = count/census_pop) %>% 
+  filter(level!= "West Midlands (region)") 
+
+
+
+
+res_pc_birm  <- care_11to22_placement %>% 
+  mutate(residential = ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                               "Residential schools",
+                                               "Other residential settings"),
+                              "Residential",
+                              "Not residential")) %>% 
+  group_by(end_period_year, level, residential) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  # left_join(care_duration_14to22) %>% 
+  group_by(level, end_period_year) %>% 
+  mutate(pc_res = count/sum(count)) %>% 
+  filter(residential == "Residential",
+         level == "Birmingham") %>% 
+  left_join(smooth_poverty %>% 
+              select(end_period_year, spov_rate)) %>% 
+  left_join(care_pc)
+
+x <- lm(pc_res ~ spov_rate, data = res_pc_birm)
+
+
+
+res_plus_age <- care_11to22_placement %>% 
+  mutate(residential = ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                               "Residential schools",
+                                               "Other residential settings"),
+                              "Residential",
+                              "Not residential")) %>% 
+  group_by(end_period_year, level, residential) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  # left_join(care_duration_14to22) %>% 
+  group_by(level, end_period_year) %>% 
+  mutate(pc_res = count/sum(count)) %>% 
+  filter(residential == "Residential",
+         level == "Birmingham") %>% 
+  left_join(smooth_poverty %>% 
+              select(end_period_year, spov_rate)) %>% 
+  left_join(care_pc) %>% 
+  left_join(care_11to22_age %>% 
+              filter(level == "Birmingham",
+                     age %in% c("10-15", "16+")) %>% 
+              group_by(end_period_year) %>% 
+              mutate(pc_age = count/sum(count)) %>% 
+              filter(age == "16+") %>% 
+              ungroup() %>% 
+              select(end_period_year, pc_age)) %>% 
+  ungroup() %>% 
+  filter(end_period_year < 2020)
+
+
+b <- lm(pc_res ~ spov_rate, data = res_plus_age %>% 
+          select(pc_res, pc_age, spov_rate))
+
+summary(b)
+
+
+a <- lm(pc_res ~ pc_age, data = res_plus_age %>% 
+          select(pc_res, pc_age))
+
+summary(a)
+
+
+poverty_range <- data.frame(spov = c(seq(0.2, 0.5, 0.01)))
+
+# 
+# res_pc_birm_predict  <- care_11to22_placement %>% 
+#   mutate(residential = ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+#                                                "Residential schools",
+#                                                "Other residential settings"),
+#                               "Residential",
+#                               "Not residential")) %>% 
+#   group_by(end_period_year, level, residential) %>% 
+#   summarise(count = sum(count)) %>% 
+#   ungroup() %>% 
+#   # left_join(care_duration_14to22) %>% 
+#   group_by(level, end_period_year) %>% 
+#   mutate(pc_res = count/sum(count)) %>% 
+#   filter(residential == "Residential",
+#          level == "Birmingham",
+#          end_period_year >= 2010) %>% 
+#   left_join(smooth_poverty %>% 
+#               select(end_period_year, spov_rate) %>% 
+#               filter(end_period_year >= 2011)) %>% 
+#   cbind(smooth_poverty %>% 
+#           select(end_period_year) %>% 
+#           filter(end_period_year >= 2011), data.frame(predict_pc = predict(x, smooth_poverty %>% 
+#                                 select(end_period_year, spov_rate))))
+
+
+care_pc <- care_11to22_age %>% 
+  filter(age %in% c("10-15", "16+"),
+         level == "Birmingham") %>% 
+  group_by(end_period_year) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  left_join(pop_estimate_01to20_age_gender %>% 
+              filter(level == "Birmingham") %>% 
+               filter(age %in% c(10:17)) %>% 
+               group_by(end_period_year) %>% 
+               summarise(pop_count = sum(count)) %>% 
+              ungroup()) %>% 
+  mutate(care_pc = count/pop_count) %>% 
+  select(end_period_year, care_pc)
+
+
+age_pc_birm <- care_11to22_age %>% 
+  filter(level == "Birmingham",
+         age %in% c("10-15", "16+")) %>% 
+              group_by(end_period_year) %>% 
+              mutate(pc = count/sum(count)) %>% 
+  filter(age == "16+") %>% 
+  left_join(smooth_poverty %>% 
+              select(end_period_year, spov_rate)) %>% 
+  left_join(care_pc %>% 
+              filter(end_period_year <= 2020))
+
+y <- lm(pc ~ spov_rate, data = age_pc_birm)
+
+
+z <- lm(care_pc ~ spov_rate, data = age_pc_birm %>% 
+          select(care_pc, spov_rate))
+
+
+
+summary(y)
+
+summary(z)
+
+check <- data.frame(pred_pc = predict(a, res_plus_age),
+                    end_period_year = res_plus_age %>% 
+                      ungroup() %>% 
+                      select(end_period_year))  %>%
+  left_join(care_11to22_age %>% 
+              filter(level == "Birmingham",
+                     age %in% c("10-15", "16+")) %>% 
+              group_by(end_period_year) %>% 
+              mutate(pc_age = count/sum(count)) %>% 
+              filter(age == "16+") %>% 
+              select(end_period_year, pc_age)) %>% 
+  left_join(care_11to22_placement %>% 
+              mutate(residential = ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                                           "Residential schools",
+                                                           "Other residential settings"),
+                                          "Residential",
+                                          "Not residential")) %>% 
+              group_by(end_period_year, level, residential) %>% 
+              summarise(count = sum(count)) %>% 
+              ungroup() %>% 
+              # left_join(care_duration_14to22) %>% 
+              group_by(level, end_period_year) %>% 
+              mutate(pc_res = count/sum(count)) %>% 
+              filter(residential == "Residential",
+                     level == "Birmingham",
+                     end_period_year >= 2011) %>% 
+              select(end_period_year, pc_res))  %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = pc_res), colour = "red") +
+  geom_line(aes(x = end_period_year, y = pred_pc), colour = "blue") +
+  geom_line(aes(x = end_period_year, y = pc_age), colour = "green") 
+
+check
+
+# FLAG
+check <- data.frame(pred_pc = predict(y, smooth_poverty %>% 
+                                        select(end_period_year, spov_rate) %>% 
+                                        filter(end_period_year >= 2011) %>% 
+                                        left_join(care_pc %>% 
+                                                    filter(end_period_year <= 2020))), 
+                    end_period_year = smooth_poverty %>% 
+                      select(end_period_year) %>% 
+                      filter(end_period_year >= 2011),
+                    spov_rate = smooth_poverty %>%
+                      filter(end_period_year >= 2011) %>% 
+                      select(spov_rate),
+                    carepc = care_pc %>% 
+                      filter(end_period_year <= 2020) %>% 
+                      select(care_pc)) %>% 
+  left_join(care_11to22_age %>% 
+          filter(level == "Birmingham",
+                 age %in% c("10-15", "16+")) %>% 
+          group_by(end_period_year) %>% 
+          mutate(pc = count/sum(count)) %>% 
+          filter(age == "16+") %>% 
+          select(end_period_year, pc)) %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = pc), colour = "red") +
+  geom_line(aes(x = end_period_year, y = pred_pc), colour = "blue") +
+  geom_line(aes(x = end_period_year, y = spov_rate), colour = "green") +
+  geom_line(aes(x = end_period_year, y = care_pc), colour = "black")
+
+
+check
+# FLAG
+output <- data.frame(pred_pc = predict(y, smooth_poverty %>% 
+                                        select(end_period_year, spov_rate) %>% 
+                                        filter(end_period_year >= 2011) %>% 
+                                        left_join(care_pc %>% 
+                                                    filter(end_period_year <= 2020))), 
+                    end_period_year = smooth_poverty %>% 
+                      select(end_period_year) %>% 
+                      filter(end_period_year >= 2011),
+                    spov_rate = smooth_poverty %>%
+                      filter(end_period_year >= 2011) %>% 
+                      select(spov_rate),
+                    carepc = care_pc %>% 
+                      filter(end_period_year <= 2020) %>% 
+                      select(care_pc)) %>% 
+  left_join(care_11to22_age %>% 
+              filter(level == "Birmingham",
+                     age %in% c("10-15", "16+")) %>% 
+              group_by(end_period_year) %>% 
+              mutate(pc = count/sum(count)) %>% 
+              filter(age == "16+") %>% 
+              select(end_period_year, pc)) %>% 
+  mutate(check = 0.17705+0.62697*spov_rate)
+
+
+
+
+# FLAG
+check3 <- data.frame(pred_pc = predict(z, smooth_poverty %>% 
+                                        select(end_period_year, spov_rate) %>% 
+                                        filter(end_period_year >= 2011)), 
+                    end_period_year = smooth_poverty %>% 
+                      select(end_period_year) %>% 
+                      filter(end_period_year >= 2011),
+                    spov_rate = smooth_poverty %>%
+                      filter(end_period_year >= 2011) %>% 
+                      select(spov_rate),
+                    what = care_pc %>% 
+                      filter(end_period_year <= 2020) %>% 
+                      select(care_pc)) %>% 
+  ggplot()+
+  # geom_line(aes(x = end_period_year, y = pc), colour = "red") +
+  geom_line(aes(x = end_period_year, y = pred_pc), color = "blue") +
+  geom_line(aes(x = end_period_year, y = care_pc), color = "black")
+  # geom_line(aes(x = end_period_year, y = spov_rate), colour = "green") +
+
+
+
+# will look at res pc versus age pc
+
+
+check3
+
+check2 <- data.frame(pred_pc = predict(x, smooth_poverty %>% 
+                                        select(end_period_year, spov_rate) %>% 
+                                        filter(end_period_year >= 2011) %>% 
+                                         left_join(care_pc %>% 
+                                                     filter(end_period_year <= 2020))), 
+                    end_period_year = smooth_poverty %>% 
+                      select(end_period_year) %>% 
+                      filter(end_period_year >= 2011),
+                    spov_rate = smooth_poverty %>%
+                      filter(end_period_year >= 2011) %>% 
+                      select(spov_rate),
+                    carepc = care_pc %>% 
+                      filter(end_period_year <= 2020) %>% 
+                      select(care_pc)) %>% 
+  left_join(care_11to22_placement %>% 
+              mutate(residential = ifelse(placement %in% c("Secure units, children's homes and semi-independent living accommodation",
+                                                           "Residential schools",
+                                                           "Other residential settings"),
+                                          "Residential",
+                                          "Not residential")) %>% 
+              group_by(end_period_year, level, residential) %>% 
+              summarise(count = sum(count)) %>% 
+              ungroup() %>% 
+              # left_join(care_duration_14to22) %>% 
+              group_by(level, end_period_year) %>% 
+              mutate(pc_res = count/sum(count)) %>% 
+              filter(residential == "Residential",
+                     level == "Birmingham",
+                     end_period_year >= 2011) %>% 
+              select(end_period_year, pc_res)) %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = pc_res), colour = "red") +
+  geom_line(aes(x = end_period_year, y = pred_pc), colour = "blue") +
+  geom_line(aes(x = end_period_year, y = spov_rate), colour = "green") +
+geom_line(aes(x = end_period_year, y = care_pc), colour = "black")
+
+check2
+
 # looked at diff between duration in birm/wm/eng by doing the p=id calculation
 # looks fine, birm higher by like 10 days at most, not too bad
 # 
@@ -84,10 +756,9 @@ care_duration <- care_duration_14to22 %>%
 care_duration %>% 
   ggplot() +
   geom_line(aes(x = end_period_year, y = mean_dur, group = residential, colour = residential)) + 
-  geom_line(aes(x = end_period_year, y = smooth_mean_dur, group = residential, colour = residential)) + 
+  geom_line(aes(x = end_period_year, y = smooth_mean_dur, group = residential, colour = residential)) 
   
-  save(care_duration, file = "output/data/processed/care_duration.Rdata")
-
+  # save(care_duration, file = "output/data/processed/care_duration.Rdata")
 
 
 # changed this to the smoothed version but could as easily go back
@@ -113,9 +784,9 @@ endres <- care_duration %>%
   mutate(Girls = Boys) %>% 
   as.matrix()
 
-save(endnr, file = "output/data/input/endnr.Rdata")
-save(endres, file = "output/data/input/endres.Rdata")
-
+# save(endnr, file = "output/data/input/endnr.Rdata")
+# save(endres, file = "output/data/input/endres.Rdata")
+# 
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -402,6 +1073,18 @@ care_pov <- care %>%
   mutate(pc_prior = cum_pc - ((Residential + `Not residential`)/pop)) %>% 
   mutate(Prior = pop*pc_prior) %>% 
   mutate(Never = pop - Prior - Residential - `Not residential`) %>% 
+  select(-c(cum_pc, pc_prior)) 
+
+care_pov <- care %>% 
+  select(-c(count, pc, smooth_pc)) %>% 
+  pivot_wider(names_from = residential,
+              values_from = smooth_count) %>% 
+  # CUM PC COMES IN FROM THAT PAPER
+  full_join(care_cum_pc) %>% 
+  mutate(cum_pc = cum_pc/100) %>% 
+  mutate(pc_prior = cum_pc - ((Residential + `Not residential`)/pop)) %>% 
+  mutate(Prior = pop*pc_prior) %>% 
+  mutate(Never = pop - Prior - Residential - `Not residential`)%>% 
   select(-c(cum_pc, pc_prior)) %>% 
   # ASSUMPTION that poverty is evenly distributed across age & gender
   # ASSUMPTION that children in poverty are 4 times more likely to go to care... why did i decide this?

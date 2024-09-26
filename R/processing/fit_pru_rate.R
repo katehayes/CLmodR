@@ -1,8 +1,390 @@
-install.packages("lognorm")
+
+
+
+
+
+fsm_check <- schools_10to22_age_gender %>%
+  select(-ward) %>% 
+  left_join(s_data) %>% 
+  filter(age %in% c(11:15),
+         level == "Birmingham") %>% 
+  mutate(school = ifelse(school %in% c("The City of Birmingham School", "City of Birmingham School", "The Behaviour Support Service"), "Behaviour Support Service at The City of Birmingham School", school),
+         school = ifelse(school == "EBN Free School", "East Birmingham Network Academy", school),
+         school = ifelse(school == "Ebn Academy  2", "EBN Academy Phase 2", school),
+         school = ifelse(school == "Titan St Georges Academy", "St Georges Academy", school)) %>% 
+  group_by(end_period_year, school_type, school_subtype, school, my_categories, academy) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  left_join(schools_fsm %>% 
+              select(-ward) %>% 
+              filter(level == "Birmingham") %>% 
+              mutate(fsm_pc = school_fsm / school_headcount) %>% 
+              mutate(fsm_pc = ifelse(is.na(fsm_pc), 0, fsm_pc)) %>% 
+              mutate(school = ifelse(school %in% c("The City of Birmingham School", "City of Birmingham School", "The Behaviour Support Service"), "Behaviour Support Service at The City of Birmingham School", school),
+                     school = ifelse(school == "EBN Free School", "East Birmingham Network Academy", school),
+                     school = ifelse(school == "Ebn Academy  2", "EBN Academy Phase 2", school),
+                     school = ifelse(school == "Titan St Georges Academy", "St Georges Academy", school))) %>% 
+  filter(my_categories != "Private school") %>% 
+  mutate(count_fsm = count * fsm_pc,
+         count_non_fsm = count * (1-fsm_pc))
+
+
+fsm_check %>% 
+  ggplot() +
+  geom_histogram(aes(x = fsm_pc, color = academy), 
+                 fill="white", binwidth = 0.01)+
+  facet_wrap(~end_period_year)
+
+
+check <- schools_fsm %>% 
+  mutate(fsm_pc = school_fsm / school_headcount) %>% 
+  mutate(fsm_pc = ifelse(is.na(fsm_pc), 0, fsm_pc)) %>% 
+  mutate(school = ifelse(school %in% c("The City of Birmingham School", "City of Birmingham School", "The Behaviour Support Service"), "Behaviour Support Service at The City of Birmingham School", school),
+         school = ifelse(school == "EBN Free School", "East Birmingham Network Academy", school),
+         school = ifelse(school == "Ebn Academy  2", "EBN Academy Phase 2", school),
+         school = ifelse(school == "Titan St Georges Academy", "St Georges Academy", school)) %>% 
+  left_join(s_data) %>% 
+  filter(level == "Birmingham")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# install.packages("lognorm")
 library(lognorm)
-install.packages("texreg")
+# install.packages("texreg")
 library(texreg)
 
+
+
+change_in_pru <- schools %>% 
+  filter(age <= 15,
+         gender == "Boys",
+         school_type == "Pupil referral unit") %>% 
+  group_by(end_period_year, age, fsm) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year, fsm) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  ggplot()+
+  # geom_bar(aes(x = end_period_year, y = count, fill = -age),
+  #          stat = "identity", position = "fill") +
+  # facet_grid(~fsm)
+  
+  # geom_line(aes(x = end_period_year, y = pc, group = interaction(age, fsm), color = as.character(age)))
+  # 
+  # geom_bar(aes(x = end_period_year, y = count, fill = -age),
+  #                   stat = "identity", position = "stack") +
+  #          facet_grid(~fsm) 
+geom_bar(aes(x = end_period_year, y = count, fill = age),
+         stat = "identity", position = "stack") +
+  geom_line(data = schools %>% 
+              filter(age <= 15,
+                     gender == "Boys",
+                     school_type == "Pupil referral unit") %>% 
+              group_by(end_period_year, age, fsm) %>% 
+              summarise(count = sum(count)) %>% 
+              ungroup() %>% 
+              mutate(count = ifelse(end_period_year > 2014,
+                                    NA, count)) %>% 
+              group_by(age, fsm) %>% 
+              mutate(count = mean(count, na.rm = T)),
+            aes(x = end_period_year, y = count), color = "red") +
+  facet_grid(~interaction(age,fct_rev(fsm))) +
+  theme_bw() +
+  scale_y_continuous(expand = c(0,0),
+                     name = "")+
+  scale_x_continuous(expand = c(0,0),
+                     name = "",
+                     breaks = c(2010, 2013, 2016, 2019, 2022), 
+                     labels = c("'10", "'13", "'16", "'19", "'22")) +
+  theme(strip.text = element_blank(),
+        legend.position = "none")
+
+change_in_pru 
+
+ggsave(filename = "output/graphs/change_in_pru.png", change_in_pru )
+
+
+# overall ratio of FSM v non versus number of FSM in pru
+
+fsm_effect_on_pru <- schools %>% 
+  filter(age <= 15,
+         gender == "Boys") %>% 
+  group_by(end_period_year, age, fsm) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year, age) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  filter(fsm == "FSM eligible") %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = pc, group = age, color = age)) +
+  geom_line(data = schools %>% 
+              filter(age <= 15,
+                     gender == "Boys",
+                     school_type == "Pupil referral unit") %>% 
+              group_by(end_period_year, age, fsm) %>% 
+              summarise(count = sum(count)) %>% 
+              ungroup() %>% 
+              group_by(end_period_year, age) %>% 
+              mutate(pc = count/sum(count)) %>% 
+              filter(fsm == "FSM eligible"),
+            aes(x = end_period_year, y = pc, group = age, color = age)) +
+  theme_bw() +
+  scale_y_continuous(limits = c(0, 1),
+                    expand = c(0,0),
+                     name = "")+
+  scale_x_continuous(limits = c(2009.5, 2022.5),
+                     expand = c(0,0),
+                     name = "",
+                     breaks = c(2010, 2013, 2016, 2019, 2022), 
+                     labels = c("2010", "2013", "2016", "2019", "2022")) +
+  theme(strip.text = element_blank(),
+        legend.position = "none")
+# for those not FSM eligible, most of the rise came from 15 year olds. 
+fsm_effect_on_pru
+
+ggsave(filename = "output/graphs/fsm_effect_on_pru.png", fsm_effect_on_pru)
+
+# for a given person age something pru something, what is the PC chance they are in a PRU?
+
+
+
+
+# the only one that sort of stays in line with the overall percentage is 15 
+# it pretty much only starts rising when the overall percentage does. 
+# the bigger the capacity, the more of a difference between FSM and non-FSM in every age except 15
+
+pru_mult <- schools %>% 
+  filter(age <= 15,
+         gender == "Boys") %>% 
+  group_by(end_period_year, age, fsm, school_type) %>% 
+  summarise(count = sum(count)) %>% 
+  filter(fsm == "FSM eligible") %>% 
+  ungroup() %>% 
+  group_by(end_period_year, age) %>% 
+  mutate(pc_pru_fsm = count/sum(count)) %>% 
+  filter(school_type == "Pupil referral unit") %>% 
+  select(end_period_year, age, pc_pru_fsm) %>% 
+  left_join(schools %>% 
+              filter(age <= 15,
+                     gender == "Boys") %>% 
+              group_by(end_period_year, age, fsm, school_type) %>% 
+              summarise(count = sum(count)) %>% 
+              filter(fsm != "FSM eligible") %>% 
+              ungroup() %>% 
+              group_by(end_period_year, age) %>% 
+              mutate(pc_pru_notfsm = count/sum(count)) %>% 
+              filter(school_type == "Pupil referral unit") %>% 
+              select(end_period_year, age, pc_pru_notfsm)) %>% 
+  mutate(mult = pc_pru_fsm/pc_pru_notfsm)
+
+
+pru_mult %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = mult, group = age, color = age))
+
+pru_age <- schools %>% 
+  filter(age <= 15,
+         gender == "Boys") %>% 
+  group_by(end_period_year, age, school_type) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year, age) %>% 
+  mutate(pc_pru_age = count/sum(count)) %>% 
+  filter(school_type == "Pupil referral unit") %>% 
+  select(end_period_year, age, pc_pru_age) %>% 
+  pivot_wider(names_from = age,
+              values_from = pc_pru_age) %>% 
+  mutate(mult15 = `15`/`12`,
+         mult14 = `14`/`12`,
+         mult13 = `13`/`12`,
+         mult10 = `10`/`12`,
+         mult11 = `11`/`12`)
+
+pru_age %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = mult14), color = "blue") +
+  geom_line(aes(x = end_period_year, y = mult15), color = "red") +
+  geom_line(aes(x = end_period_year, y = mult13), color = "green") +
+  geom_line(aes(x = end_period_year, y = mult10), color = "orange") +
+  geom_line(aes(x = end_period_year, y = mult11))
+
+  
+  age_in_pru <- schools %>% 
+  filter(age <= 15,
+         gender == "Boys") %>% 
+  group_by(end_period_year, age, fsm, school_type) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year, age, fsm) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  filter(school_type == "Pupil referral unit") %>% 
+  select(-count) %>% 
+  ungroup() %>%
+  pivot_wider(names_from = fsm,
+              values_from = pc) %>% 
+  mutate(mult = `FSM eligible`/ `Not FSM eligible`) 
+
+# %>% 
+  ggplot()+
+  geom_line(aes(x = end_period_year, y = mult, group = age, color = as.character(age))) +
+  theme_bw() +
+  scale_y_continuous(limits = c(0, 20),
+                     expand = c(0,0),
+                     name = "")+
+  scale_x_continuous(limits = c(2009.5, 2022.5),
+                     expand = c(0,0),
+                     name = "",
+                     breaks = c(2010, 2013, 2016, 2019, 2022), 
+                     labels = c("2010", "2013", "2016", "2019", "2022")) +
+  theme(strip.text = element_blank())
+
+age_in_pru
+
+
+age_in_pru <- schools %>% 
+  filter(age <= 15,
+         gender == "Boys") %>% 
+  group_by(end_period_year, age, fsm, school_type) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year, age, fsm) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  filter(school_type == "Pupil referral unit") %>% 
+  select(-count) %>% 
+  ungroup() %>%
+  pivot_wider(names_from = fsm,
+              values_from = pc) %>% 
+  mutate(mult = `FSM eligible`/ `Not FSM eligible`)
+
+
+fsm multiplier (by categorical age) versus pru capacity as a pc of total capacity plus fsm as a pc of total
+
+
+
+
+mult10 <- age_in_pru %>% 
+  filter(age == 10) %>% 
+  select(end_period_year, mult) %>% 
+  left_join(schools %>% 
+              filter(age <= 15,
+                     gender == "Boys") %>% 
+              group_by(end_period_year, school_type) %>% 
+              summarise(count = sum(count)) %>% 
+              ungroup() %>% 
+              group_by(end_period_year) %>% 
+              mutate(pru_pc = count/sum(count)) %>% 
+              filter(school_type == "Pupil referral unit") %>% 
+              select(end_period_year, pru_pc)) %>% 
+  left_join(schools %>% 
+              filter(age <= 15,
+                     gender == "Boys") %>% 
+              group_by(end_period_year, fsm) %>% 
+              summarise(count = sum(count)) %>% 
+              ungroup() %>% 
+              group_by(end_period_year) %>% 
+              mutate(fsm_pc = count/sum(count)) %>% 
+              filter(fsm == "FSM eligible") %>% 
+              select(end_period_year, fsm_pc))
+  
+
+
+mult12 %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = mult))
+
+mult12 %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pru_pc))
+
+age_in_pru %>% 
+  filter(age == 13) %>%
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = mult))
+
+
+
+mult12 <- age_in_pru %>% 
+  filter(age == 12) %>% 
+  select(end_period_year, mult) %>% 
+  left_join(schools %>% 
+              filter(age <= 15,
+                     gender == "Boys") %>% 
+              group_by(end_period_year, school_type) %>% 
+              summarise(count = sum(count)) %>% 
+              ungroup() %>% 
+              group_by(end_period_year) %>% 
+              mutate(pru_pc = count/sum(count)) %>% 
+              filter(school_type == "Pupil referral unit") %>% 
+              select(end_period_year, pru_pc)) %>% 
+  left_join(schools %>% 
+              filter(age <= 15,
+                     gender == "Boys") %>% 
+              group_by(end_period_year, fsm) %>% 
+              summarise(count = sum(count)) %>% 
+              ungroup() %>% 
+              group_by(end_period_year) %>% 
+              mutate(fsm_pc = count/sum(count)) %>% 
+              filter(fsm == "FSM eligible") %>% 
+              select(end_period_year, fsm_pc)) %>% 
+  filter(end_period_year != 2018)
+
+check <- lm(mult ~ fsm_pc + pru_pc, data = mult12)
+summary(check)
+
+check
+
+
+change_in_pru <- schools %>% 
+  filter(age <= 15,
+         gender == "Boys",
+         school_type == "Pupil referral unit") %>% 
+  group_by(end_period_year, age, fsm) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year, fsm) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  ggplot()+
+  geom_bar(aes(x = end_period_year, y = count),
+           stat = "identity", position = "stack") +
+  facet_grid(~fsm) +
+  theme_bw() +
+  scale_y_continuous(expand = c(0,0),
+                     name = "")+
+  scale_x_continuous(expand = c(0,0),
+                     name = "",
+                     breaks = c(2010, 2013, 2016, 2019, 2022), 
+                     labels = c("'10", "'13", "'16", "'19", "'22")) +
+  theme(strip.text = element_blank(),
+        legend.position = "none")
+
+change_in_pru 
+
+pru <- schools %>% 
+  filter(age <= 15,
+         gender == "Boys",
+         school_type == "Pupil referral unit") %>% 
+  group_by(fsm, age) %>% 
+  arrange(end_period_year) %>% 
+  mutate(lag_count = lag(count),
+         change = count-lag_count,
+         pc_change = change/lag_count) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc_change, group = interaction(age, fsm), color = as.character(age)))
+  
+pru
+
+# mutate(pc_change = (count-lag(count)/lag(count))) 
 
 obs_data <- schools %>% 
   filter(age <= 15) %>% 
@@ -60,7 +442,7 @@ pru_logit <- glm(pru ~ gender + age + fsm + age*fsm + end_period_year + end_peri
 summary(pru_logit)
 
 
-pru_logit_pol <- glm(pru ~ gender + age + fsm + age*fsm + policy_period*near_change , family="binomial", weight = reg_data$count, data = reg_data)
+pru_logit_pol <- glm(pru ~ gender + age + fsm + age*fsm + policy_period*near_change, family="binomial", weight = reg_data$count, data = reg_data)
 
 summary(pru_logit_pol)
 

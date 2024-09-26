@@ -338,6 +338,10 @@ ggsave(filename = "Output/Graphs/care_age.png", care_age)
 
 # PRIVATE CARE
 
+
+
+
+
 care_provider <- care_data_provider %>%
   mutate(level = factor(level, levels = c("England", "West Midlands (region)", "Birmingham"))) %>%
   mutate(characteristic = factor(characteristic, levels = c("Placement provider not reported", "Parents or other person with parental responsibility",
@@ -374,6 +378,61 @@ ggsave(filename = "Output/Graphs/care_provider.png", care_provider)
 
 
 
+
+
+
+care_provider <- care_11to22_provider %>%
+  mutate(level = factor(level, levels = c("England", "West Midlands (region)", "Birmingham"))) %>%
+  mutate(prov = ifelse(provider %in% c("Own provision (by the LA)", "Other LA provision",
+                                       "Other public provision (e.g. by a PCT etc)"),
+                       "Public", NA),
+         prov = ifelse(provider == "Private provision", "Private", prov),
+         prov = ifelse(provider == "Voluntary/third sector provision", "Voluntary", prov), 
+         prov = ifelse(provider == "Parents or other person with parental responsibility", "Parental", prov), 
+         prov = ifelse(provider == "Placement provider not reported", "Unknown", prov)) %>% 
+  group_by(end_period_year, level, prov) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(end_period_year, level) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  filter(level != "West Midlands (region)") %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc, group = prov, color = prov)) +
+  facet_grid(~level) +
+  theme_bw() +
+  scale_x_continuous(name = "", 
+                     expand = c(0,0),
+                     limits = c(2010.5, 2022.5),
+                     breaks = c(2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022),
+                     labels = c("2011", "2012", "2013", "2014",
+                                "2015", "2016", "2017", "2018",
+                                "2019", "2020", "2021", "2022")) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0),
+                     limits = c(0, 0.65)) +
+  scale_color_manual(values = c( "#ddcc77", "#cc6677", "#88ccee","#91A1BAFF", "#117733")) +
+  # scale_color_manual(values = c("#b30000", "#7c1158","#4421af", "#91A1BAFF", "#1a53ff")) +
+  theme(legend.position = "none")
+
+
+care_provider
+
+# +
+  scale_x_continuous(name = "",
+                     expand = c(0,0),
+                     breaks = c(2010:2022),
+                     labels = c("2010", "2011", "2012", "2013", "2014", "2015", "2016",
+                                "2017", "2018", "2019", "2020", "2021", "2022")) +
+  scale_y_continuous(name = "",
+                     expand = c(0,0)) +
+  theme_classic() +
+  theme(strip.background = element_blank(),
+        plot.title = element_text(hjust = 0.5, size = 10)) +
+  scale_fill_viridis(option="viridis", discrete = TRUE, direction = -1,
+                     begin = 0.1,
+                     end = 0.9)
+care_provider
+ggsave(filename = "output/graphs/care_provider.png", care_provider)
 
 
 

@@ -8,6 +8,21 @@ load("/Users/katehayes/CLmodR/output/data/cleaned/poverty_15to21_workstatus_age.
 poverty <- poverty_06to12_15to21 %>%
   filter(level != "Wales")
 
+
+poverty_data <- pop_estimate_01to20_age_gender %>%
+  filter(level == "Birmingham") %>%
+  group_by(end_period_year) %>%
+  summarise(pop = sum(count)) %>%
+  full_join(poverty_06to12_15to21 %>%
+              filter(level == "Birmingham") %>% 
+              select(end_period_year, count) %>%
+              rename(pov = count)) %>%
+  ungroup() %>%
+  mutate(pov_rate = pov / pop)
+
+
+
+
 missing_pov <- poverty %>%
   filter(end_period_year %in% c(2012, 2015)) %>%
   select(end_period_year, level, count) %>%
@@ -76,21 +91,55 @@ smooth_poverty_rate <- smooth_poverty %>%
          fall = ifelse(fall <0, -fall, 0)/52)
 
 
-rise <- smooth_poverty_rate %>%
+# july_pov <- smooth_poverty_rate %>% 
+#   arrange(week) %>% 
+#   mutate(week2 = lag(week),
+#          week2 = ifelse(week == 520, week, week2)) %>% 
+#   filter(!is.na(week2)) %>% 
+#   select(-week) %>% 
+#   rename(week = week2)
+  
+
+july_pov <- smooth_poverty_rate %>% 
+  arrange(week) %>% 
+  mutate(rise = ifelse(week < 520, (rise + lead(rise))/2, rise),
+         fall = ifelse(week < 520, (fall + lead(fall))/2, fall))
+
+# 
+# rise <- smooth_poverty_rate %>%
+#   select(rise) %>% 
+#   mutate(rise2 = rise) %>% 
+#   as.matrix()
+# 
+# fall <- smooth_poverty_rate %>%
+#   select(fall) %>% 
+#   mutate(fall2 = fall) %>% 
+#   as.matrix()
+# 
+# rf_t <- smooth_poverty_rate$week
+# 
+# save(rise, file = "output/data/input/rise.Rdata")
+# save(fall, file = "output/data/input/fall.Rdata")
+# save(rf_t, file = "output/data/input/rf_t.Rdata")
+# 
+
+
+rise <- july_pov %>%
   select(rise) %>% 
   mutate(rise2 = rise) %>% 
   as.matrix()
 
-fall <- smooth_poverty_rate %>%
+fall <- july_pov %>%
   select(fall) %>% 
   mutate(fall2 = fall) %>% 
   as.matrix()
 
-rf_t <- smooth_poverty_rate$week
+rf_t <- july_pov$week
 
-save(rise, file = "output/data/input/rise.Rdata")
-save(fall, file = "output/data/input/fall.Rdata")
-save(rf_t, file = "output/data/input/rf_t.Rdata")
+# save(rise, file = "/Users/katehayes/CLmodR/output/data/input/rise.Rdata")
+# save(fall, file = "/Users/katehayes/CLmodR/output/data/input/fall.Rdata")
+# save(rf_t, file = "/Users/katehayes/CLmodR/output/data/input/rf_t.Rdata")
+# 
 
 
 

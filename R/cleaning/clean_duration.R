@@ -1,3 +1,43 @@
+library(readr)
+
+duration_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/Supplementary_Tables/Ch 7 - Children in youth custody.xlsx", sheet = 23, skip = 3)
+
+
+dur_data <- duration_data %>% 
+  select(-c(starts_with("P"))) %>% 
+  filter(`Legal basis` != "Remand",
+         `Number\r\nof nights` != "Total") %>% 
+  pivot_longer(!c(`Legal basis`, `Number\r\nof nights`),
+               names_to = "end_period_year",
+               values_to = "count") %>% 
+  mutate(end_period_year =as.numberic(readr::parse_number(end_period_year)))
+
+med <- dur_data %>% 
+  filter(`Number\r\nof nights` == "Median number of nights")
+
+dur_dist_plot <- dur_data %>% 
+  mutate(`Number\r\nof nights` = factor(`Number\r\nof nights`, 
+                                           levels = c("1 to 91 nights", "92 to 182 nights",
+                                                      "183 to 273 nights", "274 to 365 nights",
+                                                      "274+ nights"))) %>% 
+  filter(`Number\r\nof nights` != "Median number of nights") %>% 
+  group_by(end_period_year, `Legal basis`) %>% 
+  mutate(pc = count/sum(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = pc, fill = `Number\r\nof nights`),
+           stat = "identity", position = "dodge") +
+  facet_grid(~`Legal basis`)
+
+dur_dist_plot
+
+
+dur_med_plot <- med %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count),
+           stat = "identity", position = "dodge") +
+  facet_grid(~`Legal basis`)
+  
+dur_med_plot
 # where is/how much do we have of duration data at west mids (or even birm) level??
 # youth justice statistics supplementaries chapter 7 - Children in youth custody
 # sheet 7.32 Legal basis episodes ending by Youth Justice Service region and nights, years ending March 2019 to 2021

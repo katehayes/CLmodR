@@ -1,10 +1,122 @@
 
+
+
+
+enter_data <-read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/Children_looked_after_in_England_2018_underlying_data (2)/ADM2018_amended.csv")
+
+e_data <- enter_data %>% 
+  filter(geog_n == "Birmingham")
+
+leave_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/Children_looked_after_in_England_2018_underlying_data (2)/CEA2018.csv")
+
+l_data <- leave_data %>% 
+  filter(geog_n == "Birmingham")
+
+leave_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/children-looked-after-in-england-including-adoptions_2022 (1)/data (1)/la_children_who_ceased_during_year.csv")
+
+l_data22 <- leave_data %>% 
+  filter(la_name == "Birmingham")
+
+enter_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/children-looked-after-in-england-including-adoptions_2022 (1)/data (1)/la_cla_who_started_to_be_looked_after.csv")
+
+e_data22 <- enter_data %>% 
+  filter(la_name == "Birmingham")
+
+care_entry_age <- e_data22 %>% 
+  filter(cla_group == "Age group",
+         characteristic != "Total") %>% 
+  rename(end_period_year = time_period,
+         age = characteristic,
+         count = number) %>% 
+  select(end_period_year, age, count) %>% 
+  mutate(count = as.numeric(count)) %>% 
+  group_by(end_period_year) %>% 
+  mutate(pc = paste(floor(100*count/sum(count)), "%", sep = "")) %>% 
+  mutate(age = factor(age, levels = c("Under 1 year", "1 to 4 years", "5 to 9 years",
+                                     "10 to 15 years", "16 years and over"))) %>% 
+  mutate(count = as.numeric(count),
+         end_period_year = as.numeric(end_period_year)) %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count, fill = age),
+           stat = "identity", position = "dodge2") +
+  geom_text(aes(x = end_period_year, y = count, group = age, label = pc), position = position_dodge(0.9), vjust = 1.3, color = "white") +
+  scale_fill_viridis(discrete = TRUE,
+                     option="magma",
+                     direction = -1,
+                     begin = 0.5,
+                     end = 0.8) +
+  theme_bw() +
+  # scale_x_continuous(name = "",
+  #                    breaks = c(seq(1,18,1)),
+  #                    limits = c(-0.5, 19.5),
+  #                    expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 225),
+                     expand = c(0,0))
+  
+care_entry_age
+ggsave(filename = "output/graphs/care_entry_age.png", care_entry_age)
+
+
+care_entry_age <- e_data22 %>% 
+  filter(cla_group == "Age group",
+         characteristic != "Total") %>% 
+  rename(end_period_year = time_period,
+         age = characteristic,
+         count = number) %>% 
+  select(end_period_year, age, count) %>% 
+  mutate(age = factor(age, levels = c("Under 1 year", "1 to 4 years", "5 to 9 years",
+                                      "10 to 15 years", "16 years and over"))) %>% 
+  mutate(count = as.numeric(count),
+         end_period_year = as.numeric(end_period_year)) %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count, fill = age),
+           stat = "identity", position = "fill") +
+  scale_fill_viridis(discrete = TRUE,
+                     option="magma",
+                     direction = -1,
+                     begin = 0.5,
+                     end = 0.8) +
+  theme_bw() 
+
+care_entry_age 
+  
+care_entry <- e_data22 %>% 
+  filter(cla_group == "Age group",
+         characteristic == "Total") %>% 
+  rename(end_period_year = time_period,
+         count = number) %>%
+  select(end_period_year, count) %>% 
+  rbind(e_data %>% 
+          select(c(starts_with("CLA_started201"))) %>% 
+          mutate(across(everything(), ~as.numeric(.x))) %>% 
+          pivot_longer(everything(),
+                       names_to = "end_period_year",
+                       values_to = "count") %>% 
+         mutate(end_period_year = as.numeric(str_extract_all(end_period_year, "(\\d{4})")))) %>% 
+  mutate(count = as.numeric(count)) %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = count),
+           stat = "identity", position = "dodge2")
+
+care_entry
 # March year end 2022
 # relevant topics - age, gender, type of placement provider(including whether private),
 # type of placement (ie youth accomodation etc), legal status (including justice system)
 
 c_data <- read.csv("/Users/katehayes/temp_data/children-looked-after-in-england-including-adoptions_2022/data/la_cla_on_31_march_by_characteristics.csv")
 
+
+
+
+check <- data.frame(x = seq(1, 100, 1)) %>% 
+  mutate(y = 100-x) %>% 
+  mutate(care = 10,
+         rate = care/(x+4*y),
+         rate_pov = rate*4,
+         care_np = x*rate,
+         care_pov = y*rate_pov,
+         check = care_pov/10)
 
 # ‘c’ to protect confidentiality. Secondary suppression may have been applied
 # not very specific. will replace with 3 as this is what's done the other years?
@@ -850,18 +962,34 @@ c_data <- read_xls("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sh
 rescare_age_at_entry_20 <- c_data %>% 
   select(-`% of sample`) %>% 
   rename(age = `Age of children`,
-         pc = `% of children in homes 31/03/2020`) %>% 
-  filter(age >= 10) %>%
-  mutate(`>10pc` = pc/sum(pc)) %>% 
-  select(-pc)
+         pc = `% of children in homes 31/03/2020`) 
+
+
+
+# %>% 
+#   filter(age >= 10) %>%
+#   mutate(`>10pc` = pc/sum(pc))%>% 
+#   select(-pc)
 
 save(rescare_age_at_entry_20, file = "output/data/cleaned/rescare_age_at_entry_20.Rdata")
 
 
 age_at_rescare_entry <- rescare_age_at_entry_20 %>% 
   ggplot() +
-  geom_bar(aes(x = age, y = pc), stat = "identity")
-ggsave(filename = "output/graphs/age_at_rescare_entry.png", age_at_rescare_entry)
+  geom_bar(aes(x = age, y = pc), fill = "#DE5D27", stat = "identity") +
+  theme_bw() +
+  theme(legend.position = "none",
+        strip.text = element_blank()) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 22),
+                     expand = c(0,0)) +
+  scale_x_continuous(name = "", 
+                     breaks = c(7,8,9,10,11,12,13,14,15,16,17),
+                     limits = c(6, 18),
+                     expand = c(0,0))
+
+
+ggsave(filename = "/Users/katehayes/CLmodR/output/graphs/age_at_rescare_entry.png", age_at_rescare_entry)
 
 age_at_rescare_entry 
 
@@ -1160,7 +1288,182 @@ cum_pc <- c_data %>%
   mutate(age = factor(age, level = c("1", "4", "6", "9", "12", "15", "18")))
   # mutate(age2 = age^2)
 
+cum_pc <- c_data %>% 
+  mutate(across(c(starts_with("1"), `4`, `6`, `9`), ~as.numeric(.x))) %>% 
+  mutate(across(c(starts_with("1"), `4`, `6`, `9`), round, 2)) %>% 
+  pivot_longer(c(starts_with("1"), `4`, `6`, `9`),
+               names_to = "age",
+               values_to = "cum_pc")
+  # mutate(year_of_birth = as.numeric(substr(year_of_birth, 1,4))) %>% 
+  # mutate(age = as.numeric(age))
+  # select(gender, age, year_of_birth, cum_pc) %>% 
+  # mutate(age = factor(age, level = c("1", "4", "6", "9", "12", "15", "18")))
 
+
+cum_pc %>% 
+  filter(gender == "Boys") %>% 
+  mutate(age = as.numeric(age)) %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = cum_pc),
+           fill = "#C1705B", stat = "identity") +
+  facet_wrap(~year_of_birth) +
+  scale_x_continuous(name = "",
+                     breaks = c(seq(1,18,1)),
+                     limits = c(-0.5, 19.5),
+                    expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 3.8),
+                     expand = c(0,0)) +
+  theme_bw() 
+
+
+
+cum_pc %>% 
+  filter(gender == "Boys") %>% 
+  mutate(age = as.numeric(age)) %>% 
+  filter(year_of_birth == "1992-94") %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = cum_pc),
+           fill = "#C1705B", stat = "identity", width=0.9) +
+  scale_x_continuous(name = "",
+                     breaks = c(seq(1,18,1)),
+                     limits = c(-0.5, 19.5),
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 3.8),
+                     expand = c(0,0)) +
+  theme_bw() 
+
+
+cum_pc %>% 
+  filter(gender == "Boys") %>% 
+  mutate(age = as.numeric(age)) %>% 
+  filter(year_of_birth == "1995-97") %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = cum_pc),
+           fill = "#C1705B", stat = "identity", width=0.9) +
+  scale_x_continuous(name = "",
+                     breaks = c(seq(1,18,1)),
+                     limits = c(-0.5, 19.5),
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 3.8),
+                     expand = c(0,0)) +
+  theme_bw() 
+
+
+cum_pc %>% 
+  filter(gender == "Boys") %>% 
+  mutate(age = as.numeric(age)) %>% 
+  filter(year_of_birth == "1998-00") %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = cum_pc),
+           fill = "#C1705B", stat = "identity", width=0.9) +
+  scale_x_continuous(name = "",
+                     breaks = c(seq(1,18,1)),
+                     limits = c(-0.5, 19.5),
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 3.8),
+                     expand = c(0,0)) +
+  theme_bw() 
+
+
+cum_pc %>% 
+  filter(gender == "Boys") %>% 
+  mutate(age = as.numeric(age)) %>% 
+  filter(year_of_birth == "2001-03") %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = cum_pc),
+           fill = "#C1705B", stat = "identity", width=0.9) +
+  scale_x_continuous(name = "",
+                     breaks = c(seq(1,18,1)),
+                     limits = c(-0.5, 19.5),
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 3.8),
+                     expand = c(0,0)) +
+  theme_bw() 
+
+
+
+cum_pc %>% 
+  filter(gender == "Boys") %>% 
+  mutate(age = as.numeric(age)) %>% 
+  filter(year_of_birth == "2004-06") %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = cum_pc),
+           fill = "#C1705B", stat = "identity", width=0.9) +
+  scale_x_continuous(name = "",
+                     breaks = c(seq(1,18,1)),
+                     limits = c(-0.5, 19.5),
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 3.8),
+                     expand = c(0,0)) +
+  theme_bw() 
+
+
+
+cum_pc %>% 
+  filter(gender == "Boys") %>% 
+  mutate(age = as.numeric(age)) %>% 
+  filter(year_of_birth == "2007-08") %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = cum_pc),
+           fill = "#C1705B", stat = "identity", width=0.9) +
+  scale_x_continuous(name = "",
+                     breaks = c(seq(1,18,1)),
+                     limits = c(-0.5, 19.5),
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 3.8),
+                     expand = c(0,0)) +
+  theme_bw() 
+
+
+cum_pc %>% 
+  filter(gender == "Boys") %>% 
+  mutate(age = as.numeric(age)) %>% 
+  filter(year_of_birth == "2009-11") %>% 
+  ggplot() +
+  geom_bar(aes(x = age, y = cum_pc),
+           fill = "#C1705B", stat = "identity", width=0.9) +
+  scale_x_continuous(name = "",
+                     breaks = c(seq(1,18,1)),
+                     limits = c(-0.5, 19.5),
+                     expand = c(0,0)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 3.8),
+                     expand = c(0,0)) +
+  theme_bw() 
+
+
+
+
+care_entry_cum_pc <- cum_pc %>% 
+  filter(gender == "Boys") %>% 
+  mutate(age = as.numeric(age)) %>% 
+  ggplot() +
+  geom_bar(aes(x = as.character(year_of_birth), y = cum_pc, fill = as.character(year_of_birth)),
+           stat = "identity") +
+  facet_grid(~age) +
+  scale_fill_viridis(discrete = TRUE,
+                       option="magma",
+                       begin = 0.5,
+                       end = 0.9) +
+  theme_bw() +
+  theme(
+        strip.text = element_blank()) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 3.7),
+                      expand = c(0,0)) +
+  scale_x_discrete(name = "")
+  #                    breaks = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18), 
+  #                    limits = c(0.5, 18.5),
+  #                    expand = c(0,0))
+care_entry_cum_pc
+ggsave(filename = "output/graphs/care_entry_cum_pc.png", care_entry_cum_pc)
 
 # making predictions... putting two regressions on it, jesus
 mod <- lm(cum_pc ~ end_period_year + gender + age, data = cum_pc %>% 
@@ -1376,6 +1679,79 @@ care_out_16 <- c_data %>%
 care_neet_16to22 <- care_out_18to22 %>% 
   bind_rows(care_out_17, care_out_16)
 
+
+youth_promise <- data.frame(end_period_year = c(2014, 2015, 2016, 2017, 2014, 2015, 2016, 2017),
+                            age = c(16,16,16,16,17,17,17,17),
+                            neet = c("NEET","NEET","NEET","NEET","NEET","NEET","NEET","NEET"),
+                            pc = c(0.2,0.1,0.1,0.05,0.33,0.24,0.25,0.16))
+
+
+care_neet_14to22 <- care_neet_16to22 %>% 
+  mutate(data_source = "DfE") %>% 
+  rbind(youth_promise %>% 
+          mutate(data_source = "YP dashboard"))
+
+care_neet_data_sources <- care_neet_14to22 %>% 
+  filter(age %in% c("16","17","17-18"),
+         neet == "NEET") %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc, group = interaction(age, data_source), colour = interaction(age, data_source)))
+
+care_neet_data_sources
+
+youth_promise_yoffend <- data.frame(end_period_year = c(2015.5, 2015.75, 2016, 2016.25, 2016.5, 2016.75),
+                                    age = c("16-18","16-18","16-18","16-18","16-18","16-18"),
+                                    neet = c("NEET","NEET","NEET","NEET","NEET","NEET"),
+                                    pc = c(0.65,0.61,0.7,0.7,0.7,0.64))
+
+
+la_scorecard <- data.frame(end_period_year = c(2022, 2023),
+                           age = c("16-17", "16-17"),
+                           neet = c("NEET", "NEET"),
+                           pc = c(0.36, 0.33),
+                           data_source = c("LA scorecard", "LA scorecard"),
+                           subgroup = c("vulnerable", "vulnerable"))
+
+cobs_destination <- data.frame(end_period_year = c(2019, 2020, 2021, 2022, 2023),
+                               age = c("16","16","16","16","16"),
+                               neet = c("NEET","NEET","NEET","NEET","NEET"),
+                               pc = c(0.27,0.48,0.17,0.37,0.22),
+                               data_source = c("COBs data","COBs data","COBs data","COBs data","COBs data"),
+                               subgroup = c("COBS students", "COBS students", "COBS students", "COBS students", "COBS students")) 
+
+
+neet_subgroups <- care_neet_14to22 %>% 
+  filter(age != "19-21",
+         neet == "NEET") %>% 
+  mutate(subgroup = "care") %>% 
+  rbind(youth_promise_yoffend %>% 
+          mutate(data_source = "YP dashboard") %>% 
+          mutate(subgroup = "offender")) %>% 
+  rbind(la_scorecard) %>% 
+  rbind(cobs_destination) %>% 
+  rbind(neet_11to23_age %>% 
+              group_by(end_period_year, age) %>% 
+              mutate(pc = count/sum(count)) %>% 
+              ungroup() %>% 
+              select(-count) %>% 
+              filter(neet == "NEET") %>% 
+              mutate(age = as.numeric(age),
+                     data_source = "DfE",
+                     subgroup = "whole cohort")) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = pc, group = interaction(age, subgroup, data_source), colour = interaction(age, subgroup, data_source))) +
+  theme_bw() +
+  scale_x_continuous(breaks = c(seq(2011, 2023, 1)),
+                     limits = c(2010.5, 2023.5),
+                     expand = c(0,0)) +
+  scale_y_continuous(limits = c(0, 0.74),
+                     expand = c(0,0)) +
+  scale_color_manual(values = c("#3ABFCB","#CA331C", "#5B5C5C","#A7AEAB", "#B3CA1C", "#CA8A1C", "#1CCA8A", "#1C67CA"))
+                   
+
+neet_subgroups
+
+
 save(care_neet_16to22, file = "output/data/cleaned/care_neet_16to22.Rdata")
 
 neet_pc <- care_out_16to22 %>% 
@@ -1384,7 +1760,7 @@ neet_pc <- care_out_16to22 %>%
 
 
 # neet steadily rising for 17/18 year olds, pretty steady for 19-20
-neet_rates_care <- care_neet_16to22 %>% 
+neet_rates_care <- care_neet_14to22 %>% 
   filter(age == "17-18",
          neet == "NEET") %>% 
   mutate(age = "17-18 (care-experienced)") %>% 
@@ -1399,6 +1775,23 @@ neet_rates_care <- care_neet_16to22 %>%
   geom_line(aes(x = end_period_year, y = pc, group = age, colour = age))
 neet_rates_care
 ggsave(filename = "output/graphs/neet_rates_care.png", neet_rates_care)
+
+
+
+cobs_destination <- data.frame(end_period_year = c(2019, 2020, 2021, 2022, 2023),
+                               age = c("16","16","16","16","16"),
+                               neet = c("NEET","NEET","NEET","NEET","NEET"),
+                               pc = c(0.27,0.48,0.17,0.37,0.22)) %>% 
+  ggplot() +
+  geom_bar(aes(x = end_period_year, y = 100*pc),
+           stat = "identity", fill = "#5F4143") +
+  theme_bw() +
+  scale_y_continuous(name = "",
+                     limits = c(0, 53),
+                     expand = c(0,0))
+
+cobs_destination 
+ggsave(filename = "/Users/katehayes/CLmodR/output/graphs/cobs_destination.png", cobs_destination)
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -1430,7 +1823,7 @@ pru_rates_care <- care_school_16to22 %>%
   ggplot() +
   geom_line(aes(x = end_period_year, y = pc))
 pru_rates_care
-ggsave(filename = "output/graphs/neet_rates_care.png", neet_rates_care)
+ggsave(filename = "/Users/katehayes/CLmodR/output/graphs/pru_rates_care.png", pru_rates_care)
 
 
 

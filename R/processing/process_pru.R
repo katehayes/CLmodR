@@ -11,6 +11,19 @@ load("/Users/katehayes/CLmodR/output/data/cleaned/schools_10to22_ethnicity.Rdata
 s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/school_categories.csv")
 
 
+academies <- check22 %>% 
+  rbind(check21) %>% 
+  rbind(check20) %>% 
+  distinct(Academy_flag, Phase.type.grouping, `TypeOfEstablishment..name.`) %>% 
+  rename(school_type = Phase.type.grouping, 
+         school_subtype = `TypeOfEstablishment..name.`,
+         dat_academy = Academy_flag)
+         
+s_data <- s_data %>% 
+  mutate(academy = ifelse(grepl("cadem", school_type) | grepl("cadem", school_subtype) | grepl("ree", school_subtype) | grepl("Studio Schools", school_subtype) | grepl("University Technical College", school_subtype), "Academy", "Not academy")) %>% 
+  left_join(academies) 
+
+
 secondary <- s_data %>% 
   filter(my_categories == "State-funded secondary") %>% 
   distinct(school_type, school_subtype)
@@ -33,7 +46,7 @@ schools_school_level <- schools_10to22_age_gender %>%
   mutate(count_fsm = count * fsm_pc,
          count_non_fsm = count * (1-fsm_pc)) 
 
-save(schools_school_level, file = "output/data/processed/schools_school_level.Rdata")
+# save(schools_school_level, file = "output/data/processed/schools_school_level.Rdata")
 
 
 schools <- schools_school_level %>% 
@@ -49,7 +62,7 @@ schools <- schools_school_level %>%
   rename(school_type = my_categories) %>% 
   ungroup()
 
-save(schools, file = "output/data/processed/schools.Rdata")
+# save(schools, file = "output/data/processed/schools.Rdata")
 
 
 pru <- schools %>% 
@@ -143,6 +156,8 @@ pru_decomp <- schools %>%
          ref_level = mean(ref_level, na.rm = T)) %>% 
   mutate(re_compose = ref_level*mult_bygen*mult_byage*mult_byfsm,
          check = level - re_compose)
+
+pru_decomp
 
 
 pru_decomp %>% 

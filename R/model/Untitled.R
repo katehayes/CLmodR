@@ -10516,43 +10516,7 @@ mod_data <- as.data.frame(mod$run(t))
   save(init_c, file = "output/data/input/init_c.Rdata")
 
   
-ic <- function(a = 10, p = 1, c = 1, s = 1, j = 1) {
-  
-  x <- init_c %>% 
-  mutate(poverty = ifelse(poverty == "In poverty", 2, 1),
-         care = ifelse(care == "Never", 1, care),
-         care = ifelse(care == "Not residential", 2, care),
-         care = ifelse(care == "Residential", 3, care),
-         care = ifelse(care == "Prior", 4, care),
-         school = ifelse(school == "Never", 1, school),
-         school = ifelse(school == "PRU", 2, school),
-         school = ifelse(school == "Prior", 3, school),
-         age = as.numeric(age),
-         poverty = as.numeric(poverty),
-         care = as.numeric(care),
-         school = as.numeric(school)
-  # ,
-  # yjs = ifelse(yjs == "No contact with YJS", 1, 4),
-  # yjs = ifelse(yjs == "Known to police", 2, yjs),
-  # yjs = ifelse(yjs == "In the YJS", 3, yjs)
-  ) %>% 
-    filter(age == a,
-           poverty == p,
-           care == c,
-           school == s
-           # ,
-           # yjs == j
-    ) %>% 
-    select(count) %>% 
-    unlist() %>% 
-    unname() 
-  
-  if(j!=1){
-    x<-0
-  }
-  return(x)
-  
-}
+
   
 x <- init_c %>% 
   filter(age == 10) %>% 
@@ -10595,45 +10559,7 @@ x <- init_c %>%
 
 
 
-t10 <- function(p = 1, c = 1, s = 1, j = 1) {
-  
-  x <- init_c %>% 
-    filter(age == 10) %>% 
-    mutate(poverty = ifelse(poverty == "In poverty", 2, 1),
-           care = ifelse(care == "Never", 1, care),
-           care = ifelse(care == "Not residential", 2, care),
-           care = ifelse(care == "Residential", 3, care),
-           care = ifelse(care == "Prior", 4, care),
-           school = ifelse(school == "Never", 1, school),
-           school = ifelse(school == "PRU", 2, school),
-           school = ifelse(school == "Prior", 3, school),
-           poverty = as.numeric(poverty),
-           care = as.numeric(care),
-           school = as.numeric(school)
-           # ,
-           # yjs = ifelse(yjs == "No contact with YJS", 1, 4),
-           # yjs = ifelse(yjs == "Known to police", 2, yjs),
-           # yjs = ifelse(yjs == "In the YJS", 3, yjs)
-    ) %>% 
-    group_by(poverty) %>% 
-    mutate(pc = count/sum(count)) %>% 
-    ungroup() %>% 
-    filter(poverty == p,
-           care == c,
-           school == s
-           # ,
-           # yjs == j
-    ) %>% 
-    select(pc) %>% 
-    unlist() %>% 
-    unname() 
-  
-  if(j!=1){
-    x<-0
-  }
-  return(x)
-  
-}
+
   
   
   

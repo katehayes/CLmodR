@@ -39,6 +39,15 @@ plot_grid(poverty_plot, pru_plot, neet_gender_pc, ncol = 1, align = "v")
 
 plot_grid(poverty_plot, care_levels_plot, pru_plot, neet_levels_plot, ncol = 1, align = "v")
 
+care_year_day <- plot_grid(birm_year_day, eng_year_day, ncol = 1, align = "v")
+care_year_day 
+ggsave(filename = "output/graphs/care_year_day.png", care_year_day)
+
+care_res_birm_v_eng <- plot_grid(res_pc_birmveng, res_birm_v_eng, ncol = 1, align = "v")
+care_res_birm_v_eng
+ggsave(filename = "output/graphs/care_res_birm_v_eng.png", care_res_birm_v_eng)
+
+
 p1 <- plot_grid(poverty_plot, care_levels_plot, neet_levels_plot, ncol = 1, align = "v")
 p1
 ggsave(filename = "output/graphs/p1.png", p1)
@@ -49,9 +58,9 @@ p2
 ggsave(filename = "output/graphs/p2.png", p2)
 
 
-care_trends <- plot_grid(care_poverty_plot, care_levels_plot, ncol = 1, align = "v")
-care_trends
-ggsave(filename = "output/graphs/care_trends.png", care_trends)
+care_trends2 <- plot_grid(care_poverty_plot, care_levels_plot2, ncol = 1, align = "v")
+care_trends2
+ggsave(filename = "output/graphs/care_trends2.png", care_trends2)
 
 
 pru_trends <- plot_grid(care_poverty_plot, fsm_plot, pru_plot, ncol = 1, align = "v")
@@ -261,17 +270,18 @@ poverty_plot <- poverty_series %>%
               filter(measure != "HBAI - children 0-20") %>% 
               filter(level == "Birmingham",
                      end_period_year >= 2015),
-            aes(x = end_period_year, y = pc), color = "#0054FFFF") +
+            aes(x = end_period_year, y = pc), color = "#0054FFFF")
+# +
   # geom_vline(xintercept = 2019,
   #            color = "white", size=1.2, alpha = 1) +
-  geom_vline(xintercept = 2010.4, linetype="dashed", 
-             color = "darkblue", size=1, alpha = 0.4) +
-  geom_vline(xintercept = 1997.4, linetype="dashed", 
-             color = "red", size=1, alpha = 0.4) +
-  geom_vline(xintercept = 1998.6, linetype="dashed", 
-             color = "#FBC02DFF", size=1, alpha = 0.35) +# national minimum wage act
-geom_vline(xintercept = 2013.25, linetype="dashed", 
-           color = "#FBC02DFF", size=1, alpha = 0.35) # start of the Universal Credit rollout
+#   geom_vline(xintercept = 2010.4, linetype="dashed", 
+#              color = "darkblue", size=1, alpha = 0.4) +
+#   geom_vline(xintercept = 1997.4, linetype="dashed", 
+#              color = "red", size=1, alpha = 0.4) +
+#   geom_vline(xintercept = 1998.6, linetype="dashed", 
+#              color = "#FBC02DFF", size=1, alpha = 0.35) +# national minimum wage act
+# geom_vline(xintercept = 2013.25, linetype="dashed", 
+#            color = "#FBC02DFF", size=1, alpha = 0.35) # start of the Universal Credit rollout
   # geom_text(aes(x=2021.1, label="\nBirmingham", y=0.4), colour="#634E8B", angle=0) +
   # geom_text(aes(x=2021.4, label="\nWest Midlands", y=0.31), colour="#4CAEDB", angle=0) +
   # geom_text(aes(x=2020.8, label="\nEngland", y=0.24), colour="#1EBC4C", angle=0) 
@@ -304,6 +314,7 @@ geom_vline(xintercept = 2013.25, linetype="dashed",
     mutate(measure = ifelse(level == "Birmingham", "Estimate", measure)) %>% 
     filter(measure != "HBAI - children 0-20") %>% 
     filter(level != "Birmingham",
+           level != "West Midlands (region)",
            end_period_year >= 2006) %>% 
     ggplot() +
     # ggtitle("Child poverty in Birmingham, West Midlands, England") +
@@ -336,7 +347,8 @@ geom_vline(xintercept = 2013.25, linetype="dashed",
                        expand = c(0,0)) +
     theme_bw() +
     # scale_color_manual(values = c("#762A83FF", "#5AAE61FF", "#2166ACFF", "#9970ABFF", "#ACD39EFF", "#92C5DEFF"),
-    scale_color_manual(values = c("#1A9850FF", "#673AB7FF"),
+    scale_color_manual(values = c("#1A9850FF"),
+                                  # , "#673AB7FF"),
                        guide = FALSE) +
     geom_line(data = poverty_series %>% 
                 mutate(measure = ifelse(level == "Birmingham", "Estimate", measure)) %>% 
@@ -423,23 +435,39 @@ care_levels <- care_11to22_age %>%
               summarise(census_pop = sum(count))) %>% 
   mutate(pc = count/census_pop)
 
-care_levels_plot <- care_levels %>%
+care_levels_plot2 <- care_levels %>%
   select(end_period_year, level, age, pc) %>% 
   group_by(age) %>% 
   arrange(end_period_year) %>% 
-  filter(level != "Birmingham") %>% 
+  filter(level != "Birmingham",
+         level != "West Midlands (region)") %>% 
   ggplot() +
   geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
             fill="#F7F7F7", alpha = 0.1) +
-  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2020.5,ymin=-Inf,ymax=Inf),
             fill="#EEEEEE", alpha = 0.1) +
   geom_vline(xintercept = 2014,  #linetype="dotted",
              color = "black", size=0.7, alpha = 0.05) +
-  geom_vline(xintercept = 2022,  #linetype="dotted",
-             color = "black", size=0.7, alpha = 0.05) +
+  # geom_vline(xintercept = 2022,  #linetype="dotted",
+  #            color = "black", size=0.7, alpha = 0.05) +
   geom_line(aes(x = end_period_year, y = pc, group = interaction(level, age), color = interaction(level, age))) +
-  scale_color_manual(values = c("#3299FFFF", "#3299FFFF", "#0054FFFF", "#0054FFFF", "#66BD63FF","#1A9850FF", "#B39DDBFF", "#673AB7FF"),
+  scale_color_manual(values = c("#3299FFFF", "#5E58FD", "#9CC8FD", "#9CF49C", "#66BD63FF","#009C22"),
                      guide = FALSE) +
+  geom_line(data = care_11to22_age %>% 
+              filter(age %in% c("10-15","16+")) %>% 
+              group_by(level, end_period_year) %>% 
+              summarise(count = sum(count)) %>% 
+              left_join(pop_estimate_01to20_age_gender %>% 
+                          filter(level %in% c("England", "West Midlands (region)", "Birmingham")) %>% 
+                          filter(age %in% c(10:17),
+                                 end_period_year %in% c(2011:2023)) %>%
+                          group_by(end_period_year, level) %>%
+                          summarise(census_pop = sum(count))) %>% 
+              mutate(pc = count/census_pop) %>%
+              select(end_period_year, level, pc) %>% 
+              arrange(end_period_year) %>% 
+              filter(level != "West Midlands (region)"),
+            aes(x = end_period_year, y = pc, group = level, color = level), linetype = "dashed") +
   theme_bw() +
   geom_line(data = care_rates %>%
               select(end_period_year, age, pc_school, pc_census) %>% 
@@ -451,32 +479,32 @@ care_levels_plot <- care_levels %>%
               mutate(pc = ifelse(source == "pc_school", na.approx(pc), pc)) %>% 
               filter(source == "pc_census"),
             aes(x = end_period_year, y = pc, group = interaction(age, source), color = interaction(age, source))) +
-  geom_line(data = care_rates %>%
-              select(end_period_year, age, pc_school, pc_census) %>% 
-              pivot_longer(c(pc_census, pc_school),
-                           names_to = "source",
-                           values_to = "pc") %>% 
-              group_by(age) %>% 
-              arrange(end_period_year) %>% 
-              mutate(pc = ifelse(source == "pc_school", na.approx(pc), pc)) %>% 
-              filter(source == "pc_school",
-                     end_period_year >= 2020),
-            aes(x = end_period_year, y = pc, group = interaction(age, source), color = interaction(age, source)), alpha = 0.6) +
+  # geom_line(data = care_rates %>%
+  #             select(end_period_year, age, pc_school, pc_census) %>% 
+  #             pivot_longer(c(pc_census, pc_school),
+  #                          names_to = "source",
+  #                          values_to = "pc") %>% 
+  #             group_by(age) %>% 
+  #             arrange(end_period_year) %>% 
+  #             mutate(pc = ifelse(source == "pc_school", na.approx(pc), pc)) %>% 
+  #             filter(source == "pc_school",
+  #                    end_period_year >= 2020),
+  #           aes(x = end_period_year, y = pc, group = interaction(age, source), color = interaction(age, source)), alpha = 0.6) +
   
   # geom_vline(xintercept = 2019,
   #            color = "white", size=1.2, alpha = 1) +
   # geom_text(aes(x=2018.6, label="\nCOVID", y=0.0025), colour="grey", angle=90) +
   scale_y_continuous(name = "",
-                     limits = c(0, 0.0275),
+                     limits = c(0, 0.019),
                      expand = c(0,0)) +
-  scale_x_continuous(limits = c(2010.5, 2022.5),
+  scale_x_continuous(limits = c(2010.5, 2020.5),
                      expand = c(0,0),
                      name = "", 
-                     breaks = c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
-                     labels = c("2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023")) 
+                     breaks = c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020), 
+                     labels = c("2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020")) 
 # ggtitle("Trends in care rates in Birmingham") 
-care_levels_plot
-ggsave(filename = "output/graphs/care_levels_plot.png", care_levels_plot)
+care_levels_plot2
+ggsave(filename = "output/graphs/care_levels_plot2.png", care_levels_plot2)
 
   
   
@@ -485,25 +513,145 @@ ggsave(filename = "output/graphs/care_levels_plot.png", care_levels_plot)
 
 0.008166877
 
- 
-
-  ggplot() +
-  geom_line(data = care_rates %>%
-              select(end_period_year, age, pc_school, pc_census) %>% 
-              pivot_longer(c(pc_census, pc_school),
-                           names_to = "source",
-                           values_to = "pc") %>% 
-              group_by(age) %>% 
-              arrange(end_period_year) %>% 
-              mutate(pc = ifelse(source == "pc_school", na.approx(pc), pc)),
-              aes(x = end_period_year, y = pc, group = interaction(age, source), color = interaction(age, source))) +
-  scale_color_manual(values = c("#3299FFFF", "#0054FFFF", "#3299FFFF", "#0054FFFF"),
-                     guide = FALSE) +
+ data.frame(imd = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            lac_rate = c(15, 17, 25, 34, 34, 47, 64, 75, 100, 159)) %>% 
+   ggplot() +
+   geom_bar(aes(x = imd, y = lac_rate),
+            stat = "identity", fill = "#A8543E") +
+   scale_y_continuous(name = "",
+                      limits = c(0, 170),
+                      expand = c(0,0)) +
+   scale_x_continuous(limits = c(0.5, 10.5),
+                      expand = c(0,0),
+                      name = "", 
+                      breaks = c(1,2,3,4,5,6,7,8,9,10)) +
+   theme_bw()
+  # ggplot() +
+  # geom_line(data = care_rates %>%
+  #             select(end_period_year, age, pc_school, pc_census) %>% 
+  #             pivot_longer(c(pc_census, pc_school),
+  #                          names_to = "source",
+  #                          values_to = "pc") %>% 
+  #             group_by(age) %>% 
+  #             arrange(end_period_year) %>% 
+  #             mutate(pc = ifelse(source == "pc_school", na.approx(pc), pc)),
+  #             aes(x = end_period_year, y = pc, group = interaction(age, source), color = interaction(age, source))) +
+  # scale_color_manual(values = c("#3299FFFF", "#0054FFFF", "#3299FFFF", "#0054FFFF"),
+  #                    guide = FALSE) +
   
+ care_levels_plot <- ggplot() +
+   geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+             fill="#F7F7F7", alpha = 0.1) +
+   geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+             fill="#EEEEEE", alpha = 0.1) +
+   geom_vline(xintercept = 2014,  #linetype="dotted",
+              color = "black", size=0.7, alpha = 0.05) +
+   geom_vline(xintercept = 2022,  #linetype="dotted",
+              color = "black", size=0.7, alpha = 0.05) +
+   geom_line(data = care_11to22_age %>% 
+               filter(age %in% c("10-15","16+")) %>% 
+               group_by(level, end_period_year) %>% 
+               summarise(count = sum(count)) %>% 
+               left_join(pop_estimate_01to20_age_gender %>% 
+                           filter(level %in% c("England", "West Midlands (region)", "Birmingham")) %>% 
+                           filter(age %in% c(10:17),
+                                  end_period_year %in% c(2011:2023)) %>%
+                           group_by(end_period_year, level) %>%
+                           summarise(census_pop = sum(count))) %>% 
+               mutate(pc = count/census_pop) %>%
+               select(end_period_year, level, pc) %>% 
+               arrange(end_period_year) %>% 
+               filter(level != "West Midlands (region)"),
+             aes(x = end_period_year, y = pc, group = level, color = level)) +
+   scale_color_manual(values = c("#0054FFFF","#1A9850FF"),
+                      guide = FALSE) +
+   theme_bw() +
+   scale_y_continuous(name = "",
+                      limits = c(0, 0.02),
+                      expand = c(0,0)) +
+   scale_x_continuous(limits = c(2010.5, 2022.5),
+                      expand = c(0,0),
+                      name = "", 
+                      breaks = c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
+                      labels = c("2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023")) 
+ 
+ care_levels_plot
 
 
-
-
+    care_levels_plot <- care_11to22_age %>% 
+    filter(age %in% c("10-15","16+")) %>% 
+    group_by(level, end_period_year) %>% 
+    summarise(count = sum(count)) %>% 
+    left_join(pop_estimate_01to20_age_gender %>% 
+                filter(level %in% c("England", "West Midlands (region)", "Birmingham")) %>% 
+                filter(age %in% c(10:17),
+                       end_period_year %in% c(2011:2023)) %>%
+                group_by(end_period_year, level) %>%
+                summarise(census_pop = sum(count))) %>% 
+    mutate(pc = count/census_pop) %>%
+    select(end_period_year, level, pc) %>% 
+    arrange(end_period_year) %>% 
+    filter(level != "West Midlands (region)") %>%
+    ggplot() +
+    geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+              fill="#F7F7F7", alpha = 0.1) +
+    geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+              fill="#EEEEEE", alpha = 0.1) +
+    geom_vline(xintercept = 2014,  #linetype="dotted",
+               color = "black", size=0.7, alpha = 0.05) +
+    geom_vline(xintercept = 2022,  #linetype="dotted",
+               color = "black", size=0.7, alpha = 0.05) +
+    geom_line(aes(x = end_period_year, y = pc, group = level, color = level)) +
+    scale_color_manual(values = c("#0054FFFF","#1A9850FF"),
+                       guide = FALSE) +
+    theme_bw() +
+      scale_y_continuous(name = "",
+                         limits = c(0, 0.02),
+                         expand = c(0,0)) +
+      scale_x_continuous(limits = c(2010.5, 2022.5),
+                         expand = c(0,0),
+                         name = "", 
+                         breaks = c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
+                         labels = c("2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023")) 
+    
+    care_levels_plot
+    
+    # +
+    geom_line(data = care_rates %>%
+                select(end_period_year, pc_school, pc_census) %>% 
+                pivot_longer(c(pc_census, pc_school),
+                             names_to = "source",
+                             values_to = "pc") %>% 
+                group_by(age) %>% 
+                arrange(end_period_year) %>% 
+                mutate(pc = ifelse(source == "pc_school", na.approx(pc), pc)) %>% 
+                filter(source == "pc_census"),
+              aes(x = end_period_year, y = pc, group = interaction(age, source), color = interaction(age, source))) +
+    geom_line(data = care_rates %>%
+                select(end_period_year, age, pc_school, pc_census) %>% 
+                pivot_longer(c(pc_census, pc_school),
+                             names_to = "source",
+                             values_to = "pc") %>% 
+                group_by(age) %>% 
+                arrange(end_period_year) %>% 
+                mutate(pc = ifelse(source == "pc_school", na.approx(pc), pc)) %>% 
+                filter(source == "pc_school",
+                       end_period_year >= 2020),
+              aes(x = end_period_year, y = pc, group = interaction(age, source), color = interaction(age, source)), alpha = 0.6) +
+    
+    # geom_vline(xintercept = 2019,
+    #            color = "white", size=1.2, alpha = 1) +
+    # geom_text(aes(x=2018.6, label="\nCOVID", y=0.0025), colour="grey", angle=90) +
+    scale_y_continuous(name = "",
+                       limits = c(0, 0.019),
+                       expand = c(0,0)) +
+    scale_x_continuous(limits = c(2010.5, 2022.5),
+                       expand = c(0,0),
+                       name = "", 
+                       breaks = c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
+                       labels = c("2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023")) 
+  # ggtitle("Trends in care rates in Birmingham") 
+  care_levels_plot
 
 
 
@@ -555,6 +703,29 @@ neet_school_pop %>%
   facet_grid(~age)
 
 
+
+population_compare <- neet_11to23_age %>% 
+  group_by(end_period_year, age) %>% 
+  summarise(school_pop = sum(count)) %>% 
+  bind_rows(schools_school_level %>% 
+              filter(age %in% c(10:15)) %>%
+              group_by(end_period_year, age) %>% 
+              summarise(school_pop = sum(count))) %>% 
+  left_join(population %>% 
+              filter(age %in% c(10:17),
+                     end_period_year %in% c(2011:2023)) %>%
+              group_by(end_period_year, age) %>%
+              summarise(census_pop = sum(count))) %>% 
+  ggplot() +
+  geom_line(aes(x = end_period_year, y = school_pop), colour = "blue") +
+  geom_line(aes(x = end_period_year, y = census_pop), colour = "red") +
+  facet_grid(~age) +
+  theme_bw()
+
+population_compare 
+
+ggsave(filename = "output/graphs/population_compare.png", population_compare)
+
 care_rates <- care_11to22_age %>% 
   filter(level == "Birmingham",
          age %in% c("10-15","16+")) %>% 
@@ -590,12 +761,12 @@ care_rates_plot <- care_rates %>%
                           (source == "pc_school" & end_period_year == 2022), label, NA)) %>% 
   ggplot() +
   geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
-            fill="#F7F7F7", alpha = 0.1) +
+            fill="#F7F7F7", alpha = 0.05) +
   geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
-            fill="#EEEEEE", alpha = 0.1) +
-    geom_vline(xintercept = 2014, linetype="dotted",
+            fill="#EEEEEE", alpha = 0.05) +
+    geom_vline(xintercept = 2014,
              color = "black", size=0.7, alpha = 0.3) +
-  geom_vline(xintercept = 2022, linetype="dotted",
+  geom_vline(xintercept = 2022,
              color = "black", size=0.7, alpha = 0.3) +
   geom_line(aes(x = end_period_year, y = pc, group = interaction(age, source), color = interaction(age, source))) +
   # geom_label_repel(aes(label = label),
@@ -604,8 +775,8 @@ care_rates_plot <- care_rates %>%
   scale_color_manual(values = c("#3299FFFF", "#0054FFFF", "#3299FFFF", "#0054FFFF"),
                      guide = FALSE) +
   theme_bw() +
-  geom_vline(xintercept = 2019, linetype="dashed", 
-             color = "red", size=1, alpha = 0.4) +
+  # geom_vline(xintercept = 2019, linetype="dashed", 
+  #            color = "red", size=1, alpha = 0.4) +
   # geom_text(aes(x=2018.6, label="\nCOVID", y=0.0025), colour="grey", angle=90) +
   scale_y_continuous(name = "",
                      limits = c(0, 0.02),
@@ -945,8 +1116,6 @@ check <- schools_10to22_age_gender %>%
 
 check
 
-s_data <- s_data %>% 
-  mutate(academy = ifelse(grepl("cadem", school_type) | grepl("cadem", school_subtype), "Academy", "Not academy"))
 
 academy <- schools_10to22_age_gender %>%
   filter(age %in% 10:15) %>% 
@@ -1170,7 +1339,89 @@ geom_vline(xintercept = 2013.25, linetype="dashed",
 pru_plot
 ggsave(filename = "output/graphs/pru_plot.png", pru_plot)
 
+schools <- schools_school_level %>% 
+  mutate(my_categories = ifelse(school %in% c("Virtual College", "Laces", "The City of Birmingham School", "City of Birmingham School", "The Behaviour Support Service"), "PRU", "Not PRU")) %>%
+  select(-c(count, school_headcount, school_fsm,
+            fsm_pc)) %>% 
+  pivot_longer(c(count_fsm, count_non_fsm),
+               names_to = "fsm",
+               values_to = "count") %>% 
+  mutate(fsm = ifelse(grepl("non", fsm), "Not FSM eligible", "FSM eligible")) %>% 
+  group_by(end_period_year, level, end_period_month, period_length,
+           my_categories, age, gender, fsm) %>% 
+  summarise(count = sum(count)) %>% 
+  rename(school_type = my_categories) %>% 
+  ungroup()
 
+
+cobs_plot <- schools %>% 
+  mutate(pru = ifelse(schools_school_level %in% c("Virtual College", "Laces", "The City of Birmingham School", "City of Birmingham School", "The Behaviour Support Service"), "PRU", "Not PRU")) %>%
+  filter(age %in% c(10:15)) %>% 
+  select()
+  # age != 11) %>% 
+  group_by(end_period_year, level, fsm, pru) %>%
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = level,
+              values_from = count) %>% 
+  mutate(`(rest of) England` = `(rest of) England` + `(rest of) West Midlands (region)` + `Birmingham`,
+         `(rest of) West Midlands (region)` = `(rest of) West Midlands (region)` + `Birmingham`) %>%
+  pivot_longer(c(`(rest of) England`, `(rest of) West Midlands (region)`, `Birmingham`),
+               names_to = "level",
+               values_to = "count") %>% 
+  pivot_wider(names_from = pru,
+              values_from = count,
+              values_fill = 0) %>% 
+  mutate(pc = PRU/(PRU + `Not PRU`)) %>% 
+  select(end_period_year, level, fsm, pc) %>% 
+  ggplot() +
+  geom_rect(data=NULL,aes(xmin=2009.5,xmax=2014,ymin=-Inf,ymax=Inf),
+            fill="#F7F7F7", alpha = 0.1) +
+  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+            fill="#EEEEEE", alpha = 0.1) +
+  geom_vline(xintercept = 2014,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_vline(xintercept = 2022,  #linetype="dotted",
+             color = "black", size=0.7, alpha = 0.05) +
+  geom_line(aes(x = end_period_year, y = pc, color = interaction(level, fsm))) +
+  theme_bw() +
+  scale_x_continuous(limits = c(2009.5, 2022.5),
+                     expand = c(0,0),
+                     name = "", 
+                     breaks = c(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023), 
+                     labels = c("2010","2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023")) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.025),
+                     expand = c(0,0)) +
+  # ggtitle("Trends in PRU attendance rates, in Birmingham, the West Midlands, England") +
+  scale_color_manual(values = c("#1A9850FF", "#673AB7FF",  "#0054FFFF","#66BD63FF", "#B39DDBFF",  "#3299FFFF"),
+                     guide = FALSE) +
+  geom_vline(xintercept = 2011.85, linetype="dashed", 
+             color = "#FBC02DFF", size=1, alpha = 0.35) + #bill got royal assent in november
+  # geom_text(aes(x=2010.6, label="\nEducation Act 2011", y=0.01364), colour="grey", angle=90) +
+  geom_vline(xintercept = 2012.67, linetype="dashed", 
+             color = "#FBC02DFF", size=1, alpha = 0.35) +#regulation in effect 1st sep
+  # geom_text(aes(x=2011.6, label="\nSchool Discipline Regulations 2012", y=0.017), colour="grey", angle=90) +
+  geom_vline(xintercept = 2013.25, linetype="dashed", 
+             color = "#FBC02DFF", size=1, alpha = 0.35) 
+# geom_vline(xintercept = 2018.17, linetype="dashed", 
+#            color = "#FBC02DFF", size=1, alpha = 0.35) 
+# geom_vline(xintercept = 2018, linetype="dashed", 
+#            color = "black", size=1, alpha = 0.3) +
+# geom_text(aes(x=2017.6, label="\n???", y=0.022), colour="grey", angle=90) +
+# geom_text(aes(x=2019, label="\nEngland:", y=0.022), hjust = 0, colour="black", angle=0) +
+# geom_text(aes(x=2019, label="\nWest Midlands:", y=0.0205), hjust = 0, colour="black", angle=0) +
+# geom_text(aes(x=2019, label="\nBirmingham:", y=0.019), hjust = 0, colour="black", angle=0) +
+# geom_text(aes(x=2020.1, label="\nEligible/", y=0.022), hjust = 0, colour="#468F5F", angle=0) +
+# geom_text(aes(x=2021.1, label="\nNot", y=0.022), hjust = 0, colour="#9BD4B1", angle=0) +
+# geom_vline(xintercept = 2019,
+#            color = "white", size=1.2, alpha = 1) +
+# geom_vline(xintercept = 2010.4, linetype="dashed", 
+#            color = "darkblue", size=1, alpha = 0.4)
+
+
+pru_plot
+ggsave(filename = "output/graphs/pru_plot.png", pru_plot)
 
 
 
@@ -1301,14 +1552,14 @@ care_v_all_pru_rate <- care_school_16to22 %>%
               mutate(pc = PRU/(PRU +`Not PRU`)) %>% 
               mutate(group = "FSM")) %>% 
   ggplot() +
-  geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
-            fill="#F7F7F7", alpha = 0.1) +
-  geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
-            fill="#EEEEEE", alpha = 0.1) +
-  geom_vline(xintercept = 2014,  #linetype="dotted",
-             color = "black", size=0.7, alpha = 0.05) +
-  geom_vline(xintercept = 2022,  #linetype="dotted",
-             color = "black", size=0.7, alpha = 0.05) +
+  # geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+  #           fill="#F7F7F7", alpha = 0.1) +
+  # geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+  #           fill="#EEEEEE", alpha = 0.1) +
+  # geom_vline(xintercept = 2014,  #linetype="dotted",
+  #            color = "black", size=0.7, alpha = 0.05) +
+  # geom_vline(xintercept = 2022,  #linetype="dotted",
+  #            color = "black", size=0.7, alpha = 0.05) +
   geom_line(aes(x = end_period_year, y = pc, group = group, colour = group)) +
   theme_bw() +
   scale_x_continuous(limits = c(2009.5, 2022.5),
@@ -1612,7 +1863,7 @@ geom_ribbon(aes(x = end_period_year, ymin=`Focus College`+`Virtual College`+Lace
                        limits = c(0, 700),
                        expand = c(0,0))
 
-  
+  num_prus_small
   
   
   ggsave(filename = "output/graphsnum_prus_small.png", num_prus_small)
@@ -1943,20 +2194,67 @@ pru_ft_pt <-  schools_10to22_age_gender %>%
 
 
   
-  gen_check <-  schools_10to22_age_gender %>%
+  split <-  schools_10to22_age_gender %>%
     left_join(s_data) %>% 
     filter(age %in% c(10:15),
            level == "Birmingham",
            my_categories == "Pupil referral unit") %>% 
-    mutate(school = ifelse(school %in% c("The City of Birmingham School", "City of Birmingham School", "The Behaviour Support Service"), "Behaviour Support Service at The City of Birmingham School", school),
-           school = ifelse(school == "EBN Free School", "East Birmingham Network Academy", school),
-           school = ifelse(school == "Ebn Academy  2", "EBN Academy Phase 2", school),
-           school = ifelse(school == "Titan St Georges Academy", "St Georges Academy", school)) %>%
-    mutate(school = ifelse(school == "Behaviour Support Service at The City of Birmingham School", "BSS-CBS", "AP-Free")) %>% 
+    # mutate(school = ifelse(school == "EBN Free School", "East Birmingham Network Academy", school),
+    #        school = ifelse(school == "Ebn Academy  2", "EBN Academy Phase 2", school),
+    #        school = ifelse(school == "Titan St Georges Academy", "St Georges Academy", school)) %>%
+    mutate(school_cat = ifelse(school %in% c("Virtual College", "Laces", "The City of Birmingham School", "City of Birmingham School", "The Behaviour Support Service"), "COBS", "AP-FS")) %>% 
     # mutate(age = ifelse(age == 15, age, "<15")) %>% 
-    group_by(end_period_year, gender, school) %>% 
+    group_by(end_period_year, gender, age, school, school_cat) %>% 
     summarise(count = sum(count)) %>% 
     ungroup() %>% 
+    filter(gender == "Boys") %>% 
+    left_join(schools_fsm %>% 
+                mutate(fsm_pc = school_fsm / school_headcount) %>% 
+                mutate(fsm_pc = ifelse(is.na(fsm_pc), 0, fsm_pc)) %>% 
+                filter(level == "Birmingham") %>% 
+                select(end_period_year, school, fsm_pc)) %>% 
+    mutate(FSM = fsm_pc*count,
+           notFSM = (1-fsm_pc)*count) %>% 
+    select(-c(count, fsm_pc, gender)) %>% 
+    pivot_longer(c(FSM, notFSM),
+                 names_to = "fsm",
+                 values_to = "count")
+  
+  
+  COBS <- split %>% 
+    filter(school_cat == "COBS") %>% 
+    group_by(end_period_year, age, fsm) %>% 
+    summarise(count = sum(count)) %>% 
+    ungroup() %>% 
+    group_by(end_period_year) %>% 
+    mutate(pc = count/sum(count),
+           count = sum(count)) 
+  
+x <- lm(data = COBS, pc ~ count + age + fsm)
+  
+ summary(x) 
+  
+  
+  APFS <- split %>% 
+    filter(school_cat == "AP-FS")
+  
+  
+  #theres two things - theres the percentage that the age/fsm categories are of all the pru
+  # then there's, i guess, the chances of each age/fsm cat is pru. 
+  
+  
+  COBS %>% 
+    ggplot() +
+    geom_bar(aes(x = end_period_year, y = count, fill = interaction(age, fsm)),
+             stat = "identity", position = "fill")
+  
+  
+  APFS %>% 
+    ggplot() +
+    geom_bar(aes(x = end_period_year, y = count, fill = interaction(age, fsm)),
+             stat = "identity", position = "fill")
+  
+  # %>% 
     # group_by(end_period_year, age) %>% 
     # mutate(pc = count/sum(count)) %>% 
     # filter(school == "AP-Free") %>% 
@@ -2119,6 +2417,222 @@ pru_ft_pt <-  schools_10to22_age_gender %>%
   fsm_check
   
   
+ x<- schools_10to22_age_gender %>%
+   left_join(s_data) %>% 
+   filter(age %in% c(10:15),
+          level == "Birmingham",
+          my_categories == "Pupil referral unit") %>% 
+   distinct(end_period_year, school, my_categories, academy)
+  
+ #  
+ #  The City of Birmingham School (COBS) is a large pupil referral unit (PRU) that was formed in
+ # April 2013 through the merger of three PRUs (Behaviour Support Service PRU, Virtual College
+ #                                              and LACES PRU) and the local authority Behaviour Support Service. 
+ # 
+
+ check <- schools_10to22_age_gender %>%
+   left_join(s_data) %>% 
+   filter(age %in% c(10:15),
+          level == "Birmingham",
+          my_categories == "Pupil referral unit",
+          school %in% c("Virtual College", "Laces", "The City of Birmingham School", "City of Birmingham School", "The Behaviour Support Service")) %>% 
+  group_by(end_period_year, school) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+   geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+             fill="#F7F7F7", alpha = 0.1) +
+   geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+             fill="#EEEEEE", alpha = 0.1) +
+   geom_vline(xintercept = 2014,  #linetype="dotted",
+              color = "black", size=0.7, alpha = 0.05) +
+   geom_vline(xintercept = 2022,  #linetype="dotted",
+              color = "black", size=0.7, alpha = 0.05) +
+   geom_bar(aes(x = end_period_year, y=count, fill = school),
+            stat = "identity") +
+   # geom_ribbon(aes(x = end_period_year, ymin=0,ymax=count, fill = school), alpha=0.5) +
+   facet_grid(rows = vars(school)) +
+   theme_bw() +
+   scale_x_continuous(limits = c(2009.5, 2022.5),
+                      expand = c(0,0),
+                      name = "", 
+                      breaks = c(2010, 2012, 2014, 2016, 2018, 2020, 2022), 
+                      labels = c("2010", "2012", "2014", "2016", "2018", "2020", "2022")) +
+   scale_y_continuous(name = "",
+                      limits = c(0, 400),
+                      expand = c(0,0),
+                      breaks = c(0,30,60),
+                      labels = c("0","30","60"))
+ 
+ 
+ check
+ 
+ 
+ cobs_plot <- schools_10to22_age_gender %>%
+   left_join(s_data) %>% 
+   filter(age %in% c(10:15),
+          level == "Birmingham",
+          my_categories == "Pupil referral unit") %>% 
+   mutate(school = ifelse(school %in% c("The Behaviour Support Service", "The City of Birmingham School", "City of Birmingham School"), "The City of Birmingham School", school)) %>%
+   group_by(end_period_year, school) %>% 
+   summarise(count = sum(count)) %>% 
+   ungroup() %>% 
+   add_row(school = "Virtual College", end_period_year = 2013.25, count = 0) %>% # closed 31 March 2013
+   add_row(school = "Laces", end_period_year = 2013.25, count = 0) %>% # closed 31 March 2013
+   # add_row(school = "The Behaviour Support Service", end_period_year = 2013.25, count = 0) %>% # closed 31 March 2013
+   # add_row(school = "The City of Birmingham School", end_period_year = 2013.25, count = 0) %>% # opened april 2013
+   filter(school %in% c("The City of Birmingham School", "Laces", "Virtual College")) %>% 
+   mutate(school = factor(school, levels = c("Virtual College", "Laces", "The City of Birmingham School"))) %>%
+   ggplot() + 
+   geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+             fill="#F7F7F7", alpha = 0.1) +
+   geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+             fill="#EEEEEE", alpha = 0.1) +
+   geom_vline(xintercept = 2014,  #linetype="dotted",
+              color = "black", size=0.7, alpha = 0.05) +
+   geom_vline(xintercept = 2022,  #linetype="dotted",
+              color = "black", size=0.7, alpha = 0.05) +
+   geom_line(aes(x = end_period_year, y=count, colour = school)) +
+   geom_ribbon(aes(x = end_period_year, ymin=0,ymax=count, fill = school), alpha=0.5) +
+   facet_grid(rows = vars(school)) +
+   theme_bw() +
+   scale_x_continuous(limits = c(2009.5, 2022.5),
+                      expand = c(0,0),
+                      name = "", 
+                      breaks = c(2010, 2012, 2014, 2016, 2018, 2020, 2022), 
+                      labels = c("2010", "2012", "2014", "2016", "2018", "2020", "2022")) +
+   scale_y_continuous(name = "",
+                      limits = c(0, 410),
+                      expand = c(0,0)) +
+   scale_color_manual(values = c("#A4661EFF", "#A4661EFF", "#A4661EFF")) +
+   # guide = FALSE) +
+   scale_fill_manual(values = c("#D9D6A6FF", "#D9D6A6FF", "#D9D6A6FF"),
+                     guide = FALSE) +
+   theme(strip.text = element_blank())
+ 
+ cobs_plot
+ 
+
+ 
+ 
+ num_prus <- schools_10to22_age_gender %>%
+   left_join(s_data) %>% 
+   filter(age %in% c(10:15),
+          level == "Birmingham",
+          my_categories == "Pupil referral unit") %>% 
+   mutate(school = ifelse(school %in% c("The City of Birmingham School", "City of Birmingham School", "The Behaviour Support Service"), "Behaviour Support Service at The City of Birmingham School", school),
+          school = ifelse(school == "EBN Free School", "East Birmingham Network Academy", school),
+          school = ifelse(school == "Ebn Academy  2", "EBN Academy Phase 2", school),
+          school = ifelse(school == "Titan St Georges Academy", "St Georges Academy", school),
+          school = ifelse(school == "CUL Academy Trust", "Titan Aston Academy", school)) %>%
+   group_by(end_period_year, school) %>% 
+   summarise(count = sum(count)) %>% 
+   ungroup() %>% 
+   add_row(school = "Virtual College", end_period_year = 2013.25, count = 0) %>% # closed 31 March 2013
+   add_row(school = "Laces", end_period_year = 2013.25, count = 0) %>% # closed 31 March 2013
+   add_row(school = "St Georges Academy", end_period_year = 2013.67, count = 0) %>% # opened 2 September 2013
+   add_row(school = "The Edge Academy", end_period_year = 2015.67, count = 0) %>% # opened 1 September 2015
+   add_row(school = "Reach School", end_period_year = 2013.67, count = 0) %>%  # opened 2 September 2013
+   add_row(school = "Titan Aston Academy", end_period_year = 2014.67, count = 0) %>%
+   # add_row(school = "Titan Aston Academy", end_period_year = 2018.75, count = 21) %>% 
+   # add_row(school = "Titan Aston Academy", end_period_year = 2018.83, count = 0) %>% 
+   # add_row(school = "Titan Aston Academy", end_period_year = 2018.85, count = 0) %>% 
+   add_row(school = "EBN Academy Phase 2", end_period_year = 2015.67, count = 0) %>% 
+   add_row(school = "East Birmingham Network Academy", end_period_year = 2012.67, count = 0) %>% 
+   filter(school != "Behaviour Support Service at The City of Birmingham School") %>% 
+   filter(school != "Focus College") %>% 
+   # filter(school != "Focus College") %>% 
+   mutate(school = factor(school, levels = c("Virtual College", "Laces", "East Birmingham Network Academy", "Reach School", "St Georges Academy",  "Titan Aston Academy" ,"The Edge Academy", "EBN Academy Phase 2"))) %>%
+   ggplot() + 
+   geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+             fill="#F7F7F7", alpha = 0.1) +
+   geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+             fill="#EEEEEE", alpha = 0.1) +
+   geom_vline(xintercept = 2014,  #linetype="dotted",
+              color = "black", size=0.7, alpha = 0.05) +
+   geom_vline(xintercept = 2022,  #linetype="dotted",
+              color = "black", size=0.7, alpha = 0.05) +
+   geom_line(aes(x = end_period_year, y=count, colour = school)) +
+   geom_ribbon(aes(x = end_period_year, ymin=0,ymax=count, fill = school), alpha=0.5) +
+   facet_grid(rows = vars(school)) +
+   theme_bw() +
+   scale_x_continuous(limits = c(2009.5, 2022.5),
+                      expand = c(0,0),
+                      name = "", 
+                      breaks = c(2010, 2012, 2014, 2016, 2018, 2020, 2022), 
+                      labels = c("2010", "2012", "2014", "2016", "2018", "2020", "2022")) +
+   scale_y_continuous(name = "",
+                      limits = c(0,75),
+                      expand = c(0,0),
+                      breaks = c(0,30,60),
+                      labels = c("0","30","60")) +
+   scale_color_manual(values = c("#204035FF","#204035FF","#204035FF","#204035FF", "#204035FF",  "#204035FF", "#204035FF", "#204035FF")) +
+   # guide = FALSE) +
+   scale_fill_manual(values = c("#4A7169FF","#4A7169FF","#4A7169FF","#4A7169FF","#4A7169FF","#4A7169FF","#4A7169FF", "#4A7169FF"),
+                     guide = FALSE) +
+   theme(strip.text = element_blank())
+ 
+ num_prus
+ 
+ 
+ num_prus <- schools_10to22_age_gender %>%
+   left_join(s_data) %>% 
+   filter(age %in% c(10:15),
+          level == "Birmingham",
+          my_categories == "Pupil referral unit") %>% 
+   mutate(school = ifelse(school %in% c("The City of Birmingham School", "City of Birmingham School", "The Behaviour Support Service"), "COBS", school),
+          school = ifelse(school == "EBN Free School", "East Birmingham Network Academy", school),
+          school = ifelse(school == "Ebn Academy  2", "EBN Academy Phase 2", school),
+          school = ifelse(school == "Titan St Georges Academy", "St Georges Academy", school),
+          school = ifelse(school == "CUL Academy Trust", "Titan Aston Academy", school)) %>%
+   group_by(end_period_year, school) %>% 
+   summarise(count = sum(count)) %>% 
+   ungroup() %>% 
+   add_row(school = "Virtual College", end_period_year = 2013.25, count = 0) %>% # closed 31 March 2013
+   add_row(school = "Laces", end_period_year = 2013.25, count = 0) %>% # closed 31 March 2013
+   add_row(school = "St Georges Academy", end_period_year = 2013.67, count = 0) %>% # opened 2 September 2013
+   add_row(school = "The Edge Academy", end_period_year = 2015.67, count = 0) %>% # opened 1 September 2015
+   add_row(school = "Reach School", end_period_year = 2013.67, count = 0) %>%  # opened 2 September 2013
+   add_row(school = "Titan Aston Academy", end_period_year = 2014.67, count = 0) %>%
+   # add_row(school = "Titan Aston Academy", end_period_year = 2018.75, count = 21) %>% 
+   # add_row(school = "Titan Aston Academy", end_period_year = 2018.83, count = 0) %>% 
+   # add_row(school = "Titan Aston Academy", end_period_year = 2018.85, count = 0) %>% 
+   add_row(school = "EBN Academy Phase 2", end_period_year = 2015.67, count = 0) %>% 
+   add_row(school = "East Birmingham Network Academy", end_period_year = 2012.67, count = 0) %>% 
+   filter(school %in% c("COBS", "East Birmingham Network Academy")) %>% 
+   # filter(school != "Focus College") %>% 
+   # mutate(school = factor(school, levels = c("Virtual College", "Laces", "East Birmingham Network Academy", "Reach School", "St Georges Academy",  "Titan Aston Academy" ,"The Edge Academy", "EBN Academy Phase 2"))) %>%
+   ggplot() + 
+   geom_rect(data=NULL,aes(xmin=2010.5,xmax=2014,ymin=-Inf,ymax=Inf),
+             fill="#F7F7F7", alpha = 0.1) +
+   geom_rect(data=NULL,aes(xmin=2014,xmax=2022,ymin=-Inf,ymax=Inf),
+             fill="#EEEEEE", alpha = 0.1) +
+   geom_vline(xintercept = 2014,  #linetype="dotted",
+              color = "black", size=0.7, alpha = 0.05) +
+   geom_vline(xintercept = 2022,  #linetype="dotted",
+              color = "black", size=0.7, alpha = 0.05) +
+   geom_line(aes(x = end_period_year, y=count, colour = school)) +
+   geom_ribbon(aes(x = end_period_year, ymin=0,ymax=count, fill = school), alpha=0.5) +
+   facet_grid(rows = vars(school)) +
+   theme_bw() +
+   scale_x_continuous(limits = c(2009.5, 2022.5),
+                      expand = c(0,0),
+                      name = "", 
+                      breaks = c(2010, 2012, 2014, 2016, 2018, 2020, 2022), 
+                      labels = c("2010", "2012", "2014", "2016", "2018", "2020", "2022")) +
+   scale_y_continuous(name = "",
+                      limits = c(0,400),
+                      expand = c(0,0)) +
+   scale_color_manual(values = c("#204035FF", "#204035FF")) +
+   # guide = FALSE) +
+   scale_fill_manual(values = c("#4A7169FF","#4A7169FF"),
+                     guide = FALSE) +
+   theme(strip.text = element_blank())
+ 
+ num_prus
+ 
+ 
+ 
+ 
   num_prus <- schools_10to22_age_gender %>%
     left_join(s_data) %>% 
     filter(age %in% c(10:15),
@@ -2137,13 +2651,14 @@ pru_ft_pt <-  schools_10to22_age_gender %>%
     add_row(school = "St Georges Academy", end_period_year = 2013.67, count = 0) %>% # opened 2 September 2013
     add_row(school = "The Edge Academy", end_period_year = 2015.67, count = 0) %>% # opened 1 September 2015
     add_row(school = "Reach School", end_period_year = 2013.67, count = 0) %>%  # opened 2 September 2013
-    add_row(school = "Titan Aston Academy", end_period_year = 2014.67, count = 0) %>% 
-    add_row(school = "Titan Aston Academy", end_period_year = 2018.75, count = 21) %>% 
-    add_row(school = "Titan Aston Academy", end_period_year = 2018.83, count = 0) %>% 
-    add_row(school = "Titan Aston Academy", end_period_year = 2018.85, count = 0) %>% 
+    add_row(school = "Titan Aston Academy", end_period_year = 2014.67, count = 0) %>%
+    # add_row(school = "Titan Aston Academy", end_period_year = 2018.75, count = 21) %>% 
+    # add_row(school = "Titan Aston Academy", end_period_year = 2018.83, count = 0) %>% 
+    # add_row(school = "Titan Aston Academy", end_period_year = 2018.85, count = 0) %>% 
     add_row(school = "EBN Academy Phase 2", end_period_year = 2015.67, count = 0) %>% 
     add_row(school = "East Birmingham Network Academy", end_period_year = 2012.67, count = 0) %>% 
     filter(school != "Behaviour Support Service at The City of Birmingham School") %>% 
+    filter(school != "Focus College") %>% 
     filter(school != "Focus College") %>% 
     mutate(school = factor(school, levels = c("Virtual College", "Laces", "East Birmingham Network Academy", "Reach School", "St Georges Academy",  "Titan Aston Academy" ,"The Edge Academy", "EBN Academy Phase 2"))) %>%
     ggplot() + 
@@ -2251,7 +2766,11 @@ pru_ft_pt <-  schools_10to22_age_gender %>%
   
   
   
-  
+  fsm_academies <- schools_10to22_age_gender %>%
+    left_join(s_data) %>% 
+    filter(age %in% c(10:15),
+           level == "Birmingham") %>% 
+    
   
   
   

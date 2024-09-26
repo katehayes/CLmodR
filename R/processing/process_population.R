@@ -41,6 +41,21 @@ v_turn10 <- age_in %>%
 t_turn10 <- age_in$week
 
 
+age_in <- pop_estimate_01to20_age_gender %>%
+  filter(age == 10, level == "Birmingham", gender == "Boys") %>% 
+  filter(end_period_year %in% c(2011:2019)) %>% 
+  mutate(t = (end_period_year-2010)*52) %>% 
+  select(count, t) %>% 
+  full_join(data_frame(t = seq(0, 520,1))) %>% 
+  mutate(count = ifelse(is.na(count), 0, count)) %>% 
+  arrange(t)
+
+t_turn10 <- age_in$t
+v_turn10 <- age_in$count
+
+
+
+
 age_in_pov <- pop_estimate_01to20_age_gender %>%
   filter(age == 9, level == "Birmingham") %>%
   mutate(turn10_wkly = count / 52) %>%

@@ -68,6 +68,15 @@ ss_birm <- stop_search_1214to0322 %>%
 check <- ss_birm %>%
   distinct(age)
 
+
+
+
+
+
+
+
+
+
 ######------######------######------######------######------######------######------
 ######------######-first attempt at the geospatial sthings below ######------######------######------
 ######------######------######------######------######------######------######------
@@ -145,7 +154,7 @@ check <- ss_birm %>%
 ######------######------######------######------######------######------######------
 # taking some WMP FoI data to just try get a rough idea of the age breakdown, rather than just 10-17
 
-ss_data <- read_xlsx("/Users/katehayes/temp_data/1241A_Attachment.xlsx")
+ss_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/1241A_Attachment.xlsx")
 
 stop_search_18to21_age <- ss_data %>%
   filter(grepl("Birmingham", `Neighbourhood Policing Unit`),
@@ -160,6 +169,26 @@ stop_search_18to21_age <- ss_data %>%
   ungroup() %>%
   group_by(Year, `Neighbourhood Policing Unit`) %>%
   mutate(age_pc = count/sum(count))
+
+
+stop_search_18to21_age <- ss_data %>%
+  filter(grepl("Birmingham", `Neighbourhood Policing Unit`),
+         `Subject Age` != "Not recorded",
+         `Subject Age` != "Accurate age not recorded") %>%
+  rename(age = `Subject Age`) %>%
+  mutate(age = as.numeric(age)) %>%
+  filter(age <= 17) %>%
+  mutate(count = 1) %>%
+  group_by(Year, `Neighbourhood Policing Unit`, age) %>%
+  summarise(count = sum(count)) %>%
+  ungroup() %>%
+  group_by(Year, `Neighbourhood Policing Unit`) %>%
+  mutate(age_pc = count/sum(count))
+
+
+
+
+
 
 save(stop_search_18to21_age, file = "Output/Data/Cleaned/stop_search_18to21_age.Rdata")
 
@@ -213,7 +242,7 @@ ss_outcomes
 ######------######-SECTION 60 INFO ######------######------######------
 ######------######------######------######------######------######------######------
 
-sec60_data <- read_xlsx("/Users/katehayes/CLmodelR/temp_data/188A_22_attachment.xlsx", skip = 3)
+sec60_data <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/188A_22_attachment (1).xlsx", skip = 3)
 
 sec60_dates <- sec60_data %>%
   select(`Stop Date`) %>%
