@@ -471,27 +471,7 @@ in_yjs <- yjs_states %>%
 # the thing about this is that 30\% of the people in the YJS re-offend only. 
 in_yjs
 # ggsave(filename = "/Users/katehayes/CLmodR/output/graphs/model output/in_yjs.png", in_yjs)
-# MORE PEOPLE IN YJS AT THE START
-
-
-new <- no_db_init %>% 
-  left_join(no_db_init2) %>% 
-  select(!count) %>% 
-  rename(count = count_new)
-
-
-no_db_init2 <- no_db_init %>% 
-  group_by(age, poverty, care, school) %>% 
-  mutate(tot = sum(count)) %>% 
-  mutate(x = ifelse(yjs %in% c("In_the_YJS", "In_custody"), 1.45, 1)) %>% 
-  mutate(count_new = count*x) %>% 
-  mutate(tot_new = sum(count_new)) %>% 
-  mutate(ratio = ifelse(tot > 0, tot_new/tot, 1)) %>% 
-  mutate(count_new = count_new/ratio) %>% 
-  mutate(tot_new = sum(count_new)) %>% 
-  select(age, poverty, care, school, yjs, count_new)
-
-
+# NEED MORE PEOPLE IN YJS AT THE START
 
 
 
