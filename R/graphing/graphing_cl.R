@@ -3,6 +3,7 @@ load("/Users/katehayes/CLmodR/output/data/cleaned/cl_19to22.Rdata")
 library(ggplot2)
 library(tidyverse)
 library(viridis)
+library(zoo)
 
 
 cl <- cl_19to22 %>%
@@ -15,6 +16,9 @@ cl <- cl_19to22 %>%
   ggplot() +
   geom_bar(aes(x = date, y = count, fill = as.character(age)),
            stat = "identity", position = "stack") 
+
+cl
+
   
 cl <- cl_19to22 %>%
   filter(age <= 17,

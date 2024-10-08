@@ -1,3 +1,7 @@
+install.packages("renv")
+renv::init()
+
+
 # install.packages("tidyverse")
 library(tidyverse)
 library(readxl)
