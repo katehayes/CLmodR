@@ -1,3 +1,9 @@
+# where do initial values for the size of each state come from?
+# how is the distribution of the population on ageing in at ten decided?
+
+
+
+
 IC <- read_xlsx("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/IC.xlsx", sheet = 2)
 
 init_c <- IC %>% 

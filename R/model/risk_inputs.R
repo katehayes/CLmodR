@@ -1,4 +1,4 @@
-load("/Users/katehayes/CLmodR/output/data/input/init_c.Rdata")
+load("/Users/katehayes/CLmodR/output/data/input/current/init_c.Rdata")
 
 load("/Users/katehayes/CLmodR/output/data/input/t_turn10.Rdata")
 load("/Users/katehayes/CLmodR/output/data/input/v_turn10.Rdata")
