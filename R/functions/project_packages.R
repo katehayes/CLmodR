@@ -1,7 +1,8 @@
-install.packages("renv")
-renv::init()
-
-
+# install.packages("usethis")
+# renv::init()
+# must figure out this with renv
+library(usethis)
+# use_readme_md()
 # install.packages("tidyverse")
 library(tidyverse)
 library(readxl)
