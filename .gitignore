@@ -6,5 +6,5 @@
 .gitattributes
 .Rprofile
 renv
-.renv.lock
+renv.lock
 
