@@ -1,4 +1,10 @@
+.DS_Store
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+.gitattributes
+.Rprofile
+renv
+.renv.lock
+
