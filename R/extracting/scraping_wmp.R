@@ -873,3 +873,60 @@ IDACI_by_LSOA <- jsonlite::fromJSON('https://services3.arcgis.com/tRh0agnyck3rPS
 
 # https://www.arcgis.com/home/search.html?restrict=false&sortField=relevance&sortOrder=desc&searchTerm=owner%3A%22dgrice%22#content
 
+
+29th Oct 2024
+NRM_Dashboard_v3
+
+
+
+
+
+
+
+NRM_Dashboard_v3 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/NRM_Dashboard_v3/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                    simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+NRM_Dashboard_v3_2000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/NRM_Dashboard_v3/FeatureServer/0/query?where=FID>2000&0%3D0&outFields=%2A&f=json',
+                                                                  simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+NRM_Dashboard_v3_4000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/NRM_Dashboard_v3/FeatureServer/0/query?where=FID>4000&0%3D0&outFields=%2A&f=json',
+                                            simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+
+NRM_Dashboard_v3_6000 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/NRM_Dashboard_v3/FeatureServer/0/query?where=FID>6000&0%3D0&outFields=%2A&f=json',
+                                            simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+NRM_Dashboard_v3 <- bind_rows(NRM_Dashboard_v3,
+                              NRM_Dashboard_v3_2000,
+                              NRM_Dashboard_v3_4000,
+                              NRM_Dashboard_v3_6000)
+
+save(NRM_Dashboard_v3, file = "output/data/scraped/NRM_Dashboard_v3.Rdata")
+
+
+
+County_Lines_Chartsv3 <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/County_Lines_Chartsv3/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                       simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes))
+
+County_Lines_Trend <- jsonlite::fromJSON('https://services9.arcgis.com/juEJUtOqaunVxGHJ/arcgis/rest/services/County_Lines_Trend/FeatureServer/0/query?where=0%3D0&outFields=*&f=json',
+                                            simplifyDataFrame=T) %>%
+  .$features %>%
+  unnest(cols = c(attributes)) 
+
+save(County_Lines_Trend, file = "output/data/scraped/County_Lines_Trend.Rdata")
+
+
+
+

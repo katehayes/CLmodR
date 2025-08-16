@@ -3,14 +3,6 @@
 # also regarding the FSM - need not just percentage - need for each school 
 # a) total headcount b) most expansive definition of FSM eligibility
 
-
-check <- cl_19to22 %>% 
-  distinct(ethnicity, eth_detail)
-
-check <- arrests_07to22_reason_age_gender_ethnicity %>% 
-  distinct(ethnicity)
-
-
 # going to have children by age and sex, by school
 # then for each school, how many children of each ethnicity, and how many children FSM eligible.
 
@@ -20,6 +12,80 @@ check <- arrests_07to22_reason_age_gender_ethnicity %>%
 # HAD TO RENAME AGAIN, ADDED _22
 # spc_school_level_underlying_data_22.csv
 
+library(rvest)
+library(stringr)
+library(xml2)
+library(tidyverse)
+
+
+temp <- tempfile()
+# options(timeout = 1000) # download kept timing out when limit was at 60 second default
+download.file("https://content.explore-education-statistics.service.gov.uk/api/releases/60f096b8-6ed9-4e9e-97ee-2ca83867d51e/files", temp)
+# unzip(temp, list = TRUE)$Name
+s24 <- read_csv(unz(temp, "supporting-files/spc_school_level_underlying_data.csv"))
+
+
+download.file("https://content.explore-education-statistics.service.gov.uk/api/releases/5597d8c4-ae2c-43cd-ba21-c6cbe80c5e4a/files", temp)
+unzip(temp, list = TRUE)$Name
+s23 <- read_csv(unz(temp, "supporting-files/spc_school_level_underlying_data_23112023.csv"))
+
+
+download.file("https://content.explore-education-statistics.service.gov.uk/api/releases/b71871a9-3207-4e83-8c5f-15eefdd2f458/files", temp)
+unzip(temp, list = TRUE)$Name
+s22 <- read_csv(unz(temp, "supporting-files/spc_school_level_underlying_data_20230302.csv"))
+
+
+download.file("https://content.explore-education-statistics.service.gov.uk/api/releases/18afd52c-ef75-406c-993e-e6459781dbcc/files", temp)
+unzip(temp, list = TRUE)$Name
+s21 <- read_csv(unz(temp, "supporting-files/spc_school_level_underlying_data_220216.csv"))
+
+download.file("https://content.explore-education-statistics.service.gov.uk/api/releases/759ddb6d-b508-4f92-8c64-c517c473d75f/files", temp)
+unzip(temp, list = TRUE)$Name
+s20 <- read_csv(unz(temp, "supporting-files/spc_school_level_underlying_data.csv"))
+
+
+download.file("https://assets.publishing.service.gov.uk/media/5d5bcd81ed915d08d612d802/Schools_Pupils_and_their_Characteristics_2019_Underlying_Data.zip", temp)
+unzip(temp, list = TRUE)$Name
+s19 <- read_csv(unz(temp, "Schools_Pupils_and_their_Characteristics_2019_pupil_characteristics_UD.csv"))
+
+
+download.file("https://assets.publishing.service.gov.uk/media/5bb73f48ed915d23980938e9/schools_pupils_and_their_characteristics_2018_underlying_data.zip", temp)
+unzip(temp, list = TRUE)$Name
+s18 <- read_csv(unz(temp, "Schools_Pupils_and_their_Characteristics_2018_Schools_Pupils_UD.csv"))
+
+
+download.file("https://assets.publishing.service.gov.uk/media/5a824241ed915d74e340292a/SFR28_2017_Underlying_Data.zip", temp)
+unzip(temp, list = TRUE)$Name
+s17 <- read_csv(unz(temp, "SFR28_2017_Schools_Pupils_UD.csv"))
+
+
+download.file("https://assets.publishing.service.gov.uk/media/5a7f3f4ced915d74e62294a7/SFR20_2016_Underlying_Data.zip", temp)
+unzip(temp, list = TRUE)$Name
+s16 <- read_csv(unz(temp, "SFR20_2016_Schools_Pupils_UD.csv"))
+
+download.file("https://assets.publishing.service.gov.uk/media/5a7f22f6ed915d74e62289c9/SFR16_2015_Underlying_Data.zip", temp)
+unzip(temp, list = TRUE)$Name
+s15 <- read_csv(unz(temp, "SFR16_2015_Schools_Pupils_UD.csv"))
+
+download.file("https://assets.publishing.service.gov.uk/media/5a80260de5274a2e8ab4e77a/SFR15_2014_Underlying_data_v102.zip", temp)
+unzip(temp, list = TRUE)$Name
+s14 <- read_csv(unz(temp, "SFR15_2014_school_level_pupils_UD.csv"))
+
+download.file("https://assets.publishing.service.gov.uk/media/5a7c1750e5274a1f5cc75bb1/SFR21-2013_UD.zip", temp)
+unzip(temp, list = TRUE)$Name
+s13 <- read_csv(unz(temp, "School_level_schools_pupil_2013.csv"))
+
+download.file("https://assets.publishing.service.gov.uk/media/5a7a100ee5274a319e777952/sfr10-2012ud.zip", temp)
+unzip(temp, list = TRUE)$Name
+s12 <- read_csv(unz(temp, "School_level_schools_pupils_2012.csv"))
+
+download.file("https://assets.publishing.service.gov.uk/media/5a7af937ed915d71db8b3d79/sfr12-2011udv4.zip", temp)
+unzip(temp, list = TRUE)$Name
+s11 <- read_csv(unz(temp, "School_level_schools_pupils_2011.csv"))
+
+download.file("https://assets.publishing.service.gov.uk/media/5a7a2d68e5274a319e77865a/underlying_20data_20sfr092010.zip", temp)
+unzip(temp, list = TRUE)$Name
+s10 <- read_csv(unz(temp, "school_level_census.csv"))
 
 
 s_data <- read.csv("/Users/katehayes/Library/CloudStorage/GoogleDrive-khayes2@sheffield.ac.uk/My Drive/CL_drive_data/spc_school_level_underlying_data_22 (1).csv")
